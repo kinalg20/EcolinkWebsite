@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
     this.__apiservice.home().subscribe((res:any)=>{
       this.homePageData.push(res);
       setTimeout(() => {
-        console.log(this.homePageData[0])
+        // console.log(this.homePageData[0])
       }, 500);
     })
     // this.homePageData.map((res:any)=>{

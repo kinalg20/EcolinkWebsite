@@ -99,14 +99,13 @@ export class ProductCartComponent implements OnInit {
       console.log("usser is logged in");
       this._ApiService.getItemFromCart().subscribe(res=>{
         this.CardShow = res.data;
-        // console.log(res);
       })
 
-      this.CardShow.map((res:any)=>{
-        this.SubTotal = this.SubTotal+res.product.sale_price;
-      })
-
-      console.log(this.SubTotal);
+      setTimeout(() => {
+        this.CardShow.map((res:any)=>{
+          console.log(res.product.sale_price);
+        })
+      }, 4000);
     }
   }
 
