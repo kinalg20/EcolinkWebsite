@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-
-  constructor(private route:Router) { }
+  user_id:any;
+  homePageData:any=[];
+  constructor(private route:Router,private __apiservice:ApiServiceService) { }
 
   ngOnInit(): void {
+    this.__apiservice.home().subscribe((res:any)=>{
+      this.homePageData.push(res);
+      setTimeout(() => {
+        console.log(this.homePageData[0])
+      }, 500);
+    })
+    this.homePageData.map((res:any)=>{
+      res.data.pagecategories
+    })
   }
   profile(){
     if(localStorage.getItem("ecolink_user_credential")===null){
@@ -20,4 +31,5 @@ export class HeaderComponent implements OnInit {
       this.route.navigateByUrl('/profile');
     }
   }
+  
 }

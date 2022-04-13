@@ -63,5 +63,9 @@ export class ApiServiceService {
     let trustedUrl = this.sanitizer.bypassSecurityTrustHtml(data);
     return trustedUrl;
   }
+
+  home():Observable<any>{
+    return this.http.get(this._baseurl+'home');
+  }
 }
 
