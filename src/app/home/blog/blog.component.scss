@@ -106,15 +106,18 @@
                 }
 
                 .ctasection {
-                    height: calc(100% - 377px);
+                    // height: calc(100% - 377px);
+                    height: 350px;
                     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
                     border: 1px solid #d7d1d1;
                     border-radius: 10px;
                     background: whitesmoke;
                     position: relative;
                     background-size: cover;
+                    object-fit: cover;
                     background-image: url("https://images.unsplash.com/photo-1554475900-0a0350e3fc7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2517&q=80");
-
+                    position: sticky;
+                    top: 15%;
                     .innerctadiv {
                         position: absolute;
                         width: 100%;

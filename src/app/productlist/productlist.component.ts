@@ -15,6 +15,7 @@ interface popularity {
 })
 export class ProductlistComponent implements OnInit {
   suggestions: boolean = true;
+  showFiterModel:boolean = false;
   previousdata: any;
   val1: any;
   ItemCount: any = 1;
@@ -210,4 +211,10 @@ export class ProductlistComponent implements OnInit {
       console.log(this.cart_obj);
     }
   }
+
+  getFilterModel() {
+    this.showFiterModel =true;
+    this.showFiterModel = !this.showFiterModel;
+  }
+
 }

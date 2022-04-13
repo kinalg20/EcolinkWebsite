@@ -1,38 +1,38 @@
 <p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [circular]="false"
-                [responsiveOptions]="responsiveOptions">
-                <ng-template let-product pTemplate="item">
-                    <div class="product-item">
-                        <div class="product-item-content mx-1">
-                            <div class="product-cards">
-                                <div class="card">
-                                    <div class="card-image">
-                                        <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
-                                            alt="">
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h6>ECC (A) 13oz Aerosol – Case of 12 –</h6>
-                                            <p> Aerosol, Contact Cleaner </p>
-                                        </div>
-                                        <div class="card-price-section">
-                                            <div class="card-price">
-                                                <p>$448.00</p>
-                                            </div>
-                                            <div class="rating">
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                            </div>
-                                        </div>
-                                        <div class="list-buttons" routerLink="/productdetail">
-                                            <!-- <p>Add to Cart</p> -->
-                                            <p >Show Details</p>
-                                        </div>
-                                    </div>
+    [responsiveOptions]="responsiveOptions">
+    <ng-template let-product pTemplate="item">
+        <div class="product-item">
+            <div class="product-item-content mx-1">
+                <div class="product-cards">
+                    <div class="card">
+                        <div class="card-image">
+                            <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
+                                alt="">
+                        </div>
+                        <div class="card-body">
+                            <div class="card-title">
+                                <h6>ECC (A) 13oz Aerosol – Case of 12 –</h6>
+                                <p> Aerosol, Contact Cleaner </p>
+                            </div>
+                            <div class="card-price-section">
+                                <div class="card-price">
+                                    <p>$448.00</p>
                                 </div>
+                                <div class="rating">
+                                    <i style="font-size:18px" class="fa">&#xf006;</i>
+                                    <i style="font-size:18px" class="fa">&#xf006;</i>
+                                    <i style="font-size:18px" class="fa">&#xf006;</i>
+                                    <i style="font-size:18px" class="fa">&#xf006;</i>
+                                </div>
+                            </div>
+                            <div class="list-buttons" routerLink="/productdetail">
+                                <!-- <p>Add to Cart</p> -->
+                                <p>Show Details</p>
                             </div>
                         </div>
                     </div>
-                </ng-template>
-            </p-carousel>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>

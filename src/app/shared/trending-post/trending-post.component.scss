@@ -50,27 +50,27 @@
             border-radius: 10px;
             display: grid;
             grid-template-columns: 33.33% 33.33% 33.33%;
-            
-                .first-card:last-child {
-                    .card-txt {
-                        h6 {
-                            border-right: none;
-                        }
-                    }
-                    .card-img {
-                        img {
-                            border-top-right-radius: 10px;
-                            border-top-left-radius: 0px;
-                        }
+
+            .first-card:last-child {
+                .card-txt {
+                    h6 {
+                        border-right: none;
                     }
                 }
-                .first-card:nth-child(2) {
-                    .card-img {
-                        img {
-                            border-top-left-radius: 0px;
-                        }
+                .card-img {
+                    img {
+                        border-top-right-radius: 10px;
+                        border-top-left-radius: 0px;
                     }
                 }
+            }
+            .first-card:nth-child(2) {
+                .card-img {
+                    img {
+                        border-top-left-radius: 0px;
+                    }
+                }
+            }
 
             .first-card {
                 height: 100%;
@@ -81,16 +81,89 @@
                         border-top-left-radius: 10px;
                         height: 100%;
                         width: 100%;
+                        object-fit: cover;
                     }
                 }
                 .card-txt {
-                    padding: 15px 0 15px 15px;
+                    // padding: 15px 0 15px 15px;
+                    border-right: 1px solid black;
                     h6 {
-                        border-right: 1px solid black;
                         font-size: 20px;
                         font-weight: 600;
                         text-align: center;
+                        margin: 0 10px;
                     }
+                }
+            }
+            .first-card:last-child {
+                .card-txt {
+                    border-right: none;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 992px) {
+    .trending-chemicals {
+        .container {
+            .chemical-card {
+                margin: 0;
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .container {
+        max-width: 700px;
+    }
+    .trending-chemicals {
+        .container {
+            .chemical-card {
+                .first-card {
+                    .card-img {
+                        height: 180px;
+                    }
+                    .card-txt {
+                        h6 {
+                            font-size: 1rem;
+                            margin: 0 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 550px) {
+    .trending-chemicals {
+        .container {
+            .chemical-card {
+                display: block;
+                .first-card {
+                    .card-img {
+                        img{
+                            border-radius: 0;
+                        }
+                    }
+                }
+                .first-card:last-child {
+                    .card-img {
+                        img {
+                            border-radius: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width:350px) {
+    .category-section {
+        .container {
+            .categories {
+                .category-image {
+                    height: 70px;
+                    width: 70px;
                 }
             }
         }
