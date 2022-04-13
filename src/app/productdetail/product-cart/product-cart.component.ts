@@ -69,7 +69,7 @@ export class ProductCartComponent implements OnInit {
     }
   ]
 
-  Count(string: any, id: any , product_price : any) {
+  Count(string: any, id: any, product_price: any) {
     if (string == "increase" && this.CardShow[id].quantity < 10) {
       this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
       this.subtotal();
@@ -78,6 +78,7 @@ export class ProductCartComponent implements OnInit {
       this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
       this.subtotal();
     }
+    console.log(this.CardShow);
   }
 
   getCartData() {
@@ -90,15 +91,15 @@ export class ProductCartComponent implements OnInit {
               response.quantity = res.ProductQuantity;
               this.SubTotal = this.SubTotal + response.regular_price;
               this.CardShow.push(response);
-              localStorage.setItem("CheckoutData" , JSON.stringify(this.CardShow));
+              localStorage.setItem("CheckoutData", JSON.stringify(this.CardShow));
             }
           })
         })
       })
     }
 
-    else{
-      this._ApiService.getItemFromCart().subscribe(res=>{
+    else {
+      this._ApiService.getItemFromCart().subscribe(res => {
         this.CardShow = res.data;
         this.subtotal();
       })
@@ -110,10 +111,18 @@ export class ProductCartComponent implements OnInit {
   }
 
 
-  subtotal(){
+  subtotal() {
     this.SubTotal = 0;
-    this.CardShow.map((res:any)=>{
-      this.SubTotal=this.SubTotal+res.product.sale_price*res.quantity;
+    this.CardShow.map((res: any) => {
+      this.SubTotal = this.SubTotal + res.product.sale_price * res.quantity;
+    })
+  }
+
+  function() {
+    this.CardShow.map((res: any) => {
+      this._ApiService.addItemToCart(res.id, res.quantity).subscribe(res => {
+        console.log(res);
+      })
     })
   }
 
