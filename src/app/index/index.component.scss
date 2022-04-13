@@ -1,0 +1,144 @@
+.what-we-do {
+    .heading {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        h1 {
+            font-size: 80px;
+            font-weight: 800;
+        }
+    }
+    .content-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 150px;
+        .content {
+            /* max-width: 500px; */
+            font-size: 18px;
+        }
+    }
+}
+
+.list-card .card {
+    display: flex;
+    justify-content: center;
+    padding: 20px 15px;
+    .card-title {
+        display: flex;
+        justify-content: center;
+        font-size: 25px;
+    }
+    .card-img {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.communication-coversion {
+    background: aliceblue;
+    // padding: 20px;
+    .communication-body .communication-card {
+        display: flex;
+        align-items: center;
+        .communication-content {
+            margin-left: 15px;
+            max-width: 300px;
+        }
+        .communication-image img {
+            width: 100px;
+        }
+    }
+    .communication-heading {
+        text-align: center;
+        color: #31286b;
+    }
+}
+
+.section-image {
+    width: 80%;
+}
+
+.portfolio-section {
+    // padding: 40px 0;
+    .portfolio-row {
+        align-items: center;
+        .col-6 {
+            h2 {
+                color: #1e1666;
+                font-size: 35px;
+                font-weight: 500;
+                line-height: 45px;
+                letter-spacing: -0.7px;
+                text-decoration: underline;
+            }
+            p {
+                text-align: left;
+                font-size: 15px;
+                font-weight: 400;
+                line-height: 28px;
+            }
+        }
+    }
+    .btn {
+        padding-left: 0;
+        .portfolio-btn {
+            color: #ffffff;
+            background: linear-gradient(to right, #fa7c41 0%, #ff6565 100%);
+            border-radius: 30px;
+            padding: 9px 30px;
+            text-decoration: none;
+        }
+    }
+    .career-heading {
+        h2 {
+            color: #1e1666;
+            font-size: 35px;
+            font-weight: 500;
+            line-height: 45px;
+            letter-spacing: -0.7px;
+            text-decoration: underline;
+        }
+        p {
+            text-align: left;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 28px;
+        }
+    }
+}
+
+.marketing {
+    .marketing-body .marketing-card-list .marketing-card .marketing-content {
+        text-align: left;
+    }
+    .marketing-heading {
+        h3 {
+            text-decoration: underline;
+        }
+    }
+}
+
+.image-section {
+    text-align: center;
+}
+
+.form-btn {
+    background: #3b3a3a;
+    color: #facb48;
+    padding: 6px 45px;
+    .form-btn:hover {
+        background: #3b3a3a;
+        color: #facb48;
+    }
+}
+
+.form-section {
+    text-align: right;
+}
+
+.heading-tag h1 {
+    font-size: 45px;
+    color: white;
+    text-shadow: 2px 2px #ab9595;
+}

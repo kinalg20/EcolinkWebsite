@@ -1,0 +1,35 @@
+<!-- <p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+    <ng-template let-product pTemplate="item">
+        <div class="product-item">
+            <div class="product-item-content">
+                <div>
+                    <h4 class="p-mb-1">{{product.name}}</h4>
+                    <h6 class="p-mt-0 p-mb-3">${{product.price}}</h6>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel> -->
+
+
+<p-carousel [value]="products" [numVisible]="3" [numScroll]="3" [circular]="false"
+    [responsiveOptions]="responsiveOptions">
+    <ng-template pTemplate="header">
+        <h2>Blogs</h2>
+    </ng-template>
+    <ng-template let-product pTemplate="item">
+        <div class="product-item mt-5">
+            <div class="card">
+                <div class="card-image">
+                    <img [src]="product.image"
+                        alt="">
+                </div>
+              <div class="div"></div>
+              <div class="card-content">
+                <p>The step-by-step guide on this page will show you how to create a blog in 20 minutes with just
+                    the most basic computer skills.</p>
+            </div>
+            </div>
+        </div>
+    </ng-template>
+</p-carousel>

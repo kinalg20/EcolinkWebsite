@@ -1,0 +1,98 @@
+<div class="dashboard-section" *ngIf="showdesc == 'Dashboard'">
+    <h2>Dashboard</h2>
+    <div class="profile-card">
+        <div class="row">
+            <div class="col-6">
+                <div class="card profile-section">
+                    <div class="profile-image">
+                        <img src="../../../assets/dummy.png" alt="">
+                    </div>
+                    <div class="profile-desc">
+                        <div class="profile-detail my-3">
+                            <h4>Helena Garcia</h4>
+                            <p class="m-0 p-0">example@gmail.com</p>
+                        </div>
+
+                        <div class="edit-profile-button my-2">
+                            <button>Edit Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="card address-section">
+                    <div class="customer_name my-3">
+                        <h4>Add Address</h4>
+                        <i class="pi pi-plus"></i>
+                    </div>
+                    <div class="default-Address">
+                        Random Federation
+                        115302, Moscow
+                        ul. Varshavskaya, 15-2-178
+                    </div>
+                    <span class="address-label"> Phone Number </span>
+                    <span>38 972 588-42-36</span>
+                    <span class="address-label">Email Address</span>
+                    <span>stroyka@example.com</span>
+                    <div class="edit-Address-button my-2">
+                        <button>Edit Address</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="Edit-Profile-section" *ngIf="showdesc == 'Edit Profile'">
+    <h2>Edit Profile</h2>
+    <form>
+        <div class="mb-3">
+            <label for="first-name" class="form-label">First Name</label>
+            <input type="text" class="form-control" id="first-name" aria-describedby="FirstHelp">
+        </div>
+        <div class="mb-3">
+            <label for="last-name" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="last-name">
+        </div>
+        <div class="mb-3">
+            <label for="Email Id" class="form-label">Email Id</label>
+            <input type="email" class="form-control" id="email-id">
+        </div>
+        <div class="mb-3">
+            <label for="phone-number" class="form-label">Phone Number</label>
+            <input type="number" class="form-control" id="phone-number">
+        </div>
+        <button type="submit" class="btn">Save Changes</button>
+    </form>
+</div>
+<div class="Order-History-section" *ngIf="showdesc == 'Order History'">
+    <h2>Order History</h2>
+    <div class="order-history-header">
+        <div class="search-ordered-item">
+            <input type="text" pInputText placeholder="Search Ordered Item...." /> <button pButton pRipple type="button"
+                label="Search" class="p-button-success"></button>
+        </div>
+        <div class="dropdown">
+            <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Clean Ideas<i class="fa fa-angle-down mx-2"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Sustainability Commitment</a>
+                <hr>
+                <a class="dropdown-item" href="#">B Corp</a>
+                <hr>
+                <a class="dropdown-item" href="#">Eco Links</a>
+            </div>
+        </div>
+    </div>
+    <div class="ordered-item-card"></div>
+</div>
+<div class="Addresses-section" *ngIf="showdesc == 'Addresses'">
+    <h2>Addresses</h2>
+</div>
+<div class="Wishlist-section" *ngIf="showdesc == 'Wishlist'">
+    <h2>Wishlist</h2>
+</div>
+<div class="Logout-section" *ngIf="showdesc == 'Logout'">
+    <h2>Logout</h2>
+</div>

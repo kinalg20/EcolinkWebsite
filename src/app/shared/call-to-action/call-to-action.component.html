@@ -1,0 +1,34 @@
+<ng-container *ngFor="let action of data ; index as index">
+    <div *ngIf="index%2==0; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+        <section class="ask-chemist">
+            <div class="container">
+                <div class="both-part" routerLink="/{{action.route}}">
+                    <div class="first-part" #height>
+                        <img src="{{action.imgurl}}"
+                            alt="">
+                    </div>
+                    <div class="second-part">
+                        <h3>{{action.heading}}</h3>
+                        <p>{{action.content}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-template>
+    <ng-template #elseBlock>
+        <section class="pricing-section">
+            <div class="container">
+                <div class="pricing" routerLink="/productlist">
+                    <div class="pricing-text">
+                        <h3>{{action.heading}}</h3>
+                        <p>{{action.content}}</p>
+                    </div>
+                    <div class="pricing-image">
+                        <img src="{{action.imgurl}}" alt="">
+                    </div>
+                </div>
+            </div>
+        </section>
+    </ng-template>
+</ng-container>

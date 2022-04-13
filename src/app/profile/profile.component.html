@@ -1,0 +1,25 @@
+<app-header></app-header>
+<div class="container">
+    <div class="profile-section my-2">
+        <div class="profile-heading">
+            <h1>My Account</h1>   
+        </div>
+        <div class="card">
+            <div class="profile-side-bar">
+                <h3 class="mx-1">Navigation</h3>
+               <ul>
+                   <li (click)="togglebutton='Dashboard'">Dashboard</li>
+                   <li (click)="togglebutton='Edit Profile'">Edit Profile</li>
+                   <li (click)="togglebutton='Order History'">Order History</li>
+                   <li (click)="togglebutton='Addresses'">Addresses</li>
+                   <li (click)="togglebutton='Wishlist'" routerLink="/productdetail/wishlist">Wishlist</li>
+                   <li (click)="togglebutton='Logout'" (click)="logOut()">Logout</li>
+               </ul>
+            </div>
+            <div class="profile-sidebar-desc">
+                <app-profile-dashboard [showdesc]="togglebutton"></app-profile-dashboard>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

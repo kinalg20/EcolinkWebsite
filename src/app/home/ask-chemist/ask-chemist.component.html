@@ -1,0 +1,82 @@
+<app-header></app-header>
+<section class="chemist-section">
+    <div class="container">
+        <div class="chemist-heading">
+            <h1>Ask the Chemist</h1>
+        </div>
+    </div>
+</section>
+<app-call-to-action [data]=chemist_array></app-call-to-action>
+<section class="ask-form">
+    <div class="container">
+        <div class="checkout-body">
+            <div class="billing-detail">
+                <div class="card">
+                    <h3>Ask the Chemist</h3>
+                    <form>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="first-name">First Name*</label>
+                                <input type="text" class="form-control mt-2" placeholder="First name" id="first-name">
+                            </div>
+                            <div class="col-6">
+                                <label for="last-name">Last Name*</label>
+                                <input type="text" class="form-control mt-2" placeholder="Last name">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="street-address">Street Address</label>
+                                <input type="text" class="form-control mt-2" placeholder="Street Address">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Town-city">Town / City</label>
+                                <input type="text" class="form-control mt-2" placeholder="Town / City">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="State-County">State / County</label>
+                                <input type="text" class="form-control mt-2" placeholder="State / County">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <label for="Postcode">Postcode</label>
+                                <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-6">
+                                <label for="Email Address">Email Address*</label>
+                                <input type="text" class="form-control mt-2" placeholder="First name" id="Email-Address">
+                            </div>
+                            <div class="col-6">
+                                <label for="Phone">Phone*</label>
+                                <input type="text" class="form-control mt-2" placeholder="phone">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label for="exampleFormControlTextarea1">Please describe your query here *</label>
+                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                  </div>
+                            </div>
+                        </div>
+                        <div class="proceed" style="text-align: right;">
+                            <div class="proceed-button">
+                                <button pButton pRipple type="button" label="Submit" class="p-button-raised p-button-success"
+                                    style="height:40px; width: 20%;"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

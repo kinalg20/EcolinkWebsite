@@ -1,0 +1,135 @@
+// .signup-section {
+//     .container {
+//         .signup-card {
+//             text-align: center;
+//             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+//             border: 1px solid #d7d1d1;
+//             border-radius: 10px;
+//             width: 70%;
+//             margin: auto;
+//             .web-logo {
+//                 margin: auto;
+//                 width: 25%;
+//                 height: 25%;
+//                 img {
+//                     width: 100%;
+//                 }
+//             }
+//             .signup-heading {
+//                 h3 {
+//                     font-weight: 600;
+//                 }
+//             }
+//             .signup-form {
+
+//             }
+//         }
+//     }
+// }
+
+.authentication {
+	.signup-form {
+		width: 50%;
+		margin: 30px auto;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+		border: 1px solid #d7d1d1;
+		border-radius: 10px;
+		form {
+			.form-control:focus {
+				border: 1px solid #ced4da;
+				box-shadow: none;
+			}
+			.signup-head {
+				display: flex;
+				margin-bottom: 30px;
+				align-items: center;
+				justify-content: space-between;
+				#auth-head {
+					h2 {
+						margin-bottom: 0;
+					}
+				}
+				.icon-class {
+					cursor: pointer;
+					width: 25px;
+					text-align: center;
+					background: whitesmoke;
+					border-radius: 100%;
+					i {
+						font-weight: 0;
+					}
+				}
+			}
+
+			padding: 30px;
+			input {
+				margin: 10px 0;
+			}
+			button {
+				width: 50%;
+				font-size: 18px;
+				margin: 20px auto;
+				color: white;
+				background: #55b15c;
+			}
+		}
+	}
+}
+
+.authenticated {
+	.signin-form {
+		width: 50%;
+		margin: 30px auto;
+		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+		border: 1px solid #d7d1d1;
+		border-radius: 10px;
+		form {
+			.form-control:focus {
+				border: 1px solid #ced4da;
+				box-shadow: none;
+			}
+			.signin-head {
+				display: flex;
+				margin-bottom: 30px;
+				align-items: center;
+				justify-content: space-between;
+				#auth-head {
+					h2 {
+						margin-bottom: 0;
+					}
+				}
+				.fw-icon-class {
+					cursor: pointer;
+					width: 25px;
+					text-align: center;
+					background: whitesmoke;
+					border-radius: 100%;
+					i {
+						font-weight: 0;
+					}
+				}
+			}
+
+			padding: 30px;
+			input {
+				margin: 10px 0;
+			}
+			.signin-btn {
+				width: 50%;
+				font-size: 18px;
+				margin: 20px auto;
+				color: white;
+				background: #55b15c;
+			}
+			.google-btn {
+				display: flex;
+				align-items: center;
+				justify-content: space-evenly;
+				width: 50%;
+				font-size: 18px;
+				margin: 20px auto;
+				background: whitesmoke;
+			}
+		}
+	}
+}
