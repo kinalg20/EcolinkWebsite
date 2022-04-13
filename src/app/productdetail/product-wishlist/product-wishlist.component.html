@@ -1,0 +1,85 @@
+<app-header></app-header>
+
+<ng-container *ngIf="products.length>0; then thenblock else elseblock"></ng-container>
+<div class="container">
+
+    <ng-template #elseblock>
+        <div class="empty-cart">
+            <div class="cart-heading">
+                <h3>My Wishlist</h3>
+            </div>
+            <div class="row">
+                <div class="card">
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png"
+                                width="130" height="130" class="img-fluid mb-4 mr-3">
+                            <h3><strong>Your Wishlist is Empty</strong></h3>
+                            <h4>Add something to make me happy :)</h4> <a href="/productlist"
+                                class="btn btn-success cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+</div>
+
+<ng-template #thenblock>
+    <div class="container">
+        <div class="cart-heading">
+            <h1>My Wishlist</h1>
+        </div>
+        <div class="cart-body">
+            <div class="cart-elements">
+                <p-table [value]="products" #thenblock>
+                    <ng-template pTemplate="header">
+                        <tr class="heading-row">
+                            <th style="width: 280px;">Name</th>
+                            <th style="width: 200px;">Stock</th>
+                            <th style="width: 200px;">Price</th>
+                            <th style="width: 320px;"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                        <tr class="table-body">
+                            <td>
+                                <div class="product_name">
+                                    <div class="cart_image">
+                                        <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
+                                            alt="">
+                                    </div>
+                                    <div class="product_desc">
+                                        <h6>{{product.name}}</h6>
+                                    <div style="text-align: left; padding: 0 10px;">
+                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                    </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <mark style="background:#4BB543;color: white;">{{product.status}}</mark>
+                            </td>
+                            <td>{{product.price | currency:'USD'}}</td>
+                            <td>
+                                <div class="price-row">
+                                    <button routerLink="/productdetail/cart">Add to Cart</button>
+                                    <span class="delete_item"><i class="pi pi-times"></i></span>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="summary">
+                        <div class="p-d-flex p-ai-center p-jc-between">
+                            In total there are {{products ? products.length : 0 }} products.
+                        </div>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<app-footer></app-footer>

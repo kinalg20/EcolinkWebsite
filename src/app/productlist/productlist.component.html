@@ -1,0 +1,329 @@
+<app-header></app-header>
+<div class="container">
+    <div class="listing-section">
+        <div class="card-page">
+            <div class="list-header">
+                <div class="list-heading">
+                    <h2>Aerosol</h2>
+                    <span><a href="">Home/</a></span>
+                    <span><a href="">ProductList/</a></span>
+                    <span><a href="">Aerosol</a></span>
+                </div>
+                <div class="grid-list-view">
+                    <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="pill" role="tab" aria-selected="true"
+                                (click)="showlist('card')"><i class="fa fa-th" aria-hidden="true"></i></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="pill" role="tab" aria-selected="false"
+                                (click)="showlist('list')"><i class="fa fa-list" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                    <div class="sort-by-search">
+                        <p-dropdown [options]="popularity" [(ngModel)]="selectedPopularity"
+                            placeholder="Select Sort by"></p-dropdown>
+                        <span class="p-input-icon-left">
+                            <i class="pi pi-search"></i>
+                            <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
+                                (keydown)="suggestions=true" />
+                        </span>
+                    </div>
+                </div>
+
+                <div class="suggestion-list" *ngIf="value1!='' && suggestions">
+                    <div class="card">
+                        <ul *ngFor="let prod of Students | searchPipe:value1">
+                            <li (click)="getselecteddata(prod.name)">{{prod.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product-list">
+                <div class="absolute">
+                    <h5 (click)="showFiterModel = !showFiterModel" title="Filter">
+                        <i class="fa fa-filter"></i>
+                    </h5>
+                </div>
+                <div class="filter">
+                    <div class="filter-heading">
+                        <h3>Filters</h3>
+                        <p><a href="">Clear All</a></p>
+                    </div>
+                    <div class="filter-body">
+                        <section class="categories">
+                            <h4>Catgories</h4>
+                            <ul *ngFor="let subcategory of ProductListData.subcategory">
+                                <div class="p-field-checkbox">
+                                    <p-checkbox name="group1" value="{{subcategory.name}}"
+                                        [(ngModel)]=" selectedCategory" inputId="cc"></p-checkbox>
+                                    <label for="cc" class="mx-2">{{subcategory.name}}</label>
+                                </div>
+                                <!-- <div class="p-field-checkbox">
+                                    <p-checkbox name="group1" value="Contact Cleaner1" [(ngModel)]=" selectedCategory"
+                                        inputId="cc1"></p-checkbox>
+                                    <label for="cc1" class="mx-2">Contact Cleaner</label>
+                                </div>
+                                <div class="p-field-checkbox">
+                                    <p-checkbox name="group1" value="Contact Cleaner2" [(ngModel)]=" selectedCategory"
+                                        inputId="cc2"></p-checkbox>
+                                    <label for="cc2" class="mx-2">Contact Cleaner</label>
+                                </div> -->
+                            </ul>
+                        </section>
+                        <section class="price-section">
+                            <div class="price-heading">
+                                <h4>Price</h4>
+                            </div>
+                            <div class="price-slider">
+                                <ng-container *ngIf="rangeValues">
+                                    <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum" [min]="0">
+                                    </p-slider>
+                                    <div style="
+                                          display: flex;
+                                          justify-content: space-between;
+                                          align-items: center;
+                                          margin-top: 15px;
+                                          font-size: 14px;
+                                          color: #1e2022;
+                                        ">
+                                        <b>{{ rangeValues[0] | currency: "INR" }}</b>
+                                        <b>{{ rangeValues[1] | currency: "INR" }}</b>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </section>
+                        <section class="rating">
+                            <div class="rating-heading">
+                                <h4>Rating</h4>
+                                <div class="p-field-checkbox">
+                                    <p-checkbox name="group2" value="4 Star" [(ngModel)]="selectedRatings"
+                                        inputId="4star"></p-checkbox>
+                                    <label for="4star" class="mx-2">4 Star</label>
+                                </div>
+                                <div class="p-field-checkbox">
+                                    <p-checkbox name="group2" value="3 Star" [(ngModel)]="selectedRatings"
+                                        inputId="3star"></p-checkbox>
+                                    <label for="3star" class="mx-2">3 Star</label>
+                                </div>
+                                <div class="p-field-checkbox">
+                                    <p-checkbox name="group2" value="2 Star" [(ngModel)]="selectedRatings"
+                                        inputId="2star"></p-checkbox>
+                                    <label for="2star" class="mx-2">2 Star</label>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="apply-button">
+                            <button pButton pRipple type="button" label="Apply Filter"
+                                class="p-button  filter-button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-cards" *ngIf="view_card">
+                    <ng-container class="row" *ngIf="ProductListData.products.length>0">
+                        <ng-container *ngFor="let product of ProductListData.products">
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                                <div class="card" style="cursor: pointer;" routerLink="/productdetail">
+                                    <div class="card-image">
+                                        <img [src]="product.image" alt="">
+                                        <span routerLink="/productdetail/wishlist"><i style="color: white;"
+                                                class="pi pi-heart" aria-hidden="true" title="Wishlist"></i></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h6>{{product.name}}</h6>
+                                            <ng-container *ngFor="let subcategory of ProductListData.subcategory">
+                                                <p> {{subcategory.name}}</p>
+                                            </ng-container>
+                                        </div>
+                                        <div class="card-price-section">
+                                            <div class="card-price">
+                                                <ng-container
+                                                    *ngIf="product.regular_price != product.sale_price; then thenBlock else elseBlock">
+                                                </ng-container>
+                                                <ng-template #thenBlock>
+                                                    <p class="product-price mb-1"
+                                                        style="text-decoration-line: line-through;">{{product.sale_price
+                                                        | currency}}</p>
+                                                    <p class="product-price">{{product.regular_price | currency}}</p>
+                                                </ng-template>
+                                                <ng-template #elseBlock>
+                                                    <p class="product-price">{{product.regular_price | currency}}</p>
+                                                </ng-template>
+                                            </div>
+                                            <div class="rating">
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            </div>
+                                        </div>
+                                        <div class="list-buttons">
+                                            <p routerLink="/productdetail/cart">Add to Cart</p>
+                                            <p routerLink="/productdetail" [routerLink]="['/productdetail']"
+                                                [queryParams]="{slug:product.slug}">Show Details</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="ProductListData.products.length==0">
+                        <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
+                            <h3>No data found</h3>
+                        </div>
+                    </ng-container>
+                </div>
+                <div class="product-listing" *ngIf="view_list">
+                    <ng-container *ngIf="ProductListData.products.length>0">
+                        <ng-container *ngFor="let product of ProductListData.products">
+                            <div class="card" style="cursor: pointer;" routerLink="/productdetail">
+                                <div class="card-image">
+                                    <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
+                                        alt="">
+                                    <span><i class="pi pi-heart" aria-hidden="true" title="Wishlist"
+                                            style="color: white;"></i></span>
+                                </div>
+                                <div class="card-desc">
+                                    <div class="card-title">
+                                        <h6>{{product.name}}</h6>
+                                        <div class="rating" *ngIf="product.rating>0">
+                                            <ng-container *ngFor="let rating of [].constructor(product.rating)">
+                                                <i class="fa">&#xf006;</i>
+                                            </ng-container>
+                                        </div>
+                                    </div>
+                                    <div class="desc">
+                                        <p>Flammable contact cleaner aerosol</p>
+                                        <ul>
+                                            <li>SKU: 0318-12</li>
+                                            <ng-container *ngFor="let subcategory of ProductListData.subcategory">
+                                                <li>Categories: {{subcategory.name}}</li>
+                                            </ng-container>
+                                            <li>Tag: ecolink</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-price-section">
+                                    <div class="stock">
+                                        <p>Availability : Out of Stock</p>
+                                    </div>
+                                    <ng-container
+                                        *ngIf="product.regular_price != product.sale_price; then thenBlock else elseBlock">
+                                    </ng-container>
+                                    <ng-template #thenBlock>
+                                        <p class="product-price mb-1" style="text-decoration-line: line-through;">
+                                            {{product.sale_price | currency}}</p>
+                                        <p class="product-price">{{product.regular_price | currency}}</p>
+                                    </ng-template>
+                                    <ng-template #elseBlock>
+                                        <p class="product-price">{{product.regular_price | currency}}</p>
+                                    </ng-template>
+                                    <div class="list-buttons">
+                                        <p routerLink="/productdetail/cart">Add to Cart</p>
+                                        <p [routerLink]="['/productdetail']" [queryParams]="{slug:product.slug}">Show
+                                            Details</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                    </ng-container>
+                    <ng-container *ngIf="ProductListData.products.length==0">
+                        <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
+                            <h3>No data found</h3>
+                        </div>
+                    </ng-container>
+
+                </div>
+            </div>
+        </div>
+        <div class="recommendation-product">
+            <h3>Recommended Products</h3>
+            <app-card-slider></app-card-slider>
+        </div>
+    </div>
+</div>
+<div class="filter_model" *ngIf="showFiterModel">
+    <div class="filter">
+        <div class="filter-heading">
+            <h3>
+                <button type="button" class="btn-close" aria-label="Close" id="close" (click)="getFilterModel()" style="
+              border: none;
+              background: none;
+              font-weight: bolder;
+              width: 30px;
+            "></button>Filters
+            </h3>
+            <p><a href="">Clear All</a></p>
+        </div>
+        <hr>
+        <div class="filter-body">
+            <section class="categories">
+                <h4>Catgories</h4>
+                <ul *ngFor="let subcategory of ProductListData.subcategory">
+                    <div class="p-field-checkbox">
+                        <p-checkbox name="group1" value="{{subcategory.name}}" [(ngModel)]=" selectedCategory"
+                            inputId="cc"></p-checkbox>
+                        <label for="cc" class="mx-2">{{subcategory.name}}</label>
+                    </div>
+                    <!-- <div class="p-field-checkbox">
+                        <p-checkbox name="group1" value="Contact Cleaner1" [(ngModel)]=" selectedCategory"
+                            inputId="cc1"></p-checkbox>
+                        <label for="cc1" class="mx-2">Contact Cleaner</label>
+                    </div>
+                    <div class="p-field-checkbox">
+                        <p-checkbox name="group1" value="Contact Cleaner2" [(ngModel)]=" selectedCategory"
+                            inputId="cc2"></p-checkbox>
+                        <label for="cc2" class="mx-2">Contact Cleaner</label>
+                    </div> -->
+                </ul>
+            </section>
+            <section class="price-section">
+                <div class="price-heading">
+                    <h4>Price</h4>
+                </div>
+                <div class="price-slider">
+                    <ng-container *ngIf="rangeValues">
+                        <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum" [min]="0">
+                        </p-slider>
+                        <div style="
+                              display: flex;
+                              justify-content: space-between;
+                              align-items: center;
+                              margin-top: 15px;
+                              font-size: 14px;
+                              color: #1e2022;
+                            ">
+                            <b>{{ rangeValues[0] | currency: "INR" }}</b>
+                            <b>{{ rangeValues[1] | currency: "INR" }}</b>
+                        </div>
+                    </ng-container>
+                </div>
+            </section>
+            <section class="rating">
+                <div class="rating-heading">
+                    <h4>Rating</h4>
+                    <div class="p-field-checkbox">
+                        <p-checkbox name="group2" value="4 Star" [(ngModel)]="selectedRatings" inputId="4star">
+                        </p-checkbox>
+                        <label for="4star" class="mx-2">4 Star</label>
+                    </div>
+                    <div class="p-field-checkbox">
+                        <p-checkbox name="group2" value="3 Star" [(ngModel)]="selectedRatings" inputId="3star">
+                        </p-checkbox>
+                        <label for="3star" class="mx-2">3 Star</label>
+                    </div>
+                    <div class="p-field-checkbox">
+                        <p-checkbox name="group2" value="2 Star" [(ngModel)]="selectedRatings" inputId="2star">
+                        </p-checkbox>
+                        <label for="2star" class="mx-2">2 Star</label>
+                    </div>
+                </div>
+            </section>
+            <div class="apply-button">
+                <button pButton pRipple type="button" label="Apply Filter" class="p-button  filter-button"></button>
+            </div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

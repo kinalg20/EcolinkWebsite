@@ -1,0 +1,129 @@
+.top-head-section {
+    background: whitesmoke;
+
+    .container {
+        .top-head-line {
+            display: flex;
+            justify-content: space-around;
+
+            p {
+                font-size: 13px;
+                color: #37793a;
+                margin-bottom: 0;
+            }
+        }
+    }
+}
+
+.nav-link-section {
+    background: var(--primary);
+
+    .container {
+        padding-top: 10px;
+        padding-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .logo {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            img {
+                height: 35px;
+            }
+
+            h1 {
+                color: white;
+                margin-bottom: 0;
+                font-weight: 800;
+                margin-left: 20px;
+
+            }
+        }
+
+        .menus {
+            width: 60%;
+
+            ul {
+                list-style: none;
+                display: flex;
+                justify-content: space-between;
+                padding: 0;
+                margin: 0;
+
+                a {
+                    text-decoration: none;
+                    color: white;
+                }
+
+                .dropdown:hover>.dropdown-menu {
+                    display: block;
+                }
+
+                .dropdown>.dropdown-toggle:active {
+                    pointer-events: none;
+                }
+
+                .dropdown-menu {
+                    border-bottom-left-radius: 10px;
+                    border-bottom-right-radius: 10px;
+                    padding: 10px;
+
+                    .dropdown-item {
+                        color: black;
+                    }
+
+                    hr {
+                        margin: 0;
+                    }
+                }
+
+                .fa-user {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}
+
+.location-head {
+    background: #37793a;
+
+    .container {
+        display: flex;
+        padding-top: 5px;
+        padding-bottom: 5px;
+        font-size: 13px;
+
+        .location-section {
+            display: flex;
+            .location {
+                i {
+                    font-size: 15px;
+                    color: white;
+                }
+            }
+            .address {
+                margin-left: 8px;
+                a {
+                    color: white;
+                    text-decoration-color: #d7d1d1;
+                }
+            }
+        }
+
+        .chat-section {
+            width: 80%;
+            text-align: right;
+
+            a {
+                color: white;
+                text-decoration-color: #d7d1d1;
+            }
+        }
+    }
+}
+

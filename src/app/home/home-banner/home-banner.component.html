@@ -1,0 +1,264 @@
+<section class="home-banner">
+    <div class="container">
+        <div class="background-image">
+            <div class="innerhead">
+                <div class="image">
+                    <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                </div>
+                <div class="search-bar">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1"><a href="#" class="text-white">Stay
+                                    Informed</a></span>
+                        </div>
+                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
+                            aria-describedby="basic-addon1">
+                    </div>
+                </div>
+            </div>
+            <div class="headings">
+                <h1>New Website</h1>
+                <h1>Same Chemicals</h1>
+            </div>
+            <div class="bottom-line">
+                <p>Supplying Environmentally preferred industrial degreasers & solvent nationwide and internationally
+                    for over 30 year</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="marketing">
+    <div class="container">
+        <div class="complete-section">
+            <div class="section1">
+                <div class="web-logo">
+                    <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                </div>
+                <div class="section-content">
+                    <h5>We Are Growing</h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda cupiditate voluptatem
+                        voluptas illo modi veritatis fuga similique! Ab eligendi obcaecati eum. Iure quasi deserunt
+                        dolorum similique illo atque nihil alias.</p>
+                </div>
+            </div>
+            <div class="section2">
+                <div class="sub-section1">
+                    <div class="inner-div">
+                        <div class="image-div">
+                            <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                        </div>
+                        <h5>Power Washing Detergents</h5>
+                    </div>
+                </div>
+                <div class="sub-section1">
+                    <div class="inner-div">
+                        <div class="image-div">
+                            <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                        </div>
+                        <h5>Bulk Orders</h5>
+                    </div>
+                </div>
+                <div class="sub-section1">
+                    <div class="inner-div">
+                        <div class="image-div">
+                            <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                        </div>
+                        <h5>Food Grade Solvents</h5>
+                    </div>
+                </div>
+                <div class="sub-section1">
+                    <div class="inner-div">
+                        <div class="image-div">
+                            <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                        </div>
+                        <h5>Custom Solutions</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-call-to-action [data]="action_array" routerLink="/productlist"></app-call-to-action>
+<!-- <section class="pricing-section">
+    <div class="container">
+        <div class="pricing" routerLink="/productlist">
+            <div class="pricing-text">
+                <h3>Pricing</h3>
+                <p>Get quality product on reasonable price</p>
+            </div>
+            <div class="pricing-image">
+                <img src="https://wallpaperaccess.com/full/2847970.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="tidal-washer-section">
+    <div class="container">
+        <div class="tidal-washer" routerLink="/productlist">
+            <div class="tidal-image">
+                <img src="https://ecolink.com/wp-content/uploads/2020/05/Dollarphotoclub_58451099-1-750x321.jpg" alt="">
+            </div>
+            <div class="tidal-text">
+                <h3>Ecolink</h3>
+                <p>Chemical SOlution for next generation</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="about-section">
+    <div class="container">
+        <div class="about-us" routerLink="/productlist">
+            <div class="about-text">
+                <h3>About Us</h3>
+                <p>Know about company & Meet our team</p>
+            </div>
+            <div class="about-image">
+                <img src="https://blog.ipleaders.in/wp-content/uploads/2017/08/BV-Acharya-104.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section>
+<section class="manufacturing-section">
+    <div class="container">
+        <div class="manufacturing" routerLink="/productlist">
+            <div class="manufacture-image">
+                <img src="https://static.fibre2fashion.com/articleresources/images/87/8623/chemical-big_Big.jpg" alt="">
+            </div>
+            <div class="manufacture-text">
+                <h3>Ecolink Manufacturing</h3>
+                <p>Ecolink’s successful work in the manufacturing sector</p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="service-section">
+    <div class="container">
+        <div class="services" routerLink="/productlist">
+            <div class="service-text">
+                <h3>Our Services</h3>
+                <p>Services and Marketing</p>
+            </div>
+            <div class="service-image">
+                <img src="http://www.safemax.co.id/wp-content/uploads/2016/02/banner-services.jpg" alt="">
+            </div>
+        </div>
+    </div>
+</section> -->
+<section class="shop-categories">
+    <div class="container">
+        <div class="categories-text">
+            <div class="product-category">
+                <div class="heading-section">
+                    <h3>INDUSTRIAL DEGREASERS & SOLVENTS</h3>
+                </div>
+                    <div class="categories">
+                        <div class="category-card" *ngFor="let category of getCategory.data">
+                            <div class="category-image">
+                                <img src="{{category.image}}"
+                                    alt="">
+                            </div>
+                            <div class="category-text">
+                                <div class="content">
+                                    <h5>{{category.name}}</h5>
+                                    <hr style="margin: 0;">
+                                    <p>We offer aerosols for contact cleaning, degreasing & defluxing.</p>
+                                    <div class="button-div">
+                                        <button routerLink="/product-category/{{category.slug}}">Shop Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="category-card">
+                            <div class="category-image">
+                                <img src="https://ecolink.com/wp-content/uploads/2017/09/ecolink_icons-02-300x300.jpg"
+                                    alt="">
+                            </div>
+                            <div class="category-text">
+                                <div class="content">
+                                    <h5>Aqueous Based</h5>
+                                    <hr style="margin: 0;">
+                                    <p>Looking for safer and more bio-degradable solutions? Then aqueous solutions are for
+                                        you.</p>
+                                    <div class="button-div">
+                                        <button routerLink="/productlist">Shop Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-image">
+                                <img src="https://ecolink.com/wp-content/uploads/2017/09/ecolink_icons-03-300x300.jpg"
+                                    alt="">
+                            </div>
+                            <div class="category-text">
+                                <div class="content">
+                                    <h5>Solvent Based</h5>
+                                    <hr style="margin: 0;">
+                                    <p>When an aquesous solution just won’t work as effectively, we have the solvent solution you need.</p>
+                                    <div class="button-div">
+                                        <button routerLink="/productlist">Shop Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-image">
+                                <img src="https://ecolink.com/wp-content/uploads/2017/09/ecolink_icons-04-300x300.jpg"
+                                    alt="">
+                            </div>
+                            <div class="category-text">
+                                <div class="content">
+                                    <h5>Solvent Substitution
+                                    </h5>
+                                    <hr style="margin: 0;">
+                                    <p>We stay ahead of the EPA so you don’t have to worry. Effective, EPA approved substitute chemicals for all your cleaning needs.</p>
+                                    <div class="button-div">
+                                        <button routerLink="/productlist">Shop Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-image">
+                                <img src="https://ecolink.com/wp-content/uploads/2017/09/ecolink_icons-05-300x300.jpg"
+                                    alt="">
+                            </div>
+                            <div class="category-text">
+                                <div class="content">
+                                    <h5>NDI, NDT, NDE
+                                    </h5>
+                                    <hr style="margin: 0;">
+                                    <p>For all your pre- and post- NDT cleaning needs, magnetic particle inspection, liquid penetrant inspection, developers, removers, leak testing & emulsifiers.</p>
+                                    <div class="button-div">
+                                        <button routerLink="/productlist">Shop Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="category-card">
+                            <div class="category-image">
+                                <img src="https://ecolink.com/wp-content/uploads/2017/09/ecolink_icons-06-300x300.jpg"
+                                    alt="">
+                            </div>
+                            <div class="category-text">
+                                <div class="content">
+                                    <h5>Surface Preparation
+                                    </h5>
+                                    <hr style="margin: 0;">
+                                    <p>We’ve got all your cleanroom supplies: tack cloths, swabs, pre-saturated wipes & canisters and lint-free, dry wipes.</p>
+                                    <div class="button-div">
+                                        <button routerLink="/productlist">Shop Now</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> -->
+                    </div>
+            </div>
+            <div class="shop-text">
+                <h3>Shop Chemicals</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore veniam ut similique enim cupiditate, atque natus ab vero ipsum! Illum veritatis rerum quod pariatur ratione aut rem necessitatibus modi repudiandae.</p>
+            </div>
+        </div>
+    </div>
+</section>
+

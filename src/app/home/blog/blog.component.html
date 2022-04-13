@@ -1,0 +1,42 @@
+<app-header></app-header>
+<section class="blog-section">
+    <div class="container">
+        <div class="blog-calltoaction">
+            <div class="blog">
+                <div class="head-calltoaction">
+                    <div class="shop-chemical">
+                        <button>Shop Chemicals</button>
+                    </div>
+                </div>
+                <ng-container *ngFor="let items of getBlog">
+                    <div class="blog-image">
+                        <img src="{{items.data.image}}" alt="">
+                    </div>
+                    <div class="blog-text">
+                        <div [innerHTML]="this.__apiService.getSantizedData(items.data.description)"></div>
+                    </div>
+                </ng-container>
+            </div>
+            <div class="calltoactionshop">
+                <div class="chemicalscalltoaction">
+                    <div class="chemical-div">
+                        <button>Shop Chemicals</button>
+                    </div>
+                </div>
+                <div class="blog-search">
+                    <span class="p-input-icon-right">
+                        <i class="pi pi-search"></i>
+                        <input type="text" placeholder="Search the blog" pInputText />
+                    </span>
+                </div>
+                <div class="ctasection">
+                    <div class="innerctadiv">
+                        <button>Shop Chemicals</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-trending-post></app-trending-post>
+<app-footer></app-footer>

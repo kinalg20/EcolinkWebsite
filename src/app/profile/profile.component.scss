@@ -1,0 +1,31 @@
+.profile-section{
+    height: 100%;
+    .profile-heading{
+        padding: 30px 0;
+        h1{
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .card{
+        display: grid;
+        grid-template-columns: 22% 78%;
+
+        .profile-side-bar{
+            padding: 20px 10px;
+            border-right: 1px solid #dedede;
+            ul{
+                padding: 0;
+                li{
+                    padding: 10px 5px;
+                    font-size: 18px;
+                    list-style: none;
+                }
+                li:hover{
+                    background: whitesmoke;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}

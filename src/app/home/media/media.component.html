@@ -1,0 +1,43 @@
+<app-header></app-header>
+<section class="media-section">
+    <div class="container">
+        <div class="head-section">
+            <span class="p-input-icon-right">
+                <i class="pi pi-search"></i>
+                <input type="text" placeholder="Search the blog" pInputText />
+            </span>
+        </div>
+    </div>
+</section>
+<section class="media-banner">
+    <div class="container">
+        <div class="media-calltoaction" >
+            <ng-container *ngFor="let item of getAllBlog.data">
+                <div class="media" [routerLink]="['/blog']" [queryParams]="{ slug:item.slug }">
+                    <div class="spotlight-banner">
+                        <img src="{{item.image}}" alt="">
+                    </div>
+                    <div class="spotlight-desc">
+                        <h5>{{item.title}}</h5>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium earum, quae veritatis qui, numquam corrupti nobis rerum aperiam!</p>
+                        <p class="action-button">Read Article <i class="fa fa-arrow-right"></i></p>
+                    </div>
+                </div>
+            </ng-container>
+            <div></div>
+            <div class="calltoaction">
+                <div class="chemical">
+                    <button>Shop Chemicals</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-trending-post></app-trending-post>
+<div class="container trending-section">
+    <hr>
+    Latest Posts
+    <hr>
+</div>
+<app-media-banner [data_input]=data_array></app-media-banner>
+<app-footer></app-footer>

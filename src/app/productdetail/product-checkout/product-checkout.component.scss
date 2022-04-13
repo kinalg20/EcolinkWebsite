@@ -1,0 +1,156 @@
+.checkout-section {
+    margin: 30px 60px;
+
+    .checkout-heading {
+        margin: 30px 0;
+    }
+
+    h3,
+    h2 {
+        font-weight: 600;
+        margin: 0;
+        padding: 0;
+    }
+
+    .checkout-body {
+        display: grid;
+        grid-template-columns: 60% 39%;
+        grid-gap: 10px;
+
+        .billing-detail {
+            .card {
+                padding: 20px 30px;
+
+                h3 {
+                    padding: 20px 0;
+                }
+
+                label {
+                    font-weight: 400;
+                }
+
+                .checkbox {
+                    display: flex;
+                    align-items: center;
+
+                    label {
+                        margin-left: 5px;
+                    }
+                }
+            }
+        }
+
+        .your-order {
+            .card {
+                padding: 20px 30px;
+                h3{
+                    padding: 20px 0;
+                }
+
+                .checkout-product-heading{
+                    border-bottom: 1px solid #dedede;
+                    ul{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 0 5px;
+                        margin-bottom: 0.5rem;
+                        li{
+                           list-style: none; 
+                           font-weight: 600;
+                        }
+                    }
+                }
+
+                .checkout-products{
+                    border-bottom: 1px solid #dedede;
+                    margin: 20px 0;
+                    ul{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 0 5px;
+                        li{
+                           list-style: none;
+                           max-width: 250px;
+                        }
+                    }
+                }
+
+                .checkout-products-subtotal{
+                    border-bottom: 1px solid #dedede;
+                    ul{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 0 5px;
+                        .subtotal-list-element,li{
+                           list-style: none;
+                        }
+
+                        .subtotal-list-element{
+                            font-weight: 500;
+                        }
+                    }
+                }
+                .checkout-products-total{
+                    ul{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        padding: 5px 5px;
+                        li{
+                           list-style: none;
+                           font-size: 20px;
+                        }
+
+                        .subtotal-list-element{
+                            font-weight: 500;
+                        }
+                    }
+                }
+
+                .bank-detail{
+                    .card{
+                        background: #f7f7f7;
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+::ng-deep{
+    .p-button.p-button-success,
+    .p-buttonset.p-button-success>.p-button,
+    .p-splitbutton.p-button-success>.p-button {
+        background: var(--primary);
+        border: 1px solid var(--primary);
+        font-size: 18px;
+        // font-weight: 600;
+    }
+
+    .p-button.p-button-success:enabled:focus,
+    .p-buttonset.p-button-success>.p-button:enabled:focus,
+    .p-splitbutton.p-button-success>.p-button:enabled:focus {
+        box-shadow: none;
+    }
+
+    .p-button.p-button-success:enabled:hover,
+    .p-buttonset.p-button-success>.p-button:enabled:hover,
+    .p-splitbutton.p-button-success>.p-button:enabled:hover {
+        background: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .p-button.p-button-success:enabled:focus,
+    .p-buttonset.p-button-success>.p-button:enabled:hover,
+    .p-splitbutton.p-button-success>.p-button:enabled:focus {
+        box-shadow: 0 0 0 0.2rem #95dc9b;
+    }
+}
