@@ -1,13 +1,13 @@
 <app-header></app-header>
 <div class="container">
-    <div class="listing-section">
+    <div class="listing-section" *ngFor="let listdata of ProductListData">
         <div class="card-page">
             <div class="list-header">
                 <div class="list-heading">
-                    <h2>Aerosol</h2>
-                    <span><a href="">Home/</a></span>
-                    <span><a href="">ProductList/</a></span>
-                    <span><a href="">Aerosol</a></span>
+                    <h2>{{listdata.data.name}}</h2>
+                    <span><a href="">Home</a></span>/
+                    <span><a href="">Product-category</a></span>/
+                    <span><a href="">{{listdata.data.name}}</a></span>/
                 </div>
                 <div class="grid-list-view">
                     <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
@@ -21,8 +21,20 @@
                         </li>
                     </ul>
                     <div class="sort-by-search">
-                        <p-dropdown [options]="popularity" [(ngModel)]="selectedPopularity"
-                            placeholder="Select Sort by"></p-dropdown>
+                        <!-- <p-dropdown [options]="popularity" [(ngModel)]="selectedPopularity"
+                            placeholder="Select Sort by"></p-dropdown> -->
+
+                        <div class="dropdown">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected>Default</option>
+                                <option value="1">Price low to high</option>
+                                <option value="2">Price high to low</option>
+                                <option value="3">Name</option>
+                                <option value="4">Date</option>
+                                <option value="4">Popularity</option>
+                            </select>
+                        </div>
+
                         <span class="p-input-icon-left">
                             <i class="pi pi-search"></i>
                             <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
@@ -53,22 +65,12 @@
                     <div class="filter-body">
                         <section class="categories">
                             <h4>Catgories</h4>
-                            <ul *ngFor="let subcategory of ProductListData.subcategory">
+                            <ul *ngFor="let subcategory of listdata.data.subcategory">
                                 <div class="p-field-checkbox">
                                     <p-checkbox name="group1" value="{{subcategory.name}}"
                                         [(ngModel)]=" selectedCategory" inputId="cc"></p-checkbox>
                                     <label for="cc" class="mx-2">{{subcategory.name}}</label>
                                 </div>
-                                <!-- <div class="p-field-checkbox">
-                                    <p-checkbox name="group1" value="Contact Cleaner1" [(ngModel)]=" selectedCategory"
-                                        inputId="cc1"></p-checkbox>
-                                    <label for="cc1" class="mx-2">Contact Cleaner</label>
-                                </div>
-                                <div class="p-field-checkbox">
-                                    <p-checkbox name="group1" value="Contact Cleaner2" [(ngModel)]=" selectedCategory"
-                                        inputId="cc2"></p-checkbox>
-                                    <label for="cc2" class="mx-2">Contact Cleaner</label>
-                                </div> -->
                             </ul>
                         </section>
                         <section class="price-section">
@@ -119,11 +121,12 @@
                         </div>
                     </div>
                 </div>
+                <!-- Products Cards -->
                 <div class="product-cards" *ngIf="view_card">
-                    <ng-container class="row" *ngIf="ProductListData.products.length>0">
-                        <ng-container *ngFor="let product of ProductListData.products">
-                            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
-                                <div class="card" style="cursor: pointer;" routerLink="/productdetail">
+                    <ng-container class="row" *ngIf="listdata.data.products.length>0">
+                        <ng-container *ngFor="let product of listdata.data.products">
+                            <div class="col-xl-4 col-4 col-lg-6">
+                                <div class="card" style="cursor: pointer;" routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
                                     <div class="card-image">
                                         <img [src]="product.image" alt="">
                                         <span routerLink="/productdetail/wishlist"><i style="color: white;"
@@ -132,18 +135,19 @@
                                     <div class="card-body">
                                         <div class="card-title">
                                             <h6>{{product.name}}</h6>
-                                            <ng-container *ngFor="let subcategory of ProductListData.subcategory">
+                                            <ng-container *ngFor="let subcategory of listdata.data.subcategory">
                                                 <p> {{subcategory.name}}</p>
                                             </ng-container>
                                         </div>
                                         <div class="card-price-section">
                                             <div class="card-price">
                                                 <ng-container
-                                                    *ngIf="product.regular_price != product.sale_price; then thenBlock else elseBlock">
+                                                    *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
                                                 </ng-container>
                                                 <ng-template #thenBlock>
                                                     <p class="product-price mb-1"
-                                                        style="text-decoration-line: line-through;">{{product.sale_price
+                                                        style="text-decoration-line: line-through; font-size: 14px;">
+                                                        {{product.sale_price
                                                         | currency}}</p>
                                                     <p class="product-price">{{product.regular_price | currency}}</p>
                                                 </ng-template>
@@ -159,25 +163,29 @@
                                             </div>
                                         </div>
                                         <div class="list-buttons">
-                                            <p routerLink="/productdetail/cart">Add to Cart</p>
-                                            <p routerLink="/productdetail" [routerLink]="['/productdetail']"
-                                                [queryParams]="{slug:product.slug}">Show Details</p>
+                                            <button (click)=AddProductToCart(listdata.data) pButton pRipple type="button"
+                                                label="Add to Cart" class="p-button-raised p-button-success"
+                                                style="height:38px; background-color: #55b15c;" routerLink="/shop/cart"></button>
+                                            <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">Show
+                                                Details</p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </ng-container>
                     </ng-container>
-                    <ng-container *ngIf="ProductListData.products.length==0">
+                    <ng-container *ngIf="listdata.data.products.length==0">
                         <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
                             <h3>No data found</h3>
                         </div>
                     </ng-container>
                 </div>
+
+                <!-- Product Lists -->
                 <div class="product-listing" *ngIf="view_list">
-                    <ng-container *ngIf="ProductListData.products.length>0">
-                        <ng-container *ngFor="let product of ProductListData.products">
-                            <div class="card" style="cursor: pointer;" routerLink="/productdetail">
+                    <ng-container *ngIf="listdata.data.products.length>0">
+                        <ng-container *ngFor="let product of listdata.data.products">
+                            <div class="card" style="cursor: pointer;" routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
                                 <div class="card-image">
                                     <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
                                         alt="">
@@ -197,7 +205,7 @@
                                         <p>Flammable contact cleaner aerosol</p>
                                         <ul>
                                             <li>SKU: 0318-12</li>
-                                            <ng-container *ngFor="let subcategory of ProductListData.subcategory">
+                                            <ng-container *ngFor="let subcategory of listdata.data.subcategory">
                                                 <li>Categories: {{subcategory.name}}</li>
                                             </ng-container>
                                             <li>Tag: ecolink</li>
@@ -209,10 +217,11 @@
                                         <p>Availability : Out of Stock</p>
                                     </div>
                                     <ng-container
-                                        *ngIf="product.regular_price != product.sale_price; then thenBlock else elseBlock">
+                                        *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
                                     </ng-container>
                                     <ng-template #thenBlock>
-                                        <p class="product-price mb-1" style="text-decoration-line: line-through;">
+                                        <p class="product-price mb-1"
+                                            style="text-decoration-line: line-through; font-size: 14px;">
                                             {{product.sale_price | currency}}</p>
                                         <p class="product-price">{{product.regular_price | currency}}</p>
                                     </ng-template>
@@ -220,15 +229,15 @@
                                         <p class="product-price">{{product.regular_price | currency}}</p>
                                     </ng-template>
                                     <div class="list-buttons">
-                                        <p routerLink="/productdetail/cart">Add to Cart</p>
-                                        <p [routerLink]="['/productdetail']" [queryParams]="{slug:product.slug}">Show
+                                        <p routerLink="/shop/cart" (click)=AddProductToCart(listdata.data) routerLink="/shop/cart">Add to Cart</p>
+                                        <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">Show
                                             Details</p>
                                     </div>
                                 </div>
                             </div>
                         </ng-container>
                     </ng-container>
-                    <ng-container *ngIf="ProductListData.products.length==0">
+                    <ng-container *ngIf="listdata.data.products.length==0">
                         <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
                             <h3>No data found</h3>
                         </div>
@@ -236,7 +245,10 @@
 
                 </div>
             </div>
+
         </div>
+
+        <!-- Recommended Products -->
         <div class="recommendation-product">
             <h3>Recommended Products</h3>
             <app-card-slider></app-card-slider>

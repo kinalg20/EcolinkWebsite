@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { SignupSigninComponent } from './signup-signin/signup-signin.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ProfileRoutingModule,
     SharelibraryModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ],
 })
 export class ProfileModule {

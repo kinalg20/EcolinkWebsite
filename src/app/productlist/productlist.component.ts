@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { isEmpty } from 'rxjs/operators';
 import { ApiServiceService } from '../Services/api-service.service';
+import { CookiesService } from '../Services/cookies.service';
 interface popularity {
   name: string
 }
@@ -12,35 +14,42 @@ interface popularity {
   styleUrls: ['./productlist.component.scss']
 })
 export class ProductlistComponent implements OnInit {
-  showFiterModel: boolean = false;
   suggestions: boolean = true;
+  showFiterModel:boolean = false;
+  previousdata: any;
   val1: any;
+  ItemCount: any = 1;
+  CartObj: any = {};
   rangeValues: number[] = [20, 80];
   view_card: boolean = true;
   view_list: boolean = false;
   value1: string = '';
   popularity!: popularity[];
   selectedPopularity!: popularity;
+  dropdownValue = "Default";
   maximum: number = 100;
   city: string = '';
+  slug: any;
   selectedCategory: string[] = [];
   selectedRatings: string[] = [];
-  ProductListData: any = {
-    data: [],
-    subcategory: [],
-    products: []
-  };
-  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService) {
+  ProductListData: any = [];
+  cart_obj: any = []
+  @ViewChild('warning') warning: any;
+  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService) {
     this.popularity = [
+      { name: "Default" },
       { name: "Price low to high" },
       { name: "Price high to low" },
+      { name: "Name" },
+      { name: "Date" },
+      { name: "Popularity" },
     ];
   }
 
   ngOnInit(): void {
-    let slug = this.route.snapshot.params;
-    console.log(slug)
-    this.getListingData(slug);
+    this.slug = this.route.snapshot.params;
+    this.getListingData(this.slug);
+    localStorage.setItem("category", JSON.stringify(this.slug.slug));
   }
   responsiveOptions = [
     {
@@ -165,18 +174,47 @@ export class ProductlistComponent implements OnInit {
   getListingData(slug: any) {
     setTimeout(() => {
       this._ApiService.getDetailByCategory(slug).subscribe(res => {
-        this.ProductListData = {
-          subcategory: res.data.subcategory,
-          products: res.data.products,
-          data: res
+        if (res.code == 200) {
+          this.ProductListData.push(res);
         }
+
+        if (res.code == 400) {
+          this.warning.show("Warning")
+        }
+
       })
     }, 500);
   }
+
+  AddProductToCart(Item: any) {
+    if (localStorage.getItem('ecolink_user_credential')==null) {
+      this.cart_obj = [];
+      this.previousdata = this.Cookies.GetCartData();
+      let recently_added_object = {
+        "CartProductId": Item.id,
+        "ProductQuantity": this.ItemCount,
+        "ProductCategory": this.slug.slug
+      }
+      console.log('previous data', this.previousdata);
+      if (this.previousdata != 'empty') {
+        this.previousdata.map((res: any) => {
+          if (!(res.CartProductId == recently_added_object.CartProductId && res.ProductCategory === recently_added_object.ProductCategory)) {
+            this.cart_obj.push(recently_added_object);
+          }
+          this.cart_obj.push(res);
+        })
+      }
+      else {
+        this.cart_obj.push(recently_added_object);
+      }
+      this.Cookies.SaveCartData(this.cart_obj);
+      console.log(this.cart_obj);
+    }
+  }
+
   getFilterModel() {
     this.showFiterModel =true;
     this.showFiterModel = !this.showFiterModel;
-
-    
   }
+
 }

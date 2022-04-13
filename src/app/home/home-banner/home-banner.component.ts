@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
   selector: 'app-home-banner',
@@ -7,7 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class HomeBannerComponent implements OnInit {
   @Input() getCategory:any;
-  constructor() { }
+  newsletter_email:any;
+  constructor(private _ApiService : ApiServiceService) { }
   action_array=[
     {
       imgurl:"https://t4.ftcdn.net/jpg/02/27/41/31/360_F_227413125_c5CgAhRF9FVpEYKzckx8le5cSMpYx9YP.jpg",
@@ -53,6 +55,14 @@ export class HomeBannerComponent implements OnInit {
     //   console.log(this.getCategory.data);
     // }, 500);
   }
+
+  // subscribe(){
+  //   console.log(this.newsletter_email);
+  //   let endpoint = 'newsletter'
+  //   this._ApiService.post(endpoint , this.newsletter_email).subscribe(res=>{
+  //     console.log(res);
+  //   })
+  // }
 
 
 }

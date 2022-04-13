@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AuthGuard } from './auth.guard';
 import { ApiServiceService } from './Services/api-service.service';
 
 
@@ -16,9 +17,9 @@ import { ApiServiceService } from './Services/api-service.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
-  providers: [ApiServiceService],
+  providers: [ApiServiceService,AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

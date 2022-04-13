@@ -11,6 +11,7 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { BlogComponent } from './blog/blog.component';
 import { ManufactureComponent } from './manufacture/manufacture.component';
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
     CommonModule,
     HomeRoutingModule,
     SharedModule,
-    SharelibraryModule
+    SharelibraryModule,
+    FormsModule
   ]
 })
 export class HomeModule { }

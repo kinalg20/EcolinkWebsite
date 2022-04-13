@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from 'src/app/Services/api-service.service';
+import { CookiesService } from 'src/app/Services/cookies.service';
 
 @Component({
   selector: 'app-product-cart',
@@ -6,10 +8,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-cart.component.scss']
 })
 export class ProductCartComponent implements OnInit {
-  // productCount: any = 1;
-  constructor() { }
+  CardShow: any = [];
+
+  GetProduct: any = [];
+  SubTotal: number = 0;
+  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
+    this.getCartData();
 
   }
   products = [
@@ -64,11 +70,45 @@ export class ProductCartComponent implements OnInit {
   ]
 
   Count(string: any, id: any) {
-    if (string == "increase" && this.products[id].quantity < 10) {
-      this.products[id].quantity = this.products[id].quantity + 1;
+    if (string == "increase" && this.CardShow[id].quantity < 10) {
+      this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
     }
-    if (string == "decrease" && this.products[id].quantity > 1) {
-      this.products[id].quantity = this.products[id].quantity - 1;
+    if (string == "decrease" && this.CardShow[id].quantity > 1) {
+      this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
     }
   }
+
+  getCartData() {
+    if (localStorage.getItem('ecolink_user_credential') == null) {
+      let data = this._cookies.GetCartData();
+      data.map((res: any) => {
+        this._ApiService.getDetailByCategory(res.ProductCategory).subscribe((resp: any) => {
+          resp.data.products.map((response: any) => {
+            if (res.CartProductId == response.id) {
+              response.quantity = res.ProductQuantity;
+              this.SubTotal = this.SubTotal + response.regular_price;
+              this.CardShow.push(response);
+              localStorage.setItem("CheckoutData" , JSON.stringify(this.CardShow));
+            }
+          })
+        })
+      })
+    }
+
+    else{
+      console.log("usser is logged in");
+      this._ApiService.getItemFromCart().subscribe(res=>{
+        this.CardShow = res.data;
+        // console.log(res);
+      })
+
+      this.CardShow.map((res:any)=>{
+        this.SubTotal = this.SubTotal+res.product.sale_price;
+      })
+
+      console.log(this.SubTotal);
+    }
+  }
+
+
 }

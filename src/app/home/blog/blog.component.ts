@@ -8,9 +8,9 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./blog.component.scss']
 })
 export class BlogComponent implements OnInit {
-  slug: any;
-  getBlog: any = [];
-  constructor(private route: ActivatedRoute, public __apiService: ApiServiceService) { }
+ slug:any;
+ getBlog:any=[];
+  constructor(private route: ActivatedRoute, public __apiService : ApiServiceService) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.queryParams;
@@ -18,7 +18,7 @@ export class BlogComponent implements OnInit {
       console.log(this.slug);
     }, 500);
 
-    this.__apiService.getBlog(this.slug).subscribe(res => {
+    this.__apiService.getBlog(this.slug).subscribe(res=>{
       this.getBlog.push(res);
       setTimeout(() => {
         console.log(this.getBlog);

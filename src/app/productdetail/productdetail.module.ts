@@ -9,6 +9,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ProductCartComponent } from './product-cart/product-cart.component';
 import { ProductWishlistComponent } from './product-wishlist/product-wishlist.component';
 import { ProductCheckoutComponent } from './product-checkout/product-checkout.component';
+import { ShopComponent } from './shop/shop.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProductCheckoutComponent } from './product-checkout/product-checkout.co
     ProductdetailComponent,
     ProductCartComponent,
     ProductWishlistComponent,
-    ProductCheckoutComponent
+    ProductCheckoutComponent,
+    ShopComponent
   ],
   imports: [
     CommonModule,

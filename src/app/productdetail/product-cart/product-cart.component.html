@@ -1,8 +1,5 @@
-<app-header></app-header>
-
-<ng-container *ngIf="products.length>0; then thenblock else elseblock"></ng-container>
+<ng-container *ngIf="CardShow; then thenblock else elseblock"></ng-container>
 <div class="container">
-
     <ng-template #elseblock>
         <div class="empty-cart">
             <div class="cart-heading">
@@ -14,7 +11,7 @@
                         <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png"
                                 width="130" height="130" class="img-fluid mb-4 mr-3">
                             <h3><strong>Your Cart is Empty</strong></h3>
-                            <h4>Add something to make me happy :)</h4> <a href="/productlist"
+                            <h4>Add something to make me happy :)</h4> <a href="/product-Category"
                                 class="btn btn-success cart-btn-transform m-3" data-abc="true">continue shopping</a>
                         </div>
                     </div>
@@ -31,7 +28,7 @@
         </div>
         <div class="cart-body">
             <div class="cart-elements">
-                <p-table [value]="products" #thenblock>
+                <p-table [value]="CardShow" #thenblock>
                     <ng-template pTemplate="header">
                         <tr class="heading-row">
                             <th style="width: 280px;">Product Name</th>
@@ -45,11 +42,11 @@
                             <td>
                                 <div class="product_name">
                                     <div class="cart_image" style="cursor: pointer;" routerLink="/productdetail">
-                                        <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
-                                            alt="">
+                                        <img [src]="product.product.image"
+                                            alt="{{product.product.alt}}">
                                     </div>
                                     <div class="product_desc">
-                                        <h6 style="text-align: left; padding-left: 10px;">{{product.name}}</h6>
+                                        <h6 style="text-align: left; padding-left: 10px;">{{product.product.name}}</h6>
                                     <div style="text-align: left; padding: 0 10px;">
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
@@ -60,7 +57,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{product.price | currency:'USD'}}</td>
+                            <td>{{product.product.sale_price| currency:'USD'}}</td>
                             <td>
                                 <div class="quantity">
                                     <button (click)="Count('decrease', rowIndex)">-</button>
@@ -70,7 +67,7 @@
                             </td>
                             <td>
                                 <div class="price-row">
-                                    <span class="price__subtotal">${{product.price*product.quantity}}</span>
+                                    <span class="price__subtotal">${{product.product.sale_price*product.quantity}}</span>
                                     <span class="delete_item"><i class="pi pi-times"></i></span>
                                 </div>
                             </td>
@@ -78,7 +75,7 @@
                     </ng-template>
                     <ng-template pTemplate="summary">
                         <div class="p-d-flex p-ai-center p-jc-between">
-                            In total there are {{products ? products.length : 0 }} products.
+                            In total there are {{CardShow ? CardShow.length : 0 }} products.
                         </div>
                     </ng-template>
                 </p-table>
@@ -89,7 +86,7 @@
                 <div class="subtotal-price">
                     <ul>
                         <li>Subtotal</li>
-                        <li>$320</li>
+                        <li>${{SubTotal}}</li>
                     </ul>
                 </div>
                 <div class="shipping-tax">
@@ -109,13 +106,13 @@
                         <h3>Total</h3>
                     </li>
                     <li>
-                        <h3>$520</h3>
+                        <h3>{{SubTotal+100+100}}</h3>
                     </li>
                 </ul>
             </div>
                 <div class="proceed">
                     <div class="proceed-button">
-                        <button routerLink="/productdetail/checkout" pButton pRipple type="button" label="Proceed to Checkout" class="p-button-raised p-button-success"
+                        <button routerLink="/shop/checkout" pButton pRipple type="button" label="Proceed to Checkout" class="p-button-raised p-button-success"
                             style="height:40px; width: 100%;"></button>
                     </div>
                 </div>
@@ -123,4 +120,3 @@
         </div>
     </div>
 </ng-template>
-<app-footer></app-footer>

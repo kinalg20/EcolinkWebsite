@@ -13,8 +13,7 @@
                    <li (click)="togglebutton='Order History'">Order History</li>
                    <li (click)="togglebutton='Addresses'">Addresses</li>
                    <li (click)="togglebutton='Wishlist'" routerLink="/productdetail/wishlist">Wishlist</li>
-                   <li (click)="togglebutton='Tax Exemption'">Tax Exemption</li>
-                   <li (click)="togglebutton='Logout'" routerLink="/profile/auth">Logout</li>
+                   <li (click)="togglebutton='Logout'" (click)="logOut()">Logout</li>
                </ul>
             </div>
             <div class="profile-sidebar-desc">
