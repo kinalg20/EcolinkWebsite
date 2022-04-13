@@ -9,9 +9,43 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class HeaderComponent implements OnInit {
   user_id:any;
+  
   homePageData:any=[];
   constructor(private route:Router,private __apiservice:ApiServiceService) { }
-
+  routes:any=[
+    {
+      "id":"1",
+      "route":"/about-us"
+    },
+    {
+      "id":"2",
+      "route":"/about-us"
+    },
+    {
+      "id":"3",
+      "route":"/about-us"
+    },
+    {
+      "id":"4",
+      "route":"/about-us"
+    },
+    {
+      "id":"5",
+      "route":"/about-us"
+    },
+    {
+      "id":"6",
+      "route":"/about-us"
+    },
+    {
+      "id":"7",
+      "route":"/about-us"
+    },
+    {
+      "id":"8",
+      "route":"/about-us"
+    },
+  ];
   ngOnInit(): void {
     this.__apiservice.home().subscribe((res:any)=>{
       this.homePageData.push(res);
@@ -19,9 +53,13 @@ export class HeaderComponent implements OnInit {
         console.log(this.homePageData[0])
       }, 500);
     })
-    this.homePageData.map((res:any)=>{
-      res.data.pagecategories
-    })
+    // this.homePageData.map((res:any)=>{
+    //   console.log(res);
+    //   this.routes.map((response:any)=>{
+    //     res.route=response;
+    //     console.log(res);
+    //   })
+    // })
   }
   profile(){
     if(localStorage.getItem("ecolink_user_credential")===null){
@@ -31,5 +69,6 @@ export class HeaderComponent implements OnInit {
       this.route.navigateByUrl('/profile');
     }
   }
+  
   
 }
