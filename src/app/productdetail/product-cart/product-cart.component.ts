@@ -105,6 +105,8 @@ export class ProductCartComponent implements OnInit {
       this.CardShow.map((res:any)=>{
         this.SubTotal = this.SubTotal+res.product.sale_price;
       })
+
+      console.log(this.SubTotal);
     }
   }
 
