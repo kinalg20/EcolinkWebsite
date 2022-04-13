@@ -56,13 +56,12 @@ export class HomeBannerComponent implements OnInit {
     // }, 500);
   }
 
-  // subscribe(){
-  //   console.log(this.newsletter_email);
-  //   let endpoint = 'newsletter'
-  //   this._ApiService.post(endpoint , this.newsletter_email).subscribe(res=>{
-  //     console.log(res);
-  //   })
-  // }
+  subscribe(){
+    let endpoint = 'newsletter'
+    this._ApiService.newLatter(endpoint , this.newsletter_email).subscribe(res=>{
+      console.log(res);
+    })
+  }
 
 
 }

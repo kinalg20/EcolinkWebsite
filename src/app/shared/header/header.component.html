@@ -8,55 +8,60 @@
     </div>
 </section>
 <section class="nav-link-section">
-    <div class="container">
+    <div class="container navbar navbar-expand-lg">
         <div class="logo" routerLink='/'>
             <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-33.png" alt="">
             <h1>ECOLINK</h1>
         </div>
-        <div class="menus">
-            <ul>
-                <li *ngFor="let item of homePageData"><a routerLink="/about-us">{{item.name}}</a></li>
-                <!-- <li><a routerLink="/about-us">Company</a></li>
-                <li><a routerLink="/product-category/aerosol">Products</a></li> -->
-                <!-- <li><a href="">Businesses</a></li> -->
-                <!-- <li>
-                    <div class="dropdown">
-                        <a routerLink="/manufacture" class=" " type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Products<i class="fa fa-angle-down mx-2"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" routerLink="/manufacture">Manufactures Wanted</a>
-                            <hr>
-                            <a class="dropdown-item" routerLink="/manufacture">Industries</a>
-                        </div>
-                    </div>
-                </li> -->
-                <!-- <li><a routerLink="/">Industries</a></li>
-                <li>
-                    <div class="dropdown">
-                        <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                            Clean Ideas<i class="fa fa-angle-down mx-2"></i>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                            <a class="dropdown-item" href="#">Sustainability Commitment</a>
-                            <hr>
-                            <a class="dropdown-item" href="#">B Corp</a>
-                            <hr>
-                            <a class="dropdown-item" href="#">Eco Links</a>
-                        </div>
-                    </div>
-                </li>
-                <li><a routerLink="/media">Blog</a></li>
-                <li><a routerLink="/product-category/aerosol">Bulk Pricing</a></li>
-                <li><a routerLink="/product-category/aerosol">Shop</a></li>
-                <li><a routerLink="/about-us">Contact Us</a></li> -->
-                <!-- <li><a routerLink="/shop/cart"><i class="fa fa-shopping-cart" aria-hidden="true" style="position: relative;"></i>
-                <span style="position: absolute; font-size: 12px; padding-left: 4px;">6</span>
-                </a></li> -->
-                <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-            </ul>
+        <div class="responsive-navbar">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"><i class="fa fa-list"></i></span>
+              </button>
+              <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav">
+                      <li class="nav-item" *ngFor="let item of homePageData"><a routerLink={{item.routers}}>{{item.name}}</a></li>
+                      <!-- <li><a routerLink="/about-us">Company</a></li>
+                      <li><a routerLink="/product-category/aerosol">Products</a></li> -->
+                      <!-- <li><a href="">Businesses</a></li> -->
+                      <!-- <li>
+                          <div class="dropdown">
+                              <a routerLink="/manufacture" class=" " type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  Products<i class="fa fa-angle-down mx-2"></i>
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" routerLink="/manufacture">Manufactures Wanted</a>
+                                  <hr>
+                                  <a class="dropdown-item" routerLink="/manufacture">Industries</a>
+                              </div>
+                          </div>
+                      </li> -->
+                      <!-- <li><a routerLink="/">Industries</a></li>
+                      <li>
+                          <div class="dropdown">
+                              <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                                  aria-haspopup="true" aria-expanded="false">
+                                  Clean Ideas<i class="fa fa-angle-down mx-2"></i>
+                              </a>
+                              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                  <a class="dropdown-item" href="#">Sustainability Commitment</a>
+                                  <hr>
+                                  <a class="dropdown-item" href="#">B Corp</a>
+                                  <hr>
+                                  <a class="dropdown-item" href="#">Eco Links</a>
+                              </div>
+                          </div>
+                      </li>
+                      <li><a routerLink="/media">Blog</a></li>
+                      <li><a routerLink="/product-category/aerosol">Bulk Pricing</a></li>
+                      <li><a routerLink="/product-category/aerosol">Shop</a></li>
+                      <li><a routerLink="/about-us">Contact Us</a></li> -->
+                      <!-- <li><a routerLink="/shop/cart"><i class="fa fa-shopping-cart" aria-hidden="true" style="position: relative;"></i>
+                      <span style="position: absolute; font-size: 12px; padding-left: 4px;">6</span>
+                      </a></li> -->
+                      <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+                  </ul>
+              </div>
         </div>
     </div>
 </section>

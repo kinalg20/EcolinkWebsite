@@ -43,46 +43,48 @@
 
             }
         }
-
-        .menus {
-            width: 60%;
-
-            ul {
-                list-style: none;
-                display: flex;
-                justify-content: space-between;
-                padding: 0;
-                margin: 0;
-
-                a {
-                    text-decoration: none;
-                    color: white;
-                }
-
-                .dropdown:hover>.dropdown-menu {
-                    display: block;
-                }
-
-                .dropdown>.dropdown-toggle:active {
-                    pointer-events: none;
-                }
-
-                .dropdown-menu {
-                    border-bottom-left-radius: 10px;
-                    border-bottom-right-radius: 10px;
-                    padding: 10px;
-
-                    .dropdown-item {
-                        color: black;
+        .responsive-navbar {
+            width: 63%;
+            .menus {
+    
+                ul {
+                    list-style: none;
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 0;
+                    margin: 0;
+                    width: 100%;
+    
+                    a {
+                        text-decoration: none;
+                        color: white;
                     }
-
-                    hr {
-                        margin: 0;
+    
+                    .dropdown:hover>.dropdown-menu {
+                        display: block;
                     }
-                }
-
-                .fa-user {
-                    font-size: 20px;
+    
+                    .dropdown>.dropdown-toggle:active {
+                        pointer-events: none;
+                    }
+    
+                    .dropdown-menu {
+                        border-bottom-left-radius: 10px;
+                        border-bottom-right-radius: 10px;
+                        padding: 10px;
+    
+                        .dropdown-item {
+                            color: black;
+                        }
+    
+                        hr {
+                            margin: 0;
+                        }
+                    }
+    
+                    .fa-user {
+                        font-size: 20px;
+                    }
                 }
             }
         }
