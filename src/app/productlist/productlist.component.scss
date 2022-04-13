@@ -28,15 +28,16 @@
         }
 
         .product_view {
+            display: none;
             border: 1px solid #dedede;
             border-radius: 5px;
             text-align: center;
-            display: flex;
+            // display: flex;
         }
 
         .grid-list-view {
             display: flex;
-            justify-content: space-between;
+            justify-content: end;
             align-items: end;
             position: relative;
 
@@ -61,6 +62,13 @@
                 display: flex;
                 width: 390px;
                 justify-content: space-between;
+                .dropdown {
+                    margin-right: 10px;
+                    .form-select {
+                        padding: 0.5rem 0.5rem;
+                        color: #6c757d;
+                    }
+                }
             }
 
             .p-input-icon-left:hover {
@@ -200,6 +208,7 @@
     }
 
     .product-listing {
+        display: none;
         .card {
             display: grid;
             grid-template-columns: 30% auto 30%;
@@ -378,13 +387,13 @@
 
             .list-buttons {
                 display: flex;
-                justify-content: space-between;
+                justify-content: space-evenly;
 
                 p {
                     border: 1px solid rgb(179 177 177);
                     padding: 6px 6px;
                     border-radius: 5px;
-                    width: 45%;
+                    // width: 45%;
                     text-align: center;
                     font-weight: 600;
                     cursor: pointer;
@@ -529,6 +538,11 @@
     }
     .card-page {
         .list-header {
+            .list-heading {
+                span {
+                    display: none;
+                }
+            }
             .grid-list-view {
                 .sort-by-search {
                     justify-content: center;
@@ -577,12 +591,12 @@
                         font-size: 18px;
                     }
                 }
-                .list-buttons {
-                    justify-content: space-evenly;
-                    p {
-                        font-size: 12px;
-                    }
-                }
+                // .list-buttons {
+                //     justify-content: space-evenly;
+                //     p {
+                //         font-size: 12px;
+                //     }
+                // }
             }
         }
     }
@@ -625,6 +639,7 @@
     .card-page {
         .list-header {
             grid-template-columns: 25% 75%;
+            align-items: baseline;
             .product_view {
                 display: none;
             }
@@ -665,6 +680,23 @@
         }
         .p-dropdown {
             width: 100px;
+        }
+    }
+    .product-cards {
+        .card {
+            .card-body {
+                .list-buttons {
+                    justify-content: end;
+                    p {
+                        font-size: 12px;
+                    }
+                    .p-button-raised {
+                        font-size: 12px;
+                        height: 32px !important;
+                        margin-right: 10px;
+                    }
+                }
+            }
         }
     }
 }
