@@ -96,7 +96,7 @@ export class ShopComponent implements OnInit {
   }
 
   AddProductToCart(Item: any) {
-    if (localStorage.getItem('ecolink_user_credential')==null) {
+    if (localStorage.getItem('ecolink_user_credential') == null) {
       this.cart_obj = [];
       this.previousdata = this.Cookies.GetCartData();
       let recently_added_object = {
@@ -117,6 +117,12 @@ export class ShopComponent implements OnInit {
         this.cart_obj.push(recently_added_object);
       }
       this.Cookies.SaveCartData(this.cart_obj);
+    }
+
+    else {
+      this._ApiService.addItemToCart(Item.id , this.ItemCount).subscribe((res:any)=>{
+          console.log(res);
+      })
     }
   }
 }

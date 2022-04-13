@@ -10,6 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class ApiServiceService {
   public _baseurl = environment.api_baseurl;
   header: any;
+  token: any;
 
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
@@ -42,21 +43,37 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, { slug: slug });
   }
 
-  addItemToCart(product_id: any) {
+  addItemToCart(product_id: any , quantity:any) {
     let url = 'addCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
-    const access_token = new HttpHeaders().set('Authorization', `Bearer ${JSON.parse(this.header).access_token}`);
-    // const httpHeaders = new HttpHeaders({
-    //   'content-type':'application/json',
-    //   'Authorization' : JSON.parse(this.header).access_token
-    // })
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type':'application/json',
+      'Authorization' :`Bearer ${this.token}`
+    })
     let body =
     {
-      user_id: 36,
-      product_id: 1,
-      quantity: 1
+      user_id: user_id,
+      product_id: product_id,
+      quantity: quantity
     }
-    return this.http.post<any>(this._baseurl + url, { headers: access_token})
+    return this.http.post<any>(this._baseurl + url,body, { headers: httpHeaders })
+  }
+  getItemFromCart() {
+    let url = 'getCartItems';
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type':'application/json',
+      'Authorization' :`Bearer ${this.token}`
+    })
+    let body =
+    {
+      user_id: user_id
+    }
+    return this.http.post<any>(this._baseurl + url,body, { headers: httpHeaders })
   }
 
   getSantizedData(data: any) {
@@ -64,8 +81,8 @@ export class ApiServiceService {
     return trustedUrl;
   }
 
-  home():Observable<any>{
-    return this.http.get(this._baseurl+'home');
+  home(): Observable<any> {
+    return this.http.get(this._baseurl + 'home');
   }
 }
 

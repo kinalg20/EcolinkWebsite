@@ -42,11 +42,11 @@
                             <td>
                                 <div class="product_name">
                                     <div class="cart_image" style="cursor: pointer;" routerLink="/productdetail">
-                                        <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
+                                        <img [src]="product.product.image"
                                             alt="">
                                     </div>
                                     <div class="product_desc">
-                                        <h6 style="text-align: left; padding-left: 10px;">{{product.name}}</h6>
+                                        <h6 style="text-align: left; padding-left: 10px;">{{product.product.name}}</h6>
                                     <div style="text-align: left; padding: 0 10px;">
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
@@ -57,7 +57,7 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>{{product.regular_price | currency:'USD'}}</td>
+                            <td>{{product.product.sale_price| currency:'USD'}}</td>
                             <td>
                                 <div class="quantity">
                                     <button (click)="Count('decrease', rowIndex)">-</button>
@@ -67,7 +67,7 @@
                             </td>
                             <td>
                                 <div class="price-row">
-                                    <span class="price__subtotal">${{product.regular_price*product.quantity}}</span>
+                                    <span class="price__subtotal">${{product.product.sale_price*product.quantity}}</span>
                                     <span class="delete_item"><i class="pi pi-times"></i></span>
                                 </div>
                             </td>
