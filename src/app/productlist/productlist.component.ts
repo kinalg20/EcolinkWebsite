@@ -15,6 +15,7 @@ interface popularity {
 })
 export class ProductlistComponent implements OnInit {
   suggestions: boolean = true;
+  showFiterModel:boolean = false;
   previousdata: any;
   val1: any;
   ItemCount: any = 1;
@@ -209,5 +210,16 @@ export class ProductlistComponent implements OnInit {
       this.Cookies.SaveCartData(this.cart_obj);
       console.log(this.cart_obj);
     }
+    else{
+      this._ApiService.addItemToCart(Item.id , this.ItemCount).subscribe((res:any)=>{
+        console.log(res);
+    })
+    }
   }
+
+  getFilterModel() {
+    this.showFiterModel =true;
+    this.showFiterModel = !this.showFiterModel;
+  }
+
 }

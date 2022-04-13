@@ -7,61 +7,52 @@
             <div class="billing-detail">
                 <div class="card">
                     <h3>Billing Details</h3>
-                    <form #signupform="ngForm" (ngSubmit)="signUp(signupform)">
+                    <form #signupform="ngForm" (ngSubmit)="signUp(signupform)" *ngFor="let data of CheckoutProduct">
                         <div class="row mb-3">
-                            <div class="col-6">
-                                <label for="first-name">First Name</label>
-                                <input type="text" class="form-control mt-2" placeholder="First name" id="first-name" name="firstname" ngModel>
-                            </div>
-                            <div class="col-6">
-                                <label for="last-name">Last Name</label>
-                                <input type="text" class="form-control mt-2" placeholder="Last name" name="lastname" ngModel>
+                            <div class="col-12">
+                                <label for="name">Name</label>
+                                <input type="text" class="form-control mt-2" placeholder="name" id="name" name="name" [(ngModel)]="data.user.name">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="country-name">Country / Region *</label>
-                                <select id="country-name" class="form-control mt-2" name="selectedoption" ngModel>
-                                    <option>Country / Region</option>
-                                    <option>India</option>
-                                    <option selected>Usa</option>
-                                </select>
+                                <label for="countryname">Country / Region *</label>
+                                <input type="text" class="form-control mt-2" placeholder="Country / Region" id="country" name="countryname" [(ngModel)]="data.user.country">
                             </div>
                         </div>
-
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="street-address">Street Address</label>
-                                <input type="text" class="form-control mt-2" placeholder="Street Address" name="address" ngModel>
+                                <label for="streetaddress">Street Address</label>
+                                <input type="text" class="form-control mt-2" placeholder="Street Address" name="streetaddress" [(ngModel)]="data.user.address">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="Town-city">Town / City</label>
-                                <input type="text" class="form-control mt-2" placeholder="Town / City" name="city" ngModel>
+                                <input type="text" class="form-control mt-2" placeholder="Town / City" name="city" [(ngModel)]="data.user.city">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="State-County">State</label>
-                                <input type="text" class="form-control mt-2" placeholder="State / County" name="country" ngModel>
+                                <label for="state">State</label>
+                                <input type="text" class="form-control mt-2" placeholder="State / County" name="state" [(ngModel)]="data.user.state">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="Postcode">Postcode</label>
-                                <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="pincode" ngModel>
+                                <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="pincode" [(ngModel)]="data.user.pincode">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-6">
                                 <label for="Email Address">Email Address</label>
                                 <input type="text" class="form-control mt-2" placeholder="First name"
-                                    id="Email-Address" name="email" ngModel>
+                                    id="Email-Address" name="email" [(ngModel)]="data.user.email">
                             </div>
                             <div class="col-6">
                                 <label for="Phone">Phone</label>
-                                <input type="text" class="form-control mt-2" placeholder="phone" name="mobile" ngModel>
+                                <input type="text" class="form-control mt-2" placeholder="phone" name="mobile" [(ngModel)]="data.user.mobile">
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -98,26 +89,15 @@
                         </ul>
                     </div>
                     <div class="checkout-products">
-                        <ul>
-                            <li>
-                                ECC (A) 13oz Aerosol – Case of 12 – Discontinued</li>
-                            <li>$1299.00</li>
-                        </ul>
-                        <ul>
-                            <li>
-                                ECC (A) 13oz Aerosol – Case of 12 – Discontinued</li>
-                            <li>$1299.00</li>
-                        </ul>
-                        <ul>
-                            <li>
-                                ECC (A) 13oz Aerosol – Case of 12 – Discontinued</li>
-                            <li>$1299.00</li>
+                        <ul *ngFor="let data of this.CheckoutProduct[0].carts">
+                            <li>{{data.product.name}} X {{data.quantity}}</li>
+                            <li>${{data.product.sale_price *data.quantity }}</li>
                         </ul>
                     </div>
                     <div class="checkout-products-subtotal">
                         <ul>
                             <li class="subtotal-list-element">Subtotal</li>
-                            <li>$3897</li>
+                            <li>${{this.CheckoutProduct[0].payable}}</li>
                         </ul>
                         <!-- <ul>
                             <li class="subtotal-list-element">Product</li>
@@ -131,7 +111,7 @@
                     <div class="checkout-products-total">
                         <ul>
                             <li class="subtotal-list-element"><b>Total</b></li>
-                            <li><b>$4397</b></li>
+                            <li><b>${{this.CheckoutProduct[0].payable + 500}}</b></li>
                         </ul>
                     </div>
                     <div class="bank-detail">

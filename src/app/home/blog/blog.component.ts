@@ -25,5 +25,4 @@ export class BlogComponent implements OnInit {
       }, 500);
     })
   }
-
 }

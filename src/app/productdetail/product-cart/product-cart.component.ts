@@ -69,12 +69,14 @@ export class ProductCartComponent implements OnInit {
     }
   ]
 
-  Count(string: any, id: any) {
+  Count(string: any, id: any , product_price : any) {
     if (string == "increase" && this.CardShow[id].quantity < 10) {
       this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
+      this.subtotal();
     }
     if (string == "decrease" && this.CardShow[id].quantity > 1) {
       this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
+      this.subtotal();
     }
   }
 
@@ -96,18 +98,23 @@ export class ProductCartComponent implements OnInit {
     }
 
     else{
-      console.log("usser is logged in");
       this._ApiService.getItemFromCart().subscribe(res=>{
         this.CardShow = res.data;
+        this.subtotal();
       })
 
       setTimeout(() => {
-        this.CardShow.map((res:any)=>{
-          console.log(res.product.sale_price);
-        })
-      }, 4000);
+        console.log(this.CardShow);
+      }, 10000);
     }
   }
 
+
+  subtotal(){
+    this.SubTotal = 0;
+    this.CardShow.map((res:any)=>{
+      this.SubTotal=this.SubTotal+res.product.sale_price*res.quantity;
+    })
+  }
 
 }

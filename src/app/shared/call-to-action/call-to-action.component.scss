@@ -92,3 +92,20 @@
     }
 
 }
+@media (max-width:768px) {
+    .ask-chemist {
+        .container {
+            .both-part {
+                grid-template-columns: 50% 50%;
+            }
+        }
+    }
+    .pricing-section {
+        .container {
+            .pricing {
+                grid-template-columns: 50% 50%;
+            }
+
+        }
+    }
+}

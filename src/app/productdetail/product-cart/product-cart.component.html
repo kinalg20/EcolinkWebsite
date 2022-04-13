@@ -60,9 +60,9 @@
                             <td>{{product.product.sale_price| currency:'USD'}}</td>
                             <td>
                                 <div class="quantity">
-                                    <button (click)="Count('decrease', rowIndex)">-</button>
+                                    <button (click)="Count('decrease', rowIndex , product.product.sale_price)">-</button>
                                     <input type="text" pInputText [(ngModel)]="product.quantity" />
-                                    <button (click)="Count('increase',rowIndex)">+</button>
+                                    <button (click)="Count('increase',rowIndex , product.product.sale_price)">+</button>
                                 </div>
                             </td>
                             <td>
@@ -106,7 +106,7 @@
                         <h3>Total</h3>
                     </li>
                     <li>
-                        <h3>{{SubTotal+100+100}}</h3>
+                        <h3>${{SubTotal+100+100}}</h3>
                     </li>
                 </ul>
             </div>

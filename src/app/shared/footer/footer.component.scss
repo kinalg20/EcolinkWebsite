@@ -74,3 +74,14 @@
         }
     }
 }
+@media (max-width:457px) {
+    .footer-section {
+        .container {
+            .footer-content {
+                .footer-button {
+                    margin: 10px 10px;
+                }
+            }
+        }
+    }
+}

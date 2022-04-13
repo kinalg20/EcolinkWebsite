@@ -86,7 +86,6 @@
 
     .container {
         .complete-section {
-            height: 400px;
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
             border: 1px solid #d7d1d1;
             border-radius: 10px;
@@ -126,7 +125,7 @@
                 border-bottom-right-radius: 10px;
 
                 .sub-section1 {
-
+                    margin: 50px 0;
                     width: 100%;
                     text-align: center;
                     align-items: center;
@@ -208,7 +207,6 @@
             }
         }
     }
-
 }
 
 .tidal-washer-section {
@@ -256,7 +254,6 @@
             }
         }
     }
-
 }
 
 .about-section {
@@ -304,7 +301,6 @@
             }
         }
     }
-
 }
 
 .manufacturing-section {
@@ -352,7 +348,6 @@
             }
         }
     }
-
 }
 
 .service-section {
@@ -400,7 +395,6 @@
             }
         }
     }
-
 }
 
 .shop-categories {
@@ -418,66 +412,66 @@
             //     background: whitesmoke;
             //     padding: 20px;
 
-                .product-category {
-                    background: whitesmoke;
-                    height: 100%;
-                    position: relative;
-                    border-top-left-radius: 10px;
-                    border-bottom-left-radius: 10px;
-                    // border: 1px solid #d7d1d1;
-                    padding: 20px;
+            .product-category {
+                background: whitesmoke;
+                height: 100%;
+                position: relative;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                // border: 1px solid #d7d1d1;
+                padding: 20px;
 
-                    .heading-section {
-                        text-align: center;
-                        background: var(--primary);
+                .heading-section {
+                    text-align: center;
+                    background: var(--primary);
 
-                        h3 {
-                            margin: 0;
-                            padding: 5px 0;
-                            color: white;
-                        }
+                    h3 {
+                        margin: 0;
+                        padding: 5px 0;
+                        color: white;
                     }
+                }
 
-                    .categories {
-                        margin-top: 20px;
+                .categories {
+                    margin-top: 20px;
+                    display: grid;
+                    grid-template-columns: 49% 49%;
+                    grid-gap: 15px;
+
+                    .category-card {
+                        background: white;
+                        border: 1px solid lightgray;
+                        border-radius: 10px;
+                        padding: 10px;
                         display: grid;
-                        grid-template-columns: 49% 49%;
-                        grid-gap: 15px;
-
-                        .category-card {
-                            background: white;
-                            border: 1px solid lightgray;
-                            border-radius: 10px;
-                            padding: 10px;
-                            display: grid;
-                            grid-template-columns: 50% 50%;
-                            .category-image {
-                                width: 75%;
-                                margin: auto;
-                                img {
-                                    width: 100%;
-                                }
+                        grid-template-columns: 50% 50%;
+                        .category-image {
+                            width: 75%;
+                            margin: auto;
+                            img {
+                                width: 100%;
                             }
-                            .category-text {
-                                .content {
-                                    height: 100%;
-                                    text-align: center;
-                                    p {
-                                        font-size: small;
-                                    }
-                                    .button-div {
-                                        button {
-                                            background: var(--primary);
-                                            color: white;
-                                            border: 1px solid;
-                                            border-radius: 5px;
-                                        }
+                        }
+                        .category-text {
+                            .content {
+                                height: 100%;
+                                text-align: center;
+                                p {
+                                    font-size: small;
+                                }
+                                .button-div {
+                                    button {
+                                        background: var(--primary);
+                                        color: white;
+                                        border: 1px solid;
+                                        border-radius: 5px;
                                     }
                                 }
                             }
                         }
                     }
                 }
+            }
             // }
 
             .shop-text {
@@ -499,5 +493,35 @@
             }
         }
     }
-
+}
+@media (max-width: 992px) {
+    .shop-categories {
+        .container {
+            .categories-text {
+                grid-template-columns: 100%;
+                .product-category {
+                    .categories {
+                        grid-template-columns: 100%;
+                        .category-card {
+                            .category-image {
+                                width: 40%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .marketing {
+        .container {
+            .complete-section {
+                grid-template-columns: 100%;
+                .section1 {
+                    .web-logo {
+                        width: 35%;
+                    }
+                }
+            }
+        }
+    }
 }
