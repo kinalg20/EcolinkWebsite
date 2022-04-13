@@ -9,6 +9,7 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 })
 export class ProductCartComponent implements OnInit {
   CardShow: any = [];
+
   GetProduct: any = [];
   SubTotal: number = 0;
   constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService) { }
@@ -95,10 +96,14 @@ export class ProductCartComponent implements OnInit {
     }
 
     else{
-      let item =this._ApiService.addItemToCart(2).subscribe((res:any)=>{
-        setTimeout(() => {
-          console.log(res); 
-        }, 1000);
+      console.log("usser is logged in");
+      this._ApiService.getItemFromCart().subscribe(res=>{
+        this.CardShow = res.data;
+        // console.log(res);
+      })
+
+      this.CardShow.map((res:any)=>{
+        this.SubTotal = this.SubTotal+res.product.sale_price;
       })
     }
   }
