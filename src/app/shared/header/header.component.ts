@@ -48,18 +48,28 @@ export class HeaderComponent implements OnInit {
   ];
   ngOnInit(): void {
     this.__apiservice.home().subscribe((res:any)=>{
-      this.homePageData.push(res);
+      res.data.pagecategories.map((response:any)=>{
+        this.homePageData.push(response);
+      });
       setTimeout(() => {
-        console.log(this.homePageData[0])
-      }, 500);
+        console.log(this.homePageData)
+      }, 2000);
     })
-    // this.homePageData.map((res:any)=>{
-    //   console.log(res);
-    //   this.routes.map((response:any)=>{
-    //     res.route=response;
-    //     console.log(res);
-    //   })
-    // })
+    this.homePageData.map((res:any)=>{
+      setTimeout(() => {
+        console.log(res);
+      }, 500);
+      this.routes.map((response:any)=>{
+        console.log(response);
+        console.log(res.id==response.id);
+        if(res.id==response.id){
+          res.route=response;
+        }
+      })
+    })
+    // setTimeout(() => {
+    //   console.log(this.homePageData)
+    // }, 5000);
   }
   profile(){
     if(localStorage.getItem("ecolink_user_credential")===null){
