@@ -5,9 +5,9 @@
             <div class="list-header">
                 <div class="list-heading">
                     <h2>{{listdata.data.name}}</h2>
-                    <span><a href="">Home</a></span>/
-                    <span><a href="">Product-category</a></span>/
-                    <span><a href="">{{listdata.data.name}}</a></span>/
+                    <span><a href="">Home/</a></span>
+                    <span><a href="">Product-category/</a></span>
+                    <span><a href="">{{listdata.data.name}}</a></span>
                 </div>
                 <div class="grid-list-view">
                     <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
@@ -125,8 +125,9 @@
                 <div class="product-cards" *ngIf="view_card">
                     <ng-container class="row" *ngIf="listdata.data.products.length>0">
                         <ng-container *ngFor="let product of listdata.data.products">
-                            <div class="col-xl-4 col-4 col-lg-6">
-                                <div class="card" style="cursor: pointer;" routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                                <div class="card" style="cursor: pointer;"
+                                    routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
                                     <div class="card-image">
                                         <img [src]="product.image" alt="">
                                         <span routerLink="/productdetail/wishlist"><i style="color: white;"
@@ -163,9 +164,11 @@
                                             </div>
                                         </div>
                                         <div class="list-buttons">
-                                            <button (click)=AddProductToCart(listdata.data) pButton pRipple type="button"
-                                                label="Add to Cart" class="p-button-raised p-button-success"
-                                                style="height:38px; background-color: #55b15c;" routerLink="/shop/cart"></button>
+                                            <button (click)=AddProductToCart(listdata.data) pButton pRipple
+                                                type="button" label="Add to Cart"
+                                                class="p-button-raised p-button-success"
+                                                style="height:38px; background-color: #55b15c;"
+                                                routerLink="/shop/cart"></button>
                                             <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">Show
                                                 Details</p>
                                         </div>
@@ -185,7 +188,8 @@
                 <div class="product-listing" *ngIf="view_list">
                     <ng-container *ngIf="listdata.data.products.length>0">
                         <ng-container *ngFor="let product of listdata.data.products">
-                            <div class="card" style="cursor: pointer;" routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
+                            <div class="card" style="cursor: pointer;"
+                                routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
                                 <div class="card-image">
                                     <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
                                         alt="">
@@ -229,7 +233,8 @@
                                         <p class="product-price">{{product.regular_price | currency}}</p>
                                     </ng-template>
                                     <div class="list-buttons">
-                                        <p routerLink="/shop/cart" (click)=AddProductToCart(listdata.data) routerLink="/shop/cart">Add to Cart</p>
+                                        <p routerLink="/shop/cart" (click)=AddProductToCart(listdata.data)
+                                            routerLink="/shop/cart">Add to Cart</p>
                                         <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">Show
                                             Details</p>
                                     </div>
