@@ -75,13 +75,6 @@
 		}
 	}
 }
-@media (max-width:992px) {
-	.authentication {
-		.signup-form {
-			width: 100%;
-		}
-	}
-}
 .authenticated {
 	.signin-form {
 		width: 50%;
@@ -147,7 +140,7 @@
 @media (max-width: 992px) {
 	.authenticated {
 		.signin-form {
-			width: 70%;
+			width: 100%;
 			form {
 				.google-btn {
 					font-size: 15px;
@@ -158,6 +151,11 @@
 					}
 				}
 			}
+		}
+	}
+	.authentication {
+		.signup-form {
+			width: 100%;
 		}
 	}
 }
