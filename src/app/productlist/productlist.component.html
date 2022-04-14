@@ -21,8 +21,6 @@
                         </li>
                     </ul>
                     <div class="sort-by-search">
-                        <!-- <p-dropdown [options]="popularity" [(ngModel)]="selectedPopularity"
-                            placeholder="Select Sort by"></p-dropdown> -->
 
                         <div class="dropdown">
                             <select class="form-select" aria-label="Default select example">
@@ -130,7 +128,7 @@
                                     routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
                                     <div class="card-image">
                                         <img [src]="product.image" alt="">
-                                        <span routerLink="/productdetail/wishlist"><i style="color: white;"
+                                        <span routerLink="/shop/wishlist" (click)="addWishList(product.id)"><i style="color: white;"
                                                 class="pi pi-heart" aria-hidden="true" title="Wishlist"></i></span>
                                     </div>
                                     <div class="card-body">
@@ -194,7 +192,7 @@
                                     <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
                                         alt="">
                                     <span><i class="pi pi-heart" aria-hidden="true" title="Wishlist"
-                                            style="color: white;"></i></span>
+                                            style="color: white;" (click)="addWishList(product.id)"></i></span>
                                 </div>
                                 <div class="card-desc">
                                     <div class="card-title">

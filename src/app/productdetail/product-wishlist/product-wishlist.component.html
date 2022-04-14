@@ -1,4 +1,4 @@
-<ng-container *ngIf="products.length>0; then thenblock else elseblock"></ng-container>
+<ng-container *ngIf="product.length>0; then thenblock else elseblock"></ng-container>
 <div class="container">
 
     <ng-template #elseblock>
@@ -12,7 +12,7 @@
                         <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png"
                                 width="130" height="130" class="img-fluid mb-4 mr-3">
                             <h3><strong>Your Wishlist is Empty</strong></h3>
-                            <h4>Add something to make me happy :)</h4> <a href="/productlist"
+                            <h4>Add something to make me happy :)</h4> <a href=""
                                 class="btn btn-success cart-btn-transform m-3" data-abc="true">continue shopping</a>
                         </div>
                     </div>
@@ -29,7 +29,7 @@
         </div>
         <div class="cart-body">
             <div class="cart-elements">
-                <p-table [value]="products" #thenblock>
+                <p-table [value]="product" #thenblock>
                     <ng-template pTemplate="header">
                         <tr class="heading-row">
                             <th style="width: 280px;">Name</th>
@@ -38,16 +38,16 @@
                             <th style="width: 320px;"></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
+                    <ng-template pTemplate="body" let-prod let-rowIndex="rowIndex">
                         <tr class="table-body">
                             <td>
                                 <div class="product_name">
                                     <div class="cart_image">
-                                        <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
+                                        <img [src]="prod[0].product.image"
                                             alt="">
                                     </div>
                                     <div class="product_desc">
-                                        <h6>{{product.name}}</h6>
+                                        <h6>{{prod[0].product.name}}</h6>
                                     <div style="text-align: left; padding: 0 10px;">
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
@@ -59,12 +59,12 @@
                                 </div>
                             </td>
                             <td>
-                                <mark style="background:#4BB543;color: white;">{{product.status}}</mark>
+                                <mark style="background:#4BB543;color: white;">In Stock</mark>
                             </td>
-                            <td>{{product.price | currency:'USD'}}</td>
+                            <td>{{prod[0].product.sale_price | currency:'USD'}}</td>
                             <td>
                                 <div class="price-row">
-                                    <button routerLink="/productdetail/cart">Add to Cart</button>
+                                    <button routerLink="/shop/cart">Add to Cart</button>
                                     <span class="delete_item"><i class="pi pi-times"></i></span>
                                 </div>
                             </td>
@@ -72,7 +72,7 @@
                     </ng-template>
                     <ng-template pTemplate="summary">
                         <div class="p-d-flex p-ai-center p-jc-between">
-                            In total there are {{products ? products.length : 0 }} products.
+                            In total there are {{product ? product.length : 0 }} products.
                         </div>
                     </ng-template>
                 </p-table>

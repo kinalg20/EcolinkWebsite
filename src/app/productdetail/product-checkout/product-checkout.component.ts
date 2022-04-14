@@ -32,8 +32,7 @@ export class ProductCheckoutComponent implements OnInit {
         pincode: data.pincode
       };
       console.log(this.userObj);
-      if(localStorage.getItem('ecolink_user_credential')==null){
-        console.log("Register");
+      if(localStorage.getItem('ecolink-user-credential')==null){
         this.__apiservice.post(this.userObj).subscribe(
           (res) => {
             console.log(res);
@@ -48,12 +47,9 @@ export class ProductCheckoutComponent implements OnInit {
               localStorage.removeItem('ecolink_user_credential');
             }
           },
-          () => {
-          }
-          );
-        }
+        );
       }
-      // form.reset();
+    }
   }
 
   checkoutProduct(){

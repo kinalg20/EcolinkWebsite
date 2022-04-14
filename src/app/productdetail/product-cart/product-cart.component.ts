@@ -78,7 +78,6 @@ export class ProductCartComponent implements OnInit {
       this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
       this.subtotal();
     }
-    console.log(this.CardShow);
   }
 
   getCartData() {
@@ -120,10 +119,7 @@ export class ProductCartComponent implements OnInit {
 
   function() {
     this.CardShow.map((res: any) => {
-      this._ApiService.addItemToCart(res.id, res.quantity).subscribe(res => {
-        console.log(res);
-      })
+      this._ApiService.addItemToCart(res.product_id, res.quantity);
     })
   }
-
 }
