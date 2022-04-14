@@ -68,6 +68,7 @@
                     padding: 5px;
                     border-radius: 100%;
                 }
+                
             }
 
             span.address-label {
@@ -95,6 +96,19 @@
     }
 }
 
+.modal-body {
+    .row {
+        margin: 0;
+    }
+    .add-user {
+        text-align: right;
+        .saveuserdetail {
+            width: fit-content;
+            background: var(--primary);
+            text-align: right;
+        }
+    }
+}
 
 .Edit-Profile-section {
     padding: 20px 40px;
@@ -136,6 +150,45 @@
     }
 }
 
+.Addresses-section {
+    padding: 20px 40px;
+    .address-body {
+        display: grid;
+        grid-template-columns: 49% 49%;
+        grid-gap: 15px;
+        .address-card {
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            border: 1px solid #d7d1d1;
+            border-radius: 10px;
+            .address-text {
+                padding: 10px;
+                p {
+                    margin: 0;
+                }
+                .address {
+                    display: flex;
+                }
+                .sub-address {
+                    display: flex;
+                }
+                .crud-btn {
+                    padding: 10px 0;
+                    display: flex;
+                    width: 100%;
+                    justify-content: space-around;
+                    p {
+                        color: rgb(43, 43, 209);
+                        cursor: pointer;
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+    
+                }
+            }
+        }
+    }
+}
 
 ::ng-deep {
     .search-ordered-item {

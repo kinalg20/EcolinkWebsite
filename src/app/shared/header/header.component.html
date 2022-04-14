@@ -71,4 +71,5 @@
     <ul  *ngFor="let item of homePageData">
        <li><a routerLink={{item.routers}}>{{item.name}}</a></li>
     </ul>
+    <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 </div>

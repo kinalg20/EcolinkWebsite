@@ -46,7 +46,7 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, { slug: slug });
   }
 
-  addItemToCart(product_id: any, quantity: any) {
+  addItemToCart(product_id: any, quantity: any , action:any) {
     let url = 'addCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -59,7 +59,8 @@ export class ApiServiceService {
     {
       user_id: user_id,
       product_id: product_id,
-      quantity: quantity
+      quantity: quantity,
+      action:action
     }
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
   }
@@ -139,5 +140,31 @@ export class ApiServiceService {
   home(): Observable<any> {
     return this.http.get(this._baseurl + 'home');
   }
+
+  getUserAddress():Observable<any> {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let body = {
+      user_id : user_id
+    }
+    return this.http.post(this._baseurl+'getUserAddresses', body, { headers: httpHeaders })
+  }
+  addUserAddresses(data:any):Observable<any> {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    data.user_id = user_id
+    return this.http.post(this._baseurl+'addUserAddresses',data,{headers: httpHeaders})
+  }
+
 }
 

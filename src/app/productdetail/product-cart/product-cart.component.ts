@@ -99,13 +99,14 @@ export class ProductCartComponent implements OnInit {
 
     else {
       this._ApiService.getItemFromCart().subscribe(res => {
+        console.log(res);
         this.CardShow = res.data;
         this.subtotal();
       })
 
-      setTimeout(() => {
-        console.log(this.CardShow);
-      }, 10000);
+      // setTimeout(() => {
+      //   console.log(this.CardShow);
+      // }, 10000);
     }
   }
 
@@ -117,9 +118,13 @@ export class ProductCartComponent implements OnInit {
     })
   }
 
-  function() {
-    this.CardShow.map((res: any) => {
-      this._ApiService.addItemToCart(res.product_id, res.quantity);
-    })
+  function(action:any , product_id :any) {
+    // this.CardShow.map((res: any) => {
+      this._ApiService.addItemToCart(product_id, 1 , action).subscribe(res=>
+        console.log(res));
+    // })
+    setTimeout(() => {
+      this.getCartData();
+    }, 400);
   }
 }

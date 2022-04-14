@@ -211,7 +211,7 @@ export class ProductlistComponent implements OnInit {
       console.log(this.cart_obj);
     }
     else {
-      this._ApiService.addItemToCart(Item.id, this.ItemCount).subscribe((res: any) => {
+      this._ApiService.addItemToCart(Item.id, this.ItemCount , "add").subscribe((res: any) => {
         console.log(res);
       })
     }
