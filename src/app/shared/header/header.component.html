@@ -15,7 +15,8 @@
         </div>
         <div class="responsive-navbar">
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span (click)="openmenu()"><i style="font-size:24px" class="fa">&#xf0c9;</i> </span>
+                <span (click)="openmenu()" *ngIf="!openMenu"><i style="font-size:24px" class="fa">&#xf0c9;</i></span>
+                <span (click)="openmenu()" *ngIf="openMenu"><i style="font-size:24px " class="fa">&#xf00d;</i></span>
               </button>
               <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav">
