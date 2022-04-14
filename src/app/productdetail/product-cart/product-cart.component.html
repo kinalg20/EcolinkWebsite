@@ -60,9 +60,9 @@
                             <td>{{product.product.sale_price| currency:'USD'}}</td>
                             <td>
                                 <div class="quantity">
-                                    <button (click)="Count('decrease', rowIndex , product.product.sale_price)">-</button>
+                                    <button (click)="Count('decrease', rowIndex , product.product.sale_price)" (click)="function('delete' , product.product_id)">-</button>
                                     <input type="text" pInputText [(ngModel)]="product.quantity"/>
-                                    <button (click)="Count('increase',rowIndex , product.product.sale_price)">+</button>
+                                    <button (click)="Count('increase',rowIndex , product.product.sale_price)" (click)="function('add' ,  product.product_id)">+</button>
                                 </div>
                             </td>
                             <td>
@@ -74,8 +74,11 @@
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="summary">
-                        <div class="p-d-flex p-ai-center p-jc-between">
-                            In total there are {{CardShow ? CardShow.length : 0 }} products.
+                        <div class="d-flex justify-content-between" style="align-items: center;">
+                            <div class="p-d-flex p-ai-center p-jc-between">
+                                In total there are {{CardShow ? CardShow.length : 0 }} products.
+                            </div>
+                            <!-- <button pButton pRipple type="button" label="Save Cart" (click)="function()" class="p-button-raised p-button-success"></button> -->
                         </div>
                     </ng-template>
                 </p-table>
@@ -113,7 +116,7 @@
                 <div class="proceed">
                     <div class="proceed-button">
                         <button routerLink="/shop/checkout" pButton pRipple type="button" label="Proceed to Checkout" class="p-button-raised p-button-success"
-                            style="height:40px; width: 100%;" (click)="function()"></button>
+                            style="height:40px; width: 100%;"></button>
                     </div>
                 </div>
             </div>

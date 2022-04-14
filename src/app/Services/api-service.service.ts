@@ -46,7 +46,7 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, { slug: slug });
   }
 
-  addItemToCart(product_id: any, quantity: any) {
+  addItemToCart(product_id: any, quantity: any , action:any) {
     let url = 'addCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -59,7 +59,8 @@ export class ApiServiceService {
     {
       user_id: user_id,
       product_id: product_id,
-      quantity: quantity
+      quantity: quantity,
+      action:action
     }
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
   }
