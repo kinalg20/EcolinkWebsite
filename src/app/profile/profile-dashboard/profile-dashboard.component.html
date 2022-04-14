@@ -23,7 +23,8 @@
                 <div class="card address-section">
                     <div class="customer_name my-3">
                         <h4>Add Address</h4>
-                        <i class="pi pi-plus"></i>
+                        <i data-bs-toggle="modal" data-bs-target="#exampleModal" class="pi pi-plus"></i>
+
                     </div>
                     <div class="default-Address">
                         Random Federation
@@ -88,11 +89,153 @@
     <div class="ordered-item-card"></div>
 </div>
 <div class="Addresses-section" *ngIf="showdesc == 'Addresses'">
-    <h2>Addresses</h2>
+    <div class="adderess-head">
+        <h2>Shipping Addresses</h2>
+        <p>To select a default shipping address for checkout, click "Set as my default".</p>
+    </div>
+    <div class="address-body">
+        <div class="address-card" *ngFor="let item of userAddress">
+            <div class="address-text">
+                <h4>{{item.name}}</h4>
+                <div class="address">
+                    <p>{{item.address}}</p>
+                    <p>, {{item.landmark}}</p>
+                </div>
+                <div class="sub-address">
+                    <p>{{item.city}}</p>
+                    <p>, {{item.state}}</p>
+                    <p>({{item.zipcode}})</p>
+                    <p>, {{item.country}}</p>
+                </div>
+                <p>{{item.mobile}}</p>
+                <div class="crud-btn">
+                    <p data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</p>
+                    <p>Delete</p>
+                    <p>Set as default</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div class="Wishlist-section" *ngIf="showdesc == 'Wishlist'">
     <h2>Wishlist</h2>
 </div>
 <div class="Logout-section" *ngIf="showdesc == 'Logout'">
     <h2>Logout</h2>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Add Address</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                    (click)="resetValue(signUpForm)"></button>
+            </div>
+            <div class="modal-body container">
+                <form #signUpForm="ngForm" (ngSubmit)="addUserAddress(signUpForm)">
+                    <ng-container *ngIf="resSignupMsg">
+                        <div class="alert alert-danger" role="alert" id="loginAlert" #alert>
+                            {{ resSignupMsg }}
+                        </div>
+                    </ng-container>
+                    <div class="row">
+                        <div class="col-6">
+                            <div>
+                                <label for="first-name">First Name</label>
+                                <input class="form-control" type="text" id="firstname" autocomplete="off"
+                                    name="firstname" maxlength='50' value="" ngModel required />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <label for="last-name">Last Name</label>
+                                <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
+                                    name="lastname" ngModel required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div>
+                                <label for="email">Email</label>
+                                <input class="form-control" type="email" id="email" autocomplete="off" name="email"
+                                    (input)="validateEmail($event)" ngModel required />
+                                <h6 class="text-danger" *ngIf="invalidEmail">
+                                    {{ invalidEmail ? "Invalid Email" : "" }}
+                                </h6>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <label for="phone-number">Phone Number</label>
+                                <input class="form-control" type="text" id="phonenumber" autocomplete="off"
+                                    name="phonenumber" maxlength="10" (input)="validateMobile($event)"
+                                    (keydown)="inputMobile($event)" ngModel required />
+                                <h6 class="text-danger" *ngIf="invalidMobile">
+                                    {{ invalidMobile ? "Invalid Mobile" : "" }}
+                                </h6>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                <label for="landmark">Landmark</label>
+                                <input class="form-control" type="text" id="landmark" autocomplete="off" name="landmark"
+                                    ngModel required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <div>
+                                <label for="address">Address</label>
+                                <input class="form-control" type="text" id="address" autocomplete="off" name="address"
+                                    ngModel required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div>
+                                <label for="country">Country</label>
+                                <input class="form-control" type="text" id="country" autocomplete="off" name="country"
+                                    ngModel required />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <label for="state">State</label>
+                                <input class="form-control" type="text" id="state" autocomplete="off" name="state"
+                                    ngModel required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div>
+                                <label for="city">City</label>
+                                <input class="form-control" type="text" id="city" autocomplete="off" name="city" ngModel
+                                    required />
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div>
+                                <label for="pincode">Pincode</label>
+                                <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
+                                    ngModel required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 add-user">
+                            <button class="saveuserdetail btn btn-success my-3 form-control">Save Address</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
