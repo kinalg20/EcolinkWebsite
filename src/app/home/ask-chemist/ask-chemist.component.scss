@@ -10,8 +10,6 @@
     }
 }
 
-
-
 .checkout-body {
     display: grid;
     grid-template-columns: 70% 30%;
@@ -22,7 +20,7 @@
             padding: 20px 30px;
 
             h3 {
-                padding: 20PX 0;
+                padding: 20px 0;
             }
 
             label {
@@ -43,6 +41,21 @@
     .your-order {
         .card {
             padding: 20px 30px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .checkout-body {
+        grid-template-columns: 100%;
+    }
+    .proceed-button {
+        text-align: center;
+    }
+}
+@media (max-width: 575px) {
+    .proceed-button {
+        button {
+            width: 30% !important;
         }
     }
 }
