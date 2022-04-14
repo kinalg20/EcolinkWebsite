@@ -14,8 +14,9 @@
             <h1>ECOLINK</h1>
         </div>
         <div class="responsive-navbar">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"><i class="fa fa-list"></i></span>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span (click)="openmenu()" *ngIf="!openMenu"><i style="font-size:24px" class="fa">&#xf0c9;</i></span>
+                <span (click)="openmenu()" *ngIf="openMenu"><i style="font-size:24px " class="fa">&#xf00d;</i></span>
               </button>
               <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="navbar-nav">
@@ -65,3 +66,9 @@
         </div>
     </div>
 </section>
+
+<div class="open-menu" *ngIf="openMenu">
+    <ul  *ngFor="let item of homePageData">
+       <li><a routerLink={{item.routers}}>{{item.name}}</a></li>
+    </ul>
+</div>
