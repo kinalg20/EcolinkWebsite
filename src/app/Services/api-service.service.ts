@@ -165,6 +165,19 @@ export class ApiServiceService {
     data.user_id = user_id
     return this.http.post(this._baseurl+'addUserAddresses',data,{headers: httpHeaders})
   }
+  getUserProfileDetail():Observable<any> {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let body = {
+      user_id : user_id
+    }
+    return this.http.post(this._baseurl+'userInfo',body,{headers:httpHeaders})
+  }
 
 }
 
