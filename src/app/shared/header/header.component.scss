@@ -1,6 +1,5 @@
 .top-head-section {
   background: whitesmoke;
-
   .container {
     .top-head-line {
       display: flex;
@@ -198,7 +197,6 @@
 
 }
 
-
 @media(max-width:992px) {
   .responsive-navbar {
     text-align: right;
@@ -229,9 +227,16 @@
   .open-menu {
     width: 100%;
   }
+  .top-head-section {
+    .container {
+      .top-head-line {
+        p {
+          font-size: 10px;
+        }
+      }
+    }
+  }
 }
-
-
 
 @media(max-width:419px) {
   .nav-link-section .container {
