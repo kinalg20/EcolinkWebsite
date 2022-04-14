@@ -10,6 +10,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class ProfileDashboardComponent implements OnInit {
   resSignupMsg: string = '';
   userObj: any;
+  userDetail:any;
   invalidUserEmail: string = '';
   invalidEmail: boolean = false;
   invalidMobile = false;
@@ -22,6 +23,10 @@ export class ProfileDashboardComponent implements OnInit {
     this.__apiservice.getUserAddress().subscribe((res: any) => {
       this.userAddress = res.data
       console.log(res);
+    })
+    this.__apiservice.getUserProfileDetail().subscribe((res:any)=>{
+      this.userDetail=res.data;
+      console.log(this.userDetail);
     })
   }
   validateUserEmail(email: any) {
