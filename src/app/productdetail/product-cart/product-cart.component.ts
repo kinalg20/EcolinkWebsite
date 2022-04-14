@@ -69,12 +69,14 @@ export class ProductCartComponent implements OnInit {
     }
   ]
 
-  Count(string: any, id: any) {
+  Count(string: any, id: any, product_price: any) {
     if (string == "increase" && this.CardShow[id].quantity < 10) {
       this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
+      this.subtotal();
     }
     if (string == "decrease" && this.CardShow[id].quantity > 1) {
       this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
+      this.subtotal();
     }
   }
 
@@ -88,27 +90,36 @@ export class ProductCartComponent implements OnInit {
               response.quantity = res.ProductQuantity;
               this.SubTotal = this.SubTotal + response.regular_price;
               this.CardShow.push(response);
-              localStorage.setItem("CheckoutData" , JSON.stringify(this.CardShow));
+              localStorage.setItem("CheckoutData", JSON.stringify(this.CardShow));
             }
           })
         })
       })
     }
 
-    else{
-      console.log("usser is logged in");
-      this._ApiService.getItemFromCart().subscribe(res=>{
+    else {
+      this._ApiService.getItemFromCart().subscribe(res => {
         this.CardShow = res.data;
-        // console.log(res);
+        this.subtotal();
       })
 
-      this.CardShow.map((res:any)=>{
-        this.SubTotal = this.SubTotal+res.product.sale_price;
-      })
-
-      console.log(this.SubTotal);
+      setTimeout(() => {
+        console.log(this.CardShow);
+      }, 10000);
     }
   }
 
 
+  subtotal() {
+    this.SubTotal = 0;
+    this.CardShow.map((res: any) => {
+      this.SubTotal = this.SubTotal + res.product.sale_price * res.quantity;
+    })
+  }
+
+  function() {
+    this.CardShow.map((res: any) => {
+      this._ApiService.addItemToCart(res.product_id, res.quantity);
+    })
+  }
 }

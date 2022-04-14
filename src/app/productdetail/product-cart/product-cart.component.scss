@@ -114,9 +114,13 @@
                 }
             }
 
-            .price__subtotal {
-                padding: 0 60px;
+            .price-row{
+                white-space: nowrap;
+                .price__subtotal {
+                    padding: 0 60px;
+                }
             }
+
 
             .delete_item {
                 cursor: pointer;

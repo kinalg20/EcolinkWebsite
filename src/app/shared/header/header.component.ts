@@ -52,7 +52,6 @@ export class HeaderComponent implements OnInit {
         this.homePageData.push(response);
       });
       setTimeout(() => {
-        console.log(this.homePageData);
         this.homePageData.map((res: any) => {
           this.routes.map((response: any) => {
             if (res.id == response.id) {

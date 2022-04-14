@@ -15,7 +15,7 @@ interface popularity {
 })
 export class ProductlistComponent implements OnInit {
   suggestions: boolean = true;
-  showFiterModel:boolean = false;
+  showFiterModel: boolean = false;
   previousdata: any;
   val1: any;
   ItemCount: any = 1;
@@ -187,7 +187,7 @@ export class ProductlistComponent implements OnInit {
   }
 
   AddProductToCart(Item: any) {
-    if (localStorage.getItem('ecolink_user_credential')==null) {
+    if (localStorage.getItem('ecolink_user_credential') == null) {
       this.cart_obj = [];
       this.previousdata = this.Cookies.GetCartData();
       let recently_added_object = {
@@ -210,11 +210,22 @@ export class ProductlistComponent implements OnInit {
       this.Cookies.SaveCartData(this.cart_obj);
       console.log(this.cart_obj);
     }
+    else {
+      this._ApiService.addItemToCart(Item.id, this.ItemCount).subscribe((res: any) => {
+        console.log(res);
+      })
+    }
   }
 
   getFilterModel() {
-    this.showFiterModel =true;
+    this.showFiterModel = true;
     this.showFiterModel = !this.showFiterModel;
   }
 
+  addWishList(product_id: any) {
+    console.log(product_id);
+    this._ApiService.addItemToWishlist(product_id).subscribe(res => {
+      console.log(res);
+    })
+  }
 }

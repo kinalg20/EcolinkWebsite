@@ -41,7 +41,7 @@
                         <tr>
                             <td>
                                 <div class="product_name">
-                                    <div class="cart_image" style="cursor: pointer;" routerLink="/productdetail">
+                                    <div class="cart_image" style="cursor: pointer;">
                                         <img [src]="product.product.image"
                                             alt="{{product.product.alt}}">
                                     </div>
@@ -60,9 +60,9 @@
                             <td>{{product.product.sale_price| currency:'USD'}}</td>
                             <td>
                                 <div class="quantity">
-                                    <button (click)="Count('decrease', rowIndex)">-</button>
-                                    <input type="text" pInputText [(ngModel)]="product.quantity" />
-                                    <button (click)="Count('increase',rowIndex)">+</button>
+                                    <button (click)="Count('decrease', rowIndex , product.product.sale_price)">-</button>
+                                    <input type="text" pInputText [(ngModel)]="product.quantity"/>
+                                    <button (click)="Count('increase',rowIndex , product.product.sale_price)">+</button>
                                 </div>
                             </td>
                             <td>
@@ -82,7 +82,7 @@
             </div>
             <div class="card cart-total">
                 <h2 class="mb-0">Cart Totals</h2>
-               <div class="my-3">
+               <!-- <div class="my-3">
                 <div class="subtotal-price">
                     <ul>
                         <li>Subtotal</li>
@@ -99,21 +99,21 @@
                         <li>$100</li>
                     </ul>
                 </div>
-               </div>
+               </div> -->
                <div class="total-price">
                 <ul>
                     <li>
                         <h3>Total</h3>
                     </li>
                     <li>
-                        <h3>{{SubTotal+100+100}}</h3>
+                        <h3>${{SubTotal+100+100}}</h3>
                     </li>
                 </ul>
             </div>
                 <div class="proceed">
                     <div class="proceed-button">
                         <button routerLink="/shop/checkout" pButton pRipple type="button" label="Proceed to Checkout" class="p-button-raised p-button-success"
-                            style="height:40px; width: 100%;"></button>
+                            style="height:40px; width: 100%;" (click)="function()"></button>
                     </div>
                 </div>
             </div>
