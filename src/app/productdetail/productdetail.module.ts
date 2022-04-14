@@ -12,6 +12,7 @@ import { ProductCheckoutComponent } from './product-checkout/product-checkout.co
 import { ShopComponent } from './shop/shop.component';
 
 
+
 @NgModule({
   declarations: [
     ProductdetailComponent,
@@ -25,7 +26,8 @@ import { ShopComponent } from './shop/shop.component';
     ProductdetailRoutingModule,
     SharelibraryModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+
   ]
 })
 export class ProductdetailModule { }

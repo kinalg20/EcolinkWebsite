@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PrimeNGConfig } from 'primeng/api';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 
@@ -12,11 +13,12 @@ export class ProductCartComponent implements OnInit {
 
   GetProduct: any = [];
   SubTotal: number = 0;
-  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService) { }
+
+  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
     this.getCartData();
-
+    this.primengConfig.ripple = true;
   }
   products = [
     {
@@ -69,14 +71,38 @@ export class ProductCartComponent implements OnInit {
     }
   ]
 
-  Count(string: any, id: any, product_price: any) {
-    if (string == "increase" && this.CardShow[id].quantity < 10) {
-      this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
-      this.subtotal();
+  Count(string: any, id: any) {
+    // if (string == "increase" && this.CardShow[id].quantity < 10) {
+    //   this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
+    //   this.subtotal();
+    // }
+    // if (string == "decrease" && this.CardShow[id].quantity > 1) {
+    //   this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
+    //   this.subtotal();
+    // }
+    if(string == "increase") {
+      this.CardShow = this.CardShow.map((product:any) => {
+        if(product.id === id){
+          return {
+            ...product,
+            quantity:product.quantity + 1
+          }
+        }
+        this.subtotal();
+        return product;
+      })
     }
-    if (string == "decrease" && this.CardShow[id].quantity > 1) {
-      this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
-      this.subtotal();
+    if(string == "decrease") {
+      this.products = this.products.map((product:any) => {
+        if(product.id === id){
+          return {
+            ...product,
+            quantity: product.quantity > 1 ? product.quantity - 1 : product.quantity
+          }
+        }
+        this.subtotal();
+        return product;
+      })
     }
   }
 
@@ -104,10 +130,6 @@ export class ProductCartComponent implements OnInit {
           this.subtotal();
         }, 1000);
       })
-
-      // setTimeout(() => {
-      //   console.log(this.CardShow);
-      // }, 10000);
     }
   }
 
@@ -119,13 +141,18 @@ export class ProductCartComponent implements OnInit {
     })
   }
 
-  function(action:any , product_id :any) {
-    // this.CardShow.map((res: any) => {
-      this._ApiService.addItemToCart(product_id, 1 , action).subscribe(res=>
-        console.log(res));
-    // })
+  UpdateCart(action: any, product_id: any) {
+    this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
+      console.log(res));
     setTimeout(() => {
       this.getCartData();
     }, 400);
+  }
+
+  deleteItemFromCart(product_id: any) {
+    console.log(product_id);
+    this._ApiService.deleteItemFromCart(product_id).subscribe(res =>console.log(res));
+    // setTimeout(() => {
+      this.getCartData();
   }
 }

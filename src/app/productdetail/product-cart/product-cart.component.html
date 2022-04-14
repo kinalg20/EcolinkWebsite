@@ -1,9 +1,9 @@
-<ng-container *ngIf="CardShow; then thenblock else elseblock"></ng-container>
-<div class="container">
-    <ng-template #elseblock>
+<ng-container *ngIf="CardShow.length>0; then thenblock else elseblock"></ng-container>
+<ng-template #elseblock>
+    <div class="container">
         <div class="empty-cart">
             <div class="cart-heading">
-                <h3>Cart</h3>
+                <h1 style="white-space: nowrap;">Shopping Cart</h1>
             </div>
             <div class="row">
                 <div class="card">
@@ -18,8 +18,8 @@
                 </div>
             </div>
         </div>
-    </ng-template>
-</div>
+    </div>
+</ng-template>
 
 <ng-template #thenblock>
     <div class="container">
@@ -42,33 +42,58 @@
                             <td>
                                 <div class="product_name">
                                     <div class="cart_image" style="cursor: pointer;">
-                                        <img [src]="product.product.image"
-                                            alt="{{product.product.alt}}">
+                                        <img [src]="product.product.image" alt="{{product.product.alt}}">
                                     </div>
                                     <div class="product_desc">
                                         <h6 style="text-align: left; padding-left: 10px;">{{product.product.name}}</h6>
-                                    <div style="text-align: left; padding: 0 10px;">
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                    </div>
+                                        <div style="text-align: left; padding: 0 10px;">
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
                             <td>{{product.product.sale_price| currency:'USD'}}</td>
                             <td>
                                 <div class="quantity">
-                                    <button (click)="Count('decrease', rowIndex , product.product.sale_price)" (click)="function('delete' , product.product_id)">-</button>
-                                    <input type="text" pInputText [(ngModel)]="product.quantity"/>
-                                    <button (click)="Count('increase',rowIndex , product.product.sale_price)" (click)="function('add' ,  product.product_id)">+</button>
+                                    <button (click)="Count('decrease', rowIndex)"
+                                        (click)="UpdateCart('delete' , product.product_id)">-</button>
+                                    <input type="text" pInputText [(ngModel)]="product.quantity" />
+                                    <button (click)="Count('increase',rowIndex)"
+                                        (click)="UpdateCart('add' ,  product.product_id)">+</button>
                                 </div>
                             </td>
                             <td>
                                 <div class="price-row">
-                                    <span class="price__subtotal">${{product.product.sale_price*product.quantity}}</span>
-                                    <span class="delete_item"><i class="pi pi-times"></i></span>
+                                    <span
+                                        class="price__subtotal">${{product.product.sale_price*product.quantity}}</span>
+                                    <span class="delete_item" data-toggle="modal" data-target="#DeletePopUp"><i
+                                            class="pi pi-times"></i></span>
+                                    <div class="modal fade" id="DeletePopUp" tabindex="-1" role="dialog"
+                                        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete</h5>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Are You Sure You Want to Delete ?</div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Close</button>
+                                                    <button type="button" class="btn btn-danger"
+                                                        (click)="deleteItemFromCart(product.product.id)"
+                                                        data-dismiss="modal">Delete</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </td>
                         </tr>
@@ -85,7 +110,7 @@
             </div>
             <div class="card cart-total">
                 <h2 class="mb-0">Cart Totals</h2>
-               <!-- <div class="my-3">
+                <!-- <div class="my-3">
                 <div class="subtotal-price">
                     <ul>
                         <li>Subtotal</li>
@@ -103,20 +128,20 @@
                     </ul>
                 </div>
                </div> -->
-               <div class="total-price">
-                <ul>
-                    <li>
-                        <h3>Total</h3>
-                    </li>
-                    <li>
-                        <h3>${{SubTotal}}</h3>
-                    </li>
-                </ul>
-            </div>
+                <div class="total-price">
+                    <ul>
+                        <li>
+                            <h3>Total</h3>
+                        </li>
+                        <li>
+                            <h3>${{SubTotal}}</h3>
+                        </li>
+                    </ul>
+                </div>
                 <div class="proceed">
                     <div class="proceed-button">
-                        <button routerLink="/shop/checkout" pButton pRipple type="button" label="Proceed to Checkout" class="p-button-raised p-button-success"
-                            style="height:40px; width: 100%;"></button>
+                        <button routerLink="/shop/checkout" pButton pRipple type="button" label="Proceed to Checkout"
+                            class="p-button-raised p-button-success" style="height:40px; width: 100%;"></button>
                     </div>
                 </div>
             </div>
