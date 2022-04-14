@@ -31,10 +31,10 @@
                 <p-table [value]="CardShow" #thenblock>
                     <ng-template pTemplate="header">
                         <tr class="heading-row">
-                            <th style="width: 280px;">Product Name</th>
-                            <th style="width: 200px;">Price</th>
-                            <th style="width: 200px;">Quantity</th>
-                            <th style="width: 250px;">SubTotal</th>
+                            <th>Product Name</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>SubTotal</th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-product let-rowIndex="rowIndex">
@@ -85,7 +85,7 @@
             </div>
             <div class="card cart-total">
                 <h2 class="mb-0">Cart Totals</h2>
-               <!-- <div class="my-3">
+               <div class="my-3">
                 <div class="subtotal-price">
                     <ul>
                         <li>Subtotal</li>
@@ -102,7 +102,7 @@
                         <li>$100</li>
                     </ul>
                 </div>
-               </div> -->
+               </div>
                <div class="total-price">
                 <ul>
                     <li>
