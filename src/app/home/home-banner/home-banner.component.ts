@@ -58,6 +58,7 @@ export class HomeBannerComponent implements OnInit {
 
   subscribe(){
     let endpoint = 'newsletter'
+    console.log(this.newsletter_email);
     this._ApiService.newLatter(endpoint , this.newsletter_email).subscribe(res=>{
       console.log(res);
     })

@@ -27,7 +27,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'register', data);
   }
   newLatter(url: any, email: any): Observable<any> {
-    return this.http.post(this._baseurl + url, email);
+    return this.http.post(this._baseurl + url, {email:email});
   }
   login(url: any): Observable<any> {
     // const body=JSON.stringify(url);
