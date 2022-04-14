@@ -9,7 +9,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class HeaderComponent implements OnInit {
   user_id: any;
-
+  openMenu: boolean = false;
   homePageData: any = [];
   constructor(private route: Router, private __apiservice: ApiServiceService) { }
   routes: any = [
@@ -74,5 +74,9 @@ export class HeaderComponent implements OnInit {
     else {
       this.route.navigateByUrl('/profile');
     }
+  }
+
+  openmenu() {
+    this.openMenu = !this.openMenu;
   }
 }
