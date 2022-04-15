@@ -28,7 +28,6 @@ export class ProductCheckoutComponent implements OnInit {
     });
   }
   getRadioButtonValue(value:any) {
-    console.log(value);
     console.log(this.getAllUserAddresses[value]);
   }
 
