@@ -189,8 +189,8 @@ export class ProductlistComponent implements OnInit {
 
   addWishList(product_id: any) {
     console.log(product_id);
-    this._ApiService.addItemToWishlist(product_id).subscribe(res => {
-      console.log(res);
-    })
+    // this._ApiService.addItemToWishlist(product_id).subscribe(res => {
+    //   console.log(res);
+    // })
   }
 }

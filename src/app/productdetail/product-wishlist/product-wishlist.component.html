@@ -29,7 +29,7 @@
         </div>
         <div class="cart-body">
             <div class="cart-elements">
-                <p-table [value]="product" #thenblock>
+                <p-table [value]="product[0]" #thenblock>
                     <ng-template pTemplate="header">
                         <tr class="heading-row">
                             <th style="width: 280px;">Name</th>
@@ -43,11 +43,11 @@
                             <td>
                                 <div class="product_name">
                                     <div class="cart_image">
-                                        <img [src]="prod[0].product.image"
+                                        <img [src]="prod.product.image"
                                             alt="">
                                     </div>
                                     <div class="product_desc">
-                                        <h6>{{prod[0].product.name}}</h6>
+                                        <h6>{{prod.product.name}}</h6>
                                     <div style="text-align: left; padding: 0 10px;">
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
                                         <i style="font-size:18px" class="fa">&#xf006;</i>
@@ -61,7 +61,7 @@
                             <td>
                                 <mark style="background:#4BB543;color: white;">In Stock</mark>
                             </td>
-                            <td>{{prod[0].product.sale_price | currency:'USD'}}</td>
+                            <td>{{prod.product.sale_price | currency:'USD'}}</td>
                             <td>
                                 <div class="price-row">
                                     <button routerLink="/shop/cart">Add to Cart</button>
