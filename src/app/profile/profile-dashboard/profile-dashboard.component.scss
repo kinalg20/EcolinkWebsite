@@ -150,6 +150,90 @@
             }
         }
     }
+    .ordered-item-card {
+        body {
+            background: #eee;
+        }
+        .panel-order .row {
+            border-bottom: 1px solid #ccc;
+        }
+        .panel-order .row:last-child {
+            border: 0px;
+        }
+        .panel-order .row .col-md-3 {
+            text-align: center;
+            padding-top: 15px;
+        }
+        .panel-order .row .col-md-3 img {
+            // width: 100%;
+            // height: 100%;
+        }
+        .panel-order .row .row {
+            border-bottom: 0;
+        }
+        .panel-order .row .col-md-9 {
+            border-left: 1px solid #ccc;
+        }
+        .panel-order .row .row .col-md-12 {
+            padding-top: 7px;
+            padding-bottom: 7px;
+        }
+        // .panel-order .row .row :last-child {
+
+        // }
+        .panel-order .btn-group {
+            margin: 0px;
+            padding: 0px;
+        }
+        .panel-order {
+            background: #eee;
+            margin: 50px 0;
+            padding: 25px;
+            .panel-heading {
+            }
+            .panel-body {
+                .row {
+                    width: 100%;
+                    margin: 0;
+                    .col-md-3 {
+                        // width: 100%;
+                        // height: 100%;
+                        img {
+                            width: 120px;
+                        }
+                    }
+                    .col-md-9 {
+                        padding: 0;
+                        .product-details {
+                            padding: 0 1rem;
+                            .qty {
+                                margin: 0;
+                            }
+                            .desc {
+                                margin-bottom: 2.5rem;
+                            }
+                        }
+                    }
+                }
+                .date {
+                    padding-top: 0px;
+                    padding-bottom: 0px;
+                    color: #555;
+                    background: #e0e0e0;
+                    margin-top: 10px;
+                    width: 100%;
+                    p {
+                        margin: 0;
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+
+        .panel-order .panel-deading {
+            margin-bottom: 0;
+        }
+    }
 
     .dropdown {
         white-space: nowrap;

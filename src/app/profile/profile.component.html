@@ -28,12 +28,12 @@
                     </button>
                     <div class="open-nav" *ngIf="openNav">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                            <li (click)="togglebutton='Dashboard'">Dashboard</li>
-                            <li (click)="togglebutton='Edit Profile'">Edit Profile</li>
-                            <li (click)="togglebutton='Order History'">Order History</li>
-                            <li (click)="togglebutton='Addresses'">Addresses</li>
-                            <li (click)="togglebutton='Wishlist'" routerLink="/productdetail/wishlist">Wishlist</li>
-                            <li (click)="togglebutton='Logout'" (click)="logOut()">Logout</li>
+                            <li (click)="togglebutton='Dashboard'" (click)="openNavbar()">Dashboard</li>
+                            <li (click)="togglebutton='Edit Profile'" (click)="openNavbar()">Edit Profile</li>
+                            <li (click)="togglebutton='Order History'" (click)="openNavbar()">Order History</li>
+                            <li (click)="togglebutton='Addresses'" (click)="openNavbar()">Addresses</li>
+                            <li (click)="togglebutton='Wishlist'" routerLink="/productdetail/wishlist" (click)="openNavbar()">Wishlist</li>
+                            <li (click)="togglebutton='Logout'" (click)="logOut()" (click)="openNavbar()">Logout</li>
                         </ul>
                     </div>
                 </div>
