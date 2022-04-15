@@ -208,7 +208,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'deleteUserAddresses', { address_id: item_id }, { headers: httpHeaders })
   }
 
-  filterProduct() {
+  filterProduct(dataforfilter:any) {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     let user_id = JSON.parse(this.header).user_id;
@@ -216,13 +216,7 @@ export class ApiServiceService {
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     })
-    let body = {
-      'category': [1],
-      'price_from': 100,
-      'price_to': 200,
-      'rating': [4, 3],
-      'sortby': 'default'
-    }
+    console.log(dataforfilter);
   }
 
   editUserAddress(item:any):Observable<any> {

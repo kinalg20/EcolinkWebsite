@@ -208,7 +208,7 @@ export class ProductlistComponent implements OnInit {
       sortby: this.selectedLevel
     }
     console.log(filterValue);
-    this._ApiService.filterProduct()
+    this._ApiService.filterProduct(filterValue);
   }
 
   getPrice() {
