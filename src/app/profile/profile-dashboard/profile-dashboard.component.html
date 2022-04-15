@@ -23,7 +23,7 @@
                 <div class="card address-section">
                     <div class="customer_name my-3">
                         <h4>Add Address</h4>
-                        <i data-bs-toggle="modal" data-bs-target="#exampleModal" class="pi pi-plus"></i>
+                        <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="pi pi-plus"></i>
 
                     </div>
                     <div class="default-Address">
@@ -34,7 +34,7 @@
                     <span class="address-label">Email Address</span>
                     <span>{{item.email}}</span>
                     <div class="edit-Address-button my-2">
-                        <button>Edit Address</button>
+                        <button data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Address</button>
                     </div>
                 </div>
             </div>
@@ -102,12 +102,12 @@
                 <div class="sub-address">
                     <p>{{item.city}}</p>
                     <p>, {{item.state}}</p>
-                    <p>({{item.zipcode}})</p>
+                    <p>({{item.zip}})</p>
                     <p>, {{item.country}}</p>
                 </div>
                 <p>{{item.mobile}}</p>
                 <div class="crud-btn">
-                    <p data-bs-toggle="modal" data-bs-target="#exampleModal" >Edit</p>
+                    <p (click)="getUserDetail(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</p>
                     <p  data-bs-toggle="modal" data-bs-target="#deleteModal" >Delete</p>
                     <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
@@ -143,9 +143,9 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Add Address</h4>
+        <div class="modal-content" *ngFor="let item of profileAddress">
+            <div class="modal-header" >
+                <h4 class="modal-title" id="exampleModalLabel">{{item.heading}}</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                     (click)="resetValue(signUpForm)"></button>
             </div>
@@ -156,19 +156,20 @@
                             {{ resSignupMsg }}
                         </div>
                     </ng-container>
+                    <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
                     <div class="row">
                         <div class="col-6">
                             <div>
                                 <label for="first-name">First Name</label>
                                 <input class="form-control" type="text" id="firstname" autocomplete="off"
-                                    name="firstname" maxlength='50' value="" ngModel required />
+                                    name="firstname" maxlength='50' [(ngModel)]="item.firstname" required />
                             </div>
                         </div>
                         <div class="col-6">
                             <div>
                                 <label for="last-name">Last Name</label>
                                 <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
-                                    name="lastname" ngModel required />
+                                    name="lastname" [(ngModel)]="item.lastname" required />
                             </div>
                         </div>
                     </div>
@@ -177,7 +178,7 @@
                             <div>
                                 <label for="email">Email</label>
                                 <input class="form-control" type="email" id="email" autocomplete="off" name="email"
-                                    (input)="validateEmail($event)" ngModel required />
+                                    (input)="validateEmail($event)" [(ngModel)]="item.email" required />
                                 <h6 class="text-danger" *ngIf="invalidEmail">
                                     {{ invalidEmail ? "Invalid Email" : "" }}
                                 </h6>
@@ -188,7 +189,7 @@
                                 <label for="phone-number">Phone Number</label>
                                 <input class="form-control" type="text" id="phonenumber" autocomplete="off"
                                     name="phonenumber" maxlength="10" (input)="validateMobile($event)"
-                                    (keydown)="inputMobile($event)" ngModel required />
+                                    (keydown)="inputMobile($event)" [(ngModel)]="item.mobile" required />
                                 <h6 class="text-danger" *ngIf="invalidMobile">
                                     {{ invalidMobile ? "Invalid Mobile" : "" }}
                                 </h6>
@@ -201,7 +202,7 @@
                             <div>
                                 <label for="landmark">Landmark</label>
                                 <input class="form-control" type="text" id="landmark" autocomplete="off" name="landmark"
-                                    ngModel required />
+                                [(ngModel)]="item.landmark" required />
                             </div>
                         </div>
                     </div>
@@ -210,7 +211,7 @@
                             <div>
                                 <label for="address">Address</label>
                                 <input class="form-control" type="text" id="address" autocomplete="off" name="address"
-                                    ngModel required />
+                                [(ngModel)]="item.address" required />
                             </div>
                         </div>
                     </div>
@@ -219,14 +220,14 @@
                             <div>
                                 <label for="country">Country</label>
                                 <input class="form-control" type="text" id="country" autocomplete="off" name="country"
-                                    ngModel required />
+                                [(ngModel)]="item.country" required />
                             </div>
                         </div>
                         <div class="col-6">
                             <div>
                                 <label for="state">State</label>
                                 <input class="form-control" type="text" id="state" autocomplete="off" name="state"
-                                    ngModel required />
+                                [(ngModel)]="item.state" required />
                             </div>
                         </div>
                     </div>
@@ -234,7 +235,7 @@
                         <div class="col-6">
                             <div>
                                 <label for="city">City</label>
-                                <input class="form-control" type="text" id="city" autocomplete="off" name="city" ngModel
+                                <input class="form-control" type="text" id="city" autocomplete="off" name="city" [(ngModel)]="item.city"
                                     required />
                             </div>
                         </div>
@@ -242,13 +243,13 @@
                             <div>
                                 <label for="pincode">Pincode</label>
                                 <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
-                                    ngModel required />
+                                [(ngModel)]="item.zip" required />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 add-user">
-                            <button class="saveuserdetail btn btn-success my-3 form-control">Save Address</button>
+                            <button class="saveuserdetail btn btn-success my-3 form-control" data-bs-dismiss="modal">Save Address</button>
                         </div>
                     </div>
                 </form>
