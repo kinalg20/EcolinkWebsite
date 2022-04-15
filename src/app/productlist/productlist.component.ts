@@ -5,7 +5,8 @@ import { isEmpty } from 'rxjs/operators';
 import { ApiServiceService } from '../Services/api-service.service';
 import { CookiesService } from '../Services/cookies.service';
 interface popularity {
-  name: string
+  name: string,
+  slug: string
 }
 
 @Component({
@@ -17,32 +18,29 @@ export class ProductlistComponent implements OnInit {
   suggestions: boolean = true;
   showFiterModel: boolean = false;
   previousdata: any;
-  val1: any;
   ItemCount: any = 1;
   CartObj: any = {};
-  rangeValues: number[] = [20, 80];
   view_card: boolean = true;
   view_list: boolean = false;
   value1: string = '';
   popularity!: popularity[];
-  selectedPopularity!: popularity;
-  dropdownValue = "Default";
   maximum: number = 100;
-  city: string = '';
   slug: any;
   selectedCategory: string[] = [];
   selectedRatings: string[] = [];
   ProductListData: any = [];
-  cart_obj: any = []
+  cart_obj: any = [];
+  price_from: any;
+  price_to: any;
+  selectedLevel: any = 'default';
+  rangeValues: number[] = [0, 100];
   @ViewChild('warning') warning: any;
   constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService) {
     this.popularity = [
-      { name: "Default" },
-      { name: "Price low to high" },
-      { name: "Price high to low" },
-      { name: "Name" },
-      { name: "Date" },
-      { name: "Popularity" },
+      { name: "Price low to high", slug: "lowtohigh" },
+      { name: "Price high to low", slug: "hightolow" },
+      { name: "Name", slug: "name" },
+      { name: "Popularity", slug: "popularity" },
     ];
   }
 
@@ -130,18 +128,25 @@ export class ProductlistComponent implements OnInit {
       this.view_card = true;
     }
   }
+
+  selected(event: any) {
+    console.log(event.target.value);
+    this.selectedLevel = event.target.value;
+  }
+
   getselecteddata(selectedValue: any) {
     this.value1 = selectedValue;
     this.suggestions = false;
   }
   getListingData(slug: any) {
+    let price_array: any[] = [];
     setTimeout(() => {
       this._ApiService.getDetailByCategory(slug).subscribe(res => {
         if (res.code == 200) {
           this.ProductListData.push(res);
           console.log(this.ProductListData);
+          this.getPrice();
         }
-
         if (res.code == 400) {
           this.warning.show("Warning")
         }
@@ -176,7 +181,7 @@ export class ProductlistComponent implements OnInit {
     }
     else {
       console.log(Item);
-      this._ApiService.addItemToCart(Item.id, this.ItemCount , "add").subscribe((res: any) => {
+      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
         console.log(res);
       })
     }
@@ -189,8 +194,31 @@ export class ProductlistComponent implements OnInit {
 
   addWishList(product_id: any) {
     console.log(product_id);
-    // this._ApiService.addItemToWishlist(product_id).subscribe(res => {
-    //   console.log(res);
-    // })
+    this._ApiService.addItemToWishlist(product_id).subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  getDataForFilter() {
+    let filterValue = {
+      category: this.selectedCategory,
+      price_from: this.rangeValues[0],
+      price_to: this.rangeValues[1],
+      rating: this.selectedRatings,
+      sortby: this.selectedLevel
+    }
+    console.log(filterValue);
+    this._ApiService.filterProduct()
+  }
+
+  getPrice() {
+    this.ProductListData.filter((res: any) => {
+      this.price_from = Math.min(...res.data.products.map((item: any) => item.regular_price));
+      this.price_to = Math.max(...res.data.products.map((item: any) => item.regular_price));
+      this.maximum = (this.price_to * 35) / 100 + this.price_to;
+      this.rangeValues = [this.price_from, this.price_to]
+    })
+
   }
 }
+

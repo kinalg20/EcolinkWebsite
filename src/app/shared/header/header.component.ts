@@ -39,7 +39,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       "id": "7",
-      "route": "/about-us"
+      "route": "/shop/allCategories"
     },
     {
       "id": "8",
