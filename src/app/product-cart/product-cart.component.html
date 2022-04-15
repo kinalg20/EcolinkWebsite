@@ -62,10 +62,10 @@
                             <td>
                                 <div class="quantity">
                                     <button (click)="Count('decrease', rowIndex)"
-                                        (click)="UpdateCart('delete' , product.product_id)">-</button>
+                                        (click)="UpdateCart('delete' , product.product_id ,product.quantity )">-</button>
                                     <input type="text" pInputText [(ngModel)]="product.quantity" />
                                     <button (click)="Count('increase',rowIndex)"
-                                        (click)="UpdateCart('add' ,  product.product_id)">+</button>
+                                        (click)="UpdateCart('add' ,  product.product_id , product.quantity)">+</button>
                                 </div>
                             </td>
                             <td>
@@ -75,7 +75,8 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="delete_item" data-toggle="modal" data-target="#exampleModalCenter"  (click)="deleteItemFromCart(product.product)"><i class="pi pi-times"></i></span>
+                                <span class="delete_item" data-toggle="modal" data-target="#exampleModalCenter"
+                                    (click)="deleteItemFromCart(product.product)"><i class="pi pi-times"></i></span>
                             </td>
                         </tr>
                     </ng-template>

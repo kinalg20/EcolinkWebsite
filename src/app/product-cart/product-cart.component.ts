@@ -90,12 +90,22 @@ export class ProductCartComponent implements OnInit {
     })
   }
 
-  UpdateCart(action: any, product_id: any) {
-    this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-      console.log(res));
-    setTimeout(() => {
-      this.getCartData();
-    }, 1500);
+  UpdateCart(action: any, product_id: any , product_quantity:any) {
+    if(action=='delete' && product_quantity>1){
+      this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
+        console.log(res));
+      setTimeout(() => {
+        this.getCartData();
+      }, 1500);
+    }
+
+    if(action=='add'){
+      this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
+        console.log(res));
+      setTimeout(() => {
+        this.getCartData();
+      }, 1500);
+    }
   }
 
   deleteItemFromCart(product_id: any) {
