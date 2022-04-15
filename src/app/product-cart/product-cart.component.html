@@ -62,10 +62,10 @@
                             <td>
                                 <div class="quantity">
                                     <button (click)="Count('decrease', rowIndex)"
-                                        (click)="UpdateCart('delete' , product.product_id)">-</button>
+                                        (click)="UpdateCart('delete' , product.product_id , product.quantity)">-</button>
                                     <input type="text" pInputText [(ngModel)]="product.quantity" />
                                     <button (click)="Count('increase',rowIndex)"
-                                        (click)="UpdateCart('add' ,  product.product_id)">+</button>
+                                        (click)="UpdateCart('add' ,  product.product_id , product.quantity)">+</button>
                                 </div>
                             </td>
                             <td>
