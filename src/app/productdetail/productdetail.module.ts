@@ -6,7 +6,7 @@ import { ProductdetailComponent } from './productdetail.component';
 import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
-import { ProductCartComponent } from './product-cart/product-cart.component';
+import { ProductCartComponent } from '../product-cart/product-cart.component';
 import { ProductWishlistComponent } from './product-wishlist/product-wishlist.component';
 import { ProductCheckoutComponent } from './product-checkout/product-checkout.component';
 import { ShopComponent } from './shop/shop.component';
@@ -16,7 +16,6 @@ import { ShopComponent } from './shop/shop.component';
 @NgModule({
   declarations: [
     ProductdetailComponent,
-    ProductCartComponent,
     ProductWishlistComponent,
     ProductCheckoutComponent,
     ShopComponent
@@ -26,8 +25,7 @@ import { ShopComponent } from './shop/shop.component';
     ProductdetailRoutingModule,
     SharelibraryModule,
     FormsModule,
-    SharedModule,
-
+    SharedModule
   ]
 })
 export class ProductdetailModule { }

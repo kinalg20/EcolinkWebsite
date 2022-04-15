@@ -10,7 +10,6 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 })
 export class ProductCartComponent implements OnInit {
   CardShow: any = [];
-
   GetProduct: any = [];
   SubTotal: number = 0;
 
@@ -18,58 +17,7 @@ export class ProductCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.getCartData();
-    this.primengConfig.ripple = true;
   }
-  products = [
-    {
-      id: 1,
-      name: "ECC (A) 13oz Aerosol – Case of 12 – Discontinued",
-      price: 30,
-      category: "Aerosol",
-      quantity: 2
-
-    },
-    {
-      id: 2,
-      name: "ECC (A) 13oz Aerosol – Case of 12 – Discontinued",
-      price: 30,
-      category: "Aerosol",
-      quantity: 1
-
-    },
-    {
-      id: 3,
-      name: "ECC (A) 13oz Aerosol – Case of 12 – Discontinued",
-      price: 30,
-      category: "Aerosol",
-      quantity: 2
-
-    },
-    {
-      id: 4,
-      name: "ECC (A) 13oz Aerosol – Case of 12 – Discontinued",
-      price: 30,
-      category: "Aerosol",
-      quantity: 2
-
-    },
-    {
-      id: 5,
-      name: "ECC (A) 13oz Aerosol – Case of 12 – Discontinued",
-      price: 30,
-      category: "Aerosol",
-      quantity: 2
-
-    },
-    {
-      id: 6,
-      name: "ECC (A) 13oz Aerosol – Case of 12 – Discontinued",
-      price: 30,
-      category: "Aerosol",
-      quantity: 2
-
-    }
-  ]
 
   Count(string: any, id: any) {
     // if (string == "increase" && this.CardShow[id].quantity < 10) {
@@ -93,7 +41,7 @@ export class ProductCartComponent implements OnInit {
       })
     }
     if(string == "decrease") {
-      this.products = this.products.map((product:any) => {
+      this.CardShow = this.CardShow.map((product:any) => {
         if(product.id === id){
           return {
             ...product,
@@ -125,6 +73,7 @@ export class ProductCartComponent implements OnInit {
 
     else {
       this._ApiService.getItemFromCart().subscribe(res => {
+        console.log(res);
         setTimeout(() => {
           this.CardShow = res.data;
           this.subtotal();
@@ -146,13 +95,16 @@ export class ProductCartComponent implements OnInit {
       console.log(res));
     setTimeout(() => {
       this.getCartData();
-    }, 400);
+    }, 1500);
   }
 
   deleteItemFromCart(product_id: any) {
     console.log(product_id);
     this._ApiService.deleteItemFromCart(product_id).subscribe(res =>console.log(res));
     // setTimeout(() => {
-      this.getCartData();
+    setTimeout(() => {
+      window.location.reload();
+      this.getCartData();      
+    }, 1500);  
   }
 }
