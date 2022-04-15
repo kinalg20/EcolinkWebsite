@@ -23,13 +23,9 @@
                     <div class="sort-by-search">
 
                         <div class="dropdown">
-                            <select class="form-select" aria-label="Default select example">
+                            <select  (change)="selected($event)" class="form-select">
                                 <option selected>Default</option>
-                                <option value="1">Price low to high</option>
-                                <option value="2">Price high to low</option>
-                                <option value="3">Name</option>
-                                <option value="4">Date</option>
-                                <option value="4">Popularity</option>
+                                <option *ngFor="let item of popularity" [value]="item.slug">{{item.name}}</option>
                             </select>
                         </div>
 
@@ -58,15 +54,15 @@
                 <div class="filter">
                     <div class="filter-heading">
                         <h3>Filters</h3>
-                        <p><a href="">Clear All</a></p>
+                        <p><a>Clear All</a></p>
                     </div>
                     <div class="filter-body">
                         <section class="categories">
                             <h4>Catgories</h4>
                             <ul *ngFor="let subcategory of listdata.data.subcategory">
                                 <div class="p-field-checkbox">
-                                    <p-checkbox name="group1" value="{{subcategory.name}}"
-                                        [(ngModel)]=" selectedCategory" inputId="cc"></p-checkbox>
+                                    <p-checkbox name="group1" value="{{subcategory.id}}"
+                                        [(ngModel)]=" selectedCategory" inputId="cc" #checkbox></p-checkbox>
                                     <label for="cc" class="mx-2">{{subcategory.name}}</label>
                                 </div>
                             </ul>
@@ -87,8 +83,8 @@
                                           font-size: 14px;
                                           color: #1e2022;
                                         ">
-                                        <b>{{ rangeValues[0] | currency: "INR" }}</b>
-                                        <b>{{ rangeValues[1] | currency: "INR" }}</b>
+                                        <b>{{ price_from | currency: "INR" }}</b>
+                                        <b>{{ price_to | currency: "INR" }}</b>
                                     </div>
                                 </ng-container>
                             </div>
@@ -97,24 +93,24 @@
                             <div class="rating-heading">
                                 <h4>Rating</h4>
                                 <div class="p-field-checkbox">
-                                    <p-checkbox name="group2" value="4 Star" [(ngModel)]="selectedRatings"
+                                    <p-checkbox name="group2" value=4 [(ngModel)]="selectedRatings"
                                         inputId="4star"></p-checkbox>
                                     <label for="4star" class="mx-2">4 Star</label>
                                 </div>
                                 <div class="p-field-checkbox">
-                                    <p-checkbox name="group2" value="3 Star" [(ngModel)]="selectedRatings"
+                                    <p-checkbox name="group2" value=3 [(ngModel)]="selectedRatings"
                                         inputId="3star"></p-checkbox>
                                     <label for="3star" class="mx-2">3 Star</label>
                                 </div>
                                 <div class="p-field-checkbox">
-                                    <p-checkbox name="group2" value="2 Star" [(ngModel)]="selectedRatings"
+                                    <p-checkbox name="group2" value=2 [(ngModel)]="selectedRatings"
                                         inputId="2star"></p-checkbox>
                                     <label for="2star" class="mx-2">2 Star</label>
                                 </div>
                             </div>
                         </section>
                         <div class="apply-button">
-                            <button pButton pRipple type="button" label="Apply Filter"
+                            <button pButton pRipple type="button" (click)="getDataFotFilter()" label="Apply Filter"
                                 class="p-button  filter-button"></button>
                         </div>
                     </div>
@@ -127,8 +123,9 @@
                                 <div class="card" style="cursor: pointer;">
                                     <div class="card-image">
                                         <img [src]="product.image" alt="">
-                                        <span (click)="addWishList(product)"><i style="color: white;"
-                                                class="pi pi-heart" aria-hidden="true" title="Wishlist"></i></span>
+                                        <span routerLink="/shop/wishlist" (click)="addWishList(product)"><i
+                                                style="color: white;" class="pi pi-heart" aria-hidden="true"
+                                                title="Wishlist"></i></span>
                                     </div>
                                     <div class="card-body">
                                         <div class="card-title">
@@ -161,9 +158,8 @@
                                             </div>
                                         </div>
                                         <div class="list-buttons">
-                                            <button (click)=AddProductToCart(product) pButton pRipple
-                                                type="button" label="Add to Cart"
-                                                class="p-button-raised p-button-success"
+                                            <button (click)=AddProductToCart(product) pButton pRipple type="button"
+                                                label="Add to Cart" class="p-button-raised p-button-success"
                                                 style="height:38px; background-color: #55b15c;"
                                                 routerLink="/cart"></button>
                                             <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">Show

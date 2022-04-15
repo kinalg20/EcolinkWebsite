@@ -7,7 +7,6 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./home-banner.component.scss']
 })
 export class HomeBannerComponent implements OnInit {
-  @Input() getCategory:any;
   newsletter_email:any;
   constructor(private _ApiService : ApiServiceService) { }
   action_array=[
