@@ -120,43 +120,6 @@ export class ProductlistComponent implements OnInit {
   }
   ]
 
-  products = [
-    {
-      id: 1,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 2,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 3,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 4,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 5,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 6,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 7,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    }
-  ]
   showlist(string: string) {
     if (string == 'list') {
       this.view_list = true;
@@ -176,6 +139,7 @@ export class ProductlistComponent implements OnInit {
       this._ApiService.getDetailByCategory(slug).subscribe(res => {
         if (res.code == 200) {
           this.ProductListData.push(res);
+          console.log(this.ProductListData);
         }
 
         if (res.code == 400) {
@@ -211,6 +175,7 @@ export class ProductlistComponent implements OnInit {
       console.log(this.cart_obj);
     }
     else {
+      console.log(Item);
       this._ApiService.addItemToCart(Item.id, this.ItemCount , "add").subscribe((res: any) => {
         console.log(res);
       })

@@ -10,6 +10,7 @@ import { RippleModule } from 'primeng/ripple';
 import { TabViewModule } from 'primeng/tabview';
 import { TableModule } from 'primeng/table';
 import {RadioButtonModule} from 'primeng/radiobutton';
+import {DialogModule} from 'primeng/dialog';
 
 const exportsharedata: any = [
   CarouselModule,
@@ -21,7 +22,8 @@ const exportsharedata: any = [
   RippleModule,
   TabViewModule,
   TableModule,
-  RadioButtonModule
+  RadioButtonModule,
+  DialogModule
 ]
 @NgModule({
   declarations: [
