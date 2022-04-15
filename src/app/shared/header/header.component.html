@@ -14,17 +14,19 @@
             <h1>ECOLINK</h1>
         </div>
         <div class="responsive-navbar">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"  aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span (click)="openmenu()" *ngIf="!openMenu"><i style="font-size:24px" class="fa">&#xf0c9;</i></span>
                 <span (click)="openmenu()" *ngIf="openMenu"><i style="font-size:24px " class="fa">&#xf00d;</i></span>
-              </button>
-              <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
-                  <ul class="navbar-nav">
-                      <li class="nav-item" *ngFor="let item of homePageData"><a routerLink={{item.routers}}>{{item.name}}</a></li>
-                      <!-- <li><a routerLink="/about-us">Company</a></li>
+            </button>
+            <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item" *ngFor="let item of homePageData"><a
+                            routerLink={{item.routers}}>{{item.name}}</a></li>
+                    <!-- <li><a routerLink="/about-us">Company</a></li>
                       <li><a routerLink="/product-category/aerosol">Products</a></li> -->
-                      <!-- <li><a href="">Businesses</a></li> -->
-                      <!-- <li>
+                    <!-- <li><a href="">Businesses</a></li> -->
+                    <!-- <li>
                           <div class="dropdown">
                               <a routerLink="/manufacture" class=" " type="button" id="dropdownMenuButton" data-toggle="dropdown"
                                   aria-haspopup="true" aria-expanded="false">
@@ -37,7 +39,7 @@
                               </div>
                           </div>
                       </li> -->
-                      <!-- <li><a routerLink="/">Industries</a></li>
+                    <!-- <li><a routerLink="/">Industries</a></li>
                       <li>
                           <div class="dropdown">
                               <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown"
@@ -57,19 +59,20 @@
                       <li><a routerLink="/product-category/aerosol">Bulk Pricing</a></li>
                       <li><a routerLink="/product-category/aerosol">Shop</a></li>
                       <li><a routerLink="/about-us">Contact Us</a></li> -->
-                      <!-- <li><a routerLink="/shop/cart"><i class="fa fa-shopping-cart" aria-hidden="true" style="position: relative;"></i>
+                    <!-- <li><a routerLink="/shop/cart"><i class="fa fa-shopping-cart" aria-hidden="true" style="position: relative;"></i>
                       <span style="position: absolute; font-size: 12px; padding-left: 4px;">6</span>
                       </a></li> -->
-                      <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
-                  </ul>
-              </div>
+                    <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user"
+                                aria-hidden="true"></i></a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </section>
 
 <div class="open-menu" *ngIf="openMenu">
-    <ul  *ngFor="let item of homePageData">
-       <li  routerLink={{item.routers}}><a>{{item.name}}</a></li>
+    <ul *ngFor="let item of homePageData">
+        <li routerLink={{item.routers}}><a>{{item.name}}</a></li>
     </ul>
     <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 </div>

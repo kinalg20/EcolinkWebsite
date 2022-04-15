@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, ObservedValueOf } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -216,7 +216,6 @@ export class ApiServiceService {
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     })
-
     let body = {
       'category': [1],
       'price_from': 100,
@@ -224,6 +223,18 @@ export class ApiServiceService {
       'rating': [4, 3],
       'sortby': 'default'
     }
+  }
+
+  editUserAddress(item:any):Observable<any> {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    item.user_id=user_id;
+    return this.http.post(this._baseurl+'editUserAddresses',item,{headers:httpHeaders});
   }
 }
 
