@@ -83,8 +83,8 @@
                                           font-size: 14px;
                                           color: #1e2022;
                                         ">
-                                        <b>{{ price_from | currency: "INR" }}</b>
-                                        <b>{{ price_to | currency: "INR" }}</b>
+                                        <b>{{ rangeValues[0] | currency: "INR" }}</b>
+                                        <b>{{ rangeValues[1] | currency: "INR" }}</b>
                                     </div>
                                 </ng-container>
                             </div>
@@ -110,7 +110,7 @@
                             </div>
                         </section>
                         <div class="apply-button">
-                            <button pButton pRipple type="button" (click)="getDataFotFilter()" label="Apply Filter"
+                            <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter"
                                 class="p-button  filter-button"></button>
                         </div>
                     </div>

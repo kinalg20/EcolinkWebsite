@@ -20,7 +20,6 @@ export class ProductlistComponent implements OnInit {
   previousdata: any;
   ItemCount: any = 1;
   CartObj: any = {};
-  rangeValues: number[] = [20, 80];
   view_card: boolean = true;
   view_list: boolean = false;
   value1: string = '';
@@ -34,6 +33,7 @@ export class ProductlistComponent implements OnInit {
   price_from: any;
   price_to: any;
   selectedLevel: any = 'default';
+  rangeValues: number[] = [0, 100];
   @ViewChild('warning') warning: any;
   constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService) {
     this.popularity = [
@@ -199,13 +199,24 @@ export class ProductlistComponent implements OnInit {
     })
   }
 
-  getDataFotFilter() {
+  getDataForFilter() {
+    let filterValue = {
+      category: this.selectedCategory,
+      price_from: this.rangeValues[0],
+      price_to: this.rangeValues[1],
+      rating: this.selectedRatings,
+      sortby: this.selectedLevel
+    }
+    console.log(filterValue);
+    this._ApiService.filterProduct()
   }
 
   getPrice() {
     this.ProductListData.filter((res: any) => {
-      this.price_from = Math.min(...res.data.products.map((item:any) => item.regular_price));
-      this.price_to = Math.max(...res.data.products.map((item:any) => item.regular_price));
+      this.price_from = Math.min(...res.data.products.map((item: any) => item.regular_price));
+      this.price_to = Math.max(...res.data.products.map((item: any) => item.regular_price));
+      this.maximum = (this.price_to * 35) / 100 + this.price_to;
+      this.rangeValues = [this.price_from, this.price_to]
     })
 
   }
