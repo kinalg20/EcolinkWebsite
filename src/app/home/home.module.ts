@@ -12,6 +12,12 @@ import { BlogComponent } from './blog/blog.component';
 import { ManufactureComponent } from './manufacture/manufacture.component';
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { FormsModule } from '@angular/forms';
+import { CategoriesComponent } from './categories/categories.component';
+
+
+const exportdata:any =[
+ CategoriesComponent
+]
 
 @NgModule({
   declarations: [
@@ -21,7 +27,8 @@ import { FormsModule } from '@angular/forms';
     MediaComponent,
     BlogComponent,
     ManufactureComponent,
-    AskChemistComponent
+    AskChemistComponent,
+    CategoriesComponent
   ],
   imports: [
     CommonModule,
@@ -29,6 +36,10 @@ import { FormsModule } from '@angular/forms';
     SharedModule,
     SharelibraryModule,
     FormsModule
+  ],
+
+  exports:[
+    ...exportdata
   ]
 })
 export class HomeModule { }

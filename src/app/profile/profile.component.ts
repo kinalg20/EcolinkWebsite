@@ -7,15 +7,19 @@ import { Router } from '@angular/router';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  togglebutton:string='Dashboard'
-  constructor(private route:Router) { }
+  openNav: boolean = false;
+  togglebutton: string = 'Dashboard'
+  constructor(private route: Router) { }
 
   ngOnInit(): void {
   }
 
-  logOut(){
+  logOut() {
     localStorage.removeItem('ecolink_user_credential');
     this.route.navigateByUrl('/profile/auth');
   }
-
+  openNavbar() {
+    this.openNav = !this.openNav;
+    // this.openNav = true;
+  }
 }
