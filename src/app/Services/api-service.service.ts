@@ -178,6 +178,15 @@ export class ApiServiceService {
     }
     return this.http.post(this._baseurl+'userInfo',body,{headers:httpHeaders})
   }
+  deleteUserAddress(item_id:any):Observable<any> {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    return this.http.post(this._baseurl+'deleteUserAddresses',{address_id:item_id},{headers:httpHeaders})
+  }
 
 }
 

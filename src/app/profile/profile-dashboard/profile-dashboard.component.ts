@@ -9,25 +9,42 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class ProfileDashboardComponent implements OnInit {
   resSignupMsg: string = '';
+  addORedit:boolean=false;
   userObj: any;
-  userDetail:any;
+  userDetail:any=[];
   invalidUserEmail: string = '';
   invalidEmail: boolean = false;
   invalidMobile = false;
+  addressObject:any={};
+  allUserAddresses:any=[];
   @Input() showdesc: any;
-  userAddress: any;
   constructor(private __apiservice: ApiServiceService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.__apiservice.getUserAddress().subscribe((res: any) => {
-      this.userAddress = res.data
-      console.log(res);
-    })
     this.__apiservice.getUserProfileDetail().subscribe((res:any)=>{
-      this.userDetail=res.data;
+      this.userDetail.push(res.data);
       console.log(this.userDetail);
+      this.addressObject.name=res.data.name;
+      this.addressObject.email=res.data.email;
+      this.addressObject.mobile=res.data.mobile;
+      this.addressObject.address=res.data.address;
+      this.addressObject.country=res.data.country;
+      this.addressObject.state=res.data.state;
+      this.addressObject.city=res.data.city;
+      this.addressObject.zip=res.data.pincode;
+      this.addressObject.landmark='';
     })
+    // this.allUserAddresses.push(this.addressObject);
+    this.__apiservice.getUserAddress().subscribe((res: any) => {
+      res.data.map((response:any)=> {
+        this.allUserAddresses.push(response);
+      })
+    })
+    setTimeout(() => {
+      console.log(this.allUserAddresses);
+    }, 1000);
+    console.log(this.allUserAddresses);
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -122,5 +139,11 @@ export class ProfileDashboardComponent implements OnInit {
   resetValue(form:NgForm){
     form.reset()
     this.resSignupMsg='';
+  }
+  deleteUserAddress(item_id : any){
+    console.log(item_id);
+    this.__apiservice.deleteUserAddress(item_id).subscribe((res:any)=> {
+
+    })
   }
 }
