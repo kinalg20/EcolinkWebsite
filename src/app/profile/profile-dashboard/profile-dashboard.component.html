@@ -23,7 +23,8 @@
                 <div class="card address-section">
                     <div class="customer_name my-3">
                         <h4>Add Address</h4>
-                        <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="pi pi-plus"></i>
+                        <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                            class="pi pi-plus"></i>
 
                     </div>
                     <div class="default-Address">
@@ -84,176 +85,262 @@
             </div>
         </div>
     </div>
-    <div class="ordered-item-card"></div>
-</div>
-<div class="Addresses-section" *ngIf="showdesc == 'Addresses'">
-    <div class="adderess-head">
-        <h2>Shipping Addresses</h2>
-        <p>To select a default shipping address for checkout, click "Set as my default".</p>
-    </div>
-    <div class="address-body">
-        <div class="address-card" *ngFor="let item of allUserAddresses">
-            <div class="address-text">
-                <h4>{{item.name}}</h4>
-                <div class="address">
-                    <p>{{item.address}}</p>
-                    <p>, {{item.landmark}}</p>
-                </div>
-                <div class="sub-address">
-                    <p>{{item.city}}</p>
-                    <p>, {{item.state}}</p>
-                    <p>({{item.zip}})</p>
-                    <p>, {{item.country}}</p>
-                </div>
-                <p>{{item.mobile}}</p>
-                <div class="crud-btn">
-                    <p (click)="getUserDetail(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</p>
-                    <p  data-bs-toggle="modal" data-bs-target="#deleteModal" >Delete</p>
-                    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Delete Address</h5>
-                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                              Are you sure, you want to delete this address??
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteUserAddress(item.id)">Delete</button>
-                            </div>
-                          </div>
+    <div class="ordered-item-card">
+        <link rel="stylesheet" type="text/css"
+            href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+        <div class="bootdey">
+            <div class="panel panel-default panel-order">
+                <div class="panel-heading">
+                    <strong>Order history</strong>
+                    <div class="btn-group pull-right">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default btn-xs dropdown-toggle"
+                                data-toggle="dropdown">Filter history <i class="fa fa-filter"></i></button>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li><a href="#">Approved orders</a></li>
+                                <li><a href="#">Pending orders</a></li>
+                            </ul>
                         </div>
-                      </div>
-                    <p>Set as default</p>
+                    </div>
+                </div>
+
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-3 pro-image">
+                            <img src="https://brandtalks.in/ecolink/storage/products/1571ef9b-2ce8-4d9f-a15a-8542782ca12f1649146015.jpg"
+                                class="media-object img-thumbnail" /></div>
+                        <div class="col-md-9">
+                            <div class="product-details">
+                                <h6 class="head">ECC (A) 13oz Aerosol – Case of 12 –</h6>
+                                <p class="desc">Contact Cleaner</p> 
+                                <p class="qty">Quantity : 12</p>
+                                <span class="price"> cost: $12623.13</span>
+                            </div>
+                            <div class="date">
+                                <p> order made on: 06/12/2014 by Jane Doe</p>
+                             </div>
+                        </div>
+                        
+                    </div>
+                    <!-- 
+                    <div class="row">
+                        <div class="col-md-1"><img src="https://bootdey.com/img/Content/user_3.jpg"
+                                class="media-object img-thumbnail" /></div>
+                        <div class="col-md-11">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right"><label class="label label-success">Approved</label></div>
+                                    <span><strong>Order name</strong></span> <span class="label label-info">group
+                                        name</span><br />
+                                    Quantity : 4, cost: $523.13<br />
+                                    <a data-placement="top" class="btn btn-success btn-xs glyphicon glyphicon-ok"
+                                        href="#" title="View"></a>
+                                    <a data-placement="top" class="btn btn-danger btn-xs glyphicon glyphicon-trash"
+                                        href="#" title="Danger"></a>
+                                    <a data-placement="top" class="btn btn-info btn-xs glyphicon glyphicon-usd" href="#"
+                                        title="Danger"></a>
+                                </div>
+                                <div class="col-md-12">order made on: 06/20/2014 by <a href="#">Jane Doe</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-1"><img src="https://bootdey.com/img/Content/user_2.jpg"
+                                class="media-object img-thumbnail" /></div>
+                        <div class="col-md-11">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="pull-right"><label class="label label-info">pending</label></div>
+                                    <span><strong>Order name</strong></span> <span class="label label-info">group
+                                        name</span><br />
+                                    Quantity : 4, cost: $523.13<br />
+                                    <a data-placement="top" class="btn btn-success btn-xs glyphicon glyphicon-ok"
+                                        href="#" title="View"></a>
+                                    <a data-placement="top" class="btn btn-danger btn-xs glyphicon glyphicon-trash"
+                                        href="#" title="Danger"></a>
+                                    <a data-placement="top" class="btn btn-info btn-xs glyphicon glyphicon-usd" href="#"
+                                        title="Danger"></a>
+                                </div>
+                                <div class="col-md-12">order made on: 06/20/2014 by <a href="#">Jane Doe</a></div>
+                            </div>
+                        </div>
+                    </div> -->
                 </div>
             </div>
         </div>
     </div>
-</div>
-<div class="Wishlist-section" *ngIf="showdesc == 'Wishlist'">
-    <h2>Wishlist</h2>
-</div>
-<div class="Logout-section" *ngIf="showdesc == 'Logout'">
-    <h2>Logout</h2>
-</div>
-
-
-
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content" *ngFor="let item of profileAddress">
-            <div class="modal-header" >
-                <h4 class="modal-title" id="exampleModalLabel">{{item.heading}}</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    (click)="resetValue(signUpForm)"></button>
-            </div>
-            <div class="modal-body container">
-                <form #signUpForm="ngForm" (ngSubmit)="addUserAddress(signUpForm)">
-                    <ng-container *ngIf="resSignupMsg">
-                        <div class="alert alert-danger" role="alert" id="loginAlert" #alert>
-                            {{ resSignupMsg }}
-                        </div>
-                    </ng-container>
-                    <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
-                    <div class="row">
-                        <div class="col-6">
-                            <div>
-                                <label for="first-name">First Name</label>
-                                <input class="form-control" type="text" id="firstname" autocomplete="off"
-                                    name="firstname" maxlength='50' [(ngModel)]="item.firstname" required />
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div>
-                                <label for="last-name">Last Name</label>
-                                <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
-                                    name="lastname" [(ngModel)]="item.lastname" required />
-                            </div>
-                        </div>
+    <div class="Addresses-section" *ngIf="showdesc == 'Addresses'">
+        <div class="adderess-head">
+            <h2>Shipping Addresses</h2>
+            <p>To select a default shipping address for checkout, click "Set as my default".</p>
+        </div>
+        <div class="address-body">
+            <div class="address-card" *ngFor="let item of allUserAddresses">
+                <div class="address-text">
+                    <h4>{{item.name}}</h4>
+                    <div class="address">
+                        <p>{{item.address}}</p>
+                        <p>, {{item.landmark}}</p>
                     </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div>
-                                <label for="email">Email</label>
-                                <input class="form-control" type="email" id="email" autocomplete="off" name="email"
-                                    (input)="validateEmail($event)" [(ngModel)]="item.email" required />
-                                <h6 class="text-danger" *ngIf="invalidEmail">
-                                    {{ invalidEmail ? "Invalid Email" : "" }}
-                                </h6>
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div>
-                                <label for="phone-number">Phone Number</label>
-                                <input class="form-control" type="text" id="phonenumber" autocomplete="off"
-                                    name="phonenumber" maxlength="10" (input)="validateMobile($event)"
-                                    (keydown)="inputMobile($event)" [(ngModel)]="item.mobile" required />
-                                <h6 class="text-danger" *ngIf="invalidMobile">
-                                    {{ invalidMobile ? "Invalid Mobile" : "" }}
-                                </h6>
-
-                            </div>
-                        </div>
+                    <div class="sub-address">
+                        <p>{{item.city}}</p>
+                        <p>, {{item.state}}</p>
+                        <p>({{item.zip}})</p>
+                        <p>, {{item.country}}</p>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div>
-                                <label for="landmark">Landmark</label>
-                                <input class="form-control" type="text" id="landmark" autocomplete="off" name="landmark"
-                                [(ngModel)]="item.landmark" required />
+                    <p>{{item.mobile}}</p>
+                    <div class="crud-btn">
+                        <p (click)="getUserDetail(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</p>
+                        <p data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</p>
+                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Delete Address</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Are you sure, you want to delete this address??
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                            (click)="deleteUserAddress(item.id)">Delete</button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+                        <p>Set as default</p>
                     </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <div>
-                                <label for="address">Address</label>
-                                <input class="form-control" type="text" id="address" autocomplete="off" name="address"
-                                [(ngModel)]="item.address" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div>
-                                <label for="country">Country</label>
-                                <input class="form-control" type="text" id="country" autocomplete="off" name="country"
-                                [(ngModel)]="item.country" required />
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div>
-                                <label for="state">State</label>
-                                <input class="form-control" type="text" id="state" autocomplete="off" name="state"
-                                [(ngModel)]="item.state" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-6">
-                            <div>
-                                <label for="city">City</label>
-                                <input class="form-control" type="text" id="city" autocomplete="off" name="city" [(ngModel)]="item.city"
-                                    required />
-                            </div>
-                        </div>
-                        <div class="col-6">
-                            <div>
-                                <label for="pincode">Pincode</label>
-                                <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
-                                [(ngModel)]="item.zip" required />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 add-user">
-                            <button class="saveuserdetail btn btn-success my-3 form-control" data-bs-dismiss="modal">Save Address</button>
-                        </div>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div class="Wishlist-section" *ngIf="showdesc == 'Wishlist'">
+        <h2>Wishlist</h2>
+    </div>
+    <div class="Logout-section" *ngIf="showdesc == 'Logout'">
+        <h2>Logout</h2>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content" *ngFor="let item of profileAddress">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">{{item.heading}}</h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
+                        (click)="resetValue(signUpForm)"></button>
+                </div>
+                <div class="modal-body container">
+                    <form #signUpForm="ngForm" (ngSubmit)="addUserAddress(signUpForm)">
+                        <ng-container *ngIf="resSignupMsg">
+                            <div class="alert alert-danger" role="alert" id="loginAlert" #alert>
+                                {{ resSignupMsg }}
+                            </div>
+                        </ng-container>
+                        <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <label for="first-name">First Name</label>
+                                    <input class="form-control" type="text" id="firstname" autocomplete="off"
+                                        name="firstname" maxlength='50' [(ngModel)]="item.firstname" required />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label for="last-name">Last Name</label>
+                                    <input class="form-control" type="text" id="lastname" autocomplete="off"
+                                        maxlength='50' name="lastname" [(ngModel)]="item.lastname" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <label for="email">Email</label>
+                                    <input class="form-control" type="email" id="email" autocomplete="off" name="email"
+                                        (input)="validateEmail($event)" [(ngModel)]="item.email" required />
+                                    <h6 class="text-danger" *ngIf="invalidEmail">
+                                        {{ invalidEmail ? "Invalid Email" : "" }}
+                                    </h6>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label for="phone-number">Phone Number</label>
+                                    <input class="form-control" type="text" id="phonenumber" autocomplete="off"
+                                        name="phonenumber" maxlength="10" (input)="validateMobile($event)"
+                                        (keydown)="inputMobile($event)" [(ngModel)]="item.mobile" required />
+                                    <h6 class="text-danger" *ngIf="invalidMobile">
+                                        {{ invalidMobile ? "Invalid Mobile" : "" }}
+                                    </h6>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <label for="landmark">Landmark</label>
+                                    <input class="form-control" type="text" id="landmark" autocomplete="off"
+                                        name="landmark" [(ngModel)]="item.landmark" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <div>
+                                    <label for="address">Address</label>
+                                    <input class="form-control" type="text" id="address" autocomplete="off"
+                                        name="address" [(ngModel)]="item.address" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <label for="country">Country</label>
+                                    <input class="form-control" type="text" id="country" autocomplete="off"
+                                        name="country" [(ngModel)]="item.country" required />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label for="state">State</label>
+                                    <input class="form-control" type="text" id="state" autocomplete="off" name="state"
+                                        [(ngModel)]="item.state" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div>
+                                    <label for="city">City</label>
+                                    <input class="form-control" type="text" id="city" autocomplete="off" name="city"
+                                        [(ngModel)]="item.city" required />
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div>
+                                    <label for="pincode">Pincode</label>
+                                    <input class="form-control" type="text" id="pincode" autocomplete="off"
+                                        name="pincode" [(ngModel)]="item.zip" required />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 add-user">
+                                <button class="saveuserdetail btn btn-success my-3 form-control"
+                                    data-bs-dismiss="modal">Save Address</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
