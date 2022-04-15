@@ -2,7 +2,7 @@
     <h2>Dashboard</h2>
     <div class="profile-card">
         <div class="row" *ngFor="let item of userDetail">
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="card profile-section">
                     <div class="profile-image">
                         <img src="{{item.profile_image}}" alt="">
@@ -19,7 +19,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="card address-section">
                     <div class="customer_name my-3">
                         <h4>Add Address</h4>
@@ -33,7 +33,7 @@
                     <span>{{item.mobile}}</span>
                     <span class="address-label">Email Address</span>
                     <span>{{item.email}}</span>
-                    <div class="edit-Address-button my-2">
+                    <div class="edit-Address-button my-3">
                         <button>Edit Address</button>
                     </div>
                 </div>
@@ -73,14 +73,14 @@
         <div class="dropdown">
             <a class="" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
                 aria-expanded="false">
-                Clean Ideas<i class="fa fa-angle-down mx-2"></i>
+                All Products<i class="fa fa-angle-down mx-2"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Sustainability Commitment</a>
+                <a class="dropdown-item" href="#">Success</a>
                 <hr>
-                <a class="dropdown-item" href="#">B Corp</a>
+                <a class="dropdown-item" href="#">Cancelled</a>
                 <hr>
-                <a class="dropdown-item" href="#">Eco Links</a>
+                <a class="dropdown-item" href="#">Pending</a>
             </div>
         </div>
     </div>
