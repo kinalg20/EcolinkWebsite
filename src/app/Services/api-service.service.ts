@@ -208,7 +208,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'deleteUserAddresses', { address_id: item_id }, { headers: httpHeaders })
   }
 
-  filterProduct(dataforfilter:any) {
+  filterProduct(dataforfilter: any) {
     let url = 'filterProduct';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -218,15 +218,15 @@ export class ApiServiceService {
       'Authorization': `Bearer ${this.token}`
     })
     return this.http.post(this._baseurl + url, {
-      category:dataforfilter.category,
-      price_from:dataforfilter.price_from,
-      price_to:dataforfilter.price_to,
-      rating : dataforfilter.rating,
-      sortby:dataforfilter.sortby
-    }, { headers: httpHeaders }) 
+      category: dataforfilter.category,
+      price_from: dataforfilter.price_from,
+      price_to: dataforfilter.price_to,
+      rating: dataforfilter.rating,
+      sortby: dataforfilter.sortby
+    }, { headers: httpHeaders })
   }
 
-  editUserAddress(item:any):Observable<any> {
+  editUserAddress(item: any): Observable<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     let user_id = JSON.parse(this.header).user_id;
@@ -234,8 +234,8 @@ export class ApiServiceService {
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     })
-    item.user_id=user_id;
-    return this.http.post(this._baseurl+'editUserAddresses',item,{headers:httpHeaders});
+    item.user_id = user_id;
+    return this.http.post(this._baseurl + 'editUserAddresses', item, { headers: httpHeaders });
   }
 }
 
