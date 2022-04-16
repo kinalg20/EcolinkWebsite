@@ -10,20 +10,22 @@
                         <h3>Billing Details</h3>
                         <div *ngIf="showDropdowm">
                             <div class="dropdown">
-                                <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                  Dropdown button
+                                <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    Dropdown button
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                  <li *ngFor="let item of [].constructor(getAllUserAddresses.length); let i = index">
-                                    <div class="form-check" (click)="getRadioButtonValue(i)">
-                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" #radioValue>
-                                        <label class="form-check-label" for="flexRadioDefault1">
-                                          Address {{i+1}}
-                                        </label>
-                                      </div>
-                                  </li>
+                                    <li *ngFor="let item of [].constructor(getAllUserAddresses.length); let i = index">
+                                        <div class="form-check" (click)="getRadioButtonValue(i)">
+                                            <input class="form-check-input" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault1" #radioValue>
+                                            <label class="form-check-label" for="flexRadioDefault1">
+                                                Address {{i+1}}
+                                            </label>
+                                        </div>
+                                    </li>
                                 </ul>
-                              </div>
+                            </div>
                         </div>
                     </div>
                     <form #signupform="ngForm" (ngSubmit)="signUp(signupform)" *ngFor="let data of CheckoutProduct">
@@ -114,32 +116,30 @@
                             <li>Total</li>
                         </ul>
                     </div>
-                    <div class="checkout-products">
-                        <ul *ngFor="let data of this.CheckoutProduct[0].carts">
-                            <li>{{data.product.name}} X {{data.quantity}}</li>
-                            <li>${{data.product.sale_price *data.quantity }}</li>
-                        </ul>
-                    </div>
-                    <div class="checkout-products-subtotal">
-                        <ul>
-                            <li class="subtotal-list-element">Subtotal</li>
-                            <li>${{this.CheckoutProduct[0].payable}}</li>
-                        </ul>
-                        <!-- <ul>
-                            <li class="subtotal-list-element">Product</li>
-                            <li>$500</li>
-                        </ul> -->
-                        <ul>
-                            <li class="subtotal-list-element">Shipping</li>
-                            <li>$500</li>
-                        </ul>
-                    </div>
-                    <div class="checkout-products-total">
-                        <ul>
-                            <li class="subtotal-list-element"><b>Total</b></li>
-                            <li><b>${{this.CheckoutProduct[0].payable + 500}}</b></li>
-                        </ul>
-                    </div>
+                    <ng-container *ngFor="let cart of CheckoutProduct">
+                        <div class="checkout-products">
+                            <ul *ngFor="let data of cart.carts">
+                                <li>{{data.product.name}} X {{data.quantity}}</li>
+                                <li>${{data.product.sale_price *data.quantity }}</li>
+                            </ul>
+                        </div>
+                        <div class="checkout-products-subtotal">
+                            <ul>
+                                <li class="subtotal-list-element">Subtotal</li>
+                                <li>${{this.CheckoutProduct[0].payable}}</li>
+                            </ul>
+                            <ul>
+                                <li class="subtotal-list-element">Shipping</li>
+                                <li>$500</li>
+                            </ul>
+                        </div>
+                        <div class="checkout-products-total">
+                            <ul>
+                                <li class="subtotal-list-element"><b>Total</b></li>
+                                <li><b>${{cart.payable + 500}}</b></li>
+                            </ul>
+                        </div>
+                    </ng-container>
                     <div class="bank-detail">
                         <div class="card mx-1">
                             <h6>Direct bank transfer</h6>
