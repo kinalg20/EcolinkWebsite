@@ -12,7 +12,7 @@
                     <li (click)="togglebutton='Edit Profile'">Edit Profile</li>
                     <li (click)="togglebutton='Order History'">Order History</li>
                     <li (click)="togglebutton='Addresses'">Addresses</li>
-                    <li (click)="togglebutton='Wishlist'" routerLink="/productdetail/wishlist">Wishlist</li>
+                    <li (click)="togglebutton='Wishlist'" routerLink="/shop/wishlist">Wishlist</li>
                     <li (click)="togglebutton='Logout'" (click)="logOut()">Logout</li>
                 </ul>
             </div>
@@ -32,7 +32,8 @@
                             <li (click)="togglebutton='Edit Profile'" (click)="openNavbar()">Edit Profile</li>
                             <li (click)="togglebutton='Order History'" (click)="openNavbar()">Order History</li>
                             <li (click)="togglebutton='Addresses'" (click)="openNavbar()">Addresses</li>
-                            <li (click)="togglebutton='Wishlist'" routerLink="/productdetail/wishlist" (click)="openNavbar()">Wishlist</li>
+                            <li (click)="togglebutton='Wishlist'" routerLink="/shop/wishlist" (click)="openNavbar()">
+                                Wishlist</li>
                             <li (click)="togglebutton='Logout'" (click)="logOut()" (click)="openNavbar()">Logout</li>
                         </ul>
                     </div>
