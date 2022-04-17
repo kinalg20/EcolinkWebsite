@@ -95,3 +95,67 @@
         }
     }
 }
+
+
+
+@media (max-width: 992px) {
+    .shop-categories {
+        .container {
+            .categories-text {
+                grid-template-columns: 100%;
+                .product-category {
+                    .categories {
+                        grid-template-columns: 100%;
+                        .category-card {
+                            .category-image {
+                                width: 40%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .marketing {
+        .container {
+            .complete-section {
+                grid-template-columns: 100%;
+                .section1 {
+                    .web-logo {
+                        width: 35%;
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .home-banner {
+        .container {
+            .background-image {
+                .headings {
+                    width: 100%;
+                    h1 {
+                        font-size: 2rem;
+                    }
+                }
+                .innerhead {
+                    .search-bar {
+                       span {
+                        border-radius: 20px;
+                        width: 100%;
+                       }
+                        .input-group {
+                            display: block;
+                        }
+                        .input-group .form-control{
+                            width: 100%;
+                            border-radius: 20px;
+                            margin-top: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

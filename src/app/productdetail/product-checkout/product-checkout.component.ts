@@ -68,9 +68,12 @@ export class ProductCheckoutComponent implements OnInit {
 
   checkoutProduct() {
     this.__apiservice.getCheckoutProducts().subscribe(res => {
+      console.log(res);
       this.CheckoutProduct.push(res.data);
     })
-
+    setTimeout(() => {
+    console.log(this.CheckoutProduct[0]);
+    }, 5000);
     this.__apiservice.getItemFromCart().subscribe(res => {
       console.log(res);
     })
