@@ -78,4 +78,10 @@ export class ProductCheckoutComponent implements OnInit {
       console.log(res);
     })
   }
+
+  getShippingInfo(){
+    this.__apiservice.rateDetailThroughSaia().subscribe(res=>{
+      console.log(res);
+    })
+  }
 }
