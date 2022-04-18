@@ -17,4 +17,10 @@ export class ProductWishlistComponent implements OnInit {
       console.log(this.product);
     })
   }
+
+  addProductToCart(prod:any){
+    this._ApiService.addItemToCart(prod.product_id, 1 , "add").subscribe((res: any) => {
+      console.log(res);
+    })
+  }
 }

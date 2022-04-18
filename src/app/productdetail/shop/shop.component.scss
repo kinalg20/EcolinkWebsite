@@ -339,3 +339,22 @@
         }
     }
 }
+
+
+@media(max-width:426px){
+    .product-detail-section {
+        grid-template-columns: 100%;
+        grid-gap: 0;
+        margin-top: 20px;
+        .product-image {
+            height: 250px;
+        }
+        .product-detail{
+            margin: 10px 0;
+            .add-to-cart .counter button{
+                height: 30px;
+                width: 30px;
+            }
+        }
+    }
+}

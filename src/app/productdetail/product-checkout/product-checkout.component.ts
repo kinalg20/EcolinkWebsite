@@ -9,14 +9,28 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./product-checkout.component.scss']
 })
 export class ProductCheckoutComponent implements OnInit {
-  selectedPaymentMethod:any
+  selectedPaymentMethod: any
   userObj: any;
-  CheckoutProduct:any=[]
-  constructor(private __apiservice:ApiServiceService,private route:Router) { }
+  showDropdowm: boolean = false;
+  getAllUserAddresses: any = [];
+  CheckoutProduct: any = [];
+  constructor(private __apiservice: ApiServiceService, private route: Router) { }
 
   ngOnInit(): void {
     this.checkoutProduct();
+    this.__apiservice.getUserAddress().subscribe((res: any) => {
+      res.data.map((response: any) => {
+        this.getAllUserAddresses.push(response);
+        if (this.getAllUserAddresses.length > 0) {
+          this.showDropdowm = true;
+        }
+      })
+    });
   }
+  getRadioButtonValue(value:any) {
+    console.log(this.getAllUserAddresses[value]);
+  }
+
   signUp(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
@@ -32,7 +46,7 @@ export class ProductCheckoutComponent implements OnInit {
         pincode: data.pincode
       };
       console.log(this.userObj);
-      if(localStorage.getItem('ecolink-user-credential')==null){
+      if (localStorage.getItem('ecolink-user-credential') == null) {
         this.__apiservice.post(this.userObj).subscribe(
           (res) => {
             console.log(res);
@@ -52,12 +66,21 @@ export class ProductCheckoutComponent implements OnInit {
     }
   }
 
-  checkoutProduct(){
-    this.__apiservice.getCheckoutProducts().subscribe(res=>{
+  checkoutProduct() {
+    this.__apiservice.getCheckoutProducts().subscribe(res => {
+      console.log(res);
       this.CheckoutProduct.push(res.data);
     })
+    setTimeout(() => {
+    console.log(this.CheckoutProduct[0]);
+    }, 5000);
+    this.__apiservice.getItemFromCart().subscribe(res => {
+      console.log(res);
+    })
+  }
 
-    this.__apiservice.getItemFromCart().subscribe(res=>{
+  getShippingInfo(){
+    this.__apiservice.rateDetailThroughSaia().subscribe(res=>{
       console.log(res);
     })
   }

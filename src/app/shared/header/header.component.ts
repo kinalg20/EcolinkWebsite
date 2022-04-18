@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       "id": "2",
-      "route": "/about-us"
+      "route": "/shop/allCategories"
     },
     {
       "id": "3",
@@ -39,13 +39,14 @@ export class HeaderComponent implements OnInit {
     },
     {
       "id": "7",
-      "route": "/shop"
+      "route": "/shop/allCategories"
     },
     {
       "id": "8",
       "route": "/about-us"
     },
   ];
+
   ngOnInit(): void {
     this.__apiservice.home().subscribe((res: any) => {
       res.data.pagecategories.map((response: any) => {

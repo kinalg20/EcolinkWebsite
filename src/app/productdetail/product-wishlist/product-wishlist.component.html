@@ -64,7 +64,7 @@
                             <td>{{prod.product.sale_price | currency:'USD'}}</td>
                             <td>
                                 <div class="price-row">
-                                    <button routerLink="/shop/cart">Add to Cart</button>
+                                    <button routerLink="/cart" (click)="addProductToCart(prod)">Add to Cart</button>
                                     <span class="delete_item"><i class="pi pi-times"></i></span>
                                 </div>
                             </td>
@@ -72,7 +72,7 @@
                     </ng-template>
                     <ng-template pTemplate="summary">
                         <div class="p-d-flex p-ai-center p-jc-between">
-                            In total there are {{product ? product.length : 0 }} products.
+                            In total there are {{product[0] ? product[0].length : 0 }} products.
                         </div>
                     </ng-template>
                 </p-table>
