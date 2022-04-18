@@ -10,6 +10,7 @@ import { ProductCartComponent } from './product-cart/product-cart.component';
 import { ApiServiceService } from './Services/api-service.service';
 import { SharedModule } from './shared/shared.module';
 import { SharelibraryModule } from './sharelibrary/sharelibrary.module';
+import { NgxPayPalModule } from 'ngx-paypal';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { SharelibraryModule } from './sharelibrary/sharelibrary.module';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    SharelibraryModule
+    SharelibraryModule,
+    NgxPayPalModule
   ],
   providers: [ApiServiceService,AuthGuard],
   bootstrap: [AppComponent]
