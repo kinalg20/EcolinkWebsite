@@ -151,61 +151,49 @@
         }
     }
     .ordered-item-card {
-        body {
-            background: #eee;
-        }
-        .panel-order .row {
-            border-bottom: 1px solid #ccc;
-        }
-        .panel-order .row:last-child {
-            border: 0px;
-        }
-        .panel-order .row .col-md-3 {
-            text-align: center;
-            padding-top: 15px;
-        }
-        .panel-order .row .row {
-            border-bottom: 0;
-        }
-        .panel-order .row .col-md-9 {
-            border-left: 1px solid #ccc;
-        }
-        .panel-order .row .row .col-md-12 {
-            padding-top: 7px;
-            padding-bottom: 7px;
-        }
-        // .panel-order .row .row :last-child {
-
-        // }
-        .panel-order .btn-group {
-            margin: 0px;
-            padding: 0px;
-        }
         .panel-order {
-            background: #eee;
+            // background: #eee;
             margin: 50px 0;
             padding: 25px;
             .panel-body {
                 .row {
                     width: 100%;
                     margin: 0;
+                    padding-bottom: 50px;
                     .col-md-3 {
-                        // width: 100%;
-                        // height: 100%;
+                        align-self: center;
                         img {
-                            width: 120px;
+                            // width: 120px;
                         }
                     }
                     .col-md-9 {
                         padding: 0;
+                        border-left: 1px solid #ccc;
+
                         .product-details {
                             padding: 0 1rem;
+                            .head {
+                                font-size: 1.5rem;
+                            }
                             .qty {
                                 margin: 0;
+                                font-size: 1.1rem;
                             }
                             .desc {
-                                margin-bottom: 2.5rem;
+                                font-size: 1.1rem;
                             }
+                            .price {
+                                font-size: 1.1rem;
+                            }
+                        }
+                        .return-btn {
+                            background: var(--primary-btn);
+                            color: #fff;
+                            font-size: 1.2rem;
+                            padding: 5px 15px;
+                            border: none;
+                            margin: 1rem;
+                            border-radius: 5px;
                         }
                     }
                 }
@@ -214,7 +202,7 @@
                     padding-bottom: 0px;
                     color: #555;
                     background: #e0e0e0;
-                    margin-top: 10px;
+                    margin-top: 15px;
                     width: 100%;
                     p {
                         margin: 0;
@@ -222,10 +210,6 @@
                     }
                 }
             }
-        }
-
-        .panel-order .panel-deading {
-            margin-bottom: 0;
         }
     }
 
@@ -301,6 +285,25 @@
         }
     }
 }
+@media (max-width: 992px) {
+    .Order-History-section {
+        .ordered-item-card {
+            .panel-order {
+                .panel-body {
+                    .row {
+                        .col-md-9 {
+                            .product-details {
+                                .desc {
+                                    margin: 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 @media (max-width: 768px) {
     .dashboard-section {
         h2 {
@@ -316,6 +319,32 @@
     }
     .p-button.p-button-success {
         width: 35%;
+    }
+}
+@media (max-width: 767px) {
+    .Order-History-section {
+        .ordered-item-card {
+            .panel-order {
+                .panel-body {
+                    .row {
+                        display: block;
+                        .col-md-3 {
+                            margin: auto;
+                            margin-bottom: 30px;
+                            text-align: center;
+                            img {
+                                width: 200px;
+                            }
+                        }
+                        .col-md-9 {
+                            margin: auto;
+                            border: none;
+                            text-align: center;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 @media (max-width: 575px) {
@@ -334,24 +363,3 @@
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

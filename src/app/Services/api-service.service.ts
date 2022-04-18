@@ -282,5 +282,53 @@ export class ApiServiceService {
     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT', 'Access-Control-Allow-Credentials': 'true', "Cookie": "TS01cfb1b0=01dd6f358a47dc35f68f211096e2d76a71cac91334916d33efdea10109c5be0a2387d459bf0998726bd7e691389a711b2073381163" }).set('Accept', 'text/xml');
     return this.http.post(url, body, { headers: headers });
   }
+  storeOrder(orderObj:any) {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    orderObj.user_id = user_id
+    return this.http.post(this._baseurl + 'storeOrder', orderObj, { headers: httpHeaders })
+  }
+  getOrderData() {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let body = {
+      user_id: user_id
+    }
+    return this.http.post(this._baseurl + 'getOrder', body, { headers: httpHeaders })
+  }
+  storeReturnOrder(storeObj:any) {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    storeObj.url = user_id
+    return this.http.post(this._baseurl + 'storeReturnOrder', storeObj, { headers: httpHeaders })
+  }
+  getReturnOrder() {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let body = {
+      user_id: user_id
+    }
+    return this.http.post(this._baseurl + 'getReturnOrder', body, { headers: httpHeaders })
+  }
 }
 

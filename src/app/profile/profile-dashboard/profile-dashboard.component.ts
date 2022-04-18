@@ -18,6 +18,8 @@ export class ProfileDashboardComponent implements OnInit {
   invalidMobile = false;
   addressObject: any = {};
   allUserAddresses: any = [];
+  orderData: any = [];
+  storeObj: any;
   @Input() showdesc: any;
   constructor(private __apiservice: ApiServiceService, private router: Router) {
   }
@@ -46,6 +48,7 @@ export class ProfileDashboardComponent implements OnInit {
       console.log(this.allUserAddresses);
     }, 1000);
     console.log(this.allUserAddresses);
+    this.getOrderhistory();
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -163,5 +166,29 @@ export class ProfileDashboardComponent implements OnInit {
       item.lastname = item.name.split(" ")[1];
       this.profileAddress.push(item);
     }
+  }
+  getOrderhistory() {
+    this.__apiservice.getOrderData().subscribe((res: any) => {
+      setTimeout(() => {
+        console.log("oderhistory", res);
+        this.orderData = res;
+      }, 1000);
+    })
+  }
+  storeReturnProduct(i:any) {
+    console.log(i)
+    this.storeObj = {
+      order_id: i.order_id,
+      order_item_id: i.id,
+      product_id: i.product_id,
+      quantity: i.quantity,
+      reason: "Accidentally Placed Order",
+      description: "test"
+    }
+    console.log(this.storeObj)
+  }
+  getReturnProduct() {
+   this.orderData.data[0].user_id
+   console.log(this.orderData.data[0].user_id)
   }
 }

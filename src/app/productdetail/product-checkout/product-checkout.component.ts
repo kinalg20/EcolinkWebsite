@@ -14,6 +14,7 @@ export class ProductCheckoutComponent implements OnInit {
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
+  orderObj : any;
   constructor(private __apiservice: ApiServiceService, private route: Router) { }
 
   ngOnInit(): void {
@@ -27,7 +28,7 @@ export class ProductCheckoutComponent implements OnInit {
       })
     });
   }
-  getRadioButtonValue(value:any) {
+  getRadioButtonValue(value: any) {
     console.log(this.getAllUserAddresses[value]);
   }
 
@@ -72,15 +73,49 @@ export class ProductCheckoutComponent implements OnInit {
       this.CheckoutProduct.push(res.data);
     })
     setTimeout(() => {
-    console.log(this.CheckoutProduct[0]);
+      console.log(this.CheckoutProduct[0]);
     }, 5000);
     this.__apiservice.getItemFromCart().subscribe(res => {
       console.log(res);
     })
   }
 
-  getShippingInfo(){
-    this.__apiservice.rateDetailThroughSaia().subscribe(res=>{
+  getShippingInfo() {
+    this.__apiservice.rateDetailThroughSaia().subscribe(res => {
+      console.log(res);
+    })
+  }
+  getOrderInfo() {
+    this.orderObj = {
+      sameAsShip : 0,
+      order_amount: this.CheckoutProduct[0].order_total,
+      product_discount : 0,
+      coupon_discount: 0,
+      total_amount: this.CheckoutProduct[0].payable,
+      billing_name: this.CheckoutProduct[0].user.name,
+      billing_email: this.CheckoutProduct[0].user.email,
+      billing_mobile: this.CheckoutProduct[0].user.mobile,
+      billing_address: this.CheckoutProduct[0].user.address,
+      billing_landmark: this.CheckoutProduct[0].user.address,
+      billing_country: this.CheckoutProduct[0].user.country,
+      billing_state: this.CheckoutProduct[0].user.state,
+      billing_city: this.CheckoutProduct[0].user.city,
+      billing_zip: this.CheckoutProduct[0].user.pincode,
+      shipping_name: this.CheckoutProduct[0].user.name,
+      shipping_email: this.CheckoutProduct[0].user.email,
+      shipping_mobile: this.CheckoutProduct[0].user.mobile,
+      shipping_address: this.CheckoutProduct[0].user.address,
+      shipping_landmark: this.CheckoutProduct[0].user.address,
+      shipping_country: this.CheckoutProduct[0].user.country,
+      shipping_state: this.CheckoutProduct[0].user.state,
+      shipping_city: this.CheckoutProduct[0].user.city,
+      shipping_zip: this.CheckoutProduct[0].user.pincode,
+      payment_via: 'paypal',
+      shippment_via: 'saia',
+      no_items: '1'
+    }
+    console.log(this.orderObj);
+    this.__apiservice.storeOrder(this.orderObj).subscribe(res=> {
       console.log(res);
     })
   }
