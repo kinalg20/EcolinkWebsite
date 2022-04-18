@@ -12,7 +12,7 @@
                             <div class="dropdown">
                                 <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton1"
                                     data-bs-toggle="dropdown" aria-expanded="false">
-                                    Dropdown button
+                                    Choose another address
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li *ngFor="let item of [].constructor(getAllUserAddresses.length); let i = index">
@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <form #signupform="ngForm" (ngSubmit)="signUp(signupform)" *ngFor="let data of CheckoutProduct">
+                    <!-- <form #signupform="ngForm" (ngSubmit)="signUp(signupform)" *ngFor="let data of CheckoutProduct">
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="name">Name</label>
@@ -104,7 +104,8 @@
                                     style="height:40px; width: 100%;" (click)="getShippingInfo()"></button>
                             </div>
                         </div>
-                    </form>
+                    </form> -->
+                    <app-billing-form [CheckoutProduct]=CheckoutProduct></app-billing-form>
                 </div>
             </div>
             <div class="your-order">

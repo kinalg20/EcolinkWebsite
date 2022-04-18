@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-ask-chemist',
@@ -23,4 +24,8 @@ export class AskChemistComponent implements OnInit {
       content:"Ecolink is especially proud of our work with the global mining sector"
     }
   ]
+
+  saveAskChemistDetail(data:NgForm){
+    console.log(data);
+  }
 }
