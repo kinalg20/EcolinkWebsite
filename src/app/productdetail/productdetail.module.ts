@@ -10,6 +10,7 @@ import { ProductCheckoutComponent } from './product-checkout/product-checkout.co
 import { ShopComponent } from './shop/shop.component';
 import { MainDetailComponent } from './main-detail/main-detail.component';
 import { HomeModule } from '../home/home.module';
+import { BillingFormComponent } from './billing-form/billing-form.component';
 
 
 
@@ -19,7 +20,8 @@ import { HomeModule } from '../home/home.module';
     ProductWishlistComponent,
     ProductCheckoutComponent,
     ShopComponent,
-    MainDetailComponent
+    MainDetailComponent,
+    BillingFormComponent
   ],
   imports: [
     CommonModule,

@@ -27,8 +27,10 @@ export class ProductCheckoutComponent implements OnInit {
       })
     });
   }
-  getRadioButtonValue(value:any) {
-    console.log(this.getAllUserAddresses[value]);
+  getRadioButtonValue(value:any) { 
+    this.CheckoutProduct=[];
+    this.CheckoutProduct.push(this.getAllUserAddresses[value]);
+    // window.location.reload();
   }
 
   signUp(form: NgForm) {
