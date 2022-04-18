@@ -104,7 +104,7 @@ export class ProductCartComponent implements OnInit {
         console.log(res));
       setTimeout(() => {
         this.getCartData();
-      }, 1500);
+      }, 500);
     }
   }
 
@@ -113,8 +113,7 @@ export class ProductCartComponent implements OnInit {
     this._ApiService.deleteItemFromCart(product_id).subscribe(res => console.log(res));
     // setTimeout(() => {
     setTimeout(() => {
-      window.location.reload();
       this.getCartData();
-    }, 1500);
+    }, 2000);
   }
 }

@@ -101,7 +101,7 @@
                         <div class="proceed">
                             <div class="proceed-button">
                                 <button pButton pRipple label="Save Details" class="p-button-raised p-button-success"
-                                    style="height:40px; width: 100%;"></button>
+                                    style="height:40px; width: 100%;" (click)="getShippingInfo()"></button>
                             </div>
                         </div>
                     </form> -->
@@ -170,7 +170,7 @@
                     </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
-                            <button pButton pRipple type="button" label="Place Order"
+                            <button pButton pRipple type="button" label="Place Order" (click)="getOrderInfo()"
                                 class="p-button-raised p-button-success" style="height:45px; width: 100%;"></button>
                         </div>
                     </div>

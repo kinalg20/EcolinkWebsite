@@ -237,5 +237,98 @@ export class ApiServiceService {
     item.user_id = user_id;
     return this.http.post(this._baseurl + 'editUserAddresses', item, { headers: httpHeaders });
   }
+
+  rateDetailThroughSaia() {
+    let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
+    let body = '<?xml version="1.0" encoding="utf-8"?>'
+    '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'
+    '<soap:Body>'
+    '<Create xmlns="http://www.saiasecure.com/WebService/ratequote/">'
+    '<request>'
+    ' <UserID>ecolink</UserID>'
+    '<Password>ecolink4</Password>'
+    '<TestMode>Y</TestMode>'
+    '<BillingTerms>Prepaid</BillingTerms>'
+    '<AccountNumber>0747932</AccountNumber>'
+    '<Application>Outbound</Application>'
+    '<OriginCity></OriginCity>'
+    '<OriginState></OriginState>'
+    '<OriginZipcode></OriginZipcode>'
+    '<DestinationCity>Ridgeview</DestinationCity>'
+    '<DestinationState>SD</DestinationState>'
+    '<DestinationZipcode>57652</DestinationZipcode>'
+    '<WeightUnits>KGS</WeightUnits>'
+    '<Details>'
+    '<DetailItem>'
+    '<Width>20.00</Width>'
+    '<Length>20.00</Length>'
+    '<Height>20.00</Height>'
+    '<Weight>20</Weight>'
+    '<Class>50</Class>'
+    '</DetailItem>'
+    '<DetailItem>'
+    '<Width>20.00 </Width>'
+    '< Length > 20.00 < /Length>'
+    '< Height > 20.00 < /Height>'
+    ' < Weight > 20 < /Weight>'
+    ' < Class > 50 < /Class>'
+    '</DetailItem>'
+    '</Details>'
+    '</request>'
+    '</Create>'
+    '</soap:Body>'
+    '</soap:Envelope>'
+    const headers = new HttpHeaders({ 'Content-Type': 'text/xml', 'Access-Control-Allow-Origin': '*',  'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT', 'Access-Control-Allow-Credentials': 'true', "Cookie": "TS01cfb1b0=01dd6f358a47dc35f68f211096e2d76a71cac91334916d33efdea10109c5be0a2387d459bf0998726bd7e691389a711b2073381163" }).set('Accept', 'text/xml');
+    return this.http.post(url, body, { headers: headers });
+  }
+  storeOrder(orderObj:any) {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    orderObj.user_id = user_id
+    return this.http.post(this._baseurl + 'storeOrder', orderObj, { headers: httpHeaders })
+  }
+  getOrderData() {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let body = {
+      user_id: user_id
+    }
+    return this.http.post(this._baseurl + 'getOrder', body, { headers: httpHeaders })
+  }
+  storeReturnOrder(storeObj:any) {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    storeObj.url = user_id
+    return this.http.post(this._baseurl + 'storeReturnOrder', storeObj, { headers: httpHeaders })
+  }
+  getReturnOrder() {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let body = {
+      user_id: user_id
+    }
+    return this.http.post(this._baseurl + 'getReturnOrder', body, { headers: httpHeaders })
+  }
 }
 
