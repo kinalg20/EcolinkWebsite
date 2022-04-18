@@ -1,0 +1,98 @@
+.inner-pages {
+    margin-top: 50px;
+    .container {
+        .row {
+            .col-8 {
+                border-right: 2px solid rgb(231, 231, 231);
+                .page-desc {
+                    .entry-content {
+                        padding-right: 50px;
+                        text-align: justify;
+                        ul {
+                            padding-left: 1rem;
+                        }
+                    }
+                }
+            }
+            .inner_sidebar {
+                margin-left: 50px;
+                .widget {
+                    margin-bottom: 100px;
+                    ul {
+                        list-style: none;
+                        padding: 0;
+                        li {
+                            padding: 10px 0;
+                        }
+                    }
+                }
+                .widget_text {
+                    .textwidget {
+                        p {
+                            a {
+                                color: #000;
+                                text-decoration: none;
+                            }
+                            .shopButton2020 {
+                                background-color: #0a6fbd;
+                                border-radius: 3px;
+                                display: inline-block;
+                                cursor: pointer;
+                                color: #ffffff !important;
+                                font-family: Arial;
+                                font-size: 17px;
+                                padding: 16px 31px;
+                                text-decoration: none;
+                                width: 100%;
+                                text-align: center;
+                                margin-bottom: 30px;
+                            }
+                            .requestButton2020 {
+                                background-color: #009e49;
+                                border-radius: 3px;
+                                display: inline-block;
+                                cursor: pointer;
+                                color: #ffffff !important;
+                                font-family: Arial;
+                                font-size: 17px;
+                                padding: 16px 31px;
+                                text-decoration: none;
+                                width: 100%;
+                                text-align: center;
+                                margin-bottom: 30px;
+                            }
+                            .pdsButton2020 {
+                                background-color: #000000;
+                                border-radius: 3px;
+                                display: inline-block;
+                                cursor: pointer;
+                                color: #ffffff !important;
+                                font-family: Arial;
+                                font-size: 17px;
+                                padding: 16px 31px;
+                                text-decoration: none;
+                                width: 100%;
+                                text-align: center;
+                                margin-bottom: 30px;
+                            }
+                            .contactButton2020 {
+                                background-color: #777777;
+                                border-radius: 3px;
+                                display: inline-block;
+                                cursor: pointer;
+                                color: #ffffff !important;
+                                font-family: Arial;
+                                font-size: 17px;
+                                padding: 16px 31px;
+                                text-decoration: none;
+                                width: 100%;
+                                text-align: center;
+                                margin-bottom: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

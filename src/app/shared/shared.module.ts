@@ -10,6 +10,7 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { CallToActionComponent } from './call-to-action/call-to-action.component';
 import { MediaBannerComponent } from './media-banner/media-banner.component';
 import { TrendingPostComponent } from './trending-post/trending-post.component';
+import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 
 const exportdata:any =[
   HeaderComponent,
@@ -29,7 +30,8 @@ const exportdata:any =[
     ...exportdata,
     CallToActionComponent,
     MediaBannerComponent,
-    TrendingPostComponent
+    TrendingPostComponent,
+    InnerPagesComponent
   ],
   imports: [
     CommonModule,
