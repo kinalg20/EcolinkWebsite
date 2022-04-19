@@ -32,10 +32,10 @@
                 <p-table [value]="product[0]" #thenblock>
                     <ng-template pTemplate="header">
                         <tr class="heading-row">
-                            <th style="width: 280px;">Name</th>
-                            <th style="width: 200px;">Stock</th>
-                            <th style="width: 200px;">Price</th>
-                            <th style="width: 320px;"></th>
+                            <th>Name</th>
+                            <th>Stock</th>
+                            <th>Price</th>
+                            <th></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-prod let-rowIndex="rowIndex">
@@ -43,18 +43,17 @@
                             <td>
                                 <div class="product_name">
                                     <div class="cart_image">
-                                        <img [src]="prod.product.image"
-                                            alt="">
+                                        <img [src]="prod.product.image" alt="">
                                     </div>
                                     <div class="product_desc">
                                         <h6>{{prod.product.name}}</h6>
-                                    <div style="text-align: left; padding: 0 10px;">
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                        <i style="font-size:18px" class="fa">&#xf006;</i>
-                                    </div>
+                                        <div style="text-align: left; padding: 0 10px;">
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                        </div>
                                     </div>
                                 </div>
                             </td>
