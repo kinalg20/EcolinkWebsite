@@ -7,7 +7,10 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./ask-chemist.component.scss']
 })
 export class AskChemistComponent implements OnInit {
-
+  invalidUserEmail: string = '';
+  resSignupMsg: string = '';
+  invalidMobile = false;
+  invalidEmail: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
@@ -26,6 +29,59 @@ export class AskChemistComponent implements OnInit {
   ]
 
   saveAskChemistDetail(data:NgForm){
-    console.log(data);
+    if(data.valid) {
+      console.log(data.value);
+    }
+    else {
+      this.resSignupMsg='Please fill the value';
+    }
+  }
+
+  validateUserEmail(email: any) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email.target.value) == false) {
+      this.invalidUserEmail = 'Invalid Email Address';
+      return false;
+    }
+    this.invalidUserEmail = '';
+    return true;
+  }
+  validateEmail(event: any) {
+    const value = event.target.value;
+
+    if (
+      value &&
+      !/^[0-9]*$/.test(value) &&
+      !this.validateUserEmail(event)
+    ) {
+      this.invalidEmail = true;
+    }
+
+    else {
+      this.invalidEmail = false;
+    }
+  }
+  inputMobile(event: any) {
+    if (
+      event.key.length === 1 &&
+      !/^[0-9]$/.test(event.key)
+    ) {
+      event.preventDefault();
+    }
+  }
+  validateMobile(event: any) {
+    const value = event.target.value;
+
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 10
+    ) {
+      this.invalidMobile = true;
+    }
+
+    else {
+      this.invalidMobile = false;
+    }
   }
 }
