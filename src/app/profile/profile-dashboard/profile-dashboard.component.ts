@@ -191,4 +191,28 @@ export class ProfileDashboardComponent implements OnInit {
    this.orderData.data[0].user_id
    console.log(this.orderData.data[0].user_id)
   }
+  editUserProfile(form:NgForm) {
+    if (form.valid) {
+      let data = Object.assign({}, form.value);
+      this.userObj = {
+        name: data.firstname + ' ' + data.lastname,
+        email: data.email,
+        mobile: data.phonenumber,
+        address: data.address,
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        pincode: data.pincode,
+        password:data.password
+      };
+      console.log(this.userObj);
+      this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res:any)=> {
+        console.log(res);
+        form.reset();
+      })
+    }
+    else {
+      this.resSignupMsg = 'Please fill the value';
+    }
+  }
 }

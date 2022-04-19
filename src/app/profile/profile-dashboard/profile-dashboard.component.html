@@ -44,25 +44,109 @@
 </div>
 <div class="Edit-Profile-section" *ngIf="showdesc == 'Edit Profile'">
     <h2>Edit Profile</h2>
-    <form>
-        <div class="mb-3">
-            <label for="first-name" class="form-label">First Name</label>
-            <input type="text" class="form-control" id="first-name" aria-describedby="FirstHelp">
-        </div>
-        <div class="mb-3">
-            <label for="last-name" class="form-label">Last Name</label>
-            <input type="text" class="form-control" id="last-name">
-        </div>
-        <div class="mb-3">
-            <label for="Email Id" class="form-label">Email Id</label>
-            <input type="email" class="form-control" id="email-id">
-        </div>
-        <div class="mb-3">
-            <label for="phone-number" class="form-label">Phone Number</label>
-            <input type="number" class="form-control" id="phone-number">
-        </div>
-        <button type="submit" class="btn">Save Changes</button>
-    </form>
+    <ng-container *ngFor="let item of userDetail">
+        <form #editProfileFrom="ngForm" (ngSubmit)="editUserProfile(editProfileFrom)">
+            <ng-container *ngIf="resSignupMsg">
+                <div class="alert alert-danger" role="alert" id="loginAlert" #alert>
+                    {{ resSignupMsg }}
+                </div>
+            </ng-container>
+            <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <label for="first-name">First Name</label>
+                        <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname"
+                            maxlength='50' [(ngModel)]="item.name" required />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <label for="last-name">Last Name</label>
+                        <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
+                            name="lastname" [(ngModel)]="item.name" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" id="email" autocomplete="off" name="email"
+                            (input)="validateEmail($event)" [(ngModel)]="item.email" required />
+                        <h6 class="text-danger" *ngIf="invalidEmail">
+                            {{ invalidEmail ? "Invalid Email" : "" }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <label for="phone-number">Phone Number</label>
+                        <input class="form-control" type="text" id="phonenumber" autocomplete="off" name="phonenumber"
+                            maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)"
+                            [(ngModel)]="item.mobile" required />
+                        <h6 class="text-danger" *ngIf="invalidMobile">
+                            {{ invalidMobile ? "Invalid Mobile" : "" }}
+                        </h6>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <label for="address">Address</label>
+                        <input class="form-control" type="text" id="address" autocomplete="off" name="address"
+                            [(ngModel)]="item.address" required />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <label for="address">Password</label>
+                        <input class="form-control" type="password" id="password" autocomplete="off" name="password"
+                            [(ngModel)]="item.password" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <label for="country">Country</label>
+                        <input class="form-control" type="text" id="country" autocomplete="off" name="country"
+                            [(ngModel)]="item.country" required />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <label for="state">State</label>
+                        <input class="form-control" type="text" id="state" autocomplete="off" name="state"
+                            [(ngModel)]="item.state" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div>
+                        <label for="city">City</label>
+                        <input class="form-control" type="text" id="city" autocomplete="off" name="city"
+                            [(ngModel)]="item.city" required />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <label for="pincode">Pincode</label>
+                        <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
+                            [(ngModel)]="item.pincode" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 add-user " style="text-align:right">
+                    <button class="edituserdetail btn btn-success my-3 form-control">Save Address</button>
+                </div>
+            </div>
+        </form>
+    </ng-container>
 </div>
 <div class="Order-History-section" *ngIf="showdesc == 'Order History'">
     <h2>Order History</h2>
@@ -205,9 +289,6 @@
 </div>
 <div class="Wishlist-section" *ngIf="showdesc == 'Wishlist'">
     <h2>Wishlist</h2>
-</div>
-<div class="Logout-section" *ngIf="showdesc == 'Logout'">
-    <h2>Logout</h2>
 </div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">

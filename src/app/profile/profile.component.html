@@ -14,7 +14,7 @@
                     <li (click)="togglebutton='Addresses'">Addresses</li>
                     <li (click)="togglebutton='Wishlist'" routerLink="/shop/wishlist">Wishlist</li>
                     <li (click)="togglebutton='Return Order'">Return Order</li>
-                    <li (click)="togglebutton='Logout'" (click)="logOut()">Logout</li>
+                    <li (click)="getUserLogout()">Logout</li>
                 </ul>
             </div>
             <nav class="responsive-nav">
@@ -37,7 +37,7 @@
                                 Wishlist</li>
                             <li (click)="togglebutton='Return Order'" (click)="openNavbar()">
                                 Return Order</li>
-                            <li (click)="togglebutton='Logout'" (click)="logOut()" (click)="openNavbar()">Logout</li>
+                            <li (click)="getUserLogout()">Logout</li>
                         </ul>
                     </div>
                 </div>

@@ -109,6 +109,9 @@
 
 .Edit-Profile-section {
     padding: 20px 40px;
+    .edituserdetail {
+        width: fit-content;
+    }
 
     .btn {
         background: var(--primary);
