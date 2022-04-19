@@ -348,6 +348,10 @@ export class ApiServiceService {
     }
     return this.http.post(this._baseurl + 'getReturnOrder', body, { headers: httpHeaders })
   }
+  getPageBySlug(slug: any) {
+    let url = 'getPage'
+    return this.http.post(this._baseurl + url, { slug: slug })
+  }
   askChemistFormDetail(data: any): Observable<any> {
     return this.http.post(this._baseurl + 'contact', data);
   }

@@ -11,7 +11,9 @@ export class HeaderComponent implements OnInit {
   user_id: any;
   openMenu: boolean = false;
   homePageData: any = [];
-  constructor(private route: Router, private __apiservice: ApiServiceService) { }
+  slug: any;
+  data : any = []
+  constructor(private route: Router, private __apiservice: ApiServiceService , private router :Router) { }
   routes: any = [
     {
       "id": "1",
@@ -49,6 +51,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.__apiservice.home().subscribe((res: any) => {
+      console.log(res)
       res.data.pagecategories.map((response: any) => {
         this.homePageData.push(response);
       });
@@ -62,11 +65,10 @@ export class HeaderComponent implements OnInit {
         }, 500);
       })
     })
-
-
-    // setTimeout(() => {
-    //   console.log(this.homePageData)
-    // }, 5000);
+    // this.__apiservice.getPageBySlug(this.slug).subscribe((res:any)=>{
+    //   this.data = res.data;
+    //   console.log(res);
+    // })
   }
   profile() {
     if (localStorage.getItem("ecolink_user_credential") === null) {
@@ -80,4 +82,9 @@ export class HeaderComponent implements OnInit {
   openmenu() {
     this.openMenu = !this.openMenu;
   }
+
+  // getPage(slug:any){
+  //   // routerLink="/inner-pages/{{item.slug}}"
+  //   this.router.navigateByUrl('/innerpages/inner-pages/'+slug)
+  // }
 }
