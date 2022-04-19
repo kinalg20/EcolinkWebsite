@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
 
 
+
 const exportdata:any =[
  CategoriesComponent
 ]
