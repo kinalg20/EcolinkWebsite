@@ -278,11 +278,13 @@ export class ApiServiceService {
     '</Create>'
     '</soap:Body>'
     '</soap:Envelope>'
-    const headers = new HttpHeaders({ 'Content-Type': 'text/xml', 'Access-Control-Allow-Origin': '*',  'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT', 'Access-Control-Allow-Credentials': 'true', "Cookie": "TS01cfb1b0=01dd6f358a47dc35f68f211096e2d76a71cac91334916d33efdea10109c5be0a2387d459bf0998726bd7e691389a711b2073381163" }).set('Accept', 'text/xml');
+    const headers = new HttpHeaders({
+      'Content-Type': 'text/xml', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT', 'Access-Control-Allow-Credentials': 'true', "Cookie": "TS01cfb1b0=01dd6f358a47dc35f68f211096e2d76a71cac91334916d33efdea10109c5be0a2387d459bf0998726bd7e691389a711b2073381163"
+    }).set('Accept', 'text/xml');
     return this.http.post(url, body, { headers: headers });
   }
-  storeOrder(orderObj:any) {
+  storeOrder(orderObj: any) {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     let user_id = JSON.parse(this.header).user_id;
@@ -306,7 +308,7 @@ export class ApiServiceService {
     }
     return this.http.post(this._baseurl + 'getOrder', body, { headers: httpHeaders })
   }
-  storeReturnOrder(storeObj:any) {
+  storeReturnOrder(storeObj: any) {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     let user_id = JSON.parse(this.header).user_id;
@@ -329,6 +331,10 @@ export class ApiServiceService {
       user_id: user_id
     }
     return this.http.post(this._baseurl + 'getReturnOrder', body, { headers: httpHeaders })
+  }
+  getPageBySlug(slug: any) {
+    let url = 'getPage'
+    return this.http.post(this._baseurl + url, { slug: slug })
   }
 }
 

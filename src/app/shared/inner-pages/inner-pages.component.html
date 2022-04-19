@@ -4,7 +4,8 @@
         <div class="row">
             <div class="col-8">
                 <div class="page-desc">
-                    <div class="entry-content" itemprop="text">
+                    <div [innerHtml]="data.description" *ngIf="data.description.length>0"></div>
+                    <!-- <div class="entry-content" itemprop="text">
                         <ul>
                             <li>Which has built a national reputation based on innovation, quality services, and
                                 integrity while enjoying the respect and the admiration of both clients and competitors?
@@ -35,7 +36,7 @@
                             online access to MSDS information.</p>
                         <p>If you are interested please e-mail information about your company to <a
                                 href="mailto:jroudebush@ecolink.com">jroudebush@ecolink.com</a>.</p>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-4">
@@ -57,7 +58,7 @@
                     <section id="text-5" class="widget clearfix widget_text">
                         <div class="textwidget">
                             <p><a class="shopButton2020" href="/shop">SHOP</a><br>
-                                <a class="requestButton2020" href="/products/request">REQUEST A SAMPLE</a><br>
+                                <a class="requestButton2020" routerLink="/products-request">REQUEST A SAMPLE</a><br>
                                 <a class="pdsButton2020" href="/support">REQUEST PDS / TDS</a><br>
                                 <a class="contactButton2020" href="/contact-us-today">CONTACT US</a>
                             </p>
@@ -69,7 +70,4 @@
         </div>
     </div>
 </section>
-
-
-
 <app-footer></app-footer>
