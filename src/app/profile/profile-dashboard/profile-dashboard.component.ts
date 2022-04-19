@@ -49,6 +49,7 @@ export class ProfileDashboardComponent implements OnInit {
     }, 1000);
     console.log(this.allUserAddresses);
     this.getOrderhistory();
+    console.log(this.showdesc);
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -214,5 +215,8 @@ export class ProfileDashboardComponent implements OnInit {
     else {
       this.resSignupMsg = 'Please fill the value';
     }
+  }
+  changeTab() {
+    this.showdesc='Edit Profile';
   }
 }

@@ -5,7 +5,7 @@
             <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                 <div class="card profile-section">
                     <div class="profile-image">
-                        <img src="{{item.profile_image}}" alt="">
+                        <img src="https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png" alt="">
                     </div>
                     <div class="profile-desc">
                         <div class="profile-detail my-3">
@@ -14,7 +14,7 @@
                         </div>
 
                         <div class="edit-profile-button my-2">
-                            <button>Edit Profile</button>
+                            <button (click)="changeTab()">Edit Profile</button>
                         </div>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
                     <span class="address-label">Email Address</span>
                     <span>{{item.email}}</span>
                     <div class="edit-Address-button my-2">
-                        <button data-bs-toggle="modal" data-bs-target="#exampleModal">Edit Address</button>
+                        <button (click)="changeTab()">Edit Address</button>
                     </div>
                 </div>
             </div>

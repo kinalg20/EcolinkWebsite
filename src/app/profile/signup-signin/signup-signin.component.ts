@@ -86,7 +86,8 @@ export class SignupSigninComponent implements OnInit {
         country: data.country,
         state: data.state,
         city: data.city,
-        pincode: data.pincode
+        pincode: data.pincode,
+        profile_image: "https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png"
       };
       console.log(this.userObj);
       // this.__apiservice.registerClient(this.userObj).subscribe(
