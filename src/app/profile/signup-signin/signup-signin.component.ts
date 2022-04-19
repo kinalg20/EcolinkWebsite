@@ -16,10 +16,10 @@ export class SignupSigninComponent implements OnInit {
   password: string = '';
   confirmPassword: string = '';
   invalidMobile = false;
+  invalidEmail: boolean = false;
   checkString: boolean = true;
   invalidUserEmail: string = '';
   resMsg: string = '';
-  invalidEmail: boolean = false;
   constructor(private router: Router, private __apiservice: ApiServiceService) { }
 
   ngOnInit(): void {

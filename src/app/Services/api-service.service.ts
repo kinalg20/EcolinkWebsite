@@ -348,5 +348,8 @@ export class ApiServiceService {
     }
     return this.http.post(this._baseurl + 'getReturnOrder', body, { headers: httpHeaders })
   }
+  askChemistFormDetail(data: any): Observable<any> {
+    return this.http.post(this._baseurl + 'contact', data);
+  }
 }
 

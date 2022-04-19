@@ -69,10 +69,25 @@
         </div>
     </div>
 </section>
-
+<section class="location-head">
+    <div class="container">
+        <div class="location-section">
+            <div class="location">
+                <i class="fa fa-map-pin"></i>
+            </div>
+            <div class="address">
+                <a href="#">Decatur 30030</a>
+            </div>
+        </div>
+        <div class="chat-section">
+            <a href="#">Speak with our team to find the right prodcut for you!</a>
+        </div>
+    </div>
+</section>
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData">
         <li routerLink={{item.routers}}><a>{{item.name}}</a></li>
     </ul>
     <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 </div>
+

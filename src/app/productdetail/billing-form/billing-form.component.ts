@@ -21,7 +21,7 @@ export class BillingFormComponent implements OnInit {
         alert("Successfully Done");
       }
     });
-   }
+  }
 
   ngOnInit(): void {
   }
@@ -60,6 +60,6 @@ export class BillingFormComponent implements OnInit {
     }
   }
 
-  
+
 
 }

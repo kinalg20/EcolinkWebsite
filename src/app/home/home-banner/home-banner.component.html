@@ -32,9 +32,12 @@
                 <div class="search-bar">
                     <div class="input-group">
                         <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1"><a href="#" (click)="subscribe()"
+                            <span class="input-group-text" id="basic-addon1">
+                                <a href="#" (click)="subscribe()"
                                     class="text-white">Stay
-                                    Informed</a></span>
+                                    Informed
+                                </a>
+                            </span>
                         </div>
                         <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
                             [(ngModel)]="newsletter_email">
@@ -104,69 +107,4 @@
     </div>
 </section>
 <app-call-to-action [data]="action_array" routerLink="/productlist"></app-call-to-action>
-<!-- <section class="pricing-section">
-    <div class="container">
-        <div class="pricing" routerLink="/productlist">
-            <div class="pricing-text">
-                <h3>Pricing</h3>
-                <p>Get quality product on reasonable price</p>
-            </div>
-            <div class="pricing-image">
-                <img src="https://wallpaperaccess.com/full/2847970.jpg" alt="">
-            </div>
-        </div>
-    </div>
-</section>
-<section class="tidal-washer-section">
-    <div class="container">
-        <div class="tidal-washer" routerLink="/productlist">
-            <div class="tidal-image">
-                <img src="https://ecolink.com/wp-content/uploads/2020/05/Dollarphotoclub_58451099-1-750x321.jpg" alt="">
-            </div>
-            <div class="tidal-text">
-                <h3>Ecolink</h3>
-                <p>Chemical SOlution for next generation</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="about-section">
-    <div class="container">
-        <div class="about-us" routerLink="/productlist">
-            <div class="about-text">
-                <h3>About Us</h3>
-                <p>Know about company & Meet our team</p>
-            </div>
-            <div class="about-image">
-                <img src="https://blog.ipleaders.in/wp-content/uploads/2017/08/BV-Acharya-104.jpg" alt="">
-            </div>
-        </div>
-    </div>
-</section>
-<section class="manufacturing-section">
-    <div class="container">
-        <div class="manufacturing" routerLink="/productlist">
-            <div class="manufacture-image">
-                <img src="https://static.fibre2fashion.com/articleresources/images/87/8623/chemical-big_Big.jpg" alt="">
-            </div>
-            <div class="manufacture-text">
-                <h3>Ecolink Manufacturing</h3>
-                <p>Ecolink’s successful work in the manufacturing sector</p>
-            </div>
-        </div>
-    </div>
-</section>
-<section class="service-section">
-    <div class="container">
-        <div class="services" routerLink="/productlist">
-            <div class="service-text">
-                <h3>Our Services</h3>
-                <p>Services and Marketing</p>
-            </div>
-            <div class="service-image">
-                <img src="http://www.safemax.co.id/wp-content/uploads/2016/02/banner-services.jpg" alt="">
-            </div>
-        </div>
-    </div>
-</section> -->
 <app-categories></app-categories>
