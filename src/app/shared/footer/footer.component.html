@@ -17,6 +17,20 @@
                     <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-33.png" alt="">
                 </div>
                 <h4>ECOLINK</h4>
+                <div class="search-bar">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <a href="#" (click)="subscribe()"
+                                    class="text-white">Stay
+                                    Informed
+                                </a>
+                            </span>
+                        </div>
+                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
+                            [(ngModel)]="newsletter_email">
+                    </div>
+                </div>
             </div>
             <div class="footer-grid">
                 <div class="responsive-footer-heading">
@@ -54,6 +68,20 @@
                     <p routerLink="/productlist">Categories</p>
                     <p routerLink="/productlist">Pricing</p>
                     <p>Terms & Conditions</p>
+                </div>
+            </div>
+            <div class="search-bar">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                            <a href="#" (click)="subscribe()"
+                                class="text-white">Stay
+                                Informed
+                            </a>
+                        </span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
+                        [(ngModel)]="newsletter_email">
                 </div>
             </div>
         </div>
