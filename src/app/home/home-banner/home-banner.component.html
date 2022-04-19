@@ -1,3 +1,27 @@
+<div class="container">
+    <form class="global-search">
+        <div class="input-group mx-auto">
+            <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..."
+                (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem" name="search">
+            <span class="input-group-append">
+                <button class="btn btn-outline-secondary border border-left-0 py-2" type="button" routerLink="/shop/{{slug}}/{{subslug}}">Search</button>
+            </span>
+        </div>
+    </form>
+    <div class="container">
+       <div class="model-section">
+        <div class="model-searchlist" *ngIf="showGlobalSearchSuggestion">
+            <div class="model">
+                <ng-container *ngFor="let data of suggestionList.data">
+                    <div class="suggestions" (click)="getSuggestion(data)">
+                        <h4><a>{{data.name}}</a></h4>
+                    </div>
+                </ng-container>
+            </div>
+        </div>
+       </div>
+    </div>
+</div>
 <section class="home-banner">
     <div class="container">
         <div class="background-image">

@@ -57,11 +57,11 @@
                         <p><a>Clear All</a></p>
                     </div>
                     <div class="filter-body">
-                        <section class="categories">
+                        <section class="categories" *ngIf="listdata.data.subcategory.length>0">
                             <h4>Catgories</h4>
                             <ul *ngFor="let subcategory of listdata.data.subcategory">
                                 <div class="p-field-checkbox">
-                                    <p-checkbox name="group1" value="{{subcategory.id}}" [(ngModel)]=" selectedCategory"
+                                    <p-checkbox name="group1" value="{{subcategory.id}}" [(ngModel)]="selectedCategory"
                                         inputId="cc" #checkbox></p-checkbox>
                                     <label for="cc" class="mx-2">{{subcategory.name}}</label>
                                 </div>
@@ -83,8 +83,8 @@
                                           font-size: 14px;
                                           color: #1e2022;
                                         ">
-                                        <b>{{ rangeValues[0] | currency: "INR" }}</b>
-                                        <b>{{ rangeValues[1] | currency: "INR" }}</b>
+                                        <b>${{ rangeValues[0]}}</b>
+                                        <b>${{ rangeValues[1]}}</b>
                                     </div>
                                 </ng-container>
                             </div>
@@ -119,8 +119,7 @@
 
                 <!-- Products Cards -->
                 <div class="product-cards" *ngIf="view_card">
-                    <ng-container *ngFor="let data of listdata.data.subcategory">
-                        <div class="subcategory" *ngIf="listdata.data.subcategory.length>0">
+                        <!-- <div class="subcategory" *ngIf="listdata.data.subcategory.length>0">
                             <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
                                 <div class="card" style="cursor: pointer;">
                                     <div class="card-image">
@@ -134,11 +133,10 @@
                                             <p routerLink="{{data.slug}}">Show
                                                 Details</p>
                                         </div>
-                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row" *ngIf="listdata.data.products.length>0">
+                        </div> -->
+                        <div class="row">
                             <ng-container *ngFor="let product of listdata.data.products">
                                 <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
                                     <div class="card" style="cursor: pointer;">
@@ -186,7 +184,7 @@
                                                     style="height:38px; background-color: #55b15c;"
                                                     routerLink="/cart"></button>
                                                 <p
-                                                    routerLink="/shop/{{this.slug.slug}}/{{data.slug}}/{{product.slug}}">
+                                                    routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
                                                     Show
                                                     Details</p>
                                             </div>
@@ -195,7 +193,6 @@
                                 </div>
                             </ng-container>
                         </div>
-                    </ng-container>
                     <ng-container *ngIf="listdata.data.products.length==0">
                         <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
                             <h3>No data found</h3>
@@ -318,8 +315,8 @@
                               font-size: 14px;
                               color: #1e2022;
                             ">
-                            <b>{{ rangeValues[0] | currency: "INR" }}</b>
-                            <b>{{ rangeValues[1] | currency: "INR" }}</b>
+                            <b>{{ rangeValues[0]}}</b>
+                            <b>{{ rangeValues[1]}}</b>
                         </div>
                     </ng-container>
                 </div>

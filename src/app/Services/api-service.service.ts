@@ -158,6 +158,22 @@ export class ApiServiceService {
     return this.http.get(this._baseurl + 'home');
   }
 
+  globalSearch(searchItem:any) {
+    let url = "globalSearch"
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let name = {
+      name: searchItem
+    }
+
+    return this.http.post(this._baseurl + url , name ,{ headers: httpHeaders })
+  }
+
+
   getUserAddress(): Observable<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -331,6 +347,10 @@ export class ApiServiceService {
       user_id: user_id
     }
     return this.http.post(this._baseurl + 'getReturnOrder', body, { headers: httpHeaders })
+  }
+  getPageBySlug(slug: any) {
+    let url = 'getPage'
+    return this.http.post(this._baseurl + url, { slug: slug })
   }
   askChemistFormDetail(data: any): Observable<any> {
     return this.http.post(this._baseurl + 'contact', data);

@@ -1,7 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { isEmpty } from 'rxjs/operators';
 import { ApiServiceService } from '../Services/api-service.service';
 import { CookiesService } from '../Services/cookies.service';
 interface popularity {
@@ -145,6 +143,9 @@ export class ProductlistComponent implements OnInit {
         if (res.code == 200) {
           this.ProductListData.push(res);
           console.log(this.ProductListData);
+          this.ProductListData.map((res: any) => {
+            console.log("products", res.data.products)
+          })
           this.getPrice();
         }
         if (res.code == 400) {
@@ -208,11 +209,10 @@ export class ProductlistComponent implements OnInit {
       sortby: this.selectedLevel
     }
     console.log(filterValue);
-    this._ApiService.filterProduct(filterValue).subscribe(res=>{
-      console.log("" , this.ProductListData[0].data.products);
+    this._ApiService.filterProduct(filterValue).subscribe(res => {
+      console.log("", this.ProductListData[0]);
       console.log(res);
-      this.ProductListData[0].data.products = res;
-      console.log(this.ProductListData);
+      this.ProductListData[0]=res;
     });
   }
 

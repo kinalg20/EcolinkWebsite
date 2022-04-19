@@ -12,6 +12,7 @@ import { MediaBannerComponent } from './media-banner/media-banner.component';
 import { TrendingPostComponent } from './trending-post/trending-post.component';
 import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { FormsModule } from '@angular/forms';
+import { ProductsRequestComponent } from './products-request/products-request.component';
 
 const exportdata:any =[
   HeaderComponent,
@@ -32,7 +33,8 @@ const exportdata:any =[
     CallToActionComponent,
     MediaBannerComponent,
     TrendingPostComponent,
-    InnerPagesComponent
+    InnerPagesComponent,
+    ProductsRequestComponent
   ],
   imports: [
     CommonModule,
