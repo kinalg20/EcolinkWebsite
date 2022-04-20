@@ -56,6 +56,12 @@
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData">
         <li routerLink={{item.routers}}><a>{{item.name}}</a></li>
+        <ul class="header-dropdown" *ngIf="item.sublink.length>0">
+            <li class="sub-link" *ngFor="let sublink of item.sublink">
+                <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
+                <hr>
+            </li>
+        </ul>
     </ul>
     <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
 </div>
