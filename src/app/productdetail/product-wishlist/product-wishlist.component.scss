@@ -1,24 +1,23 @@
-.cart-heading{
-    margin: 20px 50px;
-    h1{
+.cart-heading {
+    margin: 20px 0;
+    h1 {
         font-weight: 600;
     }
 }
 
-
 .empty-cart {
     .mt-100 {
-        margin-top: 100px
+        margin-top: 100px;
     }
 
     .card {
         border: 0;
-        -webkit-transition: all .3s ease;
-        transition: all .3s ease;
-        letter-spacing: .5px;
+        -webkit-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+        letter-spacing: 0.5px;
         border-radius: 8px;
-        -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05);
-        box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, .05)
+        -webkit-box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, 0.05);
+        box-shadow: 1px 5px 24px 0 rgba(68, 102, 242, 0.05);
     }
 
     .card .card-header {
@@ -27,11 +26,11 @@
         padding: 24px;
         border-bottom: 1px solid #f6f7fb;
         border-top-left-radius: 8px;
-        border-top-right-radius: 8px
+        border-top-right-radius: 8px;
     }
 
     .card-header:first-child {
-        border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0
+        border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
     }
 
     .card .card-body {
@@ -46,30 +45,38 @@
     }
 }
 
-
-
-
-.cart-body{
-    margin: 0 50px;
+.cart-body {
+    // margin: 0 50px;
     .cart-elements {
         border: 1px solid #dedede;
         p-table {
             .heading-row {
                 background: var(--primary);
             }
-    
+            .prod-details {
+                width: 30%;
+            }
+            .prod-stock {
+                width: 26%;
+            }
+            .prod-price {
+                width: 18%;
+            }
+            .prod-cart {
+                width: 26%;
+            }
             th,
             td {
                 text-align: center;
             }
-    
+
             .product_name {
                 display: flex;
                 // align-items: center;
 
                 .cart_image {
                     width: 170px;
-                    height: 170px;
+                    // height: 130px;
                     margin-right: 20px;
 
                     img {
@@ -80,18 +87,20 @@
 
                 .product_desc {
                     align-self: center;
+                    h6 {
+                        text-align: initial;
+                    }
                     i {
                         margin-right: 5px;
                     }
                 }
             }
 
-    
             .quantity {
                 display: flex;
                 justify-content: center;
                 padding: auto;
-    
+
                 button {
                     background: none;
                     border: 2px solid #dedede;
@@ -100,7 +109,7 @@
                     border-radius: 5px;
                     text-align: center;
                 }
-    
+
                 input {
                     border: 1px solid #dedede;
                     height: 38px;
@@ -110,18 +119,18 @@
                     text-align: center;
                 }
             }
-    
+
             .price__subtotal {
                 padding: 0 60px;
             }
-    
+
             .delete_item {
                 cursor: pointer;
                 padding: 8px;
                 border-radius: 5px;
                 background: #fff;
             }
-    
+
             .delete_item:hover {
                 background: #dedede;
                 padding: 8px;
@@ -138,19 +147,98 @@
                         color: white;
                     }
                 }
-            } 
+            }
         }
     }
 }
-
-::ng-deep{
+@media (max-width: 992px) {
+    .container {
+        max-width: 960px;
+    }
+    .cart-body {
+        .cart-elements {
+            p-table {
+                .product_name {
+                    .product_desc {
+                        h6 {
+                            font-size: 0.8rem;
+                        }
+                    }
+                }
+                .prod-stock {
+                    mark {
+                        font-size: 0.7rem;
+                        padding: 5px;
+                        white-space: nowrap;
+                    }
+                }
+                .prod-price {
+                    font-size: 0.7rem;
+                }
+                .prod-cart {
+                    .price-row {
+                        button {
+                            font-size: 0.7rem;
+                            white-space: nowrap;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 768px) {
+    .cart-body {
+        .cart-elements {
+            p-table {
+                .product_name {
+                    display: block;
+                    .cart_image {
+                        height: 110px;
+                        width: 110px;
+                        margin-bottom: 10px;
+                    }
+                }
+                .prod-details {
+                    width: 25%;
+                }
+            }
+        }
+    }
+}
+@media (max-width: 495px) {
+    .cart-body {
+        overflow: hidden;
+        width: fit-content;
+        .cart-elements {
+            p-table {
+                .product_name {
+                    .cart_image {
+                        height: 60px;
+                        width: 60px;
+                    }
+                    .product_desc {
+                        h6 {
+                            margin: 0;
+                        }
+                        i {
+                            font-size: 10px !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
+::ng-deep {
     .p-datatable table {
         margin: auto;
     }
-    .p-datatable .p-datatable-footer{
+    .p-datatable .p-datatable-footer {
         text-align: center;
     }
     .p-datatable table {
-        table-layout: auto!important;
+        table-layout: auto !important;
     }
 }
