@@ -57,18 +57,29 @@ export class ProductCartComponent implements OnInit {
   getCartData() {
     if (localStorage.getItem('ecolink_user_credential') == null) {
       let data = this._cookies.GetCartData();
-      data.map((res: any) => {
-        this._ApiService.getDetailByCategory(res.ProductCategory).subscribe((resp: any) => {
-          resp.data.products.map((response: any) => {
-            if (res.CartProductId == response.id) {
-              response.quantity = res.ProductQuantity;
-              this.SubTotal = this.SubTotal + response.regular_price;
-              this.CardShow.push(response);
-              localStorage.setItem("CheckoutData", JSON.stringify(this.CardShow));
-            }
-          })
+      // console.log(data);
+      data.map((res:any)=>{
+        this._ApiService.getProductById(res.CartProductId).subscribe(resp=>{
+          this.CardShow.push(resp);
         })
       })
+
+      setTimeout(() => {
+        console.log(this.CardShow);
+      }, 1000);
+
+      // data.map((res: any) => {
+      //   this._ApiService.getDetailByCategory(res.ProductCategory).subscribe((resp: any) => {
+      //     resp.data.products.map((response: any) => {
+      //       if (res.CartProductId == response.id) {
+      //         response.quantity = res.ProductQuantity;
+      //         this.SubTotal = this.SubTotal + response.regular_price;
+      //         this.CardShow.push(response);
+      //         localStorage.setItem("CheckoutData", JSON.stringify(this.CardShow));
+      //       }
+      //     })
+      //   })
+      // })
     }
 
     else {
