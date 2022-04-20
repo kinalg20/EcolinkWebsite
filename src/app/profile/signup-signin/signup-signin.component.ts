@@ -139,7 +139,13 @@ export class SignupSigninComponent implements OnInit {
               'ecolink_user_credential',
               JSON.stringify(res.data)
             );
-            this.router.navigateByUrl('/');
+            if(res.user_id==1){
+              console.log(this.router.navigateByUrl('https://brandtalks.in/ecolink/login'));
+              this.router.navigateByUrl('https://brandtalks.in/ecolink/login');
+              }
+              else {
+                this.router.navigateByUrl('/');
+              }
           
         }
         

@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
   }
   getUserLogout() {
     console.log("kinal");
-    // localStorage.removeItem("ecolink_user_credential");
+    localStorage.removeItem("ecolink_user_credential");
     this.__apiservice.getUserLogoutProfile().subscribe((res:any)=> {
       console.log(res);
       console.log('jp')

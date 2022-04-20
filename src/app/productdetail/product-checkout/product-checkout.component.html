@@ -160,13 +160,16 @@
                                 </p-radioButton>
                                 <label for="cod" class="mx-2"><b>Cash on Delivery</b></label>
                             </div>
-                            <div class="field-radiobutton mt-3">
+                            <div class="field-radiobutton mt-3" >
                                 <p-radioButton name="payment_method1" value="cod3" [(ngModel)]="selectedPaymentMethod"
-                                    inputId="cod">
+                                    inputId="cod" (click)="checkPaymentTab()">
                                 </p-radioButton>
                                 <label for="cod" class="mx-2"><b>PayPal</b></label>
                             </div>
                         </div>
+                    </div>
+                    <div class="paypal-integration" *ngIf="showPaypal">
+                        <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                     </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
