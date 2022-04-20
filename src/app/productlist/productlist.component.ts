@@ -165,24 +165,13 @@ export class ProductlistComponent implements OnInit {
         "ProductQuantity": this.ItemCount,
         "ProductCategory": this.slug.slug
       }
-      console.log('previous data', this.previousdata);
       this.cart_obj.push(recently_added_object);
       if (this.previousdata != 'empty') {
         this.previousdata.map((res: any) => {
-          console.log(res.CartProductId, this.cart_obj[0].CartProductId);
-          if (res.CartProductId != this.cart_obj[0].CartProductId){
+          if (res.CartProductId != this.cart_obj[0].CartProductId) {
             this.cart_obj.push(res);
           }
-          // if(res.CartProductId ! = this.cart_obj.CartProductId){
-          //   console.log(res);
-          // }
         })
-        // this.previousdata.map((res: any) => {
-        //   if (!(res.CartProductId == recently_added_object.CartProductId && res.ProductCategory === recently_added_object.ProductCategory)) {
-        //     this.cart_obj.push(recently_added_object);
-        //   }
-        //   this.cart_obj.push(res);
-        // })
       }
       this.Cookies.SaveCartData(this.cart_obj);
       console.log(this.cart_obj);
