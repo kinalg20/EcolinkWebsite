@@ -135,18 +135,16 @@ export class SignupSigninComponent implements OnInit {
         console.log(res);
         if (res.code === 200) 
         {
-            localStorage.setItem(
-              'ecolink_user_credential',
-              JSON.stringify(res.data)
-            );
-            if(res.user_id==1){
-              console.log(this.router.navigateByUrl('https://brandtalks.in/ecolink/login'));
-              this.router.navigateByUrl('https://brandtalks.in/ecolink/login');
+            if(res.data.user_id==1){
+              window.location.href = 'https://brandtalks.in/ecolink/login';
               }
               else {
+                localStorage.setItem(
+                  'ecolink_user_credential',
+                  JSON.stringify(res.data)
+                );
                 this.router.navigateByUrl('/');
               }
-          
         }
         
         else {
