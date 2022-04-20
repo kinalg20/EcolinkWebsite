@@ -158,7 +158,7 @@ export class ApiServiceService {
     return this.http.get(this._baseurl + 'home');
   }
 
-  globalSearch(searchItem:any) {
+  globalSearch(searchItem: any) {
     let url = "globalSearch"
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -170,7 +170,7 @@ export class ApiServiceService {
       name: searchItem
     }
 
-    return this.http.post(this._baseurl + url , name ,{ headers: httpHeaders })
+    return this.http.post(this._baseurl + url, name, { headers: httpHeaders })
   }
 
 
@@ -364,12 +364,17 @@ export class ApiServiceService {
     })
     return this.http.post(this._baseurl + 'logout', { headers: httpHeaders });
   }
-  editUserProfileInfo(data:any):Observable<any> {
+  editUserProfileInfo(data: any): Observable<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     let user_id = JSON.parse(this.header).user_id;
-    data.user_id=user_id;
-    data.profile_image="/";
-    return this.http.post(this._baseurl+'editUserInfo',data)
+    data.user_id = user_id;
+    data.profile_image = "/";
+    return this.http.post(this._baseurl + 'editUserInfo', data)
+  }
+
+  getProductById(product_id: any) {
+    let url = "getProductById";
+    return this.http.post(this._baseurl + url, { product_id: product_id })
   }
 }
 

@@ -12,7 +12,8 @@ const routes: Routes = [
   { path: 'footer', component: FooterComponent },
   { path: 'products-request', component: ProductsRequestComponent },
   { path: 'inner-pages/:slug', component: InnerPagesComponent},
-  { path: 'inner-pages/:slug/:sublink', component: InnerPagesComponent}
+  { path: 'inner-pages/:slug/:sublink', component: InnerPagesComponent},
+  { path: 'inner-pages/:slug/:sublink/:subsublink', component: InnerPagesComponent}
 ];
 
 @NgModule({

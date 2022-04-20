@@ -22,12 +22,20 @@
             <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item" *ngFor="let item of homePageData">
-                        <a href="inner-pages/{{item.slug}}">{{item.title}}
-                        </a>
+                        <a href="inner-pages/{{item.slug}}">{{item.title | uppercase}}</a>
                         <ul class="header-dropdown" *ngIf="item.subpage.length>0">
-                            <li *ngFor="let sublink of item.subpage">
+                            <li class="test" *ngFor="let sublink of item.subpage">
                                 <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
                                 <hr>
+                                <ul *ngIf="sublink.subpage.length>0" class="sub-header-dropdown">
+                                    <div class="subsublink">
+                                        <ng-container *ngFor="let subsublink of sublink.subpage">
+                                            <li class="test1">
+                                                 <a href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title}}</a>
+                                            </li>
+                                        </ng-container>
+                                    </div>
+                                </ul>
                             </li>
                         </ul>
                     </li>
