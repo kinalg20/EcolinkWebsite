@@ -14,6 +14,9 @@ export class CategoriesComponent implements OnInit {
     this.__apiService.getAllCategories().subscribe(res => {
       this.getCategory = res;
     })
+    setTimeout(() => {
+      console.log(this.getCategory)
+    }, 1000);
   }
 
 }
