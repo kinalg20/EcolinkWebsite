@@ -57,7 +57,7 @@
     <ul *ngFor="let item of homePageData">
         <li routerLink={{item.routers}}><a>{{item.name}}</a></li>
         <ul class="header-dropdown" *ngIf="item.sublink.length>0">
-            <li class="sub-link" *ngFor="let sublink of item.sublink">
+            <li class="sub-link" *ngFor="let sublink of item.subpage">
                 <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
                 <hr>
             </li>
