@@ -32,50 +32,13 @@ export class ShopComponent implements OnInit {
     }
   ];
   productDetail: any = [];
-
-  products = [
-    {
-      id: 1,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 2,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 3,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 4,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 5,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 6,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    },
-    {
-      id: 7,
-      name: "ECC (A) 13oz Aerosol – Case of 12 –",
-      price: "$448"
-    }
-  ]
   constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
     console.log(this.slug);
-    this.getProductDetail(this.slug.slug);
+    let product_list = this.slug.category + '/' + this.slug.slug + '/';
+    this.getProductDetail(product_list);
   }
 
 
@@ -89,6 +52,7 @@ export class ShopComponent implements OnInit {
   }
 
   getProductDetail(slug: any) {
+    console.log(slug);
     this._ApiService.getProductDetail(slug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
