@@ -37,7 +37,7 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
     console.log(this.slug);
-    let product_list = this.slug.category + '/' + this.slug.slug + '/';
+    let product_list = this.slug.slug + '/' + this.slug.subslug + '/';
     this.getProductDetail(product_list);
   }
 
