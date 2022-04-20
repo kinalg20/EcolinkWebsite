@@ -22,10 +22,10 @@
             <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item" *ngFor="let item of homePageData">
-                        <a href="inner-pages/{{item.slug}}">{{item.name}}
+                        <a href="inner-pages/{{item.slug}}">{{item.title}}
                         </a>
-                        <ul class="header-dropdown" *ngIf="item.sublink.length>0">
-                            <li *ngFor="let sublink of item.sublink">
+                        <ul class="header-dropdown" *ngIf="item.subpage.length>0">
+                            <li *ngFor="let sublink of item.subpage">
                                 <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
                                 <hr>
                             </li>
@@ -54,8 +54,18 @@
     </div>
 </section>
 <div class="open-menu" *ngIf="openMenu">
-    <ul *ngFor="let item of homePageData">
-        <li routerLink={{item.routers}}><a>{{item.name}}</a></li>
+    <ul *ngFor="let item of homePageData" class="responsive-menu">
+        <li class="parent-menu" ><a href="inner-pages/{{item.slug}}">{{item.title}}</a>
+            <div class="open-menu-responsive">
+                <ul class="sub-link-responsive" *ngIf="item.subpage.length>0">
+                    <li class="sub-link" *ngFor="let sublink of item.subpage">
+                        <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+        </li>
     </ul>
-    <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+    <li style="list-style: none;"><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user"
+                aria-hidden="true"></i></a></li>
 </div>

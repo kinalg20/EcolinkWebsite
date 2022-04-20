@@ -52,7 +52,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.__apiservice.home().subscribe((res: any) => {
       console.log(res)
-      res.data.pagecategories.map((response: any) => {
+      res.data.pages.map((response: any) => {
         this.homePageData.push(response);
       });
       setTimeout(() => {
