@@ -13,9 +13,9 @@ const routes: Routes = [
       {
         path: 'allCategories', component: MainDetailComponent,
       },
-      // {
-      //   path: ':category/:slug/:subslug', component: ShopComponent,
-      // },
+      {
+        path: ':category/:slug/:subslug', component: ShopComponent,
+      },
       {
         path: ':category/:slug', component: ShopComponent,
       },

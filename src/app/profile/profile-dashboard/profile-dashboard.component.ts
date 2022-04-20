@@ -43,13 +43,11 @@ export class ProfileDashboardComponent implements OnInit {
       res.data.map((response: any) => {
         this.allUserAddresses.push(response);
       })
+      setTimeout(() => {
+        console.log(this.allUserAddresses);
+      }, 1000);
     })
-    setTimeout(() => {
-      console.log(this.allUserAddresses);
-    }, 1000);
-    console.log(this.allUserAddresses);
     this.getOrderhistory();
-    console.log(this.showdesc);
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

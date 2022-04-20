@@ -166,16 +166,23 @@ export class ProductlistComponent implements OnInit {
         "ProductCategory": this.slug.slug
       }
       console.log('previous data', this.previousdata);
+      this.cart_obj.push(recently_added_object);
       if (this.previousdata != 'empty') {
         this.previousdata.map((res: any) => {
-          if (!(res.CartProductId == recently_added_object.CartProductId && res.ProductCategory === recently_added_object.ProductCategory)) {
-            this.cart_obj.push(recently_added_object);
+          console.log(res.CartProductId, this.cart_obj[0].CartProductId);
+          if (res.CartProductId != this.cart_obj[0].CartProductId){
+            this.cart_obj.push(res);
           }
-          this.cart_obj.push(res);
+          // if(res.CartProductId ! = this.cart_obj.CartProductId){
+          //   console.log(res);
+          // }
         })
-      }
-      else {
-        this.cart_obj.push(recently_added_object);
+        // this.previousdata.map((res: any) => {
+        //   if (!(res.CartProductId == recently_added_object.CartProductId && res.ProductCategory === recently_added_object.ProductCategory)) {
+        //     this.cart_obj.push(recently_added_object);
+        //   }
+        //   this.cart_obj.push(res);
+        // })
       }
       this.Cookies.SaveCartData(this.cart_obj);
       console.log(this.cart_obj);
@@ -212,7 +219,7 @@ export class ProductlistComponent implements OnInit {
     this._ApiService.filterProduct(filterValue).subscribe(res => {
       console.log("", this.ProductListData[0]);
       console.log(res);
-      this.ProductListData[0]=res;
+      this.ProductListData[0] = res;
     });
   }
 
