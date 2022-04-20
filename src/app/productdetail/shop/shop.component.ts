@@ -127,9 +127,9 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  addWishList(product_id:any) {
-    console.log("product_id" , product_id.id);
-    this._ApiService.addItemToWishlist(product_id.id).subscribe(res => {
+  addWishList(product:any) {
+    console.log("product_id" , product.id);
+    this._ApiService.addItemToWishlist(product.id).subscribe(res => {
       console.log(res);
     })
   }

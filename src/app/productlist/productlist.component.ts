@@ -193,9 +193,9 @@ export class ProductlistComponent implements OnInit {
     this.showFiterModel = !this.showFiterModel;
   }
 
-  addWishList(product_id: any) {
-    console.log(product_id);
-    this._ApiService.addItemToWishlist(product_id).subscribe(res => {
+  addWishList(product: any) {
+    console.log(product.id);
+    this._ApiService.addItemToWishlist(product.id).subscribe(res => {
       console.log(res);
     })
   }
