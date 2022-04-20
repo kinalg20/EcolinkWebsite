@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
+import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 
 @Component({
   selector: 'app-product-checkout',
@@ -14,10 +15,13 @@ export class ProductCheckoutComponent implements OnInit {
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
-  orderObj : any;
+  orderObj: any;
+  showPaypal:boolean=false;
+  public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService, private route: Router) { }
 
   ngOnInit(): void {
+    this.initConfig();
     this.checkoutProduct();
     this.__apiservice.getUserAddress().subscribe((res: any) => {
       res.data.map((response: any) => {
@@ -87,9 +91,9 @@ export class ProductCheckoutComponent implements OnInit {
   }
   getOrderInfo() {
     this.orderObj = {
-      sameAsShip : 0,
+      sameAsShip: 0,
       order_amount: this.CheckoutProduct[0].order_total,
-      product_discount : 0,
+      product_discount: 0,
       coupon_discount: 0,
       total_amount: this.CheckoutProduct[0].payable,
       billing_name: this.CheckoutProduct[0].user.name,
@@ -115,8 +119,71 @@ export class ProductCheckoutComponent implements OnInit {
       no_items: '1'
     }
     console.log(this.orderObj);
-    this.__apiservice.storeOrder(this.orderObj).subscribe(res=> {
+    this.__apiservice.storeOrder(this.orderObj).subscribe(res => {
       console.log(res);
     })
+  }
+  private initConfig(): void {
+    this.payPalConfig = {
+      currency: 'USD',
+      clientId: 'AX8Dyud-bw5dJEEKvuTkv5DJBH89Ahs4yf8RagOrGwjaeDPs0quiWiQAN8wuoOZu-mByocZMmxeAzrS2',
+      createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
+        purchase_units: [{
+          amount: {
+            currency_code: 'USD',
+            value: '9.99',
+            breakdown: {
+              item_total: {
+                currency_code: 'USD',
+                value: '9.99'
+              }
+            }
+          },
+          items: [{
+            name: 'Enterprise Subscription',
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'USD',
+              value: '9.99',
+            },
+          }]
+        }]
+      },
+      advanced: {
+        commit: 'true'
+      },
+      style: {
+        label: 'paypal',
+        layout: 'vertical',
+        size: 'small',
+        color: 'blue',
+        shape: 'rect'
+      },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then((details: any) => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+
+      },
+      onClientAuthorization: (data) => {
+        console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
+      },
+      onCancel: (data, actions) => {
+        console.log('OnCancel', data, actions);
+
+      },
+      onError: err => {
+        console.log('OnError', err);
+      },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      }
+    };
+  }
+  checkPaymentTab() {
+    this.showPaypal=!this.showPaypal;
   }
 }
