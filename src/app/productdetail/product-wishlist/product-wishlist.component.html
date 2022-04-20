@@ -28,8 +28,8 @@
             <h1>My Wishlist</h1>
         </div>
         <div class="cart-body">
-            <div class="cart-elements">
-                <p-table [value]="product[0]" #thenblock>
+            <div class="cart-elements ">
+                <p-table [value]="product[0]"  #thenblock>
                     <ng-template pTemplate="header">
                         <tr class="heading-row">
                             <th></th>
@@ -41,7 +41,7 @@
                     </ng-template>
                     <ng-template pTemplate="body" let-prod let-rowIndex="rowIndex">
                         <tr class="table-body">
-                            <td>
+                            <td class="prod-details">
                                 <div class="product_name">
                                     <div class="cart_image">
                                         <img [src]="prod.product.image" alt="">
@@ -52,7 +52,7 @@
                                 <div class="product_name">
                                     <div class="product_desc">
                                         <h6>{{prod.product.name}}</h6>
-                                        <div style="text-align: left; padding: 0 10px;">
+                                        <div style="text-align: left;">
                                             <i style="font-size:18px" class="fa">&#xf006;</i>
                                             <i style="font-size:18px" class="fa">&#xf006;</i>
                                             <i style="font-size:18px" class="fa">&#xf006;</i>
@@ -62,11 +62,11 @@
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td class="prod-stock">
                                 <mark style="background:#4BB543;color: white;">In Stock</mark>
                             </td>
-                            <td>{{prod.product.sale_price | currency:'USD'}}</td>
-                            <td>
+                            <td class="prod-price">{{prod.product.sale_price | currency:'USD'}}</td>
+                            <td class="prod-cart">
                                 <div class="price-row">
                                     <button routerLink="/cart" (click)="addProductToCart(prod)">Add to Cart</button>
                                     <span class="delete_item"><i class="pi pi-times"></i></span>

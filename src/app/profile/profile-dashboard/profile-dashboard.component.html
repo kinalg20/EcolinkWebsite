@@ -60,7 +60,7 @@
                             maxlength='50' [(ngModel)]="item.name" required />
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12 lname" >
+                <div class="col-lg-6 col-sm-12 lname">
                     <div>
                         <label for="last-name">Last Name</label>
                         <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-sm-12" >
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="email">Email</label>
                         <input class="form-control" type="email" id="email" autocomplete="off" name="email"
@@ -211,23 +211,27 @@
             <div class="panel panel-default panel-order">
                 <div class="panel-body">
                     <ng-container *ngFor="let data of orderData.data">
-                        <div class="row" *ngFor="let i of data.items">
-                            <div class="col-md-3 pro-image">
-                                <div class="product-image">
-                                    <img [src]="i.product.image" class="media-object img-thumbnail" />
+
+                        <div class="card" *ngFor="let i of data.items">
+                            <div class="row" >
+                                <div class="col-md-3 pro-image">
+                                    <div class="product-image">
+                                        <img [src]="i.product.image" class="media-object img-thumbnail" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="product-details">
-                                    <h5 class="head">{{i.product.name}}</h5>
-                                    <p class="desc"> {{i.product.meta_description}}</p>
-                                    <p class="qty">{{i.quantity}}</p>
-                                    <span class="price">${{data.total_amount}}</span>
-                                    <h5 class="status">{{data.order_status}}</h5>
-                                </div>
-                                <button type="button" class="return-btn" (click)="getReturnProduct()">Return</button>
-                                <div class="date">
-                                    <p> order by {{data.billing_name}}</p>
+                                <div class="col-md-9">
+                                    <div class="product-details">
+                                        <h5 class="head">{{i.product.name}}</h5>
+                                        <p class="desc"> {{i.product.meta_description}}</p>
+                                        <p class="qty">{{i.quantity}}</p>
+                                        <span class="price">${{data.total_amount}}</span>
+                                        <h5 class="status">{{data.order_status}}</h5>
+                                    </div>
+                                    <button type="button" class="return-btn"
+                                        (click)="getReturnProduct()">Return</button>
+                                    <!-- <div class="date">
+                                        <p> order by {{data.billing_name}}</p>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
