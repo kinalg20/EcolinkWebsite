@@ -11,6 +11,8 @@ import { ShopComponent } from './shop/shop.component';
 import { MainDetailComponent } from './main-detail/main-detail.component';
 import { HomeModule } from '../home/home.module';
 import { BillingFormComponent } from './billing-form/billing-form.component';
+import { NgxPayPalModule } from 'ngx-paypal';
+
 
 
 
@@ -29,7 +31,8 @@ import { BillingFormComponent } from './billing-form/billing-form.component';
     SharelibraryModule,
     FormsModule,
     SharedModule,
-    HomeModule
+    HomeModule,
+    NgxPayPalModule
   ]
 })
 export class ProductdetailModule { }
