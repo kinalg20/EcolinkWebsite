@@ -127,7 +127,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 13px;
-
+    justify-content: space-between;
     .location-section {
       display: flex;
 
@@ -149,7 +149,7 @@
     }
 
     .chat-section {
-      width: 80%;
+      // width: 80%;
       text-align: right;
 
       a {
@@ -275,6 +275,7 @@
   .top-head-section {
     .container {
       .top-head-line {
+        // display: block;
         p {
           font-size: 10px;
         }
@@ -282,7 +283,46 @@
     }
   }
 }
+@media (max-width: 550px) {
+  .location-head {
+    .container {
+      .location-section {
+        .location {
+          i {
+            font-size: 11px;
+          }
+        }
+        .address {
+          margin-left: 5px;
+          a {
+            font-size: 11px;
+          }
+        }
+      }
 
+      .chat-section {
+        a {
+          font-size: 11px;
+        }
+      }
+    }
+  }
+  // .top-head-section {
+  //   .container {
+  //     .top-head-line {
+  //       display: block;
+  //       p {
+  //         font-size: 12px;
+  //       }
+  //       .mail {
+  //         text-align: end;
+  //         position: relative;
+  //         bottom: 20px;
+  //       }
+  //     }
+  //   }
+  // }
+}
 @media (max-width: 419px) {
   .nav-link-section .container {
     max-width: 1000px;

@@ -182,6 +182,16 @@
     .checkout-section {
         .checkout-body {
             grid-template-columns: 50% 49%;
+            .billing-detail {
+                .card {
+                    .dropdown-address {
+                        display: block;
+                    }
+                }
+            }
+        }
+        h3 {
+            margin-bottom: 1rem;
         }
     }
 }

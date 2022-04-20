@@ -112,13 +112,17 @@
     .edituserdetail {
         width: fit-content;
     }
-
+    input {
+        margin: 12px 0;
+    }
     .btn {
         background: var(--primary);
         border: var(--primary);
         color: #fff;
     }
-
+    .add-user {
+        text-align: "right";
+    }
     .btn:focus {
         outline: 0;
         box-shadow: 0 0 0 0.25rem rgba(77, 207, 77, 0.25);
@@ -246,10 +250,10 @@
                     display: flex;
                 }
                 .crud-btn {
-                    padding: 10px 0;
+                    padding: 15px 0;
                     display: flex;
                     width: 100%;
-                    justify-content: space-around;
+                    justify-content: space-between;
                     p {
                         color: rgb(43, 43, 209);
                         cursor: pointer;
@@ -298,6 +302,33 @@
                                 }
                             }
                         }
+                    }
+                }
+            }
+        }
+    }
+    .Edit-Profile-section {
+        .row {
+            width: 100%;
+            margin: 0;
+        }
+        .add-user {
+            text-align: center;
+        }
+    }
+    .Addresses-section {
+        .address-body {
+            display: block;
+            .address-card {
+                .address-text {
+                    .address {
+                        margin: 5px 0;
+                    }
+                    .sub-address {
+                        margin: 5px 0;
+                    }
+                    .crud-btn {
+                        justify-content: space-between;
                     }
                 }
             }
@@ -360,6 +391,18 @@
                     }
                 }
             }
+        }
+    }
+    .Order-History-section {
+        .order-history-header {
+            display: block;
+        }
+        .dropdown {
+            margin-top: 20px;
+            width: 50%;
+        }
+        .search-ordered-item {
+            width: 100%;
         }
     }
 }

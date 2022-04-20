@@ -53,14 +53,14 @@
             </ng-container>
             <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12 fname">
                     <div>
                         <label for="first-name">First Name</label>
                         <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname"
                             maxlength='50' [(ngModel)]="item.name" required />
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12 lname" >
                     <div>
                         <label for="last-name">Last Name</label>
                         <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
@@ -69,7 +69,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12" >
                     <div>
                         <label for="email">Email</label>
                         <input class="form-control" type="email" id="email" autocomplete="off" name="email"
@@ -79,7 +79,7 @@
                         </h6>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="phone-number">Phone Number</label>
                         <input class="form-control" type="text" id="phonenumber" autocomplete="off" name="phonenumber"
@@ -93,14 +93,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="address">Address</label>
                         <input class="form-control" type="text" id="address" autocomplete="off" name="address"
                             [(ngModel)]="item.address" required />
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="address">Password</label>
                         <input class="form-control" type="password" id="password" autocomplete="off" name="password"
@@ -109,14 +109,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="country">Country</label>
                         <input class="form-control" type="text" id="country" autocomplete="off" name="country"
                             [(ngModel)]="item.country" required />
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="state">State</label>
                         <input class="form-control" type="text" id="state" autocomplete="off" name="state"
@@ -125,14 +125,14 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="city">City</label>
                         <input class="form-control" type="text" id="city" autocomplete="off" name="city"
                             [(ngModel)]="item.city" required />
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="pincode">Pincode</label>
                         <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
@@ -141,7 +141,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 add-user " style="text-align:right">
+                <div class="col-12 add-user ">
                     <button class="edituserdetail btn btn-success my-3 form-control">Save Address</button>
                 </div>
             </div>
@@ -192,9 +192,9 @@
                                     <h5 class="status">{{data.order_status}}</h5>
                                 </div>
                                 <button type="button" class="return-btn" (click)="storeReturnProduct(i)">Return</button>
-                                <div class="date">
+                                <!-- <div class="date">
                                     <p> order by {{data.billing_name}}</p>
-                                </div>
+                                </div> -->
                             </div>
                         </div>
                     </ng-container>

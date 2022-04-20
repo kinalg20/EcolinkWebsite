@@ -24,6 +24,7 @@
 
             h6 {
                 margin: 10px 0;
+                text-align: center;
             }
         }
     }
@@ -155,6 +156,16 @@
                             border-radius: 0;
                         }
                     }
+                }
+            }
+        }
+    }
+    .category-section {
+        .container {
+            .categories {
+                .category-image {
+                    height: 70px;
+                    width: 70px;
                 }
             }
         }
