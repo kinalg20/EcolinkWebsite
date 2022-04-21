@@ -153,6 +153,9 @@ export class ApiServiceService {
     let trustedUrl = this.sanitizer.bypassSecurityTrustHtml(data);
     return trustedUrl;
   }
+  getSantizedUrl(url: any) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
   home(): Observable<any> {
     return this.http.get(this._baseurl + 'home');
@@ -385,5 +388,6 @@ export class ApiServiceService {
   forgotPassword(data:any):Observable<any> {
     return this.http.post(this._baseurl+'forgotPassword',data);
   }
+  
 }
 
