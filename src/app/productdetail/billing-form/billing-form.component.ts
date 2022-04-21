@@ -10,9 +10,11 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class BillingFormComponent implements OnInit {
   @Input() CheckoutProduct: any;
   userObj: any;
+  resSignupMsg: any;
   constructor(private __apiservice: ApiServiceService, private route: Router) { }
 
   ngOnInit(): void {
+    console.log(this.CheckoutProduct);
   }
   signUp(form: NgForm) {
     if (form.valid) {
@@ -28,8 +30,7 @@ export class BillingFormComponent implements OnInit {
         city: data.city,
         pincode: data.pincode
       };
-      console.log(this.userObj);
-      if (localStorage.getItem('ecolink-user-credential') == null) {
+      if ('ecolink-user-credential' in localStorage) {
         this.__apiservice.post(this.userObj).subscribe(
           (res) => {
             console.log(res);
@@ -46,6 +47,12 @@ export class BillingFormComponent implements OnInit {
           },
         );
       }
+      else {
+        console.log('getuseraddress');
+      }
+    }
+    else {
+      this.resSignupMsg = 'Please fill the value';
     }
   }
 

@@ -253,7 +253,7 @@
                     padding: 15px 0;
                     display: flex;
                     width: 100%;
-                    justify-content: space-between;
+                    justify-content: space-evenly;
                     p {
                         color: rgb(43, 43, 209);
                         cursor: pointer;
@@ -262,6 +262,27 @@
                         }
                     }
                 }
+            }
+        }
+    }
+    .addAddress {
+        cursor: pointer;
+        border: 1px solid #d7d1d1;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border-radius: 5px;
+        background:whitesmoke;
+        margin: 10px 0;
+        .addAddressCol {
+            padding: 10px;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            i {
+                margin: 0 5px;
+                border: 1px solid #d7d1d1;
+                border-radius: 100%;
+                background: whitesmoke;
+                padding: 3px;
             }
         }
     }
@@ -345,8 +366,6 @@
                     .col-lg-9 {
                         .product-details {
                             padding: 0 1rem;
-                            .head {
-                            }
                             .qty {
                                 margin: 0;
                             }
@@ -489,7 +508,7 @@
                         margin: 5px 0;
                     }
                     .crud-btn {
-                        justify-content: space-between;
+                        justify-content: space-evenly;
                     }
                 }
             }
