@@ -39,7 +39,7 @@
 
                 <div class="suggestion-list" *ngIf="value1!='' && suggestions">
                     <div class="card">
-                        <ul *ngFor="let prod of Students | searchPipe:value1">
+                        <ul *ngFor="let prod of this.ProductListData[0].data.products | searchPipe:value1">
                             <li (click)="getselecteddata(prod.name)">{{prod.name}}</li>
                         </ul>
                     </div>
@@ -54,7 +54,7 @@
                 <div class="filter">
                     <div class="filter-heading">
                         <h3>Filters</h3>
-                        <p><a>Clear All</a></p>
+                        <p (click)="ClearAll()" style="cursor: pointer;"><a>Clear All</a></p>
                     </div>
                     <div class="filter-body">
                         <section class="categories" *ngIf="listdata.data.subcategory.length>0">

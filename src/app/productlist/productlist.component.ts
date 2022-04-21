@@ -27,6 +27,7 @@ export class ProductlistComponent implements OnInit {
   selectedCategory: string[] = [];
   selectedRatings: string[] = [];
   ProductListData: any = [];
+  ProductbackupData: any = []
   cart_obj: any = [];
   price_from: any;
   price_to: any;
@@ -64,57 +65,6 @@ export class ProductlistComponent implements OnInit {
       numScroll: 1
     }
   ];
-  Students = [{
-    "id": 1,
-    "name": "Nathaniel Graham",
-    "email": "nathaniel.graham@example.com"
-  },
-  {
-    "id": 2,
-    "name": "Avery Adams",
-    "email": "avery.adams@example.com"
-  },
-  {
-    "id": 3,
-    "name": "Mario Stevens",
-    "email": "mario.stevens@example.com"
-  },
-  {
-    "id": 4,
-    "name": "Constance Beck",
-    "email": "constance.beck@example.com"
-  },
-  {
-    "id": 5,
-    "name": "Jimmie Little",
-    "email": "jimmie.little@example.com"
-  },
-  {
-    "id": 6,
-    "name": "Avery Matthews",
-    "email": "avery.matthews@example.com"
-  },
-  {
-    "id": 7,
-    "name": "Pat Sutton",
-    "email": "pat.sutton@example.com"
-  },
-  {
-    "id": 8,
-    "name": "Danny Crawford",
-    "email": "danny.crawford@example.com"
-  },
-  {
-    "id": 9,
-    "name": "Pearl Mccoy",
-    "email": "pearl.mccoy@example.com"
-  },
-  {
-    "id": 10,
-    "name": "Flenn Wallace",
-    "email": "flenn.wallace@example.com"
-  }
-  ]
 
   showlist(string: string) {
     if (string == 'list') {
@@ -133,27 +83,33 @@ export class ProductlistComponent implements OnInit {
   }
 
   getselecteddata(selectedValue: any) {
+    let obj_Array: any = [];
     this.value1 = selectedValue;
     this.suggestions = false;
+    if (this.value1.length > 0) {
+      obj_Array.push(
+        this.ProductListData[0].data.products.filter((search: any) => {
+          return search.name.toLowerCase().indexOf(selectedValue.toLowerCase()) > -1
+        })
+      )
+    }
+    this.ProductListData[0].data.products = obj_Array[0];   
+    console.log(obj_Array);
   }
   getListingData(slug: any) {
-    let price_array: any[] = [];
     setTimeout(() => {
       this._ApiService.getDetailByCategory(slug).subscribe(res => {
         if (res.code == 200) {
           this.ProductListData.push(res);
-          console.log(this.ProductListData);
-          this.ProductListData.map((res: any) => {
-            console.log("products", res.data.products)
-          })
           this.getPrice();
+          console.log(this.ProductListData);
         }
         if (res.code == 400) {
           this.warning.show("Warning")
         }
-
       })
     }, 500);
+    this.ProductbackupData = this.ProductListData;
   }
 
   AddProductToCart(Item: any) {
@@ -197,19 +153,26 @@ export class ProductlistComponent implements OnInit {
   }
 
   getDataForFilter() {
-    let filterValue = {
-      category: this.selectedCategory,
-      price_from: this.rangeValues[0],
-      price_to: this.rangeValues[1],
-      rating: this.selectedRatings,
-      sortby: this.selectedLevel
-    }
-    console.log(filterValue);
-    this._ApiService.filterProduct(filterValue).subscribe(res => {
-      console.log("", this.ProductListData[0]);
-      console.log(res);
-      this.ProductListData[0] = res;
-    });
+    let obj_Array: any[] = [];
+    setTimeout(() => {
+      let filterValue = {
+        category: this.selectedCategory,
+        price_from: this.rangeValues[0],
+        price_to: this.rangeValues[1],
+        rating: this.selectedRatings,
+        sortby: this.selectedLevel
+      }
+      console.log(filterValue);
+      this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
+        console.log("response", res.data);
+        Object.keys(res.data).map(function (key) {
+          console.log(res.data[key]);
+          obj_Array.push(res.data[key]);
+        });
+        this.ProductListData[0].data.products = obj_Array;
+        this.getPrice();
+      });
+    }, 1000);
   }
 
   getPrice() {
@@ -219,7 +182,13 @@ export class ProductlistComponent implements OnInit {
       this.maximum = (this.price_to * 35) / 100 + this.price_to;
       this.rangeValues = [this.price_from, this.price_to]
     })
+  }
 
+  ClearAll() {
+    console.log(this.ProductbackupData);
+    // this.ProductListData = this.ProductbackupData;
+    // console.log(this.ProductListData);
+    this.getPrice();
   }
 }
 

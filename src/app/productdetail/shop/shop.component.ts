@@ -37,7 +37,7 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
     console.log(this.slug);
-    let product_list = this.slug.slug + '/' + this.slug.subslug + '/';
+    let product_list = this.slug.slug + '/' + this.slug.subslug;
     this.getProductDetail(product_list);
   }
 
@@ -51,9 +51,9 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  getProductDetail(slug: any) {
-    console.log(slug);
-    this._ApiService.getProductDetail(slug).subscribe((res: any) => {
+  getProductDetail(sendslug: any) {
+    console.log(sendslug);
+    this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
       }

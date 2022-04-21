@@ -25,13 +25,13 @@
                         <a href="inner-pages/{{item.slug}}">{{item.title | uppercase}}</a>
                         <ul class="header-dropdown" *ngIf="item.subpage.length>0">
                             <li class="test" *ngFor="let sublink of item.subpage">
-                                <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
+                                <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title| uppercase}}</a>
                                 <ul *ngIf="sublink.subpage.length>0" class="sub-header-dropdown">
                                     <div class="subsublink">
                                         <ng-container *ngFor="let subsublink of sublink.subpage">
                                             <li class="test1">
                                                 <a
-                                                    href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title}}</a>
+                                                    href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title| uppercase}}</a>
                                             </li>
                                         </ng-container>
                                     </div>
@@ -39,7 +39,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user"
+                    <li><a (click)="profile()" style="cursor: pointer; color: #fff;"><i class="fa fa-user"
                                 aria-hidden="true"></i></a></li>
                 </ul>
             </div>
@@ -63,17 +63,26 @@
 </section>
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData" class="responsive-menu">
-        <li class="parent-menu"><a href="inner-pages/{{item.slug}}">{{item.title}}</a>
-            <!-- <div class="open-menu-responsive">
+        <li class="parent-menu"><a href="inner-pages/{{item.slug}}">{{item.title| uppercase}}</a>
+            <div class="open-menu-responsive">
                 <ul class="sub-link-responsive" *ngIf="item.subpage">
                     <li class="sub-link" *ngFor="let sublink of item.subpage">
-                        <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
-                        <hr>
+                        <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title| uppercase}}</a>
+                        <ul *ngIf="sublink.subpage.length>0" class="sub-sub-link">
+                            <div class="sub-sub-link-responsive">
+                                <ng-container *ngFor="let subsublink of sublink.subpage">
+                                    <li class="sub-sub-link-title">
+                                        <a
+                                            href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title| uppercase}}</a>
+                                    </li>
+                                </ng-container>
+                            </div>
+                        </ul>
                     </li>
                 </ul>
-            </div> -->
+            </div>
         </li>
     </ul>
-    <li style="list-style: none;"><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user"
+    <li style="list-style: none;"><a (click)="profile()" style="cursor: pointer; color: #37793a;"><i class="fa fa-user"
                 aria-hidden="true"></i></a></li>
 </div>

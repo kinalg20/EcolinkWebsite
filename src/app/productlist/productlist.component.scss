@@ -91,11 +91,10 @@
             right: 0;
             top: 62.5px;
             z-index: 1;
-
             .card {
                 width: 220px;
-                overflow-y: scroll;
-
+                overflow: auto;
+                height: 300px;
                 ul {
                     li {
                         list-style: none;

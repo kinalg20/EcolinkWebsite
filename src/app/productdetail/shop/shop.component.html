@@ -17,7 +17,7 @@
                         <h3>{{detail.data.regular_price | currency}}</h3>
                     </div> -->
                     <ng-container
-                        *ngIf="detail.data.regular_price < detail.data.sale_price; then thenBlock else elseBlock">
+                        *ngIf="detail.data.regular_price > detail.data.sale_price; then thenBlock else elseBlock">
                     </ng-container>
                     <ng-template #thenBlock>
                         <h4 class="product-price mb-1" style="text-decoration-line: line-through; font-size: 14px;">
