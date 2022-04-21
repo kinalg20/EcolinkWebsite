@@ -221,6 +221,7 @@ export class ApiServiceService {
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     })
+    console.log(item_id);
     return this.http.post(this._baseurl + 'deleteUserAddresses', { address_id: item_id }, { headers: httpHeaders })
   }
 

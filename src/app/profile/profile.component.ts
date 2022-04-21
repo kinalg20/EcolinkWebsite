@@ -19,7 +19,6 @@ export class ProfileComponent implements OnInit {
     // this.openNav = true;
   }
   getUserLogout() {
-    console.log("kinal");
     this.__apiservice.getUserLogoutProfile().subscribe((res:any)=> {
       console.log(res);
       localStorage.removeItem("ecolink_user_credential");

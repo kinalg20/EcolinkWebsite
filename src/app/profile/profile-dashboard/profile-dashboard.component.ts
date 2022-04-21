@@ -16,7 +16,6 @@ export class ProfileDashboardComponent implements OnInit {
   invalidUserEmail: string = '';
   invalidEmail: boolean = false;
   invalidMobile = false;
-  addressObject: any = {};
   allUserAddresses: any = [];
   orderData: any = [];
   orderHistoryDesc:any=[];
@@ -31,18 +30,9 @@ export class ProfileDashboardComponent implements OnInit {
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
       console.log(this.userDetail);
-      this.addressObject.name = res.data.name;
-      this.addressObject.email = res.data.email;
-      this.addressObject.mobile = res.data.mobile;
-      this.addressObject.address = res.data.address;
-      this.addressObject.country = res.data.country;
-      this.addressObject.state = res.data.state;
-      this.addressObject.city = res.data.city;
-      this.addressObject.zip = res.data.pincode;
-      this.addressObject.landmark = '';
     })
-    // this.allUserAddresses.push(this.addressObject);
     this.__apiservice.getUserAddress().subscribe((res: any) => {
+      console.log(res);
       res.data.map((response: any) => {
         this.allUserAddresses.push(response);
       })
