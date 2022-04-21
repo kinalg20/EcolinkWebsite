@@ -206,30 +206,31 @@
         </div>
         <div class="history-item-card">
             <ng-container *ngFor="let data of orderHistoryDesc">
-                <div class="row">
-                    <div class="card" *ngFor="let i of data.items">
-                        <div class="col-12 pro-image">
+                <div class="card">
+                    <div class="details" *ngFor="let i of data.items">
+                        <div class="card-body">
                             <div class="product-image">
                                 <img [src]="i.product.image" class="media-object" />
                             </div>
-                        </div>
-                        <div class="col-12 description">
-                            <div class="product-details">
-                                <h5 class="head">{{i.product.name}}</h5>
-                                <span class="pro-desc" [innerHtml]="i.product.description"></span>
-                                <span> <strong>Address: </strong> {{data.shipping_address}}, {{data.shipping_city}},
-                                    {{data.shipping_state}}, {{data.shipping_country}}</span>
-                                <p class="desc"> {{i.product.meta_description}}</p>
-                                <p class="qty"> <strong>Qty: </strong> {{i.quantity}}</p>
-                                <span class="price"> <strong>Total amount:</strong> ${{data.total_amount}}</span>
-                                <h6> <strong>Ordered on</strong> {{i.created_at | date:'EEEE, MMMM d, y' }}</h6>
-                                <!-- <h5 class="status">{{data.order_status}}</h5> -->
-                            </div>
-                            <!-- <button type="button" class="return-btn" (click)="storeReturnProduct(i)">Return</button> -->
-                            <!-- <div class="date">
+                            <div class="description">
+                                <div class="product-details">
+                                    <h5 class="head">{{i.product.name}}</h5>
+                                    <!-- <span class="pro-desc" [innerHtml]="i.product.description"></span> -->
+                                    <span> <strong>Address: </strong> {{data.shipping_address}}, {{data.shipping_city}},
+                                        {{data.shipping_state}}, {{data.shipping_country}}</span>
+                                    <p class="desc"> {{i.product.meta_description}}</p>
+                                    <p class="qty"> <strong>Qty: </strong> {{i.quantity}}</p>
+                                    <span class="price"> <strong>Total amount:</strong> ${{data.total_amount}}</span>
+                                    <h6> <strong>Ordered on</strong> {{i.created_at | date:'EEEE, MMMM d, y' }}</h6>
+                                    <!-- <h5 class="status">{{data.order_status}}</h5> -->
+                                </div>
+                                <!-- <button type="button" class="return-btn" (click)="storeReturnProduct(i)">Return</button> -->
+                                <!-- <div class="date">
                             <p> order by {{data.billing_name}}</p>
                         </div> -->
+                            </div>
                         </div>
+                        <span class="pro-desc" [innerHtml]="i.product.description"></span>
                     </div>
                 </div>
             </ng-container>

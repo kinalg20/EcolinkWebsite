@@ -30,9 +30,9 @@
                         </div>
 
                         <span class="p-input-icon-left">
-                            <i class="pi pi-search"></i>
+                            <i class="pi pi-search" (click)="getselecteddata(value1)"></i>
                             <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
-                                (keydown)="suggestions=true" />
+                                (keyup)="getkeypressdata()" />
                         </span>
                     </div>
                 </div>
@@ -119,7 +119,8 @@
 
                 <!-- Products Cards -->
                 <div class="product-cards" *ngIf="view_card">
-                        <!-- <div class="subcategory" *ngIf="listdata.data.subcategory.length>0">
+                    <div class="subcategory" *ngIf="listdata.data.subcategory.length>0">
+                        <ng-container *ngFor="let data of listdata.data.subcategory">
                             <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
                                 <div class="card" style="cursor: pointer;">
                                     <div class="card-image">
@@ -133,66 +134,67 @@
                                             <p routerLink="{{data.slug}}">Show
                                                 Details</p>
                                         </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div> -->
-                        <div class="row">
-                            <ng-container *ngFor="let product of listdata.data.products">
-                                <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
-                                    <div class="card" style="cursor: pointer;">
-                                        <div class="card-image">
-                                            <img [src]="product.image" alt="">
-                                            <span routerLink="/shop/wishlist" (click)="addWishList(product)"><i
-                                                    style="color: white;" class="pi pi-heart" aria-hidden="true"
-                                                    title="Wishlist"></i></span>
+                        </ng-container>
+                    </div>
+                    <div class="row">
+                        <ng-container *ngFor="let product of listdata.data.products">
+                            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                                <div class="card" style="cursor: pointer;">
+                                    <div class="card-image">
+                                        <img [src]="product.image" alt="">
+                                        <span routerLink="/shop/wishlist" (click)="addWishList(product)"><i
+                                                style="color: white;" class="pi pi-heart" aria-hidden="true"
+                                                title="Wishlist"></i></span>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="card-title">
+                                            <h6>{{product.name.slice(0,36)}}</h6>
+                                            <ng-container *ngFor="let subcategory of listdata.data.subcategory">
+                                                <p> {{subcategory.name}}</p>
+                                            </ng-container>
                                         </div>
-                                        <div class="card-body">
-                                            <div class="card-title">
-                                                <h6>{{product.name.slice(0,36)}}</h6>
-                                                <ng-container *ngFor="let subcategory of listdata.data.subcategory">
-                                                    <p> {{subcategory.name}}</p>
+                                        <div class="card-price-section">
+                                            <div class="card-price">
+                                                <ng-container
+                                                    *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
                                                 </ng-container>
+                                                <ng-template #thenBlock>
+                                                    <p class="product-price mb-1"
+                                                        style="text-decoration-line: line-through; font-size: 14px;">
+                                                        {{product.sale_price
+                                                        | currency}}</p>
+                                                    <p class="product-price">{{product.regular_price | currency}}
+                                                    </p>
+                                                </ng-template>
+                                                <ng-template #elseBlock>
+                                                    <p class="product-price">{{product.regular_price | currency}}
+                                                    </p>
+                                                </ng-template>
                                             </div>
-                                            <div class="card-price-section">
-                                                <div class="card-price">
-                                                    <ng-container
-                                                        *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
-                                                    </ng-container>
-                                                    <ng-template #thenBlock>
-                                                        <p class="product-price mb-1"
-                                                            style="text-decoration-line: line-through; font-size: 14px;">
-                                                            {{product.sale_price
-                                                            | currency}}</p>
-                                                        <p class="product-price">{{product.regular_price | currency}}
-                                                        </p>
-                                                    </ng-template>
-                                                    <ng-template #elseBlock>
-                                                        <p class="product-price">{{product.regular_price | currency}}
-                                                        </p>
-                                                    </ng-template>
-                                                </div>
-                                                <div class="rating">
-                                                    <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                    <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                    <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                    <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                </div>
+                                            <div class="rating">
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                <i style="font-size:18px" class="fa">&#xf006;</i>
                                             </div>
-                                            <div class="list-buttons">
-                                                <button (click)=AddProductToCart(product) pButton pRipple type="button"
-                                                    label="Add to Cart" class="p-button-raised p-button-success"
-                                                    style="height:38px; background-color: #55b15c;" routerLink="/cart"
-                                                    ></button>
-                                                <p
-                                                    routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
-                                                    Show
-                                                    Details</p>
-                                            </div>
+                                        </div>
+                                        <div class="list-buttons">
+                                            <button (click)=AddProductToCart(product) pButton pRipple type="button"
+                                                label="Add to Cart" class="p-button-raised p-button-success"
+                                                style="height:38px; background-color: #55b15c;"
+                                                routerLink="/cart"></button>
+                                            <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
+                                                Show
+                                                Details</p>
                                         </div>
                                     </div>
                                 </div>
-                            </ng-container>
-                        </div>
+                            </div>
+                        </ng-container>
+                    </div>
                     <ng-container *ngIf="listdata.data.products.length==0">
                         <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
                             <h3>No data found</h3>

@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductsRequestComponent } from './products-request/products-request.component';
 import { ReturnProductListingComponent } from './return-product-listing/return-product-listing.component';
 import { GoogleMapComponent } from './google-map/google-map.component';
+import { ThankYouComponent } from './thank-you/thank-you.component';
 
 const exportdata: any = [
   HeaderComponent,
@@ -39,6 +40,7 @@ const exportdata: any = [
     InnerPagesComponent,
     ProductsRequestComponent,
     ReturnProductListingComponent,
+    ThankYouComponent
   ],
   imports: [
     CommonModule,

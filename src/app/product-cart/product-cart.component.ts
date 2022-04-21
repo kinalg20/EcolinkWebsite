@@ -12,6 +12,7 @@ export class ProductCartComponent implements OnInit {
   CardShow: any = [];
   GetProduct: any = [];
   SubTotal: number = 0;
+  UserLogin: any;
 
   constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig) { }
 
@@ -55,33 +56,19 @@ export class ProductCartComponent implements OnInit {
   }
 
   getCartData() {
+    this.UserLogin = localStorage.getItem('ecolink_user_credential');
+    let data: any = [];
+    let data_obj: any = {};
     if (localStorage.getItem('ecolink_user_credential') == null) {
-      let data = this._cookies.GetCartData();
-      // console.log(data);
-      data.map((res:any)=>{
-        this._ApiService.getProductById(res.CartProductId).subscribe(resp=>{
-          this.CardShow.push(resp);
+      data = this._cookies.GetCartData();
+      data.map((res: any) => {
+        this._ApiService.getProductById(res.CartProductId).subscribe((resp: any) => {
+          resp.data.quantity = res.CartProductId;
+          // this.CardShow.push(resp);
+          // this.subsubtotal();
         })
       })
-
-      setTimeout(() => {
-        console.log(this.CardShow);
-      }, 1000);
-
-      // data.map((res: any) => {
-      //   this._ApiService.getDetailByCategory(res.ProductCategory).subscribe((resp: any) => {
-      //     resp.data.products.map((response: any) => {
-      //       if (res.CartProductId == response.id) {
-      //         response.quantity = res.ProductQuantity;
-      //         this.SubTotal = this.SubTotal + response.regular_price;
-      //         this.CardShow.push(response);
-      //         localStorage.setItem("CheckoutData", JSON.stringify(this.CardShow));
-      //       }
-      //     })
-      //   })
-      // })
     }
-
     else {
       this._ApiService.getItemFromCart().subscribe(res => {
         console.log(res);
@@ -91,6 +78,7 @@ export class ProductCartComponent implements OnInit {
         }, 1000);
       })
     }
+    console.log(this.CardShow);
   }
 
 
@@ -100,9 +88,15 @@ export class ProductCartComponent implements OnInit {
       this.SubTotal = this.SubTotal + res.product.sale_price * res.quantity;
     })
   }
+  // subsubtotal() {
+  //   this.SubTotal = 0;
+  //   this.CardShow.map((res: any) => {
+  //     this.SubTotal = this.SubTotal + res.data.sale_price * res.data.quantity;
+  //   })
+  // }
 
-  UpdateCart(action: any, product_id: any , product_quantity:any) {
-    if(action=='delete' && product_quantity>1){
+  UpdateCart(action: any, product_id: any, product_quantity: any) {
+    if (action == 'delete' && product_quantity > 1) {
       this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
         console.log(res));
       setTimeout(() => {
@@ -110,7 +104,7 @@ export class ProductCartComponent implements OnInit {
       }, 1500);
     }
 
-    if(action=='add'){
+    if (action == 'add') {
       this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
         console.log(res));
       setTimeout(() => {
