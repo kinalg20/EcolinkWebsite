@@ -5,55 +5,18 @@
             <div class="col-8">
                 <div class="page-desc">
                     <div [innerHtml]="data.description" *ngIf="data.description"></div>
-                    <!-- <div class="entry-content" itemprop="text">
-                        <ul>
-                            <li>Which has built a national reputation based on innovation, quality services, and
-                                integrity while enjoying the respect and the admiration of both clients and competitors?
-                            </li>
-                            <li>Which supports local and global environmental efforts by donating a percentage of its
-                                profits, each and every year?</li>
-                            <li>If this sounds like a company you would like to be a part of… Welcome to Ecolink</li>
-                        </ul>
-                        <p><span class="greentext"><strong>Who Are We Looking For?</strong><br>
-                            </span>We are a multi-discipline company with team members ranging from environmentalists,
-                            chemists, supply chain specialists and industry experts to management consultants. With this
-                            diversity of services and our focus on personal development, the opportunities to grow into
-                            new areas are always there for those who seek them.</p>
-                        <p>In addition to the specific opportunities listed below, we welcome applications from all
-                            outstanding professionals in our field.</p>
-                        <p><span class="greentext"><strong>Sales Opportunities</strong><br>
-                            </span>Energetic, outgoing and determined individuals needed to manage sales leads and
-                            activities relating to specific Ecolink products and services. Applicants should have proven
-                            ability to work independently and exercise initiative. Outstanding career opportunity with
-                            base salary and aggressive commission structure. Excellent oral, written and computer skills
-                            required.</p>
-                        <p>Ecolink is an Equal Opportunity employer.</p>
-                        <p><strong class="greentext">Distributors wanted throughout North America.<br>
-                            </strong>Ecolink is actively seeking to expand distribution of our environmentally-preferred
-                            solvents, cleaners and maintenance chemicals for aerospace, military, utility and industrial
-                            applications. As an Ecolink distributor, you can market our complete product line or just
-                            the products that fit your customer base. Ecolink provides complete product support plus
-                            online access to MSDS information.</p>
-                        <p>If you are interested please e-mail information about your company to <a
-                                href="mailto:jroudebush@ecolink.com">jroudebush@ecolink.com</a>.</p>
-                    </div> -->
                 </div>
             </div>
             <div class="col-4">
                 <div class="inner_sidebar extralight-border">
                     <nav class="widget widget_nav_menu widget_nav_hide_child">
-                        <ul class="nested_nav">
-                            <li class="page_item page-item-17541"> Recognition</li>
-                            <li class="page_item page-item-17534">Certifications</li>
-                            <li class="page_item page-item-17540">Community Involvement
-                            </li>
-                            <li class="page_item page-item-17427">Distribution Opportunities</li>
-                            <li class="page_item page-item-17481">Ecolink Capabilities</li>
-                            <li class="page_item page-item-17426">Management Team</li>
-                            <li class="page_item page-item-17489">Sitemap</li>
-                            <li class="page_item page-item-17436 current_page_item">Would You Like
-                                    to Work for a Company. . .</li>
+                        <ul class="nested_nav" *ngFor="let link of data.links">
+                            <li class="page_item page-item-17541" style="cursor: pointer;" routerLink="/inner-pages/{{link.related_page.slug}}">{{link.related_page.title}}</li>
                         </ul>
+                       <ul>
+                        <li class="page_item page-item-17436 current_page_item" style="list-style: none;">Would You Like
+                            to Work for a Company. . .</li>
+                       </ul>
                     </nav>
                     <section id="text-5" class="widget clearfix widget_text">
                         <div class="textwidget">

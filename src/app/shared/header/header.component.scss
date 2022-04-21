@@ -73,6 +73,7 @@
             a {
               text-decoration: none;
               color: #fff;
+              font-size: 13.5px;
             }
 
             a:hover {
@@ -95,7 +96,7 @@
               background: whitesmoke;
               z-index: 999;
               padding-left: 0;
-              // padding: 10px;
+
               .test {
                 margin: 0;
                 list-style: none;
@@ -119,7 +120,7 @@
                   background: whitesmoke;
                   z-index: 999;
                   padding-left: 0;
-                  right: -230px;
+                  left: -230px;
                   width: 230px;
                   margin-top: -32px;
 
@@ -144,13 +145,11 @@
                   }
                 }
               }
-
-
             }
           }
 
           .fa-user {
-            font-size: 20px;
+            font-size: 18px;
           }
         }
       }
@@ -265,10 +264,50 @@
   z-index: 99;
   width: 50%;
   text-align: center;
-  .parent-menu{
-    a{
+
+  .open-menu-responsive {
+    display: flex;
+    justify-content: center;
+  }
+
+  .parent-menu {
+    list-style: none;
+    margin: 10px 0;
+
+    a {
       color: #37793a;
       text-decoration: none;
+    }
+
+    a:hover{
+      background-color: #37793a;
+      color: #fff;
+    }
+
+    .sub-link-responsive {
+      display: none;
+      .sub-link {
+        text-align: left;
+        .sub-sub-link-responsive {
+          display: none;
+          ::marker{
+            color: #37793a;
+          }
+        }
+      }
+
+      .sub-link:hover {
+        .sub-sub-link-responsive {
+          display: block;
+        }
+      }
+    }
+
+  }
+
+  .parent-menu:hover {
+    .sub-link-responsive {
+      display: block;
     }
   }
 }
