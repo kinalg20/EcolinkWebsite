@@ -1,0 +1,25 @@
+.thankyou-section {
+    height: 100vh;
+    align-items: center;
+    display: flex;
+    text-align: center;
+    .container {
+        .body {
+            h1 {
+            }
+            i {
+                color: white;
+                background: green;
+                border-radius: 50%;
+                padding: 21px;
+                font-size: 3rem;
+            }
+            .lead {
+                .btn-shop {
+                    background: var(--primary-btn);
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
