@@ -3,7 +3,7 @@
         <div class="input-group mx-auto">
             <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..."
                 (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem" name="search">
-            <span class="input-group-append">
+            <span class="input-group-append" autocomplete="off">
                 <button class="btn btn-outline-secondary border border-left-0 py-2" type="button" routerLink="/shop/{{slug}}/{{subslug}}">Search</button>
             </span>
         </div>

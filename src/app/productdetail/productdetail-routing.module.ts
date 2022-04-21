@@ -16,9 +16,9 @@ const routes: Routes = [
       {
         path: ':category/:slug/:subslug', component: ShopComponent,
       },
-      {
-        path: ':category/:slug', component: ShopComponent,
-      },
+      // {
+      //   path: ':category/:slug', component: ShopComponent,
+      // },
       {
         path: 'checkout', component: ProductCheckoutComponent,
       },
