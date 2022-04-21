@@ -17,8 +17,8 @@ export class SignupSigninComponent implements OnInit {
   confirmPassword: string = '';
   invalidMobile = false;
   invalidEmail: boolean = false;
-  checkString: boolean = true;
   invalidUserEmail: string = '';
+  checkString: boolean = true;
   resMsg: string = '';
   constructor(private router: Router, private __apiservice: ApiServiceService) { }
 

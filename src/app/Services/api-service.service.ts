@@ -381,5 +381,8 @@ export class ApiServiceService {
     let url = "getProductById";
     return this.http.post(this._baseurl + url, { product_id: product_id })
   }
+  forgotPassword(data:any):Observable<any> {
+    return this.http.post(this._baseurl+'forgotPassword',data);
+  }
 }
 
