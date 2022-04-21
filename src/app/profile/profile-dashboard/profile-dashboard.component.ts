@@ -48,6 +48,8 @@ export class ProfileDashboardComponent implements OnInit {
       }, 1000);
     })
     this.getOrderhistory();
+    this.getReturnProduct();
+
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -184,11 +186,18 @@ export class ProfileDashboardComponent implements OnInit {
       reason: "Accidentally Placed Order",
       description: "test"
     }
-    console.log(this.storeObj)
+    this.__apiservice.storeReturnOrder(this.storeObj).subscribe(res=>{
+      console.log(res)
+    })
   }
   getReturnProduct() {
-   this.orderData.data[0].user_id
-   console.log(this.orderData.data[0].user_id)
+  //  this.orderData.data[0].user_id
+  //  console.log(this.orderData.data[0].user_id)
+   this.__apiservice.getReturnOrder().subscribe(res=>{
+     setTimeout(() => {
+       console.log("returndata", res)
+     }, 1000);
+   })
   }
   editUserProfile(form:NgForm) {
     if (form.valid) {

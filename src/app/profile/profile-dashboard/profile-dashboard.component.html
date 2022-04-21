@@ -203,44 +203,68 @@
         </div>
     </div>
 </div>
-<div class="return-product" *ngIf="showdesc == 'Return Order'">
-    <div class="ordered-item-card">
+<!-- <div class="return-product-list" *ngIf="showdesc == 'Return Order'">
+    order-listing
+
+    <div class="row">
+        <ng-container *ngFor="let data of orderData.data">
+            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                <div class="card" *ngFor="let i of data.items">
+                    <div class="product-return-image">
+                        <img [src]="i.product.image" class="media-object" />
+                    </div>
+                    <div class="return-desc">
+                        <div class="product-details">
+                            <h5 class="head">{{i.product.name}}</h5>
+                            <p class="desc"> {{i.product.meta_description}}</p>
+                            <p class="qty">{{i.quantity}}</p>
+                            <span class="price">${{data.total_amount}}</span>
+                            <h6 class="status">{{data.order_status}}</h6>
+                        </div>
+                    </div>
+                    <button type="button" class="return-btn">Return</button>
+                </div>
+            </div>
+        </ng-container>
+    </div> -->
+
+<!-- order-details  -->
+    <!-- <div class="ordered-item-card">
         <link rel="stylesheet" type="text/css"
             href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
         <div class="bootdey">
             <div class="panel panel-default panel-order">
                 <div class="panel-body">
                     <ng-container *ngFor="let data of orderData.data">
-
                         <div class="card" *ngFor="let i of data.items">
                             <div class="row" >
-                                <div class="col-md-3 pro-image">
+                                <div class="col-lg-3 col-md-4 col-sm-4">
                                     <div class="product-image">
-                                        <img [src]="i.product.image" class="media-object img-thumbnail" />
+                                        <img [src]="i.product.image" class="media-object" />
                                     </div>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-lg-9 col-md-8 col-sm-8">
                                     <div class="product-details">
                                         <h5 class="head">{{i.product.name}}</h5>
                                         <p class="desc"> {{i.product.meta_description}}</p>
                                         <p class="qty">{{i.quantity}}</p>
                                         <span class="price">${{data.total_amount}}</span>
-                                        <h5 class="status">{{data.order_status}}</h5>
+                                        <h6 class="status">{{data.order_status}}</h6>
                                     </div>
                                     <button type="button" class="return-btn"
-                                        (click)="getReturnProduct()">Return</button>
-                                    <!-- <div class="date">
+                                        (click)="getReturnProduct()">Return</button> -->
+    <!-- <div class="date">
                                         <p> order by {{data.billing_name}}</p>
                                     </div> -->
-                                </div>
+    <!-- </div>
                             </div>
                         </div>
                     </ng-container>
                 </div>
             </div>
         </div>
-    </div>
-</div>
+    </div> -->
+<!-- </div> -->
 <div class="Addresses-section" *ngIf="showdesc == 'Addresses'">
     <div class="adderess-head">
         <h2>Shipping Addresses</h2>

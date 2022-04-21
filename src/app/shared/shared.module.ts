@@ -13,6 +13,7 @@ import { TrendingPostComponent } from './trending-post/trending-post.component';
 import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { FormsModule } from '@angular/forms';
 import { ProductsRequestComponent } from './products-request/products-request.component';
+import { ReturnProductListingComponent } from './return-product-listing/return-product-listing.component';
 
 const exportdata:any =[
   HeaderComponent,
@@ -34,7 +35,8 @@ const exportdata:any =[
     MediaBannerComponent,
     TrendingPostComponent,
     InnerPagesComponent,
-    ProductsRequestComponent
+    ProductsRequestComponent,
+    ReturnProductListingComponent
   ],
   imports: [
     CommonModule,
