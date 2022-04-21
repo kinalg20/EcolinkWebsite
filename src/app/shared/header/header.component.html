@@ -26,12 +26,12 @@
                         <ul class="header-dropdown" *ngIf="item.subpage.length>0">
                             <li class="test" *ngFor="let sublink of item.subpage">
                                 <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
-                                <hr>
                                 <ul *ngIf="sublink.subpage.length>0" class="sub-header-dropdown">
                                     <div class="subsublink">
                                         <ng-container *ngFor="let subsublink of sublink.subpage">
                                             <li class="test1">
-                                                 <a href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title}}</a>
+                                                <a
+                                                    href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title}}</a>
                                             </li>
                                         </ng-container>
                                     </div>
@@ -63,15 +63,15 @@
 </section>
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData" class="responsive-menu">
-        <li class="parent-menu" ><a href="inner-pages/{{item.slug}}">{{item.title}}</a>
-            <div class="open-menu-responsive">
-                <ul class="sub-link-responsive" *ngIf="item.subpage.length>0">
+        <li class="parent-menu"><a href="inner-pages/{{item.slug}}">{{item.title}}</a>
+            <!-- <div class="open-menu-responsive">
+                <ul class="sub-link-responsive" *ngIf="item.subpage">
                     <li class="sub-link" *ngFor="let sublink of item.subpage">
                         <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title}}</a>
                         <hr>
                     </li>
                 </ul>
-            </div>
+            </div> -->
         </li>
     </ul>
     <li style="list-style: none;"><a (click)="profile()" style="cursor: pointer;"><i class="fa fa-user"

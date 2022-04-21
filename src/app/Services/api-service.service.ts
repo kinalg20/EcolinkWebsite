@@ -358,11 +358,16 @@ export class ApiServiceService {
   getUserLogoutProfile(): Observable<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     })
-    return this.http.post(this._baseurl + 'logout', { headers: httpHeaders });
+    let body = {
+      user_id: user_id
+    }
+
+    return this.http.post(this._baseurl + 'logout',body, { headers: httpHeaders })
   }
   editUserProfileInfo(data: any): Observable<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
