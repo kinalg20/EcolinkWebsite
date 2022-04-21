@@ -19,7 +19,10 @@ export class ProfileDashboardComponent implements OnInit {
   addressObject: any = {};
   allUserAddresses: any = [];
   orderData: any = [];
+  orderHistoryDesc:any=[];
   storeObj: any;
+  show: boolean =true;
+  // showDetails: boolean=true;
   @Input() showdesc: any;
   constructor(private __apiservice: ApiServiceService, private router: Router) {
   }
@@ -176,7 +179,7 @@ export class ProfileDashboardComponent implements OnInit {
       }, 1000);
     })
   }
-  storeReturnProduct(i:any) {
+  storeReturnProduct(i: any) {
     console.log(i)
     this.storeObj = {
       order_id: i.order_id,
@@ -186,20 +189,20 @@ export class ProfileDashboardComponent implements OnInit {
       reason: "Accidentally Placed Order",
       description: "test"
     }
-    this.__apiservice.storeReturnOrder(this.storeObj).subscribe(res=>{
+    this.__apiservice.storeReturnOrder(this.storeObj).subscribe(res => {
       console.log(res)
     })
   }
   getReturnProduct() {
-  //  this.orderData.data[0].user_id
-  //  console.log(this.orderData.data[0].user_id)
-   this.__apiservice.getReturnOrder().subscribe(res=>{
-     setTimeout(() => {
-       console.log("returndata", res)
-     }, 1000);
-   })
+    //  this.orderData.data[0].user_id
+    //  console.log(this.orderData.data[0].user_id)
+    this.__apiservice.getReturnOrder().subscribe(res => {
+      setTimeout(() => {
+        console.log("returndata", res)
+      }, 1000);
+    })
   }
-  editUserProfile(form:NgForm) {
+  editUserProfile(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
       this.userObj = {
@@ -211,10 +214,10 @@ export class ProfileDashboardComponent implements OnInit {
         state: data.state,
         city: data.city,
         pincode: data.pincode,
-        password:data.password
+        password: data.password
       };
       console.log(this.userObj);
-      this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res:any)=> {
+      this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
         console.log(res);
         form.reset();
       })
@@ -224,6 +227,12 @@ export class ProfileDashboardComponent implements OnInit {
     }
   }
   changeTab() {
-    this.showdesc='Edit Profile';
+    this.showdesc = 'Edit Profile';
+  }
+  showDeatils(i:any) {
+    this.orderHistoryDesc=[];
+    this.orderHistoryDesc.push(i)
+    console.log (this.orderHistoryDesc)
+    this.show = !this.show ;
   }
 }
