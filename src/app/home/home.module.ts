@@ -17,7 +17,8 @@ import { CategoriesComponent } from './categories/categories.component';
 
 
 const exportdata:any =[
- CategoriesComponent
+ CategoriesComponent,
+ BlogComponent
 ]
 
 @NgModule({

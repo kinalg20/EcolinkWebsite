@@ -12,8 +12,8 @@ const routes: Routes = [
   { path: '', component: HomeComponent },
   { path : 'banner', component: HomeBannerComponent},
   { path : 'about-us', component: AboutUsComponent},
-  { path : 'media', component: MediaComponent},
-  { path : 'blog', component: BlogComponent},
+  { path : 'inner-pages/info', component: MediaComponent},
+  { path : 'info/:slug', component: BlogComponent},
   { path : 'manufacture', component: ManufactureComponent},
   { path : 'ask-chemist', component: AskChemistComponent}
 ];
