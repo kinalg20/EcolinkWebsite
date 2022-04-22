@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { ProductsRequestComponent } from './products-request/products-request.component';
 import { ReturnProductListingComponent } from './return-product-listing/return-product-listing.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { OrderFailComponent } from './order-fail/order-fail.component';
 
 const exportdata:any =[
   HeaderComponent,
@@ -38,7 +39,8 @@ const exportdata:any =[
     InnerPagesComponent,
     ProductsRequestComponent,
     ReturnProductListingComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    OrderFailComponent
   ],
   imports: [
     CommonModule,
