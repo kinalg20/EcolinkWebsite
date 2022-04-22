@@ -17,6 +17,7 @@ import { ReturnProductListingComponent } from './return-product-listing/return-p
 import { GoogleMapComponent } from './google-map/google-map.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const exportdata: any = [
   HeaderComponent,
@@ -42,7 +43,8 @@ const exportdata: any = [
     ProductsRequestComponent,
     ReturnProductListingComponent,
     ThankYouComponent,
-    OrderFailComponent
+    OrderFailComponent,
+    PageNotFoundComponent
   ],
   imports: [
     CommonModule,
