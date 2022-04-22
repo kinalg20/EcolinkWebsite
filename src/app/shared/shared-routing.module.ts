@@ -18,6 +18,7 @@ const routes: Routes = [
   { path: 'inner-pages/:slug', component: InnerPagesComponent },
   { path: 'inner-pages/:slug/:sublink', component: InnerPagesComponent },
   { path: 'inner-pages/:slug/:sublink/:subsublink', component: InnerPagesComponent },
+  { path: 'inner-pages/:slug/:sublink/:subsublink/:subsubsublink', component: InnerPagesComponent },
   { path: 'thanks', component: ThankYouComponent },
   { path: 'failure', component: OrderFailComponent },
   // { path : 'info/:slug', component: BlogComponent},
