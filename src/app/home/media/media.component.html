@@ -13,9 +13,9 @@
     <div class="container">
         <div class="media-calltoaction" >
             <ng-container *ngFor="let item of getAllBlog.data">
-                <div class="media" [routerLink]="['/blog']" [queryParams]="{ slug:item.slug }">
+                <div class="media" [routerLink]="['/blog']">
                     <div class="spotlight-banner">
-                        <img src="{{item.image}}" alt="">
+                        <img src="{{item.image}}" alt="{{item.alt}}">
                     </div>
                     <div class="spotlight-desc">
                         <h5>{{item.title}}</h5>
@@ -39,5 +39,5 @@
     Latest Posts
     <hr>
 </div>
-<app-media-banner [data_input]=data_array></app-media-banner>
+<app-media-banner [data_input]=getAllBlog></app-media-banner>
 <app-footer></app-footer>

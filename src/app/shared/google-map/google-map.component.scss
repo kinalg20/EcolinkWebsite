@@ -39,18 +39,40 @@
             }
         }
     }
-
-    .map-section {}
 }
 
 .sample-policy-section {
     margin: 50px 0;
 }
-// .container {
-    .contact-us-form {
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        border: 1px solid #d7d1d1;
-        border-radius: 10px;
-        padding: 30px;
+
+.contact-us-form {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    border: 1px solid #d7d1d1;
+    border-radius: 10px;
+    padding: 30px;
+
+    .contact-form-heading {
+        text-align: center;
+
+        h2 {
+            margin-bottom: 30px;
+        }
     }
-// }
+
+    form {
+        .proceed {
+            .proceed-button {
+                button {
+                    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                    border: 1px solid #d7d1d1;
+                    border-radius: 5px;
+                    font-size: 18px;
+                    margin: 20px auto;
+                    color: white;
+                    background: #55b15c;
+                    padding: 5px 25px;
+                }
+            }
+        }
+    }
+}

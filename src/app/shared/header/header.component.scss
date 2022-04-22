@@ -131,7 +131,6 @@
 
                       a {
                         color: #37793a;
-
                       }
                     }
 
@@ -223,7 +222,7 @@
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 13px;
-
+    justify-content: space-between;
     .location-section {
       display: flex;
 
@@ -279,7 +278,7 @@
       text-decoration: none;
     }
 
-    a:hover{
+    a:hover {
       background-color: #37793a;
       color: #fff;
     }
@@ -290,7 +289,7 @@
         text-align: left;
         .sub-sub-link-responsive {
           display: none;
-          ::marker{
+          ::marker {
             color: #37793a;
           }
         }
@@ -302,7 +301,6 @@
         }
       }
     }
-
   }
 
   .parent-menu:hover {
@@ -376,6 +374,14 @@
   }
 }
 
+@media (max-width: 768px) {
+  .location-head {
+    .container {
+      max-width: 765px;
+    }
+  }
+}
+
 @media (max-width: 671px) {
   .nav-link-section .container {
     max-width: 1000px;
@@ -384,17 +390,60 @@
       width: 55%;
     }
   }
+  .location-head {
+    .container {
+      .location-section {
+        .location {
+          i {
+            font-size: 12px;
+          }
+        }
+        .address {
+          a {
+            font-size: 12px;
+          }
+        }
+      }
+      .chat-section {
+        width: auto;
+        a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 426px) {
   .open-menu {
     width: 100%;
   }
-
   .top-head-section {
     .container {
       .top-head-line {
         p {
+          font-size: 10px;
+        }
+      }
+    }
+  }
+  .location-head {
+    .container {
+      .location-section {
+        .location {
+          i {
+            font-size: 10px;
+          }
+        }
+        .address {
+          margin-left: 5px;
+          a {
+            font-size: 10px;
+          }
+        }
+      }
+      .chat-section {
+        a {
           font-size: 10px;
         }
       }
