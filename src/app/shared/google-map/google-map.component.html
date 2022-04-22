@@ -1,0 +1,151 @@
+<div class="contact-us-section">
+    <div class="detail-section">
+        <div class="contact-heading">
+            <h4>ECOLINK CORPORATE HEADQUARTERS</h4>
+            <p>P. O. Box 9</p>
+            <p>Tucker, GA 30085</p>
+            <p>800-563-1305 toll free number</p>
+            <p>770-621-8240 local number</p>
+            <p>Email : info@ecolink.com</p>
+            <div class="country-buttons">
+                <div class="row button-row">
+                    <div class="col-6 button-col">
+                        <button>ASIA</button>
+                    </div>
+                    <div class="col-6 button-col">
+                        <button>CANADA</button>
+                    </div>
+                    <div class="col-6 button-col">
+                        <button>EUROPE</button>
+                    </div>
+                    <div class="col-6 button-col">
+                        <button>AMERICA</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="map-section">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d423976.63487513247!2d-84.151759!3d33.88147699999994!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc425a8157699cf5!2sEcolink+Inc!5e0!3m2!1sen!2sus!4v1402985217757"
+            width="100%" height="300" frameborder="0" style="border:0"></iframe>
+    </div>
+</div>
+<div class="sample-policy-section">
+    <div class="policy-content">
+        <p>For additional information or to request a product sample, please use this form.</p>
+
+        <p><strong>Sample Policy</strong> : <br>Established companies and military users are welcome to request samples
+            of Ecolink products at
+            no charge. For international samples, we request only that you pay the freight costs by providing your
+            shipper’s account number (FedEx, UPS, etc.) In order to determine the most effective products for your
+            needs, please describe your application using this short form.</p>
+    </div>
+</div>
+<div class="contact-us-form">
+    <div class="contact-form-heading">
+        <h2>Contact Us</h2>
+    </div>
+    <form #contactdetail="ngForm" (ngSubmit)="saveContactUsDetail(contactdetail)">
+        <ng-container *ngIf="resSignupMsg">
+            <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert">
+                {{ resSignupMsg }}
+            </div>
+            <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert">
+                {{ resSignupMsg }}
+            </div>
+        </ng-container>
+        <div class="row mb-3">
+            <div class="col-6">
+                <label for="first-name">First Name*</label>
+                <input type="text" class="form-control mt-2" placeholder="First name" id="first-name" name="firstname"
+                    ngModel required>
+            </div>
+            <div class="col-6">
+                <label for="last-name">Last Name*</label>
+                <input type="text" class="form-control mt-2" placeholder="Last name" name="lastname" ngModel required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-6">
+                <label for="Email Address">Email Address*</label>
+                <input type="email" class="form-control mt-2" placeholder="Email" id="Email-Address"
+                    (input)="validateEmail($event)" name="email" ngModel required>
+                <h6 class="text-danger" *ngIf="invalidEmail">
+                    {{ invalidEmail ? "Invalid Email" : "" }}
+                </h6>
+            </div>
+            <div class="col-6">
+                <label for="Phone">Phone*</label>
+                <input type="text" class="form-control mt-2" placeholder="phone" maxlength="10"
+                    (input)="validateMobile($event)" (keydown)="inputMobile($event)" name="phone" ngModel required>
+                <h6 class="text-danger" *ngIf="invalidMobile">
+                    {{ invalidMobile ? "Invalid Mobile" : "" }}
+                </h6>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="street-address">Street Address</label>
+                <input type="text" class="form-control mt-2" placeholder="Street Address" name="address" ngModel
+                    required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="Town-city">City</label>
+                <input type="text" class="form-control mt-2" placeholder="Town / City" name="city" ngModel required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="State-County">Country</label>
+                <input type="text" class="form-control mt-2" placeholder="State / County" name="country" ngModel
+                    required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="Postcode">Postcode</label>
+                <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="zip" ngModel required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="query1">What item do you wish to clean & what is the surface material ?
+                </label>
+                <input type="text" class="form-control mt-2" placeholder="Type here ...." id="query1" name="query1"
+                    ngModel required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="query1">What kind of soil, grease or coating do you wish to remove ?
+                </label>
+                <input type="text" class="form-control mt-2" placeholder="Type here ...." id="query1" name="query2"
+                    ngModel required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="query1">How do you currently clean this item ?
+                </label>
+                <input type="text" class="form-control mt-2" placeholder="Type here ...." id="query1" name="query3"
+                    ngModel required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="query1">What chemicals or products do you currently use and in what amounts ?
+                </label>
+                <input type="text" class="form-control mt-2" placeholder="Type here ...." id="query1" name="query4"
+                    ngModel required>
+            </div>
+        </div>
+        <div class="proceed" style="text-align: right;">
+            <div class="proceed-button">
+                <button>Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

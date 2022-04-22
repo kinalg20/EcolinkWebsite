@@ -5,6 +5,9 @@
             <div class="col-8">
                 <div class="page-desc">
                     <div [innerHtml]="data.description" *ngIf="data.description"></div>
+                    <section *ngIf="data.slug=='contact'">
+                        <app-google-map></app-google-map>
+                    </section>
                 </div>
             </div>
             <div class="col-4">

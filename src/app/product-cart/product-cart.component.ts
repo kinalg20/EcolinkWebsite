@@ -104,7 +104,6 @@ export class ProductCartComponent implements OnInit {
 
   UpdateCart(action: any, product_id: any, product_quantity: any) {
     console.log(product_id);
-    let cookiesdata: any = [];
     if (this.UserLogin! = null) {
       if (action == 'delete' && product_quantity > 1) {
         this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
@@ -123,10 +122,19 @@ export class ProductCartComponent implements OnInit {
       }
     }
     else {
-      cookiesdata = this._cookies.GetCartData();
-      console.log("data",this.CardShow);
       setTimeout(() => {
-        // console.log(cookiesdata);
+        console.log(this.CardShow);
+        let saveDataInCookies: any = [];
+        let cookiesObject : any = {}
+        this.CardShow.map((res:any)=>{
+          cookiesObject = {
+            "CartProductId": res.product_id,
+            "ProductQuantity": res.quantity
+          }
+          saveDataInCookies.push(cookiesObject);
+        })
+        console.log(saveDataInCookies);
+        this._cookies.SaveCartData(saveDataInCookies);
       }, 1000);
     }
   }

@@ -14,14 +14,17 @@ import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { FormsModule } from '@angular/forms';
 import { ProductsRequestComponent } from './products-request/products-request.component';
 import { ReturnProductListingComponent } from './return-product-listing/return-product-listing.component';
+import { GoogleMapComponent } from './google-map/google-map.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { OrderFailComponent } from './order-fail/order-fail.component';
 
-const exportdata:any =[
+const exportdata: any = [
   HeaderComponent,
   FooterComponent,
   CardSliderComponent,
   CallToActionComponent,
   MediaBannerComponent,
+  GoogleMapComponent,
   TrendingPostComponent
 ]
 
@@ -38,13 +41,14 @@ const exportdata:any =[
     InnerPagesComponent,
     ProductsRequestComponent,
     ReturnProductListingComponent,
-    ThankYouComponent
+    ThankYouComponent,
+    OrderFailComponent
   ],
   imports: [
     CommonModule,
-    SharedRoutingModule, 
+    SharedRoutingModule,
     SharelibraryModule,
-    FormsModule
+    FormsModule,
   ],
   exports: [
     ...exportdata

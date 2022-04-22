@@ -36,21 +36,21 @@ export class MediaComponent implements OnInit {
     }
   ];
 
-  data_array:any=[
-    {
-      img:"../../../assets/media.png",
-      heading:"Laura Augustine Spotlight",
-      card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
-    },
-    {
-      img:"../../../assets/media.png",
-      heading:"Laura Augustine Spotlight",
-      card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
-    },
-    {
-      img:"../../../assets/media.png",
-      heading:"Laura Augustine Spotlight",
-      card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
-    }
-  ];
+  // data_array:any=[
+  //   {
+  //     img:"../../../assets/media.png",
+  //     heading:"Laura Augustine Spotlight",
+  //     card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
+  //   },
+  //   {
+  //     img:"../../../assets/media.png",
+  //     heading:"Laura Augustine Spotlight",
+  //     card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
+  //   },
+  //   {
+  //     img:"../../../assets/media.png",
+  //     heading:"Laura Augustine Spotlight",
+  //     card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
+  //   }
+  // ];
 }

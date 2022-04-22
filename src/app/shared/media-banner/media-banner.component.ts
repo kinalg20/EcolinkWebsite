@@ -10,6 +10,9 @@ export class MediaBannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    setTimeout(() => {
+      console.log(this.data_input.data);
+    }, 1000);
   }
 
 }
