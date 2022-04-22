@@ -112,6 +112,21 @@
             }
         }
     }
+    .category-section  {
+        .container {
+            overflow-y: scroll;
+            justify-content: normal;
+            .categories {
+                .category-image {
+                    width: 70px;
+                    height: 70px;
+                }
+                h6 {
+                    font-size: 0.8rem;
+                }
+            }
+        }
+    }
 }
 @media (max-width: 768px) {
     .container {

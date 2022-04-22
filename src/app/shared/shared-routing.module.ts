@@ -5,6 +5,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsRequestComponent } from './products-request/products-request.component';
 import { SharedComponent } from './shared.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'failure', component: OrderFailComponent },
   // { path : 'info/:slug', component: BlogComponent},
 
+  { path: '404', component: PageNotFoundComponent }
 ];
 
 @NgModule({
