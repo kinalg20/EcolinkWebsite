@@ -13,7 +13,7 @@ export class BlogComponent implements OnInit {
   constructor(private route: ActivatedRoute, public __apiService : ApiServiceService) { }
 
   ngOnInit(): void {
-    this.slug = this.route.snapshot.queryParams;
+    this.slug = this.route.snapshot.params;
     setTimeout(() => {
       console.log(this.slug);
     }, 500);

@@ -12,15 +12,17 @@
 <section class="media-banner">
     <div class="container">
         <div class="media-calltoaction" >
-            <ng-container *ngFor="let item of getAllBlog.data">
-                <div class="media" [routerLink]="['/blog']">
-                    <div class="spotlight-banner">
-                        <img src="{{item.image}}" alt="{{item.alt}}">
-                    </div>
-                    <div class="spotlight-desc">
-                        <h5>{{item.title}}</h5>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laudantium earum, quae veritatis qui, numquam corrupti nobis rerum aperiam!</p>
-                        <p class="action-button">Read Article <i class="fa fa-arrow-right"></i></p>
+            <ng-container *ngFor="let item of getAllBlog.data ; index as index" >
+                <div *ngIf="index==0">
+                    <div class="media" routerLink="/info/{{item.slug}}">
+                        <div class="spotlight-banner">
+                            <img src="{{item.image}}" alt="{{item.alt}}">
+                        </div>
+                        <div class="spotlight-desc">
+                            <h5>{{item.title}}</h5>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis nesciunt earum quod et </p>
+                            <p class="action-button">Read Article <i class="fa fa-arrow-right"></i></p>
+                        </div>
                     </div>
                 </div>
             </ng-container>

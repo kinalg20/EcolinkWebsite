@@ -15,85 +15,55 @@ export class ProductCheckoutComponent implements OnInit {
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
+  Carts: any = [];
   orderObj: any;
-  showPaypal:boolean=false;
+  showPaypal: boolean = false;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService, private route: Router) { }
 
   ngOnInit(): void {
     this.initConfig();
     this.checkoutProduct();
-    this.__apiservice.getUserAddress().subscribe((res: any) => {
-      res.data.map((response: any) => {
-        this.getAllUserAddresses.push(response);
-        if (this.getAllUserAddresses.length > 0) {
-          this.showDropdowm = true;
-        }
-      })
-    });
+    // this.getShippingInfo();
+    if (localStorage.getItem('ecolink_user_credential') != null) {
+      this.__apiservice.getUserAddress().subscribe((res: any) => {
+        res.data.map((response: any) => {
+          this.getAllUserAddresses.push(response);
+          if (this.getAllUserAddresses.length > 0) {
+            this.showDropdowm = true;
+          }
+        })
+      });
+    }
+    // this.__apiservice.fedexshippingApi().subscribe(res=>{
+    //   console.log(res);
+    // })
   }
   getRadioButtonValue(value: any) {
-    console.log(value);
-    console.log(this.getAllUserAddresses);
-    this.CheckoutProduct[0].user=this.getAllUserAddresses[value];
+    if (localStorage.getItem('ecolink_user_credential') != null) {
+      console.log(value);
+      console.log(this.getAllUserAddresses);
+      this.CheckoutProduct[0].user = this.getAllUserAddresses[value];
+    }
   }
-
-  // signUp(form: NgForm) {
-  //   if (form.valid) {
-  //     let data = Object.assign({}, form.value);
-  //     this.userObj = {
-  //       name: data.name,
-  //       email: data.email,
-  //       mobile: data.mobile,
-  //       password: data.email,
-  //       address: data.streetaddress,
-  //       country: data.countryname,
-  //       state: data.state,
-  //       city: data.city,
-  //       pincode: data.pincode
-  //     };
-  //     console.log(this.userObj);
-  //     if (this.showDropdowm) {
-  //       this.__apiservice.post(this.userObj).subscribe(
-  //         (res) => {
-  //           console.log(res);
-  //           if (res.code == 200) {
-  //             localStorage.setItem(
-  //               'ecolink_user_credential',
-  //               JSON.stringify(res.data)
-  //             );
-  //             this.route.navigateByUrl('/shop/checkout');
-  //           }
-  //           else {
-  //             localStorage.removeItem('ecolink_user_credential');
-  //           }
-  //         },
-  //       );
-  //     }
-  //     else {
-  //       console.log("getuseraddress")
-  //     }
-  //   }
-  // }
 
   checkoutProduct() {
-    this.__apiservice.getCheckoutProducts().subscribe(res => {
-      console.log(res);
-      this.CheckoutProduct.push(res.data);
-    })
-    setTimeout(() => {
-      console.log(this.CheckoutProduct[0]);
-    }, 5000);
-    this.__apiservice.getItemFromCart().subscribe(res => {
-      console.log(res);
-    })
+    if (localStorage.getItem('ecolink_user_credential') != null) {
+      this.__apiservice.getCheckoutProducts().subscribe(res => {
+        console.log(res);
+        this.CheckoutProduct.push(res.data);
+      })
+    }
+    else{
+      this.getsubjectBehaviour();
+    }
   }
 
-  getShippingInfo() {
-    this.__apiservice.rateDetailThroughSaia().subscribe(res => {
-      console.log(res);
-    })
-  }
+  // getShippingInfo() {
+  //   this.__apiservice.rateDetailThroughSaia().subscribe(res => {
+  //     console.log(res);
+  //   })
+  // }
   getOrderInfo() {
     this.orderObj = {
       sameAsShip: 0,
@@ -189,6 +159,28 @@ export class ProductCheckoutComponent implements OnInit {
     };
   }
   checkPaymentTab() {
-    this.showPaypal=!this.showPaypal;
+    this.showPaypal = !this.showPaypal;
+  }
+  cookiesCheckout: any = {}
+  getsubjectBehaviour() {
+    this.__apiservice.cookiesCheckoutData.subscribe({
+      next: (grca) => {
+        if(grca.length>0){
+          console.log(grca);
+          this.Carts = grca;
+          // this.Carts.push(grca);
+        }
+        this.refractorData();
+      }
+    });
+  }
+
+  refractorData(){
+    let data: any = {};
+      data.Carts= this.Carts;
+      data.payable = localStorage.getItem('payable')
+      this.cookiesCheckout.data = data;
+    console.log(this.cookiesCheckout.data);
+    this.CheckoutProduct.push(this.cookiesCheckout.data);
   }
 }

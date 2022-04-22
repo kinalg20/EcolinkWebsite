@@ -95,18 +95,26 @@ export class ProductlistComponent implements OnInit {
     }
     this.ProductListData[0].data.products = obj_Array[0];
   }
+
+  productResponse: any = {};
+  displayProducts: any = [];
+  productList: any = [];
   getListingData(slug: any) {
-    setTimeout(() => {
-      this._ApiService.getDetailByCategory(slug).subscribe(res => {
-        if (res.code == 200) {
-          this.ProductListData.push(res);
-          this.getPrice();
-        }
-        if (res.code == 400) {
-          this.warning.show("Warning")
-        }
-      })
-    }, 500);
+    this._ApiService.getDetailByCategory(slug).subscribe(res => {
+      if (res.code == 200) {
+        this.productResponse = res.data;
+        this.productList = this.productResponse.products;
+        this.displayProducts = this.productList;
+        console.log("this.productResponse", this.displayProducts)
+        this.ProductListData.push(res);
+        this.getPrice();
+      }
+      if (res.code == 400) {
+        this.warning.show("Warning")
+      }
+    })
+    this.ProductbackupData = this.ProductListData;
+    console.log("this.ProductListData", this.ProductbackupData);
   }
 
   AddProductToCart(Item: any) {
@@ -123,6 +131,11 @@ export class ProductlistComponent implements OnInit {
         this.previousdata.map((res: any) => {
           if (res.CartProductId != this.cart_obj[0].CartProductId) {
             this.cart_obj.push(res);
+          }
+          else {
+            // res.ProductQuantity = res.ProductQuantity + this.cart_obj.ProductQuantity;
+            this.cart_obj[0].ProductQuantity = this.cart_obj[0].ProductQuantity + res.ProductQuantity;
+            console.log(this.cart_obj);
           }
         })
       }
@@ -152,25 +165,21 @@ export class ProductlistComponent implements OnInit {
   getDataForFilter() {
     let obj_Array: any[] = [];
     console.log(this.ProductListData);
-    // setTimeout(() => {
-    //   let filterValue = {
-    //     category: this.selectedCategory,
-    //     price_from: this.rangeValues[0],
-    //     price_to: this.rangeValues[1],
-    //     rating: this.selectedRatings,
-    //     sortby: this.selectedLevel
-    //   }
-    //   console.log(filterValue);
-    //   this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
-    //     console.log("response", res.data);
-    //     Object.keys(res.data).map(function (key) {
-    //       console.log(res.data[key]);
-    //       obj_Array.push(res.data[key]);
-    //     });
-    //     this.ProductListData[0].data.products = obj_Array;
-    //     this.getPrice();
-    //   });
-    // }, 1000);
+    let filterValue = {
+      category: this.selectedCategory,
+      price_from: this.rangeValues[0],
+      price_to: this.rangeValues[1],
+      rating: this.selectedRatings,
+      sortby: this.selectedLevel
+    }
+    this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
+      console.log("response", res);
+      Object.keys(res.data).map(function (key) {
+        obj_Array.push(res.data[key]);
+      });
+      this.ProductListData[0].data.products = obj_Array;
+      this.getPrice();
+    });
   }
 
   getPrice() {
@@ -183,20 +192,16 @@ export class ProductlistComponent implements OnInit {
   }
 
   ClearAll() {
-    console.log(this.ProductbackupData);
-    this.ProductListData[0].data.products = this.ProductbackupData;
-    console.log(this.ProductbackupData);
-    this.getPrice();
+    this.ProductListData[0].data.products = this.displayProducts;
   }
-  
+
   getkeypressdata() {
     console.log(this.value1);
     if (this.value1.length > 0) {
       this.suggestions = true;
     }
-    if(this.value1.length == 0){
-      this.ProductListData[0].data.products = this.ProductbackupData;
-      console.log(this.ProductbackupData);
+    if (this.value1.length == 0) {
+      this.ProductListData[0].data.products = this.displayProducts;
     }
   }
 }

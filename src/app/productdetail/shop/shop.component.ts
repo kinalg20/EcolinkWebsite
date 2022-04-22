@@ -13,6 +13,8 @@ export class ShopComponent implements OnInit {
   slug: any;
   cart_obj: any = []
   previousdata: any;
+  recommended_products: any = [];
+  detailSlug: any;
 
   responsiveOptions = [
     {
@@ -37,8 +39,13 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
     console.log(this.slug);
-    let product_list = this.slug.slug + '/' + this.slug.subslug;
-    this.getProductDetail(product_list);
+    if (this.slug.subsublug) {
+      this.detailSlug = this.slug.slug + '/' + this.slug.subslug +'/'+ this.slug.subsublug;
+    }
+    else {
+      this.detailSlug = this.slug.slug + '/' + this.slug.subslug;
+    }
+    this.getProductDetail(this.detailSlug);
   }
 
 
@@ -56,6 +63,7 @@ export class ShopComponent implements OnInit {
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
+        this.recommended_products = res.data.related_products;
       }
     })
   }
@@ -67,32 +75,33 @@ export class ShopComponent implements OnInit {
       let recently_added_object = {
         "CartProductId": Item.id,
         "ProductQuantity": this.ItemCount,
-        "ProductCategory": this.slug.category
+        "ProductCategory": this.slug.slug
       }
-      console.log('previous data', this.previousdata);
+      this.cart_obj.push(recently_added_object);
       if (this.previousdata != 'empty') {
         this.previousdata.map((res: any) => {
-          if (!(res.CartProductId == recently_added_object.CartProductId && res.ProductCategory === recently_added_object.ProductCategory)) {
-            this.cart_obj.push(recently_added_object);
+          if (res.CartProductId != this.cart_obj[0].CartProductId) {
+            this.cart_obj.push(res);
           }
-          this.cart_obj.push(res);
+          else {
+            this.cart_obj[0].ProductQuantity = this.cart_obj[0].ProductQuantity + res.ProductQuantity;
+            console.log(this.cart_obj);
+          }
         })
       }
-      else {
-        this.cart_obj.push(recently_added_object);
-      }
       this.Cookies.SaveCartData(this.cart_obj);
+      console.log(this.cart_obj);
     }
 
     else {
-      this._ApiService.addItemToCart(Item.id , this.ItemCount , "add").subscribe((res:any)=>{
-          console.log(res);
+      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
+        console.log(res);
       })
     }
   }
 
-  addWishList(product:any) {
-    console.log("product_id" , product.id);
+  addWishList(product: any) {
+    console.log("product_id", product.id);
     this._ApiService.addItemToWishlist(product.id).subscribe(res => {
       console.log(res);
     })

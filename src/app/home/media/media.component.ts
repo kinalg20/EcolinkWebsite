@@ -18,6 +18,7 @@ export class MediaComponent implements OnInit {
       }, 500);
     })
   }
+  
   responsiveOptions = [
     {
       breakpoint: '1024px',

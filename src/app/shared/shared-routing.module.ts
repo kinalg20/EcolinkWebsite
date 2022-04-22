@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BlogComponent } from '../home/blog/blog.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { InnerPagesComponent } from './inner-pages/inner-pages.component';
@@ -19,6 +20,8 @@ const routes: Routes = [
   { path: 'inner-pages/:slug/:sublink/:subsublink', component: InnerPagesComponent },
   { path: 'thanks', component: ThankYouComponent },
   { path: 'failure', component: OrderFailComponent },
+  // { path : 'info/:slug', component: BlogComponent},
+
   { path: '404', component: PageNotFoundComponent }
 ];
 
