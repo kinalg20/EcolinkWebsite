@@ -1,0 +1,56 @@
+.contact-us-section {
+    display: grid;
+    grid-template-columns: 40% 58%;
+    grid-gap: 14px;
+
+    .detail-section {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border: 1px solid #d7d1d1;
+        border-radius: 10px;
+        padding: 10px;
+
+        .contact-heading {
+            p {
+                margin-bottom: 0;
+            }
+
+            .country-buttons {
+                .button-row {
+                    .button-col {
+                        padding-top: 5px;
+                        padding-bottom: 5px;
+
+                        button {
+                            background: #55b15c;
+                            color: white;
+                            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+                            border: 1px solid #d7d1d1;
+                            border-radius: 10px;
+                            padding: 5px;
+                            width: 100%;
+                        }
+
+                        button:hover {
+                            background: whitesmoke;
+                            color: black;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .map-section {}
+}
+
+.sample-policy-section {
+    margin: 50px 0;
+}
+// .container {
+    .contact-us-form {
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        border: 1px solid #d7d1d1;
+        border-radius: 10px;
+        padding: 30px;
+    }
+// }
