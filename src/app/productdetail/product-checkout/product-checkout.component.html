@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     </form> -->
-                    <app-billing-form [CheckoutProduct]=CheckoutProduct></app-billing-form>
+                    <!-- <app-billing-form [CheckoutProduct]=CheckoutProduct></app-billing-form> -->
                 </div>
             </div>
             <div class="your-order">
@@ -120,8 +120,8 @@
                     <ng-container *ngFor="let cart of CheckoutProduct">
                         <div class="checkout-products">
                             <ul *ngFor="let data of cart.carts">
-                                <li>{{data.product.name}} X {{data.quantity}}</li>
-                                <li>${{data.product.sale_price *data.quantity }}</li>
+                                <li>{{data[0].product.name}} X {{data.quantity}}</li>
+                                <li>${{data.product.sale_price * data.quantity }}</li>
                             </ul>
                         </div>
                         <div class="checkout-products-subtotal">

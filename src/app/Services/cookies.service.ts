@@ -26,4 +26,8 @@ export class CookiesService {
       return 'empty';
     }
   }
+
+  DeleteCartData(cartObj:any){
+    this.cookieService.delete(cartObj);
+  }
 }

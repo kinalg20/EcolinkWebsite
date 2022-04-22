@@ -80,6 +80,7 @@ export class ProductCartComponent implements OnInit {
       })
       setTimeout(() => {
         this.CardShow = completedFormat.data;
+        this.subtotal();
       }, 5000);
     }
     else {
@@ -123,10 +124,9 @@ export class ProductCartComponent implements OnInit {
     }
     else {
       setTimeout(() => {
-        console.log(this.CardShow);
         let saveDataInCookies: any = [];
-        let cookiesObject : any = {}
-        this.CardShow.map((res:any)=>{
+        let cookiesObject: any = {}
+        this.CardShow.map((res: any) => {
           cookiesObject = {
             "CartProductId": res.product_id,
             "ProductQuantity": res.quantity
@@ -136,15 +136,32 @@ export class ProductCartComponent implements OnInit {
         console.log(saveDataInCookies);
         this._cookies.SaveCartData(saveDataInCookies);
       }, 1000);
+      this.subtotal();
     }
   }
 
-  deleteItemFromCart(product_id: any) {
-    console.log(product_id);
-    this._ApiService.deleteItemFromCart(product_id).subscribe(res => console.log(res));
-    // setTimeout(() => {
-    setTimeout(() => {
-      this.getCartData();
-    }, 2000);
+  deleteItemFromCart(product: any , product_quantity:any) {
+    console.log(product);
+    if (this.UserLogin != null) {
+      this._ApiService.deleteItemFromCart(product).subscribe(res => console.log(res));
+      setTimeout(() => {
+        this.getCartData();
+      }, 2000);
+    }
+
+    else {
+      let deleteproduct = {
+        "CartProductId": product.id,
+        "ProductQuantity": product_quantity,
+      }
+      this._cookies.DeleteCartData(deleteproduct);
+      console.log(this._cookies.GetCartData());
+    }
   }
+
+  StoreCookiesData(){
+    this._ApiService.cookiesCheckoutData.next(this.CardShow);
+    localStorage.setItem("payable",JSON.stringify(this.SubTotal));
+  }
+
 }

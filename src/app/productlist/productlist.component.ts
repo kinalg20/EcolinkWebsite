@@ -96,15 +96,15 @@ export class ProductlistComponent implements OnInit {
     this.ProductListData[0].data.products = obj_Array[0];
   }
 
-  productResponse:any={};
-  displayProducts:any=[];
-  productList:any=[];
+  productResponse: any = {};
+  displayProducts: any = [];
+  productList: any = [];
   getListingData(slug: any) {
     this._ApiService.getDetailByCategory(slug).subscribe(res => {
       if (res.code == 200) {
-        this.productResponse=res.data;
+        this.productResponse = res.data;
         this.productList = this.productResponse.products;
-        this.displayProducts=this.productList;
+        this.displayProducts = this.productList;
         console.log("this.productResponse", this.displayProducts)
         this.ProductListData.push(res);
         this.getPrice();
@@ -114,7 +114,7 @@ export class ProductlistComponent implements OnInit {
       }
     })
     this.ProductbackupData = this.ProductListData;
-    console.log("this.ProductListData",this.ProductbackupData);
+    console.log("this.ProductListData", this.ProductbackupData);
   }
 
   AddProductToCart(Item: any) {
@@ -131,6 +131,11 @@ export class ProductlistComponent implements OnInit {
         this.previousdata.map((res: any) => {
           if (res.CartProductId != this.cart_obj[0].CartProductId) {
             this.cart_obj.push(res);
+          }
+          else {
+            // res.ProductQuantity = res.ProductQuantity + this.cart_obj.ProductQuantity;
+            this.cart_obj[0].ProductQuantity = this.cart_obj[0].ProductQuantity + res.ProductQuantity;
+            console.log(this.cart_obj);
           }
         })
       }
@@ -187,7 +192,7 @@ export class ProductlistComponent implements OnInit {
   }
 
   ClearAll() {
-    this.ProductListData[0].data.products  = this.displayProducts; 
+    this.ProductListData[0].data.products = this.displayProducts;
   }
 
   getkeypressdata() {

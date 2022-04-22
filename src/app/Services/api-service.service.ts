@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, ObservedValueOf } from 'rxjs';
+import { BehaviorSubject, Observable, ObservedValueOf } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -11,7 +11,7 @@ export class ApiServiceService {
   public _baseurl = environment.api_baseurl;
   header: any;
   token: any;
-
+  cookiesCheckoutData = new BehaviorSubject<any>([]);
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
   getAllBlogs(): Observable<any> {
