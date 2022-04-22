@@ -1,30 +1,135 @@
-.request-form {
-    padding: 60px 0;
-    .container {
-        .form-head {
-            margin: 30px 0;
-            h3 {
-                font-size: 1.5rem;
+.container {
+    .row {
+        .request-form {
+            padding: 60px 0;
+            .main-title {
+                margin-bottom: 40px;
+            }
+            .form-head {
+                margin: 30px 0;
+                h3 {
+                    font-size: 1.5rem;
+                }
+            }
+            form {
+                label {
+                    margin-top: 10px;
+                    font-weight: bold;
+                    font-size: 1.1rem;
+                    color: #666666;
+                }
+                .field {
+                    list-style: none;
+                    .looking-change {
+                        ul {
+                            padding: 0;
+                            list-style: none;
+                            li {
+                                input {
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+                li {
+                    list-style: none;
+                    .container_checkbox {
+                        ul {
+                            padding: 0;
+                            li {
+                                input {
+                                    margin-right: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+                .submit-btn {
+                    background: #55b15c;
+                    border: none;
+                    color: #fff;
+
+                }
             }
         }
-        form {
-            label {
-                margin-top: 10px;
-                font-weight: bold;
-                font-size: 1.1rem;
-                color: #666666;
+        .inner_sidebar {
+            margin-left: 50px;
+            .widget {
+                margin-bottom: 100px;
+                ul {
+                    list-style: none;
+                    padding: 0;
+                    li {
+                        padding: 10px 0;
+                    }
+                }
             }
-            input {
-                margin: 10px 0;
-                -webkit-appearance: none;
-                border: 1px solid #e1e1e1;
-                padding: 8px 6px;
-                outline: none;
-                color: #777;
-                width: 100%;
-                display: block;
-                background: #fff;
-                border-radius: 5px;
+            .widget_text {
+                .textwidget {
+                    p {
+                        a {
+                            color: #000;
+                            text-decoration: none;
+                        }
+                        .shopButton2020 {
+                            background-color: #0a6fbd;
+                            border-radius: 3px;
+                            display: inline-block;
+                            cursor: pointer;
+                            color: #ffffff !important;
+                            font-family: Arial;
+                            font-size: 17px;
+                            padding: 16px 31px;
+                            text-decoration: none;
+                            width: 100%;
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                        .requestButton2020 {
+                            background-color: #009e49;
+                            border-radius: 3px;
+                            display: inline-block;
+                            cursor: pointer;
+                            color: #ffffff !important;
+                            font-family: Arial;
+                            font-size: 17px;
+                            padding: 16px 31px;
+                            text-decoration: none;
+                            width: 100%;
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                        .pdsButton2020 {
+                            background-color: #000000;
+                            border-radius: 3px;
+                            display: inline-block;
+                            cursor: pointer;
+                            color: #ffffff !important;
+                            font-family: Arial;
+                            font-size: 17px;
+                            padding: 16px 31px;
+                            text-decoration: none;
+                            width: 100%;
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                        .contactButton2020 {
+                            background-color: #777777;
+                            border-radius: 3px;
+                            display: inline-block;
+                            cursor: pointer;
+                            color: #ffffff !important;
+                            font-family: Arial;
+                            font-size: 17px;
+                            padding: 16px 31px;
+                            text-decoration: none;
+                            width: 100%;
+                            text-align: center;
+                            margin-bottom: 30px;
+                        }
+                    }
+                }
             }
         }
     }
