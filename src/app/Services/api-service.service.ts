@@ -257,48 +257,50 @@ export class ApiServiceService {
 
   rateDetailThroughSaia() {
     let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
-    let body = '<?xml version="1.0" encoding="utf-8"?>'
-    '<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">'
-    '<soap:Body>'
-    '<Create xmlns="http://www.saiasecure.com/WebService/ratequote/">'
-    '<request>'
-    ' <UserID>ecolink</UserID>'
-    '<Password>ecolink4</Password>'
-    '<TestMode>Y</TestMode>'
-    '<BillingTerms>Prepaid</BillingTerms>'
-    '<AccountNumber>0747932</AccountNumber>'
-    '<Application>Outbound</Application>'
-    '<OriginCity></OriginCity>'
-    '<OriginState></OriginState>'
-    '<OriginZipcode></OriginZipcode>'
-    '<DestinationCity>Ridgeview</DestinationCity>'
-    '<DestinationState>SD</DestinationState>'
-    '<DestinationZipcode>57652</DestinationZipcode>'
-    '<WeightUnits>KGS</WeightUnits>'
-    '<Details>'
-    '<DetailItem>'
-    '<Width>20.00</Width>'
-    '<Length>20.00</Length>'
-    '<Height>20.00</Height>'
-    '<Weight>20</Weight>'
-    '<Class>50</Class>'
-    '</DetailItem>'
-    '<DetailItem>'
-    '<Width>20.00 </Width>'
-    '< Length > 20.00 < /Length>'
-    '< Height > 20.00 < /Height>'
-    ' < Weight > 20 < /Weight>'
-    ' < Class > 50 < /Class>'
-    '</DetailItem>'
-    '</Details>'
-    '</request>'
-    '</Create>'
-    '</soap:Body>'
-    '</soap:Envelope>'
+    let body = `
+    <?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
+      <request>
+        <UserID>ecolink</UserID>
+        <Password>ecolink4</Password>
+        <TestMode>Y</TestMode>
+        <BillingTerms>Prepaid</BillingTerms>
+        <AccountNumber>0747932</AccountNumber>
+        <Application>Outbound</Application>
+        <OriginCity></OriginCity>
+        <OriginState></OriginState>
+        <OriginZipcode></OriginZipcode>
+        <DestinationCity>Ridgeview</DestinationCity>
+        <DestinationState>SD</DestinationState>
+        <DestinationZipcode>57652</DestinationZipcode>
+        <WeightUnits>KGS</WeightUnits>
+        <Details>
+          <DetailItem>
+            <Width>20.00</Width>
+            <Length>20.00</Length>
+            <Height>20.00</Height>
+            <Weight>20</Weight>
+            <Class>50</Class>
+          </DetailItem>
+          <DetailItem>
+            <Width>20.00</Width>
+            <Length>20.00</Length>
+            <Height>20.00</Height>
+            <Weight>20</Weight>
+            <Class>50</Class>
+          </DetailItem>
+        </Details>
+      </request>
+    </Create>
+  </soap:Body>
+</soap:Envelope>
+    `
     const headers = new HttpHeaders({
-      'Content-Type': 'text/xml', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type',
-      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT', 'Access-Control-Allow-Credentials': 'true', "Cookie": "TS01cfb1b0=01dd6f358a47dc35f68f211096e2d76a71cac91334916d33efdea10109c5be0a2387d459bf0998726bd7e691389a711b2073381163"
-    }).set('Accept', 'text/xml');
+      'Content-Type': 'text/xml; charset=utf-8', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT', 'Access-Control-Allow-Credentials': 'true'
+    });
     return this.http.post(url, body, { headers: headers });
   }
   storeOrder(orderObj: any) {
@@ -368,7 +370,7 @@ export class ApiServiceService {
       user_id: user_id
     }
 
-    return this.http.post(this._baseurl + 'logout',body, { headers: httpHeaders })
+    return this.http.post(this._baseurl + 'logout', body, { headers: httpHeaders })
   }
   editUserProfileInfo(data: any): Observable<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
@@ -382,8 +384,24 @@ export class ApiServiceService {
     let url = "getProductById";
     return this.http.post(this._baseurl + url, { product_id: product_id })
   }
-  forgotPassword(data:any):Observable<any> {
-    return this.http.post(this._baseurl+'forgotPassword',data);
+  forgotPassword(data: any): Observable<any> {
+    return this.http.post(this._baseurl + 'forgotPassword', data);
   }
+
+  fedexshippingApi(): Observable<any> {
+    const httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded'
+    })
+
+    let url = "https://sandbox.partner.api.bri.co.id/oauth/client_credential/accesstoken?grant_type=client_credentials";
+
+    let tokenGenerationData: any = {
+      client_id: 'l7df29a700b97d4d079e4b0d3ea2363d32',
+      client_secret: '4a80d56001e84d06ac4cdb5efae564d8'
+    };
+
+    return this.http.post(url, tokenGenerationData, { headers: httpHeaders })
+  }
+
 }
 

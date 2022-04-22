@@ -159,7 +159,7 @@
                                         <div class="card-price-section">
                                             <div class="card-price">
                                                 <ng-container
-                                                    *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
+                                                    *ngIf="product.regular_price > product.sale_price; then thenBlock else elseBlock">
                                                 </ng-container>
                                                 <ng-template #thenBlock>
                                                     <p class="product-price mb-1"
@@ -266,13 +266,6 @@
 
                 </div>
             </div>
-
-        </div>
-
-        <!-- Recommended Products -->
-        <div class="recommendation-product">
-            <h3>Recommended Products</h3>
-            <app-card-slider></app-card-slider>
         </div>
     </div>
 </div>

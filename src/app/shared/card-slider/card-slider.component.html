@@ -1,4 +1,4 @@
-<p-carousel [value]="products" [numVisible]="4" [numScroll]="1" [circular]="false"
+<p-carousel [value]="recommended_products" [numVisible]="4" [numScroll]="1" [circular]="false"
     [responsiveOptions]="responsiveOptions">
     <ng-template let-product pTemplate="item">
         <div class="product-item">
@@ -11,14 +11,14 @@
                         </div>
                         <div class="card-body">
                             <div class="card-title">
-                                <h6>ECC (A) 13oz Aerosol – Case of 12 –</h6>
-                                <p> Aerosol, Contact Cleaner </p>
+                                <h6>{{product.name.slice(0,36)}}</h6>
+                                <!-- <p> Aerosol, Contact Cleaner </p> -->
                             </div>
                             <div class="card-price-section">
                                 <div class="card-price">
-                                    <p>$448.00</p>
+                                    <p>${{product.sale_price}}</p>
                                 </div>
-                                <div class="rating">
+                                <div class="rating" *ngIf="product.rating > 0">
                                     <i style="font-size:18px" class="fa">&#xf006;</i>
                                     <i style="font-size:18px" class="fa">&#xf006;</i>
                                     <i style="font-size:18px" class="fa">&#xf006;</i>

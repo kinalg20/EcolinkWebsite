@@ -23,6 +23,7 @@ export class ProductCheckoutComponent implements OnInit {
   ngOnInit(): void {
     this.initConfig();
     this.checkoutProduct();
+    this.getShippingInfo();
     this.__apiservice.getUserAddress().subscribe((res: any) => {
       res.data.map((response: any) => {
         this.getAllUserAddresses.push(response);
@@ -31,6 +32,10 @@ export class ProductCheckoutComponent implements OnInit {
         }
       })
     });
+
+    this.__apiservice.fedexshippingApi().subscribe(res=>{
+      console.log(res);
+    })
   }
   getRadioButtonValue(value: any) {
     console.log(value);
