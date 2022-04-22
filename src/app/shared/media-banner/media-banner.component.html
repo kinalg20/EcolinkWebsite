@@ -1,34 +1,37 @@
-<ng-container *ngFor="let action of data_input ; index as index">
-    <div *ngIf="index%2==0; then thenBlock else elseBlock"></div>
-    <ng-template #thenBlock>
-        <section class="media-banner">
-            <div class="container">
-                <div class="img-text" routerLink="/productlist">
-                    <div class="img-part" #height>
-                        <img src="{{action.img}}"
-                            alt="">
-                    </div>
-                    <div class="text-part">
-                        <h3>{{action.heading}}</h3>
-                        <p>{{action.card_text}}</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </ng-template>
-    <ng-template #elseBlock>
-        <section class="re-media-banner">
-            <div class="container">
-                <div class="re-img-text" routerLink="/productlist">
-                    <div class="re-text-part">
-                        <h3>{{action.heading}}</h3>
-                        <p>{{action.card_text}}</p>
-                    </div>
-                    <div class="re-img-part">
-                        <img src="{{action.img}}" alt="">
+<ng-container *ngFor="let action of data_input.data ; index as index">
+    <div *ngIf="!(index==0)">
+        <div *ngIf="index%2==0; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+            <section class="media-banner">
+                <div class="container">
+                    <div class="img-text" routerLink="/productlist">
+                        <div class="img-part" #height>
+                            <img src="{{action.image}}"
+                            alt="{{action.alt}}">
+                        </div>
+                        <div class="text-part">
+                            <h3>{{action.title}}</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Id pariatur, quam repellendus velit quis, soluta aliquid facere nihil quibusdam quia omnis perspiciatis dolorum esse quos. Nihil, qui. Aliquam, repellendus consequuntur?</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-    </ng-template>
+            </section>
+        </ng-template>
+        <ng-template #elseBlock>
+            <section class="re-media-banner">
+                <div class="container">
+                    <div class="re-img-text" routerLink="/productlist">
+                        <div class="re-text-part">
+                            <h3>{{action.title}}</h3>
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis voluptate explicabo impedit voluptatem, minima dicta quidem inventore laudantium ipsum facere repellat nesciunt ut commodi quia, placeat ab sit accusantium molestias!</p>
+                        </div>
+                        <div class="re-img-part">
+                            <img src="{{action.image}}"
+                            alt="{{action.alt}}">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </ng-template>
+    </div>
 </ng-container>

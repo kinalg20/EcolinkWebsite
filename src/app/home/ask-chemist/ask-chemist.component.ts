@@ -37,7 +37,7 @@ export class AskChemistComponent implements OnInit {
         first_name: form.value.firstname,
         last_name: form.value.lastname,
         email: form.value.email,
-        type: "contact",
+        type: "askchemist",
         mobile: form.value.phonenumber,
         address_1: form.value.address,
         country: form.value.country,
@@ -46,7 +46,7 @@ export class AskChemistComponent implements OnInit {
         zip: form.value.zip,
         input_1: form.value.textarea
       };
-      this.__apiservice.askChemistFormDetail(this.userObj).subscribe((res: any) => {
+      this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         form.reset();
       }

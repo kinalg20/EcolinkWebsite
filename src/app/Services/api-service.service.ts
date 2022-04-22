@@ -356,7 +356,7 @@ export class ApiServiceService {
     let url = 'getPage'
     return this.http.post(this._baseurl + url, { slug: slug })
   }
-  askChemistFormDetail(data: any): Observable<any> {
+  submitFormDetail(data: any): Observable<any> {
     return this.http.post(this._baseurl + 'contact', data);
   }
   getUserLogoutProfile(): Observable<any> {
@@ -388,6 +388,6 @@ export class ApiServiceService {
   forgotPassword(data:any):Observable<any> {
     return this.http.post(this._baseurl+'forgotPassword',data);
   }
-  
+
 }
 
