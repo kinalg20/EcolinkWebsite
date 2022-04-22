@@ -7,12 +7,27 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class MediaBannerComponent implements OnInit {
   @Input() data_input:any;
+  blogArray:any=[];
+  count:any=0;
   constructor() { }
 
   ngOnInit(): void {
     setTimeout(() => {
       console.log(this.data_input.data);
+      this.data_input.data.map((res:any)=> {
+        if(this.count<3){
+          this.blogArray.push(res);
+          this.count++;
+        }
+      })
+      console.log(this.blogArray);
     }, 1000);
   }
-
+  loadAllBlog() {
+    this.blogArray=[]
+    this.data_input.data.map((res:any)=> {
+      this.blogArray.push(res);
+      console.log(this.blogArray)
+    })
+  }
 }
