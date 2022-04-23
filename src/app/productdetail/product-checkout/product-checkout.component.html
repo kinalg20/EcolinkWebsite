@@ -149,23 +149,23 @@
                                 the payment
                                 reference. Your order will not be shipped until the funds have cleared in our account.
                             </p>
-                            <div class="field-radiobutton mt-3">
-                                <p-radioButton name="payment_method" value="cod1" [(ngModel)]="selectedPaymentMethod"
-                                    inputId="cod">
+                            <div class="field-radiobutton mt-3" (click)="checkPaymentTab()">
+                                <p-radioButton name="payment_method" value="check-payment" [(ngModel)]="selectedPaymentMethod"
+                                    inputId="payment_method">
                                 </p-radioButton>
-                                <label for="cod" class="mx-2"><b>Check payments</b></label>
+                                <label for="payment_method" class="mx-2"><b>Check payments</b></label>
                             </div>
-                            <div class="field-radiobutton mt-3">
-                                <p-radioButton name="payment_method1" value="cod2" [(ngModel)]="selectedPaymentMethod"
-                                    inputId="cod">
+                            <div class="field-radiobutton mt-3" (click)="checkPaymentTab()">
+                                <p-radioButton name="payment_method1" value="cod" [(ngModel)]="selectedPaymentMethod"
+                                    inputId="payment_method1">
                                 </p-radioButton>
-                                <label for="cod" class="mx-2"><b>Cash on Delivery</b></label>
+                                <label for="payment_method1" class="mx-2"><b>Cash on Delivery</b></label>
                             </div>
-                            <div class="field-radiobutton mt-3" >
-                                <p-radioButton name="payment_method1" value="cod3" [(ngModel)]="selectedPaymentMethod"
-                                    inputId="cod" (click)="checkPaymentTab()">
+                            <div class="field-radiobutton mt-3" (click)="checkPaymentTab()">
+                                <p-radioButton name="payment_method2" value="paypal" [(ngModel)]="selectedPaymentMethod"
+                                    inputId="payment_method2">
                                 </p-radioButton>
-                                <label for="cod" class="mx-2"><b>PayPal</b></label>
+                                <label for="payment_method2" class="mx-2"><b>PayPal</b></label>
                             </div>
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks" (click)="getOrderInfo()"
-                                class="p-button-raised p-button-success" style="height:45px; width: 100%;"></button>
+                                class="p-button-raised p-button-success" style="height:45px; width: 100%;" [disabled]="paymentCheck"></button>
                         </div>
                     </div>
                 </div>
