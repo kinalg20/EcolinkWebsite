@@ -15,9 +15,10 @@ export class ProductCheckoutComponent implements OnInit {
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
-  Carts: any = [];
+  carts: any = [];
   orderObj: any;
   showPaypal: boolean = false;
+  shippingCharge: number = 500;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService, private route: Router) { }
 
@@ -54,7 +55,7 @@ export class ProductCheckoutComponent implements OnInit {
         this.CheckoutProduct.push(res.data);
       })
     }
-    else{
+    else {
       this.getsubjectBehaviour();
     }
   }
@@ -165,9 +166,9 @@ export class ProductCheckoutComponent implements OnInit {
   getsubjectBehaviour() {
     this.__apiservice.cookiesCheckoutData.subscribe({
       next: (grca) => {
-        if(grca.length>0){
+        if (grca.length > 0) {
           console.log(grca);
-          this.Carts = grca;
+          this.carts = grca;
           // this.Carts.push(grca);
         }
         this.refractorData();
@@ -175,12 +176,18 @@ export class ProductCheckoutComponent implements OnInit {
     });
   }
 
-  refractorData(){
+  refractorData() {
     let data: any = {};
-      data.Carts= this.Carts;
-      data.payable = localStorage.getItem('payable')
-      this.cookiesCheckout.data = data;
+    data.carts = this.carts;
+    data.payable = localStorage.getItem('payable')
+    this.cookiesCheckout.data = data;
     console.log(this.cookiesCheckout.data);
     this.CheckoutProduct.push(this.cookiesCheckout.data);
+    // console.log(this.CheckoutProduct);
+    // this.CheckoutProduct.map((res: any) => {
+    //   res.carts.map((resp:any)=>{
+    //     console.log(resp.product_id);
+    //   })
+    // })
   }
 }

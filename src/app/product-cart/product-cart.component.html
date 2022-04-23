@@ -66,7 +66,7 @@
                             <td>
                                 <div class="quantity">
                                     <button (click)="Count('decrease', rowIndex)"
-                                        (click)="UpdateCart('delete' , product.product_id ,product.quantity )">-</button>
+                                        (click)="UpdateCart('delete' , product.product_id , product.quantity )">-</button>
                                     <input type="text" pInputText [(ngModel)]="product.quantity" />
                                     <button (click)="Count('increase',rowIndex)"
                                         (click)="UpdateCart('add' ,  product.product_id , product.quantity)">+</button>
@@ -109,7 +109,8 @@
                 <div class="proceed">
                     <div class="proceed-button">
                         <button routerLink="/shop/checkout" pButton pRipple type="button" label="Proceed to Checkout"
-                            class="p-button-raised p-button-success" style="height:40px; width: 100%;" (click)="StoreCookiesData()"></button>
+                            class="p-button-raised p-button-success" style="height:40px; width: 100%;"
+                            (click)="StoreCookiesData()"></button>
                     </div>
                 </div>
             </div>

@@ -17,8 +17,8 @@ export class ProductCartComponent implements OnInit {
   constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig) { }
 
   ngOnInit(): void {
-    this.getCartData();
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
+    this.getCartData();
   }
 
   Count(string: any, id: any) {
@@ -30,37 +30,13 @@ export class ProductCartComponent implements OnInit {
       this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
       this.subtotal();
     }
-    // if(string == "increase") {
-    //   this.CardShow = this.CardShow.map((product:any) => {
-    //     if(product.id === id){
-    //       return {
-    //         ...product,
-    //         quantity:product.quantity + 1
-    //       }
-    //     }
-    //     this.subtotal();
-    //     return product;
-    //   })
-    // }
-    // if(string == "decrease") {
-    //   this.CardShow = this.CardShow.map((product:any) => {
-    //     if(product.id === id){
-    //       return {
-    //         ...product,
-    //         quantity: product.quantity > 1 ? product.quantity - 1 : product.quantity
-    //       }
-    //     }
-    //     this.subtotal();
-    //     return product;
-    //   })
-    // }
   }
 
   getCartData() {
     let cookiesdata: any = [];
     let data_obj: any = [];
     let completedFormat: any = {};
-    if (localStorage.getItem('ecolink_user_credential') == null) {
+    if (localStorage.getItem('ecolink_user_credential') === null) {
       cookiesdata = this._cookies.GetCartData();
       cookiesdata.map((res: any) => {
         this._ApiService.getProductById(res.CartProductId).subscribe((resp: any) => {
@@ -90,7 +66,7 @@ export class ProductCartComponent implements OnInit {
           this.CardShow = res.data;
           this.subtotal();
           console.log(this.CardShow);
-        }, 1000);
+        }, 1500);
       })
     }
   }
@@ -104,25 +80,7 @@ export class ProductCartComponent implements OnInit {
   }
 
   UpdateCart(action: any, product_id: any, product_quantity: any) {
-    console.log(product_id);
-    if (this.UserLogin! = null) {
-      if (action == 'delete' && product_quantity > 1) {
-        this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-          console.log(res));
-        setTimeout(() => {
-          this.getCartData();
-        }, 1500);
-      }
-
-      if (action == 'add') {
-        this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-          console.log(res));
-        setTimeout(() => {
-          this.getCartData();
-        }, 500);
-      }
-    }
-    else {
+    if (localStorage.getItem('ecolink_user_credential') === null) {
       setTimeout(() => {
         let saveDataInCookies: any = [];
         let cookiesObject: any = {}
@@ -138,9 +96,20 @@ export class ProductCartComponent implements OnInit {
       }, 1000);
       this.subtotal();
     }
+    else {
+      if (action == 'delete' && product_quantity > 1) {
+        this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
+          console.log(res));
+      }
+
+      if (action == 'add') {
+        this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
+          console.log(res));
+      }
+    }
   }
 
-  deleteItemFromCart(product: any , product_quantity:any) {
+  deleteItemFromCart(product: any, product_quantity: any) {
     console.log(product);
     if (this.UserLogin != null) {
       this._ApiService.deleteItemFromCart(product).subscribe(res => console.log(res));
@@ -159,9 +128,9 @@ export class ProductCartComponent implements OnInit {
     }
   }
 
-  StoreCookiesData(){
+  StoreCookiesData() {
     this._ApiService.cookiesCheckoutData.next(this.CardShow);
-    localStorage.setItem("payable",JSON.stringify(this.SubTotal));
+    localStorage.setItem("payable", JSON.stringify(this.SubTotal));
   }
 
 }
