@@ -14,6 +14,13 @@ export class InnerPagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
+    if(this.slug.subsubsublink){
+      let send_slug = this.slug.subsublink + '/' + this.slug.subsubsublink
+      this._apiService.getPageBySlug(this.slug.subsubsublink).subscribe((res:any)=>{
+        this.data = res.data;
+        console.log(res);
+      })
+    }
     if(this.slug.sublink){
       this._apiService.getPageBySlug(this.slug.sublink).subscribe((res:any)=>{
         this.data = res.data;
@@ -26,7 +33,6 @@ export class InnerPagesComponent implements OnInit {
         console.log(res);
       })
     }
-
   }
   
 }

@@ -72,11 +72,10 @@ export class HomeBannerComponent implements OnInit {
     console.log(this.searchItem);
     if(this.searchItem.length > 0 ){
       this.showGlobalSearchSuggestion=true;
-      this._ApiService.globalSearch(this.searchItem).subscribe(res => {
+      this._ApiService.globalSearchData(this.searchItem).subscribe(res => {
         this.suggestionList = res;
       })
     }
-
     else{
       this.showGlobalSearchSuggestion=false;
     }
