@@ -96,7 +96,7 @@ export class ProductCheckoutComponent implements OnInit {
       shipping_state: this.CheckoutProduct[0].user.state,
       shipping_city: this.CheckoutProduct[0].user.city,
       shipping_zip: this.CheckoutProduct[0].user.pincode,
-      payment_via: 'paypal',
+      payment_via: this.selectedPaymentMethod,
       shippment_via: 'saia',
       no_items: '1'
     }
@@ -151,6 +151,7 @@ export class ProductCheckoutComponent implements OnInit {
       },
       onClientAuthorization: (data) => {
         if(data.status=='COMPLETED') {
+          this.getOrderInfo();
           this.route.navigateByUrl('/thanks');
         }
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);

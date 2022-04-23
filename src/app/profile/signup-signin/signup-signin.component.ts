@@ -132,7 +132,7 @@ export class SignupSigninComponent implements OnInit {
 
     this.__apiservice.login(this.loginobj).subscribe(
       (res) => {
-        console.log(res);
+        console.log(res.error);
         if (res.code === 200) 
         {
             if(res.data.user_id==1){
