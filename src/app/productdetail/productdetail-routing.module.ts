@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ThankYouComponent } from '../shared/thank-you/thank-you.component';
 import { MainDetailComponent } from './main-detail/main-detail.component';
 import { ProductCheckoutComponent } from './product-checkout/product-checkout.component';
 import { ProductWishlistComponent } from './product-wishlist/product-wishlist.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
         path: 'wishlist', component: ProductWishlistComponent,
       }
     ]
-  }
+  },
+  { path: 'thanks', component: ThankYouComponent },
 ];
 
 @NgModule({

@@ -20,13 +20,16 @@ export class ProductCheckoutComponent implements OnInit {
   carts: any = [];
   orderObj: any;
   showPaypal: boolean = false;
+  paypalProductDetails:any={};
+  paymentCheck:boolean=true;
   shippingCharge: number = 500;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
-    this.initConfig();
     this.checkoutProduct();
+    this.getPaypalProductDetail();
+    this.initConfig();
     // this.getShippingInfo();
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getUserAddress().subscribe((res: any) => {
@@ -55,6 +58,7 @@ export class ProductCheckoutComponent implements OnInit {
       this.__apiservice.getCheckoutProducts().subscribe(res => {
         console.log(res);
         this.CheckoutProduct.push(res.data);
+        console.log(this.CheckoutProduct);
       })
     }
     else {
@@ -110,11 +114,11 @@ export class ProductCheckoutComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'USD',
-            value: '9.99',
+            value: this.paypalProductDetails.payable,
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: '9.99'
+                value: this.paypalProductDetails.payable
               }
             }
           },
@@ -124,7 +128,7 @@ export class ProductCheckoutComponent implements OnInit {
             category: 'DIGITAL_GOODS',
             unit_amount: {
               currency_code: 'USD',
-              value: '9.99',
+              value: this.paypalProductDetails.payable,
             },
           }]
         }]
@@ -144,9 +148,11 @@ export class ProductCheckoutComponent implements OnInit {
         actions.order.get().then((details: any) => {
           console.log('onApprove - you can get full order details inside onApprove: ', details);
         });
-
       },
       onClientAuthorization: (data) => {
+        if(data.status=='COMPLETED') {
+          this.route.navigateByUrl('/thanks');
+        }
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
       },
       onCancel: (data, actions) => {
@@ -162,12 +168,17 @@ export class ProductCheckoutComponent implements OnInit {
     };
   }
   checkPaymentTab() {
-    console.log(this.selectedPaymentMethod);
-    if (this.selectedPaymentMethod == "paypal") {
-      this.showPaypal = true;
+    if(this.selectedPaymentMethod=='cod') {
+      this.paymentCheck=false;
+      console.log(this.paymentCheck);
     }
-    else {
-      this.showPaypal = false;
+    else if(this.selectedPaymentMethod=="paypal") {
+      this.paymentCheck=true;
+      this.showPaypal = !this.showPaypal;
+      console.log(this.paymentCheck);
+    }
+    else if (this.selectedPaymentMethod=="check-payment"){
+      this.paymentCheck=false;
     }
   }
   cookiesCheckout: any = {}
@@ -213,5 +224,16 @@ export class ProductCheckoutComponent implements OnInit {
     this.cookiesCheckout.data.user = user;
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
+  }
+  getPaypalProductDetail() {
+    setTimeout(() => {
+      this.CheckoutProduct.map((res: any) => {
+        console.log(res.payable);
+        this.paypalProductDetails.payable = res.payable;
+        setTimeout(() => {
+          console.log(this.paypalProductDetails);
+        }, 1000);
+      })
+    }, 1000);
   }
 }
