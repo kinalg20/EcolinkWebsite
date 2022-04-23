@@ -5,6 +5,7 @@
             .col-8 {
                 border-right: 2px solid rgb(231, 231, 231);
                 .page-desc {
+                    text-align: justify;
                     h2 {
                         font-size: 10px !important;
                     }
@@ -99,11 +100,6 @@
         }
     }
 }
-.avia_textblock {
-    h2 {
-        font-size: 10px;
-    }
-}
 @media (max-width: 992px) {
     .inner-pages {
         .container {
@@ -161,10 +157,64 @@
 }
 ::ng-deep {
     .post-title {
+        margin: 2rem 0;
         a {
             color: #000000;
-            font-size: 1rem;
+            text-decoration: none;
         }
     }
-
+    @media (max-width: 1399px) {
+        .big-preview {
+            img {
+                width: 720px;
+                object-fit: cover;
+            }
+        }
+    }
+    @media (max-width: 1199px) {
+        .post-title {
+            font-size: 1.6rem;
+        }
+        .big-preview {
+            img {
+                width: 600px;
+                height: 282px;
+            }
+        }
+    }
+    @media (max-width: 992px) {
+        .big-preview {
+            img {
+                width: 450px;
+                height: 215px;
+            }
+        }
+        .post-title {
+            font-size: 1.4rem;
+        }
+    }
+    .avia_textblock {
+        h2 {
+            font-size: 1.4rem;
+        }
+    }
+    @media (max-width:767px) {
+        .big-preview {
+            img {
+                width: -webkit-fill-available;
+            }
+        }
+        .post-title {
+            font-size: 1.1rem;
+            margin: 1rem 0;
+        }
+        .avia_textblock {
+            h2 {
+                font-size: 1.2rem;
+            }
+            h3 {
+                font-size: 1.2rem;
+            }
+        }
+    }
 }
