@@ -20,11 +20,13 @@ export class ProductCheckoutComponent implements OnInit {
   showPaypal: boolean = false;
   shippingCharge: number = 500;
   public payPalConfig?: IPayPalConfig;
+  paypalProductDetails: any = {};
   constructor(private __apiservice: ApiServiceService, private route: Router) { }
 
   ngOnInit(): void {
-    this.initConfig();
     this.checkoutProduct();
+    this.getPaypalProductDetail();
+    this.initConfig();
     // this.getShippingInfo();
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getUserAddress().subscribe((res: any) => {
@@ -53,6 +55,7 @@ export class ProductCheckoutComponent implements OnInit {
       this.__apiservice.getCheckoutProducts().subscribe(res => {
         console.log(res);
         this.CheckoutProduct.push(res.data);
+        console.log(this.CheckoutProduct);
       })
     }
     else {
@@ -104,27 +107,17 @@ export class ProductCheckoutComponent implements OnInit {
       currency: 'USD',
       clientId: 'AX8Dyud-bw5dJEEKvuTkv5DJBH89Ahs4yf8RagOrGwjaeDPs0quiWiQAN8wuoOZu-mByocZMmxeAzrS2',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
-        intent: 'CAPTURE',
         purchase_units: [{
           amount: {
             currency_code: 'USD',
-            value: '9.99',
+            value: this.paypalProductDetails.payable,
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: '9.99'
+                value: this.paypalProductDetails.payable
               }
             }
           },
-          items: [{
-            name: 'Enterprise Subscription',
-            quantity: '1',
-            category: 'DIGITAL_GOODS',
-            unit_amount: {
-              currency_code: 'USD',
-              value: '9.99',
-            },
-          }]
         }]
       },
       advanced: {
@@ -137,13 +130,6 @@ export class ProductCheckoutComponent implements OnInit {
         color: 'blue',
         shape: 'rect'
       },
-      onApprove: (data, actions) => {
-        console.log('onApprove - transaction was approved, but not authorized', data, actions);
-        actions.order.get().then((details: any) => {
-          console.log('onApprove - you can get full order details inside onApprove: ', details);
-        });
-
-      },
       onClientAuthorization: (data) => {
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
       },
@@ -154,9 +140,6 @@ export class ProductCheckoutComponent implements OnInit {
       onError: err => {
         console.log('OnError', err);
       },
-      onClick: (data, actions) => {
-        console.log('onClick', data, actions);
-      }
     };
   }
   checkPaymentTab() {
@@ -194,5 +177,16 @@ export class ProductCheckoutComponent implements OnInit {
     this.cookiesCheckout.data = data;
     console.log(this.cookiesCheckout.data);
     this.CheckoutProduct.push(this.cookiesCheckout.data);
+  }
+  getPaypalProductDetail() {
+    setTimeout(() => {
+      this.CheckoutProduct.map((res: any) => {
+        console.log(res.payable);
+        this.paypalProductDetails.payable = res.payable;
+        setTimeout(() => {
+          console.log(this.paypalProductDetails);
+        }, 1000);
+      })
+    }, 1000);
   }
 }
