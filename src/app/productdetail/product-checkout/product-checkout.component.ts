@@ -77,7 +77,7 @@ export class ProductCheckoutComponent implements OnInit {
       order_amount: this.CheckoutProduct[0].order_total,
       product_discount: 0,
       coupon_discount: 0,
-      total_amount: this.CheckoutProduct[0].payable,
+      total_amount: this.CheckoutProduct[0].payable + this.shippingCharge,
       billing_name: this.CheckoutProduct[0].user.name,
       billing_email: this.CheckoutProduct[0].user.email,
       billing_mobile: this.CheckoutProduct[0].user.mobile,
