@@ -169,7 +169,6 @@ export class ProductCheckoutComponent implements OnInit {
         if (grca.length > 0) {
           console.log(grca);
           this.carts = grca;
-          // this.Carts.push(grca);
         }
         this.refractorData();
       }
@@ -178,16 +177,22 @@ export class ProductCheckoutComponent implements OnInit {
 
   refractorData() {
     let data: any = {};
+    let user: any = {}
+    user = {
+      name: "",
+      email: "",
+      address: "",
+      city: "",
+      state: "",
+      country: "",
+      pincode: "",
+      mobile: ""
+    }
+    data.user = user;
     data.carts = this.carts;
     data.payable = localStorage.getItem('payable')
     this.cookiesCheckout.data = data;
     console.log(this.cookiesCheckout.data);
     this.CheckoutProduct.push(this.cookiesCheckout.data);
-    // console.log(this.CheckoutProduct);
-    // this.CheckoutProduct.map((res: any) => {
-    //   res.carts.map((resp:any)=>{
-    //     console.log(resp.product_id);
-    //   })
-    // })
   }
 }
