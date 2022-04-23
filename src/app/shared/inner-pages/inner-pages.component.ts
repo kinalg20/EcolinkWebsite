@@ -10,13 +10,18 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class InnerPagesComponent implements OnInit {
   slug:any;
   data : any = []
-  constructor(private route: ActivatedRoute , private _apiService :ApiServiceService) { }
+  constructor(private route: ActivatedRoute , public _apiService :ApiServiceService ) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
     if(this.slug.subsubsublink){
-      let send_slug = this.slug.subsublink + '/' + this.slug.subsubsublink
       this._apiService.getPageBySlug(this.slug.subsubsublink).subscribe((res:any)=>{
+        this.data = res.data;
+        console.log(res);
+      })
+    }
+    if(this.slug.subsublink){
+      this._apiService.getPageBySlug(this.slug.subsublink).subscribe((res:any)=>{
         this.data = res.data;
         console.log(res);
       })
@@ -27,12 +32,18 @@ export class InnerPagesComponent implements OnInit {
         console.log(res);
       })
     }
-    else{
-      this._apiService.getPageBySlug(this.slug).subscribe((res:any)=>{
+    if(this.slug.slug){
+      this._apiService.getPageBySlug(this.slug.slug).subscribe((res:any)=>{
         this.data = res.data;
         console.log(res);
       })
     }
+    // else{
+    //   this._apiService.getPageBySlug(this.slug).subscribe((res:any)=>{
+    //     this.data = res.data;
+    //     console.log(res);
+    //   })
+    // }
   }
   
 }
