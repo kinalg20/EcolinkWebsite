@@ -10,7 +10,7 @@ import { MediaComponent } from './media/media.component';
 import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { BlogComponent } from './blog/blog.component';
 import { ManufactureComponent } from './manufacture/manufacture.component';
-import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
+// import { AskChemistComponent } from '../shared/ask-chemist/ask-chemist.component';
 import { FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
 
@@ -29,7 +29,7 @@ const exportdata:any =[
     MediaComponent,
     BlogComponent,
     ManufactureComponent,
-    AskChemistComponent,
+    // AskChemistComponent,
     CategoriesComponent
   ],
   imports: [

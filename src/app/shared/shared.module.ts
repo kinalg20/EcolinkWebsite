@@ -18,6 +18,9 @@ import { GoogleMapComponent } from './google-map/google-map.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
+import { SupportFormComponent } from './support-form/support-form.component';
+ 
 
 const exportdata: any = [
   HeaderComponent,
@@ -44,7 +47,9 @@ const exportdata: any = [
     ReturnProductListingComponent,
     ThankYouComponent,
     OrderFailComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    AskChemistComponent,
+    SupportFormComponent
   ],
   imports: [
     CommonModule,

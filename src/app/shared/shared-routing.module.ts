@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from '../home/blog/blog.component';
+import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { InnerPagesComponent } from './inner-pages/inner-pages.component';
@@ -14,13 +15,14 @@ const routes: Routes = [
   { path: '', component: SharedComponent },
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
-  { path: 'products-request', component: ProductsRequestComponent },
+  { path: 'inner-pages/contact/request', component: ProductsRequestComponent },
   { path: 'inner-pages/:slug', component: InnerPagesComponent },
   { path: 'inner-pages/:slug/:sublink', component: InnerPagesComponent },
   { path: 'inner-pages/:slug/:sublink/:subsublink', component: InnerPagesComponent },
   { path: 'inner-pages/:slug/:sublink/:subsublink/:subsubsublink', component: InnerPagesComponent },
   { path: 'thanks', component: ThankYouComponent },
   { path: 'failure', component: OrderFailComponent },
+  { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
   // { path : 'info/:slug', component: BlogComponent},
 
   { path: '404', component: PageNotFoundComponent }

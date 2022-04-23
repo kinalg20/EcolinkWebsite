@@ -20,7 +20,7 @@
             }
             .desc {
                 p {
-                    font-size: 1.4rem;
+                    font-size: 1rem;
                     color: #747474;
                     font-weight: 600;
                     text-align: justify;
@@ -53,11 +53,6 @@
                 .image {
                     width: 350px;
                 }
-                .desc {
-                    p {
-                        font-size: 1.2rem;
-                    }
-                }
             }
         }
     }
@@ -68,6 +63,25 @@
             .row {
                 .image {
                     width: 300px;
+                }
+            }
+        }
+    }
+}
+@media (max-width:425px) {
+    .page-not-found {
+        .container {
+            .row {
+                .image {
+                    width: 250px;
+                }
+                .desc {
+                    h1 {
+                        font-size: 1.4rem;
+                    }
+                    h2 {
+                        font-size: 1.4rem;
+                    }
                 }
             }
         }

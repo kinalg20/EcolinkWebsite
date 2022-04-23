@@ -4,9 +4,18 @@
         <div class="row">
             <div class="col-8">
                 <div class="page-desc">
+                    <section *ngIf="data.slug=='ask-the-chemist'">
+                        <app-ask-chemist></app-ask-chemist>
+                    </section>
                     <div [innerHtml]=this._apiService.getSantizedData(data.description) *ngIf="data.description"></div>
                     <section *ngIf="data.slug=='contact'">
                         <app-google-map></app-google-map>
+                    </section>
+                    <section *ngIf="data.slug=='request'">
+                        <app-products-request></app-products-request>
+                    </section>
+                    <section *ngIf="data.slug=='supportform'">
+                        <app-support-form></app-support-form>
                     </section>
                 </div>
             </div>
@@ -26,8 +35,8 @@
                     <section id="text-5" class="widget clearfix widget_text">
                         <div class="textwidget">
                             <p><a class="shopButton2020" routerLink="/shop/allCategories">SHOP</a><br>
-                                <a class="requestButton2020" routerLink="/products-request">REQUEST A SAMPLE</a><br>
-                                <a class="pdsButton2020" routerLink="/inner-pages/contact/support">REQUEST PDS / TDS</a><br>
+                                <a class="requestButton2020" routerLink="/inner-pages/contact/request">REQUEST A SAMPLE</a><br>
+                                <a class="pdsButton2020" href="/inner-pages/contact/support">REQUEST PDS / TDS</a><br>
                                 <a class="contactButton2020" href="/inner-pages/contact">CONTACT US</a>
                             </p>
                         </div>
