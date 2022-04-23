@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-8">
                 <div class="page-desc">
-                    <div [innerHtml]="data.description" *ngIf="data.description"></div>
+                    <div [innerHtml]=this._apiService.getSantizedData(data.description) *ngIf="data.description"></div>
                     <section *ngIf="data.slug=='contact'">
                         <app-google-map></app-google-map>
                     </section>
