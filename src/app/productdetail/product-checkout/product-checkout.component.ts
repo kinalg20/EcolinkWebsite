@@ -143,7 +143,13 @@ export class ProductCheckoutComponent implements OnInit {
     };
   }
   checkPaymentTab() {
-    this.showPaypal = !this.showPaypal;
+    console.log(this.selectedPaymentMethod);
+    if(this.selectedPaymentMethod == "paypal"){
+      this.showPaypal = true;
+    }
+    else{
+      this.showPaypal = false;      
+    }
   }
   cookiesCheckout: any = {}
   getsubjectBehaviour() {
