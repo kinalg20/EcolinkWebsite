@@ -1,0 +1,90 @@
+.chemist-section {
+    .container {
+        .body-head {
+            color: #666666;
+            h1 {
+                text-transform: uppercase;
+            }
+        }
+        .chemist-heading {
+            margin: 20px 0;
+        }
+    }
+}
+
+.checkout-body {
+    .billing-detail {
+        .card {
+            padding: 20px 30px;
+
+            h3 {
+                padding: 20px 0;
+            }
+
+            label {
+                font-weight: 400;
+            }
+
+            .checkbox {
+                display: flex;
+                align-items: center;
+
+                label {
+                    margin-left: 5px;
+                }
+            }
+            .gfield {
+                .ginput_container {
+                    .gfield_select {
+                        border-color: #e1e1e1;
+                        background-color: #fcfcfc;
+                        width: 100%;
+                        padding: 0.375rem 0.75rem;
+                        line-height: 1.5;
+                        color: #212529;
+                        background-color: #fff;
+                        border: 1px solid #ced4da;
+                        border-radius: 0.25rem;
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+            textarea {
+                border-color: #e1e1e1;
+                background-color: #fcfcfc;
+                width: 100%;
+                padding: 0.375rem 0.75rem;
+                line-height: 1.5;
+                color: #212529;
+                background-color: #fff;
+                border: 1px solid #ced4da;
+                border-radius: 0.25rem;
+                margin-bottom: 20px;
+            }
+        }
+    }
+
+    .your-order {
+        .card {
+            padding: 20px 30px;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .checkout-body {
+        grid-template-columns: 100%;
+    }
+    .proceed-button {
+        text-align: center;
+    }
+}
+@media (max-width: 575px) {
+    .proceed-button {
+        button {
+            width: 30% !important;
+        }
+    }
+}
+::ng-deep {
+   
+}

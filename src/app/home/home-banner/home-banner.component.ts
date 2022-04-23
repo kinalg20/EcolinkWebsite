@@ -9,17 +9,20 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class HomeBannerComponent implements OnInit {
   newsletter_email: any;
   showGlobalSearchSuggestion: boolean = false;
-  searchItem : string = '';
-  slug:any;
-  subslug:any;
-  suggestionList : any = []
+  searchItem: string = '';
+  slug: any;
+  subslug: any;
+  suggestionList: any = []
+  showMsg: boolean = false;
+  msg: any = '';
+
   constructor(private _ApiService: ApiServiceService) { }
   action_array = [
     {
       imgurl: "https://t4.ftcdn.net/jpg/02/27/41/31/360_F_227413125_c5CgAhRF9FVpEYKzckx8le5cSMpYx9YP.jpg",
       heading: "Ask The Chemist",
       content: "Get answer of your query to ask the chemist",
-      route: "ask-chemist"
+      route: "inner-pages/contact/ask-the-chemist"
     },
     {
       imgurl: "https://wallpaperaccess.com/full/2847970.jpg",
@@ -64,25 +67,29 @@ export class HomeBannerComponent implements OnInit {
     let endpoint = 'newsletter'
     console.log(this.newsletter_email);
     this._ApiService.newLatter(endpoint, this.newsletter_email).subscribe(res => {
-      console.log(res);
+      if (res.code == 200) {
+        console.log(res);
+        this.showMsg=true;
+        this.newsletter_email=' '
+      }
     })
   }
 
   globalSearch() {
     console.log(this.searchItem);
-    if(this.searchItem.length > 0 ){
-      this.showGlobalSearchSuggestion=true;
+    if (this.searchItem.length > 0) {
+      this.showGlobalSearchSuggestion = true;
       this._ApiService.globalSearchData(this.searchItem).subscribe(res => {
         this.suggestionList = res;
       })
     }
-    else{
-      this.showGlobalSearchSuggestion=false;
+    else {
+      this.showGlobalSearchSuggestion = false;
     }
   }
 
-  getSuggestion(data:any){
-    this.showGlobalSearchSuggestion=false;
+  getSuggestion(data: any) {
+    this.showGlobalSearchSuggestion = false;
     this.slug = data.category.slug;
     this.subslug = data.slug;
     this.searchItem = data.name;

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
+// import { AskChemistComponent } from '../shared/ask-chemist/ask-chemist.component';
 import { BlogComponent } from './blog/blog.component';
 import { HomeBannerComponent } from './home-banner/home-banner.component';
 import { HomeComponent } from './home.component';
@@ -14,8 +14,8 @@ const routes: Routes = [
   { path : 'about-us', component: AboutUsComponent},
   { path : 'inner-pages/info', component: MediaComponent},
   { path : 'info/:slug', component: BlogComponent},
-  { path : 'manufacture', component: ManufactureComponent},
-  { path : 'ask-chemist', component: AskChemistComponent}
+  { path : 'manufacture', component: ManufactureComponent}
+  // { path : 'ask-chemist', component: AskChemistComponent}
 ];
 
 @NgModule({
