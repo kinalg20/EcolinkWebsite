@@ -18,6 +18,7 @@ export class ProductCheckoutComponent implements OnInit {
   carts: any = [];
   orderObj: any;
   showPaypal: boolean = false;
+  paymentCheck:boolean=true;
   shippingCharge: number = 500;
   public payPalConfig?: IPayPalConfig;
   paypalProductDetails: any = {};
@@ -107,6 +108,7 @@ export class ProductCheckoutComponent implements OnInit {
       currency: 'USD',
       clientId: 'AX8Dyud-bw5dJEEKvuTkv5DJBH89Ahs4yf8RagOrGwjaeDPs0quiWiQAN8wuoOZu-mByocZMmxeAzrS2',
       createOrderOnClient: (data) => <ICreateOrderRequest>{
+        intent: 'CAPTURE',
         purchase_units: [{
           amount: {
             currency_code: 'USD',
@@ -118,6 +120,15 @@ export class ProductCheckoutComponent implements OnInit {
               }
             }
           },
+          items: [{
+            name: 'Enterprise Subscription',
+            quantity: '1',
+            category: 'DIGITAL_GOODS',
+            unit_amount: {
+              currency_code: 'USD',
+              value: this.paypalProductDetails.payable,
+            },
+          }]
         }]
       },
       advanced: {
@@ -130,7 +141,16 @@ export class ProductCheckoutComponent implements OnInit {
         color: 'blue',
         shape: 'rect'
       },
+      onApprove: (data, actions) => {
+        console.log('onApprove - transaction was approved, but not authorized', data, actions);
+        actions.order.get().then((details: any) => {
+          console.log('onApprove - you can get full order details inside onApprove: ', details);
+        });
+      },
       onClientAuthorization: (data) => {
+        if(data.status=='COMPLETED') {
+          this.route.navigateByUrl('/thanks');
+        }
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
       },
       onCancel: (data, actions) => {
@@ -140,15 +160,23 @@ export class ProductCheckoutComponent implements OnInit {
       onError: err => {
         console.log('OnError', err);
       },
+      onClick: (data, actions) => {
+        console.log('onClick', data, actions);
+      }
     };
   }
   checkPaymentTab() {
-    console.log(this.selectedPaymentMethod);
-    if(this.selectedPaymentMethod == "paypal"){
-      this.showPaypal = true;
+    if(this.selectedPaymentMethod=='cod') {
+      this.paymentCheck=false;
+      console.log(this.paymentCheck);
     }
-    else{
-      this.showPaypal = false;      
+    else if(this.selectedPaymentMethod=="paypal") {
+      this.paymentCheck=true;
+      this.showPaypal = !this.showPaypal;
+      console.log(this.paymentCheck);
+    }
+    else if (this.selectedPaymentMethod=="check-payment"){
+      this.paymentCheck=false;
     }
   }
   cookiesCheckout: any = {}
