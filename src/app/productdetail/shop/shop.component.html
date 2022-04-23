@@ -74,7 +74,7 @@
     <div class="product-detail-tab my-3">
         <ng-container *ngFor="let detail of productDetail">
             <p-tabView>
-                <p-tabPanel header="Description">
+                <p-tabPanel header="Description" *ngIf="detail.data.product.description.length>0">
                     <h5><strong>Description</strong></h5>
                     <div [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
                 </p-tabPanel>

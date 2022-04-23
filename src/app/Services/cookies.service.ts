@@ -27,7 +27,7 @@ export class CookiesService {
     }
   }
 
-  DeleteCartData(cartObj:any){
-    this.cookieService.delete(cartObj);
+  DeleteCartData(){
+    this.cookieService.deleteAll();
   }
 }

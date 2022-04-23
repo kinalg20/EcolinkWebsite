@@ -63,6 +63,7 @@ export class ShopComponent implements OnInit {
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
+        console.log(res);
         this.recommended_products = res.data.related_products;
       }
     })

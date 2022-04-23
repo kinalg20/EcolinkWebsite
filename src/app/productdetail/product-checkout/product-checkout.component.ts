@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
+import { CookieService } from 'ngx-cookie-service';
+import { CookiesService } from 'src/app/Services/cookies.service';
 
 @Component({
   selector: 'app-product-checkout',
@@ -20,7 +22,7 @@ export class ProductCheckoutComponent implements OnInit {
   showPaypal: boolean = false;
   shippingCharge: number = 500;
   public payPalConfig?: IPayPalConfig;
-  constructor(private __apiservice: ApiServiceService, private route: Router) { }
+  constructor(private __apiservice: ApiServiceService, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
     this.initConfig();
@@ -161,28 +163,42 @@ export class ProductCheckoutComponent implements OnInit {
   }
   checkPaymentTab() {
     console.log(this.selectedPaymentMethod);
-    if(this.selectedPaymentMethod == "paypal"){
+    if (this.selectedPaymentMethod == "paypal") {
       this.showPaypal = true;
     }
-    else{
-      this.showPaypal = false;      
+    else {
+      this.showPaypal = false;
     }
   }
   cookiesCheckout: any = {}
   getsubjectBehaviour() {
-    this.__apiservice.cookiesCheckoutData.subscribe({
-      next: (grca) => {
-        if (grca.length > 0) {
-          console.log(grca);
-          this.carts = grca;
-        }
-        this.refractorData();
-      }
-    });
+    let cookiesObj: any = [];
+    let data_obj: any = [];
+    let completedFormat: any = {};
+    cookiesObj = this._cookies.GetCartData();
+    cookiesObj.map((res: any) => {
+      this.__apiservice.getProductById(res.CartProductId).subscribe((resp: any) => {
+        let data: any = {};
+        let products: any = {};
+        data.quantity = res.ProductQuantity;
+        data.product_id = resp.data.id;
+        products.id = res.CartProductId;
+        products.name = resp.data.name;
+        products.sale_price = resp.data.sale_price;
+        products.image = resp.data.image;
+        products.alt = resp.data.alt;
+        data.product = products;
+        data_obj.push(data);
+        completedFormat.carts = data_obj;
+      })
+      this.cookiesCheckout.data = completedFormat;
+    })
+    setTimeout(() => {
+      this.refractorData();
+    }, 5000);
   }
 
   refractorData() {
-    let data: any = {};
     let user: any = {}
     user = {
       name: "",
@@ -194,11 +210,8 @@ export class ProductCheckoutComponent implements OnInit {
       pincode: "",
       mobile: ""
     }
-    data.user = user;
-    data.carts = this.carts;
-    data.payable = localStorage.getItem('payable')
-    this.cookiesCheckout.data = data;
-    console.log(this.cookiesCheckout.data);
+    this.cookiesCheckout.data.user = user;
+    this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
   }
 }

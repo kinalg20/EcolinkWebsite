@@ -95,6 +95,7 @@ export class ProductCartComponent implements OnInit {
         this._cookies.SaveCartData(saveDataInCookies);
       }, 1000);
       this.subtotal();
+      this.getCartData();
     }
     else {
       if (action == 'delete' && product_quantity > 1) {
@@ -106,11 +107,11 @@ export class ProductCartComponent implements OnInit {
         this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
           console.log(res));
       }
+      this.subtotal();
     }
   }
 
   deleteItemFromCart(product: any, product_quantity: any) {
-    console.log(product);
     if (this.UserLogin != null) {
       this._ApiService.deleteItemFromCart(product).subscribe(res => console.log(res));
       setTimeout(() => {
@@ -118,19 +119,20 @@ export class ProductCartComponent implements OnInit {
       }, 2000);
     }
 
-    else {
-      let deleteproduct = {
-        "CartProductId": product.id,
-        "ProductQuantity": product_quantity,
-      }
-      this._cookies.DeleteCartData(deleteproduct);
-      console.log(this._cookies.GetCartData());
-    }
+    // else {
+    //   let deleteproduct = {
+    //     "CartProductId": product.id,
+    //     "ProductQuantity": product_quantity,
+    //   }
+    //   this._cookies.DeleteCartData(deleteproduct);
+    //   console.log(this._cookies.GetCartData());
+    // }
   }
 
   StoreCookiesData() {
     this._ApiService.cookiesCheckoutData.next(this.CardShow);
     localStorage.setItem("payable", JSON.stringify(this.SubTotal));
+    // localStorage.setItem("payable", JSON.stringify(this.SubTotal));
   }
 
 }
