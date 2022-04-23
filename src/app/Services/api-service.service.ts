@@ -379,7 +379,8 @@ export class ApiServiceService {
     this.header = localStorage.getItem('ecolink_user_credential');
     let user_id = JSON.parse(this.header).user_id;
     data.user_id = user_id;
-    data.profile_image = "/";
+    data.profile_image = "https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png";
+    console.log(data);
     return this.http.post(this._baseurl + 'editUserInfo', data)
   }
 
