@@ -161,7 +161,7 @@ export class ApiServiceService {
     return this.http.get(this._baseurl + 'home');
   }
 
-  globalSearch(searchItem: any) {
+  globalSearchData(searchItem: any) {
     let url = "globalSearch"
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -397,9 +397,10 @@ export class ApiServiceService {
       'Content-Type': 'application/x-www-form-urlencoded'
     })
 
-    let url = "https://sandbox.partner.api.bri.co.id/oauth/client_credential/accesstoken?grant_type=client_credentials";
+    let url = "https://apis-sandbox.fedex.com/oauth/token";
 
     let tokenGenerationData: any = {
+      grant_type: "client_credentials",
       client_id: 'l7df29a700b97d4d079e4b0d3ea2363d32',
       client_secret: '4a80d56001e84d06ac4cdb5efae564d8'
     };

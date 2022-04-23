@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-8">
                 <div class="page-desc">
-                    <div [innerHtml]="data.description" *ngIf="data.description"></div>
+                    <div [innerHtml]=this._apiService.getSantizedData(data.description) *ngIf="data.description"></div>
                     <section *ngIf="data.slug=='contact'">
                         <app-google-map></app-google-map>
                     </section>
@@ -25,10 +25,10 @@
                     </nav>
                     <section id="text-5" class="widget clearfix widget_text">
                         <div class="textwidget">
-                            <p><a class="shopButton2020" href="/shop">SHOP</a><br>
+                            <p><a class="shopButton2020" routerLink="/shop/allCategories">SHOP</a><br>
                                 <a class="requestButton2020" routerLink="/products-request">REQUEST A SAMPLE</a><br>
-                                <a class="pdsButton2020" href="/support">REQUEST PDS / TDS</a><br>
-                                <a class="contactButton2020" href="/contact-us-today">CONTACT US</a>
+                                <a class="pdsButton2020" routerLink="/support">REQUEST PDS / TDS</a><br>
+                                <a class="contactButton2020" href="/inner-pages/contact">CONTACT US</a>
                             </p>
                         </div>
                         <span class="seperator extralight-border"></span>

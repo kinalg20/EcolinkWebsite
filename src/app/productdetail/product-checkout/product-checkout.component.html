@@ -17,8 +17,8 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li *ngFor="let item of [].constructor(getAllUserAddresses.length); let i = index">
                                         <div class="form-check">
-                                            <input class="form-check-input" (click)="getRadioButtonValue(i)"
-                                                type="radio" name="flexRadioDefault" id="flexRadioDefault1" #radioValue>
+                                            <input class="form-check-input" (click)="getRadioButtonValue(i)" type="radio" name="flexRadioDefault"
+                                                id="flexRadioDefault1" #radioValue>
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Address {{i+1}}
                                             </label>
@@ -105,7 +105,7 @@
                             </div>
                         </div>
                     </form> -->
-                    <!-- <app-billing-form [CheckoutProduct]=CheckoutProduct></app-billing-form> -->
+                    <app-billing-form [CheckoutProduct]=CheckoutProduct></app-billing-form>
                 </div>
             </div>
             <div class="your-order">
@@ -121,13 +121,13 @@
                         <div class="checkout-products">
                             <ul *ngFor="let data of cart.carts">
                                 <li>{{data.product.name}} X {{data.quantity}}</li>
-                                <li>${{data.product.sale_price * data.quantity }}</li>
+                                <li>${{data.product.sale_price *data.quantity }}</li>
                             </ul>
                         </div>
-                        <!-- <div class="checkout-products-subtotal">
+                        <div class="checkout-products-subtotal">
                             <ul>
                                 <li class="subtotal-list-element">Subtotal</li>
-                                <li>${{this.CheckoutProduct[0].payable}}</li>
+                                <li>${{cart.payable}}</li>
                             </ul>
                             <ul>
                                 <li class="subtotal-list-element">Shipping</li>
@@ -137,9 +137,10 @@
                         <div class="checkout-products-total">
                             <ul>
                                 <li class="subtotal-list-element"><b>Total</b></li>
-                                <li><b>${{cart.payable + 500}}</b></li>
+                                <!-- <li><b>${{cart.payable + 500}}</b></li> -->
+                                <li><b>{{cart.payable + shippingCharge}}</b></li>
                             </ul>
-                        </div> -->
+                        </div>
                     </ng-container>
                     <div class="bank-detail">
                         <div class="card mx-1">
@@ -160,7 +161,7 @@
                                 </p-radioButton>
                                 <label for="cod" class="mx-2"><b>Cash on Delivery</b></label>
                             </div>
-                            <div class="field-radiobutton mt-3">
+                            <div class="field-radiobutton mt-3" >
                                 <p-radioButton name="payment_method1" value="cod3" [(ngModel)]="selectedPaymentMethod"
                                     inputId="cod" (click)="checkPaymentTab()">
                                 </p-radioButton>
@@ -173,9 +174,8 @@
                     </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
-                            <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
-                                (click)="getOrderInfo()" class="p-button-raised p-button-success"
-                                style="height:45px; width: 100%;"></button>
+                            <button pButton pRipple type="button" label="Place Order" routerLink="/thanks" (click)="getOrderInfo()"
+                                class="p-button-raised p-button-success" style="height:45px; width: 100%;"></button>
                         </div>
                     </div>
                 </div>
