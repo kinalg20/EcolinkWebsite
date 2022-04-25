@@ -23,6 +23,7 @@ export class InnerpagesComponent implements OnInit {
       })
     }
     else if(this.slug.subsublink){
+      console.log(this.slug.subsublink);
       this._apiService.getPageBySlug(this.slug.subsublink).subscribe((res:any)=>{
         this.data = res.data;
         console.log("inner-page route",res);

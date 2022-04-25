@@ -12,7 +12,12 @@
                 <h3>Contact Product Support</h3>
             </div>
 
-            <form #RequestForm="ngForm" action="">
+            <form #RequestForm="ngForm" (ngSubmit)="saveSupportFormDetail(RequestForm)">
+                <ng-container *ngIf="resSignupMsg">
+                    <div class="alert alert-danger" role="alert" id="loginAlert">
+                        {{ resSignupMsg }}
+                    </div>
+                </ng-container>
                 <div class="row mb-3">
                     <div class="col-12">
                         <div class="form-group">
@@ -36,7 +41,10 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="street-address">Phone</label>
-                        <input type="text" class="form-control mt-2" name="address" ngModel required>
+                        <input type="text" class="form-control mt-2" (input)="validateMobile($event)" maxlength="10" (keydown)="inputMobile($event)" name="phone" ngModel required>
+                        <h6 class="text-danger" *ngIf="invalidMobile">
+                            {{ invalidMobile ? "Invalid Mobile" : "" }}
+                        </h6>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -60,32 +68,35 @@
                 <div class="row mb-3">
                     <div class="col-6">
                         <label for="user-name">City</label>
-                        <input type="text" class="form-control mt-2" id="first-name" name="firstname" ngModel required>
+                        <input type="text" class="form-control mt-2" id="first-name" name="city" ngModel required>
                     </div>
                     <div class="col-6">
                         <label for="last-name">State / Province / Region</label>
-                        <input type="text" class="form-control mt-2" name="lastname" ngModel required>
+                        <input type="text" class="form-control mt-2" name="state" ngModel required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-6">
                         <label for="user-name">ZIP / Postal Code</label>
-                        <input type="text" class="form-control mt-2" id="first-name" name="firstname" ngModel required>
+                        <input type="text" class="form-control mt-2" id="first-name" name="pincode" ngModel required>
                     </div>
                     <div class="col-6">
                         <label for="last-name">Country</label>
-                        <input type="text" class="form-control mt-2" name="lastname" ngModel required>
+                        <input type="text" class="form-control mt-2" name="country" ngModel required>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="user-name">Email*</label>
-                        <input type="text" class="form-control mt-2" id="first-name" name="firstname" ngModel required>
+                        <input type="text" class="form-control mt-2" id="first-name" name="email" (input)="validateEmail($event)" ngModel required>
+                        <h6 class="text-danger" *ngIf="invalidEmail">
+                            {{ invalidEmail ? "Invalid Email" : "" }}
+                        </h6>
                     </div>
                 </div>
                 <div class="proceed">
                     <div class="proceed-button">
-                        <button type="button" role="button" class="btn-sm submit-btn p-button-success">Submit</button>
+                        <button role="button" class="btn-sm submit-btn p-button-success">Submit</button>
                     </div>
                 </div>
             </form>
