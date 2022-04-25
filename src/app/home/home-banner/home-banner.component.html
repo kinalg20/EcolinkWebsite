@@ -26,11 +26,29 @@
     <div class="container">
         <div class="background-image">
             <div class="innerhead">
-                <div class="image">
-                    <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                <div class="headings">
+                    <h1>New Website</h1>
+                    <h1>Same Chemicals</h1>
+                </div>
+                <div class="bottom-line" style="left: 0;">
+                    <p>Supplying Environmentally preferred industrial degreasers & solvent nationwide and internationally
+                        for over 30 year</p>
                 </div>
                 <div class="search-bar">
-                    <div class="row" style="margin-top: 20px;" *ngIf="showMsg">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="basic-addon1">
+                            <a (click)="subscribe('true')"
+                                class="text-white" style="cursor: pointer;">Stay
+                                Informed
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <!-- <div class="image">
+                    <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-32.png" alt="">
+                </div> -->
+                <!-- <div class="search-bar"> -->
+                    <!-- <div class="row" style="margin-top: 20px;" *ngIf="showMsg">
                         <div class="col-xs-12">
                             <p class="alert alert-success">
                                 <strong>Thanks for Subscribe!</strong>
@@ -48,17 +66,9 @@
                         </div>
                         <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
                             [(ngModel)]="newsletter_email">
-                    </div>
+                    </div> -->
                     <!-- <p class="msg_success">{{ msg }}</p> -->
-                </div>
-            </div>
-            <div class="headings">
-                <h1>New Website</h1>
-                <h1>Same Chemicals</h1>
-            </div>
-            <div class="bottom-line">
-                <p>Supplying Environmentally preferred industrial degreasers & solvent nationwide and internationally
-                    for over 30 year</p>
+                <!-- </div> -->
             </div>
         </div>
     </div>

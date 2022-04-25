@@ -57,14 +57,14 @@
                     <div>
                         <label for="first-name">First Name</label>
                         <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname"
-                            maxlength='50' [(ngModel)]="item.name" required />
+                            maxlength='50' [(ngModel)]="item.firstname" required />
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 lname">
                     <div>
                         <label for="last-name">Last Name</label>
                         <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
-                            name="lastname" [(ngModel)]="item.name" required />
+                            name="lastname" [(ngModel)]="item.lastname" required />
                     </div>
                 </div>
             </div>
@@ -132,13 +132,13 @@
                             [(ngModel)]="item.pincode" required />
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12" *ngIf="passwrodCheck">
+                <!-- <div class="col-lg-6 col-sm-12" *ngIf="passwrodCheck">
                     <div>
                         <label for="address">Password</label>
                         <input class="form-control" type="password" id="password" autocomplete="off" name="password"
                             ngModel required />
                     </div>
-                </div>
+                </div> -->
             </div>
             <!-- <div class="row">
                 <div class="col-lg-6 col-sm-12">
