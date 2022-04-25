@@ -21,6 +21,7 @@ export class ProfileDashboardComponent implements OnInit {
   orderHistoryDesc: any = [];
   storeObj: any;
   passwrodCheck: boolean = false
+  userObj1:any=[]
   show: boolean = true;
   // showDetails: boolean=true;
   @Input() showdesc: any;
@@ -204,7 +205,7 @@ export class ProfileDashboardComponent implements OnInit {
     })
   }
   editUserProfile(form: NgForm) {
-    if(this.passwrodCheck) {
+    if(!(this.passwrodCheck)) {
       if (form.valid) {
         let data = Object.assign({}, form.value);
         this.userObj = {
@@ -228,27 +229,36 @@ export class ProfileDashboardComponent implements OnInit {
       }
     }
     else {
-      // if (form.valid) {
-      //   let data = Object.assign({}, form.value);
-      //   this.userObj = {
-      //     name: data.firstname + ' ' + data.lastname,
-      //     email: data.email,
-      //     mobile: data.phonenumber,
-      //     address: data.address,
-      //     country: data.country,
-      //     state: data.state,
-      //     city: data.city,
-      //     pincode: data.pincode
-      //   };
-      //   console.log(this.userObj);
-      //   this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
-      //     console.log(res);
-      //     form.reset();
-      //   })
-      // }
-      // else {
-      //   this.resSignupMsg = 'Please fill the value';
-      // }
+      if (form.valid) {
+        let data = Object.assign({}, form.value);
+        this.userObj1 = {
+          email:data.email,
+          password:data.password,
+          password_confirmation:data.password
+        };
+        this.userObj = {
+          name: data.firstname + ' ' + data.lastname,
+          email: data.email,
+          mobile: data.phonenumber,
+          address: data.address,
+          country: data.country,
+          state: data.state,
+          city: data.city,
+          pincode: data.pincode
+        };
+        console.log(this.userObj);
+        this.__apiservice.forgotPassword(this.userObj1).subscribe((res: any) => {
+          console.log(res);
+          form.reset();
+        })
+        this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
+          console.log(res);
+          form.reset();
+        })
+      }
+      else {
+        this.resSignupMsg = 'Please fill the value';
+      }
     }
   }
   changeTab() {
