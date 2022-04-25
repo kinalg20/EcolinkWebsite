@@ -20,10 +20,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { SupportFormComponent } from './support-form/support-form.component';
 import { BulkPricingComponent } from './bulk-pricing/bulk-pricing.component';
-<<<<<<< HEAD
- 
-=======
->>>>>>> f35b5645cfae5104d7f9634f703077701f46efda
 
 const exportdata: any = [
   HeaderComponent,
@@ -54,12 +50,7 @@ const exportdata: any = [
     OrderFailComponent,
     PageNotFoundComponent,
     AskChemistComponent,
-<<<<<<< HEAD
-   
-  ],
-=======
     SupportFormComponent  ],
->>>>>>> f35b5645cfae5104d7f9634f703077701f46efda
   imports: [
     CommonModule,
     SharedRoutingModule,
