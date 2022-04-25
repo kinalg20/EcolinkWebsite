@@ -1,8 +1,9 @@
-import { JsonPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
+import { SocialAuthService } from "angularx-social-login";
+import { GoogleLoginProvider } from "angularx-social-login";
 
 @Component({
   selector: 'app-signup-signin',
@@ -11,7 +12,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class SignupSigninComponent implements OnInit {
   userObj: any;
-  loginobj:any;
+  loginobj: any;
   resSignupMsg: string = '';
   password: string = '';
   confirmPassword: string = '';
@@ -20,7 +21,7 @@ export class SignupSigninComponent implements OnInit {
   invalidUserEmail: string = '';
   checkString: boolean = true;
   resMsg: string = '';
-  constructor(private router: Router, private __apiservice: ApiServiceService) { }
+  constructor(private router: Router, private __apiservice: ApiServiceService , private authService: SocialAuthService) { }
 
   ngOnInit(): void {
   }
@@ -78,7 +79,7 @@ export class SignupSigninComponent implements OnInit {
     if (form.valid) {
       let data = Object.assign({}, form.value);
       this.userObj = {
-        name: data.firstname+ ' ' + data.lastname,
+        name: data.firstname + ' ' + data.lastname,
         email: data.email,
         mobile: data.phonenumber,
         password: data.password,
@@ -105,7 +106,7 @@ export class SignupSigninComponent implements OnInit {
             );
             this.router.navigateByUrl('/');
           }
-          
+
           else {
             this.resSignupMsg = res.message;
             localStorage.removeItem('ecolink_user_credential');
@@ -133,28 +134,39 @@ export class SignupSigninComponent implements OnInit {
     this.__apiservice.login(this.loginobj).subscribe(
       (res) => {
         console.log(res.error);
-        if (res.code === 200) 
-        {
-            if(res.data.user_id==1){
-              window.location.href = 'https://brandtalks.in/ecolink/login';
-              }
-              else {
-                localStorage.setItem(
-                  'ecolink_user_credential',
-                  JSON.stringify(res.data)
-                );
-                this.router.navigateByUrl('/');
-              }
+        if (res.code === 200) {
+          if (res.data.user_id == 1) {
+            window.location.href = 'https://brandtalks.in/ecolink/login';
+          }
+          else {
+            localStorage.setItem(
+              'ecolink_user_credential',
+              JSON.stringify(res.data)
+            );
+            this.router.navigateByUrl('/');
+          }
         }
-        
+
         else {
-          this.resMsg=res.error;
-          console.log(this.resMsg=res.error);
+          this.resMsg = res.error;
+          console.log(this.resMsg = res.error);
           localStorage.removeItem('ecolink_user_credential');
         }
       },
       () => {
         form.reset();
+      }
+    );
+  }
+
+  signInWithGoogle(): void {
+    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+      (user: any) => {
+        console.log("Loged In User", user);
+        localStorage.setItem('Access_token',user.authToken);
+        // this._utilityService.setObject(user, 'GoogleOAuth_USER')
+        // this.dataService.loginedUserSubject.next(user);
+        window.history.back();
       }
     );
   }
