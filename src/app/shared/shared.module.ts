@@ -20,6 +20,7 @@ import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { SupportFormComponent } from './support-form/support-form.component';
+import { BulkPricingComponent } from './bulk-pricing/bulk-pricing.component';
  
 
 const exportdata: any = [
@@ -49,7 +50,8 @@ const exportdata: any = [
     OrderFailComponent,
     PageNotFoundComponent,
     AskChemistComponent,
-    SupportFormComponent
+    SupportFormComponent,
+    BulkPricingComponent
   ],
   imports: [
     CommonModule,
