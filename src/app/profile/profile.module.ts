@@ -14,7 +14,6 @@ import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-logi
 import { GoogleLoginProvider } from 'angularx-social-login';
 
 
-
 @NgModule({
   declarations: [
     ProfileComponent,

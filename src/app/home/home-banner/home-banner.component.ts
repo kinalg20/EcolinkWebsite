@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ViewportScroller } from '@angular/common';
+import { Component,  OnInit, Output , EventEmitter} from '@angular/core';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class HomeBannerComponent implements OnInit {
   newsletter_email: any;
   showGlobalSearchSuggestion: boolean = false;
+  @Output() newItemEvent = new EventEmitter<string>();
   searchItem: string = '';
   slug: any;
   subslug: any;
@@ -16,7 +18,7 @@ export class HomeBannerComponent implements OnInit {
   showMsg: boolean = false;
   msg: any = '';
 
-  constructor(private _ApiService: ApiServiceService) { }
+  constructor(private _ApiService: ApiServiceService , private scroller : ViewportScroller) { }
   action_array = [
     {
       imgurl: "https://t4.ftcdn.net/jpg/02/27/41/31/360_F_227413125_c5CgAhRF9FVpEYKzckx8le5cSMpYx9YP.jpg",
@@ -63,16 +65,18 @@ export class HomeBannerComponent implements OnInit {
     // }, 500);
   }
 
-  subscribe() {
-    let endpoint = 'newsletter'
-    console.log(this.newsletter_email);
-    this._ApiService.newLatter(endpoint, this.newsletter_email).subscribe(res => {
-      if (res.code == 200) {
-        console.log(res);
-        this.showMsg=true;
-        this.newsletter_email=' '
-      }
-    })
+  subscribe(value:any) {
+    // this.scroller.scrollToAnchor("targetRed");
+    // let endpoint = 'newsletter'
+    this.newItemEvent.emit(value);
+    // console.log(this.newsletter_email);
+    // this._ApiService.newLatter(endpoint, this.newsletter_email).subscribe(res => {
+    //   if (res.code == 200) {
+    //     console.log(res);
+    //     this.showMsg=true;
+    //     this.newsletter_email=''
+    //   }
+    // })
   }
 
   globalSearch() {
