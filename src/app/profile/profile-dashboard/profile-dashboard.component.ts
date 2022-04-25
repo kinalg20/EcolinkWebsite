@@ -20,7 +20,7 @@ export class ProfileDashboardComponent implements OnInit {
   orderData: any = [];
   orderHistoryDesc:any=[];
   storeObj: any;
-  passwrodCheck:boolean=false
+  passwrodCheck:boolean=true
   show: boolean =true;
   // showDetails: boolean=true;
   @Input() showdesc: any;

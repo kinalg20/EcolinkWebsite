@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
-  selector: 'app-inner-pages',
-  templateUrl: './inner-pages.component.html',
-  styleUrls: ['./inner-pages.component.scss']
+  selector: 'app-innerpages',
+  templateUrl: './innerpages.component.html',
+  styleUrls: ['./innerpages.component.scss']
 })
-export class InnerPagesComponent implements OnInit {
+export class InnerpagesComponent implements OnInit {
+
   slug:any;
   data : any = []
   constructor(private route: ActivatedRoute , public _apiService :ApiServiceService ) { }
@@ -46,5 +47,5 @@ export class InnerPagesComponent implements OnInit {
     //   })
     // }
   }
-  
+
 }
