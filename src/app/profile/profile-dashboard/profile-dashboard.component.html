@@ -132,25 +132,25 @@
                             [(ngModel)]="item.pincode" required />
                     </div>
                 </div>
-                <!-- <div class="col-lg-6 col-sm-12" *ngIf="passwrodCheck">
+                <div class="col-lg-6 col-sm-12" *ngIf="passwrodCheck">
                     <div>
                         <label for="address">Password</label>
                         <input class="form-control" type="password" id="password" autocomplete="off" name="password"
                             ngModel required />
                     </div>
-                </div> -->
+                </div>
             </div>
-            <!-- <div class="row">
+            <div class="row">
                 <div class="col-lg-6 col-sm-12">
-                        <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" type="checkbox" value="" id="flexCheckDefault">
+                        <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" ngModel name="checkbox" type="checkbox" value="" id="flexCheckDefault">
                         <label class="form-check-label" for="flexCheckDefault">
                             Do you want to change password ?
                         </label>
                 </div>
-            </div> -->
+            </div>
             <div class="row">
                 <div class="col-12 add-user ">
-                    <button class="edituserdetail btn btn-success my-3 form-control">Save Address</button>
+                    <button class="edituserdetail btn btn-success my-3 form-control">Save Details</button>
                 </div>
             </div>
         </form>

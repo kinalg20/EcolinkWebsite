@@ -44,7 +44,8 @@ export class AskChemistComponent implements OnInit {
         state: form.value.state,
         city: form.value.city,
         zip: form.value.zip,
-        input_1: form.value.textarea
+        input_1 : form.value.input_11,
+        input_2: form.value.textarea
       };
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);

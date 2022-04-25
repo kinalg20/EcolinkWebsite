@@ -20,19 +20,14 @@ export class ProfileDashboardComponent implements OnInit {
   orderData: any = [];
   orderHistoryDesc: any = [];
   storeObj: any;
-  passwrodCheck: boolean = true
+  passwrodCheck: boolean = false
   show: boolean = true;
-  stringToSplit = "abc def ghi";
   // showDetails: boolean=true;
   @Input() showdesc: any;
   constructor(private __apiservice: ApiServiceService, private router: Router) {
   }
 
   ngOnInit(): void {
-
-
-
-    console.log(this.stringToSplit.split(" ")[0]);
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
       this.userDetail.map((res:any)=> {
@@ -58,6 +53,7 @@ export class ProfileDashboardComponent implements OnInit {
   }
   changePassword() {
     this.passwrodCheck = !this.passwrodCheck;
+    console.log()
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -208,26 +204,51 @@ export class ProfileDashboardComponent implements OnInit {
     })
   }
   editUserProfile(form: NgForm) {
-    if (form.valid) {
-      let data = Object.assign({}, form.value);
-      this.userObj = {
-        name: data.firstname + ' ' + data.lastname,
-        email: data.email,
-        mobile: data.phonenumber,
-        address: data.address,
-        country: data.country,
-        state: data.state,
-        city: data.city,
-        pincode: data.pincode
-      };
-      console.log(this.userObj);
-      this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
-        console.log(res);
-        form.reset();
-      })
+    if(this.passwrodCheck) {
+      if (form.valid) {
+        let data = Object.assign({}, form.value);
+        this.userObj = {
+          name: data.firstname + ' ' + data.lastname,
+          email: data.email,
+          mobile: data.phonenumber,
+          address: data.address,
+          country: data.country,
+          state: data.state,
+          city: data.city,
+          pincode: data.pincode
+        };
+        console.log(this.userObj);
+        this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
+          console.log(res);
+          form.reset();
+        })
+      }
+      else {
+        this.resSignupMsg = 'Please fill the value';
+      }
     }
     else {
-      this.resSignupMsg = 'Please fill the value';
+      // if (form.valid) {
+      //   let data = Object.assign({}, form.value);
+      //   this.userObj = {
+      //     name: data.firstname + ' ' + data.lastname,
+      //     email: data.email,
+      //     mobile: data.phonenumber,
+      //     address: data.address,
+      //     country: data.country,
+      //     state: data.state,
+      //     city: data.city,
+      //     pincode: data.pincode
+      //   };
+      //   console.log(this.userObj);
+      //   this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
+      //     console.log(res);
+      //     form.reset();
+      //   })
+      // }
+      // else {
+      //   this.resSignupMsg = 'Please fill the value';
+      // }
     }
   }
   changeTab() {

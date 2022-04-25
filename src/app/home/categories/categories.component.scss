@@ -8,7 +8,7 @@
             border-radius: 10px;
             display: grid;
             grid-template-columns: 75% 25%;
-
+            background: whitesmoke;
             // .card-div {
             //     background: whitesmoke;
             //     padding: 20px;
@@ -78,7 +78,9 @@
             .shop-text {
                 padding: 10px;
                 display: grid;
-
+                position: sticky;
+                top: 20px;
+                height: 300px;
                 h3 {
                     font-weight: 700;
                     margin: 0;
