@@ -1,5 +1,5 @@
 .product-request-section {
-    margin-top: 50px;
+    margin: 50px 0;
     .container {
         .row {
             .col-lg-8 {
@@ -49,10 +49,14 @@
                             }
                         }
                         .submit-btn {
+                            box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+                            border: 1px solid #d7d1d1;
+                            border-radius: 5px;
+                            font-size: 18px;
+                            margin: 20px auto;
+                            color: white;
                             background: #55b15c;
-                            border: none;
-                            color: #fff;
-        
+                            padding: 5px 25px;
                         }
                     }
                 }
