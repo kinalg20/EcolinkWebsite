@@ -36,7 +36,7 @@ export class HomeBannerComponent implements OnInit {
       imgurl: "https://ecolink.com/wp-content/uploads/2020/05/Dollarphotoclub_58451099-1-750x321.jpg",
       heading: "Ecolink",
       content: "Chemical solution for next generation",
-      route: "blog"
+      route: "info"
     },
     {
       imgurl: "https://blog.ipleaders.in/wp-content/uploads/2017/08/BV-Acharya-104.jpg",
