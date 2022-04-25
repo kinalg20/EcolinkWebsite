@@ -13,6 +13,11 @@ export class HeaderComponent implements OnInit {
   homePageData: any = [];
   slug: any;
   data : any = []
+  show: boolean = false;
+  searchItem: string = '';
+  subslug: any;
+  suggestionList: any = [];
+  showGlobalSearchSuggestion:any = false;
   constructor(private route: Router, private __apiservice: ApiServiceService , private router :Router) { }
   routes: any = [
     {
@@ -83,8 +88,32 @@ export class HeaderComponent implements OnInit {
     this.openMenu = !this.openMenu;
   }
 
+  showModalDialog(){
+    this.show = true;
+  }
   // getPage(slug:any){
   //   // routerLink="/inner-pages/{{item.slug}}"
   //   this.router.navigateByUrl('/innerpages/inner-pages/'+slug)
   // }
+
+  getSuggestion(data: any) {
+    this.showGlobalSearchSuggestion = false;
+    this.slug = data.category.slug;
+    this.subslug = data.slug;
+    this.searchItem = data.name;
+  }
+
+  globalSearch() {
+    console.log(this.searchItem);
+    if (this.searchItem.length > 0) {
+      this.showGlobalSearchSuggestion = true;
+      this.__apiservice.globalSearchData(this.searchItem).subscribe(res => {
+        this.suggestionList = res;
+      })
+    }
+    else {
+      this.showGlobalSearchSuggestion = false;
+    }
+  }
+
 }
