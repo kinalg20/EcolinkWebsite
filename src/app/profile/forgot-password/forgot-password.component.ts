@@ -14,7 +14,8 @@ export class ForgotPasswordComponent implements OnInit {
   invalidUserEmail: string = ''; 
   password: string = '';
   confirmPassword: string = '';
-  userObj:any
+  userObj:any;
+  userCheck:boolean=false;
 
   constructor(private __apiservice : ApiServiceService, private route:Router) { }
 
