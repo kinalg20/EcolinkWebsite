@@ -18,6 +18,7 @@
             margin-bottom: 20px;
         }
         .proceed {
+            text-align: left;
             button {
                 box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
                 border: 1px solid #d7d1d1;
@@ -27,6 +28,15 @@
                 color: white;
                 background: #55b15c;
                 padding: 5px 25px;
+            }
+        }
+    }
+}
+@media (max-width: 500px) {
+    .container {
+        .bulk-pricing-form {
+            .proceed {
+                text-align: center;
             }
         }
     }

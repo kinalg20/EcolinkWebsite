@@ -19,12 +19,8 @@ import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { SupportFormComponent } from './support-form/support-form.component';
-<<<<<<< HEAD
 import { BulkPricingComponent } from './bulk-pricing/bulk-pricing.component';
  
-=======
-
->>>>>>> 7590491d8bc25b38b3be34ea062e51e2653af698
 
 const exportdata: any = [
   HeaderComponent,
@@ -36,7 +32,8 @@ const exportdata: any = [
   AskChemistComponent,
   GoogleMapComponent,
   SupportFormComponent,
-  TrendingPostComponent
+  TrendingPostComponent,
+  BulkPricingComponent
 ]
 
 @NgModule({
@@ -54,8 +51,7 @@ const exportdata: any = [
     OrderFailComponent,
     PageNotFoundComponent,
     AskChemistComponent,
-    SupportFormComponent,
-    BulkPricingComponent
+   
   ],
   imports: [
     CommonModule,

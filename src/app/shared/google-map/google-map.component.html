@@ -63,14 +63,14 @@
                     <input type="text" class="form-control mt-2" placeholder="First name" id="first-name"
                         name="firstname" ngModel required>
                 </div>
-                <div class="col-lg-6 col-md-12">
-                    <label for="last-name">Last Name*</label>
+                <div class="col-lg-6 col-md-12 ">
+                    <label for="last-name" class="lname">Last Name*</label>
                     <input type="text" class="form-control mt-2" placeholder="Last name" name="lastname" ngModel
                         required>
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-6">
+                <div class="col-lg-6 col-12">
                     <label for="Email Address">Email Address*</label>
                     <input type="email" class="form-control mt-2" placeholder="Email" id="Email-Address"
                         (input)="validateEmail($event)" name="email" ngModel required>
@@ -78,7 +78,7 @@
                         {{ invalidEmail ? "Invalid Email" : "" }}
                     </h6>
                 </div>
-                <div class="col-6">
+                <div class="col-lg-6 col-12">
                     <label for="Phone">Phone*</label>
                     <input type="text" class="form-control mt-2" placeholder="phone" maxlength="10"
                         (input)="validateMobile($event)" (keydown)="inputMobile($event)" name="phone" ngModel required>
