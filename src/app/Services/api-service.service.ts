@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable, ObservedValueOf } from 'rxjs';
+import { BehaviorSubject, Observable, ObservableLike, ObservedValueOf } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -394,9 +394,6 @@ export class ApiServiceService {
     let url = "getProductById";
     return this.http.post(this._baseurl + url, { product_id: product_id })
   }
-  forgotPassword(data: any): Observable<any> {
-    return this.http.post(this._baseurl + 'forgotPassword', data);
-  }
 
   fedexshippingApi(): Observable<any> {
     const httpHeaders = new HttpHeaders({
@@ -412,6 +409,9 @@ export class ApiServiceService {
     };
 
     return this.http.post(url, tokenGenerationData, { headers: httpHeaders })
+  }
+  forgotPassword(data:any):Observable<any>{
+    return this.http.post(this._baseurl+'forgotPassword',data);
   }
 
 }
