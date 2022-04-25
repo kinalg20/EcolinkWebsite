@@ -226,11 +226,14 @@ export class ProductCheckoutComponent implements OnInit {
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
   }
+  payment : any;
   getPaypalProductDetail() {
     setTimeout(() => {
       this.CheckoutProduct.map((res: any) => {
         console.log(res.payable);
-        this.paypalProductDetails.payable = res.payable;
+        this.payment = res.payable + this.shippingCharge;
+        console.log(this.payment)
+        this.paypalProductDetails.payable = this.payment;
         setTimeout(() => {
           console.log(this.paypalProductDetails);
         }, 1000);
