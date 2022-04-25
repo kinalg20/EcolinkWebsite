@@ -4,7 +4,6 @@ import { BlogComponent } from '../home/blog/blog.component';
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
-import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsRequestComponent } from './products-request/products-request.component';
@@ -16,10 +15,6 @@ const routes: Routes = [
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
   { path: 'inner-pages/contact/request', component: ProductsRequestComponent },
-  { path: 'inner-pages/:slug', component: InnerPagesComponent },
-  { path: 'inner-pages/:slug/:sublink', component: InnerPagesComponent },
-  { path: 'inner-pages/:slug/:sublink/:subsublink', component: InnerPagesComponent },
-  { path: 'inner-pages/:slug/:sublink/:subsublink/:subsubsublink', component: InnerPagesComponent },
   { path: 'thanks', component: ThankYouComponent },
   { path: 'failure', component: OrderFailComponent },
   { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
