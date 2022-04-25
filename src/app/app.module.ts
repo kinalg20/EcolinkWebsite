@@ -2,7 +2,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './auth.guard';
@@ -22,7 +22,8 @@ import { SharelibraryModule } from './sharelibrary/sharelibrary.module';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    SharelibraryModule
+    SharelibraryModule, 
+    ToastrModule.forRoot()
   ],
   providers: [ApiServiceService,AuthGuard],
   bootstrap: [AppComponent]

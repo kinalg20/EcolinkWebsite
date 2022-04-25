@@ -28,7 +28,7 @@
         }
 
         .product_view {
-            display: none;
+            // display: none;
             border: 1px solid #dedede;
             border-radius: 5px;
             text-align: center;
@@ -37,7 +37,7 @@
 
         .grid-list-view {
             display: flex;
-            justify-content: end;
+            justify-content: space-between;
             align-items: end;
             position: relative;
 

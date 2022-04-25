@@ -30,8 +30,8 @@
                                     <div class="subsublink">
                                         <ng-container *ngFor="let subsublink of sublink.subpage">
                                             <li class="test1">
-                                                <a
-                                                    href="{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title| uppercase}}</a>
+                                                <a href="{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title|
+                                                    uppercase}}</a>
                                             </li>
                                         </ng-container>
                                     </div>
@@ -39,8 +39,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item"><a (click)="profile()" style="cursor: pointer; color: #fff;"><i class="fa fa-user"
-                                aria-hidden="true"></i></a></li>
+                    <li class="nav-item"><a (click)="profile()" style="cursor: pointer; color: #fff;"><i
+                                class="fa fa-user" aria-hidden="true"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -59,8 +59,53 @@
         <div class="chat-section">
             <a href="#">Speak with our team to find the right prodcut for you!</a>
         </div>
+        <button type="button" style=" background: transparent; border: none;"  data-toggle="modal" data-target="#exampleModalCenter">
+            <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
+        </button>
     </div>
 </section>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content" style="height: 500px;">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Search Product Here</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <form class="global-search">
+                        <div class="input-group mx-auto">
+                            <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..."
+                                (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem"
+                                name="search">
+                            <span class="input-group-append" autocomplete="off">
+                                <button class="btn btn-success" type="button" style="height: 42px;"
+                                    routerLink="/shop/{{slug}}/{{subslug}}" (click)="globalSearch()" data-dismiss="modal" aria-label="Close">Search</button>
+                            </span>
+                        </div>
+                    </form>
+                </div>
+                <div class="container">
+                    <div class="model-section">
+                        <div class="model-searchlist" *ngIf="showGlobalSearchSuggestion">
+                            <!-- <div class="model"> -->
+                                <ng-container *ngFor="let data of suggestionList.data">
+                                    <div class="suggestions" (click)="getSuggestion(data)">
+                                        <h4><a>{{data.name}}</a></h4>
+                                    </div>
+                                </ng-container>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData" class="responsive-menu">
         <li class="parent-menu"><a href="inner-pages/{{item.slug}}">{{item.title| uppercase}}</a>
@@ -72,8 +117,8 @@
                             <div class="sub-sub-link-responsive">
                                 <ng-container *ngFor="let subsublink of sublink.subpage">
                                     <li class="sub-sub-link-title">
-                                        <a
-                                            href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title| uppercase}}</a>
+                                        <a href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title|
+                                            uppercase}}</a>
                                     </li>
                                 </ng-container>
                             </div>

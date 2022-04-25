@@ -75,12 +75,9 @@
         <ng-container *ngFor="let detail of productDetail">
             <p-tabView>
                 <p-tabPanel header="Description" *ngIf="detail.data.product.description.length>0">
-                    <h5><strong>Description</strong></h5>
                     <div [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
                 </p-tabPanel>
                 <p-tabPanel header="Additional Information">
-                    <h5><strong>Additional Information</strong></h5>
-
                     <ul>
                         <li style="font-size: 18px;" *ngIf="detail.data.product.weight">
                             <b>Weight</b> : {{detail.data.product.weight}}

@@ -78,20 +78,6 @@ export class HomeBannerComponent implements OnInit {
     //   }
     // })
   }
-
-  globalSearch() {
-    console.log(this.searchItem);
-    if (this.searchItem.length > 0) {
-      this.showGlobalSearchSuggestion = true;
-      this._ApiService.globalSearchData(this.searchItem).subscribe(res => {
-        this.suggestionList = res;
-      })
-    }
-    else {
-      this.showGlobalSearchSuggestion = false;
-    }
-  }
-
   getSuggestion(data: any) {
     this.showGlobalSearchSuggestion = false;
     this.slug = data.category.slug;
