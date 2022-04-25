@@ -10,6 +10,9 @@ import { SignupSigninComponent } from './signup-signin/signup-signin.component';
 import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HttpClientModule } from '@angular/common/http';
+import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import { GoogleLoginProvider } from 'angularx-social-login';
+
 
 
 @NgModule({
@@ -25,10 +28,31 @@ import { HttpClientModule } from '@angular/common/http';
     SharelibraryModule,
     FormsModule,
     SharedModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
+  providers: [
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: false,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider(
+              '394131620868-kdo7kpcg6tpejkv2tjk7u4ch1n6so9j6.apps.googleusercontent.com'
+            )
+          }
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
+      } as SocialAuthServiceConfig,
+    }
+
+  ]
 })
 export class ProfileModule {
-  
 
- }
+
+}
