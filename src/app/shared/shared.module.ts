@@ -10,7 +10,6 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { CallToActionComponent } from './call-to-action/call-to-action.component';
 import { MediaBannerComponent } from './media-banner/media-banner.component';
 import { TrendingPostComponent } from './trending-post/trending-post.component';
-import { InnerPagesComponent } from './inner-pages/inner-pages.component';
 import { FormsModule } from '@angular/forms';
 import { ProductsRequestComponent } from './products-request/products-request.component';
 import { ReturnProductListingComponent } from './return-product-listing/return-product-listing.component';
@@ -20,15 +19,18 @@ import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { SupportFormComponent } from './support-form/support-form.component';
- 
+
 
 const exportdata: any = [
   HeaderComponent,
   FooterComponent,
   CardSliderComponent,
   CallToActionComponent,
+  ProductsRequestComponent,
   MediaBannerComponent,
+  AskChemistComponent,
   GoogleMapComponent,
+  SupportFormComponent,
   TrendingPostComponent
 ]
 
@@ -42,14 +44,10 @@ const exportdata: any = [
     CallToActionComponent,
     MediaBannerComponent,
     TrendingPostComponent,
-    InnerPagesComponent,
-    ProductsRequestComponent,
     ReturnProductListingComponent,
     ThankYouComponent,
     OrderFailComponent,
     PageNotFoundComponent,
-    AskChemistComponent,
-    SupportFormComponent
   ],
   imports: [
     CommonModule,

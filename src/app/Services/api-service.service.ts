@@ -163,17 +163,17 @@ export class ApiServiceService {
 
   globalSearchData(searchItem: any) {
     let url = "globalSearch"
-    this.header = localStorage.getItem('ecolink_user_credential');
-    this.token = JSON.parse(this.header).access_token;
-    const httpHeaders = new HttpHeaders({
-      'content-type': 'application/json',
-      'Authorization': `Bearer ${this.token}`
-    })
+    // this.header = localStorage.getItem('ecolink_user_credential');
+    // this.token = JSON.parse(this.header).access_token;
+    // const httpHeaders = new HttpHeaders({
+    //   'content-type': 'application/json',
+    //   'Authorization': `Bearer ${this.token}`
+    // })
     let name = {
       name: searchItem
     }
 
-    return this.http.post(this._baseurl + url, name, { headers: httpHeaders })
+    return this.http.post(this._baseurl + url, name);
   }
 
 
@@ -230,20 +230,20 @@ export class ApiServiceService {
 
   filterProduct(dataforfilter: any) {
     let url = 'filterProduct';
-    this.header = localStorage.getItem('ecolink_user_credential');
-    this.token = JSON.parse(this.header).access_token;
-    let user_id = JSON.parse(this.header).user_id;
-    const httpHeaders = new HttpHeaders({
-      'content-type': 'application/json',
-      'Authorization': `Bearer ${this.token}`
-    })
+    // this.header = localStorage.getItem('ecolink_user_credential');
+    // this.token = JSON.parse(this.header).access_token;
+    // let user_id = JSON.parse(this.header).user_id;
+    // const httpHeaders = new HttpHeaders({
+    //   'content-type': 'application/json',
+    //   'Authorization': `Bearer ${this.token}`
+    // })
     return this.http.post(this._baseurl + url, {
       category: dataforfilter.category,
       price_from: dataforfilter.price_from,
       price_to: dataforfilter.price_to,
       rating: dataforfilter.rating,
       sortby: dataforfilter.sortby
-    }, { headers: httpHeaders })
+    })
   }
 
   editUserAddress(item: any): Observable<any> {

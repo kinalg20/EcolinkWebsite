@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InnerPagesComponent } from './inner-pages.component';
+import { InnerpagesComponent } from './innerpages.component';
 
-describe('InnerPagesComponent', () => {
-  let component: InnerPagesComponent;
-  let fixture: ComponentFixture<InnerPagesComponent>;
+describe('InnerpagesComponent', () => {
+  let component: InnerpagesComponent;
+  let fixture: ComponentFixture<InnerpagesComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ InnerPagesComponent ]
+      declarations: [ InnerpagesComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InnerPagesComponent);
+    fixture = TestBed.createComponent(InnerpagesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
