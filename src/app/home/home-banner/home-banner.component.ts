@@ -24,7 +24,7 @@ export class HomeBannerComponent implements OnInit {
       imgurl: "https://t4.ftcdn.net/jpg/02/27/41/31/360_F_227413125_c5CgAhRF9FVpEYKzckx8le5cSMpYx9YP.jpg",
       heading: "Ask The Chemist",
       content: "Get answer of your query to ask the chemist",
-      route: "inner-pages/contact/ask-the-chemist"
+      route: "contact/ask-the-chemist"
     },
     {
       imgurl: "https://wallpaperaccess.com/full/2847970.jpg",

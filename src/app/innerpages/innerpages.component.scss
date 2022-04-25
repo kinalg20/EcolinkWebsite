@@ -1,11 +1,14 @@
 .inner-pages {
-    margin-top: 50px;
+    margin-top: 30px;
     .container {
         .row {
             .col-8 {
                 border-right: 2px solid rgb(231, 231, 231);
                 .page-desc {
                     text-align: justify;
+                    a {
+                        text-decoration: none;
+                    }
                     h2 {
                         font-size: 10px !important;
                     }
@@ -174,13 +177,6 @@
     .entry-content-wrapper {
         padding: 0 !important;
     }
-    // .post-title {
-    //     margin: 2rem 0;
-    //     a {
-    //         color: #000000;
-    //         text-decoration: none;
-    //     }
-    // }
     .avia_textblock {
         h2 {
             font-size: 1.4rem !important;
@@ -189,54 +185,27 @@
     .entry-content-wrapper {
         padding: 0 !important;
     }
+    .responsive-table {
+        table {
+            tr {
+                th {
+                    width: 30%;
+                }
+            }
+        }
+    }
     @media (max-width: 1399px) {
         .template-page {
             width: 100% !important;
             padding-top: 0 !important;
         }
     }
-    // @media (max-width: 1199px) {
-    //     .post-title {
-    //         font-size: 1.6rem;
-    //     }
-    //     .big-preview {
-    //         img {
-    //             width: 600px;
-    //             height: 282px;
-    //         }
-    //     }
-    // }
-    // @media (max-width: 992px) {
-    //     .big-preview {
-    //         img {
-    //             width: 450px;
-    //             height: 215px;
-    //         }
-    //     }
-    //     .post-title {
-    //         font-size: 1.4rem;
-    //     }
-    // }
-    // @media (max-width:767px) {
-    //     .big-preview {
-    //         img {
-    //             width: -webkit-fill-available;
-    //         }
-    //     }
-    //     .post-title {
-    //         font-size: 1.1rem;
-    //         margin: 1rem 0;
-    //     }
-    //     .avia_textblock {
-    //         h2 {
-    //             font-size: 1.2rem;
-    //         }
-    //         h3 {
-    //             font-size: 1.2rem;
-    //         }
-    //     }
-    // }
-    // .template-page {
-    //     border-right: none;
-    // }
+    @media (max-width:425px) {
+        .h2_heading {
+            font-size: 1.4rem !important;
+            .a_link {
+                text-decoration: none;
+            }
+        }
+    }
 }

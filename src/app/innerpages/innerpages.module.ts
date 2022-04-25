@@ -7,7 +7,6 @@ import { SharedModule } from '../shared/shared.module';
 import { HomeModule } from '../home/home.module';
 import { ProductdetailModule } from '../productdetail/productdetail.module';
 
-
 @NgModule({
   declarations: [
     InnerpagesComponent
@@ -17,7 +16,8 @@ import { ProductdetailModule } from '../productdetail/productdetail.module';
     ProductdetailModule,
     SharedModule,
     CommonModule,
-    InnerpagesRoutingModule
+    InnerpagesRoutingModule,
+    
   ]
 })
 export class InnerpagesModule { }
