@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: ':sublink', component: InnerpagesComponent },
   { path: ':sublink/:subsublink', component: InnerpagesComponent },
   { path: ':sublink/:subsublink/:subsubsublink', component: InnerpagesComponent },
+  { path: ':sublink/:subsublink/:subsubsublink/:subsubsubsublink', component: InnerpagesComponent },
 ];
 
 @NgModule({
