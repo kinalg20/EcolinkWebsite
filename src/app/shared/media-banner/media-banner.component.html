@@ -41,6 +41,7 @@
 </ng-container>
 <div class="container">
     <div class="load-more">
-        <p (click)="loadAllBlog()">Load More...</p>
+        <p (click)="loadAllBlog()" *ngIf="moreCheck">Show More...</p>
+        <p (click)="loadAllBlog()" *ngIf="lessCheck">Show Less...</p>
     </div>
 </div>
