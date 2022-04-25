@@ -27,7 +27,8 @@
         .footer-heading {
             padding-top: 15px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
             .footer-image {
                 width: 20px;
                 img {
@@ -37,6 +38,28 @@
             h4 {
                 margin: 0 10px;
                 font-weight: 700;
+            }
+            .search-bar {
+                display: block;
+                width: 38%;
+                span {
+                    background: #2774ba;
+                    border: 1px solid #2774ba;
+                    border-top-left-radius: 20px;
+                    border-bottom-left-radius: 20px;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+    
+                    a {
+                        text-decoration: none;
+                    }
+                }
+    
+                input {
+                    border: 1px solid white;
+                    border-top-right-radius: 20px;
+                    border-bottom-right-radius: 20px;
+                }
             }
         }
         .footer-grid {
@@ -53,28 +76,30 @@
                 cursor: pointer;
             }
         }
-        .search-bar {
-            display: none;
-            width: 40%;
-            margin: auto;
-
-            span {
-                background: #2774ba;
-                border: 1px solid #2774ba;
-                border-top-left-radius: 20px;
-                border-bottom-left-radius: 20px;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-
-                a {
-                    text-decoration: none;
+        .bottom-search{
+            .search-bar {
+                display: none;
+                // width: 40%;
+                margin: auto;
+    
+                span {
+                    background: #2774ba;
+                    border: 1px solid #2774ba;
+                    border-top-left-radius: 20px;
+                    border-bottom-left-radius: 20px;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+    
+                    a {
+                        text-decoration: none;
+                    }
                 }
-            }
-
-            input {
-                border: 1px solid white;
-                border-top-right-radius: 20px;
-                border-bottom-right-radius: 20px;
+    
+                input {
+                    border: 1px solid white;
+                    border-top-right-radius: 20px;
+                    border-bottom-right-radius: 20px;
+                }
             }
         }
     }
@@ -105,17 +130,6 @@
 }
 @media (max-width: 992px) {
     .footer-div {
-        .footer-links {
-            .container {
-                max-width: 950px;
-                .footer-heading {
-                    .search-bar {
-                        display: block;
-                        width: 50%;
-                    }
-                }
-            }
-        }
         .media-links {
             .container {
                 max-width: 950px;

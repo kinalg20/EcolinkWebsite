@@ -31,8 +31,8 @@ const exportdata: any = [
   AskChemistComponent,
   GoogleMapComponent,
   SupportFormComponent,
-  BulkPricingComponent,
-  TrendingPostComponent
+  TrendingPostComponent,
+  BulkPricingComponent
 ]
 
 @NgModule({
@@ -50,8 +50,7 @@ const exportdata: any = [
     OrderFailComponent,
     PageNotFoundComponent,
     AskChemistComponent,
-    SupportFormComponent,
-  ],
+    SupportFormComponent  ],
   imports: [
     CommonModule,
     SharedRoutingModule,
