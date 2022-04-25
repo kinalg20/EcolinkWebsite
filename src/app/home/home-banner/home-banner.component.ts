@@ -70,7 +70,7 @@ export class HomeBannerComponent implements OnInit {
       if (res.code == 200) {
         console.log(res);
         this.showMsg=true;
-        this.newsletter_email=' '
+        this.newsletter_email=''
       }
     })
   }

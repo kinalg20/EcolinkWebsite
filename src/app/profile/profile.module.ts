@@ -11,7 +11,6 @@ import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { HttpClientModule } from '@angular/common/http';
 
-
 @NgModule({
   declarations: [
     ProfileComponent,
@@ -26,6 +25,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     SharedModule,
     HttpClientModule
+
   ],
 })
 export class ProfileModule {
