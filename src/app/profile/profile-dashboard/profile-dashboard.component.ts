@@ -18,18 +18,30 @@ export class ProfileDashboardComponent implements OnInit {
   invalidMobile = false;
   allUserAddresses: any = [];
   orderData: any = [];
-  orderHistoryDesc:any=[];
+  orderHistoryDesc: any = [];
   storeObj: any;
-  passwrodCheck:boolean=true
-  show: boolean =true;
+  passwrodCheck: boolean = true
+  show: boolean = true;
+  stringToSplit = "abc def ghi";
   // showDetails: boolean=true;
   @Input() showdesc: any;
   constructor(private __apiservice: ApiServiceService, private router: Router) {
   }
 
   ngOnInit(): void {
+
+
+
+    console.log(this.stringToSplit.split(" ")[0]);
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
+      this.userDetail.map((res:any)=> {
+        setTimeout(() => {
+          res.firstname=res.name.split(" ")[0]
+          res.lastname=res.name.split(" ")[1]
+          console.log(res);
+        }, 1000);
+      })
       console.log(this.userDetail);
     })
     this.__apiservice.getUserAddress().subscribe((res: any) => {
@@ -43,10 +55,9 @@ export class ProfileDashboardComponent implements OnInit {
     })
     this.getOrderhistory();
     this.getReturnProduct();
-
   }
   changePassword() {
-    this.passwrodCheck=!this.passwrodCheck;
+    this.passwrodCheck = !this.passwrodCheck;
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -207,8 +218,7 @@ export class ProfileDashboardComponent implements OnInit {
         country: data.country,
         state: data.state,
         city: data.city,
-        pincode: data.pincode,
-        password: data.password
+        pincode: data.pincode
       };
       console.log(this.userObj);
       this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
@@ -223,10 +233,10 @@ export class ProfileDashboardComponent implements OnInit {
   changeTab() {
     this.showdesc = 'Edit Profile';
   }
-  showDeatils(i:any) {
-    this.orderHistoryDesc=[];
+  showDeatils(i: any) {
+    this.orderHistoryDesc = [];
     this.orderHistoryDesc.push(i)
-    console.log (this.orderHistoryDesc)
-    this.show = !this.show ;
+    console.log(this.orderHistoryDesc)
+    this.show = !this.show;
   }
 }
