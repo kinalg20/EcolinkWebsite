@@ -102,20 +102,13 @@
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div>
-                        <label for="address">Password</label>
-                        <input class="form-control" type="password" id="password" autocomplete="off" name="password"
-                            ngModel required />
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-sm-12">
-                    <div>
                         <label for="country">Country</label>
                         <input class="form-control" type="text" id="country" autocomplete="off" name="country"
                             [(ngModel)]="item.country" required />
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="state">State</label>
@@ -123,8 +116,6 @@
                             [(ngModel)]="item.state" required />
                     </div>
                 </div>
-            </div>
-            <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="city">City</label>
@@ -132,6 +123,8 @@
                             [(ngModel)]="item.city" required />
                     </div>
                 </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="pincode">Pincode</label>
@@ -139,7 +132,22 @@
                             [(ngModel)]="item.pincode" required />
                     </div>
                 </div>
+                <div class="col-lg-6 col-sm-12" *ngIf="passwrodCheck">
+                    <div>
+                        <label for="address">Password</label>
+                        <input class="form-control" type="password" id="password" autocomplete="off" name="password"
+                            ngModel required />
+                    </div>
+                </div>
             </div>
+            <!-- <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                        <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" type="checkbox" value="" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault">
+                            Do you want to change password ?
+                        </label>
+                </div>
+            </div> -->
             <div class="row">
                 <div class="col-12 add-user ">
                     <button class="edituserdetail btn btn-success my-3 form-control">Save Address</button>
@@ -344,7 +352,8 @@
                 </div>
             </div>
         </div>
-        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getUserDetail('add')">
+        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            (click)="getUserDetail('add')">
             <div class="col-12 addAddressCol">
                 <h4 class="m-0">Add Address</h4>
                 <i class="pi pi-plus"></i>
@@ -352,7 +361,8 @@
         </div>
     </ng-container>
     <ng-container *ngIf="!(allUserAddresses.length>0)">
-        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getUserDetail('add')">
+        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal"
+            (click)="getUserDetail('add')">
             <div class="col-12 addAddressCol">
                 <h4 class="m-0">Add Address</h4>
                 <i class="pi pi-plus"></i>

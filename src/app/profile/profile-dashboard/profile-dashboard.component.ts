@@ -20,6 +20,7 @@ export class ProfileDashboardComponent implements OnInit {
   orderData: any = [];
   orderHistoryDesc:any=[];
   storeObj: any;
+  passwrodCheck:boolean=true
   show: boolean =true;
   // showDetails: boolean=true;
   @Input() showdesc: any;
@@ -43,6 +44,9 @@ export class ProfileDashboardComponent implements OnInit {
     this.getOrderhistory();
     this.getReturnProduct();
 
+  }
+  changePassword() {
+    this.passwrodCheck=!this.passwrodCheck;
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;

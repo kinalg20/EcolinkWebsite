@@ -29,6 +29,8 @@ const exportdata: any = [
   CallToActionComponent,
   MediaBannerComponent,
   GoogleMapComponent,
+  AskChemistComponent,
+  ProductsRequestComponent,
   TrendingPostComponent
 ]
 
@@ -43,12 +45,10 @@ const exportdata: any = [
     MediaBannerComponent,
     TrendingPostComponent,
     InnerPagesComponent,
-    ProductsRequestComponent,
     ReturnProductListingComponent,
     ThankYouComponent,
     OrderFailComponent,
     PageNotFoundComponent,
-    AskChemistComponent,
     SupportFormComponent
   ],
   imports: [
