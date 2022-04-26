@@ -1,6 +1,14 @@
 <section>
     <div class="container">
         <section class="bulk-pricing-form">
+            <div class="head">
+                <div class="banner">
+                    <div class="title">
+                        <h2 class="heading">COMMODITY BULK PRICING</h2>
+                        <h2 class="sub-heading">IPA / ACETONE / HEXANE / DENATURED ALCOHOL / PROPYLENE GLYCOL / 142</h2>
+                    </div>
+                </div>
+            </div>
             <h2 class="main-title" style="text-align: center;">BULK PRICING IS AVAILABLE AT 12 DRUMS, 24 DRUMS AND MORE.
             </h2>
             <p>
@@ -39,7 +47,8 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="street-address">Phone</label>
-                        <input type="text" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" class="form-control mt-2" name="phone" ngModel required>
+                        <input type="text" maxlength="10" (input)="validateMobile($event)"
+                            (keydown)="inputMobile($event)" class="form-control mt-2" name="phone" ngModel required>
                         <h6 class="text-danger" *ngIf="invalidMobile">
                             {{ invalidMobile ? "Invalid Mobile" : "" }}
                         </h6>
@@ -103,7 +112,8 @@
                 <div class="row mb-3">
                     <div class="col-12">
                         <label for="user-name">Email*</label>
-                        <input type="email" (input)="validateEmail($event)" class="form-control mt-2" id="first-name" name="email" ngModel required>
+                        <input type="email" (input)="validateEmail($event)" class="form-control mt-2" id="first-name"
+                            name="email" ngModel required>
                         <h6 class="text-danger" *ngIf="invalidEmail">
                             {{ invalidEmail ? "Invalid Email" : "" }}
                         </h6>

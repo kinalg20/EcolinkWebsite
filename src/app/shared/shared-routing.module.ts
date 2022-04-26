@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
   // { path : 'info/:slug', component: BlogComponent},
   { path: '404', component: PageNotFoundComponent },
-  { path: 'shop', component: GSAProductComponent }
+  { path: 'shops', component: GSAProductComponent }
 ];
 
 @NgModule({

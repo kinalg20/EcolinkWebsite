@@ -1,6 +1,14 @@
 <app-header></app-header>
 <section class="inner-pages">
     <div class="container">
+        <div class="list-heading">
+            <span><a href="">Home</a></span>
+            <span><a *ngIf="this.slug.slug">/{{this.slug.slug}}</a></span>
+            <span><a *ngIf="this.slug.sublink">/{{this.slug.sublink}}</a></span>
+            <span><a *ngIf="this.slug.subsublink">/{{this.slug.subsublink}}</a></span>
+            <span><a *ngIf="this.slug.subsubsublink">/{{this.slug.subsubsublink}}</a></span>
+            <span><a *ngIf="this.slug.subsubsubsublink">/{{this.slug.subsubsubsublink}}</a></span>
+        </div>
         <div class="row">
             <section *ngIf="data.slug=='ask-the-chemist'">
                 <app-call-to-action [data]=chemist_array></app-call-to-action>
