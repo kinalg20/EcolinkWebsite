@@ -28,19 +28,40 @@ export class ForgotPasswordComponent implements OnInit {
     }    
   }
   ForgotPassword(form:NgForm){
-    if(form.valid) {
-      let data = Object.assign({}, form.value);
-      this.userObj = {
-        email: data.email,
-        password: data.password,
-        password_confirmation:data.confirmPassword,
+    if(this.userCheck) {
+      if(form.valid) {
+        let data = Object.assign({}, form.value);
+        this.userObj = {
+          email: data.email,
+          password: data.password,
+          password_confirmation:data.confirmPassword,
+          token : this.params
+        }
+        this.__apiservice.forgotPassword(this.userObj).subscribe((res:any) => {
+          console.log(res);
+          form.reset();
+          this.route.navigateByUrl('/profile/auth')
+        })
       }
-      this.__apiservice.forgotPassword(this.userObj).subscribe((res:any) => {
-        console.log(res);
-      })
+      else {
+        this.resSignupMsg = 'Please fill the value !'
+      }
     }
     else {
-      this.resSignupMsg = 'Please fill the value !'
+      if(form.valid) {
+        let data = Object.assign({}, form.value);
+        this.userObj = {
+          email: data.email
+        }
+        this.__apiservice.sendResetMail(this.userObj).subscribe((res:any) => {
+          console.log(res);
+          form.reset();
+          this.resSignupMsg = 'Forgot password email sent successfully!'
+        })
+      }
+      else {
+        this.resSignupMsg = 'Please fill the value !'
+      }
     }
   }
   validateUserEmail(email: any) {

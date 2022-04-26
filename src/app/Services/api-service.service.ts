@@ -413,6 +413,8 @@ export class ApiServiceService {
   forgotPassword(data:any):Observable<any>{
     return this.http.post(this._baseurl+'forgotPassword',data);
   }
-
+  sendResetMail(data:any) : Observable<any> {
+    return this.http.post(this._baseurl+ 'forgotPasswordEmail',data)
+  }
 }
 
