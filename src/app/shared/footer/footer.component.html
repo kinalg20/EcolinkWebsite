@@ -21,26 +21,25 @@
                 </div>
                 <div class="search-bar">
                     <div class="input-group">
+                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
+                            [(ngModel)]="newsletter_email">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">
-                                <a href="#" (click)="subscribe()"
-                                    class="text-white">Stay
+                                <a href="#" (click)="subscribe()" class="text-white">Stay
                                     Informed
                                 </a>
                             </span>
                         </div>
-                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
-                            [(ngModel)]="newsletter_email">
                     </div>
                 </div>
             </div>
             <div class="footer-grid">
-                <div class="responsive-footer-heading">
+                <!-- <div class="responsive-footer-heading">
                     <h5>ECOLINK</h5>
                     <div class="footer-image">
                         <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-33.png" alt="">
                     </div>
-                </div>
+                </div> -->
                 <div class="footer-contact">
                     <h5>Contact us</h5>
                     <p>PO Box 9 Tucker, GA 30085</p>
@@ -72,22 +71,21 @@
                     <p>Terms & Conditions</p>
                 </div>
             </div>
-           <div class="bottom-search">
-            <div class="search-bar">
-                <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text" id="basic-addon1">
-                            <a href="#" (click)="subscribe()"
-                                class="text-white">Stay
-                                Informed
-                            </a>
-                        </span>
+            <!-- <div class="bottom-search">
+                <div class="search-bar">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text" id="basic-addon1">
+                                <a href="#" (click)="subscribe()" class="text-white">Stay
+                                    Informed
+                                </a>
+                            </span>
+                        </div>
+                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
+                            [(ngModel)]="newsletter_email">
                     </div>
-                    <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
-                        [(ngModel)]="newsletter_email">
                 </div>
-            </div>
-           </div>
+            </div> -->
         </div>
     </section>
     <section class="media-links">

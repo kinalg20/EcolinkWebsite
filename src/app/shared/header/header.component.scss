@@ -278,26 +278,29 @@
   }
 }
 
-.modal-dialog{
-  margin: 10rem auto;
-  .modal-content{
-    .modal-header{
-      align-items: baseline;
-      button{
-        background: none;
-        border: none;
-        font-size: 2rem;
+.modal{
+  overflow-y: hidden;
+  .modal-dialog{
+    margin: 10rem auto;
+    .modal-content{
+      .modal-header{
+        align-items: baseline;
+        button{
+          background: none;
+          border: none;
+          font-size: 2rem;
+        }
       }
-    }
-
-    .model-section{
-      height: 300px;
-      overflow: auto;
-      .model-searchlist{
-        .suggestions{
-          cursor: pointer;
-          h4{
-            font-size: 20px;
+  
+      .model-section{
+        height: 300px;
+        overflow: auto;
+        .model-searchlist{
+          .suggestions{
+            cursor: pointer;
+            h4{
+              font-size: 20px;
+            }
           }
         }
       }
