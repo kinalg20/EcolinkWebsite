@@ -23,25 +23,25 @@ export class HomeBannerComponent implements OnInit {
     {
       imgurl: "https://t4.ftcdn.net/jpg/02/27/41/31/360_F_227413125_c5CgAhRF9FVpEYKzckx8le5cSMpYx9YP.jpg",
       heading: "Ask The Chemist",
-      content: "Get answer of your query to ask the chemist",
+      content: "Need a technical question answered?",
       route: "contact/ask-the-chemist"
     },
     {
       imgurl: "https://wallpaperaccess.com/full/2847970.jpg",
       heading: "Pricing",
-      content: "Get quality product at reasonable price",
+      content: "Bulk pricing is available for 12, 24 or more drums",
       route: "productlist"
     },
     {
       imgurl: "https://ecolink.com/wp-content/uploads/2020/05/Dollarphotoclub_58451099-1-750x321.jpg",
       heading: "Ecolink",
-      content: "Chemical solution for next generation",
+      content: "Providing Lean(er) chemical solutions for next gen",
       route: "info"
     },
     {
       imgurl: "https://blog.ipleaders.in/wp-content/uploads/2017/08/BV-Acharya-104.jpg",
       heading: "About Us",
-      content: "Know about company & Meet our team",
+      content: "Supplying degreasers internationally for over 30 years",
       route: "about-us"
     },
     {

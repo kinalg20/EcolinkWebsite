@@ -54,6 +54,7 @@
                             }
                         }
                         .category-text {
+                            align-self: center;
                             .content {
                                 height: 100%;
                                 text-align: center;
@@ -80,7 +81,7 @@
                 display: grid;
                 position: sticky;
                 top: 20px;
-                height: 300px;
+                height: 500px;
                 h3 {
                     font-weight: 700;
                     margin: 0;
@@ -98,19 +99,23 @@
     }
 }
 
-@media (max-width: 992px) {
+@media (max-width: 991px) {
     .shop-categories {
         .container {
             .categories-text {
+                .shop-text {
+                    display: block;
+                    height: 200px;
+                }
                 grid-template-columns: 100%;
                 .product-category {
                     .categories {
-                        grid-template-columns: 100%;
-                        .category-card {
-                            .category-image {
-                                width: 40%;
-                            }
-                        }
+                        // grid-template-columns: 100%;
+                        // .category-card {
+                        //     .category-image {
+                        //         width: 40%;
+                        //     }
+                        // }
                     }
                 }
             }
@@ -130,6 +135,23 @@
     }
 }
 @media (max-width: 768px) {
+    .shop-categories {
+        .container {
+            .categories-text {
+                grid-template-columns: 100%;
+                .product-category {
+                    .categories {
+                        grid-template-columns: 100%;
+                        .category-card {
+                            .category-image {
+                                width: 40%;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
     .home-banner {
         .container {
             .background-image {
@@ -164,6 +186,13 @@
         .container {
             .categories-text {
                 .product-category {
+                    .categories {
+                        .category-card {
+                            .category-image {
+                                width: 60%;
+                            }
+                        }
+                    }
                     .heading-section {
                         h3 {
                             font-size: 1.2rem;
