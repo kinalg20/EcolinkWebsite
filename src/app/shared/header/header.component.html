@@ -3,7 +3,6 @@
         <div class="top-head-line">
             <p>Environmentally preferred industrial degreasers & solvent nationwide and internationally for over 30 year
             </p>
-            <p class="mail">info@ecolink.com</p>
         </div>
     </div>
 </section>
@@ -59,7 +58,8 @@
         <div class="chat-section">
             <a href="#">Speak with our team to find the right prodcut for you!</a>
         </div>
-        <button type="button" style=" background: transparent; border: none; font-size: 16px;"  data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal"
+            data-target="#exampleModalCenter">
             <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
         </button>
     </div>
@@ -84,7 +84,8 @@
                                 name="search">
                             <span class="input-group-append" autocomplete="off">
                                 <button class="btn btn-success" type="button" style="height: 42px;"
-                                    routerLink="/shop/{{slug}}/{{subslug}}" (click)="globalSearch()" data-dismiss="modal" aria-label="Close">Search</button>
+                                    routerLink="/shop/{{slug}}/{{subslug}}" (click)="globalSearch()"
+                                    data-dismiss="modal" aria-label="Close">Search</button>
                             </span>
                         </div>
                     </form>
@@ -93,11 +94,12 @@
                     <div class="model-section">
                         <div class="model-searchlist" *ngIf="showGlobalSearchSuggestion">
                             <!-- <div class="model"> -->
-                                <ng-container *ngFor="let data of suggestionList.data">
-                                    <div class="suggestions" (click)="getSuggestion(data)">
-                                        <h4><a>{{data.name}}</a></h4><hr>
-                                    </div>
-                                </ng-container>
+                            <ng-container *ngFor="let data of suggestionList.data">
+                                <div class="suggestions" (click)="getSuggestion(data)">
+                                    <h4><a>{{data.name}}</a></h4>
+                                    <hr>
+                                </div>
+                            </ng-container>
                             <!-- </div> -->
                         </div>
                     </div>
@@ -108,8 +110,10 @@
 </div>
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData" class="responsive-menu">
-        <li class="parent-menu"><a href="inner-pages/{{item.slug}}">{{item.title| uppercase}}</a>
-            <div class="open-menu-responsive">
+        <li class="parent-menu" (click)="openDropDown()"><a>{{item.title| uppercase}}
+                <i *ngIf="item.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
+            </a>
+            <div class="open-menu-responsive" *ngIf="openSubmenu">
                 <ul class="sub-link-responsive" *ngIf="item.subpage">
                     <li class="sub-link" *ngFor="let sublink of item.subpage">
                         <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title| uppercase}}</a>
@@ -128,6 +132,9 @@
             </div>
         </li>
     </ul>
-    <li style="list-style: none;"><a (click)="profile()" style="cursor: pointer; color: #37793a;"><i class="fa fa-user"
-                aria-hidden="true"></i></a></li>
+    <li class="user-icon">
+        <a (click)="profile()">
+            <i class="fa fa-user" aria-hidden="true"></i>
+        </a>
+    </li>
 </div>
