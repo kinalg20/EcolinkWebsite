@@ -59,7 +59,7 @@
         <div class="chat-section">
             <a href="#">Speak with our team to find the right prodcut for you!</a>
         </div>
-        <button type="button" style=" background: transparent; border: none;"  data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" style=" background: transparent; border: none; font-size: 16px;"  data-toggle="modal" data-target="#exampleModalCenter">
             <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
         </button>
     </div>
@@ -68,7 +68,7 @@
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content" style="height: 500px;">
+        <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">Search Product Here</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -95,7 +95,7 @@
                             <!-- <div class="model"> -->
                                 <ng-container *ngFor="let data of suggestionList.data">
                                     <div class="suggestions" (click)="getSuggestion(data)">
-                                        <h4><a>{{data.name}}</a></h4>
+                                        <h4><a>{{data.name}}</a></h4><hr>
                                     </div>
                                 </ng-container>
                             <!-- </div> -->
