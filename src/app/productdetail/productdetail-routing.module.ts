@@ -12,7 +12,7 @@ const routes: Routes = [
     path: 'shop', component: ProductdetailComponent,
     children: [
       {
-        path: 'allCategories', component: MainDetailComponent,
+        path: '', component: MainDetailComponent,
       },
       {
         path: ':category/:slug/:subslug', component: ShopComponent,

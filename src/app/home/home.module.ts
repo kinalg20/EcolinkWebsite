@@ -13,6 +13,7 @@ import { ManufactureComponent } from './manufacture/manufacture.component';
 // import { AskChemistComponent } from '../shared/ask-chemist/ask-chemist.component';
 import { FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
+import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
 
 
 
@@ -37,7 +38,8 @@ const exportdata:any =[
     HomeRoutingModule,
     SharedModule,
     SharelibraryModule,
-    FormsModule
+    FormsModule,
+    NgxShimmerLoadingModule
   ],
 
   exports:[

@@ -27,7 +27,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       "id": "2",
-      "route": "/shop/allCategories"
+      "route": "/shop"
     },
     {
       "id": "3",
@@ -47,7 +47,7 @@ export class HeaderComponent implements OnInit {
     },
     {
       "id": "7",
-      "route": "/shop/allCategories"
+      "route": "/shop"
     },
     {
       "id": "8",
