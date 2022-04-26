@@ -25,13 +25,13 @@
                         <a href="{{item.slug}}">{{item.title | uppercase}}</a>
                         <ul class="header-dropdown" *ngIf="item.subpage.length>0">
                             <li class="test" *ngFor="let sublink of item.subpage">
-                                <a href="{{item.slug}}/{{sublink.slug}}">{{sublink.title| uppercase}}</a>
+                                <a href="{{item.slug}}/{{sublink.slug}}"><div>{{sublink.title| uppercase}}</div></a>
                                 <ul *ngIf="sublink.subpage.length>0" class="sub-header-dropdown">
                                     <div class="subsublink">
                                         <ng-container *ngFor="let subsublink of sublink.subpage">
                                             <li class="test1">
-                                                <a href="{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title|
-                                                    uppercase}}</a>
+                                                <a href="{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}"><div>{{subsublink.title|
+                                                    uppercase}}</div></a>
                                             </li>
                                         </ng-container>
                                     </div>

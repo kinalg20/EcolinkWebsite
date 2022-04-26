@@ -41,9 +41,9 @@ export class ProductCheckoutComponent implements OnInit {
         })
       });
     }
-    // this.__apiservice.fedexshippingApi().subscribe(res=>{
-    //   console.log(res);
-    // })
+    this.__apiservice.fedexshippingApi().subscribe(res=>{
+      console.log(res);
+    })
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
