@@ -2,6 +2,9 @@
 <section class="inner-pages">
     <div class="container">
         <div class="row">
+            <section *ngIf="data.slug=='ask-the-chemist'">
+                <app-call-to-action [data]=chemist_array></app-call-to-action>
+            </section>
             <div class="col-8">
                 <div class="page-desc">
                     <section *ngIf="data.slug=='ask-the-chemist'">
