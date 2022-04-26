@@ -104,7 +104,7 @@ export class ProductCheckoutComponent implements OnInit {
       shipping_city: this.CheckoutProduct[0].user.city,
       shipping_zip: this.CheckoutProduct[0].user.pincode,
       payment_via: this.selectedPaymentMethod,
-      shippment_via: 'saia',
+      shippment_via: 'fedex',
       no_items: '1'
     }
     console.log(this.orderObj);
