@@ -1,7 +1,6 @@
 <ng-container *ngIf="product.length>0; then thenblock else elseblock"></ng-container>
-<div class="container">
-
-    <ng-template #elseblock>
+<ng-template #elseblock>
+        <div class="container">
         <div class="empty-cart">
             <div class="cart-heading">
                 <h3>My Wishlist</h3>
@@ -19,8 +18,8 @@
                 </div>
             </div>
         </div>
-    </ng-template>
-</div>
+    </div>
+</ng-template>
 
 <ng-template #thenblock>
     <div class="container">

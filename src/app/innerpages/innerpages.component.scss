@@ -1,6 +1,15 @@
 .inner-pages {
     margin-top: 30px;
     .container {
+        .list-heading {
+            margin-bottom: 2rem;
+            span {
+                a {
+                    font-size: 0.9rem;
+                    color: rgb(87, 87, 87);
+                }
+            }
+        }
         .row {
             .col-8 {
                 border-right: 2px solid rgb(231, 231, 231);

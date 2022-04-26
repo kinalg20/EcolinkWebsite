@@ -117,3 +117,39 @@
         }
     }
 }
+@media (max-width:575px) {
+    .ask-chemist {
+        .container {
+            .both-part {
+                .second-part {
+                    h3 {
+                        font-size: 1.1rem;
+                    }
+                    p {
+                        font-size: 0.8rem;
+                    }
+                    svg {
+                        width: 20px;
+                    }
+                }
+            }
+        }
+    }
+    .pricing-section {
+        .container  {
+            .pricing {
+                .pricing-text {
+                    h3 {
+                        font-size: 1.1rem;
+                    }
+                    p {
+                        font-size: 0.8rem;
+                    }
+                    svg {
+                        width: 20px;
+                    }
+                }
+            }
+        }
+    }
+}

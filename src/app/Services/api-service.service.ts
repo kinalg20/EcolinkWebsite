@@ -404,5 +404,8 @@ rateDetailThroughSaia() {
   });
   return this.http.post(url, body, { headers: headers });
 }
+  sendResetMail(data:any) : Observable<any> {
+    return this.http.post(this._baseurl+ 'forgotPasswordEmail',data)
+  }
 }
 

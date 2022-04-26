@@ -10,6 +10,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class HeaderComponent implements OnInit {
   user_id: any;
   openMenu: boolean = false;
+  openSubmenu: boolean = false;
   homePageData: any = [];
   slug: any;
   data : any = []
@@ -86,6 +87,9 @@ export class HeaderComponent implements OnInit {
 
   openmenu() {
     this.openMenu = !this.openMenu;
+  }
+  openDropDown () {
+    this.openSubmenu = !this.openSubmenu
   }
 
   showModalDialog(){

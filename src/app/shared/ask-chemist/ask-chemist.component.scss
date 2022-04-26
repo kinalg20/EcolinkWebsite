@@ -39,7 +39,7 @@
                     .gfield_select {
                         border-color: #e1e1e1;
                         background-color: #fcfcfc;
-                        width: 100%;
+                        // width: 100%;
                         padding: 0.375rem 0.75rem;
                         line-height: 1.5;
                         color: #212529;
@@ -47,6 +47,10 @@
                         border: 1px solid #ced4da;
                         border-radius: 0.25rem;
                         margin-bottom: 20px;
+                        option {
+                            font-size: 13px;
+                            max-width: 100px !important;
+                        }
                     }
                 }
             }
@@ -60,7 +64,7 @@
                 background-color: #fff;
                 border: 1px solid #ced4da;
                 border-radius: 0.25rem;
-                margin-bottom: 20px;
+                // margin-bottom: 20px;
             }
             button {
                 box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
@@ -80,21 +84,40 @@
             padding: 20px 30px;
         }
     }
+    .proceed-button {
+        text-align: left;
+    }
+}
+@media (max-widtH:992px) {
+    
+    .Fname {
+        .fname {
+            margin-bottom: 1rem;
+        }
+    }
+    .Email {
+        .email {
+            margin-bottom: 1rem;
+        }
+    }
 }
 @media (max-width: 768px) {
     .checkout-body {
         grid-template-columns: 100%;
-    }
-    .proceed-button {
-        text-align: center;
-    }
-}
-@media (max-width: 575px) {
-    .proceed-button {
-        button {
-            width: 30% !important;
+        .proceed-button {
+            text-align: center;
         }
     }
 }
 ::ng-deep {
+    .wp-image-3097 {
+        width: 100%;
+        object-fit: contain;
+        height: 200px !important;
+    }
+    .wp-image-3098 {
+        width: 100%;
+        object-fit: contain;
+        height: 200px !important;
+    }
 }
