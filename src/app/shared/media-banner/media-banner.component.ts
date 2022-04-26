@@ -28,17 +28,23 @@ export class MediaBannerComponent implements OnInit {
     }, 1000);
   }
   loadAllBlog() {
+    this.moreCheck=!this.moreCheck;
+    this.lessCheck=!this.lessCheck;
     this.blogArray=[]
-    this.moreCheck=false;
-    this.lessCheck=true;
     if(this.moreCheck==false) {
+      console.log('more',this.moreCheck);
       this.data_input.data.map((res:any)=> {
         this.blogArray.push(res);
         console.log(this.blogArray)
       })
     }
     else {
-      
+      console.log('less',this.lessCheck);
+      console.log(this.helperArray);
+      this.helperArray.map((res:any)=> {
+        this.blogArray.push(res);
+        console.log(this.blogArray);
+      })
     }
   }
 }
