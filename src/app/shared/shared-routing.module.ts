@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from '../home/blog/blog.component';
 import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
 import { FooterComponent } from './footer/footer.component';
+import { GSAProductComponent } from './gsa-product/gsa-product.component';
 import { HeaderComponent } from './header/header.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
@@ -19,8 +20,8 @@ const routes: Routes = [
   { path: 'failure', component: OrderFailComponent },
   { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
   // { path : 'info/:slug', component: BlogComponent},
-
-  { path: '404', component: PageNotFoundComponent }
+  { path: '404', component: PageNotFoundComponent },
+  { path: 'shop', component: GSAProductComponent }
 ];
 
 @NgModule({
