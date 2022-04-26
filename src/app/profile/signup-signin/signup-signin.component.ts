@@ -159,15 +159,15 @@ export class SignupSigninComponent implements OnInit {
     );
   }
 
-  signInWithGoogle(): void {
-    this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
-      (user: any) => {
-        console.log("Loged In User", user);
-        localStorage.setItem('Access_token',user.authToken);
-        // this._utilityService.setObject(user, 'GoogleOAuth_USER')
-        // this.dataService.loginedUserSubject.next(user);
-        window.history.back();
-      }
-    );
-  }
+  // signInWithGoogle(): void {
+  //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+  //     (user: any) => {
+  //       console.log("Loged In User", user);
+  //       localStorage.setItem('Access_token',user.authToken);
+  //       // this._utilityService.setObject(user, 'GoogleOAuth_USER')
+  //       // this.dataService.loginedUserSubject.next(user);
+  //       window.history.back();
+  //     }
+  //   );
+  // }
 }

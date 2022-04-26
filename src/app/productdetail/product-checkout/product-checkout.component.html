@@ -131,14 +131,13 @@
                             </ul>
                             <ul>
                                 <li class="subtotal-list-element">Shipping</li>
-                                <li>$500</li>
+                                <li>${{shippingCharge}}</li>
                             </ul>
                         </div>
                         <div class="checkout-products-total">
                             <ul>
                                 <li class="subtotal-list-element"><b>Total</b></li>
-                                <!-- <li><b>${{cart.payable + 500}}</b></li> -->
-                                <li><b>${{cart.payable -- shippingCharge}}</b></li>
+                                <li><b>${{cart.payable -- shippingCharge | number : '1.2-2'}}</b></li>
                             </ul>
                         </div>
                     </ng-container>

@@ -79,7 +79,7 @@
                                 </div>
                             </td>
                             <td>
-                                <span class="delete_item" data-toggle="modal" data-target="#exampleModalCenter"
+                                <span class="delete_item" data-toggle="modal" data-target="#exampleXCenter"
                                     (click)="deleteItemFromCart(product.product ,product.quantity )"><i
                                         class="pi pi-times"></i></span>
                             </td>
@@ -102,7 +102,7 @@
                             <h3>Total</h3>
                         </li>
                         <li>
-                            <h3>${{SubTotal}}</h3>
+                            <h3>${{SubTotal | number : '1.2-2'}}</h3>
                         </li>
                     </ul>
                 </div>

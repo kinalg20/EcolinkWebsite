@@ -5,6 +5,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/app/Services/cookies.service';
+import { ShippingServiceService } from 'src/app/Services/shipping-service.service';
 
 @Component({
   selector: 'app-product-checkout',
@@ -20,11 +21,14 @@ export class ProductCheckoutComponent implements OnInit {
   carts: any = [];
   orderObj: any;
   showPaypal: boolean = false;
-  paypalProductDetails:any={};
-  paymentCheck:boolean=true;
-  shippingCharge: number = 500;
+  paypalProductDetails: any = {};
+  paymentCheck: boolean = true;
+  shippingCharge: number = 0;
   public payPalConfig?: IPayPalConfig;
-  constructor(private __apiservice: ApiServiceService, private route: Router, private _cookies: CookiesService) { }
+  constructor(private __apiservice: ApiServiceService,
+  private route: Router,
+  private _cookies: CookiesService,
+  private _ShippingApi: ShippingServiceService) { }
 
   ngOnInit(): void {
     this.checkoutProduct();
@@ -41,8 +45,11 @@ export class ProductCheckoutComponent implements OnInit {
         })
       });
     }
-    this.__apiservice.fedexshippingApi().subscribe(res=>{
-      console.log(res);
+    this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
+      this._ShippingApi.fedexshippingApi(res.access_token , this.CheckoutProduct).subscribe((resp: any) => {
+        console.log("resp.output",resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+        this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
+      })
     })
   }
   getRadioButtonValue(value: any) {
@@ -66,11 +73,11 @@ export class ProductCheckoutComponent implements OnInit {
     }
   }
 
-  // getShippingInfo() {
-  //   this.__apiservice.rateDetailThroughSaia().subscribe(res => {
-  //     console.log(res);
-  //   })
-  // }
+  getShippingInfo() {
+    this.__apiservice.rateDetailThroughSaia().subscribe(res => {
+      console.log(res);
+    })
+  }
   getOrderInfo() {
     this.orderObj = {
       sameAsShip: 0,
@@ -97,7 +104,7 @@ export class ProductCheckoutComponent implements OnInit {
       shipping_city: this.CheckoutProduct[0].user.city,
       shipping_zip: this.CheckoutProduct[0].user.pincode,
       payment_via: this.selectedPaymentMethod,
-      shippment_via: 'saia',
+      shippment_via: 'fedex',
       no_items: '1'
     }
     console.log(this.orderObj);
@@ -150,7 +157,7 @@ export class ProductCheckoutComponent implements OnInit {
         });
       },
       onClientAuthorization: (data) => {
-        if(data.status=='COMPLETED') {
+        if (data.status == 'COMPLETED') {
           this.getOrderInfo();
           this.route.navigateByUrl('/thanks');
         }
@@ -169,17 +176,17 @@ export class ProductCheckoutComponent implements OnInit {
     };
   }
   checkPaymentTab() {
-    if(this.selectedPaymentMethod=='cod') {
-      this.paymentCheck=false;
+    if (this.selectedPaymentMethod == 'cod') {
+      this.paymentCheck = false;
       console.log(this.paymentCheck);
     }
-    else if(this.selectedPaymentMethod=="paypal") {
-      this.paymentCheck=true;
+    else if (this.selectedPaymentMethod == "paypal") {
+      this.paymentCheck = true;
       this.showPaypal = !this.showPaypal;
       console.log(this.paymentCheck);
     }
-    else if (this.selectedPaymentMethod=="check-payment"){
-      this.paymentCheck=false;
+    else if (this.selectedPaymentMethod == "check-payment") {
+      this.paymentCheck = false;
     }
   }
   cookiesCheckout: any = {}
@@ -226,7 +233,7 @@ export class ProductCheckoutComponent implements OnInit {
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
   }
-  payment : any;
+  payment: any;
   getPaypalProductDetail() {
     setTimeout(() => {
       this.CheckoutProduct.map((res: any) => {
