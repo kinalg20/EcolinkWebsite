@@ -25,7 +25,7 @@
                         <div id="field_4_11" class="gfield">
                             <label class="gfield_label" for="input_4_11">I am interested in*</label>
                             <div class="ginput_container mt-2">
-                                <select name="input_11" id="input_4_11" class="gfield_select" aria-required="true"
+                                <select name="input_11" id="input_4_11" class="gfield_select col-12" aria-required="true"
                                     aria-invalid="false" ngModel required>
                                     <option value="abatement">VOC abatement</option>
                                     <option value="performance">Improving chemical performance
@@ -48,9 +48,9 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-lg-6 col-12">
+                            <div class="col-lg-6 col-12 Fname">
                                 <label for="first-name">First Name*</label>
-                                <input type="text" class="form-control mt-2" placeholder="First name" id="first-name"
+                                <input type="text" class="form-control fname mt-2" placeholder="First name" id="first-name"
                                     name="firstname" ngModel required>
                             </div>
                             <div class="col-lg-6 col-12">
@@ -88,15 +88,15 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-6">
+                            <div class="col-lg-6 col-12 Email">
                                 <label for="Email Address">Email Address*</label>
-                                <input type="email" class="form-control mt-2" placeholder="Email" id="Email-Address"
+                                <input type="email" class="form-control mt-2 email" placeholder="Email" id="Email-Address"
                                     (input)="validateEmail($event)" name="email" ngModel required>
                                 <h6 class="text-danger" *ngIf="invalidEmail">
                                     {{ invalidEmail ? "Invalid Email" : "" }}
                                 </h6>
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6 col-12">
                                 <label for="Phone">Phone*</label>
                                 <input type="text" class="form-control mt-2" placeholder="phone" maxlength="10"
                                     (input)="validateMobile($event)" (keydown)="inputMobile($event)" name="phone"
@@ -106,7 +106,7 @@
                                 </h6>
                             </div>
                         </div>
-                        <div class="proceed" style="text-align: left;">
+                        <div class="proceed">
                             <div class="proceed-button">
                                 <button>Submit</button>
                             </div>
