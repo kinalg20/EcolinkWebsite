@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -16,10 +16,16 @@ export class ForgotPasswordComponent implements OnInit {
   confirmPassword: string = '';
   userObj:any;
   userCheck:boolean=false;
+  params:any;
 
-  constructor(private __apiservice : ApiServiceService, private route:Router) { }
+  constructor(private __apiservice : ApiServiceService, private route:Router, private router:ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.params=this.router.snapshot.params;
+    console.log(this.params.params);
+    if(this.params.params) {
+      this.userCheck=true;
+    }    
   }
   ForgotPassword(form:NgForm){
     if(form.valid) {

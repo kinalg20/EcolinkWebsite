@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: '',canActivate:[AuthGuard], component: ProfileComponent },
   { path: 'auth', component: SignupSigninComponent },
   { path: 'reset-password', component: ForgotPasswordComponent },
+  { path: 'reset-password/:params', component: ForgotPasswordComponent },
 
 ];
 
