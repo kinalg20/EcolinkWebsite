@@ -23,7 +23,7 @@ export class ProductCheckoutComponent implements OnInit {
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
   paymentCheck: boolean = true;
-  shippingCharge: number = 500;
+  shippingCharge: number = 0;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
   private route: Router,
