@@ -188,6 +188,7 @@
 @media (max-width: 768px) {
     .cart-body {
         .cart-elements {
+            overflow-x: scroll;
             p-table {
                 .product_name {
                     display: block;
@@ -209,9 +210,7 @@
 
 @media (max-width: 495px) {
     .cart-body {
-        overflow: hidden;
-        width: fit-content;
-
+        overflow-x: scroll;
         .cart-elements {
             p-table {
                 .product_name {

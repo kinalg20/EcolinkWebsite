@@ -1,5 +1,25 @@
 .container {
     .bulk-pricing-form {
+        .head {
+            .banner {
+                margin-bottom: 30px;
+                background-image: url("https://cefic.org/app/uploads/2019/03/shutterstock_145005184-e1552310285263-1024x481.jpg");
+                .title {
+                    padding: 50px 0;
+                    h2 {
+                        color: #ffffff;
+                        text-align: center;
+                        font-size: 1.6rem;
+                    }
+                    .heading {
+                        margin: 40px 0;
+                    }
+                    .sub-heading {
+                        margin: 20px 0;
+                    }
+                }
+            }
+        }
         .form-head {
             h3 {
                 margin: 25px 0;
@@ -32,11 +52,59 @@
         }
     }
 }
+@media (max-width: 1200px) {
+    .container {
+        .bulk-pricing-form {
+            .head {
+                .banner {
+                    .title {
+                        padding: 20px 0;
+                        h2 {
+                            font-size: 1.2rem !important;
+                        }
+                        .heading {
+                            margin: 20px 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media (max-width: 992px) {
+    .container {
+        .bulk-pricing-form {
+            .head {
+                .banner {
+                    .title {
+                        h2 {
+                            font-size: 1.2rem;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 @media (max-width: 500px) {
     .container {
         .bulk-pricing-form {
             .proceed {
                 text-align: center;
+            }
+            .head {
+                .banner {
+                    .title {
+                        padding: 20px 0;
+                        h2 {
+                            font-size: 1.2rem;
+                        }
+                        .heading {
+                            margin: 20px 0;
+                        }
+                    }
+                }
             }
         }
     }
