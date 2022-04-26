@@ -15,10 +15,10 @@
             </section>
             <div class="col-8">
                 <div class="page-desc">
+                    <div [innerHtml]=this._apiService.getSantizedData(data.description) *ngIf="data.description"></div>
                     <section *ngIf="data.slug=='ask-the-chemist'">
                         <app-ask-chemist></app-ask-chemist>
                     </section>
-                    <div [innerHtml]=this._apiService.getSantizedData(data.description)></div>
                     <section *ngIf="data.slug=='contact'">
                         <app-google-map></app-google-map>
                     </section>
