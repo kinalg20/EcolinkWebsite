@@ -11,12 +11,12 @@ export class TrendingPostComponent implements OnInit {
   constructor(private __apiservice:ApiServiceService) { }
 
   ngOnInit(): void {
-    this.__apiservice.getAllCategories().subscribe(res=> {
-      this.getCategory=res;
-      setTimeout(() => {
-        console.log(this.getCategory);
-      }, 500);
+    this.__apiservice.getAllCategories().subscribe(res => {
+      this.getCategory = res;
     })
+    setTimeout(() => {
+      console.log(this.getCategory)
+    }, 1000);
   }
 
 }
