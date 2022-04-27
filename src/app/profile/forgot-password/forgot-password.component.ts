@@ -35,7 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
           email: data.email,
           password: data.password,
           password_confirmation:data.confirmPassword,
-          token : this.params
+          token : this.params.params
         }
         this.__apiservice.forgotPassword(this.userObj).subscribe((res:any) => {
           console.log(res);
