@@ -30,15 +30,7 @@ export class ProductCheckoutComponent implements OnInit {
   private route: Router,
   private _cookies: CookiesService,
   private _ShippingApi: ShippingServiceService) { }
-  paypal:any=[{
-    name: 'Enterprise Subscription',
-    quantity: '1',
-    category: 'DIGITAL_GOODS',
-    unit_amount: {
-      currency_code: 'USD',
-      value: '110',
-    },
-  }]
+  paypal:any=[]
 
   ngOnInit(): void {
     this.checkoutProduct();
@@ -79,9 +71,9 @@ export class ProductCheckoutComponent implements OnInit {
         console.log(this.CheckoutProduct);
         res.data.carts.map((response:any)=> {
           this.paypalItems.name=response.product.name,
-          this.paypalItems.quantity=response.quantity;
+          this.paypalItems.quantity="3";
           this.paypalItems.category="aerosol";
-          this.paypalItems.unit_amount={currency_code:'USD',value:response.product.sale_price}
+          this.paypalItems.unit_amount={currency_code:'USD',value:"1825"}
           this.paypal.push(this.paypalItems);
 
           console.log(this.paypal);
@@ -141,11 +133,11 @@ export class ProductCheckoutComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'USD',
-            value: "110",
+            value: "5475",
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: "110"
+                value: "5475"
               }
             }
           },
