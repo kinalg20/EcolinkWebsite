@@ -11,6 +11,7 @@ export class SupportFormComponent implements OnInit {
   userObj: any;
   invalidUserEmail: string = '';
   resSignupMsg: string = '';
+  resSignupMsgCheck: string = ' ';
   invalidMobile = false;
   invalidEmail: boolean = false;
   checkBoxChcek:boolean=false
@@ -38,12 +39,14 @@ export class SupportFormComponent implements OnInit {
         console.log(res);
         form.reset();
         this.checkBoxChcek=false
+        this.resSignupMsg = 'Contact detail saved successfully!';
+        this.resSignupMsgCheck='success';
       }
       )
     }
     else {
-      this.resSignupMsg = 'Please fill the value';
-    }
+      this.resSignupMsgCheck='danger';
+      this.resSignupMsg = 'Please fill the value!';    }
   }
 
   validateUserEmail(email: any) {

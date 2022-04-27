@@ -11,7 +11,7 @@ export class AskChemistComponent implements OnInit {
   userObj: any;
   invalidUserEmail: string = '';
   resSignupMsg: string = '';
-  invalidMobile = false;
+  resSignupMsgCheck: string = ' ';  invalidMobile = false;
   invalidEmail: boolean = false;
   constructor(private __apiservice: ApiServiceService) { }
 
@@ -50,12 +50,14 @@ export class AskChemistComponent implements OnInit {
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         form.reset();
+        this.resSignupMsg = 'Contact detail saved successfully!';
+        this.resSignupMsgCheck = 'success';
       }
       )
     }
     else {
-      this.resSignupMsg = 'Please fill the value';
-    }
+      this.resSignupMsgCheck = 'danger';
+      this.resSignupMsg = 'Please fill the value!';    }
   }
 
   validateUserEmail(email: any) {

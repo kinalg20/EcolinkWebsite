@@ -1,4 +1,3 @@
-
 <section class="product-request-section">
     <div class="container">
         <div class="row">
@@ -7,19 +6,27 @@
                     <h1 class="main-title">Request A Product Sample</h1>
                     <p><strong>Sample Policy: </strong> Established companies and military users are welcome to request
                         samples of
-                        Ecolink products at no charge. For international samples, we request only that you pay the freight
+                        Ecolink products at no charge. For international samples, we request only that you pay the
+                        freight
                         costs by
                         providing your shipper’saccount number (FedEx, UPS, etc.)</p>
-                    <p>In order to determine the most effective products for your needs, please describe your application
+                    <p>In order to determine the most effective products for your needs, please describe your
+                        application
                         using this
                         short form.</p>
                     <div class="form-head">
                         <h3>Request A Product Sample</h3>
                     </div>
-    
+
                     <form #RequestForm="ngForm" (ngSubmit)="saveProductRequestDetail(RequestForm)">
                         <ng-container *ngIf="resSignupMsg">
-                            <div class="alert alert-danger" role="alert" id="loginAlert">
+                            <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
+                                id="loginAlert">
+                                {{ resSignupMsg }}
+                                <span class="icon-class"><i (click)="closeMsg()" class="fa fa-close"></i></span>
+                            </div>
+                            <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
+                                id="loginAlert">
                                 {{ resSignupMsg }}
                             </div>
                         </ng-container>
@@ -31,7 +38,8 @@
                                     required>
                             </div>
                             <div class="col-12">
-                                <label for="last-name">What kind of soil, grease or coating do you wish to remove ?</label>
+                                <label for="last-name">What kind of soil, grease or coating do you wish to remove
+                                    ?</label>
                                 <input type="text" class="form-control mt-2" name="input2" ngModel required>
                             </div>
                         </div>
@@ -78,13 +86,13 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="Town-city">Other? Please explain</label>
-                                <input type="text" class="form-control mt-2" name="city1"  >
+                                <input type="text" class="form-control mt-2" name="city1">
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="Town-city">Shipper Acct # (FedEx, UPS):</label>
-                                <input type="text" class="form-control mt-2" name="city2"  >
+                                <input type="text" class="form-control mt-2" name="city2">
                             </div>
                         </div>
                         <li id="field_5_13" class="">
@@ -99,8 +107,10 @@
                                     </li>
                                     <li class="gchoice_5_13_2">
                                         <input class="choice-input" name="input_13.2" type="checkbox"
-                                            value="How to become a distributor for Ecolink products." id="choice_5_13_2">
-                                        <label for="choice_5_13_2" id="label_5_13_2">How to become a distributor for Ecolink
+                                            value="How to become a distributor for Ecolink products."
+                                            id="choice_5_13_2">
+                                        <label for="choice_5_13_2" id="label_5_13_2">How to become a distributor for
+                                            Ecolink
                                             products.</label>
                                     </li>
                                 </ul>
@@ -120,7 +130,9 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="street-address">Phone</label>
-                                <input type="text" (input)="validateMobile($event)" maxlength="10" (keydown)="inputMobile($event)" class="form-control mt-2" name="phone" ngModel required>
+                                <input type="text" (input)="validateMobile($event)" maxlength="10"
+                                    (keydown)="inputMobile($event)" class="form-control mt-2" name="phone" ngModel
+                                    required>
                                 <h6 class="text-danger" *ngIf="invalidMobile">
                                     {{ invalidMobile ? "Invalid Mobile" : "" }}
                                 </h6>
@@ -148,7 +160,7 @@
                             <div class="col-lg-6 col-12">
                                 <label for="user-name">City*</label>
                                 <input type="text" class="form-control mt-2" id="first-name" name="city" ngModel
-                                required>
+                                    required>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <label for="last-name">State / Province / Region</label>
@@ -159,7 +171,7 @@
                             <div class="col-lg-6 col-12">
                                 <label for="user-name">ZIP / Postal Code</label>
                                 <input type="text" class="form-control mt-2" id="first-name" name="pincode" ngModel
-                                required>
+                                    required>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <label for="last-name">Country</label>
@@ -169,8 +181,8 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="user-name">Email*</label>
-                                <input type="email" class="form-control mt-2" id="first-name"  (input)="validateEmail($event)" name="email" ngModel
-                                required>
+                                <input type="email" class="form-control mt-2" id="first-name"
+                                    (input)="validateEmail($event)" name="email" ngModel required>
                                 <h6 class="text-danger" *ngIf="invalidEmail">
                                     {{ invalidEmail ? "Invalid Email" : "" }}
                                 </h6>

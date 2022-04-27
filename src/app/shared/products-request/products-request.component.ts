@@ -9,30 +9,34 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./products-request.component.scss']
 })
 export class ProductsRequestComponent implements OnInit {
-  slug:any;
-  data : any = []
+  slug: any;
+  data: any = []
   userObj: any;
   invalidUserEmail: string = '';
   resSignupMsg: string = '';
+  resSignupMsgCheck: string = ' ';
   invalidMobile = false;
   invalidEmail: boolean = false;
-  checkBoxChcek:boolean = false;
-  constructor(private route: ActivatedRoute , private _apiService :ApiServiceService) { }
+  checkBoxChcek: boolean = false;
+  constructor(private route: ActivatedRoute, private _apiService: ApiServiceService) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
-    if(this.slug.sublink){
-      this._apiService.getPageBySlug(this.slug.sublink).subscribe((res:any)=>{
+    if (this.slug.sublink) {
+      this._apiService.getPageBySlug(this.slug.sublink).subscribe((res: any) => {
         this.data = res.data;
         console.log(res);
       })
     }
-    else{
-      this._apiService.getPageBySlug(this.slug).subscribe((res:any)=>{
+    else {
+      this._apiService.getPageBySlug(this.slug).subscribe((res: any) => {
         this.data = res.data;
         console.log(res);
       })
     }
+  }
+  closeMsg() {
+    const [ngClass] = "{'display': none}"
   }
   saveProductRequestDetail(form: NgForm) {
     if (form.valid) {
@@ -48,20 +52,23 @@ export class ProductsRequestComponent implements OnInit {
         state: form.value.state,
         city: form.value.city,
         zip: form.value.pincode,
-        input_1 : form.value.input1,
-        input_2 : form.value.input2,
-        input_3 : form.value.input3,
-        input_4 : form.value.input4
+        input_1: form.value.input1,
+        input_2: form.value.input2,
+        input_3: form.value.input3,
+        input_4: form.value.input4
       };
       this._apiService.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         form.reset();
-        this.checkBoxChcek=false
+        this.checkBoxChcek = false
+        this.resSignupMsg = 'Contact detail saved successfully!';
+        this.resSignupMsgCheck = 'success';
       }
       )
     }
     else {
-      this.resSignupMsg = 'Please fill the value';
+      this.resSignupMsgCheck = 'danger';
+      this.resSignupMsg = 'Please fill the value!';
     }
   }
 

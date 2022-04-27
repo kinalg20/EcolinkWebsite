@@ -14,7 +14,13 @@
 
             <form #RequestForm="ngForm" (ngSubmit)="saveSupportFormDetail(RequestForm)">
                 <ng-container *ngIf="resSignupMsg">
-                    <div class="alert alert-danger" role="alert" id="loginAlert">
+                    <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
+                        id="loginAlert">
+                        {{ resSignupMsg }}
+                        <span class="icon-class"><i class="fa fa-close"></i></span>
+                    </div>
+                    <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
+                        id="loginAlert">
                         {{ resSignupMsg }}
                     </div>
                 </ng-container>
