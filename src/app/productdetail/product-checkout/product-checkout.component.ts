@@ -229,6 +229,7 @@ export class ProductCheckoutComponent implements OnInit {
     setTimeout(() => {
       this.refractorData();
     }, 5000);
+    this.formShimmer = false;
   }
 
   refractorData() {
