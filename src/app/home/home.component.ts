@@ -11,11 +11,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  scrolldown(event:any){
-      this.scroller.scrollToAnchor("newsletter");
+  scrolldown(event: any) {
+    this.scroller.scrollToAnchor("newsletter");
   }
 
-  scroll(){
-    this.scroller.scrollToAnchor("targetRed");
-  }
 }

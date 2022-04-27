@@ -94,7 +94,7 @@
         </ng-container>
         <div class="recommendation-product" *ngIf="recommended_products.length>0">
             <h3>Recommended Products</h3>
-            <app-card-slider [recommended_products]="recommended_products"></app-card-slider>
+            <app-card-slider [recommended_products]="recommended_products"  [category]="this.slug.category"></app-card-slider>
         </div>
     </div>
 </div>

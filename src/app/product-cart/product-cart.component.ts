@@ -62,11 +62,14 @@ export class ProductCartComponent implements OnInit {
     else {
       this._ApiService.getItemFromCart().subscribe(res => {
         console.log(res);
-        setTimeout(() => {
-          this.CardShow = res.data;
-          this.subtotal();
-          console.log(this.CardShow);
-        }, 1500);
+        if(res.code == 200){
+          setTimeout(() => {
+            this.CardShow = res.data;
+            this.subtotal();
+            console.log(this.CardShow);
+          }, 1500);
+        }
+        
       })
     }
   }

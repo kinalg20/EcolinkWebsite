@@ -7,9 +7,12 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class CardSliderComponent implements OnInit {
   @Input() recommended_products : any;
+  @Input() category : any;
   constructor() { }
 
   ngOnInit(): void {
+    console.log(this.category);
+    // console.log(this.recommended_products);
   }
 
   responsiveOptions = [

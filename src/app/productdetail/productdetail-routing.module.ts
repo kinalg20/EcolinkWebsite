@@ -15,10 +15,13 @@ const routes: Routes = [
         path: '', component: MainDetailComponent,
       },
       {
+        path: ':category/:slug/:subslug/:subsublug', component: ShopComponent,
+      },
+      {
         path: ':category/:slug/:subslug', component: ShopComponent,
       },
       {
-        path: ':category/:slug/:subslug/:subsublug', component: ShopComponent,
+        path: ':category/:slug', component: ShopComponent,
       },
       {
         path: 'checkout', component: ProductCheckoutComponent,

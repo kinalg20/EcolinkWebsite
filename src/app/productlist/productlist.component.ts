@@ -45,7 +45,14 @@ export class ProductlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
-    this.getListingData(this.slug);
+    if (this.slug.sublink) {
+      console.log(this.slug.sublink);
+      this.getListingData(this.slug.sublink);
+    }
+    else {
+      this.getListingData(this.slug.slug);
+      console.log(this.slug.slug); 
+    }
     localStorage.setItem("category", JSON.stringify(this.slug.slug));
   }
   responsiveOptions = [

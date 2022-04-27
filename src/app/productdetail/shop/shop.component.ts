@@ -38,13 +38,17 @@ export class ShopComponent implements OnInit {
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
-    console.log(this.slug);
     if (this.slug.subsublug) {
-      this.detailSlug = this.slug.slug + '/' + this.slug.subslug +'/'+ this.slug.subsublug;
+      this.detailSlug = this.slug.slug + '/' + this.slug.subslug + '/' + this.slug.subsublug;
     }
-    else {
+    else if (this.slug.subslug) {
       this.detailSlug = this.slug.slug + '/' + this.slug.subslug;
     }
+
+    else {
+      this.detailSlug = this.slug.slug
+    }
+
     this.getProductDetail(this.detailSlug);
   }
 
