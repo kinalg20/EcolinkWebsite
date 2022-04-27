@@ -1,7 +1,3 @@
-export class HeaderMenu{
+export class HeaderMenuAction{
     static readonly type='[HeaderMenu] Get';
 }
-
-// export class Getaminties{
-//     static readonly type='[aminity] Get';
-// }

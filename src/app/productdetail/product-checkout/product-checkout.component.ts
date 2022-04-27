@@ -25,6 +25,7 @@ export class ProductCheckoutComponent implements OnInit {
   paypalProductDetails: any = {};
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
+  formShimmer: boolean = true;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
   private route: Router,
@@ -48,8 +49,8 @@ export class ProductCheckoutComponent implements OnInit {
       });
     }
     this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
-      this._ShippingApi.fedexshippingApi(res.access_token , this.CheckoutProduct).subscribe((resp: any) => {
-        console.log("resp.output",resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+      this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
+        console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
         this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
@@ -68,6 +69,7 @@ export class ProductCheckoutComponent implements OnInit {
       this.__apiservice.getCheckoutProducts().subscribe(res => {
         console.log(res);
         this.CheckoutProduct.push(res.data);
+        this.formShimmer = false;
         console.log(this.CheckoutProduct);
         res.data.carts.map((response:any)=> {
           this.paypalItems.name=response.product.name,

@@ -33,6 +33,7 @@ export class ProductlistComponent implements OnInit {
   price_to: any;
   selectedLevel: any = 'default';
   rangeValues: number[] = [0, 100];
+  shimmerLoad : boolean = true;
   @ViewChild('warning') warning: any;
   constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService) {
     this.popularity = [
@@ -115,6 +116,7 @@ export class ProductlistComponent implements OnInit {
         console.log("this.productResponse", this.displayProducts)
         this.ProductListData.push(res);
         this.getPrice();
+        this.shimmerLoad = false;
       }
       if (res.code == 400) {
         this.warning.show("Warning")

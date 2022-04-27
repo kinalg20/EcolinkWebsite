@@ -8,10 +8,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class CardSliderComponent implements OnInit {
   @Input() recommended_products : any;
   @Input() category : any;
+  recommended_shimmer_load : boolean = true;
   constructor() { }
 
   ngOnInit(): void {
     console.log(this.category);
+    if(this.recommended_products.length>0){
+      this.recommended_shimmer_load = false;
+    }
     // console.log(this.recommended_products);
   }
 

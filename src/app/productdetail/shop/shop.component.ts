@@ -15,6 +15,7 @@ export class ShopComponent implements OnInit {
   previousdata: any;
   recommended_products: any = [];
   detailSlug: any;
+  shimmerLoad:boolean= true;
 
   responsiveOptions = [
     {
@@ -69,6 +70,7 @@ export class ShopComponent implements OnInit {
         this.productDetail.push(res);
         console.log(res);
         this.recommended_products = res.data.related_products;
+        this.shimmerLoad = false;
       }
     })
   }
