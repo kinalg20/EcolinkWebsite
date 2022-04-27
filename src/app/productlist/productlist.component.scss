@@ -421,7 +421,6 @@
         }
     }
 }
-
 .recommendation-product {
     h3 {
         margin: 10px 28px;
@@ -430,6 +429,9 @@
 }
 
 ::ng-deep {
+    .shimmer-loading .ngx-shimmer {
+        height: 280px;
+    }
     .p-dropdown:not(.p-disabled):hover {
         border-color: #55b15c;
     }

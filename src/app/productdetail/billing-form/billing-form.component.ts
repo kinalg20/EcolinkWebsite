@@ -10,6 +10,7 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 })
 export class BillingFormComponent implements OnInit {
   @Input() CheckoutProduct: any;
+  @Input() formShimmer: boolean = true;
   userObj: any;
   resSignupMsg: any;
   password: string = '';
@@ -18,6 +19,7 @@ export class BillingFormComponent implements OnInit {
   constructor(private __apiservice: ApiServiceService, private route: Router , private _cookies : CookiesService) { }
 
   ngOnInit(): void {
+    console.log(this.formShimmer);
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
   }
   signUp(form: NgForm) {

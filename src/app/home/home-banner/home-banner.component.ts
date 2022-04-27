@@ -17,6 +17,7 @@ export class HomeBannerComponent implements OnInit {
   suggestionList: any = []
   showMsg: boolean = false;
   msg: any = '';
+  
 
   constructor(private _ApiService: ApiServiceService , private scroller : ViewportScroller) { }
   action_array = [

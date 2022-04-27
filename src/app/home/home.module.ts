@@ -38,8 +38,7 @@ const exportdata:any =[
     HomeRoutingModule,
     SharedModule,
     SharelibraryModule,
-    FormsModule,
-    NgxShimmerLoadingModule
+    FormsModule
   ],
 
   exports:[

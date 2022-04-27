@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
+import { FetchedHeaderState } from '../../store/state/header.state';
+import { HeaderMenuAction } from '../../store/actions/header.action';
+
 
 @Component({
   selector: 'app-header',
@@ -8,18 +13,24 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  headerMenuData: any;
+  isAlive = true;
   user_id: any;
   openMenu: boolean = false;
   openSubmenu: boolean = false;
   homePageData: any = [];
   slug: any;
-  data : any = []
+  data: any = []
   show: boolean = false;
   searchItem: string = '';
   subslug: any;
   suggestionList: any = [];
-  showGlobalSearchSuggestion:any = false;
-  constructor(private route: Router, private __apiservice: ApiServiceService , private router :Router) { }
+  showGlobalSearchSuggestion: any = false;
+
+  @Select(FetchedHeaderState.getFetchedHeader) headerMenu$!: Observable<any>;
+  @Select(FetchedHeaderState.getFetchedHeaderLoad) headerMenuDataLoaded$!: Observable<boolean>;
+
+  constructor(private route: Router, private __apiservice: ApiServiceService , private store : Store) { }
   routes: any = [
     {
       "id": "1",
@@ -56,25 +67,19 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.__apiservice.home().subscribe((res: any) => {
-      console.log(res)
-      res.data.pages.map((response: any) => {
-        this.homePageData.push(response);
-      });
-      setTimeout(() => {
-        this.homePageData.map((res: any) => {
-          this.routes.map((response: any) => {
-            if (res.id == response.id) {
-              res.routers = response.route;
-            }
-          })
-        }, 500);
-      })
-    })
-    // this.__apiservice.getPageBySlug(this.slug).subscribe((res:any)=>{
-    //   this.data = res.data;
-    //   console.log(res);
-    // })
+    this.getAllHeaderMenu();
+    this.headerMenu$.subscribe(res => {
+      if (res.data) {
+        res.data.pages.map((response: any) => {
+          this.homePageData.push(response);
+        });
+      }
+    });
+    
+    setTimeout(() => {
+      console.log("this.homePageData", this.homePageData);
+    }, 1000);
+
   }
   profile() {
     if (localStorage.getItem("ecolink_user_credential") === null) {
@@ -88,17 +93,10 @@ export class HeaderComponent implements OnInit {
   openmenu() {
     this.openMenu = !this.openMenu;
   }
-  openDropDown () {
+
+  openDropDown() {
     this.openSubmenu = !this.openSubmenu
   }
-
-  showModalDialog(){
-    this.show = true;
-  }
-  // getPage(slug:any){
-  //   // routerLink="/inner-pages/{{item.slug}}"
-  //   this.router.navigateByUrl('/innerpages/inner-pages/'+slug)
-  // }
 
   getSuggestion(data: any) {
     this.showGlobalSearchSuggestion = false;
@@ -120,4 +118,16 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  getAllHeaderMenu() {
+    this.headerMenuData = this.headerMenuDataLoaded$.subscribe(res => {
+      if (!res) {
+        this.store.dispatch(new HeaderMenuAction());
+      }
+    })
+  }
+
+  ngOnDestroy(): void {
+    this.isAlive = false;
+    this.headerMenuData.unsubscribe();
+  }
 }

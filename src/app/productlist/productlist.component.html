@@ -1,272 +1,297 @@
 <app-header></app-header>
 <div class="container">
     <div class="listing-section">
-        <div class="card-page" *ngFor="let listdata of ProductListData">
-            <div class="list-header">
-                <div class="list-heading">
-                    <h2>{{listdata.data.name}}</h2>
-                    <span><a href="">Home/</a></span>
-                    <span><a href="">Product-category/</a></span>
-                    <span><a href="">{{listdata.data.name}}</a></span>
-                </div>
-                <div class="grid-list-view">
-                    <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="pill" role="tab" aria-selected="true"
-                                (click)="showlist('card')"><i class="fa fa-th" aria-hidden="true"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="pill" role="tab" aria-selected="false"
-                                (click)="showlist('list')"><i class="fa fa-list" aria-hidden="true"></i></a>
-                        </li>
-                    </ul>
-                    <div class="sort-by-search">
-
-                        <div class="dropdown">
-                            <select (change)="selected($event)" class="form-select">
-                                <option selected>Default</option>
-                                <option *ngFor="let item of popularity" [value]="item.slug">{{item.name}}</option>
-                            </select>
-                        </div>
-
-                        <span class="p-input-icon-left">
-                            <i class="pi pi-search" (click)="getselecteddata(value1)"></i>
-                            <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
-                                (keyup)="getkeypressdata()" />
-                        </span>
+        <ng-container *ngIf="ProductListData.length > 0">
+            <div class="card-page" *ngFor="let listdata of ProductListData">
+                <div class="list-header">
+                    <div class="list-heading">
+                        <h2>{{listdata.data.name}}</h2>
+                        <span><a href="">Home/</a></span>
+                        <span><a href="">Product-category/</a></span>
+                        <span><a href="">{{listdata.data.name}}</a></span>
                     </div>
-                </div>
-
-                <div class="suggestion-list" *ngIf="value1!='' && suggestions">
-                    <div class="card">
-                        <ul *ngFor="let prod of this.ProductListData[0].data.products | searchPipe:value1">
-                            <li (click)="getselecteddata(prod.name)">{{prod.name}}</li>
+                    <div class="grid-list-view">
+                        <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="pill" role="tab" aria-selected="true"
+                                    (click)="showlist('card')"><i class="fa fa-th" aria-hidden="true"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="pill" role="tab" aria-selected="false"
+                                    (click)="showlist('list')"><i class="fa fa-list" aria-hidden="true"></i></a>
+                            </li>
                         </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="product-list">
-                <div class="absolute">
-                    <h5 (click)="showFiterModel = !showFiterModel" title="Filter">
-                        <i class="fa fa-filter"></i>
-                    </h5>
-                </div>
-                <div class="filter">
-                    <div class="filter-heading">
-                        <h3>Filters</h3>
-                        <p (click)="ClearAll()" style="cursor: pointer;"><a>Clear All</a></p>
-                    </div>
-                    <div class="filter-body">
-                        <section class="categories" *ngIf="listdata.data.subcategory.length>0">
-                            <h4>Catgories</h4>
-                            <ul *ngFor="let subcategory of listdata.data.subcategory">
-                                <div class="p-field-checkbox">
-                                    <p-checkbox name="group1" value="{{subcategory.id}}" [(ngModel)]="selectedCategory"
-                                        inputId="cc" #checkbox></p-checkbox>
-                                    <label for="cc" class="mx-2">{{subcategory.name}}</label>
-                                </div>
-                            </ul>
-                        </section>
-                        <section class="price-section">
-                            <div class="price-heading">
-                                <h4>Price</h4>
+                        <div class="sort-by-search">
+
+                            <div class="dropdown">
+                                <select (change)="selected($event)" class="form-select">
+                                    <option selected>Default</option>
+                                    <option *ngFor="let item of popularity" [value]="item.slug">{{item.name}}</option>
+                                </select>
                             </div>
-                            <div class="price-slider">
-                                <ng-container *ngIf="rangeValues">
-                                    <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum" [min]="0">
-                                    </p-slider>
-                                    <div style="
-                                          display: flex;
-                                          justify-content: space-between;
-                                          align-items: center;
-                                          margin-top: 15px;
-                                          font-size: 14px;
-                                          color: #1e2022;
-                                        ">
-                                        <b>${{ rangeValues[0]}}</b>
-                                        <b>${{ rangeValues[1]}}</b>
+
+                            <span class="p-input-icon-left">
+                                <i class="pi pi-search" (click)="getselecteddata(value1)"></i>
+                                <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
+                                    (keyup)="getkeypressdata()" />
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="suggestion-list" *ngIf="value1!='' && suggestions">
+                        <div class="card">
+                            <ul *ngFor="let prod of this.ProductListData[0].data.products | searchPipe:value1">
+                                <li (click)="getselecteddata(prod.name)">{{prod.name}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-list">
+                    <div class="absolute">
+                        <h5 (click)="showFiterModel = !showFiterModel" title="Filter">
+                            <i class="fa fa-filter"></i>
+                        </h5>
+                    </div>
+                    <div class="filter">
+                        <div class="filter-heading">
+                            <h3>Filters</h3>
+                            <p (click)="ClearAll()" style="cursor: pointer;"><a>Clear All</a></p>
+                        </div>
+                        <div class="filter-body">
+                            <section class="categories" *ngIf="listdata.data.subcategory.length>0">
+                                <h4>Catgories</h4>
+                                <ul *ngFor="let subcategory of listdata.data.subcategory">
+                                    <div class="p-field-checkbox">
+                                        <p-checkbox name="group1" value="{{subcategory.id}}"
+                                            [(ngModel)]="selectedCategory" inputId="cc" #checkbox></p-checkbox>
+                                        <label for="cc" class="mx-2">{{subcategory.name}}</label>
+                                    </div>
+                                </ul>
+                            </section>
+                            <section class="price-section">
+                                <div class="price-heading">
+                                    <h4>Price</h4>
+                                </div>
+                                <div class="price-slider">
+                                    <ng-container *ngIf="rangeValues">
+                                        <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum" [min]="0">
+                                        </p-slider>
+                                        <div style="
+                                              display: flex;
+                                              justify-content: space-between;
+                                              align-items: center;
+                                              margin-top: 15px;
+                                              font-size: 14px;
+                                              color: #1e2022;
+                                            ">
+                                            <b>${{ rangeValues[0]}}</b>
+                                            <b>${{ rangeValues[1]}}</b>
+                                        </div>
+                                    </ng-container>
+                                </div>
+                            </section>
+                            <section class="rating">
+                                <div class="rating-heading">
+                                    <h4>Rating</h4>
+                                    <div class="p-field-checkbox">
+                                        <p-checkbox name="group2" value=4 [(ngModel)]="selectedRatings" inputId="4star">
+                                        </p-checkbox>
+                                        <label for="4star" class="mx-2">4 Star</label>
+                                    </div>
+                                    <div class="p-field-checkbox">
+                                        <p-checkbox name="group2" value=3 [(ngModel)]="selectedRatings" inputId="3star">
+                                        </p-checkbox>
+                                        <label for="3star" class="mx-2">3 Star</label>
+                                    </div>
+                                    <div class="p-field-checkbox">
+                                        <p-checkbox name="group2" value=2 [(ngModel)]="selectedRatings" inputId="2star">
+                                        </p-checkbox>
+                                        <label for="2star" class="mx-2">2 Star</label>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="apply-button">
+                                <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter"
+                                    class="p-button  filter-button"></button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Products Cards -->
+                    <div class="product-cards" *ngIf="view_card">
+                        <ng-container *ngIf="shimmerLoad">
+                            <div class="row">
+                                <ng-container *ngFor="let data of [].constructor(1)">
+                                    <div class="col-4 mt-3">
+                                        <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
                                     </div>
                                 </ng-container>
                             </div>
-                        </section>
-                        <section class="rating">
-                            <div class="rating-heading">
-                                <h4>Rating</h4>
-                                <div class="p-field-checkbox">
-                                    <p-checkbox name="group2" value=4 [(ngModel)]="selectedRatings" inputId="4star">
-                                    </p-checkbox>
-                                    <label for="4star" class="mx-2">4 Star</label>
-                                </div>
-                                <div class="p-field-checkbox">
-                                    <p-checkbox name="group2" value=3 [(ngModel)]="selectedRatings" inputId="3star">
-                                    </p-checkbox>
-                                    <label for="3star" class="mx-2">3 Star</label>
-                                </div>
-                                <div class="p-field-checkbox">
-                                    <p-checkbox name="group2" value=2 [(ngModel)]="selectedRatings" inputId="2star">
-                                    </p-checkbox>
-                                    <label for="2star" class="mx-2">2 Star</label>
-                                </div>
-                            </div>
-                        </section>
-                        <div class="apply-button">
-                            <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter"
-                                class="p-button  filter-button"></button>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!-- Products Cards -->
-                <div class="product-cards" *ngIf="view_card">
-                    <div class="subcategory" *ngIf="listdata.data.subcategory.length>0">
-                        <ng-container *ngFor="let data of listdata.data.subcategory">
-                            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
-                                <div class="card" style="cursor: pointer;">
-                                    <div class="card-image">
-                                        <img [src]="data.image" alt="">
+                        </ng-container>
+                        <ng-container *ngIf="shimmerLoad">
+                            <div class="row">
+                                <ng-container *ngFor="let data of [].constructor(6)">
+                                    <div class="col-4">
+                                        <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
                                     </div>
-                                    <div class="card-body">
-                                        <div class="card-title">
-                                            <h5>{{data.name.slice(0,36)}}</h5>
-                                        </div>
-                                        <div class="list-buttons">
-                                            <p routerLink="{{data.slug}}">Show
-                                                Details</p>
-                                        </div>
-                                    </div>
-                                </div>
+                                </ng-container>
                             </div>
                         </ng-container>
+                        <ng-container *ngIf="!shimmerLoad">
+                            <div class="subcategory" *ngIf="listdata.data.subcategory.length>0">
+                                <ng-container *ngFor="let data of listdata.data.subcategory">
+                                    <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                                        <div class="card" style="cursor: pointer;">
+                                            <div class="card-image">
+                                                <img [src]="data.image" alt="">
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h5>{{data.name.slice(0,36)}}</h5>
+                                                </div>
+                                                <div class="list-buttons">
+                                                    <p routerLink="{{data.slug}}">Show
+                                                        Details</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <div class="row">
+                                <ng-container *ngFor="let product of listdata.data.products">
+                                    <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                                        <div class="card" style="cursor: pointer;">
+                                            <div class="card-image">
+                                                <img [src]="product.image" alt="">
+                                                <span routerLink="/shop/wishlist" (click)="addWishList(product)"><i
+                                                        style="color: white;" class="pi pi-heart" aria-hidden="true"
+                                                        title="Wishlist"></i></span>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="card-title">
+                                                    <h6>{{product.name.slice(0,36)}}</h6>
+                                                    <ng-container *ngFor="let subcategory of listdata.data.subcategory">
+                                                        <p> {{subcategory.name}}</p>
+                                                    </ng-container>
+                                                </div>
+                                                <div class="card-price-section">
+                                                    <div class="card-price">
+                                                        <ng-container
+                                                            *ngIf="product.regular_price > product.sale_price; then thenBlock else elseBlock">
+                                                        </ng-container>
+                                                        <ng-template #thenBlock>
+                                                            <p class="product-price mb-1"
+                                                                style="text-decoration-line: line-through; font-size: 14px;">
+                                                                {{product.regular_price
+                                                                | currency}}</p>
+                                                            <p class="product-price">{{product.sale_price |
+                                                                currency}}
+                                                            </p>
+                                                        </ng-template>
+                                                        <ng-template #elseBlock>
+                                                            <p class="product-price">{{product.sale_price |
+                                                                currency}}
+                                                            </p>
+                                                        </ng-template>
+                                                    </div>
+                                                    <div class="rating">
+                                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                        <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                    </div>
+                                                </div>
+                                                <div class="list-buttons">
+                                                    <button (click)=AddProductToCart(product) pButton pRipple
+                                                        type="button" label="Add to Cart"
+                                                        class="p-button-raised p-button-success"
+                                                        style="height:38px; background-color: #55b15c;"
+                                                        routerLink="/cart"></button>
+                                                    <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
+                                                        Show
+                                                        Details</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-container>
+                            </div>
+                            <ng-container *ngIf="listdata.data.products.length==0">
+                                <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
+                                    <h3>No data found</h3>
+                                </div>
+                            </ng-container>
+                        </ng-container>
                     </div>
-                    <div class="row">
-                        <ng-container *ngFor="let product of listdata.data.products">
-                            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+
+                    <!-- Product Lists -->
+                    <div class="product-listing" *ngIf="view_list">
+                        <ng-container *ngIf="listdata.data.products.length>0">
+                            <ng-container *ngFor="let product of listdata.data.products">
                                 <div class="card" style="cursor: pointer;">
                                     <div class="card-image">
-                                        <img [src]="product.image" alt="">
-                                        <span routerLink="/shop/wishlist" (click)="addWishList(product)"><i
-                                                style="color: white;" class="pi pi-heart" aria-hidden="true"
-                                                title="Wishlist"></i></span>
+                                        <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
+                                            alt="">
+                                        <span><i class="pi pi-heart" aria-hidden="true" title="Wishlist"
+                                                style="color: white;" (click)="addWishList(product.id)"></i></span>
                                     </div>
-                                    <div class="card-body">
+                                    <div class="card-desc">
                                         <div class="card-title">
-                                            <h6>{{product.name.slice(0,36)}}</h6>
-                                            <ng-container *ngFor="let subcategory of listdata.data.subcategory">
-                                                <p> {{subcategory.name}}</p>
-                                            </ng-container>
-                                        </div>
-                                        <div class="card-price-section">
-                                            <div class="card-price">
-                                                <ng-container
-                                                    *ngIf="product.regular_price > product.sale_price; then thenBlock else elseBlock">
+                                            <h6>{{product.name}}</h6>
+                                            <div class="rating" *ngIf="product.rating>0">
+                                                <ng-container *ngFor="let rating of [].constructor(product.rating)">
+                                                    <i class="fa">&#xf006;</i>
                                                 </ng-container>
-                                                <ng-template #thenBlock>
-                                                    <p class="product-price mb-1"
-                                                        style="text-decoration-line: line-through; font-size: 14px;">
-                                                        {{product.sale_price
-                                                        | currency}}</p>
-                                                    <p class="product-price">{{product.regular_price | currency}}
-                                                    </p>
-                                                </ng-template>
-                                                <ng-template #elseBlock>
-                                                    <p class="product-price">{{product.regular_price | currency}}
-                                                    </p>
-                                                </ng-template>
-                                            </div>
-                                            <div class="rating">
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
                                             </div>
                                         </div>
+                                        <div class="desc">
+                                            <p>Flammable contact cleaner aerosol</p>
+                                            <ul>
+                                                <li>SKU: 0318-12</li>
+                                                <ng-container *ngFor="let subcategory of listdata.data.subcategory">
+                                                    <li>Categories: {{subcategory.name}}</li>
+                                                </ng-container>
+                                                <li>Tag: ecolink</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-price-section">
+                                        <div class="stock">
+                                            <p>Availability : Out of Stock</p>
+                                        </div>
+                                        <ng-container
+                                            *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
+                                        </ng-container>
+                                        <ng-template #thenBlock>
+                                            <p class="product-price mb-1"
+                                                style="text-decoration-line: line-through; font-size: 14px;">
+                                                {{product.sale_price | currency}}</p>
+                                            <p class="product-price">{{product.regular_price | currency}}</p>
+                                        </ng-template>
+                                        <ng-template #elseBlock>
+                                            <p class="product-price">{{product.regular_price | currency}}</p>
+                                        </ng-template>
                                         <div class="list-buttons">
-                                            <button (click)=AddProductToCart(product) pButton pRipple type="button"
-                                                label="Add to Cart" class="p-button-raised p-button-success"
-                                                style="height:38px; background-color: #55b15c;"
-                                                routerLink="/cart"></button>
-                                            <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
-                                                Show
+                                            <p routerLink="/cart" (click)=AddProductToCart(product)>Add to Cart</p>
+                                            <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">Show
                                                 Details</p>
                                         </div>
                                     </div>
                                 </div>
+                            </ng-container>
+                        </ng-container>
+                        <ng-container *ngIf="listdata.data.products.length==0">
+                            <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
+                                <h3>No data found</h3>
                             </div>
                         </ng-container>
+
                     </div>
-                    <ng-container *ngIf="listdata.data.products.length==0">
-                        <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
-                            <h3>No data found</h3>
-                        </div>
-                    </ng-container>
-                </div>
-
-                <!-- Product Lists -->
-                <div class="product-listing" *ngIf="view_list">
-                    <ng-container *ngIf="listdata.data.products.length>0">
-                        <ng-container *ngFor="let product of listdata.data.products">
-                            <div class="card" style="cursor: pointer;">
-                                <div class="card-image">
-                                    <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
-                                        alt="">
-                                    <span><i class="pi pi-heart" aria-hidden="true" title="Wishlist"
-                                            style="color: white;" (click)="addWishList(product.id)"></i></span>
-                                </div>
-                                <div class="card-desc">
-                                    <div class="card-title">
-                                        <h6>{{product.name}}</h6>
-                                        <div class="rating" *ngIf="product.rating>0">
-                                            <ng-container *ngFor="let rating of [].constructor(product.rating)">
-                                                <i class="fa">&#xf006;</i>
-                                            </ng-container>
-                                        </div>
-                                    </div>
-                                    <div class="desc">
-                                        <p>Flammable contact cleaner aerosol</p>
-                                        <ul>
-                                            <li>SKU: 0318-12</li>
-                                            <ng-container *ngFor="let subcategory of listdata.data.subcategory">
-                                                <li>Categories: {{subcategory.name}}</li>
-                                            </ng-container>
-                                            <li>Tag: ecolink</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="card-price-section">
-                                    <div class="stock">
-                                        <p>Availability : Out of Stock</p>
-                                    </div>
-                                    <ng-container
-                                        *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
-                                    </ng-container>
-                                    <ng-template #thenBlock>
-                                        <p class="product-price mb-1"
-                                            style="text-decoration-line: line-through; font-size: 14px;">
-                                            {{product.sale_price | currency}}</p>
-                                        <p class="product-price">{{product.regular_price | currency}}</p>
-                                    </ng-template>
-                                    <ng-template #elseBlock>
-                                        <p class="product-price">{{product.regular_price | currency}}</p>
-                                    </ng-template>
-                                    <div class="list-buttons">
-                                        <p routerLink="/cart" (click)=AddProductToCart(product)>Add to Cart</p>
-                                        <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">Show
-                                            Details</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </ng-container>
-                    </ng-container>
-                    <ng-container *ngIf="listdata.data.products.length==0">
-                        <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
-                            <h3>No data found</h3>
-                        </div>
-                    </ng-container>
-
                 </div>
             </div>
-        </div>
+        </ng-container>
     </div>
 </div>
 <div class="filter_model" *ngIf="showFiterModel">
@@ -338,7 +363,7 @@
             </section>
             <div class="apply-button">
                 <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter"
-                    class="p-button  filter-button" ></button>
+                    class="p-button  filter-button"></button>
             </div>
         </div>
     </div>
