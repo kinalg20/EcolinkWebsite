@@ -88,8 +88,7 @@
         text-align: left;
     }
 }
-@media (max-widtH:992px) {
-    
+@media (max-width: 992px) {
     .Fname {
         .fname {
             margin-bottom: 1rem;
@@ -110,14 +109,16 @@
     }
 }
 ::ng-deep {
-    .wp-image-3097 {
-        width: 100%;
-        object-fit: contain;
-        height: 200px !important;
-    }
-    .wp-image-3098 {
-        width: 100%;
-        object-fit: contain;
-        height: 200px !important;
+    @media (max-width: 500px) {
+        .wp-image-3097 {
+            width: 100%;
+            object-fit: contain;
+            height: 200px !important;
+        }
+        .wp-image-3098 {
+            width: 100%;
+            object-fit: contain;
+            height: 200px !important;
+        }
     }
 }
