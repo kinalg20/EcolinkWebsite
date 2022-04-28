@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 import { ShippingServiceService } from 'src/app/Services/shipping-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AnyRecord } from 'dns';
 
 @Component({
   selector: 'app-product-checkout',
@@ -16,6 +17,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProductCheckoutComponent implements OnInit {
   selectedPaymentMethod: any
   userObj: any;
+  discountCheck: boolean = true;
+  couponCheck: boolean = false;
+  couponDiscount:any=0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
@@ -101,7 +105,7 @@ export class ProductCheckoutComponent implements OnInit {
 
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia().subscribe(
-      res => {
+      (res:any) => {
         console.log(res);
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'text/xml');
@@ -281,5 +285,16 @@ export class ProductCheckoutComponent implements OnInit {
         }, 1000);
       })
     }, 1000);
+  }
+  couponButton() {
+    this.discountCheck = false;
+    this.couponCheck = true;
+    this.CheckoutProduct.map((res:any)=> {
+      console.log(res);
+      res.carts.map((response:any)=> {
+        this.couponDiscount+=response.product.coupon_discount
+        console.log(this.couponDiscount)
+      })
+    })
   }
 }

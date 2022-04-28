@@ -24,8 +24,8 @@ export class ProductlistComponent implements OnInit {
   popularity!: popularity[];
   maximum: number = 100;
   slug: any;
-  selectedCategory: string[] = [];
-  selectedRatings: string[] = [];
+  selectedCategory: any = [];
+  selectedRatings: any = [];
   ProductListData: any = [];
   ProductbackupData: any = []
   cart_obj: any = [];
@@ -175,10 +175,10 @@ export class ProductlistComponent implements OnInit {
     let obj_Array: any[] = [];
     console.log(this.ProductListData);
     let filterValue = {
-      category: this.selectedCategory,
+      category: Array.from(this.selectedCategory,Number),
       price_from: this.rangeValues[0],
       price_to: this.rangeValues[1],
-      rating: this.selectedRatings,
+      rating: Array.from(this.selectedRatings,Number),
       sortby: this.selectedLevel
     }
     this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
