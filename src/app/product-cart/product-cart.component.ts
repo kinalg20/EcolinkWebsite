@@ -20,7 +20,9 @@ export class ProductCartComponent implements OnInit {
 
   ngOnInit(): void {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
-    this.getCartData();
+    setTimeout(() => {
+      this.getCartData();
+    }, 300);
   }
 
   Count(string: any, id: any) {

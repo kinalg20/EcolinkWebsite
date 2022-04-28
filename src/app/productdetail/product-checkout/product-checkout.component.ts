@@ -82,11 +82,6 @@ export class ProductCheckoutComponent implements OnInit {
           console.log(this.paypal);
         })
       })
-      this.paypalItems.name = "ABC",
-        this.paypalItems.quantity = "3";
-      this.paypalItems.category = "aerosol";
-      this.paypalItems.unit_amount = { currency_code: 'USD', value: "1825" }
-      this.paypal.push(this.paypalItems);
     }
     else {
       this.getsubjectBehaviour();
