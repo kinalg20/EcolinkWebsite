@@ -19,27 +19,20 @@ export class ProductCheckoutComponent implements OnInit {
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
   carts: any = [];
-  paypalItems:any={}
+  formShimmer:boolean=true;
+  paypalItems: any = {}
   orderObj: any;
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
+  paypal:any=[]
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
-  formShimmer: boolean = true;
+  checkoutShimmer: boolean = true;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
-  private route: Router,
-  private _cookies: CookiesService,
-  private _ShippingApi: ShippingServiceService) { }
-  paypal:any=[{
-    name: 'Enterprise Subscription',
-    quantity: '1',
-    category: 'DIGITAL_GOODS',
-    unit_amount: {
-      currency_code: 'USD',
-      value: '110',
-    },
-  }]
+    private route: Router,
+    private _cookies: CookiesService,
+    private _ShippingApi: ShippingServiceService) { }
 
   ngOnInit(): void {
     this.checkoutProduct();
@@ -57,12 +50,12 @@ export class ProductCheckoutComponent implements OnInit {
       });
     }
     this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
-      this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
-        console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+      this._ShippingApi.fedexshippingApi(res.access_token , this.CheckoutProduct).subscribe((resp: any) => {
+        console.log("resp.output",resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
         this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
-    
+
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
@@ -77,22 +70,30 @@ export class ProductCheckoutComponent implements OnInit {
       this.__apiservice.getCheckoutProducts().subscribe(res => {
         console.log(res);
         this.CheckoutProduct.push(res.data);
-        this.formShimmer = false;
         console.log(this.CheckoutProduct);
-        res.data.carts.map((response:any)=> {
-          this.paypalItems.name=response.product.name,
-          this.paypalItems.quantity=response.quantity;
-          this.paypalItems.category="aerosol";
-          this.paypalItems.unit_amount={currency_code:'USD',value:response.product.sale_price}
-          this.paypal.push(this.paypalItems);
-
+        res.data.carts.map((response: any) => {
           console.log(this.paypal);
         })
       })
+      this.paypalItems.name = "ABC",
+        this.paypalItems.quantity = "3";
+      this.paypalItems.category = "aerosol";
+      this.paypalItems.unit_amount = { currency_code: 'USD', value: "1825" }
+      this.paypal.push(this.paypalItems);
+      this.formShimmer = false;
+      this.checkoutShimmer = false;
     }
     else {
       this.getsubjectBehaviour();
     }
+    this.CheckoutProduct.map((response:any) => {
+      console.log(response.product.name)
+      this.paypalItems.name=response.product.name;
+      this.paypalItems.quantity=response.quantity;
+      this.paypalItems.category="PHYSICAL_GOODS";
+      this.paypalItems.unit_amount={currency_code:"USD",value:response.product.sale_price}
+      this.paypal.push(this.paypalItems)
+    })
   }
 
   getShippingInfo() {
@@ -143,15 +144,15 @@ export class ProductCheckoutComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'USD',
-            value: "110",
+            value: this.paypalProductDetails.payable,
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: "110"
+                value: this.paypalProductDetails.payable
               }
             }
           },
-          items:  this.paypal
+          items: this.paypal
         }]
       },
       advanced: {
@@ -228,7 +229,9 @@ export class ProductCheckoutComponent implements OnInit {
     })
     setTimeout(() => {
       this.refractorData();
-    }, 5000);
+      this.formShimmer = false;
+      this.checkoutShimmer = false
+    }, 1000);
   }
 
   refractorData() {
