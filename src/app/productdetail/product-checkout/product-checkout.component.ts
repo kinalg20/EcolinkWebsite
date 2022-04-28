@@ -15,16 +15,19 @@ import { ShippingServiceService } from 'src/app/Services/shipping-service.servic
 export class ProductCheckoutComponent implements OnInit {
   selectedPaymentMethod: any
   userObj: any;
+  discountCheck: boolean = true;
+  couponCheck: boolean = false;
+  couponDiscount:any=0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
   carts: any = [];
-  formShimmer:boolean=true;
+  formShimmer: boolean = true;
   paypalItems: any = {}
   orderObj: any;
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
-  paypal:any=[]
+  paypal: any = []
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
   checkoutShimmer: boolean = true;
@@ -50,8 +53,8 @@ export class ProductCheckoutComponent implements OnInit {
       });
     }
     this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
-      this._ShippingApi.fedexshippingApi(res.access_token , this.CheckoutProduct).subscribe((resp: any) => {
-        console.log("resp.output",resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+      this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
+        console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
         this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
@@ -86,19 +89,19 @@ export class ProductCheckoutComponent implements OnInit {
     else {
       this.getsubjectBehaviour();
     }
-    this.CheckoutProduct.map((response:any) => {
+    this.CheckoutProduct.map((response: any) => {
       console.log(response.product.name)
-      this.paypalItems.name=response.product.name;
-      this.paypalItems.quantity=response.quantity;
-      this.paypalItems.category="PHYSICAL_GOODS";
-      this.paypalItems.unit_amount={currency_code:"USD",value:response.product.sale_price}
+      this.paypalItems.name = response.product.name;
+      this.paypalItems.quantity = response.quantity;
+      this.paypalItems.category = "PHYSICAL_GOODS";
+      this.paypalItems.unit_amount = { currency_code: "USD", value: response.product.sale_price }
       this.paypal.push(this.paypalItems)
     })
   }
 
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia().subscribe(res => {
-      
+
     })
   }
   getOrderInfo() {
@@ -263,5 +266,16 @@ export class ProductCheckoutComponent implements OnInit {
         }, 1000);
       })
     }, 1000);
+  }
+  couponButton() {
+    this.discountCheck = false;
+    this.couponCheck = true;
+    this.CheckoutProduct.map((res:any)=> {
+      console.log(res);
+      res.carts.map((response:any)=> {
+        this.couponDiscount+=response.product.coupon_discount
+        console.log(this.couponDiscount)
+      })
+    })
   }
 }
