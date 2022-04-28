@@ -7,7 +7,6 @@ import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 import { ShippingServiceService } from 'src/app/Services/shipping-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { AnyRecord } from 'dns';
 
 @Component({
   selector: 'app-product-checkout',
