@@ -79,15 +79,7 @@ export class ProductCheckoutComponent implements OnInit {
         }
         this.CheckoutProduct.push(res.data);
         console.log(this.CheckoutProduct);
-        res.data.carts.map((response: any) => {
-          console.log(this.paypal);
-        })
       })
-      this.paypalItems.name = "ABC",
-        this.paypalItems.quantity = "3";
-      this.paypalItems.category = "aerosol";
-      this.paypalItems.unit_amount = { currency_code: 'USD', value: "1825" }
-      this.paypal.push(this.paypalItems);
     }
     else {
       this.getsubjectBehaviour();
@@ -104,16 +96,14 @@ export class ProductCheckoutComponent implements OnInit {
 
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia().subscribe(
-      (res:any) => {
-        console.log(res);
+      res => {
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'text/xml');
         let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
-        let nodes = firstEmploye.childNodes[0];
-        console.log(nodes.nodeValue);
-
         for (let i = 1; i < 4; i++) {
-          console.log(firstEmploye.childNodes[i].nodeName);
+          let emp = firstEmploye.childNodes[i]
+          // console.log
+          console.log(firstEmploye.childNodes[i]);
         }
       },
       (error: HttpErrorResponse) => {
