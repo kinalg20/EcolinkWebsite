@@ -102,15 +102,13 @@ export class ProductCheckoutComponent implements OnInit {
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia().subscribe(
       res => {
-        console.log(res);
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'text/xml');
         let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
-        let nodes = firstEmploye.childNodes[0];
-        console.log(nodes.nodeValue);
-
         for (let i = 1; i < 4; i++) {
-          console.log(firstEmploye.childNodes[i].nodeName);
+          let emp = firstEmploye.childNodes[i]
+          // console.log
+          console.log(firstEmploye.childNodes[i]);
         }
       },
       (error: HttpErrorResponse) => {
