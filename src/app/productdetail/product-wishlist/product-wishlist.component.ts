@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
@@ -7,20 +8,42 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./product-wishlist.component.scss']
 })
 export class ProductWishlistComponent implements OnInit {
-  product : any = [];
-  constructor(private _ApiService : ApiServiceService) { }
+  product: any = [];
+  wishlistShimmer: boolean = true;
+  constructor(private _ApiService: ApiServiceService) { }
 
   ngOnInit(): void {
-    this._ApiService.getWishListItem().subscribe(res=>{
+    this.getWishlistItems();
+  }
+
+  addProductToCart(prod: any) {
+    this._ApiService.addItemToCart(prod.product_id, 1, "add").subscribe((res: any) => {
       console.log(res);
-      this.product.push(res.data);
-      console.log(this.product);
     })
   }
 
-  addProductToCart(prod:any){
-    this._ApiService.addItemToCart(prod.product_id, 1 , "add").subscribe((res: any) => {
+  getWishlistItems() {
+    this.product = [];
+    this._ApiService.getWishListItem().subscribe(res => {
+      if (res.code == 200) {
+        console.log(res);
+        this.product.push(res.data);
+        this.wishlistShimmer = false;
+      }
+      (error: HttpErrorResponse) => {
+        if (error.error.code == 400) {
+          this.product = [];
+          this.wishlistShimmer = false;
+        }
+        console.log(error.error.code);
+      }
+    })
+  }
+
+  deleteWishlistItems(product_id: any) {
+    this._ApiService.deleteWishlistItems(product_id).subscribe((res: any) => {
       console.log(res);
     })
+    this.getWishlistItems();
   }
 }
