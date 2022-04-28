@@ -68,14 +68,14 @@ export class ProductsRequestComponent implements OnInit {
         console.log(res);
         form.reset();
         this.checkBoxChcek = false
-        this.resSignupMsg = 'Contact detail saved successfully!';
+        this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
       }
       )
     }
     else {
       this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please fill the value!';
+      this.resSignupMsg = 'Please Fill the Fields Below!';
     }
   }
   ngAfterViewInit() { }
