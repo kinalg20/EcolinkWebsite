@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
@@ -63,18 +64,25 @@ export class ProductCartComponent implements OnInit {
         1500);
     }
     else {
-      this._ApiService.getItemFromCart().subscribe(res => {
-        console.log(res);
-        if (res.code == 200) {
-          setTimeout(() => {
-            this.CardShow = res.data;
-            this.subtotal();
-            console.log(this.CardShow);
-            this.CartShimmer = false;
-          }, 1500);
-        }
+      this._ApiService.getItemFromCart().subscribe(
+        res => {
+          console.log(res.code);
+          if (res.code == 200) {
+            setTimeout(() => {
+              this.CardShow = res.data;
+              this.subtotal();
+              console.log(this.CardShow);
+              this.CartShimmer = false;
+            }, 1500);
+          }
 
-      })
+        },
+        (error: HttpErrorResponse) => {
+          if(error.error.code == 400){
+            this.CartShimmer = false;
+          }
+          console.log(error.error.code);
+        })
     }
   }
 
@@ -88,6 +96,7 @@ export class ProductCartComponent implements OnInit {
 
   UpdateCart(action: any, product_id: any, product_quantity: any) {
     if (localStorage.getItem('ecolink_user_credential') === null) {
+      this.CartShimmer = true;
       setTimeout(() => {
         let saveDataInCookies: any = [];
         let cookiesObject: any = {}

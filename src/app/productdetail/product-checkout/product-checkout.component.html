@@ -3,7 +3,7 @@
         <div class="checkout-heading">
             <h1>Checkout </h1>
         </div>
-        <div class="checkout-body"> 
+        <div class="checkout-body">
             <div class="billing-detail">
                 <div class="card">
                     <div class="dropdown-address">
@@ -17,8 +17,8 @@
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                     <li *ngFor="let item of [].constructor(getAllUserAddresses.length); let i = index">
                                         <div class="form-check">
-                                            <input class="form-check-input" (click)="getRadioButtonValue(i)" type="radio" name="flexRadioDefault"
-                                                id="flexRadioDefault1" #radioValue>
+                                            <input class="form-check-input" (click)="getRadioButtonValue(i)"
+                                                type="radio" name="flexRadioDefault" id="flexRadioDefault1" #radioValue>
                                             <label class="form-check-label" for="flexRadioDefault1">
                                                 Address {{i+1}}
                                             </label>
@@ -28,87 +28,26 @@
                             </div>
                         </div>
                     </div>
-                    <!-- <form #signupform="ngForm" (ngSubmit)="signUp(signupform)" *ngFor="let data of CheckoutProduct">
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="name">Name</label>
-                                <input type="text" class="form-control mt-2" placeholder="name" id="name" name="name"
-                                    [(ngModel)]="data.user.name">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="countryname">Country / Region *</label>
-                                <input type="text" class="form-control mt-2" placeholder="Country / Region" id="country"
-                                    name="countryname" [(ngModel)]="data.user.country">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="streetaddress">Street Address</label>
-                                <input type="text" class="form-control mt-2" placeholder="Street Address"
-                                    name="streetaddress" [(ngModel)]="data.user.address">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="Town-city">Town / City</label>
-                                <input type="text" class="form-control mt-2" placeholder="Town / City" name="city"
-                                    [(ngModel)]="data.user.city">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="state">State</label>
-                                <input type="text" class="form-control mt-2" placeholder="State / County" name="state"
-                                    [(ngModel)]="data.user.state">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="Postcode">Postcode</label>
-                                <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="pincode"
-                                    [(ngModel)]="data.user.pincode">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-6">
-                                <label for="Email Address">Email Address</label>
-                                <input type="text" class="form-control mt-2" placeholder="First name" id="Email-Address"
-                                    name="email" [(ngModel)]="data.user.email">
-                            </div>
-                            <div class="col-6">
-                                <label for="Phone">Phone</label>
-                                <input type="text" class="form-control mt-2" placeholder="phone" name="mobile"
-                                    [(ngModel)]="data.user.mobile">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <div class="checkbox form-group">
-                                    <input type="checkbox"><label for="">Ship to a different address?</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <div class="form-group">
-                                    <label for="exampleFormControlTextarea1">Order notes (optional)</label>
-                                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="proceed">
-                            <div class="proceed-button">
-                                <button pButton pRipple label="Save Details" class="p-button-raised p-button-success"
-                                    style="height:40px; width: 100%;" (click)="getShippingInfo()"></button>
-                            </div>
-                        </div>
-                    </form> -->
                     <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer"></app-billing-form>
                 </div>
             </div>
-            <div class="your-order">
+            <div class="your_order" *ngIf="checkoutShimmer">
+                <div class="card">
+                    <div class="checkout-product-heading m-4">
+                        <ng-container *ngFor="let data of [].constructor(3)">
+                            <ngx-shimmer-loading width="'100%'" ></ngx-shimmer-loading>
+                        </ng-container>
+                        <div class="bank-detail">
+                            <div class="card my-3">
+                                <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+                                <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+                                <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="your-order" *ngIf="!checkoutShimmer">
                 <div class="card">
                     <h3>Your Order</h3>
                     <div class="checkout-product-heading">
@@ -149,8 +88,8 @@
                                 reference. Your order will not be shipped until the funds have cleared in our account.
                             </p>
                             <div class="field-radiobutton mt-3" (click)="checkPaymentTab()">
-                                <p-radioButton name="payment_method" value="check-payment" [(ngModel)]="selectedPaymentMethod"
-                                    inputId="payment_method">
+                                <p-radioButton name="payment_method" value="check-payment"
+                                    [(ngModel)]="selectedPaymentMethod" inputId="payment_method">
                                 </p-radioButton>
                                 <label for="payment_method" class="mx-2"><b>Check payments</b></label>
                             </div>
@@ -173,8 +112,9 @@
                     </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
-                            <button pButton pRipple type="button" label="Place Order" routerLink="/thanks" (click)="getOrderInfo()"
-                                class="p-button-raised p-button-success" style="height:45px; width: 100%;" [disabled]="paymentCheck"></button>
+                            <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
+                                (click)="getOrderInfo()" class="p-button-raised p-button-success"
+                                style="height:45px; width: 100%;" [disabled]="paymentCheck"></button>
                         </div>
                     </div>
                 </div>

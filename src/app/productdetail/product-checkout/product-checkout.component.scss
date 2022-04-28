@@ -142,7 +142,20 @@
 }
 
 ::ng-deep {
-
+    .checkout-body{
+        .your_order{
+            .card{
+                .checkout-product-heading{
+                    .shimmer-loading {
+                        // height: 100px;
+                        .ngx-shimmer {
+                            height: 40px!important;
+                        }
+                    }
+                }
+            }
+        }
+    }
     .p-button.p-button-success,
     .p-buttonset.p-button-success>.p-button,
     .p-splitbutton.p-button-success>.p-button {
