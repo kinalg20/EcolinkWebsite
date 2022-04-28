@@ -1,6 +1,66 @@
 <app-header></app-header>
 <div class="container">
-    <div class="listing-section">
+    <div class="listing-section" *ngIf="shimmerLoad">
+        <div class="card-page">
+            <div class="list-header">
+                <div class="list-heading">
+                </div>
+                <div class="grid-list-view">
+                    <div class="sort-by-search">
+                        <div class="dropdown">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="suggestion-list" *ngIf="value1!='' && suggestions">
+                    <div class="card">
+                        <ul *ngFor="let prod of this.ProductListData[0].data.products | searchPipe:value1">
+                            <li (click)="getselecteddata(prod.name)">{{prod.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="product-list">
+                <div class="absolute">
+                </div>
+                <div class="filter">
+                    <ngx-shimmer-loading [shape]="'rect'" ></ngx-shimmer-loading>
+                </div>
+                <div class="product-cards">
+                    <div class="subcategory">
+                        <ng-container>
+                            <div class="row">
+                                <ng-container *ngFor="let data of [].constructor(1)">
+                                    <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                                        <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                        <ng-container>
+                            <div class="row">
+                                <ng-container *ngFor="let data of [].constructor(6)">
+                                    <div class="col-4">
+                                        <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+                                    </div>
+                                </ng-container>
+                            </div>
+                        </ng-container>
+                    </div>
+                </div>
+                <div class="product-listing"></div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div class="listing-section" *ngIf="!shimmerLoad">
         <ng-container *ngIf="ProductListData.length > 0">
             <div class="card-page" *ngFor="let listdata of ProductListData">
                 <div class="list-header">
@@ -119,24 +179,6 @@
 
                     <!-- Products Cards -->
                     <div class="product-cards" *ngIf="view_card">
-                        <ng-container *ngIf="shimmerLoad">
-                            <div class="row">
-                                <ng-container *ngFor="let data of [].constructor(1)">
-                                    <div class="col-4 mt-3">
-                                        <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
-                                    </div>
-                                </ng-container>
-                            </div>
-                        </ng-container>
-                        <ng-container *ngIf="shimmerLoad">
-                            <div class="row">
-                                <ng-container *ngFor="let data of [].constructor(6)">
-                                    <div class="col-4">
-                                        <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
-                                    </div>
-                                </ng-container>
-                            </div>
-                        </ng-container>
                         <ng-container *ngIf="!shimmerLoad">
                             <div class="subcategory">
                                 <ng-container *ngFor="let data of listdata.data.subcategory">
