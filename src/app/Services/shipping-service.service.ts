@@ -105,8 +105,7 @@ export class ShippingServiceService {
 
   rateDetailThroughSaia() {
     let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
-    let body = `
-    <?xml version="1.0" encoding="utf-8"?>
+    let body = `<?xml version="1.0" encoding="utf-8"?>
   <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
     <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
@@ -143,11 +142,10 @@ export class ShippingServiceService {
       </request>
     </Create>
   </soap:Body>
-  </soap:Envelope>
-    `
+  </soap:Envelope>`
     const headers = new HttpHeaders({
       'Content-Type': 'text/xml; charset=utf-8', 'Access-Control-Allow-Origin': '*'
     });
-    return this.http.post(url, body, { headers: headers });
+    return this.http.post(url, body , {headers : headers});
   }
 }

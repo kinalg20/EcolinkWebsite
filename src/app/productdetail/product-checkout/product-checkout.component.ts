@@ -98,7 +98,7 @@ export class ProductCheckoutComponent implements OnInit {
 
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia().subscribe(res => {
-      console.log(res);
+      
     })
   }
   getOrderInfo() {
