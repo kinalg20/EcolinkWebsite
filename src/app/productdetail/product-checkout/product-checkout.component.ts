@@ -7,6 +7,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 import { ShippingServiceService } from 'src/app/Services/shipping-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { AnyRecord } from 'dns';
 
 @Component({
   selector: 'app-product-checkout',
@@ -104,7 +105,7 @@ export class ProductCheckoutComponent implements OnInit {
 
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia().subscribe(
-      res => {
+      (res:any) => {
         console.log(res);
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'text/xml');
