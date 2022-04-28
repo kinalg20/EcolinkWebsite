@@ -16,6 +16,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProductCheckoutComponent implements OnInit {
   selectedPaymentMethod: any
   userObj: any;
+  discountCheck: boolean = true;
+  couponCheck: boolean = false;
+  couponDiscount:any=0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
@@ -279,5 +282,16 @@ export class ProductCheckoutComponent implements OnInit {
         }, 1000);
       })
     }, 1000);
+  }
+  couponButton() {
+    this.discountCheck = false;
+    this.couponCheck = true;
+    this.CheckoutProduct.map((res:any)=> {
+      console.log(res);
+      res.carts.map((response:any)=> {
+        this.couponDiscount+=response.product.coupon_discount
+        console.log(this.couponDiscount)
+      })
+    })
   }
 }
