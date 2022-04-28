@@ -144,8 +144,8 @@ export class ShippingServiceService {
   </soap:Body>
   </soap:Envelope>`
     const headers = new HttpHeaders({
-      'Content-Type': 'text/xml; charset=utf-8', 'Access-Control-Allow-Origin': '*'
+      'Content-Type': 'text/xml; charset=utf-8'
     });
-    return this.http.post(url, body , {headers : headers});
+    return this.http.post(url, body , {headers : headers , responseType: 'text'});
   }
 }

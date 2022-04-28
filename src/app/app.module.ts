@@ -15,6 +15,7 @@ import { SharedModule } from './shared/shared.module';
 import { SharelibraryModule } from './sharelibrary/sharelibrary.module';
 import { FetchedHeaderState } from './store/state/header.state';
 import {FetchedCategoriesState} from './store/state/category.state'
+import { environment } from 'src/environments/environment';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +29,7 @@ import {FetchedCategoriesState} from './store/state/category.state'
     SharedModule,
     SharelibraryModule, 
     ToastrModule.forRoot(),
-    NgxsModule.forRoot([FetchedHeaderState , FetchedCategoriesState]),
+    NgxsModule.forRoot([FetchedHeaderState , FetchedCategoriesState] , { developmentMode: !environment.production }),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],

@@ -6,6 +6,7 @@ import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
 import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 import { ShippingServiceService } from 'src/app/Services/shipping-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-product-checkout',
@@ -72,6 +73,10 @@ export class ProductCheckoutComponent implements OnInit {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getCheckoutProducts().subscribe(res => {
         console.log(res);
+        if (res.code == 200) {
+          this.formShimmer = false;
+          this.checkoutShimmer = false;
+        }
         this.CheckoutProduct.push(res.data);
         console.log(this.CheckoutProduct);
         res.data.carts.map((response: any) => {
@@ -83,8 +88,6 @@ export class ProductCheckoutComponent implements OnInit {
       this.paypalItems.category = "aerosol";
       this.paypalItems.unit_amount = { currency_code: 'USD', value: "1825" }
       this.paypal.push(this.paypalItems);
-      this.formShimmer = false;
-      this.checkoutShimmer = false;
     }
     else {
       this.getsubjectBehaviour();
@@ -100,9 +103,24 @@ export class ProductCheckoutComponent implements OnInit {
   }
 
   getShippingInfo() {
-    this._ShippingApi.rateDetailThroughSaia().subscribe(res => {
+    this._ShippingApi.rateDetailThroughSaia().subscribe(
+      res => {
+        console.log(res);
+        var parser = new DOMParser();
+        let xmlDoc = parser.parseFromString(res, 'text/xml');
+        let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
+        let nodes = firstEmploye.childNodes[0];
+        console.log(nodes.nodeValue);
 
-    })
+        for (let i = 1; i < 4; i++) {
+          console.log(firstEmploye.childNodes[i].nodeName);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        if (true) {
+          console.log(error.error);
+        }
+      })
   }
   getOrderInfo() {
     this.orderObj = {

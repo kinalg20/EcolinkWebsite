@@ -24,8 +24,8 @@
                     <div class="customer_name my-3">
                         <h4>Add Address</h4>
                         <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            class="pi pi-plus"></i>
-
+                            class="pi pi-plus">
+                        </i>
                     </div>
                     <div class="default-Address">
                         {{item.address}}, {{item.city}} <br>{{item.state}}, {{item.country}}, {{item.pincode}}
@@ -45,10 +45,16 @@
 <div class="Edit-Profile-section" *ngIf="showdesc == 'Edit Profile'">
     <h2>Edit Profile</h2>
     <ng-container *ngFor="let item of userDetail">
-        <form #editProfileFrom="ngForm" (ngSubmit)="editUserProfile(editProfileFrom)">
+        <form #editProfileFrom="ngForm" (ngSubmit)="editUserProfile(editProfileFrom)" id="backToTop">
             <ng-container *ngIf="resSignupMsg">
-                <div class="alert alert-danger" role="alert" id="loginAlert" #alert>
+                <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
                     {{ resSignupMsg }}
+                    <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+                </div>
+                <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
+                    #test>
+                    {{ resSignupMsg }}
+                    <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                 </div>
             </ng-container>
             <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
@@ -142,15 +148,17 @@
             </div>
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
-                        <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" ngModel name="checkbox" type="checkbox" value="" id="flexCheckDefault">
-                        <label class="form-check-label" for="flexCheckDefault">
-                            Do you want to change password ?
-                        </label>
+                    <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" ngModel
+                        name="checkbox" type="checkbox" value="" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Do you want to change password ?
+                    </label>
                 </div>
             </div>
             <div class="row">
                 <div class="col-12 add-user ">
-                    <button class="edituserdetail btn btn-success my-3 form-control">Save Details</button>
+                    <button class="edituserdetail btn btn-success my-3 form-control" (click)="goToTop()">Save
+                        Details</button>
                 </div>
             </div>
         </form>
@@ -370,9 +378,6 @@
         </div>
     </ng-container>
 </div>
-<div class="Wishlist-section" *ngIf="showdesc == 'Wishlist'">
-    <h2>Wishlist</h2>
-</div>
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content" *ngFor="let item of profileAddress">
@@ -384,8 +389,14 @@
             <div class="modal-body container">
                 <form #signUpForm="ngForm" (ngSubmit)="addUserAddress(signUpForm)">
                     <ng-container *ngIf="resSignupMsg">
-                        <div class="alert alert-danger" role="alert" id="loginAlert" #alert>
+                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
                             {{ resSignupMsg }}
+                            <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+                        </div>
+                        <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
+                            #test>
+                            {{ resSignupMsg }}
+                            <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                         </div>
                     </ng-container>
                     <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
