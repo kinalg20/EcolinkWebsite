@@ -18,7 +18,7 @@
         </div>
     </ng-container>
 
-    <ng-container  *ngIf="!shimmerLoad">
+    <ng-container *ngIf="!shimmerLoad">
         <div class="product-detail-section">
             <ng-container *ngFor="let detail of productDetail">
                 <div class="product-image">
@@ -40,7 +40,7 @@
                         <ng-template #elseBlock>
                             <h4 class="product-price">{{detail.data.product.regular_price | currency}}</h4>
                         </ng-template>
-    
+
                         <ng-container *ngIf="detail.data.product.in_stock==1">
                             <p>Availability : In Stock</p>
                         </ng-container>
@@ -84,7 +84,7 @@
             <ng-container *ngFor="let detail of productDetail">
                 <p-tabView>
                     <p-tabPanel header="Description" *ngIf="detail.data.product.description.length>0">
-                        <div [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
+                        <div class="desc" [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
                     </p-tabPanel>
                     <p-tabPanel header="Additional Information">
                         <ul>

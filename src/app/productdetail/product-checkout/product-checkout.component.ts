@@ -38,7 +38,7 @@ export class ProductCheckoutComponent implements OnInit {
     this.checkoutProduct();
     this.getPaypalProductDetail();
     this.initConfig();
-    // this.getShippingInfo();
+    this.getShippingInfo();
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getUserAddress().subscribe((res: any) => {
         res.data.map((response: any) => {
@@ -97,8 +97,8 @@ export class ProductCheckoutComponent implements OnInit {
   }
 
   getShippingInfo() {
-    this.__apiservice.rateDetailThroughSaia().subscribe(res => {
-      console.log(res);
+    this._ShippingApi.rateDetailThroughSaia().subscribe(res => {
+      
     })
   }
   getOrderInfo() {

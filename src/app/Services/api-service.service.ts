@@ -131,7 +131,6 @@ export class ApiServiceService {
 
   }
 
-
   getWishListItem() {
     let url = 'getWishlistItems';
     this.header = localStorage.getItem('ecolink_user_credential');
@@ -144,6 +143,23 @@ export class ApiServiceService {
 
     let body = {
       user_id: user_id
+    }
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+  }
+
+  deleteWishlistItems(product_id:any){
+    let url = 'deleteWishlistItems';
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+    let body =
+    {
+      user_id: user_id ,
+      product_id : product_id
     }
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
   }
@@ -355,55 +371,6 @@ export class ApiServiceService {
 
 
 
-//shipping apis
-
-rateDetailThroughSaia() {
-  let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
-  let body = `
-  <?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-<soap:Body>
-  <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
-    <request>
-      <UserID>ecolink</UserID>
-      <Password>ecolink4</Password>
-      <TestMode>Y</TestMode>
-      <BillingTerms>Prepaid</BillingTerms>
-      <AccountNumber>0747932</AccountNumber>
-      <Application>Outbound</Application>
-      <OriginCity></OriginCity>
-      <OriginState></OriginState>
-      <OriginZipcode></OriginZipcode>
-      <DestinationCity>Ridgeview</DestinationCity>
-      <DestinationState>SD</DestinationState>
-      <DestinationZipcode>57652</DestinationZipcode>
-      <WeightUnits>KGS</WeightUnits>
-      <Details>
-        <DetailItem>
-          <Width>20.00</Width>
-          <Length>20.00</Length>
-          <Height>20.00</Height>
-          <Weight>20</Weight>
-          <Class>50</Class>
-        </DetailItem>
-        <DetailItem>
-          <Width>20.00</Width>
-          <Length>20.00</Length>
-          <Height>20.00</Height>
-          <Weight>20</Weight>
-          <Class>50</Class>
-        </DetailItem>
-      </Details>
-    </request>
-  </Create>
-</soap:Body>
-</soap:Envelope>
-  `
-  const headers = new HttpHeaders({
-    'Content-Type': 'text/xml; charset=utf-8', 'Access-Control-Allow-Origin': '*'
-  });
-  return this.http.post(url, body, { headers: headers });
-}
   sendResetMail(data:any) : Observable<any> {
     return this.http.post(this._baseurl+ 'forgotPasswordEmail',data)
   }

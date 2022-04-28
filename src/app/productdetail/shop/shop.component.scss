@@ -19,7 +19,7 @@
             height: 100%;
             position: absolute;
             border-radius: 10px;
-            // object-fit: cover;
+            object-fit: cover;
         }
     }
 
@@ -237,6 +237,32 @@
         outline: 0 none;
         outline-offset: 0;
         box-shadow: none;
+    }
+    .container_wrap {
+        padding: 0 !important;
+        text-align: justify !important;
+        .container {
+            width: 100% !important;
+            padding: 0 !important;
+        }
+    }
+    .woocommerce-tabs {
+        padding: 0 !important;
+    }
+    .avia-section {
+        display: none !important;
+    }
+    // td {
+    //     a {
+    //         img {
+    //             width: 50px;
+    //         }
+    //     }
+    // }
+    @media (max-width: 500px) {
+        .alignright {
+            display: none !important;
+        }
     }
 }
 @media (max-width: 992px) {

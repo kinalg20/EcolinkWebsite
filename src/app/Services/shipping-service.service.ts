@@ -32,8 +32,23 @@ export class ShippingServiceService {
 
   fedexshippingurl = 'https://apis-sandbox.fedex.com/rate/v1/rates/quotes'
   fedextoken: string = ''
-  fedexshippingApi(access_token: any , product_details : any) {
-    // console.log(product_details);
+  requestedPackage: any = [];
+  fedexshippingApi(access_token: any, product_details: any) {
+    let product: any = {};
+    product_details.map((res: any) => {
+      res.carts.map((resp: any) => {
+        product = {};
+        product = {
+          "groupPackageCount": resp.quantity,
+          "weight": {
+            "units": 'LB',
+            "value": resp.product.weight ? resp.product.weight : 1
+          }
+        }
+        this.requestedPackage.push(product);
+      })
+    })
+
     this.fedextoken = access_token;
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/json',
@@ -63,48 +78,74 @@ export class ShippingServiceService {
           "LIST",
           "ACCOUNT"
         ],
-        "customsClearanceDetail": {
-          "dutiesPayment": {
-            "paymentType": "SENDER",
-            "payor": {
-              "responsibleParty": null
-            }
-          },
-          "commodities": [
-            {
-              "description": "Camera",
-              "quantity": 1,
-              "quantityUnits": "PCS",
-              "weight": {
-                "units": "KG",
-                "value": 11
-              },
-              "customsValue": {
-                "amount": 100,
-                "currency": "SFR"
-              }
-            }
-          ]
-        },
-        "requestedPackageLineItems": [
-          {
-            "groupPackageCount": 2,
-            "weight": {
-              "units": "KG",
-              "value": 1
-            }
-          },
-          {
-            "groupPackageCount": 3,
-            "weight": {
-              "units": "KG",
-              "value": 10
-            }
-          }
-        ]
+        // "customsClearanceDetail": {
+        //   "commodities": [
+        //     {
+        //       "description": "Camera",
+        //       "quantity": 1,
+        //       "quantityUnits": "PCS",
+        //       "weight": {
+        //         "units": "KG",
+        //         "value": 11
+        //       },
+        //       "customsValue": {
+        //         "amount": 100,
+        //         "currency": "SFR"
+        //       }
+        //     }
+        //   ]
+        // },
+        "requestedPackageLineItems": this.requestedPackage
       }
     }
 
     return this.http.post(this.fedexshippingurl, fedexdata, { headers: httpHeaders })
+  }
+
+
+  rateDetailThroughSaia() {
+    let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
+    let body = `<?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
+      <request>
+        <UserID>ecolink</UserID>
+        <Password>ecolink4</Password>
+        <TestMode>Y</TestMode>
+        <BillingTerms>Prepaid</BillingTerms>
+        <AccountNumber>0747932</AccountNumber>
+        <Application>Outbound</Application>
+        <OriginCity></OriginCity>
+        <OriginState></OriginState>
+        <OriginZipcode></OriginZipcode>
+        <DestinationCity>Ridgeview</DestinationCity>
+        <DestinationState>SD</DestinationState>
+        <DestinationZipcode>57652</DestinationZipcode>
+        <WeightUnits>KGS</WeightUnits>
+        <Details>
+          <DetailItem>
+            <Width>20.00</Width>
+            <Length>20.00</Length>
+            <Height>20.00</Height>
+            <Weight>20</Weight>
+            <Class>50</Class>
+          </DetailItem>
+          <DetailItem>
+            <Width>20.00</Width>
+            <Length>20.00</Length>
+            <Height>20.00</Height>
+            <Weight>20</Weight>
+            <Class>50</Class>
+          </DetailItem>
+        </Details>
+      </request>
+    </Create>
+  </soap:Body>
+  </soap:Envelope>`
+    const headers = new HttpHeaders({
+      'Content-Type': 'text/xml; charset=utf-8', 'Access-Control-Allow-Origin': '*'
+    });
+    return this.http.post(url, body , {headers : headers});
   }
 }

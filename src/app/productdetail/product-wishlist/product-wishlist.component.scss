@@ -236,6 +236,21 @@
 }
 
 ::ng-deep {
+    .cart-body{
+        .card-elements{
+            .shimmer-loading .ngx-shimmer {
+                height: 200px;
+                width: 100%;
+            }
+        }
+
+        .cart-total{
+            .shimmer-loading .ngx-shimmer {
+                height: 250px;
+                width: 100%;
+            }
+        }
+    }
     .p-datatable table {
         margin: auto;
     }
