@@ -11,15 +11,15 @@ import { CallToActionComponent } from './call-to-action/call-to-action.component
 import { MediaBannerComponent } from './media-banner/media-banner.component';
 import { TrendingPostComponent } from './trending-post/trending-post.component';
 import { FormsModule } from '@angular/forms';
-import { ProductsRequestComponent } from './products-request/products-request.component';
+import { ProductsRequestComponent } from './Forms/products-request/products-request.component';
 import { ReturnProductListingComponent } from './return-product-listing/return-product-listing.component';
-import { GoogleMapComponent } from './google-map/google-map.component';
+import { GoogleMapComponent } from './Forms/google-map/google-map.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
-import { SupportFormComponent } from './support-form/support-form.component';
-import { BulkPricingComponent } from './bulk-pricing/bulk-pricing.component';
+import { AskChemistComponent } from './Forms/ask-chemist/ask-chemist.component';
+import { SupportFormComponent } from './Forms/support-form/support-form.component';
+import { BulkPricingComponent } from './Forms/bulk-pricing/bulk-pricing.component';
 import { GSAProductComponent } from './gsa-product/gsa-product.component';
 
 const exportdata: any = [

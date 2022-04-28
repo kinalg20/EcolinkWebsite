@@ -6,6 +6,7 @@ import { ViewportScroller } from "@angular/common";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  
   constructor(private scroller: ViewportScroller) { }
 
   ngOnInit(): void {
@@ -14,5 +15,4 @@ export class HomeComponent implements OnInit {
   scrolldown(event: any) {
     this.scroller.scrollToAnchor("newsletter");
   }
-
 }

@@ -13,23 +13,24 @@
             <div class="billing-detail">
                 <div class="card">
                     <h3>Ask the Chemist</h3>
-                    <form #askchemist="ngForm" (ngSubmit)="saveAskChemistDetail(askchemist)">
+                    <form #askchemist="ngForm" (ngSubmit)="saveAskChemistDetail(askchemist)" id="backToTop">
                         <ng-container *ngIf="resSignupMsg">
                             <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
-                                id="loginAlert">
+                                id="loginAlert" #test>
                                 {{ resSignupMsg }}
-                                <span class="icon-class"><i class="fa fa-close"></i></span>
+                                <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                             </div>
                             <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
-                                id="loginAlert">
+                                id="loginAlert" #test>
                                 {{ resSignupMsg }}
+                                <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                             </div>
                         </ng-container>
                         <div id="field_4_11" class="gfield">
                             <label class="gfield_label" for="input_4_11">I am interested in*</label>
                             <div class="ginput_container mt-2">
-                                <select name="input_11" id="input_4_11" class="gfield_select col-12" aria-required="true"
-                                    aria-invalid="false" ngModel required>
+                                <select name="input_11" id="input_4_11" class="gfield_select col-12"
+                                    aria-required="true" aria-invalid="false" ngModel required>
                                     <option value="abatement">VOC abatement</option>
                                     <option value="performance">Improving chemical performance
                                     </option>
@@ -53,8 +54,8 @@
                         <div class="row mb-3">
                             <div class="col-lg-6 col-12 Fname">
                                 <label for="first-name">First Name*</label>
-                                <input type="text" class="form-control fname mt-2" placeholder="First name" id="first-name"
-                                    name="firstname" ngModel required>
+                                <input type="text" class="form-control fname mt-2" placeholder="First name"
+                                    id="first-name" name="firstname" ngModel required>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <label for="last-name">Last Name*</label>
@@ -93,8 +94,8 @@
                         <div class="row mb-3">
                             <div class="col-lg-6 col-12 Email">
                                 <label for="Email Address">Email Address*</label>
-                                <input type="email" class="form-control mt-2 email" placeholder="Email" id="Email-Address"
-                                    (input)="validateEmail($event)" name="email" ngModel required>
+                                <input type="email" class="form-control mt-2 email" placeholder="Email"
+                                    id="Email-Address" (input)="validateEmail($event)" name="email" ngModel required>
                                 <h6 class="text-danger" *ngIf="invalidEmail">
                                     {{ invalidEmail ? "Invalid Email" : "" }}
                                 </h6>
@@ -111,7 +112,7 @@
                         </div>
                         <div class="proceed">
                             <div class="proceed-button">
-                                <button>Submit</button>
+                                <button role="button" class="btn-sm submit-btn" (click)="goToTop()">Submit</button>
                             </div>
                         </div>
                     </form>

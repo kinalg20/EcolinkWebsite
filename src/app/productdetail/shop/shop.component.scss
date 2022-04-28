@@ -224,6 +224,9 @@
 }
 
 ::ng-deep {
+    .shimmer-loading .ngx-shimmer {
+        height: 280px;
+    }
     .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
         background: #ffffff;
         border-color: var(--primary);

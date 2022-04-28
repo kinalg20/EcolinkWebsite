@@ -14,7 +14,7 @@ import { ApiServiceService } from './Services/api-service.service';
 import { SharedModule } from './shared/shared.module';
 import { SharelibraryModule } from './sharelibrary/sharelibrary.module';
 import { FetchedHeaderState } from './store/state/header.state';
-
+import {FetchedCategoriesState} from './store/state/category.state'
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +28,7 @@ import { FetchedHeaderState } from './store/state/header.state';
     SharedModule,
     SharelibraryModule, 
     ToastrModule.forRoot(),
-    NgxsModule.forRoot([FetchedHeaderState]),
+    NgxsModule.forRoot([FetchedHeaderState , FetchedCategoriesState]),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot()
   ],

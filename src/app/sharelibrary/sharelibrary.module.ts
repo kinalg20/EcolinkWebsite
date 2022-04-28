@@ -11,6 +11,7 @@ import { TabViewModule } from 'primeng/tabview';
 import { TableModule } from 'primeng/table';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {DialogModule} from 'primeng/dialog';
+import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
 
 const exportsharedata: any = [
   CarouselModule,
@@ -23,7 +24,8 @@ const exportsharedata: any = [
   TabViewModule,
   TableModule,
   RadioButtonModule,
-  DialogModule
+  DialogModule,
+  NgxShimmerLoadingModule
 ]
 @NgModule({
   declarations: [

@@ -6,6 +6,7 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SearchPipePipe } from '../custom-pipe/search-pipe.pipe';
+import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
 
 
 @NgModule({
@@ -18,7 +19,7 @@ import { SearchPipePipe } from '../custom-pipe/search-pipe.pipe';
     ProductlistRoutingModule,
     SharelibraryModule,
     FormsModule,
-    SharedModule
+    SharedModule,
   ]
 
 })

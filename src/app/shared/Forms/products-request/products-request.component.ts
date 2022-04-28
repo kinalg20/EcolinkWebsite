@@ -1,4 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Renderer2,
+  AfterViewInit,
+  ViewChild,
+  ElementRef, OnInit
+} from '@angular/core'; 
+import { ViewportScroller } from "@angular/common";
+import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
@@ -9,6 +17,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./products-request.component.scss']
 })
 export class ProductsRequestComponent implements OnInit {
+  @ViewChild('test') test: ElementRef | any;
   slug: any;
   data: any = []
   userObj: any;
@@ -18,7 +27,7 @@ export class ProductsRequestComponent implements OnInit {
   invalidMobile = false;
   invalidEmail: boolean = false;
   checkBoxChcek: boolean = false;
-  constructor(private route: ActivatedRoute, private _apiService: ApiServiceService) { }
+  constructor(private route: ActivatedRoute, private _apiService: ApiServiceService, private renderer: Renderer2, private scroller: ViewportScroller, private router: Router) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
@@ -35,9 +44,7 @@ export class ProductsRequestComponent implements OnInit {
       })
     }
   }
-  closeMsg() {
-    const [ngClass] = "{'display': none}"
-  }
+
   saveProductRequestDetail(form: NgForm) {
     if (form.valid) {
       console.log(form.value);
@@ -71,7 +78,14 @@ export class ProductsRequestComponent implements OnInit {
       this.resSignupMsg = 'Please fill the value!';
     }
   }
-
+  ngAfterViewInit() { }
+  close() {
+    this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
+    this.resSignupMsg = '';
+  }
+  goToTop() {
+    this.scroller.scrollToAnchor("backToTop");
+  }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email.target.value) == false) {

@@ -19,16 +19,27 @@ export class ProductCheckoutComponent implements OnInit {
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
   carts: any = [];
+  paypalItems:any={}
   orderObj: any;
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
+  formShimmer: boolean = true;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
   private route: Router,
   private _cookies: CookiesService,
   private _ShippingApi: ShippingServiceService) { }
+  paypal:any=[{
+    name: 'Enterprise Subscription',
+    quantity: '1',
+    category: 'DIGITAL_GOODS',
+    unit_amount: {
+      currency_code: 'USD',
+      value: '110',
+    },
+  }]
 
   ngOnInit(): void {
     this.checkoutProduct();
@@ -46,11 +57,12 @@ export class ProductCheckoutComponent implements OnInit {
       });
     }
     this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
-      this._ShippingApi.fedexshippingApi(res.access_token , this.CheckoutProduct).subscribe((resp: any) => {
-        console.log("resp.output",resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+      this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
+        console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
         this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
+    
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
@@ -65,7 +77,17 @@ export class ProductCheckoutComponent implements OnInit {
       this.__apiservice.getCheckoutProducts().subscribe(res => {
         console.log(res);
         this.CheckoutProduct.push(res.data);
+        this.formShimmer = false;
         console.log(this.CheckoutProduct);
+        res.data.carts.map((response:any)=> {
+          this.paypalItems.name=response.product.name,
+          this.paypalItems.quantity=response.quantity;
+          this.paypalItems.category="aerosol";
+          this.paypalItems.unit_amount={currency_code:'USD',value:response.product.sale_price}
+          this.paypal.push(this.paypalItems);
+
+          console.log(this.paypal);
+        })
       })
     }
     else {
@@ -121,23 +143,15 @@ export class ProductCheckoutComponent implements OnInit {
         purchase_units: [{
           amount: {
             currency_code: 'USD',
-            value: this.paypalProductDetails.payable,
+            value: "110",
             breakdown: {
               item_total: {
                 currency_code: 'USD',
-                value: this.paypalProductDetails.payable
+                value: "110"
               }
             }
           },
-          items: [{
-            name: 'Enterprise Subscription',
-            quantity: '1',
-            category: 'DIGITAL_GOODS',
-            unit_amount: {
-              currency_code: 'USD',
-              value: this.paypalProductDetails.payable,
-            },
-          }]
+          items:  this.paypal
         }]
       },
       advanced: {

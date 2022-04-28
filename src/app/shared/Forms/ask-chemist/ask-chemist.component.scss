@@ -13,6 +13,9 @@
 }
 
 .checkout-body {
+    .fa-close:hover {
+        cursor: pointer;
+    }
     margin-bottom: 40px;
     .billing-detail {
         .card {

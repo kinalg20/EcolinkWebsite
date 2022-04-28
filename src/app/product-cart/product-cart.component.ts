@@ -13,6 +13,7 @@ export class ProductCartComponent implements OnInit {
   GetProduct: any = [];
   SubTotal: number = 0;
   UserLogin: any;
+  CartShimmer: boolean = true;
 
   constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig) { }
 
@@ -57,19 +58,22 @@ export class ProductCartComponent implements OnInit {
       setTimeout(() => {
         this.CardShow = completedFormat.data;
         this.subtotal();
-      }, 5000);
+        this.CartShimmer = false;
+      },
+        1500);
     }
     else {
       this._ApiService.getItemFromCart().subscribe(res => {
         console.log(res);
-        if(res.code == 200){
+        if (res.code == 200) {
           setTimeout(() => {
             this.CardShow = res.data;
             this.subtotal();
             console.log(this.CardShow);
+            this.CartShimmer = false;
           }, 1500);
         }
-        
+
       })
     }
   }

@@ -12,16 +12,17 @@
                 <h3>Contact Product Support</h3>
             </div>
 
-            <form #RequestForm="ngForm" (ngSubmit)="saveSupportFormDetail(RequestForm)">
+            <form #RequestForm="ngForm" (ngSubmit)="saveSupportFormDetail(RequestForm)" id="backToTop">
                 <ng-container *ngIf="resSignupMsg">
                     <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
-                        id="loginAlert">
+                        id="loginAlert" #test>
                         {{ resSignupMsg }}
-                        <span class="icon-class"><i class="fa fa-close"></i></span>
+                        <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
                     <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
-                        id="loginAlert">
+                        id="loginAlert" #test>
                         {{ resSignupMsg }}
+                        <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
                 </ng-container>
                 <div class="row mb-3">
@@ -102,7 +103,7 @@
                 </div>
                 <div class="proceed">
                     <div class="proceed-button">
-                        <button role="button" class="btn-sm submit-btn p-button-success">Submit</button>
+                        <button role="button" class="btn-sm submit-btn p-button-success" (click)="goToTop()">Submit</button>
                     </div>
                 </div>
             </form>

@@ -18,16 +18,17 @@
                         <h3>Request A Product Sample</h3>
                     </div>
 
-                    <form #RequestForm="ngForm" (ngSubmit)="saveProductRequestDetail(RequestForm)">
+                    <form #RequestForm="ngForm" (ngSubmit)="saveProductRequestDetail(RequestForm)" id="backToTop">
                         <ng-container *ngIf="resSignupMsg">
                             <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
-                                id="loginAlert">
+                                id="loginAlert" #test>
                                 {{ resSignupMsg }}
-                                <span class="icon-class"><i (click)="closeMsg()" class="fa fa-close"></i></span>
+                                <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
                             </div>
                             <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
-                                id="loginAlert">
+                                id="loginAlert" #test>
                                 {{ resSignupMsg }}
+                                <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
                             </div>
                         </ng-container>
                         <div class="row mb-3">
@@ -188,7 +189,7 @@
                                 </h6>
                             </div>
                         </div>
-                        <button role="button" class="btn-sm submit-btn">Submit</button>
+                        <button role="button" class="btn-sm submit-btn" (click)="goToTop()">Submit</button>
                     </form>
                 </section>
             </div>
