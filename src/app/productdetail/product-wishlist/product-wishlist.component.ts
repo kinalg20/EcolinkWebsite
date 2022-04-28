@@ -13,7 +13,9 @@ export class ProductWishlistComponent implements OnInit {
   constructor(private _ApiService: ApiServiceService) { }
 
   ngOnInit(): void {
-    this.getWishlistItems();
+    setTimeout(() => {
+      this.getWishlistItems();
+    }, 500);
   }
 
   addProductToCart(prod: any) {
