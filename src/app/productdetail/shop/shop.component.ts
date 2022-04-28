@@ -9,8 +9,10 @@ import { CookiesService } from 'src/app/Services/cookies.service';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  ItemCount: any = 1;
+  ItemCount: any;
+  stock:any
   slug: any;
+  minimum_qyt:any
   cart_obj: any = []
   previousdata: any;
   recommended_products: any = [];
@@ -51,14 +53,16 @@ export class ShopComponent implements OnInit {
     }
 
     this.getProductDetail(this.detailSlug);
+    
+
   }
 
 
   Count(string: any) {
-    if (string == "increase" && this.ItemCount < 10) {
+    if (string == "increase" && this.ItemCount < this.stock) {
       this.ItemCount = this.ItemCount + 1;
     }
-    if (string == "decrease" && this.ItemCount > 1) {
+    if (string == "decrease" && this.ItemCount > this.minimum_qyt) {
       this.ItemCount = this.ItemCount - 1;
     }
   }
@@ -68,9 +72,13 @@ export class ShopComponent implements OnInit {
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
+        this.minimum_qyt=res.data.product.minimum_qty;
+        this.stock=res.data.product.stock;
         console.log(res);
+        console.log(res.data.product.stock)
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
+        this.ItemCount = this.minimum_qyt;
       }
     })
   }

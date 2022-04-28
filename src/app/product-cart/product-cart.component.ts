@@ -79,9 +79,9 @@ export class ProductCartComponent implements OnInit {
         },
         (error: HttpErrorResponse) => {
           if(error.error.code == 400){
+            this.CardShow = [];
             this.CartShimmer = false;
           }
-          console.log(error.error.code);
         })
     }
   }
@@ -132,7 +132,7 @@ export class ProductCartComponent implements OnInit {
       this._ApiService.deleteItemFromCart(product).subscribe(res => console.log(res));
       setTimeout(() => {
         this.getCartData();
-      }, 2000);
+      }, 500);
     }
 
     // else {
