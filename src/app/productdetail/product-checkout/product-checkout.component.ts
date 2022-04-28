@@ -19,19 +19,20 @@ export class ProductCheckoutComponent implements OnInit {
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
   carts: any = [];
-  paypalItems:any={}
+  paypalItems: any = {}
   orderObj: any;
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
   formShimmer: boolean = true;
+  checkoutShimmer: boolean = true;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
-  private route: Router,
-  private _cookies: CookiesService,
-  private _ShippingApi: ShippingServiceService) { }
-  paypal:any=[]
+    private route: Router,
+    private _cookies: CookiesService,
+    private _ShippingApi: ShippingServiceService) { }
+  paypal: any = []
 
   ngOnInit(): void {
     this.checkoutProduct();
@@ -54,7 +55,7 @@ export class ProductCheckoutComponent implements OnInit {
         this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
-    
+
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
@@ -69,18 +70,18 @@ export class ProductCheckoutComponent implements OnInit {
       this.__apiservice.getCheckoutProducts().subscribe(res => {
         console.log(res);
         this.CheckoutProduct.push(res.data);
-        this.formShimmer = false;
         console.log(this.CheckoutProduct);
-        res.data.carts.map((response:any)=> {
-          this.paypalItems.name=response.product.name,
-          this.paypalItems.quantity="3";
-          this.paypalItems.category="aerosol";
-          this.paypalItems.unit_amount={currency_code:'USD',value:"1825"}
-          this.paypal.push(this.paypalItems);
-
+        res.data.carts.map((response: any) => {
           console.log(this.paypal);
         })
       })
+      this.paypalItems.name = "ABC",
+        this.paypalItems.quantity = "3";
+      this.paypalItems.category = "aerosol";
+      this.paypalItems.unit_amount = { currency_code: 'USD', value: "1825" }
+      this.paypal.push(this.paypalItems);
+      this.formShimmer = false;
+      this.checkoutShimmer = false;
     }
     else {
       this.getsubjectBehaviour();
@@ -143,7 +144,7 @@ export class ProductCheckoutComponent implements OnInit {
               }
             }
           },
-          items:  this.paypal
+          items: this.paypal
         }]
       },
       advanced: {
@@ -220,8 +221,9 @@ export class ProductCheckoutComponent implements OnInit {
     })
     setTimeout(() => {
       this.refractorData();
-    }, 5000);
-    this.formShimmer = false;
+      this.formShimmer = false;
+      this.checkoutShimmer = false
+    }, 1000);
   }
 
   refractorData() {
