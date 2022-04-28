@@ -78,9 +78,6 @@ export class ProductCheckoutComponent implements OnInit {
         }
         this.CheckoutProduct.push(res.data);
         console.log(this.CheckoutProduct);
-        res.data.carts.map((response: any) => {
-          console.log(this.paypal);
-        })
       })
     }
     else {
@@ -105,7 +102,7 @@ export class ProductCheckoutComponent implements OnInit {
     //     });  
     // });  
     .subscribe(
-      res => {
+      (res:any) => {
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'text/xml');
         let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
