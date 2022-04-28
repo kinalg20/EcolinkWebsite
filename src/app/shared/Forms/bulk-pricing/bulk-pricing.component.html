@@ -20,10 +20,17 @@
                 <h3>Bulk Order Contact</h3>
             </div>
 
-            <form #RequestForm="ngForm" (ngSubmit)="saveBulkFormDetail(RequestForm)">
+            <form #RequestForm="ngForm" (ngSubmit)="saveBulkFormDetail(RequestForm)" id="backToTop">
                 <ng-container *ngIf="resSignupMsg">
-                    <div class="alert alert-danger" role="alert" id="loginAlert">
+                    <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
+                        #test>
                         {{ resSignupMsg }}
+                        <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+                    </div>
+                    <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
+                        #test>
+                        {{ resSignupMsg }}
+                        <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
                 </ng-container>
                 <div class="row mb-3">
@@ -128,7 +135,9 @@
                 </div>
                 <div class="proceed">
                     <div class="proceed-button">
-                        <button>Submit</button>
+                        <div class="proceed-button">
+                            <button role="button" class="btn-sm submit-btn" (click)="goToTop()">Submit</button>
+                        </div>
                     </div>
                 </div>
             </form>

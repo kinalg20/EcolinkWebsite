@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BlogComponent } from '../home/blog/blog.component';
-import { AskChemistComponent } from './ask-chemist/ask-chemist.component';
+import { AskChemistComponent } from './Forms/ask-chemist/ask-chemist.component';
 import { FooterComponent } from './footer/footer.component';
 import { GSAProductComponent } from './gsa-product/gsa-product.component';
 import { HeaderComponent } from './header/header.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { ProductsRequestComponent } from './products-request/products-request.component';
+import { ProductsRequestComponent } from './Forms/products-request/products-request.component';
 import { SharedComponent } from './shared.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
 

@@ -48,13 +48,17 @@
         <div class="contact-form-heading">
             <h2>Contact Us</h2>
         </div>
-        <form #contactdetail="ngForm" (ngSubmit)="saveContactUsDetail(contactdetail)">
+        <form #contactdetail="ngForm" (ngSubmit)="saveContactUsDetail(contactdetail)" id="backToTop">
             <ng-container *ngIf="resSignupMsg">
-                <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert">
+                <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
+                    id="loginAlert" #test>
                     {{ resSignupMsg }}
+                    <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
                 </div>
-                <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert">
+                <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
+                    id="loginAlert" #test>
                     {{ resSignupMsg }}
+                    <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
                 </div>
             </ng-container>
             <div class="row mb-3">
@@ -148,7 +152,7 @@
             </div>
             <div class="proceed" style="text-align: left;">
                 <div class="proceed-button">
-                    <button>Submit</button>
+                    <button role="button" class="btn-sm submit-btn p-button-success" (click)="goToTop()">Submit</button>
                 </div>
             </div>
         </form>

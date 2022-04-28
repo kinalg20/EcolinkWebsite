@@ -4,6 +4,9 @@
             .col-lg-12 {
                 // border-right: 2px solid #e7e7e7;
                 .request-form {
+                    .fa-close:hover {
+                        cursor: pointer;
+                    }
                     .main-title {
                         margin-bottom: 40px;
                     }
@@ -16,9 +19,6 @@
                     form {
                         label {
                             margin-top: 10px;
-                            font-weight: bold;
-                            font-size: 1.1rem;
-                            color: #666666;
                         }
                         .field {
                             list-style: none;

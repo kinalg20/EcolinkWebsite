@@ -50,7 +50,9 @@
     border: 1px solid #d7d1d1;
     border-radius: 10px;
     padding: 30px;
-
+    .fa-close:hover {
+        cursor: pointer;
+    }
     .contact-form-heading {
         text-align: center;
 

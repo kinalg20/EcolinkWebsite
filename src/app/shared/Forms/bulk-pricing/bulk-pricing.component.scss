@@ -1,5 +1,8 @@
 .container {
     .bulk-pricing-form {
+        .fa-close:hover {
+            cursor: pointer;
+        }
         .head {
             .banner {
                 margin-bottom: 30px;

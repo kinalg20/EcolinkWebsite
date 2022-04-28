@@ -12,11 +12,14 @@
             }
             .footer-button {
                 margin: 0 10px;
-                color: #fff;
                 border: none;
                 background: #55b15c;
                 border-radius: 5px;
                 padding: 8px 30px;
+                a {
+                    text-decoration: none;
+                    color: #fff;
+                }
             }
         }
     }
