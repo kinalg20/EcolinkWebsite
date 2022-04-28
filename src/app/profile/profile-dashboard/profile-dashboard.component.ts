@@ -1,13 +1,18 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+  Component, Input, OnInit, Renderer2, AfterViewInit, ViewChild, ElementRef
+} from '@angular/core';
+import { ViewportScroller } from "@angular/common";
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
+import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-profile-dashboard',
   templateUrl: './profile-dashboard.component.html',
   styleUrls: ['./profile-dashboard.component.scss']
 })
 export class ProfileDashboardComponent implements OnInit {
+  @ViewChild('test') test: ElementRef | any;
   resSignupMsg: string = '';
   profileAddress: any = [];
   addORedit: boolean = false;
@@ -21,26 +26,34 @@ export class ProfileDashboardComponent implements OnInit {
   orderHistoryDesc: any = [];
   storeObj: any;
   passwrodCheck: boolean = false
-  userObj1:any=[]
+  userObj1: any = []
   show: boolean = true;
+  resSignupMsgCheck: string = ' ';
   // showDetails: boolean=true;
   @Input() showdesc: any;
-  constructor(private __apiservice: ApiServiceService, private router: Router) {
+  constructor(private __apiservice: ApiServiceService, private scroller: ViewportScroller, private renderer: Renderer2, private router: Router) {
   }
 
   ngOnInit(): void {
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
-      this.userDetail.map((res:any)=> {
+      this.userDetail.map((res: any) => {
         setTimeout(() => {
-          res.firstname=res.name.split(" ")[0]
-          res.lastname=res.name.split(" ")[1]
+          res.firstname = res.name.split(" ")[0]
+          res.lastname = res.name.split(" ")[1]
           console.log(res);
         }, 1000);
       })
       console.log(this.userDetail);
     })
+    this.getAllUserAddress()
+    this.getOrderhistory();
+    this.getReturnProduct();
+  }
+
+  getAllUserAddress() {
     this.__apiservice.getUserAddress().subscribe((res: any) => {
+      this.allUserAddresses = [];
       console.log(res);
       res.data.map((response: any) => {
         this.allUserAddresses.push(response);
@@ -49,8 +62,6 @@ export class ProfileDashboardComponent implements OnInit {
         console.log(this.allUserAddresses);
       }, 1000);
     })
-    this.getOrderhistory();
-    this.getReturnProduct();
   }
   changePassword() {
     this.passwrodCheck = !this.passwrodCheck;
@@ -139,15 +150,17 @@ export class ProfileDashboardComponent implements OnInit {
           },
             () => {
               form.reset();
+              this.resSignupMsg = 'Profile Edited Successfully!';
+              this.resSignupMsgCheck = 'success';
             }
           );
         }
       })
     }
     else {
-      this.resSignupMsg = 'Please fill the value';
+      this.resSignupMsgCheck = 'danger';
+      this.resSignupMsg = 'Please Fill the Fields Below!';
     }
-
 
   }
   resetValue(form: NgForm) {
@@ -156,10 +169,22 @@ export class ProfileDashboardComponent implements OnInit {
   deleteUserAddress(item_id: any) {
     console.log(item_id);
     this.__apiservice.deleteUserAddress(item_id).subscribe((res: any) => {
-      window.location.reload();
-    })
+      if (res.code == 200) {
+        this.resSignupMsg = 'Your Address Deleted Successfully!';
+        this.resSignupMsgCheck = 'success';
+        this.getAllUserAddress();
+      }
+      // window.location.reload();
+    },
+      (error: HttpErrorResponse) => {
+        if (error.error.code == 400) {
+          this.allUserAddresses = []
+          this.getAllUserAddress();
+        }
+        console.log(error.error.code);
+      }
+    )
   }
-
   getUserDetail(item: any) {
     if (item == 'add') {
       this.profileAddress = [];
@@ -205,7 +230,7 @@ export class ProfileDashboardComponent implements OnInit {
     })
   }
   editUserProfile(form: NgForm) {
-    if(!(this.passwrodCheck)) {
+    if (!(this.passwrodCheck)) {
       if (form.valid) {
         let data = Object.assign({}, form.value);
         this.userObj = {
@@ -222,19 +247,23 @@ export class ProfileDashboardComponent implements OnInit {
         this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
           console.log(res);
           form.reset();
-        })
+          this.resSignupMsg = 'Profile Edited Successfully!';
+          this.resSignupMsgCheck = 'success';
+        }
+        )
       }
       else {
-        this.resSignupMsg = 'Please fill the value';
+        this.resSignupMsgCheck = 'danger';
+        this.resSignupMsg = 'Please Fill the Fields Below!';
       }
     }
     else {
       if (form.valid) {
         let data = Object.assign({}, form.value);
         this.userObj1 = {
-          email:data.email,
-          password:data.password,
-          password_confirmation:data.password
+          email: data.email,
+          password: data.password,
+          password_confirmation: data.password
         };
         this.userObj = {
           name: data.firstname + ' ' + data.lastname,
@@ -260,6 +289,15 @@ export class ProfileDashboardComponent implements OnInit {
         this.resSignupMsg = 'Please fill the value';
       }
     }
+  }
+  ngAfterViewInit() { }
+  close() {
+    this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
+    this.resSignupMsg = '';
+  }
+  goToTop() {
+    window.scrollTo(0, 0);
+    this.scroller.scrollToAnchor("backToTop");
   }
   changeTab() {
     this.showdesc = 'Edit Profile';

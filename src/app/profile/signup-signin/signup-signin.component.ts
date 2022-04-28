@@ -1,9 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  Renderer2,
+  AfterViewInit,
+  ViewChild,
+  ElementRef, OnInit
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { SocialAuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup-signin',
@@ -11,6 +18,7 @@ import { GoogleLoginProvider } from "angularx-social-login";
   styleUrls: ['./signup-signin.component.scss']
 })
 export class SignupSigninComponent implements OnInit {
+  @ViewChild('test') test: ElementRef | any;
   userObj: any;
   loginobj: any;
   resSignupMsg: string = '';
@@ -20,8 +28,9 @@ export class SignupSigninComponent implements OnInit {
   invalidEmail: boolean = false;
   invalidUserEmail: string = '';
   checkString: boolean = true;
+  resSignupMsgCheck: string = ' ';
   resMsg: string = '';
-  constructor(private router: Router, private __apiservice: ApiServiceService , private authService: SocialAuthService) { }
+  constructor(private router: Router, private renderer: Renderer2, private __apiservice: ApiServiceService, private authService: SocialAuthService) { }
 
   ngOnInit(): void {
   }
@@ -137,6 +146,8 @@ export class SignupSigninComponent implements OnInit {
         if (res.code === 200) {
           if (res.data.user_id == 1) {
             window.location.href = 'https://brandtalks.in/ecolink/login';
+            this.resSignupMsg = 'Form Submitted Successfully!';
+            this.resSignupMsgCheck = 'success';
           }
           else {
             localStorage.setItem(
@@ -153,12 +164,21 @@ export class SignupSigninComponent implements OnInit {
           localStorage.removeItem('ecolink_user_credential');
         }
       },
-      () => {
+      (error: HttpErrorResponse) => {
+        this.resSignupMsgCheck = 'danger';
+        this.resSignupMsg = 'Username Password Incorrect!';
+        console.log(error.error.code);
         form.reset();
-      }
-    );
-  }
+      });
 
+    () => {
+      form.reset();
+    }
+  }
+  close() {
+    this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
+    this.resSignupMsg = '';
+  }
   // signInWithGoogle(): void {
   //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(
   //     (user: any) => {

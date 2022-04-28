@@ -65,14 +65,14 @@ export class GoogleMapComponent implements OnInit {
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         form.reset();
-        this.resSignupMsg = 'Contact detail saved successfully!';
+        this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
       }
       )
     }
     else {
       this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please fill the value!';
+      this.resSignupMsg = 'Please Fill the Fields Below!';
     }
   }
 
