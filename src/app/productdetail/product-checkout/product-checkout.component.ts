@@ -3,7 +3,6 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
-import { CookieService } from 'ngx-cookie-service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 import { ShippingServiceService } from 'src/app/Services/shipping-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -103,14 +102,23 @@ export class ProductCheckoutComponent implements OnInit {
   }
 
   getShippingInfo() {
-    this._ShippingApi.rateDetailThroughSaia().subscribe(
+    this._ShippingApi.rateDetailThroughSaia()
+    // .subscribe((data) => {  
+    //   this.parseXML(data)  
+    //     .then((data) => {  
+    //       this.xmlItems = data;  
+    //     });  
+    // });  
+    .subscribe(
       res => {
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'text/xml');
         let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
+        let str = firstEmploye.childNodes[0];
+        console.log(JSON.stringify(str));
+        let arr = JSON.stringify(str).split("");
+        console.log(arr)
         for (let i = 1; i < 4; i++) {
-          let emp = firstEmploye.childNodes[i]
-          // console.log
           console.log(firstEmploye.childNodes[i]);
         }
       },
@@ -120,6 +128,32 @@ export class ProductCheckoutComponent implements OnInit {
         }
       })
   }
+
+  // parseXML(data:any) {  
+  //   return new Promise(resolve => {  
+  //     var k: string | number,  
+  //       arr : any = [],  
+  //       parser = new xml2js.Parser(  
+  //         {  
+  //           trim: true,  
+  //           explicitArray: true  
+  //         });  
+  //     parser.parseString(data, function (err, result) {  
+  //       var obj = result.Employee;  
+  //       for (k in obj.emp) {  
+  //         var item = obj.emp[k];  
+  //         arr.push({  
+  //           id: item.id[0],  
+  //           name: item.name[0],  
+  //           email: item.email[0],  
+            
+  //         });  
+  //       }  
+  //       resolve(arr);  
+  //     });  
+  //   });  
+  // }  
+
   getOrderInfo() {
     this.orderObj = {
       sameAsShip: 0,
