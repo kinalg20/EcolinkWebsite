@@ -109,6 +109,8 @@ export class SignupSigninComponent implements OnInit {
         (res) => {
           console.log(res);
           if (res.code == 200) {
+            this.resSignupMsg = 'Account Created Successfully!';
+            this.resSignupMsgCheck = 'success';
             localStorage.setItem(
               'ecolink_user_credential',
               JSON.stringify(res.data)
@@ -121,10 +123,19 @@ export class SignupSigninComponent implements OnInit {
             localStorage.removeItem('ecolink_user_credential');
           }
         },
-        () => {
+        (error: HttpErrorResponse) => {
+          if (error.error.code == 400) {
+            console.log(error.error.message.mobile)
+            this.resSignupMsg = error.error.message.email ? error.error.message.email : '' + error.error.message.password ? error.error.message.password : '' + error.error.message.mobile ? error.error.message.mobile : '';
+            this.resSignupMsgCheck = 'danger';
+          }
+          // this.resSignupMsg = 'Username Password Incorrect!';
+          // console.log(error.error.code);
           form.reset();
-        }
-      );
+        });
+      () => {
+        form.reset();
+      }
     }
     else {
       this.resSignupMsg = 'Please fill the value';
