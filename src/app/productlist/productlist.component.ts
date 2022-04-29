@@ -83,6 +83,10 @@ export class ProductlistComponent implements OnInit {
       this.view_list = false;
       this.view_card = true;
     }
+    
+    console.log("view_list", this.view_list);
+    console.log("view_card", this.view_card);
+    
   }
 
   selected(event: any) {

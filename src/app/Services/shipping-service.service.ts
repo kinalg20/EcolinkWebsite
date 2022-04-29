@@ -78,24 +78,32 @@ export class ShippingServiceService {
           "LIST",
           "ACCOUNT"
         ],
-        // "customsClearanceDetail": {
-        //   "commodities": [
-        //     {
-        //       "description": "Camera",
-        //       "quantity": 1,
-        //       "quantityUnits": "PCS",
-        //       "weight": {
-        //         "units": "KG",
-        //         "value": 11
-        //       },
-        //       "customsValue": {
-        //         "amount": 100,
-        //         "currency": "SFR"
-        //       }
+        "customsClearanceDetail": {
+          "commodities": [
+            {
+              "description": "Camera",
+              "quantity": 1,
+              "quantityUnits": "PCS",
+              "weight": {
+                "units": "KG",
+                "value": 11
+              },
+              "customsValue": {
+                "amount": 100,
+                "currency": "SFR"
+              }
+            }
+          ]
+        },
+        // "requestedPackageLineItems": [
+        //   {
+        //     "groupPackageCount": 3,
+        //     "weight": {
+        //       "units": 'LB',
+        //       "value": 2
         //     }
-        //   ]
-        // },
-        "requestedPackageLineItems": this.requestedPackage
+        //   }
+        // ]
       }
     }
 
@@ -116,26 +124,13 @@ export class ShippingServiceService {
         <BillingTerms>Prepaid</BillingTerms>
         <AccountNumber>0747932</AccountNumber>
         <Application>Outbound</Application>
-        <OriginCity></OriginCity>
-        <OriginState></OriginState>
-        <OriginZipcode></OriginZipcode>
         <DestinationCity>Ridgeview</DestinationCity>
         <DestinationState>SD</DestinationState>
         <DestinationZipcode>57652</DestinationZipcode>
         <WeightUnits>KGS</WeightUnits>
         <Details>
           <DetailItem>
-            <Width>20.00</Width>
-            <Length>20.00</Length>
-            <Height>20.00</Height>
-            <Weight>20</Weight>
-            <Class>50</Class>
-          </DetailItem>
-          <DetailItem>
-            <Width>20.00</Width>
-            <Length>20.00</Length>
-            <Height>20.00</Height>
-            <Weight>20</Weight>
+            <Weight>100</Weight>
             <Class>50</Class>
           </DetailItem>
         </Details>

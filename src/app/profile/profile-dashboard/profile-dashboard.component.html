@@ -1,45 +1,57 @@
 <div class="dashboard-section" *ngIf="showdesc == 'Dashboard'">
     <h2>Dashboard</h2>
     <div class="profile-card">
-        <div class="row" *ngFor="let item of userDetail">
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                <div class="card profile-section">
-                    <div class="profile-image">
-                        <img src="https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png" alt="">
-                    </div>
-                    <div class="profile-desc">
-                        <div class="profile-detail my-3">
-                            <h4>{{item.name}}</h4>
-                            <p class="m-0 p-0">{{item.email}}</p>
+        <ng-container *ngIf="shimmerLoad">
+            <div class="row">
+                <div class="col-6 mt-3">
+                    <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+                </div>
+                <div class="col-6 mt-3">
+                    <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngIf="!shimmerLoad">
+            <div class="row" *ngFor="let item of userDetail">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="card profile-section">
+                        <div class="profile-image">
+                            <img src="https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png" alt="">
                         </div>
+                        <div class="profile-desc">
+                            <div class="profile-detail my-3">
+                                <h4>{{item.name}}</h4>
+                                <p class="m-0 p-0">{{item.email}}</p>
+                            </div>
 
-                        <div class="edit-profile-button my-2">
-                            <button (click)="changeTab()">Edit Profile</button>
+                            <div class="edit-profile-button my-2">
+                                <button (click)="changeTab()">Edit Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <div class="card address-section">
+                        <div class="customer_name my-3">
+                            <h4>Add Address</h4>
+                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                class="pi pi-plus">
+                            </i>
+                        </div>
+                        <div class="default-Address">
+                            {{item.address}}, {{item.city}} <br>{{item.state}}, {{item.country}}, {{item.pincode}}
+                        </div>
+                        <span class="address-label"> Phone Number </span>
+                        <span>{{item.mobile}}</span>
+                        <span class="address-label">Email Address</span>
+                        <span>{{item.email}}</span>
+                        <div class="edit-Address-button my-2">
+                            <button (click)="changeTab()">Edit Address</button>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6 col-12">
-                <div class="card address-section">
-                    <div class="customer_name my-3">
-                        <h4>Add Address</h4>
-                        <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                            class="pi pi-plus">
-                        </i>
-                    </div>
-                    <div class="default-Address">
-                        {{item.address}}, {{item.city}} <br>{{item.state}}, {{item.country}}, {{item.pincode}}
-                    </div>
-                    <span class="address-label"> Phone Number </span>
-                    <span>{{item.mobile}}</span>
-                    <span class="address-label">Email Address</span>
-                    <span>{{item.email}}</span>
-                    <div class="edit-Address-button my-2">
-                        <button (click)="changeTab()">Edit Address</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </ng-container>
     </div>
 </div>
 <div class="Edit-Profile-section" *ngIf="showdesc == 'Edit Profile'">
@@ -389,12 +401,13 @@
             <div class="modal-body container">
                 <form #signUpForm="ngForm" (ngSubmit)="addUserAddress(signUpForm)">
                     <ng-container *ngIf="resSignupMsg">
-                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
+                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
+                            #test>
                             {{ resSignupMsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                         </div>
-                        <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
-                            #test>
+                        <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
+                            id="loginAlert" #test>
                             {{ resSignupMsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                         </div>

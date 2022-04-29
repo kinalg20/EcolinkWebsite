@@ -25,20 +25,23 @@ export class ProductWishlistComponent implements OnInit {
   }
 
   getWishlistItems() {
+    this.wishlistShimmer= true;
     this.product = [];
-    this._ApiService.getWishListItem().subscribe(res => {
+    this._ApiService.getWishListItem().subscribe(res => 
+      {
       if (res.code == 200) {
         console.log(res);
         this.product.push(res.data);
         this.wishlistShimmer = false;
       }
-      (error: HttpErrorResponse) => {
-        if (error.error.code == 400) {
-          this.product = [];
-          this.wishlistShimmer = false;
-        }
-        console.log(error.error.code);
+    },
+    (error: HttpErrorResponse) => {
+      if (error.error.code == 400) {
+        console.log("400");
+        this.product = [];
+        this.wishlistShimmer = false;
       }
+      console.log(error.error.code);
     })
   }
 

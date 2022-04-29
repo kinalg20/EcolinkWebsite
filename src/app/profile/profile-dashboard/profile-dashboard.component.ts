@@ -14,6 +14,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProfileDashboardComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   resSignupMsg: string = '';
+  shimmerLoad:boolean= true;
+  tabCheck:boolean=true
   profileAddress: any = [];
   addORedit: boolean = false;
   userObj: any;
@@ -37,6 +39,7 @@ export class ProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
+      this.shimmerLoad=false;
       this.userDetail.map((res: any) => {
         setTimeout(() => {
           res.firstname = res.name.split(" ")[0]
@@ -300,6 +303,7 @@ export class ProfileDashboardComponent implements OnInit {
     this.scroller.scrollToAnchor("backToTop");
   }
   changeTab() {
+    this.tabCheck=false;
     this.showdesc = 'Edit Profile';
   }
   showDeatils(i: any) {
