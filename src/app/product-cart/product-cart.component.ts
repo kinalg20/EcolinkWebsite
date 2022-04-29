@@ -130,6 +130,7 @@ export class ProductCartComponent implements OnInit {
   }
 
   deleteItemFromCart(product: any, product_quantity: any) {
+    this.CartShimmer = true;
     if (this.UserLogin != null) {
       this._ApiService.deleteItemFromCart(product).subscribe(res => console.log(res));
       setTimeout(() => {

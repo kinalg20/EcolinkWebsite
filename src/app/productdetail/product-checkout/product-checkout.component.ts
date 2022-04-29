@@ -96,56 +96,24 @@ export class ProductCheckoutComponent implements OnInit {
 
   saiaValues: any = {}
   getShippingInfo() {
-    this._ShippingApi.rateDetailThroughSaia()
-      // .subscribe((data) => {  
-      //   this.parseXML(data)  
-      //     .then((data) => {  
-      //       this.xmlItems = data;  
-      //     });  
-      // });  
-      .subscribe(
-        (res: any) => {
-          var parser = new DOMParser();
-          let xmlDoc = parser.parseFromString(res, 'application/xml');
-          let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
-          for (let i = 1; i < 4; i++) {
-            let x = xmlDoc.getElementsByTagName(firstEmploye.childNodes[i].nodeName)[0];
-            console.log("x", x.childNodes[0].nodeValue);
-            this.saiaValues.firstEmploye.childNodes[i].nodeName = x.childNodes[0].nodeValue;
-          }
-          
-        },
-        (error: HttpErrorResponse) => {
-          if (true) {
-            console.log(error.error);
-          }
-        })
+    this._ShippingApi.rateDetailThroughSaia().subscribe(
+      (res: any) => {
+        var parser = new DOMParser();
+        let xmlDoc = parser.parseFromString(res, 'application/xml');
+        let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
+        for (let i = 0; i < 4; i++) {
+          let x = xmlDoc.getElementsByTagName(firstEmploye.childNodes[i].nodeName)[0];
+          console.log("x", firstEmploye.childNodes[i].nodeName, x.childNodes[0].nodeValue);
+          this.saiaValues[firstEmploye.childNodes[i].nodeName] = x.childNodes[0].nodeValue
+        }
+        console.log(this.saiaValues);
+      },
+      (error: HttpErrorResponse) => {
+        if (true) {
+          console.log(error.error);
+        }
+      })
   }
-
-  // parseXML(data:any) {  
-  //   return new Promise(resolve => {  
-  //     var k: string | number,  
-  //       arr : any = [],  
-  //       parser = new xml2js.Parser(  
-  //         {  
-  //           trim: true,  
-  //           explicitArray: true  
-  //         });  
-  //     parser.parseString(data, function (err, result) {  
-  //       var obj = result.Employee;  
-  //       for (k in obj.emp) {  
-  //         var item = obj.emp[k];  
-  //         arr.push({  
-  //           id: item.id[0],  
-  //           name: item.name[0],  
-  //           email: item.email[0],  
-
-  //         });  
-  //       }  
-  //       resolve(arr);  
-  //     });  
-  //   });  
-  // }  
 
   getOrderInfo() {
     this.orderObj = {
