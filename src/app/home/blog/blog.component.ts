@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class BlogComponent implements OnInit {
  slug:any;
  getBlog:any=[];
-  constructor(private route: ActivatedRoute, public __apiService : ApiServiceService) { }
+  constructor(private route: ActivatedRoute, public __apiService : ApiServiceService , private router : Router) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
@@ -24,5 +24,10 @@ export class BlogComponent implements OnInit {
         console.log(this.getBlog);
       }, 500);
     })
+  }
+  routeOnSamePage(slug: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/' + slug]);
   }
 }

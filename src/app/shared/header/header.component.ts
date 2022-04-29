@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
   @Select(FetchedHeaderState.getFetchedHeader) headerMenu$!: Observable<any>;
   @Select(FetchedHeaderState.getFetchedHeaderLoad) headerMenuDataLoaded$!: Observable<boolean>;
 
-  constructor(private route: Router, private __apiservice: ApiServiceService , private store : Store) { }
+  constructor(private route: Router, private __apiservice: ApiServiceService, private store: Store, private router: Router) { }
   routes: any = [
     {
       "id": "1",
@@ -75,7 +75,7 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-    
+
     setTimeout(() => {
       console.log("this.homePageData", this.homePageData);
     }, 1000);
@@ -124,6 +124,21 @@ export class HeaderComponent implements OnInit {
         this.store.dispatch(new HeaderMenuAction());
       }
     })
+  }
+
+  routeOnSamePage(slug: any, sublink?: any , subsublink?: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    if(subsublink){
+      this.router.navigate(['/' + slug + '/' + sublink + '/' + subsublink]);
+    }
+    else if (sublink) {
+      this.router.navigate(['/' + slug + '/' + sublink]);
+    }
+
+    else {
+      this.router.navigate(['/' + slug]);
+    }
   }
 
   ngOnDestroy(): void {

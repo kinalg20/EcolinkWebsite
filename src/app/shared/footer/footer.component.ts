@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class FooterComponent implements OnInit {
   newsletter_email:any;
-  constructor(private _ApiService : ApiServiceService) { }
+  constructor(private _ApiService : ApiServiceService , private router : Router) { }
 
   ngOnInit(): void {
   }
@@ -18,5 +19,11 @@ export class FooterComponent implements OnInit {
     this._ApiService.newLatter(endpoint , this.newsletter_email).subscribe(res=>{
       console.log(res);
     })
+  }
+
+  routeOnSamePage(slug: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/' + slug]);
   }
 }

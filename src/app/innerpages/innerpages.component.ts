@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -11,8 +11,8 @@ export class InnerpagesComponent implements OnInit {
 
   slug: any;
   data: any = []
-  innershimmerLoad : boolean = true;
-  constructor(private route: ActivatedRoute, public _apiService: ApiServiceService) { }
+  innershimmerLoad: boolean = true;
+  constructor(private route: ActivatedRoute, public _apiService: ApiServiceService, private router: Router) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
@@ -73,5 +73,11 @@ export class InnerpagesComponent implements OnInit {
       content: "Ecolink is especially proud of our work with the global mining sector"
     }
   ]
+
+  routeOnSamePage(slug: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/' + slug]);
+  }
 
 }

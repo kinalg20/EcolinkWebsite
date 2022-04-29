@@ -5,10 +5,10 @@
                 <h4>Didn't find what you were looking for?</h4>
                 <div class="footer-button-div">
                     <button class="footer-button">
-                        <a href="contact/ask-the-chemist">Ask The Chemist</a>
+                        <a (click)="routeOnSamePage('contact/ask-the-chemist')">Ask The Chemist</a>
                     </button>
                     <button class="footer-button">
-                        <a  href="shop">Shop Chemicals</a>
+                        <a (click)="routeOnSamePage('shop')">Shop Chemicals</a>
                     </button>
                 </div>
             </div>
@@ -29,7 +29,7 @@
                             [(ngModel)]="newsletter_email">
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">
-                                <a href="#" (click)="subscribe()" class="text-white">Stay
+                                <a (click)="subscribe()" class="text-white">Stay
                                     Informed
                                 </a>
                             </span>
@@ -38,12 +38,6 @@
                 </div>
             </div>
             <div class="footer-grid">
-                <!-- <div class="responsive-footer-heading">
-                    <h5>ECOLINK</h5>
-                    <div class="footer-image">
-                        <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-33.png" alt="">
-                    </div>
-                </div> -->
                 <div class="footer-contact">
                     <h5>Contact us</h5>
                     <p>PO Box 9 Tucker, GA 30085</p>
@@ -75,21 +69,6 @@
                     <p>Terms & Conditions</p>
                 </div>
             </div>
-            <!-- <div class="bottom-search">
-                <div class="search-bar">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text" id="basic-addon1">
-                                <a href="#" (click)="subscribe()" class="text-white">Stay
-                                    Informed
-                                </a>
-                            </span>
-                        </div>
-                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
-                            [(ngModel)]="newsletter_email">
-                    </div>
-                </div>
-            </div> -->
         </div>
     </section>
     <section class="media-links">

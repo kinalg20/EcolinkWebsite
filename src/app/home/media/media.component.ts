@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class MediaComponent implements OnInit {
   getAllBlog:any=[];
-  constructor(private __apiservice:ApiServiceService) { }
+  constructor(private __apiservice:ApiServiceService , private router : Router) { }
 
   ngOnInit(): void {
     this.__apiservice.getAllBlogs().subscribe(res=> {
@@ -37,21 +38,9 @@ export class MediaComponent implements OnInit {
     }
   ];
 
-  // data_array:any=[
-  //   {
-  //     img:"../../../assets/media.png",
-  //     heading:"Laura Augustine Spotlight",
-  //     card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
-  //   },
-  //   {
-  //     img:"../../../assets/media.png",
-  //     heading:"Laura Augustine Spotlight",
-  //     card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
-  //   },
-  //   {
-  //     img:"../../../assets/media.png",
-  //     heading:"Laura Augustine Spotlight",
-  //     card_text:"Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt exercitationem similique tempora, eaque animi, quasi cupiditate pariatur cumque explicabo maiores vitae ipsum in alias culpa sunt veniam! Tenetur, dolorum repellat"
-  //   }
-  // ];
+  routeOnSamePage(slug: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/' + slug]);
+  }
 }
