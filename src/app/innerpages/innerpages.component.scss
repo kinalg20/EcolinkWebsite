@@ -168,6 +168,23 @@
     }
 }
 ::ng-deep {
+        .inner-pages {
+            .list-heading {
+                .shimmer-loading .ngx-shimmer {
+                    height: 50px !important;
+                } 
+            }
+            .page-desc {
+                .shimmer-loading .ngx-shimmer {
+                    height: 500px !important;
+                } 
+            }
+            .inner_sidebar {
+                .shimmer-loading .ngx-shimmer {
+                    height: 500px !important;
+                } 
+            }
+        }
     .post-entry {
         width: -webkit-fill-available !important;
     }

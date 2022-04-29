@@ -1,6 +1,25 @@
 <app-header></app-header>
 <section class="inner-pages">
-    <div class="container">
+     <!-- shimmer -->
+    <div class="container" *ngIf="innershimmerLoad">
+        <div class="list-heading"> 
+            <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="row">
+            <div class="col-8">
+                <div class="page-desc">
+                    <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="inner_sidebar extralight-border">
+                    <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Falseshimmer -->
+    <div class="container" *ngIf="!innershimmerLoad">
         <div class="list-heading">
             <span><a href="">Home</a></span>
             <span><a *ngIf="this.slug.slug">/{{this.slug.slug | titlecase}}</a></span>

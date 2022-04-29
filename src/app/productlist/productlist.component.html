@@ -1,5 +1,6 @@
 <app-header></app-header>
 <div class="container">
+    <!-- shimmer -->
     <div class="listing-section" *ngIf="shimmerLoad">
         <div class="card-page">
             <div class="list-header">
@@ -51,16 +52,8 @@
                 <div class="product-listing"></div>
             </div>
         </div>
-    </div>
-
-
-
-
-
-
-
-
-    <div class="listing-section" *ngIf="!shimmerLoad">
+        <!-- Falseshimmer -->
+    </div> <div class="listing-section" *ngIf="!shimmerLoad">
         <ng-container *ngIf="ProductListData.length > 0">
             <div class="card-page" *ngFor="let listdata of ProductListData">
                 <div class="list-header">

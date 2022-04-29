@@ -256,6 +256,10 @@
         text-decoration-color: #d7d1d1;
       }
     }
+    .fa-shopping-cart {
+      font-size: 24px;
+      cursor: pointer;
+    }
   }
 }
 
@@ -442,6 +446,9 @@
   .location-head {
     .container {
       max-width: 765px;
+      .fa-shopping-cart {
+        font-size: 20px;
+      }
     }
   }
 }

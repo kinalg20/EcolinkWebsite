@@ -11,6 +11,7 @@ export class InnerpagesComponent implements OnInit {
 
   slug: any;
   data: any = []
+  innershimmerLoad : boolean = true;
   constructor(private route: ActivatedRoute, public _apiService: ApiServiceService) { }
 
   ngOnInit(): void {
@@ -20,12 +21,15 @@ export class InnerpagesComponent implements OnInit {
       this._apiService.getPageBySlug(this.slug.subsubsubsublink).subscribe((res: any) => {
         this.data = res.data;
         console.log("inner-page route", res);
+        this.innershimmerLoad = false;
+
       })
     }
     if (this.slug.subsubsublink) {
       this._apiService.getPageBySlug(this.slug.subsubsublink).subscribe((res: any) => {
         this.data = res.data;
         console.log("inner-page route", res);
+        this.innershimmerLoad = false;
       })
     }
     else if (this.slug.subsublink) {
@@ -33,18 +37,21 @@ export class InnerpagesComponent implements OnInit {
       this._apiService.getPageBySlug(this.slug.subsublink).subscribe((res: any) => {
         this.data = res.data;
         console.log("inner-page route", res);
+        this.innershimmerLoad = false;
       })
     }
     else if (this.slug.sublink) {
       this._apiService.getPageBySlug(this.slug.sublink).subscribe((res: any) => {
         this.data = res.data;
         console.log("inner-page route", res);
+        this.innershimmerLoad = false;
       })
     }
     else if (this.slug.slug) {
       this._apiService.getPageBySlug(this.slug.slug).subscribe((res: any) => {
         this.data = res.data;
         console.log("inner-page route", res);
+        this.innershimmerLoad = false;
       })
     }
     // else{
