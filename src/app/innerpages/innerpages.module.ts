@@ -6,6 +6,7 @@ import { InnerpagesComponent } from './innerpages.component';
 import { SharedModule } from '../shared/shared.module';
 import { HomeModule } from '../home/home.module';
 import { ProductdetailModule } from '../productdetail/productdetail.module';
+import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ProductdetailModule } from '../productdetail/productdetail.module';
     SharedModule,
     CommonModule,
     InnerpagesRoutingModule,
+    SharelibraryModule
     
   ]
 })
