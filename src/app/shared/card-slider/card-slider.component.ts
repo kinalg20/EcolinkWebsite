@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-card-slider',
@@ -6,19 +7,18 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./card-slider.component.scss']
 })
 export class CardSliderComponent implements OnInit {
-  @Input() recommended_products : any;
-  @Input() category : any;
-  recommended_shimmer_load : boolean = true;
-  constructor() { }
+  @Input() recommended_products: any;
+  @Input() category: any;
+  recommended_shimmer_load: boolean = true;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     console.log(this.category);
-    if(this.recommended_products.length>0){
+    if (this.recommended_products.length > 0) {
       this.recommended_shimmer_load = false;
     }
     // console.log(this.recommended_products);
   }
-
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -74,5 +74,11 @@ export class CardSliderComponent implements OnInit {
       price: "$448"
     }
   ]
+
+  routeOnSamePage(slug: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/shop/' + this.category + '/' + slug]);
+  }
 
 }
