@@ -21,16 +21,21 @@
             <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <li class="nav-item" *ngFor="let item of homePageData">
-                        <a href="{{item.slug}}">{{item.title | uppercase}}</a>
+                        <a (click)="routeOnSamePage(item.slug)">{{item.title | uppercase}}</a>
                         <ul class="header-dropdown" *ngIf="item.subpage.length>0">
                             <li class="test" *ngFor="let sublink of item.subpage">
-                                <a href="{{item.slug}}/{{sublink.slug}}"><div>{{sublink.title| uppercase}}</div></a>
+                                <a (click)="routeOnSamePage(item.slug,sublink.slug)">
+                                    <div>{{sublink.title| uppercase}}</div>
+                                </a>
                                 <ul *ngIf="sublink.subpage.length>0" class="sub-header-dropdown">
                                     <div class="subsublink">
                                         <ng-container *ngFor="let subsublink of sublink.subpage">
                                             <li class="test1">
-                                                <a href="{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}"><div>{{subsublink.title|
-                                                    uppercase}}</div></a>
+                                                <a
+                                                    (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">
+                                                    <div>{{subsublink.title|
+                                                        uppercase}}</div>
+                                                </a>
                                             </li>
                                         </ng-container>
                                     </div>
@@ -40,7 +45,7 @@
                     </li>
                     <li class="nav-item"><a (click)="profile()" style="cursor: pointer; color: #fff;"><i
                                 class="fa fa-user" aria-hidden="true"></i></a></li>
-                    
+
                 </ul>
             </div>
         </div>
@@ -53,11 +58,11 @@
                 <i class="fa fa-map-pin"></i>
             </div>
             <div class="address">
-                <a href="#">Decatur 30030</a>
+                <a >Decatur 30030</a>
             </div>
         </div>
         <div class="chat-section">
-            <a href="#">Speak with our team to find the right prodcut for you!</a>
+            <a>Speak with our team to find the right prodcut for you!</a>
         </div>
         <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal"
             data-target="#exampleModalCenter">
@@ -118,12 +123,12 @@
             <div class="open-menu-responsive" *ngIf="openSubmenu">
                 <ul class="sub-link-responsive" *ngIf="item.subpage">
                     <li class="sub-link" *ngFor="let sublink of item.subpage">
-                        <a href="inner-pages/{{item.slug}}/{{sublink.slug}}">{{sublink.title| uppercase}}</a>
+                        <a (click)="routeOnSamePage(item.slug , sublink.slug)">{{sublink.title| uppercase}}</a>
                         <ul *ngIf="sublink.subpage.length>0" class="sub-sub-link">
                             <div class="sub-sub-link-responsive">
                                 <ng-container *ngFor="let subsublink of sublink.subpage">
                                     <li class="sub-sub-link-title">
-                                        <a href="inner-pages/{{item.slug}}/{{sublink.slug}}/{{subsublink.slug}}">{{subsublink.title|
+                                        <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
                                             uppercase}}</a>
                                     </li>
                                 </ng-container>
