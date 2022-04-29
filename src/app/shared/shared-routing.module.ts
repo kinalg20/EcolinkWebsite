@@ -20,7 +20,8 @@ const routes: Routes = [
   { path: 'failure', component: OrderFailComponent },
   { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
   // { path : 'info/:slug', component: BlogComponent},
-  { path: '404', component: PageNotFoundComponent },
+  // { path: 'not-found', component: PageNotFoundComponent, pathMatch: 'full', },
+  // { path: '**', redirectTo: '/not-found' },
   { path: 'shops', component: GSAProductComponent }
 ];
 
