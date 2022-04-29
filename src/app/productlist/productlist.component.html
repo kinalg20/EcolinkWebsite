@@ -278,10 +278,10 @@
                             <ng-container *ngFor="let product of listdata.data.products">
                                 <div class="card" style="cursor: pointer;">
                                     <div class="card-image">
-                                        <img src="https://ecolink.com/wp-content/uploads/2020/05/aerosol-contact-cleaner-ecc-a-13oz-aerosol1-450x450.jpg"
+                                        <img [src]="product.image"
                                             alt="">
                                         <span><i class="pi pi-heart" aria-hidden="true" title="Wishlist"
-                                                style="color: white;" (click)="addWishList(product.id)"></i></span>
+                                                style="color: white;" (click)="addWishList(product)"></i></span>
                                     </div>
                                     <div class="card-desc">
                                         <div class="card-title">

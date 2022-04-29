@@ -17,7 +17,7 @@ export class ProductCheckoutComponent implements OnInit {
   userObj: any;
   discountCheck: boolean = true;
   couponCheck: boolean = false;
-  couponDiscount:any=0;
+  couponDiscount: any = 0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
@@ -54,8 +54,9 @@ export class ProductCheckoutComponent implements OnInit {
     }
     this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
       this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
-        console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
-        this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
+        console.log(resp);
+        // console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+        // this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
 
@@ -93,32 +94,32 @@ export class ProductCheckoutComponent implements OnInit {
     })
   }
 
+  saiaValues: any = {}
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia()
-    // .subscribe((data) => {  
-    //   this.parseXML(data)  
-    //     .then((data) => {  
-    //       this.xmlItems = data;  
-    //     });  
-    // });  
-    .subscribe(
-      (res:any) => {
-        var parser = new DOMParser();
-        let xmlDoc = parser.parseFromString(res, 'text/xml');
-        let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
-        let str = firstEmploye.childNodes[0];
-        console.log(JSON.stringify(str));
-        let arr = JSON.stringify(str).split("");
-        console.log(arr)
-        for (let i = 1; i < 4; i++) {
-          console.log(firstEmploye.childNodes[i]);
-        }
-      },
-      (error: HttpErrorResponse) => {
-        if (true) {
-          console.log(error.error);
-        }
-      })
+      // .subscribe((data) => {  
+      //   this.parseXML(data)  
+      //     .then((data) => {  
+      //       this.xmlItems = data;  
+      //     });  
+      // });  
+      .subscribe(
+        (res: any) => {
+          var parser = new DOMParser();
+          let xmlDoc = parser.parseFromString(res, 'application/xml');
+          let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
+          for (let i = 1; i < 4; i++) {
+            let x = xmlDoc.getElementsByTagName(firstEmploye.childNodes[i].nodeName)[0];
+            console.log("x", x.childNodes[0].nodeValue);
+            this.saiaValues.firstEmploye.childNodes[i].nodeName = x.childNodes[0].nodeValue;
+          }
+          
+        },
+        (error: HttpErrorResponse) => {
+          if (true) {
+            console.log(error.error);
+          }
+        })
   }
 
   // parseXML(data:any) {  
@@ -138,7 +139,7 @@ export class ProductCheckoutComponent implements OnInit {
   //           id: item.id[0],  
   //           name: item.name[0],  
   //           email: item.email[0],  
-            
+
   //         });  
   //       }  
   //       resolve(arr);  
@@ -312,10 +313,10 @@ export class ProductCheckoutComponent implements OnInit {
   couponButton() {
     this.discountCheck = false;
     this.couponCheck = true;
-    this.CheckoutProduct.map((res:any)=> {
+    this.CheckoutProduct.map((res: any) => {
       console.log(res);
-      res.carts.map((response:any)=> {
-        this.couponDiscount+=response.product.coupon_discount
+      res.carts.map((response: any) => {
+        this.couponDiscount += response.product.coupon_discount
         console.log(this.couponDiscount)
       })
     })

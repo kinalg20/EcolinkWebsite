@@ -78,24 +78,32 @@ export class ShippingServiceService {
           "LIST",
           "ACCOUNT"
         ],
-        // "customsClearanceDetail": {
-        //   "commodities": [
-        //     {
-        //       "description": "Camera",
-        //       "quantity": 1,
-        //       "quantityUnits": "PCS",
-        //       "weight": {
-        //         "units": "KG",
-        //         "value": 11
-        //       },
-        //       "customsValue": {
-        //         "amount": 100,
-        //         "currency": "SFR"
-        //       }
+        "customsClearanceDetail": {
+          "commodities": [
+            {
+              "description": "Camera",
+              "quantity": 1,
+              "quantityUnits": "PCS",
+              "weight": {
+                "units": "KG",
+                "value": 11
+              },
+              "customsValue": {
+                "amount": 100,
+                "currency": "SFR"
+              }
+            }
+          ]
+        },
+        // "requestedPackageLineItems": [
+        //   {
+        //     "groupPackageCount": 3,
+        //     "weight": {
+        //       "units": 'LB',
+        //       "value": 2
         //     }
-        //   ]
-        // },
-        "requestedPackageLineItems": this.requestedPackage
+        //   }
+        // ]
       }
     }
 
