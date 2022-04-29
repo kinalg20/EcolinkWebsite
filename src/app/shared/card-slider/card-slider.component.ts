@@ -75,10 +75,10 @@ export class CardSliderComponent implements OnInit {
     }
   ]
 
-  // routeOnSamePage(slug: any) {
-  //   this.router.navigateByUrl('/shop/' + this.category + '/' + slug, { skipLocationChange: true }).then(() => {
-  //     this.router.navigate(['/shop/' + this.category + '/' + slug]);
-  //   });
-  // }
+  routeOnSamePage(slug: any) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/shop/' + this.category + '/' + slug]);
+  }
 
 }
