@@ -18,6 +18,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class ForgotPasswordComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   resSignupMsg: string = '';
+  resetMsg: string = '';
   invalidEmail: boolean = false;
   invalidUserEmail: string = '';
   password: string = '';
@@ -50,10 +51,23 @@ export class ForgotPasswordComponent implements OnInit {
             console.log(res);
             form.reset();
             this.route.navigateByUrl('/profile/auth')
-          })
+          },
+            (error: HttpErrorResponse) => {
+              if (error.error.code = 500) {
+                this.resSignupMsg = 'Invalid Email!'
+                this.resSignupMsgCheck = "danger"
+                form.reset();
+              }
+              // else {
+              //   this.resetMsg = 'Password Reset Successfully!'
+              //   this.resSignupMsgCheck = "success"
+              // }
+            }
+          )
       }
       else {
-        this.resSignupMsg = 'Please fill the value !'
+        this.resSignupMsg = "Please Fill The Value!"
+        this.resSignupMsgCheck = "danger"
       }
     }
     else {
@@ -82,9 +96,9 @@ export class ForgotPasswordComponent implements OnInit {
               form.reset();
             }
           )
-        // else {
-        //   this.resSignupMsg = 'Please fill the value !'
-        // }
+      }
+      else {
+        this.resSignupMsg = 'Please fill the value !'
       }
     }
   }
@@ -116,7 +130,9 @@ export class ForgotPasswordComponent implements OnInit {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
   }
-  update(){
-    this.resSignupMsg = 'Please Wait For a While...';
+  update() {
+    if(!this.userCheck){
+      this.resSignupMsg = 'Please Wait For a While...';
     }
+  }
 }

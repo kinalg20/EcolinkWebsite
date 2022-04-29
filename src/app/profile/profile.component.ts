@@ -9,23 +9,19 @@ import { ProfileDashboardComponent } from './profile-dashboard/profile-dashboard
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })
-export class ProfileComponent implements OnInit,AfterViewInit {
-  @ViewChild(ProfileDashboardComponent) child!:ProfileDashboardComponent;
+export class ProfileComponent implements OnInit {
   openNav: boolean = false;
   togglebutton: string = 'Dashboard'
   constructor(private route: Router, private __apiservice:ApiServiceService) { }
-  ngAfterViewInit(): void {
-    
-  }
+
 
 
   ngOnInit(): void {
   }
+  event(event:any) {
+    this.togglebutton=event;
+  }
   openNavbar() {
-    if(this.child.tabCheck==false) {
-      this.togglebutton='Edit Profile';
-      this.child.tabCheck=true
-    }
     this.openNav = !this.openNav;
     // this.openNav = true;
   }

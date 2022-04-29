@@ -1,5 +1,5 @@
 import {
-  Component, Input, OnInit, Renderer2, AfterViewInit, ViewChild, ElementRef
+  Component, Input, OnInit, Renderer2, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { NgForm } from '@angular/forms';
@@ -13,6 +13,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ProfileDashboardComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
+  @Output() itemEvent = new EventEmitter<any>();
   resSignupMsg: string = '';
   shimmerLoad:boolean= true;
   tabCheck:boolean=true
@@ -303,8 +304,7 @@ export class ProfileDashboardComponent implements OnInit {
     this.scroller.scrollToAnchor("backToTop");
   }
   changeTab() {
-    this.tabCheck=false;
-    this.showdesc = 'Edit Profile';
+    this.itemEvent.emit('Edit Profile')
   }
   showDeatils(i: any) {
     this.orderHistoryDesc = [];
