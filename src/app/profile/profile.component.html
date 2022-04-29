@@ -43,7 +43,7 @@
                 </div>
             </nav>
             <div class="profile-sidebar-desc">
-                <app-profile-dashboard [showdesc]="togglebutton"></app-profile-dashboard>
+                <app-profile-dashboard [showdesc]="togglebutton" (itemEvent)="event($event)"></app-profile-dashboard>
             </div>
         </div>
     </div>
