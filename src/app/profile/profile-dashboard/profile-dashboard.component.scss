@@ -772,3 +772,9 @@
         }
     }
 }
+
+::ng-deep {
+    .ngx-shimmer {
+        height: 200px!important;
+    }
+}
