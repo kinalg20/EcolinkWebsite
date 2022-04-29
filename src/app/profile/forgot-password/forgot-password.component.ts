@@ -1,4 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import {
+  Component,
+  Renderer2,
+  AfterViewInit,
+  ViewChild,
+  ElementRef, OnInit
+} from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
@@ -9,58 +16,75 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./forgot-password.component.scss']
 })
 export class ForgotPasswordComponent implements OnInit {
+  @ViewChild('test') test: ElementRef | any;
   resSignupMsg: string = '';
   invalidEmail: boolean = false;
-  invalidUserEmail: string = ''; 
+  invalidUserEmail: string = '';
   password: string = '';
   confirmPassword: string = '';
-  userObj:any;
-  userCheck:boolean=false;
-  params:any;
-
-  constructor(private __apiservice : ApiServiceService, private route:Router, private router:ActivatedRoute) { }
+  userObj: any;
+  userCheck: boolean = false;
+  params: any;
+  resSignupMsgCheck: string = ' ';
+  constructor(private __apiservice: ApiServiceService, private renderer: Renderer2, private route: Router, private router: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.params=this.router.snapshot.params;
+    this.params = this.router.snapshot.params;
     console.log(this.params.params);
-    if(this.params.params) {
-      this.userCheck=true;
-    }    
+    if (this.params.params) {
+      this.userCheck = true;
+    }
   }
-  ForgotPassword(form:NgForm){
-    if(this.userCheck) {
-      if(form.valid) {
+  ForgotPassword(form: NgForm) {
+    if (this.userCheck) {
+      if (form.valid) {
         let data = Object.assign({}, form.value);
         this.userObj = {
           email: data.email,
           password: data.password,
-          password_confirmation:data.confirmPassword,
-          token : this.params.params
+          password_confirmation: data.confirmPassword,
+          token: this.params.params
         }
-        this.__apiservice.forgotPassword(this.userObj).subscribe((res:any) => {
-          console.log(res);
-          form.reset();
-          this.route.navigateByUrl('/profile/auth')
-        })
+        this.__apiservice.forgotPassword(this.userObj).subscribe
+          ((res: any) => {
+            console.log(res);
+            form.reset();
+            this.route.navigateByUrl('/profile/auth')
+          })
       }
       else {
         this.resSignupMsg = 'Please fill the value !'
       }
     }
     else {
-      if(form.valid) {
+      if (form.valid) {
         let data = Object.assign({}, form.value);
         this.userObj = {
           email: data.email
         }
-        this.__apiservice.sendResetMail(this.userObj).subscribe((res:any) => {
-          console.log(res);
-          form.reset();
-          this.resSignupMsg = 'Forgot password email sent successfully!'
-        })
-      }
-      else {
-        this.resSignupMsg = 'Please fill the value !'
+        this.__apiservice.sendResetMail(this.userObj).subscribe
+          ((res: any) => {
+            console.log(res);
+            form.reset();
+            this.resSignupMsg = 'Forgot password email sent successfully!'
+            this.resSignupMsgCheck = 'success'
+          },
+            (error: HttpErrorResponse) => {
+              if (error.error.code = 400) {
+                this.resSignupMsg = 'No User Found associated with this email!'
+                this.resSignupMsgCheck = "danger"
+
+              }
+              else {
+                this.resSignupMsg = "Please Fill The Value!"
+                this.resSignupMsgCheck = "danger"
+              }
+              form.reset();
+            }
+          )
+        // else {
+        //   this.resSignupMsg = 'Please fill the value !'
+        // }
       }
     }
   }
@@ -88,4 +112,11 @@ export class ForgotPasswordComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
+  close() {
+    this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
+    this.resSignupMsg = '';
+  }
+  update(){
+    this.resSignupMsg = 'Please Wait For a While...';
+    }
 }

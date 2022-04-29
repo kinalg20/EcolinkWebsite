@@ -30,22 +30,6 @@
                 font-size: 33px;
             }
         }
-
-        // .product-rating {
-        //     max-width: 100px;
-        //     display: flex;
-        //     justify-content: space-between;
-
-        //     h3 {
-        //         margin: 0;
-        //         font-size: 35px;
-        //     }
-        //     h4{
-        //         font-size: 35px;
-        //         text-decoration:underline
-        //     }
-        // }
-
         .product-rate {
             display: flex;
             justify-content: space-between;
@@ -55,7 +39,7 @@
             h3 {
                 font-size: 35px;
             }
-            
+
             p.sale_price {
                 font-size: 25px;
                 text-decoration: gray line-through;
@@ -161,7 +145,6 @@
                 h6 {
                     margin: 0;
                     padding: 0;
-
                 }
 
                 p {
@@ -206,7 +189,6 @@
                         font-weight: 600;
                     }
                 }
-
             }
         }
     }
@@ -219,9 +201,7 @@
     }
 }
 
-
 ::ng-deep {
-
     .p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link {
         background: #ffffff;
         border-color: var(--primary);

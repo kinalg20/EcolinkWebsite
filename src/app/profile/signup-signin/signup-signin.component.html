@@ -127,7 +127,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button class="form-control">Sign Up</button>
+                        <button class="form-control" (click)="goToTop()">Sign Up</button>
                     </div>
                 </div>
                 <div class="row">
@@ -158,11 +158,6 @@
                     </ng-container> -->
                     <ng-container *ngIf="resSignupMsg">
                         <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
-                            id="loginAlert" #test>
-                            {{ resSignupMsg }}
-                            <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
-                        </div>
-                        <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
                             id="loginAlert" #test>
                             {{ resSignupMsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
@@ -232,7 +227,6 @@
                             </svg>Continue with Google</button>
                     </div> -->
                 </div>
-
             </form>
         </div>
     </div>

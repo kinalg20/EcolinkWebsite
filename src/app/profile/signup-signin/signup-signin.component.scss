@@ -1,5 +1,8 @@
 .authentication {
 	.signup-form {
+		.fa-close:hover {
+			cursor: pointer;
+		}
 		width: 50%;
 		margin: 30px auto;
 		box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;

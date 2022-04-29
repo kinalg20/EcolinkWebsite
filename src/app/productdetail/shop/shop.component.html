@@ -42,7 +42,7 @@
                         </ng-template>
 
                         <ng-container *ngIf="detail.data.product.in_stock==1">
-                            <p>Availability : In Stock</p>
+                            <p>In Stock : {{detail.data.product.stock}}</p>
                         </ng-container>
                         <ng-container *ngIf="detail.data.product.in_stock==0">
                             <p>Availability : Out of Stock</p>
@@ -84,7 +84,8 @@
             <ng-container *ngFor="let detail of productDetail">
                 <p-tabView>
                     <p-tabPanel header="Description" *ngIf="detail.data.product.description.length>0">
-                        <div class="desc" [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
+                        <div class="desc"
+                            [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
                     </p-tabPanel>
                     <p-tabPanel header="Additional Information">
                         <ul>
