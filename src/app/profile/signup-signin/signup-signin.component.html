@@ -12,13 +12,13 @@
                     </div>
                 </ng-container>
                 <ng-container *ngIf="resSignupMsg">
-                    <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
-                        id="loginAlert" #test>
+                    <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
+                        #test>
                         {{ resSignupMsg }}
                         <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
-                    <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
-                        id="loginAlert" #test>
+                    <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
+                        #test>
                         {{ resSignupMsg }}
                         <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
@@ -126,6 +126,26 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-lg-6 col-md-12">
+                        <div>
+                            <label for="photo">Profile photo</label>
+                            <input class="form-control" type="file" id="image" autocomplete="off" name="image" ngModel
+                                required />
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12">
+                        <div>
+                            <label for="taxes">Tax Exemption</label><br>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-6"><input type="radio" id="radio1" name="radio2" value="yes" ngModel
+                                        required /> Yes</div>
+                                <div class="col-6"><input type="radio" id="radio2" name="radio2" value="no" ngModel
+                                        required /> No</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
                     <div class="col-12">
                         <button class="form-control" (click)="goToTop()">Sign Up</button>
                     </div>
@@ -157,8 +177,8 @@
                         </div>
                     </ng-container> -->
                     <ng-container *ngIf="resSignupMsg">
-                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
-                            id="loginAlert" #test>
+                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
+                            #test>
                             {{ resSignupMsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                         </div>
