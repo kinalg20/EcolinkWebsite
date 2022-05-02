@@ -35,7 +35,7 @@ export class BulkPricingComponent implements OnInit {
         last_name: form.value.lastname,
         email: form.value.email,
         type: "bulkpricing",
-        mobile: form.value.phone,
+        phone: form.value.phone,
         address_1: form.value.address,
         country: form.value.country,
         state: form.value.state,

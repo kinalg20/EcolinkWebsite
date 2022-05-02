@@ -48,7 +48,7 @@ export class AskChemistComponent implements OnInit {
         last_name: form.value.lastname,
         email: form.value.email,
         type: "askchemist",
-        mobile: form.value.phonenumber,
+        phone: form.value.phone,
         address_1: form.value.address,
         country: form.value.country,
         state: form.value.state,

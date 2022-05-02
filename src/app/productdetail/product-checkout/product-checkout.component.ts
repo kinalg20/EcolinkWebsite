@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
@@ -12,7 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './product-checkout.component.html',
   styleUrls: ['./product-checkout.component.scss']
 })
-export class ProductCheckoutComponent implements OnInit {
+export class ProductCheckoutComponent implements OnInit,AfterViewInit {
   selectedPaymentMethod: any
   userObj: any;
   discountCheck: boolean = true;
@@ -36,6 +36,9 @@ export class ProductCheckoutComponent implements OnInit {
     private route: Router,
     private _cookies: CookiesService,
     private _ShippingApi: ShippingServiceService) { }
+  ngAfterViewInit(): void {
+    
+  }
 
   ngOnInit(): void {
     this.checkoutProduct();

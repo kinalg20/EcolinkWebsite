@@ -12,6 +12,7 @@ export class ApiServiceService {
   header: any;
   token: any;
   cookiesCheckoutData = new BehaviorSubject<any>([]);
+  cartCount = new BehaviorSubject<any>([]);
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
   getAllBlogs(): Observable<any> {

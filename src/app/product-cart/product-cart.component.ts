@@ -17,7 +17,6 @@ export class ProductCartComponent implements OnInit {
   CartShimmer: boolean = true;
 
   constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig) { }
-
   ngOnInit(): void {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
     setTimeout(() => {
@@ -75,6 +74,7 @@ export class ProductCartComponent implements OnInit {
               this.subtotal();
               console.log(this.CardShow);
               this.CartShimmer = false;
+              this._ApiService.cartCount.next(this.CardShow.length);
             }, 1500);
           }
 

@@ -56,7 +56,11 @@
             .search-bar {
                 display: block;
                 width: 35%;
-
+                .icon-class {
+                    background: transparent;
+                    border: none;
+                    cursor: pointer;
+                }
                 span {
                     background: #2774ba;
                     border: 1px solid #2774ba;

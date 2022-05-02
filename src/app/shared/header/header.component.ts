@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {  Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { FetchedHeaderState } from '../../store/state/header.state';
 import { HeaderMenuAction } from '../../store/actions/header.action';
+import { ProductCartComponent } from 'src/app/product-cart/product-cart.component';
 
 
 @Component({
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   headerMenuData: any;
   isAlive = true;
   user_id: any;
+  cartCount:any;
   openMenu: boolean = false;
   openSubmenu: boolean = false;
   homePageData: any = [];
@@ -75,11 +77,16 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-
     setTimeout(() => {
       console.log("this.homePageData", this.homePageData);
     }, 1000);
-
+    this.cartCountFunction();
+    this.cartCount=this.__apiservice.cartCount;
+  }
+  cartCountFunction() {
+    this.__apiservice.getItemFromCart().subscribe((res:any)=> {
+      this.cartCount=res.data.length;
+    })
   }
   profile() {
     if (localStorage.getItem("ecolink_user_credential") === null) {
@@ -89,7 +96,6 @@ export class HeaderComponent implements OnInit {
       this.route.navigateByUrl('/profile');
     }
   }
-
   openmenu() {
     this.openMenu = !this.openMenu;
   }
@@ -140,7 +146,11 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/' + slug]);
     }
   }
-
+  goToLocation() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/' + 'contact']);
+  }
   ngOnDestroy(): void {
     this.isAlive = false;
     this.headerMenuData.unsubscribe();

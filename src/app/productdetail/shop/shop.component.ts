@@ -12,7 +12,7 @@ export class ShopComponent implements OnInit {
   ItemCount: any;
   stock:any
   slug: any;
-  minimum_qyt:any
+  minimum_qyt:any=1
   cart_obj: any = []
   previousdata: any;
   recommended_products: any = [];

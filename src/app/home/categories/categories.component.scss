@@ -139,6 +139,9 @@
         .container {
             .categories-text {
                 grid-template-columns: 100%;
+                .shop-text {
+                    height: 245px;
+                }
                 .product-category {
                     .categories {
                         grid-template-columns: 100%;
@@ -185,6 +188,10 @@
     .shop-categories {
         .container {
             .categories-text {
+                .shop-text {
+                    display: block;
+                    height: 270px;
+                }
                 .product-category {
                     .categories {
                         .category-card {
