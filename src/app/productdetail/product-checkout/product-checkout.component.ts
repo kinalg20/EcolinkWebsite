@@ -16,6 +16,7 @@ export class ProductCheckoutComponent implements OnInit {
   selectedPaymentMethod: any
   userObj: any;
   discountCheck: boolean = true;
+  disableOrderButton: boolean = true;
   couponCheck: boolean = false;
   couponDiscount: any = 0;
   showDropdowm: boolean = false;
@@ -288,5 +289,8 @@ export class ProductCheckoutComponent implements OnInit {
         console.log(this.couponDiscount)
       })
     })
+  }
+  fillformevent(event: any) {
+    this.disableOrderButton = event;
   }
 }

@@ -59,9 +59,15 @@ export class ProductCartComponent implements OnInit {
         })
       })
       setTimeout(() => {
-        this.CardShow = completedFormat.data;
-        this.subtotal();
-        this.CartShimmer = false;
+        if (completedFormat.data.length > 0) {
+          this.CardShow = completedFormat.data;
+          this.subtotal();
+          this.CartShimmer = false;
+        }
+        else {
+          this.CardShow = [];
+          this.CartShimmer = false;
+        }
       },
         1500);
     }
@@ -80,7 +86,7 @@ export class ProductCartComponent implements OnInit {
 
         },
         (error: HttpErrorResponse) => {
-          if(error.error.code == 400){
+          if (error.error.code == 400) {
             this.CardShow = [];
             this.CartShimmer = false;
           }
@@ -111,9 +117,9 @@ export class ProductCartComponent implements OnInit {
         })
         console.log(saveDataInCookies);
         this._cookies.SaveCartData(saveDataInCookies);
+        this.getCartData();
       }, 1000);
       this.subtotal();
-      this.getCartData();
     }
     else {
       if (action == 'delete' && product_quantity > 1) {
@@ -130,8 +136,8 @@ export class ProductCartComponent implements OnInit {
   }
 
   deleteItemFromCart(product: any, product_quantity: any) {
-    this.CartShimmer = true;
     if (this.UserLogin != null) {
+      this.CartShimmer = true;
       this._ApiService.deleteItemFromCart(product).subscribe(res => console.log(res));
       setTimeout(() => {
         this.getCartData();
