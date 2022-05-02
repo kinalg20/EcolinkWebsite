@@ -32,6 +32,8 @@
             }
             .inner_sidebar {
                 margin-left: 50px;
+                position: sticky;
+                top: 80px;
                 .widget {
                     margin-bottom: 100px;
                     ul {

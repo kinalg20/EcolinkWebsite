@@ -63,7 +63,7 @@
                                 <td>{{product.product.sale_price| currency:'USD'}}</td>
                                 <td>
                                     <div class="quantity">
-                                        <button (click)="Count('decrease', rowIndex)"
+                                        <button
                                             (click)="UpdateCart('delete' , product.product_id , product.quantity )">-</button>
                                             <p>{{product.quantity}}</p>
                                         <button (click)="Count('increase',rowIndex)"
@@ -72,8 +72,8 @@
                                 </td>
                                 <td>
                                     <div class="price-row">
-                                        <span
-                                            class="price__subtotal">${{product.product.sale_price*product.quantity | number : '1.2-2'}}</span>
+                                        <span class="price__subtotal">${{product.product.sale_price*product.quantity |
+                                            number : '1.2-2'}}</span>
                                     </div>
                                 </td>
                                 <td>

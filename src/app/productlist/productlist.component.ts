@@ -23,6 +23,7 @@ export class ProductlistComponent implements OnInit {
   value1: string = '';
   popularity!: popularity[];
   maximum: number = 100;
+  max: number = 100;
   slug: any;
   selectedCategory: any = [];
   selectedRatings: any = [];
@@ -33,6 +34,7 @@ export class ProductlistComponent implements OnInit {
   price_to: any;
   selectedLevel: any = 'default';
   rangeValues: number[] = [0, 100];
+  resetvalues: number[] = [0, 100];
   shimmerLoad : boolean = true;
   @ViewChild('warning') warning: any;
   constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService , private router :Router) {
@@ -120,6 +122,9 @@ export class ProductlistComponent implements OnInit {
         console.log("this.productResponse", this.displayProducts)
         this.ProductListData.push(res);
         this.getPrice();
+        this.resetvalues[0]=this.rangeValues[0];
+        this.resetvalues[1]=this.rangeValues[1];
+        this.max=this.maximum
         this.shimmerLoad = false;
       }
       if (res.code == 400) {
@@ -212,7 +217,11 @@ export class ProductlistComponent implements OnInit {
   }
 
   ClearAll() {
+    console.log(this.rangeValues)
     this.ProductListData[0].data.products = this.displayProducts;
+    this.rangeValues[0]=this.resetvalues[0];
+    this.rangeValues[1]=this.resetvalues[1];
+    this.maximum=this.max;
   }
 
   getkeypressdata() {

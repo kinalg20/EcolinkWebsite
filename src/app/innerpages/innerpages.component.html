@@ -1,8 +1,8 @@
 <app-header></app-header>
 <section class="inner-pages">
-     <!-- shimmer -->
+    <!-- shimmer -->
     <div class="container" *ngIf="innershimmerLoad">
-        <div class="list-heading"> 
+        <div class="list-heading">
             <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
         </div>
         <div class="row">
@@ -18,10 +18,11 @@
             </div>
         </div>
     </div>
-   <!-- Falseshimmer -->
+    <!-- Falseshimmer -->
     <div class="container" *ngIf="!innershimmerLoad">
+        <h5>{{data.title}}</h5>
         <div class="list-heading">
-            <span><a >Home</a></span>
+            <span><a>Home</a></span>
             <span><a *ngIf="this.slug.slug">/{{this.slug.slug | titlecase}}</a></span>
             <span><a *ngIf="this.slug.sublink">/{{this.slug.sublink | titlecase}}</a></span>
             <span><a *ngIf="this.slug.subsublink">/{{this.slug.subsublink | titlecase}}</a></span>
@@ -33,6 +34,7 @@
                 <app-call-to-action [data]=chemist_array></app-call-to-action>
             </section>
             <div class="col-8">
+                
                 <div class="page-desc">
                     <section *ngIf="data.slug=='ask-the-chemist'">
                         <app-ask-chemist></app-ask-chemist>
@@ -66,8 +68,10 @@
                     <section id="text-5" class="widget clearfix widget_text">
                         <div class="textwidget">
                             <p><a class="shopButton2020" routerLink="shop">SHOP</a><br>
-                                <a class="requestButton2020" (click)="routeOnSamePage('contact/request')">REQUEST A SAMPLE</a><br>
-                                <a class="pdsButton2020" (click)="routeOnSamePage('contact/support')">REQUEST PDS / TDS</a><br>
+                                <a class="requestButton2020" (click)="routeOnSamePage('contact/request')">REQUEST A
+                                    SAMPLE</a><br>
+                                <a class="pdsButton2020" (click)="routeOnSamePage('contact/support')">REQUEST PDS /
+                                    TDS</a><br>
                                 <a class="contactButton2020" (click)="routeOnSamePage('contact')">CONTACT US</a>
                             </p>
                         </div>
