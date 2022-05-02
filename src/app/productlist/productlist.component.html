@@ -53,7 +53,8 @@
             </div>
         </div>
         <!-- Falseshimmer -->
-    </div> <div class="listing-section" *ngIf="!shimmerLoad">
+    </div>
+     <div class="listing-section" *ngIf="!shimmerLoad">
         <ng-container *ngIf="ProductListData.length > 0">
             <div class="card-page" *ngFor="let listdata of ProductListData">
                 <div class="list-header">
@@ -204,7 +205,7 @@
                                         <div class="card" style="cursor: pointer;">
                                             <div class="card-image">
                                                 <img [src]="product.image" alt="">
-                                                <span routerLink="/shop/wishlist" (click)="addWishList(product)"><i
+                                                <span  (click)="addWishList(product)"><i
                                                         style="color: white;" class="pi pi-heart" aria-hidden="true"
                                                         title="Wishlist"></i></span>
                                             </div>
