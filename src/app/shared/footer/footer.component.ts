@@ -1,5 +1,6 @@
-import { Component, ElementRef, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, Inject, ViewChild, HostListener } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
@@ -14,8 +15,12 @@ export class FooterComponent implements OnInit {
   resSignupMsgCheck: string = '';
   invalidUserEmail: string = '';
   invalidEmail: boolean = false;
-  constructor(private _ApiService: ApiServiceService, private router: Router,private renderer: Renderer2) { }
-  @ViewChild('close') closer!:ElementRef;
+  windowScrolled!: boolean;
+  isShow: any;
+  topPosToStartShowing = 100;
+
+  constructor(@Inject(DOCUMENT) private document: Document, private _ApiService: ApiServiceService, private router: Router, private renderer: Renderer2) { }
+  @ViewChild('close') closer!: ElementRef;
   ngOnInit(): void {
   }
   validateUserEmail(email: any) {
@@ -53,18 +58,35 @@ export class FooterComponent implements OnInit {
         console.log(res);
         this.resSignupMsg = 'Email Subscribed !'
         this.resSignupMsgCheck = 'success';
-        this.newsletter_email=undefined
+        this.newsletter_email = undefined
       })
     }
   }
   closeButton() {
     this.renderer.setStyle(this.closer.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
-    this.resSignupMsgCheck=''
+    this.resSignupMsgCheck = ''
   }
   routeOnSamePage(slug: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/' + slug]);
+  }
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
+  scrollToTop() {
+    window.scrollTo(0, 0);
   }
 }
