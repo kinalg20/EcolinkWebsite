@@ -30,8 +30,8 @@
                             {{ resSignupMsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
                         </div>
-                        <div *ngIf="resSignupMsgCheck=='success'" class="text-success" role="alert"
-                            id="loginAlert" #close>
+                        <div *ngIf="resSignupMsgCheck=='success'" class="text-success" role="alert" id="loginAlert"
+                            #close>
                             {{ resSignupMsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
                         </div>
@@ -102,4 +102,9 @@
             </div>
         </div>
     </section>
+    <div class="back-to-top" *ngIf="isShow">
+        <button (click)="scrollToTop()">
+            <i class="fa fa-arrow-up" aria-hidden="true"></i> 
+        </button>
+    </div>
 </div>
