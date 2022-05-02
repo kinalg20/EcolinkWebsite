@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from '../Services/api-service.service';
 import { CookiesService } from '../Services/cookies.service';
 interface popularity {
@@ -35,7 +35,7 @@ export class ProductlistComponent implements OnInit {
   rangeValues: number[] = [0, 100];
   shimmerLoad : boolean = true;
   @ViewChild('warning') warning: any;
-  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService) {
+  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService , private router :Router) {
     this.popularity = [
       { name: "Price low to high", slug: "lowtohigh" },
       { name: "Price high to low", slug: "hightolow" },
@@ -169,10 +169,17 @@ export class ProductlistComponent implements OnInit {
   }
 
   addWishList(product: any) {
-    console.log(product.id);
-    this._ApiService.addItemToWishlist(product.id).subscribe(res => {
-      console.log(res);
-    })
+    if(localStorage.getItem('ecolink_user_credential')!=null){
+      console.log(product.id);
+      this._ApiService.addItemToWishlist(product.id).subscribe(res => {
+        console.log(res);
+      })
+      this.router.navigate(['/shop/wishlist'])
+    }
+
+    else{
+      this.router.navigate(['/profile/auth'])
+    }
   }
 
   getDataForFilter() {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
@@ -11,6 +11,7 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 export class BillingFormComponent implements OnInit {
   @Input() CheckoutProduct: any;
   @Input() formShimmer: boolean = true;
+  @Output() FormFillUp = new EventEmitter<boolean>();
   userObj: any;
   resSignupMsg: any;
   password: string = '';
@@ -47,7 +48,6 @@ export class BillingFormComponent implements OnInit {
                 JSON.stringify(res.data)
               );
               this.route.navigateByUrl('/shop/checkout');
-
             }
             else {
               localStorage.removeItem('ecolink_user_credential');
@@ -78,6 +78,7 @@ export class BillingFormComponent implements OnInit {
             }
         })
       })
+      this.FormFillUp.emit(false);
     }, 1000);
   }
 

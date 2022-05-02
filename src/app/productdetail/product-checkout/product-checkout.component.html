@@ -28,7 +28,7 @@
                             </div>
                         </div>
                     </div>
-                    <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer"></app-billing-form>
+                    <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer" (FormFillUp)="fillformevent($event)"></app-billing-form>
                 </div>
             </div>
             <div class="your_order" *ngIf="checkoutShimmer">
@@ -123,7 +123,7 @@
                         <div class="proceed-button">
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
                                 (click)="getOrderInfo()" class="p-button-raised p-button-success"
-                                style="height:45px; width: 100%;" [disabled]="paymentCheck"></button>
+                                style="height:45px; width: 100%;" [disabled]="paymentCheck || disableOrderButton"></button>
                         </div>
                     </div>
                 </div>
