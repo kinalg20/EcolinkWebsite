@@ -23,37 +23,37 @@
                             <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
                                 id="loginAlert" #test>
                                 {{ resSignupMsg }}
-                                <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
+                                <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                             </div>
                             <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
                                 id="loginAlert" #test>
                                 {{ resSignupMsg }}
-                                <span class="icon-class" ><i class="fa fa-close" (click)="close()"></i></span>
+                                <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                             </div>
                         </ng-container>
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="first-name">What item do you wish to clean & what is the surface
-                                    material ?</label>
+                                    material ?*</label>
                                 <input type="text" class="form-control mt-2" id="first-name" name="input1" ngModel
                                     required>
                             </div>
                             <div class="col-12">
                                 <label for="last-name">What kind of soil, grease or coating do you wish to remove
-                                    ?</label>
+                                    ?*</label>
                                 <input type="text" class="form-control mt-2" name="input2" ngModel required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="street-address">How do you currently clean this item ?</label>
+                                <label for="street-address">How do you currently clean this item ?*</label>
                                 <input type="text" class="form-control mt-2" name="input3" ngModel required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="Town-city">What chemicals or products do you currently use and in what
-                                    amounts ?</label>
+                                    amounts ?*</label>
                                 <input type="text" class="form-control mt-2" name="input4" ngModel required>
                             </div>
                         </div>
@@ -86,7 +86,7 @@
                         </li>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="Town-city">Other? Please explain</label>
+                                <label for="Town-city">Other, Please explain?</label>
                                 <input type="text" class="form-control mt-2" name="city1">
                             </div>
                         </div>
@@ -98,7 +98,7 @@
                         </div>
                         <li id="field_5_13" class="">
                             <label class="interested">I'm also interested in learning more
-                                about</label>
+                                about...</label>
                             <div class="container_checkbox">
                                 <ul class="checkbox" id="input_5_13">
                                     <li class="gchoice">
@@ -119,42 +119,50 @@
                         </li>
                         <div class="row mb-3">
                             <div class="col-lg-6 col-12">
-                                <label for="first-name">First Name</label>
+                                <label for="first-name">First Name*</label>
                                 <input type="text" class="form-control mt-2" id="first-name" name="firstname" ngModel
                                     required>
                             </div>
                             <div class="col-lg-6 col-12">
-                                <label for="last-name">Last Name</label>
+                                <label for="last-name">Last Name*</label>
                                 <input type="text" class="form-control mt-2" name="lastname" ngModel required>
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="street-address">Phone</label>
+                            <div class="col-6">
+                                <label for="user-name">Email*</label>
+                                <input type="email" class="form-control mt-2" id="first-name"
+                                    (input)="validateEmail($event)" name="email" ngModel required>
+                                <h6 class="text-danger" *ngIf="invalidEmail">
+                                    {{ invalidEmail ? "Invalid Email" : "" }}
+                                </h6>
+                            </div>
+                            <div class="col-6">
+                                <label for="street-address">Phone*</label>
                                 <input type="text" (input)="validateMobile($event)" maxlength="10"
                                     (keydown)="inputMobile($event)" class="form-control mt-2" name="phone" ngModel
                                     required>
                                 <h6 class="text-danger" *ngIf="invalidMobile">
                                     {{ invalidMobile ? "Invalid Mobile" : "" }}
                                 </h6>
-                            </div>
+                            </div>              
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="street-address">Address</label>
+                                <label for="street-address">Address*</label>
                                 <input type="text" class="form-control mt-2" name="address" ngModel required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="street-address">Street Address</label>
+                                <label for="street-address">Street Address*</label>
                                 <input type="text" class="form-control mt-2" name="address" ngModel required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-12">
-                                <label for="street-address">Address Line 2</label>
-                                <input type="text" class="form-control mt-2" name="address" ngModel required>
+                                <label for="street-address">Address 2</label>
+                                <input type="text" class="form-control mt-2" name="address" ngModel>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -164,31 +172,22 @@
                                     required>
                             </div>
                             <div class="col-lg-6 col-12">
-                                <label for="last-name">State / Province / Region</label>
+                                <label for="last-name">State*</label>
                                 <input type="text" class="form-control mt-2" name="state" ngModel required>
                             </div>
                         </div>
                         <div class="row mb-3">
                             <div class="col-lg-6 col-12">
-                                <label for="user-name">ZIP / Postal Code</label>
+                                <label for="user-name">Postcode*</label>
                                 <input type="text" class="form-control mt-2" id="first-name" name="pincode" ngModel
                                     required>
                             </div>
                             <div class="col-lg-6 col-12">
-                                <label for="last-name">Country</label>
+                                <label for="last-name">Country*</label>
                                 <input type="text" class="form-control mt-2" name="country" ngModel required>
                             </div>
                         </div>
-                        <div class="row mb-3">
-                            <div class="col-12">
-                                <label for="user-name">Email*</label>
-                                <input type="email" class="form-control mt-2" id="first-name"
-                                    (input)="validateEmail($event)" name="email" ngModel required>
-                                <h6 class="text-danger" *ngIf="invalidEmail">
-                                    {{ invalidEmail ? "Invalid Email" : "" }}
-                                </h6>
-                            </div>
-                        </div>
+
                         <button role="button" class="btn-sm submit-btn" (click)="goToTop()">Submit</button>
                     </form>
                 </section>

@@ -21,6 +21,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class SignupSigninComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   userObj: any;
+  taxCalculate:any
   loginobj: any;
   resSignupMsg: string = '';
   password: string = '';
@@ -104,8 +105,10 @@ export class SignupSigninComponent implements OnInit {
         state: data.state,
         city: data.city,
         pincode: data.pincode,
-        profile_image: "https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png"
+        profile_image: data.image,
+        tax_exempt:data.radio2
       };
+      this.taxCalculate=data.radio2
       console.log(this.userObj);
       // this.__apiservice.registerClient(this.userObj).subscribe(
       //   (res) => {

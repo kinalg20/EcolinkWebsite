@@ -15,8 +15,8 @@ export class ProfileDashboardComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   @Output() itemEvent = new EventEmitter<any>();
   resSignupMsg: string = '';
-  shimmerLoad:boolean= true;
-  tabCheck:boolean=true
+  shimmerLoad: boolean = true;
+  tabCheck: boolean = true
   profileAddress: any = [];
   addORedit: boolean = false;
   userObj: any;
@@ -40,7 +40,7 @@ export class ProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
-      this.shimmerLoad=false;
+      this.shimmerLoad = false;
       this.userDetail.map((res: any) => {
         setTimeout(() => {
           res.firstname = res.name.split(" ")[0]
@@ -138,7 +138,9 @@ export class ProfileDashboardComponent implements OnInit {
           this.__apiservice.addUserAddresses(this.userObj).subscribe(
             (res) => {
               console.log(res);
-              window.location.reload();
+              this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+              this.router.onSameUrlNavigation = 'reload';
+              this.router.navigate(['/' + 'profile']);
             },
             () => {
               form.reset();
