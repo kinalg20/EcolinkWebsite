@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { FetchedHeaderState } from '../../store/state/header.state';
 import { HeaderMenuAction } from '../../store/actions/header.action';
 import { ProductCartComponent } from 'src/app/product-cart/product-cart.component';
+import { HttpErrorResponse } from '@angular/common/http';
 
 
 @Component({
@@ -114,11 +115,18 @@ export class HeaderComponent implements OnInit {
   globalSearch() {
     console.log(this.searchItem);
     if (this.searchItem.length > 0) {
-      this.showGlobalSearchSuggestion = true;
-      this.__apiservice.globalSearchData(this.searchItem).subscribe(res => {
+      this.__apiservice.globalSearchData(this.searchItem).subscribe(
+        res => {
+        this.showGlobalSearchSuggestion = true;
         this.suggestionList = res;
-      })
+      },
+      (error: HttpErrorResponse) => {
+        if (error.error.code == 400) {
+          this.showGlobalSearchSuggestion=false;
+        }
     }
+    )
+  }
     else {
       this.showGlobalSearchSuggestion = false;
     }
