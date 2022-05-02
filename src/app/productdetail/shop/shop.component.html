@@ -63,7 +63,7 @@
                         <div class="add-to-cart">
                             <div class="counter">
                                 <button (click)="Count('decrease')">-</button>
-                                <input type="text" pInputText [(ngModel)]="ItemCount" />
+                                <p>{{ItemCount}}</p>
                                 <button (click)="Count('increase')">+</button>
                             </div>
                             <div class="addtocartbutton">
@@ -72,7 +72,7 @@
                                     style="height:38px;"></button>
                             </div>
                         </div>
-                        <div class="wishlist" routerLink="/shop/wishlist">
+                        <div class="wishlist">
                             <span><i class="pi pi-heart" aria-hidden="true" title="Wishlist"
                                     (click)="addWishList(detail.data.product)"></i></span>
                         </div>

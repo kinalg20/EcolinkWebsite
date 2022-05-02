@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 
@@ -37,7 +37,7 @@ export class ShopComponent implements OnInit {
     }
   ];
   productDetail: any = [];
-  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService) { }
+  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router:Router) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
@@ -116,9 +116,17 @@ export class ShopComponent implements OnInit {
   }
 
   addWishList(product: any) {
-    console.log("product_id", product.id);
+    if(localStorage.getItem('ecolink_user_credential')!=null){
+      console.log("product_id", product.id);
     this._ApiService.addItemToWishlist(product.id).subscribe(res => {
       console.log(res);
     })
+      this.router.navigate(['/shop/wishlist'])
+    }
+
+    else{
+      this.router.navigate(['/profile/auth'])
+    }
+    
   }
 }
