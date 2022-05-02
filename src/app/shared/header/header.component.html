@@ -93,7 +93,7 @@
                     <form class="global-search">
                         <div class="input-group mx-auto">
                             <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..."
-                                 (input)="globalSearch()" [(ngModel)]="searchItem"
+                                (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem"
                                 name="search">
                             <span class="input-group-append" autocomplete="off">
                                 <button class="btn btn-success" type="button" style="height: 42px;"
@@ -124,9 +124,11 @@
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData" class="responsive-menu">
         <li class="parent-menu" (click)="openDropDown()">
-            <a (click)="routeOnSamePage(item.slug)">{{item.title| uppercase}}
-                <i *ngIf="item.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
+            <a *ngIf="item.subpage.length==0" (click)="routeOnSamePage(item.slug)">{{item.title| uppercase}}</a>
+            <a *ngIf="item.subpage.length!=0">{{item.title| uppercase}}
+            <i *ngIf="item.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
             </a>
+
             <div class="open-menu-responsive" *ngIf="openSubmenu">
                 <ul class="sub-link-responsive" *ngIf="item.subpage">
                     <li class="sub-link" *ngFor="let sublink of item.subpage">
