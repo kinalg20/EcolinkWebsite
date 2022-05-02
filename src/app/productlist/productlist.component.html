@@ -128,7 +128,7 @@
                                 </div>
                                 <div class="price-slider">
                                     <ng-container *ngIf="rangeValues">
-                                        <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum" [min]="0">
+                                        <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum">
                                         </p-slider>
                                         <div style="
                                               display: flex;
@@ -365,7 +365,7 @@
                 </div>
                 <div class="price-slider">
                     <ng-container *ngIf="rangeValues">
-                        <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum" [min]="0">
+                        <p-slider [(ngModel)]="rangeValues" [range]="true" [max]="maximum">
                         </p-slider>
                         <div style="
                               display: flex;
@@ -387,17 +387,22 @@
                     <div class="p-field-checkbox">
                         <p-checkbox name="group2" value="4 Star" [(ngModel)]="selectedRatings" inputId="4star">
                         </p-checkbox>
-                        <label for="4star" class="mx-2">4Star</label>
+                        <label for="4star" class="mx-2">4★  & above</label>
                     </div>
                     <div class="p-field-checkbox">
                         <p-checkbox name="group2" value="3 Star" [(ngModel)]="selectedRatings" inputId="3star">
                         </p-checkbox>
-                        <label for="3star" class="mx-2">3 Star</label>
+                        <label for="3star" class="mx-2">3★  & above</label>
                     </div>
                     <div class="p-field-checkbox">
                         <p-checkbox name="group2" value="2 Star" [(ngModel)]="selectedRatings" inputId="2star">
                         </p-checkbox>
-                        <label for="2star" class="mx-2">2 Star</label>
+                        <label for="2star" class="mx-2">2★  & above</label>
+                    </div>
+                    <div class="p-field-checkbox">
+                        <p-checkbox name="group2" value="1 Star" [(ngModel)]="selectedRatings" inputId="1star">
+                        </p-checkbox>
+                        <label for="1star" class="mx-2">1★  & above</label>
                     </div>
                 </div>
             </section>

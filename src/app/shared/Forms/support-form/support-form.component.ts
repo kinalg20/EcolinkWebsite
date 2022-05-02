@@ -43,7 +43,7 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
         first_name: form.value.firstname,
         last_name: form.value.lastname,
         email: form.value.email,
-        type: "productrequest",
+        type: "technical",
         phone: form.value.phone,
         address_1: form.value.address,
         country: form.value.country,

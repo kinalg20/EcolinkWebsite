@@ -1,3 +1,4 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from '../Services/api-service.service';
@@ -16,6 +17,7 @@ export class ProductlistComponent implements OnInit {
   suggestions: boolean = true;
   showFiterModel: boolean = false;
   previousdata: any;
+  productCheck:boolean=false;
   ItemCount: any = 1;
   CartObj: any = {};
   view_card: boolean = true;
@@ -33,7 +35,7 @@ export class ProductlistComponent implements OnInit {
   price_from: any;
   price_to: any;
   selectedLevel: any = 'default';
-  rangeValues: number[] = [0, 100];
+  rangeValues: number[] = [0,100];
   resetvalues: number[] = [0, 100];
   shimmerLoad : boolean = true;
   @ViewChild('warning') warning: any;
@@ -122,9 +124,9 @@ export class ProductlistComponent implements OnInit {
         console.log("this.productResponse", this.displayProducts)
         this.ProductListData.push(res);
         this.getPrice();
-        this.resetvalues[0]=this.rangeValues[0];
-        this.resetvalues[1]=this.rangeValues[1];
-        this.max=this.maximum
+        // this.resetvalues[0]=this.rangeValues[0];
+        // this.resetvalues[1]=this.rangeValues[1];
+        // this.max=this.maximum
         this.shimmerLoad = false;
       }
       if (res.code == 400) {
@@ -197,6 +199,7 @@ export class ProductlistComponent implements OnInit {
       rating: Array.from(this.selectedRatings,Number),
       sortby: this.selectedLevel
     }
+    console.log(filterValue);
     this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
       console.log("response", res);
       Object.keys(res.data).map(function (key) {
@@ -204,7 +207,13 @@ export class ProductlistComponent implements OnInit {
       });
       this.ProductListData[0].data.products = obj_Array;
       this.getPrice();
-    });
+    },
+    (error:HttpErrorResponse)=> {
+      if(error.error.code==400) {
+        this.productCheck=true
+      }
+    }
+    );
   }
 
   getPrice() {
@@ -213,15 +222,13 @@ export class ProductlistComponent implements OnInit {
       this.price_to = Math.max(...res.data.products.map((item: any) => item.regular_price));
       this.maximum = (this.price_to * 35) / 100 + this.price_to;
       this.rangeValues = [this.price_from, this.price_to]
+      console.log(this.maximum,this.rangeValues[1]);
     })
   }
 
   ClearAll() {
-    console.log(this.rangeValues)
     this.ProductListData[0].data.products = this.displayProducts;
-    this.rangeValues[0]=this.resetvalues[0];
-    this.rangeValues[1]=this.resetvalues[1];
-    this.maximum=this.max;
+    this.getPrice();
   }
 
   getkeypressdata() {
