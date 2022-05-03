@@ -18,6 +18,7 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
   discountCheck: boolean = true;
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
+  rate:any
   couponDiscount: any = 0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
@@ -74,13 +75,16 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
       this.tax_exempt_user=res.data.tax_exempt;
       console.log(this.tax_exempt_user);
     })
-    if(this.tax_exempt_user==0) {
-      this.taxCheck=true;
-      this.__apiservice.getTaxForUser(this.pincode).subscribe((res:any)=> {
-        let rate=res.data.rate;
-        console.log(rate);
-      })
-    }
+    console.log(this.tax_exempt_user)
+    setTimeout(() => {
+      if(this.tax_exempt_user!=1) {
+        this.taxCheck=true;
+        this.__apiservice.getTaxForUser(this.pincode).subscribe((res:any)=> {
+           this.rate=res.data.rate;
+          console.log(this.rate);
+        })
+      }
+    }, 1000);
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
