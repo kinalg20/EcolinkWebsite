@@ -58,12 +58,12 @@ export class ProductCartComponent implements OnInit {
         })
       })
       setTimeout(() => {
-        if (completedFormat.data.length ? completedFormat.data.length > 0 : []) {
+        if (completedFormat.data) {
           this.CardShow = completedFormat.data;
           this.subtotal();
           this.CartShimmer = false;
         }
-        else if (completedFormat.data.length == 0) {
+        else if (!completedFormat.data) {
           console.log("hjbhjbbhj");
 
           this.CartShimmer = false;
