@@ -73,23 +73,23 @@
                                 <li class="subtotal-list-element">Shipping : </li>
                                 <li>${{shippingCharge}}</li>
                             </ul>
+                            <ul *ngIf="taxCheck">
+                                <li class="subtotal-list-element">Taxes : </li>
+                                <li>${{rate}}</li>
+                            </ul>
                             <ul *ngIf="discountCheck">
                                 <li class="subtotal-list-element"></li>
                                 <li><button (click)="couponButton()">Apply Coupon</button></li>
                             </ul>
                             <ul *ngIf="couponCheck">
                                 <li class="subtotal-list-element">Coupon Discount : </li>
-                                <li>-${{couponDiscount}}</li>
-                            </ul>
-                            <ul *ngIf="taxCheck">
-                                <li class="subtotal-list-element">Taxes : </li>
-                                <li>-${{couponDiscount}}</li>
+                                <li style="color: #55b15c;">${{couponDiscount}}</li>
                             </ul>
                         </div>
                         <div class="checkout-products-total">
                             <ul>
                                 <li class="subtotal-list-element"><b>Total : </b></li>
-                                <li><b>${{cart.payable -- shippingCharge - couponDiscount | number : '1.2-2'}}</b></li>
+                                <li><b>${{rate -- cart.payable -- shippingCharge - couponDiscount | number : '1.2-2'}}</b></li>
                             </ul>
                         </div>
                     </ng-container>
