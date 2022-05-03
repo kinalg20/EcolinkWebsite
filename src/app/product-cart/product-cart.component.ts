@@ -25,11 +25,11 @@ export class ProductCartComponent implements OnInit {
   }
 
   Count(string: any, id: any) {
-    if (string == "increase" && this.CardShow[id].quantity < 10) {
+    if (string == "add" && this.CardShow[id].quantity < 10) {
       this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
       this.subtotal();
     }
-    if (string == "decrease" && this.CardShow[id].quantity > 1) {
+    if (string == "delete" && this.CardShow[id].quantity > 1) {
       this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
       this.subtotal();
     }
@@ -103,9 +103,10 @@ export class ProductCartComponent implements OnInit {
     })
   }
 
-  UpdateCart(action: any, product_id: any, product_quantity: any) {
+  UpdateCart(action: any, product_id: any, product_quantity: any , rowIndex:any) {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       this.CartShimmer = true;
+      this.Count(action , rowIndex);
       setTimeout(() => {
         let saveDataInCookies: any = [];
         let cookiesObject: any = {}
@@ -143,23 +144,24 @@ export class ProductCartComponent implements OnInit {
     }
   }
 
+  cookies_data : any;
   deleteItemFromCart(product: any, product_quantity: any) {
     if (this.UserLogin != null) {
       this.CartShimmer = true;
-      this._ApiService.deleteItemFromCart(product).subscribe(res => console.log(res));
+      this._ApiService.deleteItemFromCart(product.product.id).subscribe(res => console.log(res));
       setTimeout(() => {
         this.getCartData();
       }, 500);
     }
 
-    // else {
-    //   let deleteproduct = {
-    //     "CartProductId": product.id,
-    //     "ProductQuantity": product_quantity,
-    //   }
-    //   this._cookies.DeleteCartData(deleteproduct);
-    //   console.log(this._cookies.GetCartData());
-    // }
+    else {
+      console.log(product);
+      this.cookies_data = this._cookies.GetCartData();
+      console.log(this.cookies_data);
+      // this.CardShow.map((res:any)=>{
+      //   console.log(res);
+      // })
+    }
   }
 
   StoreCookiesData() {
