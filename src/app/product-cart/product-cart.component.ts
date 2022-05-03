@@ -58,14 +58,16 @@ export class ProductCartComponent implements OnInit {
         })
       })
       setTimeout(() => {
-        if (completedFormat.data.length > 0) {
+        if (completedFormat.data) {
           this.CardShow = completedFormat.data;
           this.subtotal();
           this.CartShimmer = false;
         }
-        else {
-          this.CardShow = [];
+        else if (!completedFormat.data) {
+          console.log("hjbhjbbhj");
+
           this.CartShimmer = false;
+          this.CardShow = [];
         }
       },
         1500);
@@ -102,10 +104,10 @@ export class ProductCartComponent implements OnInit {
     })
   }
 
-  UpdateCart(action: any, product_id: any, product_quantity: any , rowIndex:any) {
+  UpdateCart(action: any, product_id: any, product_quantity: any, rowIndex: any) {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       this.CartShimmer = true;
-      this.Count(action , rowIndex);
+      this.Count(action, rowIndex);
       setTimeout(() => {
         let saveDataInCookies: any = [];
         let cookiesObject: any = {}
@@ -136,8 +138,8 @@ export class ProductCartComponent implements OnInit {
     }
   }
 
-  cookies_data : any;
-  deleteItemFromCart(product: any, product_quantity: any) {
+  cookies_data: any = [];
+  deleteItemFromCart(product: any) {
     if (this.UserLogin != null) {
       this.CartShimmer = true;
       this._ApiService.deleteItemFromCart(product.product.id).subscribe(res => console.log(res));
@@ -147,12 +149,16 @@ export class ProductCartComponent implements OnInit {
     }
 
     else {
-      console.log(product);
+      this.CartShimmer = true;
       this.cookies_data = this._cookies.GetCartData();
-      console.log(this.cookies_data);
-      // this.CardShow.map((res:any)=>{
-      //   console.log(res);
-      // })
+      this.cookies_data.map((resp: any) => {
+        if (product.product_id == resp.CartProductId) {
+          console.log(this.cookies_data.indexOf(resp));
+          this.cookies_data.splice(this.cookies_data.indexOf(resp), 1);
+          this._cookies.SaveCartData(this.cookies_data);
+          this.getCartData();
+        }
+      })
     }
   }
 
