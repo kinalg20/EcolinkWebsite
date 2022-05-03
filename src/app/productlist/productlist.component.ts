@@ -191,7 +191,6 @@ export class ProductlistComponent implements OnInit {
 
   getDataForFilter() {
     let obj_Array: any[] = [];
-    console.log(this.ProductListData);
     let filterValue = {
       category: Array.from(this.selectedCategory,Number),
       price_from: this.rangeValues[0],
@@ -210,7 +209,8 @@ export class ProductlistComponent implements OnInit {
     },
     (error:HttpErrorResponse)=> {
       if(error.error.code==400) {
-        this.productCheck=true
+        console.log("error code",error.error.code)
+        this.productCheck=true;
       }
     }
     );
@@ -228,7 +228,10 @@ export class ProductlistComponent implements OnInit {
 
   ClearAll() {
     this.ProductListData[0].data.products = this.displayProducts;
+    console.log(this.displayProducts);
     this.getPrice();
+    this.productCheck=false;
+    this.selectedRatings=false
   }
 
   getkeypressdata() {

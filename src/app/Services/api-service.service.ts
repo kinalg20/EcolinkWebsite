@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable} from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Injectable({
@@ -148,7 +148,7 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
   }
 
-  deleteWishlistItems(product_id:any){
+  deleteWishlistItems(product_id: any) {
     let url = 'deleteWishlistItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -159,8 +159,8 @@ export class ApiServiceService {
     })
     let body =
     {
-      user_id: user_id ,
-      product_id : product_id
+      user_id: user_id,
+      product_id: product_id
     }
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
   }
@@ -367,8 +367,15 @@ export class ApiServiceService {
   forgotPassword(data: any): Observable<any> {
     return this.http.post(this._baseurl + 'forgotPassword', data);
   }
-  sendResetMail(data:any) : Observable<any> {
-    return this.http.post(this._baseurl+ 'forgotPasswordEmail',data)
+  sendResetMail(data: any): Observable<any> {
+    return this.http.post(this._baseurl + 'forgotPasswordEmail', data)
+  }
+  getTaxForUser(pincode: any): Observable<any> {
+    console.log(pincode)
+    let body = {
+      zip: 93524
+    }
+    return this.http.post(this._baseurl + 'getTaxByZip', body)
   }
 }
 
