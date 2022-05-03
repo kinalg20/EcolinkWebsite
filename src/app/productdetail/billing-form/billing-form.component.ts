@@ -17,7 +17,7 @@ export class BillingFormComponent implements OnInit {
   password: string = '';
   confirm_password: string = ''
   UserLogin: any;
-  constructor(private __apiservice: ApiServiceService, private route: Router , private _cookies : CookiesService) { }
+  constructor(private __apiservice: ApiServiceService, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
     console.log(this.formShimmer);
@@ -58,6 +58,7 @@ export class BillingFormComponent implements OnInit {
       }
       else {
         console.log('getuseraddress');
+        this.FormFillUp.emit(false);
       }
     }
     else {
@@ -65,7 +66,7 @@ export class BillingFormComponent implements OnInit {
     }
   }
 
-  SaveCookiesDataInCart(){
+  SaveCookiesDataInCart() {
     setTimeout(() => {
       this.CheckoutProduct.map((res: any) => {
         console.log(res.carts);
@@ -73,9 +74,9 @@ export class BillingFormComponent implements OnInit {
           console.log(resp);
           this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add").subscribe(res =>
             console.log(res));
-            if(res.code == 200){
+          if (res.code == 200) {
             this._cookies.DeleteCartData();
-            }
+          }
         })
       })
       this.FormFillUp.emit(false);
