@@ -41,41 +41,43 @@ export class ProductCartComponent implements OnInit {
     let completedFormat: any = {};
     if (localStorage.getItem('ecolink_user_credential') === null) {
       cookiesdata = this._cookies.GetCartData();
-      if(cookiesdata.CartObj){
-        cookiesdata.map((res: any) => {
-          this._ApiService.getProductById(res.CartProductId).subscribe((resp: any) => {
-            let data: any = {};
-            let products: any = {};
-            data.quantity = res.ProductQuantity;
-            data.product_id = resp.data.id;
-            products.id = res.CartProductId;
-            products.name = resp.data.name;
-            products.sale_price = resp.data.sale_price;
-            products.image = resp.data.image;
-            products.alt = resp.data.alt;
-            data.product = products;
-            data_obj.push(data);
-            completedFormat.data = data_obj;
-          })
+     if(cookiesdata != 'empty'){
+      console.log(cookiesdata);
+      cookiesdata.map((res: any) => {
+        this._ApiService.getProductById(res.CartProductId).subscribe((resp: any) => {
+          let data: any = {};
+          let products: any = {};
+          data.quantity = res.ProductQuantity;
+          data.product_id = resp.data.id;
+          products.id = res.CartProductId;
+          products.name = resp.data.name;
+          products.sale_price = resp.data.sale_price;
+          products.image = resp.data.image;
+          products.alt = resp.data.alt;
+          data.product = products;
+          data_obj.push(data);
+          completedFormat.data = data_obj;
         })
-        setTimeout(() => {
-          if (completedFormat.data) {
-            this.CardShow = completedFormat.data;
-            this.subtotal();
-            this.CartShimmer = false;
-          }
-          else if (!completedFormat.data) {
-            console.log("hjbhjbbhj");
-            this.CartShimmer = false;
-            this.CardShow = [];
-          }
-        },
-          1500);
-      }
-      else{
-        this.CardShow = [];
-        this.CartShimmer = false;
-      }
+      })
+      setTimeout(() => {
+        if (completedFormat.data) {
+          this.CardShow = completedFormat.data;
+          this.subtotal();
+          this.CartShimmer = false;
+        }
+        else if (!completedFormat.data) {
+          console.log("hjbhjbbhj");
+
+          this.CartShimmer = false;
+          this.CardShow = [];
+        }
+      },
+        1500);
+     }
+     else{
+       this.CardShow = [];
+       this.CartShimmer = false;
+     }
     }
     else {
       this._ApiService.getItemFromCart().subscribe(
@@ -133,8 +135,7 @@ export class ProductCartComponent implements OnInit {
       this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
         this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-          console.log(res)
-          );
+          console.log(res));
         this.getCartData();
         this.subtotal();
       }
