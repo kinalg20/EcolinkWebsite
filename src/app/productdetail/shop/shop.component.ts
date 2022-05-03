@@ -68,14 +68,12 @@ export class ShopComponent implements OnInit {
   }
 
   getProductDetail(sendslug: any) {
-    console.log(sendslug);
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
         this.minimum_qyt=res.data.product.minimum_qty;
         this.stock=res.data.product.stock;
         console.log(res);
-        console.log(res.data.product.stock)
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
         this.ItemCount = this.minimum_qyt;
