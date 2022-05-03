@@ -125,16 +125,22 @@ export class ProductCartComponent implements OnInit {
       this.subtotal();
     }
     else {
+      this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
         this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-          console.log(res));
+          console.log(res)
+          );
+        this.getCartData();
+        this.subtotal();
       }
 
       if (action == 'add') {
         this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
           console.log(res));
+        this.getCartData();
+        this.subtotal();
+
       }
-      this.subtotal();
     }
   }
 
