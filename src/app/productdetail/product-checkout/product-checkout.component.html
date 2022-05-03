@@ -66,11 +66,11 @@
                         </div>
                         <div class="checkout-products-subtotal">
                             <ul>
-                                <li class="subtotal-list-element">Subtotal</li>
+                                <li class="subtotal-list-element">Subtotal : </li>
                                 <li>${{cart.payable | number : '1.2-2'}}</li>
                             </ul>
                             <ul>
-                                <li class="subtotal-list-element">Shipping</li>
+                                <li class="subtotal-list-element">Shipping : </li>
                                 <li>${{shippingCharge}}</li>
                             </ul>
                             <ul *ngIf="discountCheck">
@@ -78,13 +78,17 @@
                                 <li><button (click)="couponButton()">Apply Coupon</button></li>
                             </ul>
                             <ul *ngIf="couponCheck">
-                                <li class="subtotal-list-element">Coupon Discount</li>
+                                <li class="subtotal-list-element">Coupon Discount : </li>
+                                <li>-${{couponDiscount}}</li>
+                            </ul>
+                            <ul *ngIf="taxCheck">
+                                <li class="subtotal-list-element">Taxes : </li>
                                 <li>-${{couponDiscount}}</li>
                             </ul>
                         </div>
                         <div class="checkout-products-total">
                             <ul>
-                                <li class="subtotal-list-element"><b>Total</b></li>
+                                <li class="subtotal-list-element"><b>Total : </b></li>
                                 <li><b>${{cart.payable -- shippingCharge - couponDiscount | number : '1.2-2'}}</b></li>
                             </ul>
                         </div>

@@ -23,14 +23,17 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
   carts: any = [];
+  pincode:any
   formShimmer: boolean = true;
   paypalItems: any = {}
   orderObj: any;
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
   paypal: any = []
+  taxCheck:boolean=false;
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
+  tax_exempt_user:number=0
   checkoutShimmer: boolean = true;
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
@@ -43,6 +46,7 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
 
   ngOnInit(): void {
     this.checkoutProduct();
+    this.getTaxExempt()
     this.getPaypalProductDetail();
     this.initConfig();
     this.getShippingInfo();
@@ -65,6 +69,19 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
     })
 
   }
+  getTaxExempt() {
+    this.__apiservice.getUserProfileDetail().subscribe((res:any)=> {
+      this.tax_exempt_user=res.data.tax_exempt;
+      console.log(this.tax_exempt_user);
+    })
+    if(this.tax_exempt_user==0) {
+      this.taxCheck=true;
+      this.__apiservice.getTaxForUser(this.pincode).subscribe((res:any)=> {
+        let rate=res.data.rate;
+        console.log(rate);
+      })
+    }
+  }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       console.log(value);
@@ -82,7 +99,10 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
           this.checkoutShimmer = false;
         }
         this.CheckoutProduct.push(res.data);
-        console.log(this.CheckoutProduct);
+        res.data.addresses.map((res:any)=> {
+          this.pincode=res.zip
+        })
+        console.log(this.pincode);
       })
     }
     else {

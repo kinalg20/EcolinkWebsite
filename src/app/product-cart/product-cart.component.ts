@@ -38,7 +38,6 @@ export class ProductCartComponent implements OnInit {
   getCartData() {
     let cookiesdata: any = [];
     let data_obj: any = [];
-    this.CardShow = [];
     let completedFormat: any = {};
     if (localStorage.getItem('ecolink_user_credential') === null) {
       cookiesdata = this._cookies.GetCartData();
@@ -123,23 +122,16 @@ export class ProductCartComponent implements OnInit {
       this.subtotal();
     }
     else {
-      this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
         this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
           console.log(res));
-        setTimeout(() => {
-          this.getCartData();
-          this.subtotal();
-        }, 1000);
       }
 
       if (action == 'add') {
         this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
           console.log(res));
-        this.getCartData();
-        this.subtotal();
-
       }
+      this.subtotal();
     }
   }
 
