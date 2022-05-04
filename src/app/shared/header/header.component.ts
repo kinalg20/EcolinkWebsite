@@ -1,4 +1,4 @@
-import {  Component, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { Select, Store } from '@ngxs/store';
@@ -15,10 +15,10 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
+  @Input() length: any;
   headerMenuData: any;
   isAlive = true;
   user_id: any;
-  cartCount:any;
   openMenu: boolean = false;
   openSubmenu: boolean = false;
   homePageData: any = [];
@@ -82,12 +82,13 @@ export class HeaderComponent implements OnInit {
       console.log("this.homePageData", this.homePageData);
     }, 1000);
     this.cartCountFunction();
-    this.cartCount=this.__apiservice.cartCount;
   }
   cartCountFunction() {
-    this.__apiservice.getItemFromCart().subscribe((res:any)=> {
-      this.cartCount=res.data.length;
-    })
+    if(localStorage.getItem('ecolink_user_credential')!=null) {
+      this.__apiservice.getItemFromCart().subscribe((res: any) => {
+        this.length = res.data.length;
+      })
+    }
   }
   profile() {
     if (localStorage.getItem("ecolink_user_credential") === null) {
@@ -117,16 +118,16 @@ export class HeaderComponent implements OnInit {
     if (this.searchItem.length > 0) {
       this.__apiservice.globalSearchData(this.searchItem).subscribe(
         res => {
-        this.showGlobalSearchSuggestion = true;
-        this.suggestionList = res;
-      },
-      (error: HttpErrorResponse) => {
-        if (error.error.code == 400) {
-          this.showGlobalSearchSuggestion=false;
+          this.showGlobalSearchSuggestion = true;
+          this.suggestionList = res;
+        },
+        (error: HttpErrorResponse) => {
+          if (error.error.code == 400) {
+            this.showGlobalSearchSuggestion = false;
+          }
         }
+      )
     }
-    )
-  }
     else {
       this.showGlobalSearchSuggestion = false;
     }
@@ -140,10 +141,10 @@ export class HeaderComponent implements OnInit {
     })
   }
 
-  routeOnSamePage(slug: any, sublink?: any , subsublink?: any) {
+  routeOnSamePage(slug: any, sublink?: any, subsublink?: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    if(subsublink){
+    if (subsublink) {
       this.router.navigate(['/' + slug + '/' + sublink + '/' + subsublink]);
     }
     else if (sublink) {

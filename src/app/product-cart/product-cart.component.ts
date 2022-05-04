@@ -12,6 +12,7 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 export class ProductCartComponent implements OnInit {
   CardShow: any = [];
   GetProduct: any = [];
+  length:any
   SubTotal: number = 0;
   UserLogin: any;
   CartShimmer: boolean = true;
@@ -89,7 +90,7 @@ export class ProductCartComponent implements OnInit {
               this.subtotal();
               console.log(this.CardShow);
               this.CartShimmer = false;
-              this._ApiService.cartCount.next(this.CardShow.length);
+              this.length=this.CardShow.length;
             }, 1500);
           }
 
@@ -98,6 +99,7 @@ export class ProductCartComponent implements OnInit {
           if (error.error.code == 400) {
             this.CardShow = [];
             this.CartShimmer = false;
+            this.length=0;
           }
         })
     }
