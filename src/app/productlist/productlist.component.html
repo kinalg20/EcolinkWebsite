@@ -347,7 +347,7 @@
               width: 30px;
             "></button>Filters
             </h3>
-            <p (click)="ClearAll()" style="cursor: pointer;"><a>Clear All</a></p>
+            <p (click)="ClearAll()" (click)="showFiterModel=false" style="cursor: pointer;"><a>Clear All</a></p>
         </div>
         <hr>
         <div class="filter-body">
@@ -377,8 +377,8 @@
                               font-size: 14px;
                               color: #1e2022;
                             ">
-                            <b>{{ rangeValues[0]}}</b>
-                            <b>{{ rangeValues[1]}}</b>
+                            <b>${{ rangeValues[0]}}</b>
+                            <b>${{ rangeValues[1]}}</b>
                         </div>
                     </ng-container>
                 </div>
@@ -409,7 +409,7 @@
                 </div>
             </section>
             <div class="apply-button">
-                <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter"
+                <button pButton pRipple type="button" (click)="getDataForFilter()" (click)="showFiterModel=false" label="Apply Filter"
                     class="p-button  filter-button"></button>
             </div>
         </div>

@@ -110,6 +110,7 @@ export class SignupSigninComponent implements OnInit {
       };
       this.taxCalculate=data.radio2
       console.log(this.userObj);
+      
       // this.__apiservice.registerClient(this.userObj).subscribe(
       //   (res) => {
       //     console.log(res.message);

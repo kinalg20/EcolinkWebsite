@@ -12,7 +12,7 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 export class ProductCartComponent implements OnInit {
   CardShow: any = [];
   GetProduct: any = [];
-  length:any
+  length:any=0
   SubTotal: number = 0;
   UserLogin: any;
   CartShimmer: boolean = true;
@@ -43,7 +43,8 @@ export class ProductCartComponent implements OnInit {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       cookiesdata = this._cookies.GetCartData();
      if(cookiesdata != 'empty'){
-      console.log(cookiesdata);
+      console.log(cookiesdata.length);
+      this.length=cookiesdata.length;
       cookiesdata.map((res: any) => {
         this._ApiService.getProductById(res.CartProductId).subscribe((resp: any) => {
           let data: any = {};
