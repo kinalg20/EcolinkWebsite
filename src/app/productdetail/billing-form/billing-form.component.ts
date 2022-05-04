@@ -13,7 +13,11 @@ export class BillingFormComponent implements OnInit {
   @Input() formShimmer: boolean = true;
   @Output() FormFillUp = new EventEmitter<boolean>();
   userObj: any;
-  resSignupMsg: any;
+  invalidUserEmail: string = '';
+  resSignupMsg: string = '';
+  resSignupMsgCheck: string = ' '; 
+  invalidMobile = false;
+  invalidEmail: boolean = false;
   password: string = '';
   confirm_password: string = ''
   UserLogin: any;
@@ -65,7 +69,30 @@ export class BillingFormComponent implements OnInit {
       this.resSignupMsg = 'Please fill the form';
     }
   }
+  validateUserEmail(email: any) {
+    const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    if (re.test(email.target.value) == false) {
+      this.invalidUserEmail = 'Invalid Email Address';
+      return false;
+    }
+    this.invalidUserEmail = '';
+    return true;
+  }
+  validateEmail(event: any) {
+    const value = event.target.value;
 
+    if (
+      value &&
+      !/^[0-9]*$/.test(value) &&
+      !this.validateUserEmail(event)
+    ) {
+      this.invalidEmail = true;
+    }
+
+    else {
+      this.invalidEmail = false;
+    }
+  }
   SaveCookiesDataInCart() {
     setTimeout(() => {
       this.CheckoutProduct.map((res: any) => {
@@ -82,7 +109,29 @@ export class BillingFormComponent implements OnInit {
       this.FormFillUp.emit(false);
     }, 1000);
   }
+  inputMobile(event: any) {
+    if (
+      event.key.length === 1 &&
+      !/^[0-9]$/.test(event.key)
+    ) {
+      event.preventDefault();
+    }
+  }
+  validateMobile(event: any) {
+    const value = event.target.value;
 
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 10
+    ) {
+      this.invalidMobile = true;
+    }
+
+    else {
+      this.invalidMobile = false;
+    }
+  }
 
 
 }
