@@ -1,4 +1,4 @@
-<app-header></app-header>
+<app-header ></app-header>
 <ng-container *ngIf="CartShimmer; then elseblock else thenblock"></ng-container>
 <ng-template #elseblock>
     <div class="container mt-5">
@@ -9,7 +9,7 @@
             <div class="card-elements table-responsive">
                 <ng-container *ngFor="let data of [].constructor(3)">
                     <ngx-shimmer-loading [shape]="'square'" width="'100%'" height="'200px'"></ngx-shimmer-loading>
-                </ng-container>
+                </ng-container> 
             </div>
 
             <div class="cart cart-total pt-0">

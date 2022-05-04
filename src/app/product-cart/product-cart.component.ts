@@ -145,7 +145,6 @@ export class ProductCartComponent implements OnInit {
           console.log(res));
         this.getCartData();
         this.subtotal();
-
       }
     }
   }
