@@ -111,16 +111,29 @@
 
         .absolute {
             display: none;
+            // position: fixed;
+            // bottom: 80px;
+            // z-index: 100;
+            // right: 32px;
+            // border-radius: 100%;
+            // background: var(--primary);
+            // color: #fff;
+            // padding: 15px;
+            // padding-bottom: 4px;
+            // box-shadow: 4px 4px 9px 1px rgb(0 0 0 / 15%);
             position: fixed;
-            bottom: 30px;
-            z-index: 100;
-            right: 32px;
-            border-radius: 100%;
-            background: var(--primary);
-            color: #fff;
-            padding: 15px;
-            padding-bottom: 4px;
-            box-shadow: 4px 4px 9px 1px rgb(0 0 0 / 15%);
+            bottom: 80px;
+            right: 40px;
+            z-index: 999;
+            cursor: pointer;
+            h5 {
+                border: none;
+                background: var(--primary);
+                color: #fff;
+                border-radius: 100%;
+                padding: 6px 10px;
+                box-shadow: 4px 4px 9px 1px rgb(0 0 0 / 15%);
+            }
         }
 
         .filter {
@@ -337,14 +350,14 @@
             border: 1px solid rgb(179 177 177);
             box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
             border-radius: 8px;
-    
+
             .card-image {
                 position: relative;
                 width: 100%;
                 height: 200px;
                 border-top-left-radius: 18px;
                 border-top-right-radius: 18px;
-    
+
                 img {
                     position: absolute;
                     width: 100%;
@@ -354,20 +367,20 @@
                     padding: 8px 8px;
                 }
             }
-    
+
             .card-body {
                 padding: 0.8rem;
-    
+
                 .card-title {
                     p {
                         font-size: 14px;
                     }
                 }
-    
+
                 .list-buttons {
                     display: flex;
                     justify-content: space-between;
-    
+
                     p {
                         border: 1px solid rgb(179 177 177);
                         padding: 6px 6px;
@@ -376,7 +389,7 @@
                         text-align: center;
                         font-weight: 600;
                         cursor: pointer;
-    
+
                         &:hover {
                             box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
                             background-color: #55b15c;
@@ -396,14 +409,14 @@
             box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
             border-radius: 8px;
             height: 403px;
-    
+
             .card-image {
                 position: relative;
                 width: 100%;
                 height: 200px;
                 border-top-left-radius: 18px;
                 border-top-right-radius: 18px;
-    
+
                 img {
                     position: absolute;
                     width: 100%;
@@ -412,7 +425,7 @@
                     border-top-right-radius: 18px;
                     padding: 8px 8px;
                 }
-    
+
                 span {
                     position: absolute;
                     top: 11px;
@@ -420,42 +433,42 @@
                     cursor: pointer;
                 }
             }
-    
+
             .card-body {
                 padding: 0.8rem;
-    
+
                 .card-title {
                     h6 {
                         margin: 0;
                         padding: 0;
                     }
-    
+
                     p {
                         font-size: 14px;
                     }
                 }
-    
+
                 .card-price-section {
                     display: flex;
                     justify-content: space-between;
                     align-items: baseline;
-    
+
                     .card-price {
                         font-weight: 700;
                         font-size: 20px;
                     }
-    
+
                     .rating {
                         width: 80px;
                         display: flex;
                         justify-content: space-between;
                     }
                 }
-    
+
                 .list-buttons {
                     display: flex;
                     justify-content: space-between;
-    
+
                     p {
                         border: 1px solid rgb(179 177 177);
                         padding: 6px 6px;
@@ -464,7 +477,7 @@
                         text-align: center;
                         font-weight: 600;
                         cursor: pointer;
-    
+
                         &:hover {
                             box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
                             background-color: #55b15c;
@@ -751,7 +764,7 @@
                     }
                     .rating {
                         label {
-                            margin-left: 0!important;
+                            margin-left: 0 !important;
                         }
                     }
                 }
