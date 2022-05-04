@@ -21,7 +21,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class SignupSigninComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   userObj: any;
-  taxCalculate:any
+  taxCalculate: any
   loginobj: any;
   resSignupMsg: string = '';
   password: string = '';
@@ -105,10 +105,10 @@ export class SignupSigninComponent implements OnInit {
         state: data.state,
         city: data.city,
         pincode: data.pincode,
-        profile_image: data.image,
-        tax_exempt:data.radio2
+        profile_image: this.file,
+        tax_exempt: data.radio2
       };
-      this.taxCalculate=data.radio2
+      this.taxCalculate = data.radio2
       console.log(this.userObj);
       // this.__apiservice.registerClient(this.userObj).subscribe(
       //   (res) => {
@@ -210,6 +210,22 @@ export class SignupSigninComponent implements OnInit {
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
+  }
+
+  file: any;
+  fileUrl : any;
+  GetFileChange(e: any) {
+    this.file = e.target.files;
+    console.log(this.file);
+    if(this.file){
+      let reader = new FileReader();
+      console.log(reader);      
+      reader.readAsDataURL(this.file[0]);
+      reader.onload = (event : any)=>{
+        console.log(event);
+        this.fileUrl = event.target.result;
+      }
+    }
   }
   // signInWithGoogle(): void {
   //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(

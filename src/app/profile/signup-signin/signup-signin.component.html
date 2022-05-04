@@ -130,7 +130,7 @@
                         <div>
                             <label for="photo">Profile photo</label>
                             <input class="form-control" type="file" id="image" autocomplete="off" name="image" ngModel
-                                 />
+                                (change)="GetFileChange($event)" />
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
