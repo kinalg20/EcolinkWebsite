@@ -190,6 +190,7 @@ export class ProductlistComponent implements OnInit {
   }
 
   getDataForFilter() {
+    this.productCheck = false;
     let obj_Array: any[] = [];
     let filterValue = {
       category: Array.from(this.selectedCategory,Number),
@@ -209,7 +210,6 @@ export class ProductlistComponent implements OnInit {
     },
     (error:HttpErrorResponse)=> {
       if(error.error.code==400) {
-        console.log("error code",error.error.code)
         this.productCheck=true;
       }
     }
