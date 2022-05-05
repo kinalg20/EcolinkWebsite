@@ -271,7 +271,7 @@
 
                     <!-- Product Lists -->
                     <div class="product-listing" *ngIf="view_list">
-                        <ng-container *ngIf="productCheck!=true">
+                        <ng-container *ngIf="listdata.data.products.length>0">
                             <ng-container *ngFor="let product of listdata.data.products">
                                 <div class="card" style="cursor: pointer;">
                                     <div class="card-image">
@@ -325,7 +325,7 @@
                                 </div>
                             </ng-container>
                         </ng-container>
-                        <ng-container *ngIf="productCheck">
+                        <ng-container *ngIf="listdata.data.products.length==0">
                             <div style="text-align: center; border: 1px solid #dedede; margin: 100px 0;">
                                 <h3>No data found</h3>
                             </div>
