@@ -167,7 +167,6 @@ export class ProductCartComponent implements OnInit {
       this.cookies_data = this._cookies.GetCartData();
       this.cookies_data.map((resp: any) => {
         if (product.product_id == resp.CartProductId) {
-          console.log(this.cookies_data.indexOf(resp));
           this.cookies_data.splice(this.cookies_data.indexOf(resp), 1);
           this._cookies.SaveCartData(this.cookies_data);
           this.getCartData();

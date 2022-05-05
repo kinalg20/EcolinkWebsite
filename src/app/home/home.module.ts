@@ -5,15 +5,13 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { HomeBannerComponent } from './home-banner/home-banner.component';
 import { SharedModule } from '../shared/shared.module';
-import { AboutUsComponent } from './about-us/about-us.component';
-import { MediaComponent } from './media/media.component';
+import { AboutUsComponent } from '../shared/about-us/about-us.component';
+import { MediaComponent } from '../shared/media/media.component';
 import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
-import { BlogComponent } from './blog/blog.component';
-import { ManufactureComponent } from './manufacture/manufacture.component';
-// import { AskChemistComponent } from '../shared/ask-chemist/ask-chemist.component';
+import { BlogComponent } from '../shared/blog/blog.component';
+import { ManufactureComponent } from '../shared/manufacture/manufacture.component';
 import { FormsModule } from '@angular/forms';
 import { CategoriesComponent } from './categories/categories.component';
-import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
 
 
 
@@ -30,7 +28,6 @@ const exportdata:any =[
     MediaComponent,
     BlogComponent,
     ManufactureComponent,
-    // AskChemistComponent,
     CategoriesComponent
   ],
   imports: [
