@@ -40,7 +40,8 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
-    private _ShippingApi: ShippingServiceService) { }
+    private _ShippingApi: ShippingServiceService,
+    private router:Router) { }
   ngAfterViewInit(): void {
     
   }
@@ -89,6 +90,11 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
         this.taxCheck=false;
       }
     }, 1000);
+  }
+  routeToProfile() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/profile']);
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
