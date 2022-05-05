@@ -26,7 +26,7 @@
                 </div>
                 <div class="product-detail">
                     <div class="product-name">
-                        <h3>{{detail.data.product.name}}</h3>
+                        <h3>{{detail.data.product.name}} - {{detail.data.product.variant}}</h3>
                     </div>
                     <div class="product-rate">
                         <ng-container
@@ -57,6 +57,18 @@
                             <li *ngIf="detail.data.product.sku">SKU: {{detail.data.product.sku}}</li>
                             <li *ngIf="detail.data.product.hsn">hsn :{{detail.data.product.hsn}}</li>
                             <li *ngIf="detail.data.product.tag">Tag: {{detail.data.product.tag}}</li>
+                        </ul>
+                    </div>
+                    <div class="dropdown" *ngIf="detail.data.variants.length>0">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            {{detail.data.product.variant}}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li>
+                                <p class="dropdown-item" (click)="routeOnSamePage()">
+                                    {{variant}}</p>
+                            </li>
                         </ul>
                     </div>
                     <div class="cart">

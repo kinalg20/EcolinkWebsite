@@ -79,9 +79,6 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-    setTimeout(() => {
-      console.log("this.homePageData", this.homePageData);
-    }, 1000);
     this.cartCountFunction();
   }
   cartCountFunction() {

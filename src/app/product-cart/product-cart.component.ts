@@ -118,7 +118,7 @@ export class ProductCartComponent implements OnInit {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       this.CartShimmer = true;
       this.Count(action, rowIndex);
-      setTimeout(() => {
+      // setTimeout(() => {
         let saveDataInCookies: any = [];
         let cookiesObject: any = {}
         this.CardShow.map((res: any) => {
@@ -131,29 +131,28 @@ export class ProductCartComponent implements OnInit {
         console.log(saveDataInCookies);
         this._cookies.SaveCartData(saveDataInCookies);
         this.getCartData();
-      }, 1000);
+      // }, 1000);
       this.subtotal();
     }
     else {
       this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
-        setTimeout(() => {
-          this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-            console.log(res));
-            this.getCartData();
-            this.subtotal();
-        }, 1000);
+        this.updateFunction(product_id , action);
       }
 
       if (action == 'add') {
-        setTimeout(() => {
-          this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-            console.log(res));
-            this.getCartData();
-            this.subtotal();
-        }, 1000);
+        this.updateFunction(product_id , action);
       }
     }
+  }
+
+  updateFunction(product_id:any , action:any){
+    setTimeout(() => {
+      this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
+        console.log(res));
+        this.getCartData();
+        this.subtotal();
+    }, 1000);
   }
 
   cookies_data: any = [];
