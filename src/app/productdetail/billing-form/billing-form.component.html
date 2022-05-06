@@ -45,6 +45,24 @@
             </div>
         </div>
         <div class="row mb-3">
+            <div class="col-6">
+                <label for="Email Address">Email Address</label>
+                <input type="text" class="form-control mt-2" placeholder="Email Address" id="Email-Address" name="email"
+                    [(ngModel)]="data.user.email" required (input)="validateEmail($event)">
+                    <h6 class="text-danger" *ngIf="invalidEmail">
+                        {{ invalidEmail ? "Invalid Email" : "" }}
+                    </h6>
+            </div>
+            <div class="col-6">
+                <label for="Phone">Phone</label>
+                <input type="text" maxlength="10" class="form-control mt-2" placeholder="phone" name="mobile"
+                    [(ngModel)]="data.user.mobile" required (input)="validateMobile($event)" (keydown)="inputMobile($event)">
+                    <h6 class="text-danger" *ngIf="invalidMobile">
+                        {{ invalidMobile ? "Invalid Mobile" : "" }}
+                    </h6>
+            </div>
+        </div>
+        <div class="row mb-3">
             <div class="col-12">
                 <label for="countryname">Country / Region *</label>
                 <input type="text" class="form-control mt-2" placeholder="Country / Region" id="country"
@@ -77,18 +95,6 @@
                 <label for="Postcode">Postcode</label>
                 <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="pincode"
                     [(ngModel)]="data.user.pincode" required>
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col-6">
-                <label for="Email Address">Email Address</label>
-                <input type="text" class="form-control mt-2" placeholder="Email Address" id="Email-Address" name="email"
-                    [(ngModel)]="data.user.email" required>
-            </div>
-            <div class="col-6">
-                <label for="Phone">Phone</label>
-                <input type="text" class="form-control mt-2" placeholder="phone" name="mobile"
-                    [(ngModel)]="data.user.mobile" required>
             </div>
         </div>
         <div class="row mb-3" *ngIf="UserLogin == null">

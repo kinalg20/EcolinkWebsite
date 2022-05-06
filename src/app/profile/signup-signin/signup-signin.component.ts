@@ -21,7 +21,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class SignupSigninComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   userObj: any;
-  taxCalculate:any
+  taxCalculate: any
   loginobj: any;
   resSignupMsg: string = '';
   password: string = '';
@@ -37,6 +37,7 @@ export class SignupSigninComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   SignIn() {
     this.checkString = !this.checkString;
   }
@@ -50,10 +51,12 @@ export class SignupSigninComponent implements OnInit {
     this.invalidUserEmail = '';
     return true;
   }
+
   goToTop() {
     window.scrollTo(0, 0);
     this.scroller.scrollToAnchor("backToTop");
   }
+
   validateEmail(event: any) {
     const value = event.target.value;
 
@@ -69,6 +72,7 @@ export class SignupSigninComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
+
   inputMobile(event: any) {
     if (
       event.key.length === 1 &&
@@ -77,6 +81,7 @@ export class SignupSigninComponent implements OnInit {
       event.preventDefault();
     }
   }
+
   validateMobile(event: any) {
     const value = event.target.value;
 
@@ -92,34 +97,30 @@ export class SignupSigninComponent implements OnInit {
       this.invalidMobile = false;
     }
   }
+
   signUp(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
-      this.userObj = {
-        name: data.firstname + ' ' + data.lastname,
-        email: data.email,
-        mobile: data.phonenumber,
-        password: data.password,
-        address: data.address,
-        country: data.country,
-        state: data.state,
-        city: data.city,
-        pincode: data.pincode,
-        profile_image: data.image,
-        tax_exempt:data.radio2
-      };
-      this.taxCalculate=data.radio2
-      console.log(this.userObj);
-      // this.__apiservice.registerClient(this.userObj).subscribe(
-      //   (res) => {
-      //     console.log(res.message);
-      //   }
-      // );
-      this.__apiservice.post(this.userObj).subscribe(
+      let formData = new FormData();
+      formData.append('profile_image', this.file);
+      formData.append('name', data.firstname + ' ' + data.lastname);
+      formData.append('email', data.email);
+      formData.append('mobile', data.phonenumber);
+      formData.append('password', data.password);
+      formData.append('address', data.address);
+      formData.append('country', data.country);
+      formData.append('state',  data.state);
+      formData.append('city', data.city);
+      formData.append('pincode', data.pincode);
+      formData.append('tax_exempt', data.radio2);
+
+
+      this.taxCalculate = data.radio2
+      this.__apiservice.post(formData).subscribe(
         (res) => {
           console.log(res);
           if (res.code == 200) {
-            this.resSignupMsg = 'Account Created Successfully!';
+            this.resSignupMsg = res.message;
             this.resSignupMsgCheck = 'success';
             localStorage.setItem(
               'ecolink_user_credential',
@@ -159,6 +160,7 @@ export class SignupSigninComponent implements OnInit {
       this.resSignupMsgCheck = "danger"
     }
   }
+
   signinWithEmail(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
@@ -207,9 +209,29 @@ export class SignupSigninComponent implements OnInit {
       this.resSignupMsgCheck = "danger"
     }
   }
+
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
+  }
+
+  file: any = null;
+  fileUrl: any;
+  max_error_front_img: string = '';
+  GetFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files[0].size < 2000000) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => this.fileUrl = e.target.result;
+        reader.readAsDataURL(event.target.files[0]);
+        this.file = event.target.files[0];
+        this.max_error_front_img = "";
+      } else {
+        this.max_error_front_img = "Max file upload size to 2MB";
+        this.fileUrl = 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png';
+        this.file = null;
+      }
+    }
   }
   // signInWithGoogle(): void {
   //   this.authService.signIn(GoogleLoginProvider.PROVIDER_ID).then(

@@ -150,22 +150,22 @@
                                     <div class="p-field-checkbox mb-2">
                                         <p-checkbox name="group2" value=4 [(ngModel)]="selectedRatings" inputId="4star">
                                         </p-checkbox>
-                                        <label for="4star" class="mx-2">4★ & above</label>
+                                        <label for="4star" class="mx-2">4 & above</label>
                                     </div>
                                     <div class="p-field-checkbox mb-2">
                                         <p-checkbox name="group2" value=3 [(ngModel)]="selectedRatings" inputId="3star">
                                         </p-checkbox>
-                                        <label for="3star" class="mx-2">3★ & above</label>
+                                        <label for="3star" class="mx-2">3 & above</label>
                                     </div>
                                     <div class="p-field-checkbox mb-2">
                                         <p-checkbox name="group2" value=2 [(ngModel)]="selectedRatings" inputId="2star">
                                         </p-checkbox>
-                                        <label for="2star" class="mx-2">2★ & above</label>
+                                        <label for="2star" class="mx-2">2 & above</label>
                                     </div>
                                     <div class="p-field-checkbox mb-2">
                                         <p-checkbox name="group2" value=1 [(ngModel)]="selectedRatings" inputId="1star">
                                         </p-checkbox>
-                                        <label for="1star" class="mx-2">1★ & above</label>
+                                        <label for="1star" class="mx-2">1 & above</label>
                                     </div>
                                 </div>
                             </section>
@@ -347,7 +347,7 @@
               width: 30px;
             "></button>Filters
             </h3>
-            <p (click)="ClearAll()" style="cursor: pointer;"><a>Clear All</a></p>
+            <p (click)="ClearAll()" (click)="showFiterModel=false" style="cursor: pointer;"><a>Clear All</a></p>
         </div>
         <hr>
         <div class="filter-body">
@@ -377,8 +377,8 @@
                               font-size: 14px;
                               color: #1e2022;
                             ">
-                            <b>{{ rangeValues[0]}}</b>
-                            <b>{{ rangeValues[1]}}</b>
+                            <b>${{ rangeValues[0]}}</b>
+                            <b>${{ rangeValues[1]}}</b>
                         </div>
                     </ng-container>
                 </div>
@@ -389,27 +389,27 @@
                     <div class="p-field-checkbox">
                         <p-checkbox name="group2" value="4 Star" [(ngModel)]="selectedRatings" inputId="4star">
                         </p-checkbox>
-                        <label for="4star" class="mx-2">4★ & above</label>
+                        <label for="4star" class="mx-2">4 & above</label>
                     </div>
                     <div class="p-field-checkbox">
                         <p-checkbox name="group2" value="3 Star" [(ngModel)]="selectedRatings" inputId="3star">
                         </p-checkbox>
-                        <label for="3star" class="mx-2">3★ & above</label>
+                        <label for="3star" class="mx-2">3 & above</label>
                     </div>
                     <div class="p-field-checkbox">
                         <p-checkbox name="group2" value="2 Star" [(ngModel)]="selectedRatings" inputId="2star">
                         </p-checkbox>
-                        <label for="2star" class="mx-2">2★ & above</label>
+                        <label for="2star" class="mx-2">2 & above</label>
                     </div>
                     <div class="p-field-checkbox">
                         <p-checkbox name="group2" value="1 Star" [(ngModel)]="selectedRatings" inputId="1star">
                         </p-checkbox>
-                        <label for="1star" class="mx-2">1★ & above</label>
+                        <label for="1star" class="mx-2">1 & above</label>
                     </div>
                 </div>
             </section>
             <div class="apply-button">
-                <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter"
+                <button pButton pRipple type="button" (click)="getDataForFilter()" (click)="showFiterModel=false" label="Apply Filter"
                     class="p-button  filter-button"></button>
             </div>
         </div>

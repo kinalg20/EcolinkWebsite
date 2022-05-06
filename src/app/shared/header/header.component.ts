@@ -7,6 +7,7 @@ import { FetchedHeaderState } from '../../store/state/header.state';
 import { HeaderMenuAction } from '../../store/actions/header.action';
 import { ProductCartComponent } from 'src/app/product-cart/product-cart.component';
 import { HttpErrorResponse } from '@angular/common/http';
+import { CookiesService } from 'src/app/Services/cookies.service';
 
 
 @Component({
@@ -33,7 +34,7 @@ export class HeaderComponent implements OnInit {
   @Select(FetchedHeaderState.getFetchedHeader) headerMenu$!: Observable<any>;
   @Select(FetchedHeaderState.getFetchedHeaderLoad) headerMenuDataLoaded$!: Observable<boolean>;
 
-  constructor(private route: Router, private __apiservice: ApiServiceService, private store: Store, private router: Router) { }
+  constructor(private _cookies: CookiesService, private route: Router, private __apiservice: ApiServiceService, private store: Store, private router: Router) { }
   routes: any = [
     {
       "id": "1",
@@ -78,9 +79,6 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-    setTimeout(() => {
-      console.log("this.homePageData", this.homePageData);
-    }, 1000);
     this.cartCountFunction();
   }
   cartCountFunction() {
@@ -88,6 +86,10 @@ export class HeaderComponent implements OnInit {
       this.__apiservice.getItemFromCart().subscribe((res: any) => {
         this.length = res.data.length;
       })
+    }
+    else {
+      let cookiesdata = this._cookies.GetCartData();
+      this.length= cookiesdata.length;
     }
   }
   profile() {

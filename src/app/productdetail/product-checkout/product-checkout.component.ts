@@ -40,12 +40,16 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
-    private _ShippingApi: ShippingServiceService) { }
+    private _ShippingApi: ShippingServiceService,
+    private router:Router) { }
   ngAfterViewInit(): void {
     
   }
 
   ngOnInit(): void {
+    if(localStorage.getItem('ecolink_user_credential')==null) {
+      this.discountCheck=false;
+    }
     this.checkoutProduct();
     this.getTaxExempt()
     this.getPaypalProductDetail();
@@ -68,23 +72,29 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
         // this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
-
   }
   getTaxExempt() {
     this.__apiservice.getUserProfileDetail().subscribe((res:any)=> {
       this.tax_exempt_user=res.data.tax_exempt;
-      console.log(this.tax_exempt_user);
     })
-    console.log(this.tax_exempt_user)
     setTimeout(() => {
-      if(this.tax_exempt_user!=1) {
+      if(!this.tax_exempt_user) {
         this.taxCheck=true;
         this.__apiservice.getTaxForUser(this.pincode).subscribe((res:any)=> {
            this.rate=res.data.rate;
           console.log(this.rate);
         })
       }
+      else{
+        console.log("false");
+        this.taxCheck=false;
+      }
     }, 1000);
+  }
+  routeToProfile() {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    this.router.onSameUrlNavigation = 'reload';
+    this.router.navigate(['/profile']);
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
@@ -307,15 +317,15 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
     }, 1000);
   }
   couponButton() {
-    this.discountCheck = false;
-    this.couponCheck = true;
-    this.CheckoutProduct.map((res: any) => {
-      console.log(res);
-      res.carts.map((response: any) => {
-        this.couponDiscount += response.product.coupon_discount
-        console.log(this.couponDiscount)
+      this.discountCheck = false;
+      this.couponCheck = true;
+      this.CheckoutProduct.map((res: any) => {
+        console.log(res);
+        res.carts.map((response: any) => {
+          this.couponDiscount += response.product.coupon_discount
+          console.log(this.couponDiscount)
+        })
       })
-    })
   }
   fillformevent(event: any) {
     this.disableOrderButton = event;

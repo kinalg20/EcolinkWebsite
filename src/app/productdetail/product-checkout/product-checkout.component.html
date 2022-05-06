@@ -11,7 +11,7 @@
                         <div *ngIf="showDropdowm">
                             <div class="dropdown">
                                 <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    data-bs-toggle="dropdown" aria-expanded="false" style="width: 100%;">
                                     Choose another address
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -23,6 +23,9 @@
                                                 Address {{i+1}}
                                             </label>
                                         </div>
+                                    </li>
+                                    <li class="d-flex my-3 add-button" (click)="routeToProfile()">
+                                        <p class="m-0" >Add Address</p><i class="fa fa-plus mx-3"></i>
                                     </li>
                                 </ul>
                             </div>

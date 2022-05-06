@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BlogComponent } from '../home/blog/blog.component';
+import { BlogComponent } from './blog/blog.component';
 import { AskChemistComponent } from './Forms/ask-chemist/ask-chemist.component';
 import { FooterComponent } from './footer/footer.component';
 import { GSAProductComponent } from './gsa-product/gsa-product.component';
 import { HeaderComponent } from './header/header.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsRequestComponent } from './Forms/products-request/products-request.component';
 import { SharedComponent } from './shared.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
@@ -19,9 +18,6 @@ const routes: Routes = [
   { path: 'thanks', component: ThankYouComponent },
   { path: 'failure', component: OrderFailComponent },
   { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
-  // { path : 'info/:slug', component: BlogComponent},
-  // { path: 'not-found', component: PageNotFoundComponent, pathMatch: 'full', },
-  // { path: '**', redirectTo: '/not-found' },
   { path: 'shops', component: GSAProductComponent }
 ];
 
