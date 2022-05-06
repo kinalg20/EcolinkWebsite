@@ -15,6 +15,7 @@ export class ProfileDashboardComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   @Output() itemEvent = new EventEmitter<any>();
   resSignupMsg: string = '';
+  searchItem: string = '';
   shimmerLoad: boolean = true;
   tabCheck: boolean = true
   profileAddress: any = [];
@@ -27,12 +28,14 @@ export class ProfileDashboardComponent implements OnInit {
   allUserAddresses: any = [];
   orderData: any = [];
   orderHistoryDesc: any = [];
+  searchProductArray: any = [];
   storeObj: any;
   passwrodCheck: boolean = false
   userObj1: any = []
   show: boolean = true;
   resSignupMsgCheck: string = ' ';
-  // showDetails: boolean=true;
+  suggestions: boolean = false;
+  order: any = [];
   @Input() showdesc: any;
   constructor(private __apiservice: ApiServiceService, private scroller: ViewportScroller, private renderer: Renderer2, private router: Router) {
   }
@@ -205,10 +208,17 @@ export class ProfileDashboardComponent implements OnInit {
     }
   }
   getOrderhistory() {
+    let product_search: any;
     this.__apiservice.getOrderData().subscribe((res: any) => {
       setTimeout(() => {
-        console.log("oderhistory", res);
-        this.orderData = res;
+        this.orderData = res.data;
+        this.order = res.data;
+        res.data.map((resp: any) => {
+          resp.items.map((response: any) => {
+            product_search = response.product;
+          })
+          this.searchProductArray.push(product_search);
+        })
       }, 1000);
     })
   }
@@ -227,8 +237,6 @@ export class ProfileDashboardComponent implements OnInit {
     })
   }
   getReturnProduct() {
-    //  this.orderData.data[0].user_id
-    //  console.log(this.orderData.data[0].user_id)
     this.__apiservice.getReturnOrder().subscribe(res => {
       setTimeout(() => {
         console.log("returndata", res)
@@ -296,7 +304,7 @@ export class ProfileDashboardComponent implements OnInit {
       }
     }
   }
-  ngAfterViewInit() { }
+  // ngAfterViewInit() { }
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
@@ -313,5 +321,58 @@ export class ProfileDashboardComponent implements OnInit {
     this.orderHistoryDesc.push(i)
     console.log(this.orderHistoryDesc)
     this.show = !this.show;
+  }
+
+  getselecteddata(value: any) {
+    console.log(value);
+    this.searchItem = value;
+    this.suggestions = false;
+  }
+
+  getSuggestions() {
+
+    if (this.searchItem.length > 0) {
+      this.suggestions = true;
+    }
+
+    else {
+      this.suggestions = false;
+      this.orderData = this.order;
+    }
+
+  }
+
+  FetchSearchedData() {
+    let product_search: any;
+    this.orderData = []
+    this.order.map((res: any) => {
+      res.items.filter((resp: any) => {
+        product_search = '';
+        if (resp.product.name.includes(this.searchItem)) {
+          product_search = res;
+        }
+
+        if (product_search) {
+          console.log(product_search);
+          this.orderData.push(product_search);
+        }
+
+        console.log(this.orderData);
+        
+      })
+    })
+
+    // this.orderData = [];
+    // this.orderData.data.map((res:any)=>{
+    //   res.data.map((resp: any) => {
+    //     resp.items.map((response: any) => {
+    //       if(response.product.name === this.searchItem){
+    //         product_search = resp.product;
+    //       }
+    //       console.log(product_search);
+    //     })
+    //     // this.orderData.push(product_search);
+    //   })
+    // })
   }
 }
