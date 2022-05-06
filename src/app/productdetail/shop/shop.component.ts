@@ -16,7 +16,7 @@ export class ShopComponent implements OnInit {
   cart_obj: any = []
   previousdata: any;
   test_slug:any;
-  variant:any;
+  variant:any=[];
   recommended_products: any = [];
   detailSlug: any;
   shimmerLoad:boolean= true;
@@ -77,7 +77,7 @@ export class ShopComponent implements OnInit {
         this.stock=res.data.product.stock;
         console.log(res);
         res.data.variants.map((res:any)=> {
-          this.variant=res.variant;
+          this.variant.push(res.variant);
           this.test_slug=res.slug;
         })
         console.log(this.test_slug);
