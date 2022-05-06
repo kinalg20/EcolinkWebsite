@@ -65,9 +65,9 @@
                             {{detail.data.product.variant}}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li *ngFor="let item of variant">
-                                <p class="dropdown-item" (click)="routeOnSamePage()">
-                                    {{item}}</p>
+                            <li *ngFor="let item of detail.data.variants">
+                                <p class="dropdown-item" (click)="routeOnSamePage(item.slug)">
+                                    {{item.variant}}</p>
                             </li>
                         </ul>
                     </div>

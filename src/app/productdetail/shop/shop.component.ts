@@ -16,7 +16,6 @@ export class ShopComponent implements OnInit {
   cart_obj: any = []
   previousdata: any;
   test_slug:any;
-  variant:any=[];
   recommended_products: any = [];
   detailSlug: any;
   shimmerLoad:boolean= true;
@@ -75,12 +74,6 @@ export class ShopComponent implements OnInit {
         this.productDetail.push(res);
         this.minimum_qyt=res.data.product.minimum_qty;
         this.stock=res.data.product.stock;
-        console.log(res);
-        res.data.variants.map((res:any)=> {
-          this.variant.push(res.variant);
-          this.test_slug=res.slug;
-        })
-        console.log(this.test_slug);
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
         this.ItemCount = this.minimum_qyt;
@@ -136,10 +129,10 @@ export class ShopComponent implements OnInit {
   }
 
   
-  routeOnSamePage() {
+  routeOnSamePage(slug:any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/shop/' + this.slug.category + '/' + this.test_slug]);
+    this.router.navigate(['/shop/' + this.slug.category + '/' + slug]);
   }
 
 }
