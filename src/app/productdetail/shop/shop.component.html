@@ -65,14 +65,14 @@
                             {{detail.data.product.variant}}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li>
+                            <li *ngFor="let item of variant">
                                 <p class="dropdown-item" (click)="routeOnSamePage()">
-                                    {{variant}}</p>
+                                    {{item}}</p>
                             </li>
                         </ul>
                     </div>
                     <div class="cart">
-                        <div class="add-to-cart">
+                        <div class="add-to-cart"> 
                             <div class="counter">
                                 <button (click)="Count('decrease')">-</button>
                                 <p>{{ItemCount}}</p>
