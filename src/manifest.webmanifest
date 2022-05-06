@@ -1,0 +1,17 @@
+{
+  "name": "Ecolink",
+  "short_name": "Ecolink",
+  "theme_color": "#1976d2",
+  "background_color": "#fafafa",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-33.png",
+      "sizes": "",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ]
+}

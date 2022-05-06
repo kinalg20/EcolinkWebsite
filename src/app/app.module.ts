@@ -16,6 +16,7 @@ import { SharelibraryModule } from './sharelibrary/sharelibrary.module';
 import { FetchedHeaderState } from './store/state/header.state';
 import {FetchedCategoriesState} from './store/state/category.state'
 import { environment } from 'src/environments/environment';
+import { ServiceWorkerModule } from '@angular/service-worker';
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,7 +32,13 @@ import { environment } from 'src/environments/environment';
     ToastrModule.forRoot(),
     NgxsModule.forRoot([FetchedHeaderState , FetchedCategoriesState] , { developmentMode: !environment.production }),
     NgxsLoggerPluginModule.forRoot(),
-    NgxsReduxDevtoolsPluginModule.forRoot()
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      // Register the ServiceWorker as soon as the application is stable
+      // or after 30 seconds (whichever comes first).
+      registrationStrategy: 'registerWhenStable:30000'
+    })
   ],
   providers: [ApiServiceService,AuthGuard],
   bootstrap: [AppComponent]
