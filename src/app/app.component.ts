@@ -1,5 +1,4 @@
 import { Component, HostListener } from '@angular/core';
-import { PwaService } from './pwa.service';
 
 @Component({
   selector: 'app-root',
@@ -11,57 +10,49 @@ export class AppComponent {
   deferredPrompt: any;
   showButton = false;
   addHomeScreenbtn: boolean = true
-  isShow: boolean = true;
+  isShow: boolean=true;
   topPosToStartShowing = 100;
-  private promptEvent: any;
-  Pwa: any;
-  constructor(private pwaService: PwaService) { }
-
-
-  // @HostListener('window:beforeinstallprompt', ['$event'])
-  // onbeforeinstallprompt(e: any) {
-  //   console.log(e);
-  //   // Prevent Chrome 67 and earlier from automatically showing the prompt
-  //   e.preventDefault();
-  //   // Stash the event so it can be triggered later.
-  //   this.deferredPrompt = e;
-  //   this.showButton = true;
-  // }
-  // @HostListener('window:scroll')
-  // checkScroll() {
-  //   const scrollPosition =
-  //     window.pageYOffset ||
-  //     document.documentElement.scrollTop ||
-  //     document.body.scrollTop ||
-  //     0;
-
-  //   if (scrollPosition >= this.topPosToStartShowing) {
-  //     this.isShow = true;
-  //   } else {
-  //     this.isShow = false;
-  //   }
-  // }
-  // ngOnInit() {
-  //   this.addToHomeScreen()
-  // }
-  public addToHomeScreen(): void {
-    // // hide our user interface that shows our A2HS button
-    // this.showButton = false;
-    // // Show the prompt
-    // this.deferredPrompt.prompt();
-    // // Wait for the user to respond to the prompt
-    // this.deferredPrompt.userChoice
-    //   .then((choiceResult: any) => {
-    //     if (choiceResult.outcome === 'accepted') {
-    //       console.log('User accepted the A2HS prompt');
-    //       this.addHomeScreenbtn = false;
-    //     } else {
-    //       console.log('User dismissed the A2HS prompt');
-    //     }
-    //     this.deferredPrompt = null;
-    //   });
+  @HostListener('window:beforeinstallprompt', ['$event'])
+  onbeforeinstallprompt(e: any) {
+    console.log(e);
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    this.deferredPrompt = e;
+    this.showButton = true;
   }
-  installPwa(): void {
-    this.Pwa.promptEvent.prompt();
+  @HostListener('window:scroll')
+  checkScroll() {
+    const scrollPosition =
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0;
+
+    if (scrollPosition >= this.topPosToStartShowing) {
+      this.isShow = true;
+    } else {
+      this.isShow = false;
+    }
+  }
+  ngOnInit() {
+    this.addToHomeScreen()
+  }
+  public addToHomeScreen(): void {
+    // hide our user interface that shows our A2HS button
+    this.showButton = false;
+    // Show the prompt
+    this.deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    this.deferredPrompt.userChoice
+      .then((choiceResult: any) => {
+        if (choiceResult.outcome === 'accepted') {
+          console.log('User accepted the A2HS prompt');
+          this.addHomeScreenbtn = false;
+        } else {
+          console.log('User dismissed the A2HS prompt');
+        }
+        this.deferredPrompt = null;
+      });
   }
 }
