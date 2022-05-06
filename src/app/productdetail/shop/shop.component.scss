@@ -87,7 +87,6 @@
                 border-color: none;
             }
             .dropdown-menu.show {
-                height: 50px;
                 cursor: pointer;
             }
         }
@@ -96,7 +95,6 @@
             align-items: center;
 
             .counter {
-
                 display: flex;
                 p {
                     margin: 0 10px;
@@ -327,11 +325,10 @@
                 }
                 li {
                     p {
-                    font-size: 0.8rem;
+                        font-size: 0.8rem;
                     }
                 }
                 .dropdown-menu.show {
-                    height: 30px;
                     padding: 0;
                 }
             }
@@ -399,7 +396,6 @@
 
 @media (max-width: 600px) {
     .product-detail-section {
-
         // grid-template-columns: 35% 60%;
         // padding: 15px;
         .product-detail {
@@ -449,7 +445,12 @@
 
         .product-detail {
             margin: 10px 0;
-
+            .dropdown {
+                button {
+                    font-size: 0.8rem;
+                    padding: 6px 10px;
+                }
+            }
             .add-to-cart .counter button {
                 height: 30px;
                 width: 30px;

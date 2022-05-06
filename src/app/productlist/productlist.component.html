@@ -76,14 +76,12 @@
                             </li>
                         </ul>
                         <div class="sort-by-search">
-
                             <div class="dropdown">
                                 <select (change)="selected($event)" class="form-select">
                                     <option selected>Default</option>
                                     <option *ngFor="let item of popularity" [value]="item.slug">{{item.name}}</option>
                                 </select>
                             </div>
-
                             <span class="p-input-icon-left">
                                 <i class="pi pi-search" (click)="getselecteddata(value1)"></i>
                                 <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
@@ -409,8 +407,8 @@
                 </div>
             </section>
             <div class="apply-button">
-                <button pButton pRipple type="button" (click)="getDataForFilter()" (click)="showFiterModel=false" label="Apply Filter"
-                    class="p-button  filter-button"></button>
+                <button pButton pRipple type="button" (click)="getDataForFilter()" (click)="showFiterModel=false"
+                    label="Apply Filter" class="p-button  filter-button"></button>
             </div>
         </div>
     </div>
