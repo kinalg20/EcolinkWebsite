@@ -37,11 +37,11 @@
                 <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" style="justify-content: space-between;
                 display: flex;">
                     {{ resSignupMsg }}
-                    <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+                    <span class="icon-class"><i class="fa fa-close" (click)="close()"  style="cursor: pointer;"></i></span>
                 </div>
                 <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert">
                     {{ resSignupMsg }}
-                    <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+                    <span class="icon-class"><i class="fa fa-close" (click)="close()" style="cursor: pointer;"></i></span>
                 </div>
             </ng-container>
         <div class="row mb-3">

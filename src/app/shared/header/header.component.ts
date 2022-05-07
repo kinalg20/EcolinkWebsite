@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   user_id: any;
   openMenu: boolean = false;
   openSubmenu: boolean = false;
+  opensubSubmenu: boolean = false;
   homePageData: any = [];
   slug: any;
   data: any = []
@@ -85,20 +86,14 @@ export class HeaderComponent implements OnInit {
     this.cartCountFunction();
   }
   cartCountFunction() {
-    if (localStorage.getItem('ecolink_user_credential') != null) {
+    if(localStorage.getItem('ecolink_user_credential')!=null) {
       this.__apiservice.getItemFromCart().subscribe((res: any) => {
         this.length = res.data.length;
       })
     }
     else {
       let cookiesdata = this._cookies.GetCartData();
-      if (cookiesdata! != 'empty') {
-        this.length = cookiesdata.length;
-      }
-
-      else{
-        this.length = 0;
-      }
+      this.length= cookiesdata.length;
     }
   }
   profile() {
@@ -115,6 +110,9 @@ export class HeaderComponent implements OnInit {
 
   openDropDown() {
     this.openSubmenu = !this.openSubmenu
+  }
+  opensubDropDown() {
+    this.opensubSubmenu = !this.opensubSubmenu
   }
 
   getSuggestion(data: any) {

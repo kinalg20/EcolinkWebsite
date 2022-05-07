@@ -129,16 +129,23 @@
             <i *ngIf="item.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
             </a>
 
-            <div class="open-menu-responsive" *ngIf="openSubmenu">
+            <div class="open-menu-responsive">
                 <ul class="sub-link-responsive" *ngIf="item.subpage">
-                    <li class="sub-link" *ngFor="let sublink of item.subpage">
-                        <a (click)="routeOnSamePage(item.slug , sublink.slug)">{{sublink.title| uppercase}}</a>
+                    <li class="sub-link" *ngFor="let sublink of item.subpage" (click)="opensubDropDown()">
+                        <ng-container *ngIf="openSubmenu">
+                            <a *ngIf="sublink.subpage.length==0" (click)="routeOnSamePage(item.slug , sublink.slug)" >{{sublink.title| uppercase}}</a>
+                            <a *ngIf="sublink.subpage.length!=0">{{sublink.title| uppercase}}
+                                <i *ngIf="sublink.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
+                                </a>
+                        </ng-container>
                         <ul *ngIf="sublink.subpage.length>0" class="sub-sub-link">
                             <div class="sub-sub-link-responsive">
                                 <ng-container *ngFor="let subsublink of sublink.subpage">
                                     <li class="sub-sub-link-title">
-                                        <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
-                                            uppercase}}</a>
+                                        <ng-container *ngIf="opensubSubmenu">
+                                            <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
+                                                uppercase}}</a>
+                                        </ng-container>
                                     </li>
                                 </ng-container>
                             </div>

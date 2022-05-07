@@ -51,7 +51,7 @@ export class BillingFormComponent implements OnInit {
             console.log(res);
             if (res.code == 200) {
               window.scroll(0, 0)
-              this.resSignupMsg = res.message
+              this.resSignupMsg = res.message;
               this.resSignupMsgCheck = 'success'
               localStorage.setItem(
                 'ecolink_user_credential',
@@ -91,7 +91,7 @@ export class BillingFormComponent implements OnInit {
     else {
       this.resSignupMsg = 'Please fill the form';
       this.resSignupMsgCheck = 'danger';
-      window.scroll(0,0);
+      window.scroll(0, 0);
     }
   }
 
@@ -164,9 +164,9 @@ export class BillingFormComponent implements OnInit {
     if (form.valid) {
       let data = Object.assign({}, form.value);
       this.userObj = {
-        name: data.name, //
-        email: data.email, // 
-        mobile: data.mobile, //
+        name: data.name,
+        email: data.email,
+        mobile: data.mobile,
         landmark: data.landmark,
         address: data.streetaddress,
         country: data.countryname,
@@ -178,9 +178,14 @@ export class BillingFormComponent implements OnInit {
       this.__apiservice.addUserAddresses(this.userObj).subscribe(
         (res) => {
           console.log(res);
-          this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-          // this.route.onSameUrlNavigation = 'reload';
-          this.route.navigate(['/shop/checkout']);
+          if (res.code == 200) {
+            this.resSignupMsgCheck = 'success';
+            this.resSignupMsg = res.message;
+            window.scroll(0,0)
+            this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+            // this.route.onSameUrlNavigation = 'reload';
+            this.route.navigate(['/shop/checkout']);
+          }
         },
 
         (error: HttpErrorResponse) => {

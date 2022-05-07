@@ -9,7 +9,6 @@ import { MediaComponent } from '../shared/media/media.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: ':slug', component: HomeComponent },
   { path : 'banner', component: HomeBannerComponent},
   { path : 'about-us', component: AboutUsComponent},
   { path : 'info', component: MediaComponent},
