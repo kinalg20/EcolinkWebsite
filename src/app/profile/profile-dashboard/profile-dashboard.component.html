@@ -16,7 +16,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="card profile-section">
                         <div class="profile-image">
-                            <img src="item.profile_image ? item.profile_image : 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png'"
+                            <img [src]="item.profile_image ? item.profile_image : 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png'"
                                 alt="">
                         </div>
                         <div class="profile-desc">
@@ -160,6 +160,14 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <label for="image">Profile Image</label>
+                        <input class="form-control" type="file" id="image" autocomplete="off" name="profile_image" (change)="GetFileChange($event)" [(ngModel)]="item.profile_image"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" ngModel
                         name="checkbox" type="checkbox" value="" id="flexCheckDefault">
@@ -181,14 +189,22 @@
     <h2>Order History</h2>
     <div class="order-history-header">
         <div class="search-ordered-item">
-            <input type="text" pInputText placeholder="Search Ordered Item...." />
-            <button pButton pRipple type="button" label="Search" class="p-button-success"></button>
+            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem"
+                (input)="getSuggestions()" />
+            <button pButton pRipple type="button" label="Search" class="p-button-success"
+                (click)="FetchSearchedData()"></button>
+        </div>
+        <div class="card history_product_search" *ngIf="suggestions">
+            <ul *ngFor="let i of searchProductArray | searchPipe : searchItem">
+                <li (click)="getselecteddata(i.name)">{{i.name}}</li>
+            </ul>
         </div>
     </div>
+    
     <!-- list-card -->
     <div class="history-list-card">
         <div class="row" *ngIf="show">
-            <ng-container *ngFor="let data of orderData.data">
+            <ng-container *ngFor="let data of orderData">
                 <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6" *ngFor="let i of data.items">
                     <div class="card">
                         <div class="history-image">
@@ -196,14 +212,23 @@
                         </div>
                         <div class="history-desc">
                             <div class="product-details">
-                                <h6 class="head">{{i.product.name.slice(0,50)}}</h6>
-                                <p class="desc"> {{i.product.meta_description}}</p>
+                                <h6 class="head">{{i.product.name.slice(0,30) + '...'}}</h6>
+                                <!-- <p class="desc"> {{i.product.meta_description}}</p> -->
                                 <div class="history-data">
                                     <p class="qty">Qty: {{i.quantity}}</p>
                                     <span class="price">${{data.total_amount}}</span>
                                 </div>
-                                <h6 class="status">{{data.order_status}}</h6>
-                                <button type="button" (click)="showDeatils(data)" class="more-btn">Show More</button>
+                                <div class="history-data">
+                                    <h6 class="status">{{data.order_status}}</h6>
+                                    <h6 class="status">{{data.created_at | date:"dd/MM/yyyy"}}</h6>
+
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" (click)="showDeatils(data)" class="more-btn">Show
+                                        More</button>
+                                    <button type="button" class="cancel-btn" *ngIf="data.payment_via=='cod'">Cancel
+                                        Order</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -333,28 +358,6 @@
                     <div class="crud-btn">
                         <p (click)="getUserDetail(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</p>
                         <p (click)="deleteUserAddress(item.id)">Delete</p>
-                        <!-- <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Delete Address</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        Are you sure, you want to delete this address??
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary"
-                                            data-bs-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
-                                            >Delete</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
-                        <!-- <p>Set as default</p> -->
                     </div>
                 </div>
             </div>

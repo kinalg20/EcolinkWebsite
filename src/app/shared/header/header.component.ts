@@ -22,6 +22,7 @@ export class HeaderComponent implements OnInit {
   user_id: any;
   openMenu: boolean = false;
   openSubmenu: boolean = false;
+  opensubSubmenu: boolean = false;
   homePageData: any = [];
   slug: any;
   data: any = []
@@ -79,6 +80,9 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
+    setTimeout(() => {
+      console.log("this.homePageData", this.homePageData);
+    }, 1000);
     this.cartCountFunction();
   }
   cartCountFunction() {
@@ -105,7 +109,12 @@ export class HeaderComponent implements OnInit {
   }
 
   openDropDown() {
+    console.log('category')
     this.openSubmenu = !this.openSubmenu
+  }
+  opensubDropDown() {
+    console.log('subcategory')
+    this.opensubSubmenu = !this.opensubSubmenu
   }
 
   getSuggestion(data: any) {

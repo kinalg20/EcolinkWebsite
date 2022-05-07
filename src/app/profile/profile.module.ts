@@ -12,6 +12,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { HttpClientModule } from '@angular/common/http';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
+import { BrowserModule } from '@angular/platform-browser';
+import { ProductlistModule } from '../productlist/productlist.module';
 
 
 @NgModule({
@@ -28,7 +30,8 @@ import { GoogleLoginProvider } from 'angularx-social-login';
     FormsModule,
     SharedModule,
     HttpClientModule,
-    SocialLoginModule
+    SocialLoginModule,
+    ProductlistModule
   ],
   providers: [
     {
