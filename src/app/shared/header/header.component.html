@@ -72,8 +72,7 @@
             <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
         </button>
         <div class="cart-icon">
-            <i class="fa fa-shopping-cart text-white" routerLink="/cart"></i><span
-                *ngIf="length>0">{{length}}</span>
+            <i class="fa fa-shopping-cart text-white" routerLink="/cart"></i><span *ngIf="length>0">{{length}}</span>
         </div>
     </div>
 </section>
@@ -123,35 +122,36 @@
 </div>
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData" class="responsive-menu">
-        <li class="parent-menu" (click)="openDropDown()">
+        <li class="parent-menu">
             <a *ngIf="item.subpage.length==0" (click)="routeOnSamePage(item.slug)">{{item.title| uppercase}}</a>
-            <a *ngIf="item.subpage.length!=0">{{item.title| uppercase}}
-            <i *ngIf="item.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
+            <a *ngIf="item.subpage.length!=0" (click)="openDropDown()">{{item.title| uppercase}}
+                <i *ngIf="item.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
             </a>
-
             <div class="open-menu-responsive">
-                <ul class="sub-link-responsive" *ngIf="item.subpage">
-                    <li class="sub-link" *ngFor="let sublink of item.subpage" (click)="opensubDropDown()">
-                        <ng-container *ngIf="openSubmenu">
-                            <a *ngIf="sublink.subpage.length==0" (click)="routeOnSamePage(item.slug , sublink.slug)" >{{sublink.title| uppercase}}</a>
+                <ng-container *ngIf="openSubmenu">
+                    <ul class="sub-link-responsive" *ngIf="item.subpage">
+                        <li class="sub-link" *ngFor="let sublink of item.subpage" (click)="opensubDropDown()">
+                            <a *ngIf="sublink.subpage.length==0"
+                                (click)="routeOnSamePage(item.slug , sublink.slug)">{{sublink.title| uppercase}}</a>
                             <a *ngIf="sublink.subpage.length!=0">{{sublink.title| uppercase}}
                                 <i *ngIf="sublink.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
-                                </a>
-                        </ng-container>
-                        <ul *ngIf="sublink.subpage.length>0" class="sub-sub-link">
+                            </a>
                             <div class="sub-sub-link-responsive">
-                                <ng-container *ngFor="let subsublink of sublink.subpage">
-                                    <li class="sub-sub-link-title">
-                                        <ng-container *ngIf="opensubSubmenu">
-                                            <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
-                                                uppercase}}</a>
+                                <ng-container *ngIf="opensubSubmenu">
+                                    <ul *ngIf="sublink.subpage.length>0" class="sub-sub-link">
+                                        <ng-container *ngFor="let subsublink of sublink.subpage">
+                                            <li class="sub-sub-link-title">
+                                                <a
+                                                    (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
+                                                    uppercase}}</a>
+                                            </li>
                                         </ng-container>
-                                    </li>
+                                    </ul>
                                 </ng-container>
                             </div>
-                        </ul>
-                    </li>
-                </ul>
+                        </li>
+                    </ul>
+                </ng-container>
             </div>
         </li>
     </ul>

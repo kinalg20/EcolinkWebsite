@@ -109,9 +109,11 @@ export class HeaderComponent implements OnInit {
   }
 
   openDropDown() {
+    console.log('category')
     this.openSubmenu = !this.openSubmenu
   }
   opensubDropDown() {
+    console.log('subcategory')
     this.opensubSubmenu = !this.opensubSubmenu
   }
 
