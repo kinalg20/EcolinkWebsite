@@ -15,6 +15,7 @@ export class ProfileDashboardComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   @Output() itemEvent = new EventEmitter<any>();
   resSignupMsg: string = '';
+  searchItem: string = '';
   shimmerLoad: boolean = true;
   tabCheck: boolean = true
   profileAddress: any = [];
@@ -27,12 +28,14 @@ export class ProfileDashboardComponent implements OnInit {
   allUserAddresses: any = [];
   orderData: any = [];
   orderHistoryDesc: any = [];
+  searchProductArray: any = [];
   storeObj: any;
   passwrodCheck: boolean = false
   userObj1: any = []
   show: boolean = true;
   resSignupMsgCheck: string = ' ';
-  // showDetails: boolean=true;
+  suggestions: boolean = false;
+  order: any = [];
   @Input() showdesc: any;
   constructor(private __apiservice: ApiServiceService, private scroller: ViewportScroller, private renderer: Renderer2, private router: Router) {
   }
@@ -45,7 +48,7 @@ export class ProfileDashboardComponent implements OnInit {
         setTimeout(() => {
           res.firstname = res.name.split(" ")[0]
           res.lastname = res.name.split(" ")[1]
-          console.log(res);
+          console.log("res", res);
         }, 1000);
       })
       console.log(this.userDetail);
@@ -205,10 +208,17 @@ export class ProfileDashboardComponent implements OnInit {
     }
   }
   getOrderhistory() {
+    let product_search: any;
     this.__apiservice.getOrderData().subscribe((res: any) => {
       setTimeout(() => {
-        console.log("oderhistory", res);
-        this.orderData = res;
+        this.orderData = res.data;
+        this.order = res.data;
+        res.data.map((resp: any) => {
+          resp.items.map((response: any) => {
+            product_search = response.product;
+          })
+          this.searchProductArray.push(product_search);
+        })
       }, 1000);
     })
   }
@@ -227,36 +237,52 @@ export class ProfileDashboardComponent implements OnInit {
     })
   }
   getReturnProduct() {
-    //  this.orderData.data[0].user_id
-    //  console.log(this.orderData.data[0].user_id)
     this.__apiservice.getReturnOrder().subscribe(res => {
       setTimeout(() => {
         console.log("returndata", res)
       }, 1000);
     })
   }
+
+  header : any;
   editUserProfile(form: NgForm) {
     if (!(this.passwrodCheck)) {
       if (form.valid) {
+        let formData1 = new FormData();
         let data = Object.assign({}, form.value);
-        this.userObj = {
-          name: data.firstname + ' ' + data.lastname,
-          email: data.email,
-          mobile: data.phonenumber,
-          address: data.address,
-          country: data.country,
-          state: data.state,
-          city: data.city,
-          pincode: data.pincode
-        };
-        console.log(this.userObj);
-        this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
+        this.header = localStorage.getItem('ecolink_user_credential');
+        let user_id = JSON.parse(this.header).user_id;
+        formData1.append('profile_image', this.file);
+        formData1.append('name', data.firstname + ' ' + data.lastname);
+        formData1.append('email', data.email);
+        formData1.append('mobile', data.phonenumber);
+        // formData1.append('password', data.password);
+        formData1.append('address', data.address);
+        formData1.append('country', data.country);
+        formData1.append('state', data.state);
+        formData1.append('city', data.city);
+        formData1.append('pincode', data.pincode);
+        formData1.append('user_id', user_id);
+        // console.log(formData1.get('profile_image'));
+        // this.userObj = {
+        //   name: data.firstname + ' ' + data.lastname,
+        //   email: data.email,
+        //   mobile: data.phonenumber,
+        //   address: data.address,
+        //   country: data.country,
+        //   state: data.state,
+        //   city: data.city,
+        //   pincode: data.pincode,
+        //   user_id : user_id
+        // };
+        // console.log(this.userObj);
+
+        this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
           console.log(res);
           form.reset();
           this.resSignupMsg = 'Profile Edited Successfully!';
           this.resSignupMsgCheck = 'success';
-        }
-        )
+        })
       }
       else {
         this.resSignupMsgCheck = 'danger';
@@ -296,7 +322,7 @@ export class ProfileDashboardComponent implements OnInit {
       }
     }
   }
-  ngAfterViewInit() { }
+  // ngAfterViewInit() { }
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
@@ -313,5 +339,78 @@ export class ProfileDashboardComponent implements OnInit {
     this.orderHistoryDesc.push(i)
     console.log(this.orderHistoryDesc)
     this.show = !this.show;
+  }
+
+  getselecteddata(value: any) {
+    console.log(value);
+    this.searchItem = value;
+    this.suggestions = false;
+  }
+
+  getSuggestions() {
+
+    if (this.searchItem.length > 0) {
+      this.suggestions = true;
+    }
+
+    else {
+      this.suggestions = false;
+      this.orderData = this.order;
+    }
+
+  }
+
+  FetchSearchedData() {
+    let product_search: any;
+    this.orderData = []
+    this.order.map((res: any) => {
+      res.items.filter((resp: any) => {
+        product_search = '';
+        if (resp.product.name.includes(this.searchItem)) {
+          product_search = res;
+        }
+
+        if (product_search) {
+          console.log(product_search);
+          this.orderData.push(product_search);
+        }
+
+        console.log(this.orderData);
+
+      })
+    })
+
+    // this.orderData = [];
+    // this.orderData.data.map((res:any)=>{
+    //   res.data.map((resp: any) => {
+    //     resp.items.map((response: any) => {
+    //       if(response.product.name === this.searchItem){
+    //         product_search = resp.product;
+    //       }
+    //       console.log(product_search);
+    //     })
+    //     // this.orderData.push(product_search);
+    //   })
+    // })
+  }
+
+
+  file: any = null;
+  fileUrl: any;
+  max_error_front_img: string = '';
+  GetFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files[0].size < 2000000) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => this.fileUrl = e.target.result;
+        reader.readAsDataURL(event.target.files[0]);
+        this.file = event.target.files[0];
+        this.max_error_front_img = "";
+      } else {
+        this.max_error_front_img = "Max file upload size to 2MB";
+        this.fileUrl = 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png';
+        this.file = null;
+      }
+    }
   }
 }

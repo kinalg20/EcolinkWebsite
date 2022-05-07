@@ -6,13 +6,15 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { SearchPipePipe } from '../custom-pipe/search-pipe.pipe';
-import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
 
+const exportdata: any = [
+  SearchPipePipe
+]
 
 @NgModule({
   declarations: [
     ProductlistComponent,
-    SearchPipePipe
+    ...exportdata
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,9 @@ import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
     SharelibraryModule,
     FormsModule,
     SharedModule,
+  ],
+  exports : [
+    ...exportdata
   ]
 
 })
