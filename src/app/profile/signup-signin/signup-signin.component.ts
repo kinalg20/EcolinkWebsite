@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { SocialAuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
@@ -33,7 +33,7 @@ export class SignupSigninComponent implements OnInit {
   resSignupMsgCheck: string = ' ';
   resMsg: string = '';
   errMsg = [];
-  constructor(private router: Router, private renderer: Renderer2, private scroller: ViewportScroller, private __apiservice: ApiServiceService, private authService: SocialAuthService) { }
+  constructor(private router: Router, private renderer: Renderer2, private scroller: ViewportScroller, private __apiservice: ApiServiceService, private authService: SocialAuthService, private route :ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -109,24 +109,28 @@ export class SignupSigninComponent implements OnInit {
       formData.append('password', data.password);
       formData.append('address', data.address);
       formData.append('country', data.country);
-      formData.append('state',  data.state);
+      formData.append('state', data.state);
       formData.append('city', data.city);
       formData.append('pincode', data.pincode);
       formData.append('tax_exempt', data.radio2);
 
 
       this.taxCalculate = data.radio2
+
       this.__apiservice.post(formData).subscribe(
         (res) => {
           console.log(res);
           if (res.code == 200) {
+            if (res.data.user.remember_token) {
+              this.resSignupMsgCheck = 'success';
+              this.resSignupMsg = 'Verification mail has been sent to your Email Id !'
+            }
             this.resSignupMsg = res.message;
             this.resSignupMsgCheck = 'success';
             localStorage.setItem(
               'ecolink_user_credential',
               JSON.stringify(res.data)
             );
-            this.router.navigateByUrl('/');
           }
 
           else {

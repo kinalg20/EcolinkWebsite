@@ -79,17 +79,26 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
+    setTimeout(() => {
+      console.log("this.homePageData", this.homePageData);
+    }, 1000);
     this.cartCountFunction();
   }
   cartCountFunction() {
-    if(localStorage.getItem('ecolink_user_credential')!=null) {
+    if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getItemFromCart().subscribe((res: any) => {
         this.length = res.data.length;
       })
     }
     else {
       let cookiesdata = this._cookies.GetCartData();
-      this.length= cookiesdata.length;
+      if (cookiesdata! != 'empty') {
+        this.length = cookiesdata.length;
+      }
+
+      else{
+        this.length = 0;
+      }
     }
   }
   profile() {
