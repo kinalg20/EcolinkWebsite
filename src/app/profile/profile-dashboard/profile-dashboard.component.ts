@@ -48,7 +48,7 @@ export class ProfileDashboardComponent implements OnInit {
         setTimeout(() => {
           res.firstname = res.name.split(" ")[0]
           res.lastname = res.name.split(" ")[1]
-          console.log(res);
+          console.log("res", res);
         }, 1000);
       })
       console.log(this.userDetail);
@@ -243,28 +243,46 @@ export class ProfileDashboardComponent implements OnInit {
       }, 1000);
     })
   }
+
+  header : any;
   editUserProfile(form: NgForm) {
     if (!(this.passwrodCheck)) {
       if (form.valid) {
+        let formData1 = new FormData();
         let data = Object.assign({}, form.value);
-        this.userObj = {
-          name: data.firstname + ' ' + data.lastname,
-          email: data.email,
-          mobile: data.phonenumber,
-          address: data.address,
-          country: data.country,
-          state: data.state,
-          city: data.city,
-          pincode: data.pincode
-        };
-        console.log(this.userObj);
-        this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
+        this.header = localStorage.getItem('ecolink_user_credential');
+        let user_id = JSON.parse(this.header).user_id;
+        formData1.append('profile_image', this.file);
+        formData1.append('name', data.firstname + ' ' + data.lastname);
+        formData1.append('email', data.email);
+        formData1.append('mobile', data.phonenumber);
+        // formData1.append('password', data.password);
+        formData1.append('address', data.address);
+        formData1.append('country', data.country);
+        formData1.append('state', data.state);
+        formData1.append('city', data.city);
+        formData1.append('pincode', data.pincode);
+        formData1.append('user_id', user_id);
+        // console.log(formData1.get('profile_image'));
+        // this.userObj = {
+        //   name: data.firstname + ' ' + data.lastname,
+        //   email: data.email,
+        //   mobile: data.phonenumber,
+        //   address: data.address,
+        //   country: data.country,
+        //   state: data.state,
+        //   city: data.city,
+        //   pincode: data.pincode,
+        //   user_id : user_id
+        // };
+        // console.log(this.userObj);
+
+        this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
           console.log(res);
           form.reset();
           this.resSignupMsg = 'Profile Edited Successfully!';
           this.resSignupMsgCheck = 'success';
-        }
-        )
+        })
       }
       else {
         this.resSignupMsgCheck = 'danger';
@@ -358,7 +376,7 @@ export class ProfileDashboardComponent implements OnInit {
         }
 
         console.log(this.orderData);
-        
+
       })
     })
 
@@ -374,5 +392,25 @@ export class ProfileDashboardComponent implements OnInit {
     //     // this.orderData.push(product_search);
     //   })
     // })
+  }
+
+
+  file: any = null;
+  fileUrl: any;
+  max_error_front_img: string = '';
+  GetFileChange(event: any) {
+    if (event.target.files && event.target.files[0]) {
+      if (event.target.files[0].size < 2000000) {
+        const reader = new FileReader();
+        reader.onload = (e: any) => this.fileUrl = e.target.result;
+        reader.readAsDataURL(event.target.files[0]);
+        this.file = event.target.files[0];
+        this.max_error_front_img = "";
+      } else {
+        this.max_error_front_img = "Max file upload size to 2MB";
+        this.fileUrl = 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png';
+        this.file = null;
+      }
+    }
   }
 }
