@@ -20,29 +20,31 @@
             </button>
             <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
-                    <li class="nav-item" *ngFor="let item of homePageData">
-                        <a (click)="routeOnSamePage(item.slug)">{{item.title | uppercase}}</a>
-                        <ul class="header-dropdown" *ngIf="item.subpage.length>0">
-                            <li class="test" *ngFor="let sublink of item.subpage">
-                                <a (click)="routeOnSamePage(item.slug,sublink.slug)">
-                                    <div>{{sublink.title| uppercase}}</div>
-                                </a>
-                                <ul *ngIf="sublink.subpage.length>0" class="sub-header-dropdown">
-                                    <div class="subsublink">
-                                        <ng-container *ngFor="let subsublink of sublink.subpage">
-                                            <li class="test1">
-                                                <a
-                                                    (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">
-                                                    <div>{{subsublink.title|
-                                                        uppercase}}</div>
-                                                </a>
-                                            </li>
-                                        </ng-container>
-                                    </div>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                    <ng-container *ngFor="let item of homePageData">
+                        <li class="nav-item" >
+                            <a (click)="routeOnSamePage(item.slug)">{{item.title | uppercase}}</a>
+                            <ul class="header-dropdown" *ngIf="item.subpage.length>0">
+                                <li class="test" *ngFor="let sublink of item.subpage">
+                                    <a (click)="routeOnSamePage(item.slug,sublink.slug)">
+                                        <div>{{sublink.title| uppercase}}</div>
+                                    </a>
+                                    <ul *ngIf="sublink.subpage.length>0" class="sub-header-dropdown">
+                                        <div class="subsublink">
+                                            <ng-container *ngFor="let subsublink of sublink.subpage">
+                                                <li class="test1">
+                                                    <a
+                                                        (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">
+                                                        <div>{{subsublink.title|
+                                                            uppercase}}</div>
+                                                    </a>
+                                                </li>
+                                            </ng-container>
+                                        </div>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ng-container>
                     <li class="nav-item">
                         <a (click)="profile()" style="cursor: pointer; color: #fff;">
                             <i class="fa fa-user" aria-hidden="true"></i>
