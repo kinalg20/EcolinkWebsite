@@ -8,18 +8,21 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
   styleUrls: ['./media.component.scss']
 })
 export class MediaComponent implements OnInit {
-  getAllBlog:any=[];
-  constructor(private __apiservice:ApiServiceService , private router : Router) { }
+  getAllBlog: any = [];
+  backupBlog: any = [];
+  searchValue: string = '';
+  constructor(private __apiservice: ApiServiceService, private router: Router) { }
 
   ngOnInit(): void {
-    this.__apiservice.getAllBlogs().subscribe(res=> {
-      this.getAllBlog=res;
+    this.__apiservice.getAllBlogs().subscribe(res => {
+      this.getAllBlog = res.data;
+      this.backupBlog = res;
       setTimeout(() => {
         console.log(this.getAllBlog);
       }, 500);
     })
   }
-  
+
   responsiveOptions = [
     {
       breakpoint: '1024px',
@@ -42,5 +45,14 @@ export class MediaComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/' + slug]);
+  }
+  getInputValue() {
+    // window.scroll(1200, 1200)
+    // this.getAllBlog = [];
+    this.backupBlog.data.map((res: any) => {
+      if (res.title.includes(this.searchValue)) {
+        this.router.navigateByUrl('/info/'+res.slug)
+      }
+    })
   }
 }

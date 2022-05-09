@@ -22,8 +22,7 @@ import { CommonModule } from "@angular/common";
 @NgModule({
   declarations: [
     AppComponent,
-    ProductCartComponent,
-    SearchPipePipe
+    ProductCartComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +43,7 @@ import { CommonModule } from "@angular/common";
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [ApiServiceService, AuthGuard , SearchPipePipe],
+  providers: [ApiServiceService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
