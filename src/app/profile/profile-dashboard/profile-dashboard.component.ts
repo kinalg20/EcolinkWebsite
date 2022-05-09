@@ -413,4 +413,8 @@ export class ProfileDashboardComponent implements OnInit {
       }
     }
   }
+
+  orderCancel(id:any){
+    // this.__apiservice.CancelOrderApi(id)
+  }
 }
