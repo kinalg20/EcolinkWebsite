@@ -21,6 +21,7 @@ import { AskChemistComponent } from './Forms/ask-chemist/ask-chemist.component';
 import { SupportFormComponent } from './Forms/support-form/support-form.component';
 import { BulkPricingComponent } from './Forms/bulk-pricing/bulk-pricing.component';
 import { GSAProductComponent } from './gsa-product/gsa-product.component';
+import { PipemoduleModule } from '../pipemodule/pipemodule.module';
 
 const exportdata: any = [
   HeaderComponent,
@@ -56,6 +57,7 @@ const exportdata: any = [
      ],
   imports: [
     CommonModule,
+    PipemoduleModule,
     SharedRoutingModule,
     SharelibraryModule,
     FormsModule,

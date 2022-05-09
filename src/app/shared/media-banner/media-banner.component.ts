@@ -16,8 +16,8 @@ export class MediaBannerComponent implements OnInit {
 
   ngOnInit(): void {
     setTimeout(() => {
-      console.log(this.data_input.data);
-      this.data_input.data.map((res:any)=> {
+      console.log(this.data_input);
+      this.data_input.map((res:any)=> {
         if(this.count<3){
           this.blogArray.push(res);
           this.helperArray.push(res);
@@ -33,7 +33,7 @@ export class MediaBannerComponent implements OnInit {
     this.blogArray=[]
     if(this.moreCheck==false) {
       console.log('more',this.moreCheck);
-      this.data_input.data.map((res:any)=> {
+      this.data_input.map((res:any)=> {
         this.blogArray.push(res);
         console.log(this.blogArray)
       })

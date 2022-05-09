@@ -43,7 +43,7 @@ import { CommonModule } from "@angular/common";
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [ApiServiceService, AuthGuard],
+  providers: [ApiServiceService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
