@@ -11,6 +11,7 @@ export class MediaComponent implements OnInit {
   getAllBlog: any = [];
   backupBlog: any = [];
   searchValue: string = '';
+  showSuggestedList : boolean =false;
   constructor(private __apiservice: ApiServiceService, private router: Router) { }
 
   ngOnInit(): void {
@@ -54,5 +55,13 @@ export class MediaComponent implements OnInit {
         this.router.navigateByUrl('/info/'+res.slug)
       }
     })
+  }
+  getSearchedBlog(){
+    if(this.searchValue.length>0){
+      this.showSuggestedList = true;
+    }
+    else{
+      this.showSuggestedList = false;
+    }
   }
 }

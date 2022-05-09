@@ -19,6 +19,7 @@ import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { SearchPipePipe } from './custom-pipe/search-pipe.pipe';
 import { CommonModule } from "@angular/common";
+import { TitlePipe } from './custom-pipe/title.pipe';
 @NgModule({
   declarations: [
     AppComponent,

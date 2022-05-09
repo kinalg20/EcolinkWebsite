@@ -12,7 +12,7 @@ import { TableModule } from 'primeng/table';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DialogModule } from 'primeng/dialog';
 import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
-import { SearchPipePipe } from '../custom-pipe/search-pipe.pipe';
+import { PipemoduleModule } from '../pipemodule/pipemodule.module';
 
 const exportsharedata: any = [
   CarouselModule,
@@ -26,7 +26,8 @@ const exportsharedata: any = [
   TableModule,
   RadioButtonModule,
   DialogModule,
-  NgxShimmerLoadingModule
+  NgxShimmerLoadingModule,
+  PipemoduleModule
 ]
 @NgModule({
   declarations: [
