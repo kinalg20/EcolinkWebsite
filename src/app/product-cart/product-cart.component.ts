@@ -82,23 +82,26 @@ export class ProductCartComponent implements OnInit {
       }
     }
     else {
-      await this._ApiService.getItemFromCart().then(
-        (res) => {
-          if (res.code == 200) {
-            this.CardShow = res.data;
-            this.subtotal();
-            console.log(this.CardShow);
-            this.CartShimmer = false;
-            this.length = this.CardShow.length;
+      await this._ApiService.getItemFromCart()
+        .then(
+          (res) => {
+            if (res.code == 200) {
+              this.CardShow = res.data;
+              this.subtotal();
+              console.log(this.CardShow);
+              this.CartShimmer = false;
+              this.length = this.CardShow.length;
+            }
+          })
+        .catch(
+          (error) => {
+            if (error.error.code == 400) {
+              this.CardShow = [];
+              this.CartShimmer = false;
+              this.length = 0;
+            }
           }
-        }),
-        (error: HttpErrorResponse) => {
-          if (error.error.code == 400) {
-            this.CardShow = [];
-            this.CartShimmer = false;
-            this.length = 0;
-          }
-        }
+        )
       // this._ApiService.getItemFromCart().subscribe(
       //   res => {
       //     console.log(res.code);
@@ -156,7 +159,6 @@ export class ProductCartComponent implements OnInit {
     else {
       this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
-        // this.updateFunction(product_id , action);
         this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
           return res;
         })
@@ -177,24 +179,19 @@ export class ProductCartComponent implements OnInit {
           this.getCartData();
           this.subtotal();
         }
-        // this.updateFunction(product_id, action);
-        // this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action);
-        // console.log(this.ItemCart);
+      }
 
+      else{
+        this.getCartData();
+        this.subtotal();
       }
     }
   }
 
 
-  async updateFunction(product_id: any, action: any) {
-    return await this._ApiService.addItemToCart(product_id, 1, action);
-    // setTimeout(() => {
-    //   this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-    //     console.log(res));
-    //     this.getCartData();
-    //     this.subtotal();
-    // }, 1000);
-  }
+  // async updateFunction(product_id: any, action: any) {
+  //   return await this._ApiService.addItemToCart(product_id, 1, action);
+  // }
 
   cookies_data: any = [];
   deleteItemFromCart(product: any) {
