@@ -126,6 +126,9 @@
                     <div class="paypal-integration" *ngIf="showPaypal">
                         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                     </div>
+                    <div class="warning-message">
+                        <p ></p>
+                    </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
