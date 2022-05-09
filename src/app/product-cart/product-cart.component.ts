@@ -68,8 +68,6 @@ export class ProductCartComponent implements OnInit {
             this.CartShimmer = false;
           }
           else if (!completedFormat.data) {
-            console.log("hjbhjbbhj");
-
             this.CartShimmer = false;
             this.CardShow = [];
           }
@@ -102,27 +100,6 @@ export class ProductCartComponent implements OnInit {
             }
           }
         )
-      // this._ApiService.getItemFromCart().subscribe(
-      //   res => {
-      //     console.log(res.code);
-      //     if (res.code == 200) {
-      //       setTimeout(() => {
-      //         this.CardShow = res.data;
-      //         this.subtotal();
-      //         console.log(this.CardShow);
-      //         this.CartShimmer = false;
-      //         this.length = this.CardShow.length;
-      //       }, 1500);
-      //     }
-
-      //   },
-      //   (error: HttpErrorResponse) => {
-      //     if (error.error.code == 400) {
-      //       this.CardShow = [];
-      //       this.CartShimmer = false;
-      //       this.length = 0;
-      //     }
-      //   })
     }
   }
 
@@ -188,19 +165,21 @@ export class ProductCartComponent implements OnInit {
     }
   }
 
-
-  // async updateFunction(product_id: any, action: any) {
-  //   return await this._ApiService.addItemToCart(product_id, 1, action);
-  // }
-
   cookies_data: any = [];
   deleteItemFromCart(product: any) {
     if (this.UserLogin != null) {
       this.CartShimmer = true;
-      this._ApiService.deleteItemFromCart(product.product.id).subscribe(res => console.log(res));
-      setTimeout(() => {
+      this._ApiService.deleteItemFromCart(product.product.id)
+      .then((res)=>{
         this.getCartData();
-      }, 1000);
+      })
+      .catch((error)=>{
+        this.getCartData();
+      })
+      // this._ApiService.deleteItemFromCart(product.product.id).subscribe(res => console.log(res));
+      // setTimeout(() => {
+      //   this.getCartData();
+      // }, 1000);
     }
 
     else {

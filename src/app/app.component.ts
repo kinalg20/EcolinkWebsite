@@ -36,7 +36,7 @@ export class AppComponent {
     }
   }
   ngOnInit() {
-    this.addToHomeScreen()
+    // this.addToHomeScreen()
   }
   public addToHomeScreen(): void {
     // hide our user interface that shows our A2HS button

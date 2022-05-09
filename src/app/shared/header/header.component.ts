@@ -86,17 +86,28 @@ export class HeaderComponent implements OnInit {
     this.cartCountFunction();
   }
   cartCountFunction() {
-    if(localStorage.getItem('ecolink_user_credential')!=null) {
+    if (localStorage.getItem('ecolink_user_credential') != null) {
       // this.__apiservice.getItemFromCart().subscribe((res: any) => {
       //   this.length = res.data.length;
       // })
-      this.__apiservice.getItemFromCart().then((res)=>{
-        this.length = res.data.length;
-      })
+      this.__apiservice.getItemFromCart()
+        .then((res) => {
+          this.length = res.data.length;
+        })
+
+        .catch((error) => {
+          this.length = 0;
+        })
     }
     else {
       let cookiesdata = this._cookies.GetCartData();
-      this.length= cookiesdata.length;
+      console.log("cookiesdata",cookiesdata);
+      if(cookiesdata != 'empty'){
+        this.length = cookiesdata.length;
+      }
+      else{
+        this.length = 0 ;
+      }
     }
   }
   profile() {
