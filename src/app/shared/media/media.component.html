@@ -8,7 +8,8 @@
             </span>
             <div *ngIf="showSuggestedList" class="ListSuggested">
                 <ul *ngFor="let value of backupBlog.data | title:searchValue">
-                    <li style="list-style:none;">{{value.title}}</li>
+                    <li (click)="getInputSelectedValue(value.title)" style="list-style:none;text-align: left;">>  {{value.title}}</li>
+                    <!-- <hr style="margin: 0;"> -->
                 </ul>
             </div>
         </div>
