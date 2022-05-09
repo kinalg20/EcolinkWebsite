@@ -36,7 +36,7 @@ export class ProductCartComponent implements OnInit {
     }
   }
 
-  getCartData() {
+  async getCartData() {
     let cookiesdata: any = [];
     let data_obj: any = [];
     let completedFormat: any = {};
@@ -82,27 +82,44 @@ export class ProductCartComponent implements OnInit {
       }
     }
     else {
-      this._ApiService.getItemFromCart().subscribe(
-        res => {
-          console.log(res.code);
+      await this._ApiService.getItemFromCart().then(
+        (res) => {
           if (res.code == 200) {
-            setTimeout(() => {
-              this.CardShow = res.data;
-              this.subtotal();
-              console.log(this.CardShow);
-              this.CartShimmer = false;
-              this.length = this.CardShow.length;
-            }, 1500);
+            this.CardShow = res.data;
+            this.subtotal();
+            console.log(this.CardShow);
+            this.CartShimmer = false;
+            this.length = this.CardShow.length;
           }
-
-        },
+        }),
         (error: HttpErrorResponse) => {
           if (error.error.code == 400) {
             this.CardShow = [];
             this.CartShimmer = false;
             this.length = 0;
           }
-        })
+        }
+      // this._ApiService.getItemFromCart().subscribe(
+      //   res => {
+      //     console.log(res.code);
+      //     if (res.code == 200) {
+      //       setTimeout(() => {
+      //         this.CardShow = res.data;
+      //         this.subtotal();
+      //         console.log(this.CardShow);
+      //         this.CartShimmer = false;
+      //         this.length = this.CardShow.length;
+      //       }, 1500);
+      //     }
+
+      //   },
+      //   (error: HttpErrorResponse) => {
+      //     if (error.error.code == 400) {
+      //       this.CardShow = [];
+      //       this.CartShimmer = false;
+      //       this.length = 0;
+      //     }
+      //   })
     }
   }
 
@@ -114,45 +131,69 @@ export class ProductCartComponent implements OnInit {
     })
   }
 
-  UpdateCart(action: any, product_id: any, product_quantity: any, rowIndex: any) {
+
+  ItemCart: any;
+  async UpdateCart(action: any, product_id: any, product_quantity: any, rowIndex: any) {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       this.CartShimmer = true;
       this.Count(action, rowIndex);
       // setTimeout(() => {
-        let saveDataInCookies: any = [];
-        let cookiesObject: any = {}
-        this.CardShow.map((res: any) => {
-          cookiesObject = {
-            "CartProductId": res.product_id,
-            "ProductQuantity": res.quantity
-          }
-          saveDataInCookies.push(cookiesObject);
-        })
-        console.log(saveDataInCookies);
-        this._cookies.SaveCartData(saveDataInCookies);
-        this.getCartData();
+      let saveDataInCookies: any = [];
+      let cookiesObject: any = {}
+      this.CardShow.map((res: any) => {
+        cookiesObject = {
+          "CartProductId": res.product_id,
+          "ProductQuantity": res.quantity
+        }
+        saveDataInCookies.push(cookiesObject);
+      })
+      console.log(saveDataInCookies);
+      this._cookies.SaveCartData(saveDataInCookies);
+      this.getCartData();
       // }, 1000);
       this.subtotal();
     }
     else {
       this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
-        this.updateFunction(product_id , action);
+        // this.updateFunction(product_id , action);
+        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
+          return res;
+        })
+
+        if (this.ItemCart.code == 200) {
+          this.getCartData();
+          this.subtotal();
+        }
+
       }
 
-      if (action == 'add') {
-        this.updateFunction(product_id , action);
+      else if (action == 'add') {
+        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
+          return res;
+        })
+
+        if (this.ItemCart.code == 200) {
+          this.getCartData();
+          this.subtotal();
+        }
+        // this.updateFunction(product_id, action);
+        // this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action);
+        // console.log(this.ItemCart);
+
       }
     }
   }
 
-  updateFunction(product_id:any , action:any){
-    setTimeout(() => {
-      this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-        console.log(res));
-        this.getCartData();
-        this.subtotal();
-    }, 1000);
+
+  async updateFunction(product_id: any, action: any) {
+    return await this._ApiService.addItemToCart(product_id, 1, action);
+    // setTimeout(() => {
+    //   this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
+    //     console.log(res));
+    //     this.getCartData();
+    //     this.subtotal();
+    // }, 1000);
   }
 
   cookies_data: any = [];

@@ -126,11 +126,13 @@ export class BillingFormComponent implements OnInit {
         console.log(res.carts);
         res.carts.map((resp: any) => {
           console.log(resp);
-          this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add").subscribe(res =>
-            console.log(res));
-          if (res.code == 200) {
-            this._cookies.DeleteCartData();
-          }
+          this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add");
+          // this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add").subscribe(res =>
+          //   console.log(res));
+          // if (res.code == 200) {
+          //   this._cookies.DeleteCartData();
+          // }
+
         })
       })
       this.FormFillUp.emit(false);
@@ -181,7 +183,7 @@ export class BillingFormComponent implements OnInit {
           if (res.code == 200) {
             this.resSignupMsgCheck = 'success';
             this.resSignupMsg = res.message;
-            window.scroll(0,0)
+            window.scroll(0, 0)
             this.route.routeReuseStrategy.shouldReuseRoute = () => false;
             // this.route.onSameUrlNavigation = 'reload';
             this.route.navigate(['/shop/checkout']);

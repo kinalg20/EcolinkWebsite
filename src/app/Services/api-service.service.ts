@@ -46,7 +46,7 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, { slug: slug });
   }
 
-  addItemToCart(product_id: any, quantity: any, action: any) {
+  addItemToCart(product_id: any, quantity: any, action: any) : Promise<any>{
     let url = 'addCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -62,9 +62,9 @@ export class ApiServiceService {
       quantity: quantity,
       action: action
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise();
   }
-  getItemFromCart() {
+  getItemFromCart() : Promise<any>{
     let url = 'getCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -77,7 +77,7 @@ export class ApiServiceService {
     {
       user_id: user_id
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise()
   }
 
   deleteItemFromCart(product_id: any) {

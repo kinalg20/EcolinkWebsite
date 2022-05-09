@@ -87,7 +87,10 @@ export class HeaderComponent implements OnInit {
   }
   cartCountFunction() {
     if(localStorage.getItem('ecolink_user_credential')!=null) {
-      this.__apiservice.getItemFromCart().subscribe((res: any) => {
+      // this.__apiservice.getItemFromCart().subscribe((res: any) => {
+      //   this.length = res.data.length;
+      // })
+      this.__apiservice.getItemFromCart().then((res)=>{
         this.length = res.data.length;
       })
     }
