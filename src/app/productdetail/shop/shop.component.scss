@@ -92,8 +92,8 @@
             .dropdown-menu {
                 padding: 0.15rem 0.15rem;
                 cursor: pointer;
-                li{
-                    .dropdown-item{
+                li {
+                    .dropdown-item {
                         padding: 0.15rem 0.15rem;
                         margin: 0;
                     }
@@ -284,14 +284,6 @@
     .avia-section {
         display: none !important;
     }
-
-    // td {
-    //     a {
-    //         img {
-    //             width: 50px;
-    //         }
-    //     }
-    // }
     @media (max-width: 500px) {
         .alignright {
             display: none !important;

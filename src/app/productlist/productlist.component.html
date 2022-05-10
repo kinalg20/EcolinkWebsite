@@ -380,6 +380,12 @@
                         </div>
                     </ng-container>
                 </div>
+                <div class="dropdown">
+                    <select (change)="selected($event)" class="form-select">
+                        <option selected>Default</option>
+                        <option *ngFor="let item of popularity" [value]="item.slug">{{item.name}}</option>
+                    </select>
+                </div>
             </section>
             <section class="rating">
                 <div class="rating-heading">

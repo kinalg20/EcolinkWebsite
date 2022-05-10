@@ -783,9 +783,19 @@
 @media (max-width: 767px) {
     .card-page {
         .list-header {
-            grid-template-columns: 25% 75%;
+            grid-template-columns: 50% 50%;
             align-items: baseline;
-
+            .grid-list-view {
+                display: block;
+                .sort-by-search {
+                    display: block;
+                    width: auto;
+                    text-align: right;
+                    .dropdown {
+                        display: none;
+                    }
+                }
+            }
             .product_view {
                 display: none;
             }
@@ -982,6 +992,9 @@
 
             .rating {
                 margin: 20px 0;
+            }
+            .dropdown {
+                margin-top: 20px;
             }
         }
     }
