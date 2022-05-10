@@ -14,9 +14,12 @@ import { ApiServiceService } from './Services/api-service.service';
 import { SharedModule } from './shared/shared.module';
 import { SharelibraryModule } from './sharelibrary/sharelibrary.module';
 import { FetchedHeaderState } from './store/state/header.state';
-import {FetchedCategoriesState} from './store/state/category.state'
+import { FetchedCategoriesState } from './store/state/category.state'
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { SearchPipePipe } from './custom-pipe/search-pipe.pipe';
+import { CommonModule } from "@angular/common";
+import { TitlePipe } from './custom-pipe/title.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +31,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    SharelibraryModule, 
+    SharelibraryModule,
+    CommonModule,
     ToastrModule.forRoot(),
-    NgxsModule.forRoot([FetchedHeaderState , FetchedCategoriesState] , { developmentMode: !environment.production }),
+    NgxsModule.forRoot([FetchedHeaderState, FetchedCategoriesState], { developmentMode: !environment.production }),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {
@@ -40,7 +44,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [ApiServiceService,AuthGuard],
+  providers: [ApiServiceService, AuthGuard ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -46,7 +46,7 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, { slug: slug });
   }
 
-  addItemToCart(product_id: any, quantity: any, action: any) {
+  addItemToCart(product_id: any, quantity: any, action: any): Promise<any> {
     let url = 'addCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -62,9 +62,9 @@ export class ApiServiceService {
       quantity: quantity,
       action: action
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise();
   }
-  getItemFromCart() {
+  getItemFromCart(): Promise<any> {
     let url = 'getCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -77,10 +77,10 @@ export class ApiServiceService {
     {
       user_id: user_id
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise()
   }
 
-  deleteItemFromCart(product_id: any) {
+  deleteItemFromCart(product_id: any): Promise<any> {
     let url = 'deleteCartItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -94,7 +94,7 @@ export class ApiServiceService {
       user_id: user_id,
       product_id: product_id
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise()
   }
 
   getCheckoutProducts() {
@@ -285,6 +285,7 @@ export class ApiServiceService {
     orderObj.user_id = user_id
     return this.http.post(this._baseurl + 'storeOrder', orderObj, { headers: httpHeaders })
   }
+
   getOrderData() {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -298,6 +299,18 @@ export class ApiServiceService {
     }
     return this.http.post(this._baseurl + 'getOrder', body, { headers: httpHeaders })
   }
+
+  // CancelOrderApi(id: any): Promise<any> {
+  //   // this.header = localStorage.getItem('ecolink_user_credential');
+  //   // this.token = JSON.parse(this.header).access_token;
+  //   // let user_id = JSON.parse(this.header).user_id;
+  //   // const httpHeaders = new HttpHeaders({
+  //   //   'content-type': 'application/json',
+  //   //   'Authorization': `Bearer ${this.token}`
+  //   // })
+
+  //   // return this.http.post(this._baseurl+'storeOrder')
+  // }
   storeReturnOrder(storeObj: any) {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -372,5 +385,6 @@ export class ApiServiceService {
     }
     return this.http.post(this._baseurl + 'getTaxByZip', body)
   }
+
 }
 

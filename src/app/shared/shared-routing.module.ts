@@ -7,16 +7,18 @@ import { GSAProductComponent } from './gsa-product/gsa-product.component';
 import { HeaderComponent } from './header/header.component';
 import { OrderFailComponent } from './order-fail/order-fail.component';
 import { ProductsRequestComponent } from './Forms/products-request/products-request.component';
-import { SharedComponent } from './shared.component';
 import { ThankYouComponent } from './thank-you/thank-you.component';
+import { HomeComponent } from '../home/home.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 const routes: Routes = [
-  { path: '', component: SharedComponent },
+  { path: '', component: HomeComponent},
   { path: 'header', component: HeaderComponent },
   { path: 'footer', component: FooterComponent },
   { path: 'inner-pages/contact/request', component: ProductsRequestComponent },
   { path: 'thanks', component: ThankYouComponent },
   { path: 'failure', component: OrderFailComponent },
+  { path: 'error-404', component: PageNotFoundComponent },
   { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
   { path: 'shops', component: GSAProductComponent }
 ];

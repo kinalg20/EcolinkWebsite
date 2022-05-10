@@ -107,9 +107,10 @@ export class ShopComponent implements OnInit {
     }
 
     else {
-      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
-        console.log(res);
-      })
+      // this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
+      //   console.log(res);
+      // })
+      this._ApiService.addItemToCart(Item.id ,this.ItemCount, "add" );
     }
   }
 

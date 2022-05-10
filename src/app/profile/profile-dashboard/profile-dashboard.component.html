@@ -226,7 +226,7 @@
                                 <div class="d-flex justify-content-between">
                                     <button type="button" (click)="showDeatils(data)" class="more-btn">Show
                                         More</button>
-                                    <button type="button" class="cancel-btn" *ngIf="data.payment_via=='cod'">Cancel
+                                    <button type="button" class="cancel-btn" *ngIf="data.payment_via=='cod'" (click)="orderCancel(i.product.id)">Cancel
                                         Order</button>
                                 </div>
                             </div>

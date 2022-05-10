@@ -1,6 +1,7 @@
 .media-section {
     .container {
         .head-section {
+            position: relative;
             text-align: center;
             padding: 20px 0;
 
@@ -14,6 +15,27 @@
                     height: 35px;
                     box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
                     padding-left: 25px;
+                }
+                i {
+                    cursor: pointer;
+                    padding-right: 10px;
+                }
+            }
+            .ListSuggested{
+                width: 50%;
+                position: absolute;
+                top: 60px;
+                left: 25%;
+                background: #ececec;
+                z-index: 99;
+                border-radius: 10px;
+                ul {
+                    margin-bottom: 0;
+                    padding-left: 0;
+                    li {
+                        cursor: pointer;
+                        padding: 10px;
+                    }
                 }
             }
         }

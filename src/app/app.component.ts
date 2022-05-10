@@ -39,10 +39,9 @@ export class AppComponent {
   //     this.isShow = false;
   //   }
   // }
-  ngOnInit() {
-    // this.addToHomeScreen()
-    this.cookiesService.DeleteServiceWorker();
-  }
+  // ngOnInit() {
+  //   this.cookiesService.DeleteServiceWorker();
+  // }
   // public addToHomeScreen(): void {
   //   // hide our user interface that shows our A2HS button
   //   this.showButton = false;

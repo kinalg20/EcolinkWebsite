@@ -25,13 +25,14 @@
                                         </div>
                                     </li>
                                     <li class="d-flex my-3 add-button" (click)="routeToProfile()">
-                                        <p class="m-0" >Add Address</p><i class="fa fa-plus mx-3"></i>
+                                        <p class="m-0">Add Address</p><i class="fa fa-plus mx-3"></i>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer" (FormFillUp)="fillformevent($event)"></app-billing-form>
+                    <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer"
+                        (FormFillUp)="fillformevent($event)"></app-billing-form>
                 </div>
             </div>
             <div class="your_order" *ngIf="checkoutShimmer">
@@ -39,7 +40,7 @@
                     <h3>Your Order</h3>
                     <div class="checkout-product-heading m-4">
                         <ng-container *ngFor="let data of [].constructor(3)">
-                            <ngx-shimmer-loading width="'100%'" ></ngx-shimmer-loading>
+                            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
                         </ng-container>
                         <div class="bank-detail">
                             <div class="card my-3">
@@ -92,7 +93,8 @@
                         <div class="checkout-products-total">
                             <ul>
                                 <li class="subtotal-list-element"><b>Total : </b></li>
-                                <li><b>${{(rate ? rate : 0) -- cart.payable -- shippingCharge - couponDiscount | number : '1.2-2'}}</b></li>
+                                <li><b>${{(rate ? rate : 0) -- cart.payable -- shippingCharge - couponDiscount | number
+                                        : '1.2-2'}}</b></li>
                             </ul>
                         </div>
                     </ng-container>
@@ -126,11 +128,15 @@
                     <div class="paypal-integration" *ngIf="showPaypal">
                         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                     </div>
+                    <div class="warning-message">
+                        <p></p>
+                    </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
                                 (click)="getOrderInfo()" class="p-button-raised p-button-success"
-                                style="height:45px; width: 100%;" [disabled]="paymentCheck || disableOrderButton"></button>
+                                style="height:45px; width: 100%;"
+                                [disabled]="paymentCheck || disableOrderButton"></button>
                         </div>
                     </div>
                 </div>

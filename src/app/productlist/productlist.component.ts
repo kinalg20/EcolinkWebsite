@@ -137,7 +137,7 @@ export class ProductlistComponent implements OnInit {
     console.log("this.ProductListData", this.ProductbackupData);
   }
 
-  AddProductToCart(Item: any) {
+  async AddProductToCart(Item: any) {
     if (localStorage.getItem('ecolink_user_credential') == null) {
       this.cart_obj = [];
       this.previousdata = this.Cookies.GetCartData();
@@ -164,9 +164,10 @@ export class ProductlistComponent implements OnInit {
     }
     else {
       console.log(Item);
-      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
-        console.log(res);
-      })
+      this._ApiService.addItemToCart(Item.id ,this.ItemCount, "add" )
+      // this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
+      //   console.log(res);
+      // })
     }
   }
 

@@ -1,6 +1,5 @@
 import { ViewportScroller } from '@angular/common';
 import { Component,  OnInit, Output , EventEmitter} from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -14,14 +13,13 @@ export class HomeBannerComponent implements OnInit {
   @Output() newItemEvent = new EventEmitter<string>();
   searchItem: string = '';
   slug: any;
-  user_info:any
   subslug: any;
   suggestionList: any = []
   showMsg: boolean = false;
   msg: any = '';
   
 
-  constructor(private _ApiService: ApiServiceService , private scroller : ViewportScroller,private route:ActivatedRoute,private router:Router) { }
+  constructor(private _ApiService: ApiServiceService , private scroller : ViewportScroller) { }
   action_array = [
     {
       imgurl: "https://t4.ftcdn.net/jpg/02/27/41/31/360_F_227413125_c5CgAhRF9FVpEYKzckx8le5cSMpYx9YP.jpg",
@@ -62,21 +60,7 @@ export class HomeBannerComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    let slug = this.route.snapshot.params;
-    this.user_info=localStorage.getItem('ecolink_user_credential');
-    let remember_token=JSON.parse(this.user_info).user.remember_token;
-    let user_id=JSON.parse(this.user_info).user_id;
-    
-    if(slug.slug==remember_token) {
-      this.router.navigateByUrl('/')
-    }
-    else if(remember_token==null) {
-      this.router.navigateByUrl('/')
-    }
-    else {
-      localStorage.removeItem('ecolink_user_credentail');
-      this.router.navigateByUrl('/');
-    }
+
     // setTimeout(() => {
     //   console.log(this.getCategory.data);
     // }, 500);

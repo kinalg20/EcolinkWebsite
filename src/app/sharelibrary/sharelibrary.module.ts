@@ -9,9 +9,10 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RippleModule } from 'primeng/ripple';
 import { TabViewModule } from 'primeng/tabview';
 import { TableModule } from 'primeng/table';
-import {RadioButtonModule} from 'primeng/radiobutton';
-import {DialogModule} from 'primeng/dialog';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { DialogModule } from 'primeng/dialog';
 import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
+import { PipemoduleModule } from '../pipemodule/pipemodule.module';
 
 const exportsharedata: any = [
   CarouselModule,
@@ -25,7 +26,8 @@ const exportsharedata: any = [
   TableModule,
   RadioButtonModule,
   DialogModule,
-  NgxShimmerLoadingModule
+  NgxShimmerLoadingModule,
+  PipemoduleModule
 ]
 @NgModule({
   declarations: [

@@ -36,7 +36,7 @@ export class ProductCartComponent implements OnInit {
     }
   }
 
-  getCartData() {
+  async getCartData() {
     let cookiesdata: any = [];
     let data_obj: any = [];
     let completedFormat: any = {};
@@ -68,8 +68,6 @@ export class ProductCartComponent implements OnInit {
             this.CartShimmer = false;
           }
           else if (!completedFormat.data) {
-            console.log("hjbhjbbhj");
-
             this.CartShimmer = false;
             this.CardShow = [];
           }
@@ -82,27 +80,26 @@ export class ProductCartComponent implements OnInit {
       }
     }
     else {
-      this._ApiService.getItemFromCart().subscribe(
-        res => {
-          console.log(res.code);
-          if (res.code == 200) {
-            setTimeout(() => {
+      await this._ApiService.getItemFromCart()
+        .then(
+          (res) => {
+            if (res.code == 200) {
               this.CardShow = res.data;
               this.subtotal();
               console.log(this.CardShow);
               this.CartShimmer = false;
               this.length = this.CardShow.length;
-            }, 1500);
+            }
+          })
+        .catch(
+          (error) => {
+            if (error.error.code == 400) {
+              this.CardShow = [];
+              this.CartShimmer = false;
+              this.length = 0;
+            }
           }
-
-        },
-        (error: HttpErrorResponse) => {
-          if (error.error.code == 400) {
-            this.CardShow = [];
-            this.CartShimmer = false;
-            this.length = 0;
-          }
-        })
+        )
     }
   }
 
@@ -114,55 +111,75 @@ export class ProductCartComponent implements OnInit {
     })
   }
 
-  UpdateCart(action: any, product_id: any, product_quantity: any, rowIndex: any) {
+
+  ItemCart: any;
+  async UpdateCart(action: any, product_id: any, product_quantity: any, rowIndex: any) {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       this.CartShimmer = true;
       this.Count(action, rowIndex);
       // setTimeout(() => {
-        let saveDataInCookies: any = [];
-        let cookiesObject: any = {}
-        this.CardShow.map((res: any) => {
-          cookiesObject = {
-            "CartProductId": res.product_id,
-            "ProductQuantity": res.quantity
-          }
-          saveDataInCookies.push(cookiesObject);
-        })
-        console.log(saveDataInCookies);
-        this._cookies.SaveCartData(saveDataInCookies);
-        this.getCartData();
+      let saveDataInCookies: any = [];
+      let cookiesObject: any = {}
+      this.CardShow.map((res: any) => {
+        cookiesObject = {
+          "CartProductId": res.product_id,
+          "ProductQuantity": res.quantity
+        }
+        saveDataInCookies.push(cookiesObject);
+      })
+      console.log(saveDataInCookies);
+      this._cookies.SaveCartData(saveDataInCookies);
+      this.getCartData();
       // }, 1000);
       this.subtotal();
     }
     else {
       this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
-        this.updateFunction(product_id , action);
+        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
+          return res;
+        })
+
+        if (this.ItemCart.code == 200) {
+          this.getCartData();
+          this.subtotal();
+        }
+
       }
 
-      if (action == 'add') {
-        this.updateFunction(product_id , action);
-      }
-    }
-  }
+      else if (action == 'add') {
+        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
+          return res;
+        })
 
-  updateFunction(product_id:any , action:any){
-    setTimeout(() => {
-      this._ApiService.addItemToCart(product_id, 1, action).subscribe(res =>
-        console.log(res));
+        if (this.ItemCart.code == 200) {
+          this.getCartData();
+          this.subtotal();
+        }
+      }
+
+      else{
         this.getCartData();
         this.subtotal();
-    }, 1000);
+      }
+    }
   }
 
   cookies_data: any = [];
   deleteItemFromCart(product: any) {
     if (this.UserLogin != null) {
       this.CartShimmer = true;
-      this._ApiService.deleteItemFromCart(product.product.id).subscribe(res => console.log(res));
-      setTimeout(() => {
+      this._ApiService.deleteItemFromCart(product.product.id)
+      .then((res)=>{
         this.getCartData();
-      }, 1000);
+      })
+      .catch((error)=>{
+        this.getCartData();
+      })
+      // this._ApiService.deleteItemFromCart(product.product.id).subscribe(res => console.log(res));
+      // setTimeout(() => {
+      //   this.getCartData();
+      // }, 1000);
     }
 
     else {

@@ -3,16 +3,22 @@
     <div class="container">
         <div class="head-section">
             <span class="p-input-icon-right">
-                <i class="pi pi-search"></i>
-                <input type="text" placeholder="Search the blog" pInputText />
+                <i class="pi pi-search" (click)="getInputValue()"></i>
+                <input type="text" placeholder="Search the blog" [(ngModel)]="searchValue" pInputText (input)="getSearchedBlog()"/>
             </span>
+            <div *ngIf="showSuggestedList" class="ListSuggested">
+                <ul *ngFor="let value of backupBlog.data | title:searchValue">
+                    <li (click)="getInputSelectedValue(value.title)" style="list-style:none;text-align: left;">>  {{value.title}}</li>
+                    <!-- <hr style="margin: 0;"> -->
+                </ul>
+            </div>
         </div>
     </div>
 </section>
 <section class="media-banner">
     <div class="container">
-        <div class="media-calltoaction" >
-            <ng-container *ngFor="let item of getAllBlog.data ; index as index" >
+        <div class="media-calltoaction">
+            <ng-container *ngFor="let item of backupBlog.data; index as index">
                 <div *ngIf="index==0">
                     <div class="media" routerLink="/info/{{item.slug}}">
                         <div class="spotlight-banner">
@@ -43,5 +49,5 @@
     Latest Posts
     <hr>
 </div>
-<app-media-banner [data_input]=getAllBlog></app-media-banner>
+<app-media-banner [data_input]="getAllBlog"></app-media-banner>
 <app-footer></app-footer>

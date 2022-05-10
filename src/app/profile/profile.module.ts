@@ -13,7 +13,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 import { GoogleLoginProvider } from 'angularx-social-login';
 import { BrowserModule } from '@angular/platform-browser';
-import { ProductlistModule } from '../productlist/productlist.module';
+import { SearchPipePipe } from '../custom-pipe/search-pipe.pipe';
+import { PipemoduleModule } from '../pipemodule/pipemodule.module';
 
 
 @NgModule({
@@ -31,7 +32,7 @@ import { ProductlistModule } from '../productlist/productlist.module';
     SharedModule,
     HttpClientModule,
     SocialLoginModule,
-    ProductlistModule
+    PipemoduleModule
   ],
   providers: [
     {
@@ -50,8 +51,8 @@ import { ProductlistModule } from '../productlist/productlist.module';
           console.error(err);
         }
       } as SocialAuthServiceConfig,
-    }
-
+    },
+    BrowserModule
   ]
 })
 export class ProfileModule {
