@@ -25,13 +25,14 @@
                                         </div>
                                     </li>
                                     <li class="d-flex my-3 add-button" (click)="routeToProfile()">
-                                        <p class="m-0" >Add Address</p><i class="fa fa-plus mx-3"></i>
+                                        <p class="m-0">Add Address</p><i class="fa fa-plus mx-3"></i>
                                     </li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer" (FormFillUp)="fillformevent($event)"></app-billing-form>
+                    <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer"
+                        (FormFillUp)="fillformevent($event)"></app-billing-form>
                 </div>
             </div>
             <div class="your_order" *ngIf="checkoutShimmer">
@@ -39,7 +40,7 @@
                     <h3>Your Order</h3>
                     <div class="checkout-product-heading m-4">
                         <ng-container *ngFor="let data of [].constructor(3)">
-                            <ngx-shimmer-loading width="'100%'" ></ngx-shimmer-loading>
+                            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
                         </ng-container>
                         <div class="bank-detail">
                             <div class="card my-3">
@@ -72,14 +73,39 @@
                                 <li class="subtotal-list-element">Subtotal : </li>
                                 <li>${{cart.payable | number : '1.2-2'}}</li>
                             </ul>
-                            <ul>
-                                <li class="subtotal-list-element">Shipping : </li>
-                                <li>${{shippingCharge}}</li>
-                            </ul>
+
                             <ul *ngIf="taxCheck">
                                 <li class="subtotal-list-element">Taxes : </li>
                                 <li>${{rate}}</li>
                             </ul>
+
+                            <ul>
+                                <li>
+                                    <div><b>Shippment Via</b></div>
+                                </li>
+                            </ul>
+                            <div class="Shipping_class mt-3">
+                                <ul>
+                                    <li>
+                                        <div class="Shipping_key">
+                                            <div class="d-flex " style="align-items: center;">
+                                                <input type="radio" id="saia" name="shipping"
+                                                    [(ngModel)]="selectedShippingMethod" value="saia" class="saia"
+                                                    >
+                                                <label for="saia" class=" mx-2">Saia</label>
+                                            </div>
+                                            <div class="d-flex mx-3" style="align-items: center;">
+                                                <input type="radio" id="fedex" name="shipping" value="fedex"
+                                                    class="fedex mx-2" [(ngModel)]="selectedShippingMethod"
+                                                    >
+                                                <label for="fedex">Fedex</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li *ngIf="selectedShippingMethod=='fedex'">${{shippingCharge}}</li>
+                                    <li *ngIf="selectedShippingMethod=='saia'">${{saiaValues.Amount}}</li>
+                                </ul>
+                            </div>
                             <ul *ngIf="discountCheck">
                                 <li class="subtotal-list-element"></li>
                                 <li><button (click)="couponButton()">Apply Coupon</button></li>
@@ -92,7 +118,8 @@
                         <div class="checkout-products-total">
                             <ul>
                                 <li class="subtotal-list-element"><b>Total : </b></li>
-                                <li><b>${{(rate ? rate : 0) -- cart.payable -- shippingCharge - couponDiscount | number : '1.2-2'}}</b></li>
+                                <li><b>${{(rate ? rate : 0) -- cart.payable -- (selectedShippingMethod == 'fedex' ? shippingCharge : saiaValues.Amount) - couponDiscount | number
+                                        : '1.2-2'}}</b></li>
                             </ul>
                         </div>
                     </ng-container>
@@ -127,13 +154,14 @@
                         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                     </div>
                     <div class="warning-message">
-                        <p ></p>
+                        <p></p>
                     </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
                                 (click)="getOrderInfo()" class="p-button-raised p-button-success"
-                                style="height:45px; width: 100%;" [disabled]="paymentCheck || disableOrderButton"></button>
+                                style="height:45px; width: 100%;"
+                                [disabled]="paymentCheck || disableOrderButton"></button>
                         </div>
                     </div>
                 </div>

@@ -213,6 +213,7 @@ export class ProfileDashboardComponent implements OnInit {
       setTimeout(() => {
         this.orderData = res.data;
         this.order = res.data;
+        console.log(this.orderData);        
         res.data.map((resp: any) => {
           resp.items.map((response: any) => {
             product_search = response.product;
@@ -221,6 +222,7 @@ export class ProfileDashboardComponent implements OnInit {
         })
       }, 1000);
     })
+    
   }
   storeReturnProduct(i: any) {
     console.log(i)
@@ -415,6 +417,17 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   orderCancel(id:any){
-    // this.__apiservice.CancelOrderApi(id)
+    console.log(id.order_id);
+    this.__apiservice.CancelOrderApi(id.order_id)
+    .then((res)=>{
+      if(res.code == 200){
+        this.getOrderhistory();
+      }
+      console.log(res);
+      
+    })
+    .catch((error)=>{
+      console.log(error.error.code);
+    })
   }
 }

@@ -18,7 +18,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   discountCheck: boolean = true;
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
-  rate: any
+  rate: any;
+  selectedShippingMethod : any;
   couponDiscount: any = 0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
@@ -36,7 +37,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   shippingCharge: number = 0;
   tax_exempt_user: number = 0
   checkoutShimmer: boolean = true;
-  checkoutProductItem: any = []
+  checkoutProductItem: any = {};
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
@@ -65,13 +66,13 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         })
       });
     }
-    this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
-      this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
-        console.log(resp);
-        // console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
-        // this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
-      })
-    })
+    // this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
+    //   this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
+    //     console.log(resp);
+    //     // console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+    //     // this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
+    //   })
+    // })
   }
   getTaxExempt() {
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
@@ -148,26 +149,30 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         this.product_height = this.product_height + resp.quantity * resp.product.height;
         this.product_length = this.product_length + resp.quantity * resp.product.lenght;
       })
-      console.log(this.product_weight , this.product_width , this.product_height , this.product_length);
     })
-    this.checkoutProductItem.push(this.product_weight);
-    this.checkoutProductItem.push(this.product_width);
-    this.checkoutProductItem.push(this.product_height);
-    this.checkoutProductItem.push(this.product_length);
+    this.checkoutProductItem.weight = this.product_weight;
+    this.checkoutProductItem.width = this.product_width;
+    this.checkoutProductItem.height = this.product_height;
+    this.checkoutProductItem.length = this.product_length;
     this.getShippingInfo();
   }
 
   saiaValues: any = {}
   getShippingInfo() {    
-    this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem).subscribe(
+    this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem)
+    .subscribe(
       (res: any) => {
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'application/xml');
-        let firstEmploye = xmlDoc.getElementsByTagName('RateDetailItem')[0];
+        console.log(xmlDoc);
+        
+        let firstEmployee = xmlDoc.getElementsByTagName('RateDetailItem')[0];
+        console.log(firstEmployee);
+        
         for (let i = 0; i < 4; i++) {
-          let x = xmlDoc.getElementsByTagName(firstEmploye.childNodes[i].nodeName)[0];
-          console.log("x", firstEmploye.childNodes[i].nodeName, x.childNodes[0].nodeValue);
-          this.saiaValues[firstEmploye.childNodes[i].nodeName] = x.childNodes[0].nodeValue
+          let x = xmlDoc.getElementsByTagName(firstEmployee.childNodes[i].nodeName)[0];
+          console.log("x", firstEmployee.childNodes[i].nodeName, x.childNodes[0].nodeValue);
+          this.saiaValues[firstEmployee.childNodes[i].nodeName] = x.childNodes[0].nodeValue
         }
         console.log(this.saiaValues);
       },
@@ -175,16 +180,25 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         if (true) {
           console.log(error.error);
         }
-      })
+      }
+      )
   }
 
   getOrderInfo() {
+    let Extra_Charges : any;
+    if(this.selectedShippingMethod == 'fedex'){
+      Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;
+    }
+
+    else{
+      Extra_Charges = this.saiaValues.Amount + this.CheckoutProduct[0].payable;
+    }
     this.orderObj = {
       sameAsShip: 0,
       order_amount: this.CheckoutProduct[0].order_total,
       product_discount: 0,
       coupon_discount: 0,
-      total_amount: this.CheckoutProduct[0].payable + this.shippingCharge,
+      total_amount: Extra_Charges,
       billing_name: this.CheckoutProduct[0].user.name,
       billing_email: this.CheckoutProduct[0].user.email,
       billing_mobile: this.CheckoutProduct[0].user.mobile,
@@ -204,7 +218,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       shipping_city: this.CheckoutProduct[0].user.city,
       shipping_zip: this.CheckoutProduct[0].user.pincode,
       payment_via: this.selectedPaymentMethod,
-      shippment_via: 'fedex',
+      shippment_via: this.selectedShippingMethod,
       no_items: '1'
     }
     console.log(this.orderObj);
@@ -353,5 +367,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   }
   fillformevent(event: any) {
     this.disableOrderButton = event;
+  }
+
+  getShippingMethod(){
+    console.log(this.selectedShippingMethod);
   }
 }

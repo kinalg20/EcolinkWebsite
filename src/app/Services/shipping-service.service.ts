@@ -1,15 +1,21 @@
 import { Injectable } from '@angular/core';
+import * as JsonToXML from 'js2xmlparser';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-
-
+import { NgxXmlToJsonService } from 'ngx-xml-to-json';
 @Injectable({
   providedIn: 'root'
 })
 export class ShippingServiceService {
 
-  constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
+  constructor(public http: HttpClient, private sanitizer: DomSanitizer, private ngxXmlToJsonService: NgxXmlToJsonService) {
+    const options = { // set up the default options 
+      textKey: 'text', // tag name for text nodes
+      attrKey: 'attr', // tag for attr groups
+      cdataKey: 'cdata', // tag for cdata nodes (ignored if mergeCDATA is true)
+    };
+  }
 
 
   options: any = {};
@@ -112,48 +118,45 @@ export class ShippingServiceService {
 
 
   rateDetailThroughSaia(checkoutProductList: any) {
-    let body = `<?xml version="1.0" encoding="utf-8"?>
-    <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-    <soap:Body>
-      <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
-        <request>
-          <UserID>ecolink</UserID>
-          <Password>ecolink4</Password>
-          <TestMode>Y</TestMode>
-          <BillingTerms>Prepaid</BillingTerms>
-          <AccountNumber>0747932</AccountNumber>
-          <Application>Outbound</Application>
-          <OriginCity>Tucker</OriginCity>
-          <OriginState>GA</OriginState>
-          <OriginZipcode>30085</OriginZipcode>
-          <DestinationCity>Tucker</DestinationCity>
-          <DestinationState>GA</DestinationState>
-          <DestinationZipcode>30085</DestinationZipcode>
-          <WeightUnits>KGS</WeightUnits>
-          <Details>
-            <DetailItem>
-              <Weight>100</Weight>
-              <Hright>100</Height>
-              <Width>100</Width>
-              <Class>50</Class>
-            </DetailItem>
-          </Details>
-        </request>
-      </Create>
-    </soap:Body>
-    </soap:Envelope>`
-    // let options = {
-    //   format: {
-    //     doubleQuotes: true
-    //   }, 
-    //   declaration: {
-    //     include: false
-    //   }
-    // }
-
-    // return JsonToXML.parse("Universal", body, options);
-
     let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
+    let body = `<?xml version="1.0" encoding="utf-8"?>
+  <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
+      <request>
+        <UserID>ecolink</UserID>
+        <Password>ecolink4</Password>
+        <TestMode>Y</TestMode>
+        <BillingTerms>Prepaid</BillingTerms>
+        <AccountNumber>0747932</AccountNumber>
+        <Application>Outbound</Application>
+        <OriginCity>Tucker</OriginCity>
+        <OriginState>GA</OriginState>
+        <OriginZipcode>30085</OriginZipcode>
+        <DestinationCity>Tucker</DestinationCity>
+        <DestinationState>GA</DestinationState>
+        <DestinationZipcode>30085</DestinationZipcode>
+        <WeightUnits>KGS</WeightUnits>
+        <Details>
+          <DetailItem>
+            <Weight>${checkoutProductList.weight}</Weight>
+            <Height>${checkoutProductList.height}</Height>
+            <Length>${checkoutProductList.length}</Length>
+            <Width>${checkoutProductList.width}</Width>
+            <Class>50</Class>
+          </DetailItem>
+        </Details>
+      </request>
+    </Create>
+  </soap:Body>
+  </soap:Envelope>`
+    // const obj = this.ngxXmlToJsonService.xmlToJson(body, this.options)
+    // console.log(obj);
+    // const obj1 = JsonToXML.parse("xmlversion", obj, options);
+    // console.log(obj1);
+    
+    // let obj1 = js2xmlparser.parse("person", obj)
+    // console.log(obj1);
 
     const headers = new HttpHeaders({
       'Content-Type': 'text/xml; charset=utf-8'

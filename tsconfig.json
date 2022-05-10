@@ -1,5 +1,6 @@
 /* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
+  
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
@@ -16,6 +17,12 @@
     "importHelpers": true,
     "target": "es2017",
     "module": "es2020",
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
     "lib": [
       "es2018",
       "dom"

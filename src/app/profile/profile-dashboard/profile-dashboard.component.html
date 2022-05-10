@@ -219,14 +219,16 @@
                                     <span class="price">${{data.total_amount}}</span>
                                 </div>
                                 <div class="history-data">
-                                    <h6 class="status">{{data.order_status}}</h6>
+                                    <h6 class="status text-danger" *ngIf="data.order_status == 'cancelled'">{{data.order_status}}</h6>
+                                    <h6 class="status text-warning" *ngIf="data.order_status == 'pending'">{{data.order_status}}</h6>
+                                    <h6 class="status text-success" *ngIf="data.order_status == 'complete'">{{data.order_status}}</h6>
                                     <h6 class="status">{{data.created_at | date:"dd/MM/yyyy"}}</h6>
 
                                 </div>
                                 <div class="d-flex justify-content-between">
                                     <button type="button" (click)="showDeatils(data)" class="more-btn">Show
                                         More</button>
-                                    <button type="button" class="cancel-btn" *ngIf="data.payment_via=='cod'" (click)="orderCancel(i.product.id)">Cancel
+                                    <button type="button" class="cancel-btn" *ngIf="data.payment_via=='cod' && data.order_status == 'pending'" (click)="orderCancel(i)">Cancel
                                         Order</button>
                                 </div>
                             </div>

@@ -300,17 +300,22 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'getOrder', body, { headers: httpHeaders })
   }
 
-  // CancelOrderApi(id: any): Promise<any> {
-  //   // this.header = localStorage.getItem('ecolink_user_credential');
-  //   // this.token = JSON.parse(this.header).access_token;
-  //   // let user_id = JSON.parse(this.header).user_id;
-  //   // const httpHeaders = new HttpHeaders({
-  //   //   'content-type': 'application/json',
-  //   //   'Authorization': `Bearer ${this.token}`
-  //   // })
+  CancelOrderApi(id: any): Promise<any> {
+    this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
 
-  //   // return this.http.post(this._baseurl+'storeOrder')
-  // }
+    let body = {
+      id: id,
+      user_id: user_id
+    }
+
+    return this.http.post(this._baseurl + 'cancelOrder', body , {headers : httpHeaders}).toPromise();
+  }
   storeReturnOrder(storeObj: any) {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
