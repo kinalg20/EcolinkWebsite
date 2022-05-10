@@ -187,11 +187,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   getOrderInfo() {
     let Extra_Charges : any;
     if(this.selectedShippingMethod == 'fedex'){
-      Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;
+      Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;     
     }
 
     else{
       Extra_Charges = this.saiaValues.Amount + this.CheckoutProduct[0].payable;
+      console.log(Extra_Charges);
     }
     this.orderObj = {
       sameAsShip: 0,
