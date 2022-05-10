@@ -30,4 +30,8 @@ export class CookiesService {
   DeleteCartData(){
     this.cookieService.deleteAll();
   }
+
+  DeleteServiceWorker() {
+    // this.cookieService.delete('Cookies.cpsession');
+  }
 }

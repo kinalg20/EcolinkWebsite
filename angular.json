@@ -6,7 +6,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "EcolinkWebsite": {
+    "Ecolink": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -23,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/EcolinkWebsite",
+            "outputPath": "dist/Ecolink",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -87,10 +87,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "EcolinkWebsite:build:production"
+              "browserTarget": "Ecolink:build:production"
             },
             "development": {
-              "browserTarget": "EcolinkWebsite:build:development"
+              "browserTarget": "Ecolink:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -98,7 +98,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "EcolinkWebsite:build"
+            "browserTarget": "Ecolink:build"
           }
         },
         "test": {
@@ -123,5 +123,5 @@
       }
     }
   },
-  "defaultProject": "EcolinkWebsite"
+  "defaultProject": "Ecolink"
 }

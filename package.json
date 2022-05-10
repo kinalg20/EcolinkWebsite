@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "predeploy": "ng build --prod --base-href=/ecolinkfrontend/"
+    "predeploy": "ng build --prod --base-href=/angularpwa/"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
     "creditcardpayments": "^1.0.3",
     "font-awesome": "^4.7.0",
     "forms-angular": "^0.12.0-beta.180",
+    "http-server": "^14.1.0",
     "jquery": "^3.6.0",
     "ngx-cookie-service": "^13.2.0",
     "ngx-paypal": "^9.0.0",
