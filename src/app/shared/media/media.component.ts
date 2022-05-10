@@ -50,11 +50,19 @@ export class MediaComponent implements OnInit {
   getInputValue() {
     // window.scroll(1200, 1200)
     // this.getAllBlog = [];
-    this.backupBlog.data.map((res: any) => {
-      if (res.title.includes(this.searchValue)) {
-        this.router.navigateByUrl('/info/'+res.slug)
-      }
-    })
+    if(this.searchValue) {
+      this.backupBlog.data.map((res: any) => {
+        if (res.title.includes(this.searchValue)) {
+          console.log(this.searchValue)
+          console.log(res.slug);
+          this.router.navigateByUrl('/info/'+res.slug);
+        }
+      })
+    }
+  }
+  getInputSelectedValue(value:any) {
+    this.searchValue=value;
+    this.showSuggestedList=false
   }
   getSearchedBlog(){
     if(this.searchValue.length>0){
