@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+
 
 @Injectable({
   providedIn: 'root'
@@ -111,36 +111,53 @@ export class ShippingServiceService {
   }
 
 
-  rateDetailThroughSaia() {
-    let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
+  rateDetailThroughSaia(checkoutProductList: any) {
     let body = `<?xml version="1.0" encoding="utf-8"?>
-  <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-    <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
-      <request>
-        <UserID>ecolink</UserID>
-        <Password>ecolink4</Password>
-        <TestMode>Y</TestMode>
-        <BillingTerms>Prepaid</BillingTerms>
-        <AccountNumber>0747932</AccountNumber>
-        <Application>Outbound</Application>
-        <DestinationCity>Ridgeview</DestinationCity>
-        <DestinationState>SD</DestinationState>
-        <DestinationZipcode>57652</DestinationZipcode>
-        <WeightUnits>KGS</WeightUnits>
-        <Details>
-          <DetailItem>
-            <Weight>100</Weight>
-            <Class>50</Class>
-          </DetailItem>
-        </Details>
-      </request>
-    </Create>
-  </soap:Body>
-  </soap:Envelope>`
+    <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+      <Create xmlns="http://www.saiasecure.com/WebService/ratequote/">
+        <request>
+          <UserID>ecolink</UserID>
+          <Password>ecolink4</Password>
+          <TestMode>Y</TestMode>
+          <BillingTerms>Prepaid</BillingTerms>
+          <AccountNumber>0747932</AccountNumber>
+          <Application>Outbound</Application>
+          <OriginCity>Tucker</OriginCity>
+          <OriginState>GA</OriginState>
+          <OriginZipcode>30085</OriginZipcode>
+          <DestinationCity>Tucker</DestinationCity>
+          <DestinationState>GA</DestinationState>
+          <DestinationZipcode>30085</DestinationZipcode>
+          <WeightUnits>KGS</WeightUnits>
+          <Details>
+            <DetailItem>
+              <Weight>100</Weight>
+              <Hright>100</Height>
+              <Width>100</Width>
+              <Class>50</Class>
+            </DetailItem>
+          </Details>
+        </request>
+      </Create>
+    </soap:Body>
+    </soap:Envelope>`
+    // let options = {
+    //   format: {
+    //     doubleQuotes: true
+    //   }, 
+    //   declaration: {
+    //     include: false
+    //   }
+    // }
+
+    // return JsonToXML.parse("Universal", body, options);
+
+    let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
+
     const headers = new HttpHeaders({
       'Content-Type': 'text/xml; charset=utf-8'
     });
-    return this.http.post(url, body , {headers : headers , responseType: 'text'});
+    return this.http.post(url, body, { headers: headers, responseType: 'text' });
   }
 }

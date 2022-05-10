@@ -24,18 +24,6 @@
                     <h4>ECOLINK</h4>
                 </div>
                 <div class="search-bar">
-                    <ng-container *ngIf="resSignupMsg">
-                        <div *ngIf="resSignupMsgCheck=='danger'" class="text-danger" role="alert" id="loginAlert"
-                            #close>
-                            {{ resSignupMsg }}
-                            <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
-                        </div>
-                        <div *ngIf="resSignupMsgCheck=='success'" class="text-success" role="alert" id="loginAlert"
-                            #close>
-                            {{ resSignupMsg }}
-                            <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
-                        </div>
-                    </ng-container>
                     <div class="input-group">
                         <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
                             [(ngModel)]="newsletter_email" (input)="validateEmail($event)" required>

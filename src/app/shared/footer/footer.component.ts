@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, Renderer2, Inject, ViewChild, HostListener } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2, Inject, ViewChild, HostListener, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DOCUMENT } from '@angular/common';
 import { Router } from '@angular/router';
@@ -11,8 +11,10 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class FooterComponent implements OnInit {
   newsletter_email: any;
-  resSignupMsg: string = '';
-  resSignupMsgCheck: string = '';
+  // resSignupMsg: string = '';
+  // @Output() resSignupMsgCheck = new EventEmitter<string>();
+  // @Output() resSignupMsg = new EventEmitter<string>();
+  @Output() responseArray = new EventEmitter<any>();
   invalidUserEmail: string = '';
   invalidEmail: boolean = false;
   windowScrolled!: boolean;
@@ -49,23 +51,32 @@ export class FooterComponent implements OnInit {
   }
   subscribe() {
     if (this.newsletter_email == undefined) {
-      this.resSignupMsg = 'Please Enter Email !'
-      this.resSignupMsgCheck = 'danger'
+      let resSignupMsg = 'Please Enter Email !'
+      let resSignupMsgCheck = 'danger';
+      let object = {
+        resSignupMsg : resSignupMsg,
+        resSignupMsgCheck : resSignupMsgCheck
+      }
+
+      this.responseArray.emit(object);
+
     }
     else {
       let endpoint = 'newsletter'
       this._ApiService.newLatter(endpoint, this.newsletter_email).subscribe(res => {
         console.log(res);
-        this.resSignupMsg = 'Email Subscribed !'
-        this.resSignupMsgCheck = 'success';
-        this.newsletter_email = undefined
+        let resSignupMsg = 'Email Subscribed !'
+        let resSignupMsgCheck = 'success';
+        this.newsletter_email = undefined;
+        let object = {
+          resSignupMsg : resSignupMsg,
+          resSignupMsgCheck : resSignupMsgCheck
+        }
+
+        this.responseArray.emit(object);
       })
+      
     }
-  }
-  closeButton() {
-    this.renderer.setStyle(this.closer.nativeElement, 'display', 'none');
-    this.resSignupMsg = '';
-    this.resSignupMsgCheck = ''
   }
   routeOnSamePage(slug: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
