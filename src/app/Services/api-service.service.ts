@@ -379,7 +379,6 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'forgotPasswordEmail', data)
   }
   getTaxForUser(pincode: any): Observable<any> {
-    console.log(pincode)
     let body = {
       zip: 93524
     }

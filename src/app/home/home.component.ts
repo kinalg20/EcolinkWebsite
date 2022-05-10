@@ -8,28 +8,29 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  remembertoken : any ;
-  
-  constructor(private scroller: ViewportScroller , private route : ActivatedRoute , private router : Router) { }
+  remembertoken: any;
+  responseSubscribe: any = {}
+
+  constructor(private scroller: ViewportScroller, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     let slug = this.route.snapshot.params;
     console.log(slug.token);
-    if(slug.token){
-      if(localStorage.getItem('ecolink_user_credential')!=null){
+    if (slug.token) {
+      if (localStorage.getItem('ecolink_user_credential') != null) {
         this.remembertoken = localStorage.getItem('ecolink_user_credential')
         let token = JSON.parse(this.remembertoken).user.remember_token;
-        if(token!=null){
+        if (token != null) {
           this.router.navigateByUrl('/')
         }
-        else if(slug.token == this.remembertoken){
+        else if (slug.token == this.remembertoken) {
           this.router.navigateByUrl('/')
         }
         else {
           this.router.navigateByUrl('shared/error-404');
         }
       }
-      else{
+      else {
         this.router.navigateByUrl('shared/error-404');
       }
     }
@@ -37,5 +38,24 @@ export class HomeComponent implements OnInit {
 
   scrolldown(event: any) {
     this.scroller.scrollToAnchor("newsletter");
+  }
+
+  scrollup(event: any) {
+    console.log(event);
+    this.responseSubscribe = event;
+    this.scroller.scrollToAnchor('subscribeMsg');
+  }
+
+  closeButton() {
+    // this.renderer.setStyle(this.closer.nativeElement, 'display', 'none');
+    let resSignupMsg = '';
+    let resSignupMsgCheck = ''
+    let object = {
+      resSignupMsg: resSignupMsg,
+      resSignupMsgCheck: resSignupMsgCheck
+    }
+
+    this.responseSubscribe = object;
+
   }
 }

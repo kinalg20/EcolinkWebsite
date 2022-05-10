@@ -12,49 +12,49 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './product-checkout.component.html',
   styleUrls: ['./product-checkout.component.scss']
 })
-export class ProductCheckoutComponent implements OnInit,AfterViewInit {
+export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   selectedPaymentMethod: any
   userObj: any;
   discountCheck: boolean = true;
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
-  rate:any
+  rate: any
   couponDiscount: any = 0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
   CheckoutProduct: any = [];
   carts: any = [];
-  pincode:any
+  pincode: any
   formShimmer: boolean = true;
   paypalItems: any = {}
   orderObj: any;
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
   paypal: any = []
-  taxCheck:boolean=false;
+  taxCheck: boolean = false;
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
-  tax_exempt_user:number=0
+  tax_exempt_user: number = 0
   checkoutShimmer: boolean = true;
+  checkoutProductItem: any = []
   public payPalConfig?: IPayPalConfig;
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
     private _ShippingApi: ShippingServiceService,
-    private router:Router) { }
+    private router: Router) { }
   ngAfterViewInit(): void {
-    
+
   }
 
   ngOnInit(): void {
-    if(localStorage.getItem('ecolink_user_credential')==null) {
-      this.discountCheck=false;
+    if (localStorage.getItem('ecolink_user_credential') == null) {
+      this.discountCheck = false;
     }
     this.checkoutProduct();
     this.getTaxExempt()
     this.getPaypalProductDetail();
     this.initConfig();
-    this.getShippingInfo();
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getUserAddress().subscribe((res: any) => {
         res.data.map((response: any) => {
@@ -74,20 +74,20 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
     })
   }
   getTaxExempt() {
-    this.__apiservice.getUserProfileDetail().subscribe((res:any)=> {
-      this.tax_exempt_user=res.data.tax_exempt;
+    this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
+      this.tax_exempt_user = res.data.tax_exempt;
     })
     setTimeout(() => {
-      if(!this.tax_exempt_user) {
-        this.taxCheck=true;
-        this.__apiservice.getTaxForUser(this.pincode).subscribe((res:any)=> {
-           this.rate=res.data.rate;
+      if (!this.tax_exempt_user) {
+        this.taxCheck = true;
+        this.__apiservice.getTaxForUser(this.pincode).subscribe((res: any) => {
+          this.rate = res.data.rate;
           console.log(this.rate);
         })
       }
-      else{
+      else {
         console.log("false");
-        this.taxCheck=false;
+        this.taxCheck = false;
       }
     }, 1000);
   }
@@ -113,11 +113,14 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
           this.checkoutShimmer = false;
         }
         this.CheckoutProduct.push(res.data);
-        res.data.addresses.map((res:any)=> {
-          this.pincode=res.zip
+        res.data.addresses.map((res: any) => {
+          this.pincode = res.zip;
         })
-        console.log(this.pincode);
       })
+
+      setTimeout(() => {
+        this.getProduct();
+      }, 1000);
     }
     else {
       this.getsubjectBehaviour();
@@ -132,9 +135,31 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
     })
   }
 
+  product_weight: number = 0;
+  product_width: number = 0;
+  product_height: number = 0;
+  product_length: number = 0;
+  getProduct() {
+    this.CheckoutProduct.map((res: any) => {
+      console.log(res);
+      res.carts.map((resp: any) => {
+        this.product_weight = this.product_weight + resp.quantity * resp.product.weight;
+        this.product_width = this.product_width + resp.quantity * resp.product.width;
+        this.product_height = this.product_height + resp.quantity * resp.product.height;
+        this.product_length = this.product_length + resp.quantity * resp.product.lenght;
+      })
+      console.log(this.product_weight , this.product_width , this.product_height , this.product_length);
+    })
+    this.checkoutProductItem.push(this.product_weight);
+    this.checkoutProductItem.push(this.product_width);
+    this.checkoutProductItem.push(this.product_height);
+    this.checkoutProductItem.push(this.product_length);
+    this.getShippingInfo();
+  }
+
   saiaValues: any = {}
-  getShippingInfo() {
-    this._ShippingApi.rateDetailThroughSaia().subscribe(
+  getShippingInfo() {    
+    this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem).subscribe(
       (res: any) => {
         var parser = new DOMParser();
         let xmlDoc = parser.parseFromString(res, 'application/xml');
@@ -306,7 +331,6 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
   getPaypalProductDetail() {
     setTimeout(() => {
       this.CheckoutProduct.map((res: any) => {
-        console.log(res.payable);
         this.payment = res.payable + this.shippingCharge;
         console.log(this.payment)
         this.paypalProductDetails.payable = this.payment;
@@ -317,15 +341,15 @@ export class ProductCheckoutComponent implements OnInit,AfterViewInit {
     }, 1000);
   }
   couponButton() {
-      this.discountCheck = false;
-      this.couponCheck = true;
-      this.CheckoutProduct.map((res: any) => {
-        console.log(res);
-        res.carts.map((response: any) => {
-          this.couponDiscount += response.product.coupon_discount
-          console.log(this.couponDiscount)
-        })
+    this.discountCheck = false;
+    this.couponCheck = true;
+    this.CheckoutProduct.map((res: any) => {
+      console.log(res);
+      res.carts.map((response: any) => {
+        this.couponDiscount += response.product.coupon_discount
+        console.log(this.couponDiscount)
       })
+    })
   }
   fillformevent(event: any) {
     this.disableOrderButton = event;
