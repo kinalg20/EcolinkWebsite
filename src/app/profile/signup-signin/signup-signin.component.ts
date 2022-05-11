@@ -125,12 +125,11 @@ export class SignupSigninComponent implements OnInit {
               this.resSignupMsgCheck = 'success';
               this.resSignupMsg = 'Verification mail has been sent to your Email Id !'
             }
-            this.resSignupMsg = res.message;
-            this.resSignupMsgCheck = 'success';
             localStorage.setItem(
               'ecolink_user_credential',
               JSON.stringify(res.data)
             );
+            form.reset();
           }
 
           else {
@@ -155,9 +154,6 @@ export class SignupSigninComponent implements OnInit {
           // console.log(error.error.code);
           form.reset();
         });
-      () => {
-        form.reset();
-      }
     }
     else {
       this.resSignupMsg = "Please Fill The Value!"
