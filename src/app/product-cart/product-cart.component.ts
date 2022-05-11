@@ -176,10 +176,6 @@ export class ProductCartComponent implements OnInit {
       .catch((error)=>{
         this.getCartData();
       })
-      // this._ApiService.deleteItemFromCart(product.product.id).subscribe(res => console.log(res));
-      // setTimeout(() => {
-      //   this.getCartData();
-      // }, 1000);
     }
 
     else {

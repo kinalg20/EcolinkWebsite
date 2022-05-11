@@ -139,7 +139,7 @@
                                     </ng-container>
                                 </div>
                             </section>
-                            <section class="rating">
+                            <!-- <section class="rating">
                                 <div class="rating-heading">
                                     <h4>Rating</h4>
                                     <div class="p-field-checkbox mb-2">
@@ -163,7 +163,8 @@
                                         <label for="1star" class="mx-2">1 & above</label>
                                     </div>
                                 </div>
-                            </section>
+                            </section> --> 
+                            
                             <div class="apply-button">
                                 <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter" class="p-button  filter-button"></button>
                             </div>
@@ -183,7 +184,38 @@
                                                 </div>
                                                 <div class="card-body">
                                                     <div class="card-title">
-                                                        <h5>{{data.name.slice(0,36)}}</h5>
+                                                        <h6>{{product.name.slice(0,36)}}</h6>
+                                                        <ng-container
+                                                            *ngFor="let subcategory of listdata.data.subcategory">
+                                                            <p> {{subcategory.name}}</p>
+                                                        </ng-container>
+                                                    </div>
+                                                    <div class="card-price-section">
+                                                        <div class="card-price">
+                                                            <ng-container
+                                                                *ngIf="product.regular_price > product.sale_price; then thenBlock else elseBlock">
+                                                            </ng-container>
+                                                            <ng-template #thenBlock>
+                                                                <p class="product-price mb-1"
+                                                                    style="text-decoration-line: line-through; font-size: 14px;">
+                                                                    {{product.regular_price
+                                                                    | currency}}</p>
+                                                                <p class="product-price">{{product.sale_price |
+                                                                    currency}}
+                                                                </p>
+                                                            </ng-template>
+                                                            <ng-template #elseBlock>
+                                                                <p class="product-price">{{product.sale_price |
+                                                                    currency}}
+                                                                </p>
+                                                            </ng-template>
+                                                        </div>
+                                                        <!-- <div class="rating">
+                                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                            <i style="font-size:18px" class="fa">&#xf006;</i>
+                                                        </div> -->
                                                     </div>
                                                     <div class="list-buttons">
                                                         <p routerLink="{{data.slug}}">Show Details
@@ -373,7 +405,7 @@
                     </select>
                 </div>
             </section>
-            <section class="rating">
+            <!-- <section class="rating">
                 <div class="rating-heading">
                     <h4>Rating</h4>
                     <div class="p-field-checkbox">
@@ -397,7 +429,7 @@
                         <label for="1star" class="mx-2">1 & above</label>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <div class="apply-button">
                 <button pButton pRipple type="button" (click)="getDataForFilter()" (click)="showFiterModel=false" label="Apply Filter" class="p-button  filter-button"></button>
             </div>
