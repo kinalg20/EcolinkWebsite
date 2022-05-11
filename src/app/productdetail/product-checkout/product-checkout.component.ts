@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
@@ -13,13 +13,14 @@ import { HttpErrorResponse } from '@angular/common/http';
   styleUrls: ['./product-checkout.component.scss']
 })
 export class ProductCheckoutComponent implements OnInit, AfterViewInit {
-  selectedPaymentMethod: any
+  selectedPaymentMethod: any;
   userObj: any;
   discountCheck: boolean = true;
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
   rate: any;
-  selectedShippingMethod : any;
+  openAddressDropdown:boolean = false;
+  selectedShippingMethod: string = 'fedex';
   couponDiscount: any = 0;
   showDropdowm: boolean = false;
   getAllUserAddresses: any = [];
@@ -39,6 +40,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   checkoutShimmer: boolean = true;
   checkoutProductItem: any = {};
   public payPalConfig?: IPayPalConfig;
+  SaveDetails: boolean = false;
+  shippingDataObj : any = {};
+  billingUserDetail:any={};
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
@@ -83,7 +87,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         this.taxCheck = true;
         this.__apiservice.getTaxForUser(this.pincode).subscribe((res: any) => {
           this.rate = res.data.rate;
-          console.log(this.rate);
         })
       }
       else {
@@ -98,26 +101,36 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/profile']);
   }
   getRadioButtonValue(value: any) {
+    // this.showDropdowm=!this.showDropdowm;
     if (localStorage.getItem('ecolink_user_credential') != null) {
-      console.log(value);
+      this.disableOrderButton = false;
       console.log(this.getAllUserAddresses);
       this.CheckoutProduct[0].user = this.getAllUserAddresses[value];
+      this.shippingDataObj=this.getAllUserAddresses[value];
+      this.SaveDetails = true;
     }
   }
 
-  checkoutProduct() {
+  async checkoutProduct() {
     if (localStorage.getItem('ecolink_user_credential') != null) {
-      this.__apiservice.getCheckoutProducts().subscribe(res => {
-        console.log(res);
-        if (res.code == 200) {
-          this.formShimmer = false;
-          this.checkoutShimmer = false;
-        }
-        this.CheckoutProduct.push(res.data);
-        res.data.addresses.map((res: any) => {
-          this.pincode = res.zip;
+      await this.__apiservice.getCheckoutProducts()
+        .then(res => {
+          console.log(res);
+          if (res.code == 200) {
+            this.formShimmer = false;
+            this.checkoutShimmer = false;
+          }
+          this.CheckoutProduct.push(res.data);
+          this.billingUserDetail = res.data.user;
+          console.log(this.billingUserDetail  );
+          res.data.addresses.map((res: any) => {
+            this.pincode = res.zip;
+          })
         })
-      })
+
+        .catch(error => {
+          console.log(error.error.code);
+        })
 
       setTimeout(() => {
         this.getProduct();
@@ -127,12 +140,13 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.getsubjectBehaviour();
     }
     this.CheckoutProduct.map((response: any) => {
-      console.log(response.product.name)
-      this.paypalItems.name = response.product.name;
-      this.paypalItems.quantity = response.quantity;
-      this.paypalItems.category = "PHYSICAL_GOODS";
-      this.paypalItems.unit_amount = { currency_code: "USD", value: response.product.sale_price }
-      this.paypal.push(this.paypalItems)
+      response.carts.map((resp: any) => {
+        this.paypalItems.name = resp.product.name;
+        this.paypalItems.quantity = resp.quantity;
+        this.paypalItems.category = "PHYSICAL_GOODS";
+        this.paypalItems.unit_amount = { currency_code: "USD", value: resp.product.sale_price }
+        this.paypal.push(this.paypalItems)
+      })
     })
   }
 
@@ -142,57 +156,55 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   product_length: number = 0;
   getProduct() {
     this.CheckoutProduct.map((res: any) => {
-      console.log(res);
       res.carts.map((resp: any) => {
-        this.product_weight = this.product_weight + resp.quantity * resp.product.weight;
-        this.product_width = this.product_width + resp.quantity * resp.product.width;
-        this.product_height = this.product_height + resp.quantity * resp.product.height;
-        this.product_length = this.product_length + resp.quantity * resp.product.lenght;
+        this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight);
+        this.checkoutProductItem.width = this.product_width += (resp.quantity * resp.product.width);
+        this.checkoutProductItem.height = this.product_height += (resp.quantity * resp.product.height);
+        this.checkoutProductItem.length = this.product_length += (resp.quantity * resp.product.lenght);
       })
     })
-    this.checkoutProductItem.weight = this.product_weight;
-    this.checkoutProductItem.width = this.product_width;
-    this.checkoutProductItem.height = this.product_height;
-    this.checkoutProductItem.length = this.product_length;
     this.getShippingInfo();
   }
 
   saiaValues: any = {}
-  getShippingInfo() {    
+  getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem)
-    .subscribe(
-      (res: any) => {
-        var parser = new DOMParser();
-        let xmlDoc = parser.parseFromString(res, 'application/xml');
-        console.log(xmlDoc);
-        
-        let firstEmployee = xmlDoc.getElementsByTagName('RateDetailItem')[0];
-        console.log(firstEmployee);
-        
-        for (let i = 0; i < 4; i++) {
-          let x = xmlDoc.getElementsByTagName(firstEmployee.childNodes[i].nodeName)[0];
-          console.log("x", firstEmployee.childNodes[i].nodeName, x.childNodes[0].nodeValue);
-          this.saiaValues[firstEmployee.childNodes[i].nodeName] = x.childNodes[0].nodeValue
+      .subscribe(
+        (res: any) => {
+          var parser = new DOMParser();
+          let xmlDoc = parser.parseFromString(res, 'application/xml');
+          console.log(xmlDoc);
+
+          let firstEmployee = xmlDoc.getElementsByTagName('RateDetailItem')[0];
+
+          for (let i = 0; i < 4; i++) {
+            let x = xmlDoc.getElementsByTagName(firstEmployee.childNodes[i].nodeName)[0];
+            console.log("x", firstEmployee.childNodes[i].nodeName, x.childNodes[0].nodeValue);
+            this.saiaValues[firstEmployee.childNodes[i].nodeName] = x.childNodes[0].nodeValue
+          }
+          console.log(this.saiaValues);
+        },
+        (error: HttpErrorResponse) => {
+          if (true) {
+            console.log(error.error);
+          }
         }
-        console.log(this.saiaValues);
-      },
-      (error: HttpErrorResponse) => {
-        if (true) {
-          console.log(error.error);
-        }
-      }
       )
   }
 
   getOrderInfo() {
-    let Extra_Charges : any;
-    if(this.selectedShippingMethod == 'fedex'){
-      Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;     
+    console.log(this.billingUserDetail);
+    let Extra_Charges: any;
+    if (this.selectedShippingMethod == 'fedex') {
+      Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;
+      console.log(Extra_Charges);
+
     }
 
-    else{
-      Extra_Charges = this.saiaValues.Amount + this.CheckoutProduct[0].payable;
-      console.log(Extra_Charges);
+    else {
+      let saiaAmount = Number(this.saiaValues.Amount);
+      console.log(saiaAmount + this.CheckoutProduct[0].payable);
+      Extra_Charges = saiaAmount + this.CheckoutProduct[0].payable;
     }
     this.orderObj = {
       sameAsShip: 0,
@@ -200,32 +212,30 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       product_discount: 0,
       coupon_discount: 0,
       total_amount: Extra_Charges,
-      billing_name: this.CheckoutProduct[0].user.name,
-      billing_email: this.CheckoutProduct[0].user.email,
-      billing_mobile: this.CheckoutProduct[0].user.mobile,
-      billing_address: this.CheckoutProduct[0].user.address,
-      billing_landmark: this.CheckoutProduct[0].user.address,
-      billing_country: this.CheckoutProduct[0].user.country,
-      billing_state: this.CheckoutProduct[0].user.state,
-      billing_city: this.CheckoutProduct[0].user.city,
-      billing_zip: this.CheckoutProduct[0].user.pincode,
-      shipping_name: this.CheckoutProduct[0].user.name,
-      shipping_email: this.CheckoutProduct[0].user.email,
-      shipping_mobile: this.CheckoutProduct[0].user.mobile,
-      shipping_address: this.CheckoutProduct[0].user.address,
-      shipping_landmark: this.CheckoutProduct[0].user.address,
-      shipping_country: this.CheckoutProduct[0].user.country,
-      shipping_state: this.CheckoutProduct[0].user.state,
-      shipping_city: this.CheckoutProduct[0].user.city,
-      shipping_zip: this.CheckoutProduct[0].user.pincode,
+      billing_name: this.billingUserDetail.name,
+      billing_email: this.billingUserDetail.email,
+      billing_mobile: this.billingUserDetail.mobile,
+      billing_address: this.billingUserDetail.address,
+      billing_landmark: this.billingUserDetail.address,
+      billing_country: this.billingUserDetail.country,
+      billing_state: this.billingUserDetail.state,
+      billing_city: this.billingUserDetail.city,
+      billing_zip: this.billingUserDetail.pincode,
+      shipping_name: this.shippingDataObj.name,
+      shipping_email: this.shippingDataObj.email,
+      shipping_mobile: this.shippingDataObj.mobile,
+      shipping_address: this.shippingDataObj.address,
+      shipping_landmark: this.shippingDataObj.landmark,
+      shipping_country: this.shippingDataObj.country,
+      shipping_state:this.shippingDataObj.state,
+      shipping_city:this.shippingDataObj.city,
+      shipping_zip: this.shippingDataObj.zip,
       payment_via: this.selectedPaymentMethod,
       shippment_via: this.selectedShippingMethod,
       no_items: '1'
     }
     console.log(this.orderObj);
-    this.__apiservice.storeOrder(this.orderObj).subscribe(res => {
-      console.log(res);
-    })
+    // this.__apiservice.storeOrder(this.orderObj);
   }
   private initConfig(): void {
     this.payPalConfig = {
@@ -347,10 +357,10 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     setTimeout(() => {
       this.CheckoutProduct.map((res: any) => {
         this.payment = res.payable + this.shippingCharge;
-        console.log(this.payment)
+        // console.log(this.payment)
         this.paypalProductDetails.payable = this.payment;
         setTimeout(() => {
-          console.log(this.paypalProductDetails);
+          // console.log(this.paypalProductDetails);
         }, 1000);
       })
     }, 1000);
@@ -362,7 +372,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       console.log(res);
       res.carts.map((response: any) => {
         this.couponDiscount += response.product.coupon_discount
-        console.log(this.couponDiscount)
+        // console.log(this.couponDiscount)
       })
     })
   }
@@ -370,7 +380,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.disableOrderButton = event;
   }
 
-  getShippingMethod(){
+  getShippingMethod() {
     console.log(this.selectedShippingMethod);
+  }
+
+  getshippingInfo(event: any) {
+    console.log(event);
+    this.shippingDataObj=event;
   }
 }

@@ -12,8 +12,10 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 })
 export class BillingFormComponent implements OnInit {
   @Input() CheckoutProduct: any;
+  @Input() SaveDetails: any;
   @Input() formShimmer: boolean = true;
   @Output() FormFillUp = new EventEmitter<boolean>();
+  @Output() OrderInfo = new EventEmitter<boolean>();
   userObj: any;
   invalidUserEmail: string = '';
   resSignupMsg: string = '';
@@ -26,6 +28,7 @@ export class BillingFormComponent implements OnInit {
   constructor(private __apiservice: ApiServiceService, private renderer: Renderer2, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
+    // this.Successbutton = this.SaveDetails;
     console.log(this.formShimmer);
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
   }
@@ -50,13 +53,15 @@ export class BillingFormComponent implements OnInit {
           (res) => {
             console.log(res);
             if (res.code == 200) {
+              this.SaveDetails = true;
+              this.FormFillUp.emit(false);
+              this.OrderInfo.emit(this.userObj)
               window.scroll(0, 0)
               this.resSignupMsg = res.message;
               this.resSignupMsgCheck = 'success'
               localStorage.setItem(
                 'ecolink_user_credential',
-                JSON.stringify(res.data)
-              );
+                JSON.stringify(res.data));
               this.route.navigateByUrl('/shop/checkout');
               this.SaveCookiesDataInCart();
             }
@@ -85,7 +90,6 @@ export class BillingFormComponent implements OnInit {
       }
       else {
         this.addUserAddress(form);
-        this.FormFillUp.emit(false);
       }
     }
     else {
@@ -181,11 +185,13 @@ export class BillingFormComponent implements OnInit {
         (res) => {
           console.log(res);
           if (res.code == 200) {
+            this.SaveDetails = true;
+            this.FormFillUp.emit(false);
+            this.OrderInfo.emit(this.userObj)
             this.resSignupMsgCheck = 'success';
             this.resSignupMsg = res.message;
             window.scroll(0, 0)
             this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-            // this.route.onSameUrlNavigation = 'reload';
             this.route.navigate(['/shop/checkout']);
           }
         },

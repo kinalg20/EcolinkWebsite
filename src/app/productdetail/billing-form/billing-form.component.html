@@ -88,7 +88,7 @@
             <div class="col-12">
                 <label for="landmark">LandMark</label>
                 <input type="text" class="form-control mt-2" placeholder="Land Mark" name="landmark"
-                    [(ngModel)]="data.user.landmark" required>
+                    [(ngModel)]="data.user.landmark ? data.user.landmark : data.user.address" required>
             </div>
         </div>
         <div class="row mb-3">
@@ -109,7 +109,7 @@
             <div class="col-12">
                 <label for="Postcode">Postcode</label>
                 <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="pincode"
-                    [(ngModel)]="data.user.pincode" required>
+                    [(ngModel)]="data.user.pincode ? data.user.pincode : data.user.zip" required>
             </div>
         </div>
         <div class="row mb-3" *ngIf="UserLogin == null">
@@ -152,8 +152,10 @@
         <div class="proceed">
             <div class="proceed-button">
                 <button pButton pRipple label="Save Details" class="p-button-raised p-button-success"
-                    style="height:40px; width: 100%;"></button>
+                    style="height:40px; width: 100%;" *ngIf="!SaveDetails"></button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+        <button pButton pRipple label="Saved Successfully" disabled *ngIf="SaveDetails" class="p-button-raised p-button-success"
+            style="height:40px; width: 100%;"></button>
 </ng-container>
