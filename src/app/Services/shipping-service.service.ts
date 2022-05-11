@@ -1,15 +1,13 @@
 import { Injectable } from '@angular/core';
-import * as JsonToXML from 'js2xmlparser';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
-import { NgxXmlToJsonService } from 'ngx-xml-to-json';
 @Injectable({
   providedIn: 'root'
 })
 export class ShippingServiceService {
 
-  constructor(public http: HttpClient, private sanitizer: DomSanitizer, private ngxXmlToJsonService: NgxXmlToJsonService) {
+  constructor(public http: HttpClient, private sanitizer: DomSanitizer) {
     const options = { // set up the default options 
       textKey: 'text', // tag name for text nodes
       attrKey: 'attr', // tag for attr groups
