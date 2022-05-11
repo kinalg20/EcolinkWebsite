@@ -19,6 +19,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
   rate: any;
+  openAddressDropdown:boolean = false;
   selectedShippingMethod: string = 'fedex';
   couponDiscount: any = 0;
   showDropdowm: boolean = false;
@@ -100,6 +101,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.router.navigate(['/profile']);
   }
   getRadioButtonValue(value: any) {
+    // this.showDropdowm=!this.showDropdowm;
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.disableOrderButton = false;
       console.log(this.getAllUserAddresses);

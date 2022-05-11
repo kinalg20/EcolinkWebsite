@@ -88,7 +88,7 @@
             <div class="col-12">
                 <label for="landmark">LandMark</label>
                 <input type="text" class="form-control mt-2" placeholder="Land Mark" name="landmark"
-                    [(ngModel)]="data.user.landmark" required>
+                    [(ngModel)]="data.user.landmark ? data.user.landmark : data.user.address" required>
             </div>
         </div>
         <div class="row mb-3">
@@ -109,7 +109,7 @@
             <div class="col-12">
                 <label for="Postcode">Postcode</label>
                 <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="pincode"
-                    [(ngModel)]="data.user.zip" required>
+                    [(ngModel)]="data.user.pincode ? data.user.pincode : data.user.zip" required>
             </div>
         </div>
         <div class="row mb-3" *ngIf="UserLogin == null">
