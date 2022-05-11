@@ -41,6 +41,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   public payPalConfig?: IPayPalConfig;
   SaveDetails: boolean = false;
   shippingDataObj : any = {};
+  billingUserDetail:any={};
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
@@ -100,10 +101,10 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   }
   getRadioButtonValue(value: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
-      console.log(value);
       this.disableOrderButton = false;
       console.log(this.getAllUserAddresses);
       this.CheckoutProduct[0].user = this.getAllUserAddresses[value];
+      this.shippingDataObj=this.getAllUserAddresses[value];
       this.SaveDetails = true;
     }
   }
@@ -118,6 +119,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
             this.checkoutShimmer = false;
           }
           this.CheckoutProduct.push(res.data);
+          this.billingUserDetail = res.data.user;
+          console.log(this.billingUserDetail  );
           res.data.addresses.map((res: any) => {
             this.pincode = res.zip;
           })
@@ -188,6 +191,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   }
 
   getOrderInfo() {
+    console.log(this.billingUserDetail);
     let Extra_Charges: any;
     if (this.selectedShippingMethod == 'fedex') {
       Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;
@@ -206,15 +210,15 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       product_discount: 0,
       coupon_discount: 0,
       total_amount: Extra_Charges,
-      billing_name: this.CheckoutProduct[0].user.name,
-      billing_email: this.CheckoutProduct[0].user.email,
-      billing_mobile: this.CheckoutProduct[0].user.mobile,
-      billing_address: this.CheckoutProduct[0].user.address,
-      billing_landmark: this.CheckoutProduct[0].user.address,
-      billing_country: this.CheckoutProduct[0].user.country,
-      billing_state: this.CheckoutProduct[0].user.state,
-      billing_city: this.CheckoutProduct[0].user.city,
-      billing_zip: this.CheckoutProduct[0].user.pincode,
+      billing_name: this.billingUserDetail.name,
+      billing_email: this.billingUserDetail.email,
+      billing_mobile: this.billingUserDetail.mobile,
+      billing_address: this.billingUserDetail.address,
+      billing_landmark: this.billingUserDetail.address,
+      billing_country: this.billingUserDetail.country,
+      billing_state: this.billingUserDetail.state,
+      billing_city: this.billingUserDetail.city,
+      billing_zip: this.billingUserDetail.pincode,
       shipping_name: this.shippingDataObj.name,
       shipping_email: this.shippingDataObj.email,
       shipping_mobile: this.shippingDataObj.mobile,
