@@ -97,7 +97,7 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise()
   }
 
-  getCheckoutProducts() {
+  getCheckoutProducts():Promise<any>{
     let url = 'checkout';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -110,7 +110,7 @@ export class ApiServiceService {
     {
       user_id: user_id
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise()
   }
 
   addItemToWishlist(product_id: any) {

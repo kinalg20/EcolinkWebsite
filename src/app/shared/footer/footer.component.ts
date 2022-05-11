@@ -11,9 +11,6 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class FooterComponent implements OnInit {
   newsletter_email: any;
-  // resSignupMsg: string = '';
-  // @Output() resSignupMsgCheck = new EventEmitter<string>();
-  // @Output() resSignupMsg = new EventEmitter<string>();
   @Output() responseArray = new EventEmitter<any>();
   invalidUserEmail: string = '';
   invalidEmail: boolean = false;
