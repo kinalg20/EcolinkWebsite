@@ -116,6 +116,7 @@ export class ShippingServiceService {
 
 
   rateDetailThroughSaia(checkoutProductList: any) {
+    console.log("checkoutProductList", checkoutProductList);
     let url = "http://www.saiasecure.com/webservice/ratequote/soap.asmx";
     let body = `<?xml version="1.0" encoding="utf-8"?>
   <soap:Envelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
@@ -137,10 +138,10 @@ export class ShippingServiceService {
         <WeightUnits>KGS</WeightUnits>
         <Details>
           <DetailItem>
-            <Weight>${checkoutProductList.weight}</Weight>
-            <Height>${checkoutProductList.height}</Height>
-            <Length>${checkoutProductList.length}</Length>
-            <Width>${checkoutProductList.width}</Width>
+            <Weight>${checkoutProductList.weight != undefined ? checkoutProductList.weight : 0}</Weight>
+            <Height>${checkoutProductList.height != undefined ? checkoutProductList.height : 0}</Height>
+            <Length>${checkoutProductList.length != undefined ? checkoutProductList.length : 0}</Length>
+            <Width>${checkoutProductList.width != undefined ? checkoutProductList.width : 0}</Width>
             <Class>50</Class>
           </DetailItem>
         </Details>
@@ -148,13 +149,6 @@ export class ShippingServiceService {
     </Create>
   </soap:Body>
   </soap:Envelope>`
-    // const obj = this.ngxXmlToJsonService.xmlToJson(body, this.options)
-    // console.log(obj);
-    // const obj1 = JsonToXML.parse("xmlversion", obj, options);
-    // console.log(obj1);
-    
-    // let obj1 = js2xmlparser.parse("person", obj)
-    // console.log(obj1);
 
     const headers = new HttpHeaders({
       'Content-Type': 'text/xml; charset=utf-8'
