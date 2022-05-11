@@ -153,7 +153,7 @@ export class SignupSigninComponent implements OnInit {
           }
           // this.resSignupMsg = 'Username Password Incorrect!';
           // console.log(error.error.code);
-          form.reset();
+          // form.reset();
         });
       () => {
         form.reset();
