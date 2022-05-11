@@ -12,7 +12,6 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 })
 export class BillingFormComponent implements OnInit {
   @Input() CheckoutProduct: any;
-  @Input() SaveDetails: any;
   @Input() formShimmer: boolean = true;
   @Output() FormFillUp = new EventEmitter<boolean>();
   @Output() OrderInfo = new EventEmitter<boolean>();
@@ -28,14 +27,20 @@ export class BillingFormComponent implements OnInit {
   constructor(private __apiservice: ApiServiceService, private renderer: Renderer2, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
-    // this.Successbutton = this.SaveDetails;
     console.log(this.formShimmer);
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
+    if(this.UserLogin){
+      this.FormFillUp.emit(false);
+    }
+
+    else{
+      this.FormFillUp.emit(true);
+    }
   }
   signUp(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
-      console.log(data);
+      console.log(data.radio2);
       this.userObj = {
         name: data.name,
         email: data.email,
@@ -46,14 +51,15 @@ export class BillingFormComponent implements OnInit {
         state: data.state,
         city: data.city,
         pincode: data.pincode,
-        tax_exempt: data.tax_exempt
+        tax_exempt: Number(data.radio2)
       };
+
+      console.log("this.userObj", this.userObj);
       if (!localStorage.getItem('ecolink_user_credential')) {
         this.__apiservice.post(this.userObj).subscribe(
           (res) => {
             console.log(res);
             if (res.code == 200) {
-              this.SaveDetails = true;
               this.FormFillUp.emit(false);
               this.OrderInfo.emit(this.userObj)
               window.scroll(0, 0)
@@ -64,6 +70,7 @@ export class BillingFormComponent implements OnInit {
                 JSON.stringify(res.data));
               this.route.navigateByUrl('/shop/checkout');
               this.SaveCookiesDataInCart();
+              window.location.reload();
             }
             else {
               localStorage.removeItem('ecolink_user_credential');
@@ -125,22 +132,28 @@ export class BillingFormComponent implements OnInit {
     }
   }
   SaveCookiesDataInCart() {
-    setTimeout(() => {
-      this.CheckoutProduct.map((res: any) => {
-        console.log(res.carts);
-        res.carts.map((resp: any) => {
-          console.log(resp);
-          this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add");
-          // this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add").subscribe(res =>
-          //   console.log(res));
-          // if (res.code == 200) {
-          //   this._cookies.DeleteCartData();
-          // }
+    this.CheckoutProduct.map((res: any) => {
+      console.log(res.carts);
+      res.carts.map(async (resp: any) => {
+        console.log(resp);
+        await this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add")
+          .then((res) => {
+            console.log(res);
+            this._cookies.DeleteCartData();
+          })
 
-        })
+          .catch((error: any) => {
+            console.log(error);
+            
+          })
+        // this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add").subscribe(res =>
+        //   console.log(res));
+        // if (res.code == 200) {
+        // }
+
       })
-      this.FormFillUp.emit(false);
-    }, 1000);
+    })
+    this.FormFillUp.emit(false);
   }
   inputMobile(event: any) {
     if (
@@ -185,7 +198,6 @@ export class BillingFormComponent implements OnInit {
         (res) => {
           console.log(res);
           if (res.code == 200) {
-            this.SaveDetails = true;
             this.FormFillUp.emit(false);
             this.OrderInfo.emit(this.userObj)
             this.resSignupMsgCheck = 'success';

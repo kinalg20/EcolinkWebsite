@@ -151,11 +151,11 @@
         </div>
         <div class="proceed">
             <div class="proceed-button">
-                <button pButton pRipple label="Save Details" class="p-button-raised p-button-success"
-                    style="height:40px; width: 100%;" *ngIf="!SaveDetails"></button>
+                <button pButton pRipple label="Save Details" *ngIf="!UserLogin" class="p-button-raised p-button-success"
+                    style="height:40px; width: 100%;" ></button>
                 </div>
             </div>
         </form>
-        <button pButton pRipple label="Saved Successfully" disabled *ngIf="SaveDetails" class="p-button-raised p-button-success"
+        <button pButton pRipple label="Saved Successfully" disabled *ngIf="UserLogin"  class="p-button-raised p-button-success"
             style="height:40px; width: 100%;"></button>
 </ng-container>

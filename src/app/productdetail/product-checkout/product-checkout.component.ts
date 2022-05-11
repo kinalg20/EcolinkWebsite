@@ -40,7 +40,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   checkoutShimmer: boolean = true;
   checkoutProductItem: any = {};
   public payPalConfig?: IPayPalConfig;
-  SaveDetails: boolean = false;
   shippingDataObj : any = {};
   billingUserDetail:any={};
   constructor(private __apiservice: ApiServiceService,
@@ -70,30 +69,32 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         })
       });
     }
-    // this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
-    //   this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
-    //     console.log(resp);
-    //     // console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
-    //     // this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
-    //   })
-    // })
+    this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
+      this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
+        console.log(resp);
+        // console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+        // this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
+      })
+    })
   }
   getTaxExempt() {
-    this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
-      this.tax_exempt_user = res.data.tax_exempt;
-    })
-    setTimeout(() => {
-      if (!this.tax_exempt_user) {
-        this.taxCheck = true;
-        this.__apiservice.getTaxForUser(this.pincode).subscribe((res: any) => {
-          this.rate = res.data.rate;
-        })
-      }
-      else {
-        console.log("false");
-        this.taxCheck = false;
-      }
-    }, 1000);
+    if(localStorage.getItem('ecolink_user_credential') != null){
+      this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
+        this.tax_exempt_user = res.data.tax_exempt;
+      })
+      setTimeout(() => {
+        if (!this.tax_exempt_user) {
+          this.taxCheck = true;
+          this.__apiservice.getTaxForUser(this.pincode).subscribe((res: any) => {
+            this.rate = res.data.rate;
+          })
+        }
+        else {
+          console.log("false");
+          this.taxCheck = false;
+        }
+      }, 1000);
+    }
   }
   routeToProfile() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -103,11 +104,10 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   getRadioButtonValue(value: any) {
     // this.showDropdowm=!this.showDropdowm;
     if (localStorage.getItem('ecolink_user_credential') != null) {
-      this.disableOrderButton = false;
+      // this.disableOrderButton = false;
       console.log(this.getAllUserAddresses);
       this.CheckoutProduct[0].user = this.getAllUserAddresses[value];
       this.shippingDataObj=this.getAllUserAddresses[value];
-      this.SaveDetails = true;
     }
   }
 
@@ -166,7 +166,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.getShippingInfo();
   }
 
-  saiaValues: any = {}
+  saiaValues: any = {};
+  saiaAmount : number = 0;
   getShippingInfo() {
     this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem)
       .subscribe(
@@ -183,6 +184,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
             this.saiaValues[firstEmployee.childNodes[i].nodeName] = x.childNodes[0].nodeValue
           }
           console.log(this.saiaValues);
+          this.saiaAmount=Number(this.saiaValues.Amount);
         },
         (error: HttpErrorResponse) => {
           if (true) {
@@ -197,7 +199,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     let Extra_Charges: any;
     if (this.selectedShippingMethod == 'fedex') {
       Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;
-      console.log(Extra_Charges);
+      // console.log(Extra_Charges);
 
     }
 
@@ -372,7 +374,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       console.log(res);
       res.carts.map((response: any) => {
         this.couponDiscount += response.product.coupon_discount
-        // console.log(this.couponDiscount)
       })
     })
   }

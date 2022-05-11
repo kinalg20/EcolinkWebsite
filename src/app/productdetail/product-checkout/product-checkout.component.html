@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer"
-                        (FormFillUp)="fillformevent($event)" [SaveDetails]="SaveDetails" (OrderInfo)="getshippingInfo($event)"></app-billing-form>
+                        (FormFillUp)="fillformevent($event)" (OrderInfo)="getshippingInfo($event)"></app-billing-form>
                 </div>
             </div>
             <div class="your_order" *ngIf="checkoutShimmer">
@@ -118,7 +118,7 @@
                         <div class="checkout-products-total">
                             <ul>
                                 <li class="subtotal-list-element"><b>Total : </b></li>
-                                <li><b>${{(rate ? rate : 0) -- cart.payable -- (selectedShippingMethod == 'fedex' ? shippingCharge : saiaValues.Amount) - couponDiscount | number
+                                <li><b>${{(rate ? rate : 0) -- cart.payable -- (selectedShippingMethod == 'fedex' ? shippingCharge : saiaAmount) - couponDiscount | number
                                         : '1.2-2'}}</b></li>
                             </ul>
                         </div>
@@ -130,12 +130,6 @@
                                 the payment
                                 reference. Your order will not be shipped until the funds have cleared in our account.
                             </p>
-                            <!-- <div class="field-radiobutton mt-3" (click)="checkPaymentTab()">
-                                <p-radioButton name="payment_method" value="check-payment"
-                                    [(ngModel)]="selectedPaymentMethod" inputId="payment_method">
-                                </p-radioButton>
-                                <label for="payment_method" class="mx-2"><b>Check payments</b></label>
-                            </div> -->
                             <div class="field-radiobutton mt-3" (click)="checkPaymentTab()">
                                 <p-radioButton name="payment_method1" value="cod" [(ngModel)]="selectedPaymentMethod"
                                     inputId="payment_method1">
