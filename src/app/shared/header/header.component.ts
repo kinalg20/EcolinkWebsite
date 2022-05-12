@@ -101,7 +101,6 @@ export class HeaderComponent implements OnInit {
     }
     else {
       let cookiesdata = this._cookies.GetCartData();
-      console.log("cookiesdata",cookiesdata);
       if(cookiesdata != 'empty'){
         this.length = cookiesdata.length;
       }
