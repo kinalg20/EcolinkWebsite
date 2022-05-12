@@ -56,18 +56,22 @@ export class FooterComponent implements OnInit {
       this._ApiService.subscribedmsg.next(Object.assign({}, object));
     }
     else {
+      let object = {
+        resSignupMsg: 'Wait for while....',
+        resSignupMsgCheck: 'warning'
+      }
+      this._ApiService.subscribedmsg.next(Object.assign({}, object));
       let endpoint = 'newsletter'
       this._ApiService.newLatter(endpoint, this.newsletter_email).subscribe(res => {
         console.log(res);
         let resSignupMsg = 'Email Subscribed !'
         let resSignupMsgCheck = 'success';
         this.newsletter_email = undefined;
-        let object = {
+        object = {
           resSignupMsg: resSignupMsg,
           resSignupMsgCheck: resSignupMsgCheck
         }
         this._ApiService.subscribedmsg.next(Object.assign({}, object));
-        console.log(this._ApiService.subscribedmsg);
       })
 
     }
