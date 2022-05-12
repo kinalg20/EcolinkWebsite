@@ -39,6 +39,7 @@ export class SubcatgorycomponentComponent implements OnInit {
   rangeValues: number[] = [0, 100];
   resetvalues: number[] = [0, 100];
   shimmerLoad: boolean = true;
+  subslug : any;
   subCatgoryProduct: any = [];
   @ViewChild('warning') warning: any;
   constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService, private router: Router) {
@@ -50,10 +51,11 @@ export class SubcatgorycomponentComponent implements OnInit {
     ];
   }
 
+
   ngOnInit(): void {
     this.catgory = localStorage.getItem('category');
-    let subslug = JSON.parse(this.catgory);
-    this.getListingData(subslug);
+    this.subslug = JSON.parse(this.catgory);
+    this.getListingData(this.subslug);
     this.slug = this.route.snapshot.params;
   }
   responsiveOptions = [
@@ -98,7 +100,9 @@ export class SubcatgorycomponentComponent implements OnInit {
       })
     }
     else if(this.value1.length == 0){
+      console.log(this.subCatgoryProduct[0].products);
       
+      // this.subCatgoryProduct[0].products = this.subCatgoryProduct;
     }
 
   }
@@ -110,15 +114,15 @@ export class SubcatgorycomponentComponent implements OnInit {
     await this._ApiService.getDetailByCategory(slug).then(res => {
       if (res.code == 200) {
         this.productResponse = res.data.subcategory;
-        this.ProductListData.push(res);
         for (let data = 0; data < this.productResponse.length; data++) {
           if (this.slug.sublink == this.productResponse[data].slug) {
-            this.productList = this.productResponse[data];
             this.subCatgoryProduct.push(this.productResponse[data]);
+            this.productList = this.productResponse[0];
+            this.displayProducts = this.productList.products;
           }
         }
         this.getPrice();
-        console.log("this.productList", this.productList);
+        console.log("this.productList", this.productResponse);
         this.shimmerLoad = false;
       }
     })
@@ -182,7 +186,7 @@ export class SubcatgorycomponentComponent implements OnInit {
 
   getDataForFilter() {
     console.log(this.productList);
-    this.productCheck = false;
+    // this.productCheck = false;
     let obj_Array: any[] = [];
     let filterValue = {
       category: Array.from(this.selectedCategory, Number),
@@ -191,15 +195,12 @@ export class SubcatgorycomponentComponent implements OnInit {
       rating: Array.from(this.selectedRatings, Number),
       sortby: this.selectedLevel
     }
-    console.log(filterValue);
     this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
       console.log("response", res);
       Object.keys(res.data).map(function (key) {
         obj_Array.push(res.data[key]);
       });
       this.subCatgoryProduct[0].products = obj_Array;
-      console.log(this.subCatgoryProduct);
-      this.getPrice();
     },
       (error: HttpErrorResponse) => {
         if (error.error.code == 400) {
@@ -208,7 +209,6 @@ export class SubcatgorycomponentComponent implements OnInit {
       }
     );
 
-    console.log(this.productList);
   }
 
   getPrice() {
@@ -223,9 +223,10 @@ export class SubcatgorycomponentComponent implements OnInit {
 
   ClearAll() {
     console.log(this.productList, this.subCatgoryProduct);
-    this.subCatgoryProduct = this.productList;
-    // this.getPrice();
-    // this.productCheck = false;
+    this.subCatgoryProduct[0].products = this.displayProducts;
+    this.getPrice();
+    console.log(this.displayProducts , this.subCatgoryProduct);
+    // this.productCheck = false;]
     // this.selectedRatings = false
   }
 
@@ -236,10 +237,10 @@ export class SubcatgorycomponentComponent implements OnInit {
     }
     else if (this.value1.length == 0) {
       this.suggestions = false;
-      // this.subCatgoryProduct = this.productList;
+      this.subCatgoryProduct = this.displayProducts;
     }
 
-    console.log(this.subCatgoryProduct);
+    console.log(this.displayProducts);
 
   }
 
