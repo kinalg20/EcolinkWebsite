@@ -14,11 +14,11 @@ export class AuthGuard implements CanActivate {
       this.email_token = localStorage.getItem('email_token');
       this.user_detail = localStorage.getItem('ecolink_user_credential');
       let detail = JSON.parse(this.user_detail);
-      if (detail.user.email_verified) {
+      if (detail.user.email_verified==0) {
         return true;
       }
 
-      else if(this.email_token == this.user_detail.user.remember_token){
+      else if(this.email_token == detail.user.remember_token){
         return true;
       }
 
