@@ -1,16 +1,4 @@
 <app-header id="subscribeMsg"></app-header>
-<div class="container">
-    <ng-container *ngIf="responseSubscribe.resSignupMsg">
-        <div *ngIf="responseSubscribe.resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert1" #close>
-            {{ responseSubscribe.resSignupMsg }}
-            <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
-        </div>
-        <div *ngIf="responseSubscribe.resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert1" #close>
-            <!-- {{ responseSubscribe.resSignupMsg }} -->
-            <p>Thank you for subscribing ! </p>
-            <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
-        </div>
-    </ng-container>
-</div>
+
 <app-home-banner (newItemEvent)="scrolldown($event)"></app-home-banner>
-<app-footer id="newsletter" (responseArray)="scrollup($event)"></app-footer>
+<app-footer id="newsletter"></app-footer>

@@ -8,6 +8,7 @@ import { HeaderMenuAction } from '../../store/actions/header.action';
 import { ProductCartComponent } from 'src/app/product-cart/product-cart.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CookiesService } from 'src/app/Services/cookies.service';
+import { ViewportScroller } from '@angular/common';
 
 
 @Component({
@@ -26,6 +27,7 @@ export class HeaderComponent implements OnInit {
   homePageData: any = [];
   slug: any;
   data: any = []
+  responseSubscribe: any = {}
   show: boolean = false;
   searchItem: string = '';
   subslug: any;
@@ -35,7 +37,7 @@ export class HeaderComponent implements OnInit {
   @Select(FetchedHeaderState.getFetchedHeader) headerMenu$!: Observable<any>;
   @Select(FetchedHeaderState.getFetchedHeaderLoad) headerMenuDataLoaded$!: Observable<boolean>;
 
-  constructor(private _cookies: CookiesService, private route: Router, private __apiservice: ApiServiceService, private store: Store, private router: Router) { }
+  constructor(private scroller: ViewportScroller,private _cookies: CookiesService, private route: Router, private __apiservice: ApiServiceService, private store: Store, private router: Router) { }
   routes: any = [
     {
       "id": "1",
@@ -72,8 +74,10 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
+    
     this.getAllHeaderMenu();
     this.headerMenu$.subscribe(res => {
+      this.homePageData=[];
       if (res.data) {
         res.data.pages.map((response: any) => {
           this.homePageData.push(response);
@@ -84,6 +88,12 @@ export class HeaderComponent implements OnInit {
       console.log("this.homePageData", this.homePageData);
     }, 1000);
     this.cartCountFunction();
+    this.getSUbscribemsg();
+  }
+  getSUbscribemsg() {
+    this.__apiservice.subscribedmsg.subscribe((res:any)=> {
+      this.responseSubscribe=res;
+    })
   }
   cartCountFunction() {
     if (localStorage.getItem('ecolink_user_credential') != null) {
@@ -187,5 +197,22 @@ export class HeaderComponent implements OnInit {
   ngOnDestroy(): void {
     this.isAlive = false;
     this.headerMenuData.unsubscribe();
+  }
+  closeButton() {
+    // this.renderer.setStyle(this.closer.nativeElement, 'display', 'none');
+    let resSignupMsg = '';
+    let resSignupMsgCheck = ''
+    let object = {
+      resSignupMsg: resSignupMsg,
+      resSignupMsgCheck: resSignupMsgCheck
+    }
+
+    this.responseSubscribe = object;
+
+  }
+  scrollup(event: any) {
+    console.log(event);
+    this.responseSubscribe = event;
+    this.scroller.scrollToAnchor('subscribeMsg');
   }
 }

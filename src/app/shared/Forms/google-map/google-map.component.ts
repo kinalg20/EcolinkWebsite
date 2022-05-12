@@ -67,12 +67,18 @@ export class GoogleMapComponent implements OnInit {
         form.reset();
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
+        setTimeout(() => {
+          this.resSignupMsg = '';
+          }, 3000);
       }
       )
     }
     else {
       this.resSignupMsgCheck = 'danger';
       this.resSignupMsg = 'Please Fill the Fields Below!';
+      setTimeout(() => {
+        this.resSignupMsg = '';
+        }, 2000);
     }
   }
 
