@@ -41,6 +41,14 @@ export class ProfileDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getFunction();
+    
+    this.getAllUserAddress()
+    this.getOrderhistory();
+    this.getReturnProduct();
+  }
+  getFunction() {
+    this.userDetail=[]
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
       this.shimmerLoad = false;
@@ -53,11 +61,7 @@ export class ProfileDashboardComponent implements OnInit {
       })
       console.log(this.userDetail);
     })
-    this.getAllUserAddress()
-    this.getOrderhistory();
-    this.getReturnProduct();
   }
-
   getAllUserAddress() {
     this.__apiservice.getUserAddress().subscribe((res: any) => {
       this.allUserAddresses = [];
@@ -281,9 +285,10 @@ export class ProfileDashboardComponent implements OnInit {
 
         this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
           console.log(res);
-          form.reset();
           this.resSignupMsg = 'Profile Edited Successfully!';
           this.resSignupMsgCheck = 'success';
+          this.getFunction()
+          form.reset();
         })
       }
       else {
@@ -316,7 +321,8 @@ export class ProfileDashboardComponent implements OnInit {
         })
         this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
           console.log(res);
-          form.reset();
+          this.getFunction(); 
+          // form.reset();
         })
       }
       else {
@@ -332,6 +338,7 @@ export class ProfileDashboardComponent implements OnInit {
   goToTop() {
     window.scrollTo(0, 0);
     this.scroller.scrollToAnchor("backToTop");
+    // console.log(this.userDetail)
   }
   changeTab() {
     this.itemEvent.emit('Edit Profile')
