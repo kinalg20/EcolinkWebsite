@@ -111,7 +111,7 @@ export class SubcatgorycomponentComponent implements OnInit {
   displayProducts: any = [];
   productList: any = [];
   async getListingData(slug: any) {
-    await this._ApiService.getDetailByCategory(slug).then(res => {
+    await this._ApiService.getDetailByCategory(slug).then((res:any) => {
       if (res.code == 200) {
         this.productResponse = res.data.subcategory;
         for (let data = 0; data < this.productResponse.length; data++) {

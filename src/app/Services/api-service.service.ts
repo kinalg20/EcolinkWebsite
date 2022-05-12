@@ -39,9 +39,9 @@ export class ApiServiceService {
     return this.http.get(this._baseurl + 'getCategories');
   }
 
-  getDetailByCategory(slug: any): Observable<any> {
+  getDetailByCategory(slug: any): Promise<any> {
     let url = 'getCategory';
-    return this.http.post<any>(this._baseurl + url, { slug: slug });
+    return this.http.post<any>(this._baseurl + url, { slug: slug }).toPromise();
   }
   getProductDetail(slug: any): Observable<any> {
     let url = 'getProduct';
