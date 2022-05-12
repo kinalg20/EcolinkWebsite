@@ -16,8 +16,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="card profile-section">
                         <div class="profile-image">
-                            <img [src]="item.profile_image ? item.profile_image : 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png'"
-                                alt="">
+                            <img [src]="item.profile_image ? item.profile_image : 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png'" alt="">
                         </div>
                         <div class="profile-desc">
                             <div class="profile-detail my-3">
@@ -35,8 +34,7 @@
                     <div class="card address-section">
                         <div class="customer_name my-3">
                             <h4>Add Address</h4>
-                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal"
-                                class="pi pi-plus">
+                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="pi pi-plus">
                             </i>
                         </div>
                         <div class="default-Address">
@@ -59,14 +57,13 @@
     <h2>Edit Profile</h2>
     <ng-container *ngFor="let item of userDetail">
         <form #editProfileFrom="ngForm" (ngSubmit)="editUserProfile(editProfileFrom)" id="backToTop">
-            <ng-container *ngIf="resSignupMsg">
-                <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
-                    {{ resSignupMsg }}
+            <ng-container *ngIf="resEditProfileMsg">
+                <div *ngIf="resEditProfileMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
+                    {{ resEditProfileMsg }}
                     <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                 </div>
-                <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
-                    #test>
-                    {{ resSignupMsg }}
+                <div *ngIf="resEditProfileMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert" #test>
+                    {{ resEditProfileMsg }}
                     <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                 </div>
             </ng-container>
@@ -75,15 +72,13 @@
                 <div class="col-lg-6 col-sm-12 fname">
                     <div>
                         <label for="first-name">First Name</label>
-                        <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname"
-                            maxlength='50' [(ngModel)]="item.firstname" required />
+                        <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname" maxlength='50' [(ngModel)]="item.firstname" required />
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12 lname">
                     <div>
                         <label for="last-name">Last Name</label>
-                        <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
-                            name="lastname" [(ngModel)]="item.lastname" required />
+                        <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50' name="lastname" [(ngModel)]="item.lastname" required />
                     </div>
                 </div>
             </div>
@@ -91,8 +86,7 @@
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="email">Email</label>
-                        <input class="form-control" type="email" id="email" autocomplete="off" name="email"
-                            (input)="validateEmail($event)" [(ngModel)]="item.email" required />
+                        <input class="form-control" type="email" id="email" autocomplete="off" name="email" (input)="validateEmail($event)" [(ngModel)]="item.email" required />
                         <h6 class="text-danger" *ngIf="invalidEmail">
                             {{ invalidEmail ? "Invalid Email" : "" }}
                         </h6>
@@ -101,9 +95,7 @@
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="phone-number">Phone Number</label>
-                        <input class="form-control" type="text" id="phonenumber" autocomplete="off" name="phonenumber"
-                            maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)"
-                            [(ngModel)]="item.mobile" required />
+                        <input class="form-control" type="text" id="phonenumber" autocomplete="off" name="phonenumber" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" [(ngModel)]="item.mobile" required />
                         <h6 class="text-danger" *ngIf="invalidMobile">
                             {{ invalidMobile ? "Invalid Mobile" : "" }}
                         </h6>
@@ -115,15 +107,13 @@
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="address">Address</label>
-                        <input class="form-control" type="text" id="address" autocomplete="off" name="address"
-                            [(ngModel)]="item.address" required />
+                        <input class="form-control" type="text" id="address" autocomplete="off" name="address" [(ngModel)]="item.address" required />
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="country">Country</label>
-                        <input class="form-control" type="text" id="country" autocomplete="off" name="country"
-                            [(ngModel)]="item.country" required />
+                        <input class="form-control" type="text" id="country" autocomplete="off" name="country" [(ngModel)]="item.country" required />
                     </div>
                 </div>
             </div>
@@ -131,15 +121,13 @@
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="state">State</label>
-                        <input class="form-control" type="text" id="state" autocomplete="off" name="state"
-                            [(ngModel)]="item.state" required />
+                        <input class="form-control" type="text" id="state" autocomplete="off" name="state" [(ngModel)]="item.state" required />
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="city">City</label>
-                        <input class="form-control" type="text" id="city" autocomplete="off" name="city"
-                            [(ngModel)]="item.city" required />
+                        <input class="form-control" type="text" id="city" autocomplete="off" name="city" [(ngModel)]="item.city" required />
                     </div>
                 </div>
             </div>
@@ -147,15 +135,13 @@
                 <div class="col-lg-6 col-sm-12">
                     <div>
                         <label for="pincode">Pincode</label>
-                        <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
-                            [(ngModel)]="item.pincode" required />
+                        <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode" [(ngModel)]="item.pincode" required />
                     </div>
                 </div>
                 <div class="col-lg-6 col-sm-12" *ngIf="passwrodCheck">
                     <div>
                         <label for="address">Password</label>
-                        <input class="form-control" type="password" id="password" autocomplete="off" name="password"
-                            ngModel required />
+                        <input class="form-control" type="password" id="password" autocomplete="off" name="password" ngModel required />
                     </div>
                 </div>
             </div>
@@ -163,14 +149,13 @@
                 <div class="col-lg-12">
                     <div>
                         <label for="image">Profile Image</label>
-                        <input class="form-control" type="file" id="image" autocomplete="off" name="profile_image" (change)="GetFileChange($event)" ngModel/>
+                        <input class="form-control" type="file" id="image" autocomplete="off" name="profile_image" (change)="GetFileChange($event)" ngModel />
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
-                    <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" ngModel
-                        name="checkbox" type="checkbox" id="flexCheckDefault">
+                    <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" ngModel name="checkbox" type="checkbox" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">
                         Do you want to change password ?
                     </label>
@@ -189,10 +174,8 @@
     <h2>Order History</h2>
     <div class="order-history-header">
         <div class="search-ordered-item">
-            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem"
-                (input)="getSuggestions()" />
-            <button pButton pRipple type="button" label="Search" class="p-button-success"
-                (click)="FetchSearchedData()"></button>
+            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem" (input)="getSuggestions()" />
+            <button pButton pRipple type="button" label="Search" class="p-button-success" (click)="FetchSearchedData()"></button>
         </div>
         <div class="card history_product_search" *ngIf="suggestions">
             <ul *ngFor="let i of searchProductArray | searchPipe : searchItem">
@@ -200,7 +183,7 @@
             </ul>
         </div>
     </div>
-    
+
     <!-- list-card -->
     <div class="history-list-card">
         <div class="row" *ngIf="show">
@@ -219,9 +202,12 @@
                                     <span class="price">${{data.total_amount}}</span>
                                 </div>
                                 <div class="history-data">
-                                    <h6 class="status text-danger" *ngIf="data.order_status == 'cancelled'">{{data.order_status}}</h6>
-                                    <h6 class="status text-warning" *ngIf="data.order_status == 'pending'">{{data.order_status}}</h6>
-                                    <h6 class="status text-success" *ngIf="data.order_status == 'complete'">{{data.order_status}}</h6>
+                                    <h6 class="status text-danger" *ngIf="data.order_status == 'cancelled'">
+                                        {{data.order_status}}</h6>
+                                    <h6 class="status text-warning" *ngIf="data.order_status == 'pending'">
+                                        {{data.order_status}}</h6>
+                                    <h6 class="status text-success" *ngIf="data.order_status == 'complete'">
+                                        {{data.order_status}}</h6>
                                     <h6 class="status">{{data.created_at | date:"dd/MM/yyyy"}}</h6>
 
                                 </div>
@@ -341,6 +327,12 @@
         <h2>Shipping Addresses</h2>
         <p>To select a default shipping address for checkout, click "Set as my default".</p>
     </div>
+    <ng-container *ngIf="resSignupMsg">
+        <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert" #test>
+            {{ resSignupMsg }}
+            <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+        </div>
+    </ng-container>
     <ng-container *ngIf="allUserAddresses.length>0">
         <div class="address-body">
             <div class="address-card" *ngFor="let item of allUserAddresses">
@@ -364,8 +356,7 @@
                 </div>
             </div>
         </div>
-        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            (click)="getUserDetail('add')">
+        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getUserDetail('add')">
             <div class="col-12 addAddressCol">
                 <h4 class="m-0">Add Address</h4>
                 <i class="pi pi-plus"></i>
@@ -373,8 +364,7 @@
         </div>
     </ng-container>
     <ng-container *ngIf="!(allUserAddresses.length>0)">
-        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal"
-            (click)="getUserDetail('add')">
+        <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getUserDetail('add')">
             <div class="col-12 addAddressCol">
                 <h4 class="m-0">Add Address</h4>
                 <i class="pi pi-plus"></i>
@@ -387,20 +377,13 @@
         <div class="modal-content" *ngFor="let item of profileAddress">
             <div class="modal-header">
                 <h4 class="modal-title" id="exampleModalLabel">{{item.heading}}</h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
-                    (click)="resetValue(signUpForm)"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="resetValue(signUpForm)"></button>
             </div>
             <div class="modal-body container">
                 <form #signUpForm="ngForm" (ngSubmit)="addUserAddress(signUpForm)">
-                    <ng-container *ngIf="resSignupMsg">
-                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
-                            #test>
-                            {{ resSignupMsg }}
-                            <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
-                        </div>
-                        <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
-                            id="loginAlert" #test>
-                            {{ resSignupMsg }}
+                    <ng-container *ngIf="resAddmsg">
+                        <div *ngIf="resAddmsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
+                            {{ resAddmsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                         </div>
                     </ng-container>
@@ -409,15 +392,13 @@
                         <div class="col-6">
                             <div>
                                 <label for="first-name">First Name</label>
-                                <input class="form-control" type="text" id="firstname" autocomplete="off"
-                                    name="firstname" maxlength='50' [(ngModel)]="item.firstname" required />
+                                <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname" maxlength='50' [(ngModel)]="item.firstname" required />
                             </div>
                         </div>
                         <div class="col-6">
                             <div>
                                 <label for="last-name">Last Name</label>
-                                <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
-                                    name="lastname" [(ngModel)]="item.lastname" required />
+                                <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50' name="lastname" [(ngModel)]="item.lastname" required />
                             </div>
                         </div>
                     </div>
@@ -425,8 +406,7 @@
                         <div class="col-6">
                             <div>
                                 <label for="email">Email</label>
-                                <input class="form-control" type="email" id="email" autocomplete="off" name="email"
-                                    (input)="validateEmail($event)" [(ngModel)]="item.email" required />
+                                <input class="form-control" type="email" id="email" autocomplete="off" name="email" (input)="validateEmail($event)" [(ngModel)]="item.email" required />
                                 <h6 class="text-danger" *ngIf="invalidEmail">
                                     {{ invalidEmail ? "Invalid Email" : "" }}
                                 </h6>
@@ -435,9 +415,7 @@
                         <div class="col-6">
                             <div>
                                 <label for="phone-number">Phone Number</label>
-                                <input class="form-control" type="text" id="phonenumber" autocomplete="off"
-                                    name="phonenumber" maxlength="10" (input)="validateMobile($event)"
-                                    (keydown)="inputMobile($event)" [(ngModel)]="item.mobile" required />
+                                <input class="form-control" type="text" id="phonenumber" autocomplete="off" name="phonenumber" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" [(ngModel)]="item.mobile" required />
                                 <h6 class="text-danger" *ngIf="invalidMobile">
                                     {{ invalidMobile ? "Invalid Mobile" : "" }}
                                 </h6>
@@ -449,8 +427,7 @@
                         <div class="col-12">
                             <div>
                                 <label for="landmark">Landmark</label>
-                                <input class="form-control" type="text" id="landmark" autocomplete="off" name="landmark"
-                                    [(ngModel)]="item.landmark" required />
+                                <input class="form-control" type="text" id="landmark" autocomplete="off" name="landmark" [(ngModel)]="item.landmark" required />
                             </div>
                         </div>
                     </div>
@@ -458,8 +435,7 @@
                         <div class="col-12">
                             <div>
                                 <label for="address">Address</label>
-                                <input class="form-control" type="text" id="address" autocomplete="off" name="address"
-                                    [(ngModel)]="item.address" required />
+                                <input class="form-control" type="text" id="address" autocomplete="off" name="address" [(ngModel)]="item.address" required />
                             </div>
                         </div>
                     </div>
@@ -467,15 +443,13 @@
                         <div class="col-6">
                             <div>
                                 <label for="country">Country</label>
-                                <input class="form-control" type="text" id="country" autocomplete="off" name="country"
-                                    [(ngModel)]="item.country" required />
+                                <input class="form-control" type="text" id="country" autocomplete="off" name="country" [(ngModel)]="item.country" required />
                             </div>
                         </div>
                         <div class="col-6">
                             <div>
                                 <label for="state">State</label>
-                                <input class="form-control" type="text" id="state" autocomplete="off" name="state"
-                                    [(ngModel)]="item.state" required />
+                                <input class="form-control" type="text" id="state" autocomplete="off" name="state" [(ngModel)]="item.state" required />
                             </div>
                         </div>
                     </div>
@@ -483,22 +457,19 @@
                         <div class="col-6">
                             <div>
                                 <label for="city">City</label>
-                                <input class="form-control" type="text" id="city" autocomplete="off" name="city"
-                                    [(ngModel)]="item.city" required />
+                                <input class="form-control" type="text" id="city" autocomplete="off" name="city" [(ngModel)]="item.city" required />
                             </div>
                         </div>
                         <div class="col-6">
                             <div>
                                 <label for="pincode">Pincode</label>
-                                <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
-                                    [(ngModel)]="item.zip" required />
+                                <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode" [(ngModel)]="item.zip" required />
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12 add-user">
-                            <button class="saveuserdetail btn btn-success my-3 form-control"
-                                data-bs-dismiss="modal">Save Address</button>
+                            <button class="saveuserdetail btn btn-success my-3 form-control">Save Address</button>
                         </div>
                     </div>
                 </form>

@@ -1,36 +1,30 @@
 .dashboard-section {
     padding: 20px 40px;
-
     .profile-card {
         padding: 20px 0;
-
         .profile-section {
             text-align: center;
             padding: 30px 20px;
             display: grid;
             grid-template-columns: 50% 50%;
             align-items: center;
-
             .profile-image {
                 width: 160px;
                 height: 150px;
                 margin: auto;
                 border-radius: 100%;
-
                 img {
                     width: 100%;
                     border-radius: 100%;
                     height: 100%;
                 }
             }
-
             .profile-desc {
                 h4 {
                     font-size: 20px;
                     margin: 0;
                 }
             }
-
             .edit-profile-button {
                 button {
                     border: none;
@@ -39,7 +33,6 @@
                     padding: 6px 10px;
                     border-radius: 3px;
                     font-weight: 500;
-
                     &:hover {
                         background: var(--primary);
                         color: white;
@@ -47,33 +40,27 @@
                 }
             }
         }
-
         .address-section {
             padding: 30px 20px;
-
             .customer_name {
                 display: inline-flex;
                 justify-content: space-between;
                 align-items: center;
                 cursor: pointer;
-
                 h4 {
                     margin: 0;
                 }
-
                 i {
                     border: 1px solid var(--primary);
                     padding: 5px;
                     border-radius: 100%;
                 }
             }
-
             span.address-label {
                 font-size: 14px;
                 margin-top: 10px;
                 color: #7e7979;
             }
-
             .edit-Address-button {
                 button {
                     border: none;
@@ -82,7 +69,6 @@
                     padding: 6px 10px;
                     border-radius: 3px;
                     font-weight: 500;
-
                     &:hover {
                         background: var(--primary);
                         color: white;
@@ -93,14 +79,16 @@
     }
 }
 
+.fa-close:hover {
+    cursor: pointer;
+}
+
 .modal-body {
     .row {
         margin: 0;
     }
-
     .add-user {
         text-align: right;
-
         .saveuserdetail {
             width: fit-content;
             background: var(--primary);
@@ -111,25 +99,20 @@
 
 .Edit-Profile-section {
     padding: 20px 40px;
-
     .edituserdetail {
         width: fit-content;
     }
-
     .form-control {
         margin: 12px 0;
     }
-
     .btn {
         background: var(--primary);
         border: var(--primary);
         color: #fff;
     }
-
     .add-user {
         text-align: "right";
     }
-
     .btn:focus {
         outline: 0;
         box-shadow: 0 0 0 0.25rem rgba(77, 207, 77, 0.25);
@@ -138,27 +121,22 @@
 
 .Order-History-section {
     padding: 20px 40px;
-
     .order-history-header {
         position: relative;
         margin-bottom: 30px;
         align-items: center;
-
         .p-button.p-button-success {
             width: 30%;
         }
-
         .search-ordered-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             width: 100%;
-
             input {
                 width: 100%;
             }
         }
-
         .history_product_search {
             position: absolute;
             z-index: 999;
@@ -173,7 +151,6 @@
                 }
             }
         }
-
         // .dropdown-menu {
         //     margin-top: 10px;
         //     hr {
@@ -185,7 +162,6 @@
         //     }
         // }
     }
-
     .history-list-card {
         .row {
             .card {
@@ -195,12 +171,10 @@
                 box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
                 border-radius: 8px;
                 padding: 10px;
-
                 .history-image {
                     width: 100%;
                     height: 250px;
                     margin-bottom: 20px;
-
                     img {
                         border-top-right-radius: 10px;
                         border-top-left-radius: 10px;
@@ -209,29 +183,23 @@
                         object-fit: cover;
                     }
                 }
-
                 .history-desc {
                     .product-details {
                         .head {}
-
                         .desc {
                             margin: 0;
                         }
-
                         .history-data {
                             display: flex;
                             justify-content: space-between;
-
                             .qty {
                                 margin: 0;
                                 font-weight: 700;
                             }
-
                             .price {
                                 font-weight: 700;
                             }
                         }
-
                         .more-btn {
                             // width: 100%;
                             border: 1px solid #b3b1b1;
@@ -242,8 +210,7 @@
                             cursor: pointer;
                             margin-top: 10px;
                         }
-
-                        .cancel-btn{
+                        .cancel-btn {
                             border: 2px solid #e21e22;
                             padding: 6px 6px;
                             background: none;
@@ -252,38 +219,32 @@
                             font-weight: 600;
                             cursor: pointer;
                             margin-top: 10px;
-                            &:hover{
-                                background:#e21e22;
+                            &:hover {
+                                background: #e21e22;
                                 color: #fff;
-                            }   
+                            }
                         }
-
                     }
                 }
             }
         }
     }
-
     .history-details-card {
         .back {
             margin-bottom: 30px;
             cursor: pointer;
-
             svg {
                 width: 30px;
             }
         }
-
         .history-item-card {
             .card {
                 box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
                 padding: 20px;
-
                 .details {
                     width: 100%;
                     margin: 0;
                     padding-bottom: 50px;
-
                     .card-body {
                         align-items: center;
                         display: grid;
@@ -294,26 +255,22 @@
                             border-radius: 10px;
                             width: 100%;
                             height: 200px;
-
                             img {
                                 width: 100%;
                                 height: 100%;
                             }
                         }
-
                         .description {
                             .product-details {
                                 .desc {
                                     margin: 0;
                                 }
-
                                 .qty {
                                     margin: 0;
                                 }
                             }
                         }
                     }
-
                     .pro-desc {
                         text-align: justify;
                     }
@@ -325,42 +282,33 @@
 
 .Addresses-section {
     padding: 20px 40px;
-
     .address-body {
         display: grid;
         grid-template-columns: 49% 49%;
         grid-gap: 15px;
-
         .address-card {
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
             border: 1px solid #d7d1d1;
             border-radius: 10px;
-
             .address-text {
                 padding: 10px;
-
                 p {
                     margin: 0;
                 }
-
                 .address {
                     display: flex;
                 }
-
                 .sub-address {
                     display: flex;
                 }
-
                 .crud-btn {
                     padding: 15px 0;
                     display: flex;
                     width: 100%;
                     justify-content: space-evenly;
-
                     p {
                         color: rgb(43, 43, 209);
                         cursor: pointer;
-
                         &:hover {
                             text-decoration: underline;
                         }
@@ -369,7 +317,6 @@
             }
         }
     }
-
     .addAddress {
         cursor: pointer;
         border: 1px solid #d7d1d1;
@@ -377,13 +324,11 @@
         border-radius: 5px;
         background: whitesmoke;
         margin: 10px 0;
-
         .addAddressCol {
             padding: 10px;
             justify-content: center;
             display: flex;
             align-items: center;
-
             i {
                 margin: 0 5px;
                 border: 1px solid #d7d1d1;
@@ -404,11 +349,9 @@
             box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
             border-radius: 8px;
             padding: 20px;
-
             .product-return-image {
                 width: 100%;
                 height: 250px;
-
                 img {
                     width: 100%;
                     height: 100%;
@@ -421,42 +364,34 @@
 
 .return-product {
     padding: 20px 40px;
-
     .order-history-header {
         display: grid;
         grid-template-columns: 70% 27%;
         grid-gap: 20px;
         align-items: center;
-
         .search-ordered-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
-
             input {
                 width: 100%;
             }
         }
-
         .dropdown-menu {
             margin-top: 10px;
-
             hr {
                 margin: 0.5rem;
             }
-
             a:hover {
                 background-color: #689f38;
                 color: #fff;
             }
         }
     }
-
     .ordered-item-card {
         .panel-order {
             margin: 50px 0;
             padding: 25px;
-
             .panel-body {
                 .card {
                     margin-bottom: 50px;
@@ -464,19 +399,15 @@
                     box-shadow: 0 0px 5px #0003, 0 6px 10px #00000026;
                     padding: 20px;
                 }
-
                 .row {
                     width: 100%;
                     margin: 0;
-
                     .col-lg-3 {
                         padding: 0;
                         align-self: center;
-
                         .product-image {
                             width: 100%;
                             height: 100%;
-
                             img {
                                 width: 100%;
                                 height: 180px;
@@ -484,20 +415,16 @@
                             }
                         }
                     }
-
                     .col-lg-9 {
                         .product-details {
                             padding: 0 1rem;
-
                             .qty {
                                 margin: 0;
                             }
-
                             .desc {
                                 margin: 0;
                             }
                         }
-
                         .return-btn {
                             background: var(--primary-btn);
                             color: #fff;
@@ -508,7 +435,6 @@
                         }
                     }
                 }
-
                 .date {
                     padding-top: 0px;
                     padding-bottom: 0px;
@@ -516,7 +442,6 @@
                     background: #e0e0e0;
                     margin-top: 15px;
                     width: 100%;
-
                     p {
                         margin: 0;
                         font-size: 1rem;
@@ -525,13 +450,11 @@
             }
         }
     }
-
     .dropdown {
         white-space: nowrap;
         border: 1px solid #689f38;
         justify-self: center;
         border-radius: 5px;
-
         a {
             padding: 0.5rem 1.5rem;
         }
@@ -544,7 +467,6 @@
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
-
         .p-inputtext {
             border-bottom-right-radius: 0;
             border-top-right-radius: 0;
@@ -560,7 +482,6 @@
             }
         }
     }
-
     .return-product {
         .ordered-item-card {
             .panel-order {
@@ -573,27 +494,22 @@
                                 }
                             }
                         }
-
                         .col-lg-9 {
                             .product-details {
                                 .head {
                                     font-size: 1.2rem;
                                 }
-
                                 .desc {
                                     font-size: 1rem;
                                     margin: 0;
                                 }
-
                                 .price {
                                     font-size: 1rem;
                                 }
-
                                 .status {
                                     font-size: 1rem;
                                 }
                             }
-
                             .return-btn {
                                 margin-left: 1rem !important;
                                 margin: 0;
@@ -623,7 +539,6 @@
                 }
             }
         }
-
         .history-list-card {
             .row {
                 .card {
@@ -633,7 +548,6 @@
                 }
             }
         }
-
         .history-details-card {
             .history-item-card {
                 .card {
@@ -642,7 +556,6 @@
                             .product-image {
                                 height: 180px;
                             }
-
                             .description {
                                 padding: 0 0 0 20px;
                             }
@@ -652,32 +565,26 @@
             }
         }
     }
-
     .Edit-Profile-section {
         .row {
             width: 100%;
             margin: 0;
         }
-
         .add-user {
             text-align: center;
         }
     }
-
     .Addresses-section {
         .address-body {
             display: block;
-
             .address-card {
                 .address-text {
                     .address {
                         margin: 5px 0;
                     }
-
                     .sub-address {
                         margin: 5px 0;
                     }
-
                     .crud-btn {
                         justify-content: space-evenly;
                     }
@@ -693,7 +600,6 @@
             font-size: 1.6rem;
         }
     }
-
     .Order-History-section {
         .order-history-header {
             grid-template-columns: 55% 45%;
@@ -701,28 +607,23 @@
             width: 100%;
             margin-bottom: 15px;
         }
-
         .history-details-card {
             .back {
                 margin-bottom: 15px;
-
                 svg {
                     width: 25px;
                 }
             }
-
             .history-item-card {
                 .card {
                     .details {
                         .card-body {
-
                             // display: grid;
                             // grid-template-columns: 25% 75%;
                             .product-image {
                                 height: 140px;
                                 width: 140px;
                             }
-
                             .description {
                                 .product-details {
                                     h5 {
@@ -736,11 +637,9 @@
             }
         }
     }
-
     .p-button.p-button-success {
         width: 35%;
     }
-
     .return-product {
         .ordered-item-card {
             .panel-order {
@@ -751,21 +650,17 @@
                                 .head {
                                     font-size: 1rem;
                                 }
-
                                 .desc {
                                     font-size: 0.8rem;
                                     margin: 0;
                                 }
-
                                 .price {
                                     font-size: 0.8rem;
                                 }
-
                                 .status {
                                     font-size: 0.8rem;
                                 }
                             }
-
                             .return-btn {
                                 margin-left: 1rem !important;
                                 margin: 0;
@@ -784,7 +679,6 @@
         .ordered-item-card {
             .panel-order {
                 padding: 4px;
-
                 .panel-body {
                     .row {
                         .col-lg-3 {
@@ -792,14 +686,11 @@
                                 margin-bottom: 20px;
                             }
                         }
-
                         .col-lg-9 {
                             padding: 0;
-
                             .product-details {
                                 padding: 0;
                             }
-
                             .return-btn {
                                 margin: 0 !important;
                             }
@@ -809,7 +700,6 @@
             }
         }
     }
-
     .Order-History-section {
         .history-details-card {
             .history-item-card {
@@ -818,12 +708,10 @@
                         .card-body {
                             display: block;
                             padding: 0;
-
                             .product-image {
                                 margin: auto;
                                 margin-bottom: 20px;
                             }
-
                             .description {
                                 padding: 0;
                             }
@@ -842,17 +730,14 @@
                 .panel-body {
                     .row {
                         display: block;
-
                         .col-md-3 {
                             margin: auto;
                             margin-bottom: 30px;
                             text-align: center;
-
                             img {
                                 width: 200px;
                             }
                         }
-
                         .col-md-9 {
                             margin: auto;
                             border: none;
@@ -863,7 +748,6 @@
             }
         }
     }
-
     .return-product {
         .ordered-item-card {
             .panel-order {
@@ -887,7 +771,6 @@
             .profile-section {
                 margin-bottom: 20px;
             }
-
             .address-section {
                 .customer_name {
                     h4 {
@@ -897,17 +780,14 @@
             }
         }
     }
-
     .Order-History-section {
         .order-history-header {
             display: block;
         }
-
         .dropdown {
             margin-top: 20px;
             width: 50%;
         }
-
         .search-ordered-item {
             width: 100%;
         }
