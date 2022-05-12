@@ -25,8 +25,7 @@
                 </div>
                 <div class="search-bar">
                     <div class="input-group">
-                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email"
-                            [(ngModel)]="newsletter_email" (input)="validateEmail($event)" required>
+                        <input type="email" class="form-control" placeholder="your@gmail.com" aria-label="email" [(ngModel)]="newsletter_email" (input)="validateEmail($event)" required>
                         <div class="input-group-prepend">
                             <span class="input-group-text" id="basic-addon1">
                                 <a (click)="subscribe()" class="text-white" style="cursor: pointer;">Stay
@@ -67,7 +66,7 @@
                 </div>
                 <div class="footer-shop">
                     <h5>Shop</h5>
-                    <p routerLink="/productlist">Categories</p>
+                    <p routerLink="/shop">Categories</p>
                     <p routerLink="/productlist">Pricing</p>
                     <p>Terms & Conditions</p>
                 </div>
