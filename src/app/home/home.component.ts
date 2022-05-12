@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
     let slug = this.route.snapshot.params;
     console.log(slug.token);
     if (slug.token) {
+      localStorage.setItem('email_token' , slug.token)
       if (localStorage.getItem('ecolink_user_credential') != null) {
         this.remembertoken = localStorage.getItem('ecolink_user_credential')
         let token = JSON.parse(this.remembertoken).user.remember_token;

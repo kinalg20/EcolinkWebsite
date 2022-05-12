@@ -139,7 +139,7 @@
                                     </ng-container>
                                 </div>
                             </section>
-                            <section class="rating">
+                            <!-- <section class="rating">
                                 <div class="rating-heading">
                                     <h4>Rating</h4>
                                     <div class="p-field-checkbox mb-2">
@@ -163,7 +163,7 @@
                                         <label for="1star" class="mx-2">1 & above</label>
                                     </div>
                                 </div>
-                            </section>
+                            </section> -->
                             <div class="apply-button">
                                 <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter" class="p-button  filter-button"></button>
                             </div>
@@ -230,12 +230,12 @@
                                                                     </p>
                                                                 </ng-template>
                                                             </div>
-                                                            <div class="rating">
+                                                            <!-- <div class="rating">
                                                                 <i style="font-size:18px" class="fa">&#xf006;</i>
                                                                 <i style="font-size:18px" class="fa">&#xf006;</i>
                                                                 <i style="font-size:18px" class="fa">&#xf006;</i>
                                                                 <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                            </div>
+                                                            </div> -->
                                                         </div>
                                                         <div class="list-buttons">
                                                             <button (click)=AddProductToCart(product) pButton pRipple type="button" label="Add to Cart" class="p-button-raised p-button-success" style="height:38px; background-color: #55b15c;" routerLink="/cart"></button>
@@ -336,7 +336,7 @@
         </div>
         <hr>
         <div class="filter-body">
-            <section class="categories">
+            <section class="categories" *ngIf="ProductListData.subcategory">
                 <h4>Catgories</h4>
                 <ul *ngFor="let subcategory of ProductListData.subcategory">
                     <div class="p-field-checkbox">
@@ -373,7 +373,7 @@
                     </select>
                 </div>
             </section>
-            <section class="rating">
+            <!-- <section class="rating">
                 <div class="rating-heading">
                     <h4>Rating</h4>
                     <div class="p-field-checkbox">
@@ -397,7 +397,7 @@
                         <label for="1star" class="mx-2">1 & above</label>
                     </div>
                 </div>
-            </section>
+            </section> -->
             <div class="apply-button">
                 <button pButton pRipple type="button" (click)="getDataForFilter()" (click)="showFiterModel=false" label="Apply Filter" class="p-button  filter-button"></button>
             </div>
