@@ -31,9 +31,12 @@
         }
         .grid-list-view {
             display: flex;
-            justify-content: space-between;
+            justify-content: end;
             align-items: end;
             position: relative;
+            .nav-pills {
+                margin-right: 20px;
+            }
             .nav-pills .nav-link.active,
             .nav-pills .show>.nav-link {
                 color: #fff;
@@ -140,6 +143,12 @@
                         color: #000;
                         text-decoration: none;
                     }
+                }
+                p:hover {
+                    a {
+                        color: #55b15c;
+                    }
+                    text-decoration: underline;
                 }
             }
             .filter-body {
@@ -340,7 +349,7 @@
             }
         }
     }
-    .products{
+    .products {
         .row {
             .card {
                 width: 100%;
@@ -349,14 +358,12 @@
                 box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
                 border-radius: 8px;
                 height: 403px;
-    
                 .card-image {
                     position: relative;
                     width: 100%;
                     height: 200px;
                     border-top-left-radius: 18px;
                     border-top-right-radius: 18px;
-    
                     img {
                         position: absolute;
                         width: 100%;
@@ -365,7 +372,6 @@
                         border-top-right-radius: 18px;
                         padding: 8px 8px;
                     }
-    
                     span {
                         position: absolute;
                         top: 11px;
@@ -373,42 +379,34 @@
                         cursor: pointer;
                     }
                 }
-    
                 .card-body {
                     padding: 0.8rem;
-    
                     .card-title {
                         h6 {
                             margin: 0;
                             padding: 0;
                         }
-    
                         p {
                             font-size: 14px;
                         }
                     }
-    
                     .card-price-section {
                         display: flex;
                         justify-content: space-between;
                         align-items: baseline;
-    
                         .card-price {
                             font-weight: 700;
                             font-size: 20px;
                         }
-    
                         .rating {
                             width: 80px;
                             display: flex;
                             justify-content: space-between;
                         }
                     }
-    
                     .list-buttons {
                         display: flex;
                         justify-content: space-between;
-    
                         p {
                             border: 1px solid rgb(179 177 177);
                             padding: 6px 6px;
@@ -417,7 +415,6 @@
                             text-align: center;
                             font-weight: 600;
                             cursor: pointer;
-    
                             &:hover {
                                 box-shadow: 0 0.125rem 0.25rem rgb(0 0 0 / 8%);
                                 background-color: #55b15c;
@@ -568,6 +565,15 @@
                 }
             }
         }
+        .product-listing {
+            .card-price-section {
+                .list-buttons {
+                    p {
+                        margin: 0 0 1rem 0;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -691,10 +697,11 @@
 @media (max-width: 767px) {
     .card-page {
         .list-header {
-            grid-template-columns: 70% 30%;
+            grid-template-columns: 35% 65%;
+            margin-left: 0;
             align-items: baseline;
             .grid-list-view {
-                display: block;
+                // display: block;
                 .sort-by-search {
                     display: block;
                     width: auto;
@@ -705,7 +712,7 @@
                 }
             }
             .product_view {
-                display: none;
+                // display: none;
             }
             .list-heading {
                 span {
@@ -730,16 +737,46 @@
 
 @media (max-width: 600px) {
     .card-page {
+        .product-listing {
+            .card-image {
+                height: 150px;
+                width: 150px;
+            }
+            .card-price-section {
+                .product-price {
+                    font-size: 18px;
+                }
+                .list-buttons {
+                    p {
+                        font-size: 12px;
+                        margin: 0 0 0.5rem 0;
+                    }
+                }
+            }
+            .card-desc {
+                .card-title {
+                    h6 {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
         .list-header {
             align-items: baseline;
+            grid-template-columns: 50% 50%;
             .list-heading {
                 h2 {
                     font-size: 1.4rem;
                 }
             }
             .grid-list-view {
+                display: grid;
+                .nav-pills {
+                    margin-bottom: 10px;
+                    justify-self: right;
+                }
                 .sort-by-search {
-                    padding-right: 35px;
+                    padding-right: 20px;
                     justify-content: end;
                     .dropdown {
                         .form-select {
@@ -759,10 +796,10 @@
                 .list-buttons {
                     justify-content: end;
                     p {
-                        font-size: 16px;
+                        font-size: 14px;
                     }
                     .p-button-raised {
-                        font-size: 16px;
+                        font-size: 14px;
                         height: 32px !important;
                         margin-right: 10px;
                     }
@@ -776,6 +813,26 @@
         }
         i:first-of-type {
             left: 4.5rem;
+        }
+    }
+}
+
+@media (max-width: 475px) {
+    .card-page {
+        .product-listing {
+            .card {
+                display: block;
+                .card-image {
+                    margin: auto;
+                    width: 100%;
+                    height: 175px;
+                }
+            }
+            .card-price-section {
+                .product-price {
+                    text-align: left;
+                }
+            }
         }
     }
 }
@@ -875,7 +932,7 @@
                 margin: 20px 0;
             }
             .dropdown {
-                margin-top: 20px;
+                margin: 20px 0;
             }
         }
     }

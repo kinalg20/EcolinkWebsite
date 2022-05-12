@@ -13,15 +13,14 @@
             <h1>ECOLINK</h1>
         </div>
         <div class="responsive-navbar">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span (click)="openmenu()" *ngIf="!openMenu"><i style="font-size:24px" class="fa">&#xf0c9;</i></span>
                 <span (click)="openmenu()" *ngIf="openMenu"><i style="font-size:24px " class="fa">&#xf00d;</i></span>
             </button>
             <div class="menus collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav">
                     <ng-container *ngFor="let item of homePageData">
-                        <li class="nav-item" >
+                        <li class="nav-item">
                             <a (click)="routeOnSamePage(item.slug)">{{item.title | uppercase}}</a>
                             <ul class="header-dropdown" *ngIf="item.subpage.length>0">
                                 <li class="test" *ngFor="let sublink of item.subpage">
@@ -32,10 +31,9 @@
                                         <div class="subsublink">
                                             <ng-container *ngFor="let subsublink of sublink.subpage">
                                                 <li class="test1">
-                                                    <a
-                                                        (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">
-                                                        <div>{{subsublink.title|
-                                                            uppercase}}</div>
+                                                    <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">
+                                                        <div>{{subsublink.title| uppercase}}
+                                                        </div>
                                                     </a>
                                                 </li>
                                             </ng-container>
@@ -69,8 +67,7 @@
             <a style="cursor: pointer;" (click)="goToLocation()">Speak with our team to find the right product for
                 you!</a>
         </div>
-        <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal"
-            data-target="#exampleModalCenter">
+        <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal" data-target="#exampleModalCenter">
             <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
         </button>
         <div class="cart-icon">
@@ -79,8 +76,7 @@
     </div>
 </section>
 <!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-    aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -93,9 +89,7 @@
                 <div class="container">
                     <form class="global-search">
                         <div class="input-group mx-auto">
-                            <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..."
-                                (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem"
-                                name="search">
+                            <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..." (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem" name="search">
                             <span class="input-group-append" autocomplete="off">
                                 <button class="btn btn-success" type="button" style="height: 42px;"
                                     routerLink="/shop/{{slug}}/{{subslug}}" (click)="globalSearch()"
@@ -133,8 +127,7 @@
                 <ng-container *ngIf="openSubmenu">
                     <ul class="sub-link-responsive" *ngIf="item.subpage">
                         <li class="sub-link" *ngFor="let sublink of item.subpage" (click)="opensubDropDown()">
-                            <a *ngIf="sublink.subpage.length==0"
-                                (click)="routeOnSamePage(item.slug , sublink.slug)">{{sublink.title| uppercase}}</a>
+                            <a *ngIf="sublink.subpage.length==0" (click)="routeOnSamePage(item.slug , sublink.slug)">{{sublink.title| uppercase}}</a>
                             <a *ngIf="sublink.subpage.length!=0">{{sublink.title| uppercase}}
                                 <i *ngIf="sublink.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
                             </a>
@@ -143,8 +136,7 @@
                                     <ul *ngIf="sublink.subpage.length>0" class="sub-sub-link">
                                         <ng-container *ngFor="let subsublink of sublink.subpage">
                                             <li class="sub-sub-link-title">
-                                                <a
-                                                    (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
+                                                <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
                                                     uppercase}}</a>
                                             </li>
                                         </ng-container>
