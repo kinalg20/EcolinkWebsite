@@ -31,9 +31,12 @@
         }
         .grid-list-view {
             display: flex;
-            justify-content: space-between;
+            justify-content: end;
             align-items: end;
             position: relative;
+            .nav-pills {
+                margin-right: 20px;
+            }
             .nav-pills .nav-link.active,
             .nav-pills .show>.nav-link {
                 color: #fff;
@@ -562,6 +565,15 @@
                 }
             }
         }
+        .product-listing {
+            .card-price-section {
+                .list-buttons {
+                    p {
+                        margin: 0 0 1rem 0;
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -685,10 +697,11 @@
 @media (max-width: 767px) {
     .card-page {
         .list-header {
-            grid-template-columns: 70% 30%;
+            grid-template-columns: 35% 65%;
+            margin-left: 0;
             align-items: baseline;
             .grid-list-view {
-                display: block;
+                // display: block;
                 .sort-by-search {
                     display: block;
                     width: auto;
@@ -699,7 +712,7 @@
                 }
             }
             .product_view {
-                display: none;
+                // display: none;
             }
             .list-heading {
                 span {
@@ -724,16 +737,46 @@
 
 @media (max-width: 600px) {
     .card-page {
+        .product-listing {
+            .card-image {
+                height: 150px;
+                width: 150px;
+            }
+            .card-price-section {
+                .product-price {
+                    font-size: 18px;
+                }
+                .list-buttons {
+                    p {
+                        font-size: 12px;
+                        margin: 0 0 0.5rem 0;
+                    }
+                }
+            }
+            .card-desc {
+                .card-title {
+                    h6 {
+                        font-size: 15px;
+                    }
+                }
+            }
+        }
         .list-header {
             align-items: baseline;
+            grid-template-columns: 50% 50%;
             .list-heading {
                 h2 {
                     font-size: 1.4rem;
                 }
             }
             .grid-list-view {
+                display: grid;
+                .nav-pills {
+                    margin-bottom: 10px;
+                    justify-self: right;
+                }
                 .sort-by-search {
-                    padding-right: 35px;
+                    padding-right: 20px;
                     justify-content: end;
                     .dropdown {
                         .form-select {
@@ -770,6 +813,26 @@
         }
         i:first-of-type {
             left: 4.5rem;
+        }
+    }
+}
+
+@media (max-width: 475px) {
+    .card-page {
+        .product-listing {
+            .card {
+                display: block;
+                .card-image {
+                    margin: auto;
+                    width: 100%;
+                    height: 175px;
+                }
+            }
+            .card-price-section {
+                .product-price {
+                    text-align: left;
+                }
+            }
         }
     }
 }

@@ -52,47 +52,51 @@
                 <div class="product-listing"></div>
             </div>
         </div>
-        <!-- Falseshimmer -->
     </div>
+    <!-- Falseshimmer -->
     <div class="listing-section" *ngIf="!shimmerLoad">
         <ng-container *ngIf="ProductListData.length > 0">
             <div class="card-page" *ngFor="let listdata of ProductListData">
-                <div class="list-header">
-                    <div class="list-heading">
-                        <h2>{{listdata.data.name}}</h2>
-                        <span><a>Home/</a></span>
-                        <span><a>Product-category/</a></span>
-                        <span><a>{{listdata.data.name}}</a></span>
-                    </div>
-                    <div class="grid-list-view">
-                        <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="pill" role="tab" aria-selected="true" (click)="showlist('card')"><i class="fa fa-th" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" role="tab" aria-selected="false" (click)="showlist('list')"><i class="fa fa-list" aria-hidden="true"></i></a>
-                            </li>
-                        </ul>
-                        <div class="sort-by-search">
-                            <div class="dropdown">
-                                <select (change)="selected($event)" class="form-select">
-                                    <option selected>Default</option>
-                                    <option *ngFor="let item of popularity" [value]="item.slug">{{item.name}}</option>
-                                </select>
-                            </div>
-                            <span class="p-input-icon-left">
-                                <i class="pi pi-search" (click)="getselecteddata(value1)"></i>
-                                <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
-                                    (keyup)="getkeypressdata()" />
-                            </span>
+                <div class="container">
+                    <div class="list-header">
+                        <div class="list-heading">
+                            <h2>{{listdata.data.name}}</h2>
+                            <span><a>Home/</a></span>
+                            <span><a>Product-category/</a></span>
+                            <span><a>{{listdata.data.name}}</a></span>
                         </div>
-                    </div>
-
-                    <div class="suggestion-list" *ngIf="value1!='' && suggestions">
-                        <div class="card">
-                            <ul *ngFor="let prod of this.ProductListData[0].data.products | searchPipe:value1">
-                                <li (click)="getselecteddata(prod.name)">{{prod.name}}</li>
+                        <div class="grid-list-view">
+                            <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="pill" role="tab" aria-selected="true" (click)="showlist('card')"><i class="fa fa-th" aria-hidden="true"></i></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="pill" role="tab" aria-selected="false" (click)="showlist('list')"><i class="fa fa-list" aria-hidden="true"></i></a>
+                                </li>
                             </ul>
+                            <div class="sort-by-search">
+                                <div class="dropdown">
+                                    <select (change)="selected($event)" class="form-select">
+                                        <option selected>Default</option>
+                                        <option *ngFor="let item of popularity" [value]="item.slug">{{item.name}}
+                                        </option>
+                                    </select>
+                                </div>
+                                <span class="p-input-icon-left">
+                                    <i class="pi pi-search" (click)="getselecteddata(value1)"></i>
+                                    <input type="text" pInputText placeholder="Search" [(ngModel)]="value1"
+                                        (keyup)="getkeypressdata()" />
+                                </span>
+                            </div>
+                        </div>
+
+
+                        <div class="suggestion-list" *ngIf="value1!='' && suggestions">
+                            <div class="card">
+                                <ul *ngFor="let prod of this.ProductListData[0].data.products | searchPipe:value1">
+                                    <li (click)="getselecteddata(prod.name)">{{prod.name}}</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -270,27 +274,25 @@
                                     <div class="card-desc">
                                         <div class="card-title">
                                             <h6>{{product.name}}</h6>
-                                            <div class="rating" *ngIf="product.rating>0">
+                                            <!-- <div class="rating" *ngIf="product.rating>0">
                                                 <ng-container *ngFor="let rating of [].constructor(product.rating)">
                                                     <i class="fa">&#xf006;</i>
                                                 </ng-container>
-                                            </div>
+                                            </div> -->
                                         </div>
-                                        <div class="desc">
-                                            <p>Flammable contact cleaner aerosol</p>
-                                            <ul>
-                                                <li>SKU: 0318-12</li>
-                                                <ng-container *ngFor="let subcategory of listdata.data.subcategory">
-                                                    <li>Categories: {{subcategory.name}}</li>
-                                                </ng-container>
-                                                <li>Tag: ecolink</li>
-                                            </ul>
-                                        </div>
+                                        <!-- <div class="desc"> -->
+                                        <!-- <p>Flammable contact cleaner aerosol</p> -->
+                                        <!-- <li>SKU: 0318-12</li> -->
+                                        <!-- <ng-container *ngFor="let subcategory of listdata.data.subcategory">
+                                                <p>Categories: {{subcategory.name}}</p>
+                                            </ng-container> -->
+                                        <!-- <li>Tag: ecolink</li> -->
+                                        <!-- </div> -->
                                     </div>
                                     <div class="card-price-section">
-                                        <div class="stock">
+                                        <!-- <div class="stock">
                                             <p>Availability : Out of Stock</p>
-                                        </div>
+                                        </div> -->
                                         <ng-container *ngIf="product.regular_price < product.sale_price; then thenBlock else elseBlock">
                                         </ng-container>
                                         <ng-template #thenBlock>
