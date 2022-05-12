@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { timeout } from 'rxjs/operators';
 @Component({
   selector: 'app-profile-dashboard',
   templateUrl: './profile-dashboard.component.html',
@@ -14,7 +15,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class ProfileDashboardComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   @Output() itemEvent = new EventEmitter<any>();
-  resSignupMsg: string = '';
   searchItem: string = '';
   shimmerLoad: boolean = true;
   tabCheck: boolean = true
@@ -33,7 +33,12 @@ export class ProfileDashboardComponent implements OnInit {
   passwrodCheck: boolean = false
   userObj1: any = []
   show: boolean = true;
+  resEditProfileMsg: string = '';
+  resEditProfileMsgCheck: string = '';
+  resSignupMsg: string = '';
   resSignupMsgCheck: string = ' ';
+  resAddmsg: string = ' ';
+  resAddmsgCheck: string = ' ';
   suggestions: boolean = false;
   order: any = [];
   @Input() showdesc: any;
@@ -42,13 +47,13 @@ export class ProfileDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFunction();
-    
+
     this.getAllUserAddress()
     this.getOrderhistory();
     this.getReturnProduct();
   }
   getFunction() {
-    this.userDetail=[]
+    this.userDetail = []
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
       this.userDetail.push(res.data);
       this.shimmerLoad = false;
@@ -159,25 +164,43 @@ export class ProfileDashboardComponent implements OnInit {
           this.userObj.address_id = data.id;
           this.__apiservice.editUserAddress(this.userObj).subscribe((res: any) => {
             console.log(res);
-            window.location.reload();
+            this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+              this.router.onSameUrlNavigation = 'reload';
+              this.router.navigate(['/' + 'profile']);
           },
             () => {
               form.reset();
-              this.resSignupMsg = 'Profile Edited Successfully!';
-              this.resSignupMsgCheck = 'success';
+              // this.resAddmsg = 'Profile Edited Successfully!';
+              // this.resAddmsgCheck = 'success';
             }
           );
         }
       })
     }
     else {
-      this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please Fill the Fields Below!';
+      this.resAddmsg = 'Please Fill the Fields Below!';
+      this.resAddmsgCheck = 'danger';
+      setTimeout(() => {
+        this.resAddmsg=''
+      }, 2000);
     }
 
   }
   resetValue(form: NgForm) {
     this.resSignupMsg = '';
+  }
+  getUserDetail(item: any) {
+    if (item == 'add') {
+      this.profileAddress = [];
+      this.profileAddress.push({ heading: "Add Address" })
+    }
+    else {
+      this.profileAddress = [];
+      item.heading = "Edit Address";
+      item.firstname = item.name.split(" ")[0];
+      item.lastname = item.name.split(" ")[1];
+      this.profileAddress.push(item);
+    }
   }
   deleteUserAddress(item_id: any) {
     console.log(item_id);
@@ -198,26 +221,13 @@ export class ProfileDashboardComponent implements OnInit {
       }
     )
   }
-  getUserDetail(item: any) {
-    if (item == 'add') {
-      this.profileAddress = [];
-      this.profileAddress.push({ heading: "Add Address" })
-    }
-    else {
-      this.profileAddress = [];
-      item.heading = "Edit Address";
-      item.firstname = item.name.split(" ")[0];
-      item.lastname = item.name.split(" ")[1];
-      this.profileAddress.push(item);
-    }
-  }
   getOrderhistory() {
     let product_search: any;
     this.__apiservice.getOrderData().subscribe((res: any) => {
       setTimeout(() => {
         this.orderData = res.data;
         this.order = res.data;
-        console.log(this.orderData);        
+        console.log(this.orderData);
         res.data.map((resp: any) => {
           resp.items.map((response: any) => {
             product_search = response.product;
@@ -226,7 +236,7 @@ export class ProfileDashboardComponent implements OnInit {
         })
       }, 1000);
     })
-    
+
   }
   storeReturnProduct(i: any) {
     console.log(i)
@@ -250,7 +260,7 @@ export class ProfileDashboardComponent implements OnInit {
     })
   }
 
-  header : any;
+  header: any;
   editUserProfile(form: NgForm) {
     if (!(this.passwrodCheck)) {
       if (form.valid) {
@@ -283,15 +293,21 @@ export class ProfileDashboardComponent implements OnInit {
 
         this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
           console.log(res);
-          this.resSignupMsg = 'Profile Edited Successfully!';
-          this.resSignupMsgCheck = 'success';
+          this.resEditProfileMsgCheck = 'success';
+          this.resEditProfileMsg = 'Profile Edited Successfully!';
+          setTimeout(() => {
+          this.resEditProfileMsg = '';
+          }, 3000);
           this.getFunction()
           form.reset();
         })
       }
       else {
-        this.resSignupMsgCheck = 'danger';
-        this.resSignupMsg = 'Please Fill the Fields Below!';
+        this.resEditProfileMsgCheck = 'danger';
+        this.resEditProfileMsg = 'Please Fill the Fields Below!';
+        setTimeout(() => {
+          this.resEditProfileMsg = '';
+        }, 2000);
       }
     }
     else {
@@ -330,7 +346,7 @@ export class ProfileDashboardComponent implements OnInit {
         })
         this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
           console.log(res);
-          this.getFunction(); 
+          this.getFunction();
           // form.reset();
         })
       }
@@ -432,18 +448,18 @@ export class ProfileDashboardComponent implements OnInit {
     }
   }
 
-  orderCancel(id:any){
+  orderCancel(id: any) {
     console.log(id.order_id);
     this.__apiservice.CancelOrderApi(id.order_id)
-    .then((res)=>{
-      if(res.code == 200){
-        this.getOrderhistory();
-      }
-      console.log(res);
-      
-    })
-    .catch((error)=>{
-      console.log(error.error.code);
-    })
+      .then((res) => {
+        if (res.code == 200) {
+          this.getOrderhistory();
+        }
+        console.log(res);
+
+      })
+      .catch((error) => {
+        console.log(error.error.code);
+      })
   }
 }

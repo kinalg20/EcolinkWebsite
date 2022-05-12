@@ -9,7 +9,7 @@
             <div class="card-elements table-responsive">
                 <ng-container *ngFor="let data of [].constructor(3)">
                     <ngx-shimmer-loading [shape]="'square'" width="'100%'" height="'200px'"></ngx-shimmer-loading>
-                </ng-container> 
+                </ng-container>
             </div>
 
             <div class="cart cart-total pt-0">
@@ -50,24 +50,15 @@
                                         <div class="product_desc">
                                             <h6 style="text-align: left; padding-left: 10px;">{{product.product.name}}
                                             </h6>
-                                            <!-- <div style="text-align: left; padding: 0 10px;">
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                                <i style="font-size:18px" class="fa">&#xf006;</i>
-                                            </div> -->
                                         </div>
                                     </div>
                                 </td>
                                 <td>{{product.product.sale_price| currency:'USD'}}</td>
                                 <td>
                                     <div class="quantity">
-                                        <button
-                                            (click)="UpdateCart('delete' , product.product_id , product.quantity ,rowIndex )">-</button>
+                                        <button (click)="UpdateCart('delete' , product.product_id , product.quantity ,rowIndex )">-</button>
                                         <p>{{product.quantity}}</p>
-                                        <button
-                                            (click)="UpdateCart('add' ,  product.product_id , product.quantity , rowIndex)">+</button>
+                                        <button (click)="UpdateCart('add' ,  product.product_id , product.quantity , rowIndex)">+</button>
                                     </div>
                                 </td>
                                 <td>
@@ -77,8 +68,7 @@
                                     </div>
                                 </td>
                                 <td>
-                                    <span class="delete_item" data-toggle="modal" data-target="#exampleXCenter"
-                                        (click)="deleteItemFromCart(product)"><i
+                                    <span class="delete_item" data-toggle="modal" data-target="#exampleXCenter" (click)="deleteItemFromCart(product)"><i
                                             class="pi pi-times"></i></span>
                                 </td>
                             </tr>
@@ -106,9 +96,7 @@
                     </div>
                     <div class="proceed">
                         <div class="proceed-button">
-                            <button routerLink="/shop/checkout" pButton pRipple type="button"
-                                label="Proceed to Checkout" class="p-button-raised p-button-success"
-                                style="height:40px; width: 100%;" (click)="StoreCookiesData()"></button>
+                            <button routerLink="/shop/checkout" pButton pRipple type="button" label="Proceed to Checkout" class="p-button-raised p-button-success" style="height:40px; width: 100%;" (click)="StoreCookiesData()"></button>
                         </div>
                     </div>
                 </div>
@@ -117,12 +105,9 @@
                 <div class="row">
                     <div class="card">
                         <div class="card-body cart">
-                            <div class="col-sm-12 empty-cart-cls text-center"> <img
-                                    src="https://i.imgur.com/dCdflKN.png" width="130" height="130"
-                                    class="img-fluid mb-4 mr-3">
+                            <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png" width="130" height="130" class="img-fluid mb-4 mr-3">
                                 <h3><strong>Your Cart is Empty</strong></h3>
-                                <h4>Add something to make me happy :)</h4> <a routerLink="/shop"
-                                    class="btn btn-success cart-btn-transform m-3" data-abc="true">continue shopping</a>
+                                <h4>Add something to make me happy :)</h4> <a routerLink="/shop" class="btn btn-success cart-btn-transform m-3" data-abc="true">continue shopping</a>
                             </div>
                         </div>
                     </div>

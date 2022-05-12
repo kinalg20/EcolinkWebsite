@@ -58,12 +58,18 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
         this.checkBoxChcek = false
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
+        setTimeout(() => {
+          this.resSignupMsg = '';
+          }, 3000);
       }
       )
     }
     else {
       this.resSignupMsgCheck = 'danger';
       this.resSignupMsg = 'Please Fill the Fields Below!';
+      setTimeout(() => {
+        this.resSignupMsg = '';
+        }, 2000);
     }
   }
 

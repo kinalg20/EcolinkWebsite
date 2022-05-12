@@ -4,7 +4,7 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef, OnInit
-} from '@angular/core'; 
+} from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
 import { NgForm } from '@angular/forms';
@@ -20,10 +20,10 @@ export class AskChemistComponent implements OnInit {
   userObj: any;
   invalidUserEmail: string = '';
   resSignupMsg: string = '';
-  resSignupMsgCheck: string = ' '; 
+  resSignupMsgCheck: string = ' ';
   invalidMobile = false;
   invalidEmail: boolean = false;
-  constructor(private __apiservice: ApiServiceService,private renderer: Renderer2, private scroller: ViewportScroller, private router: Router) { }
+  constructor(private __apiservice: ApiServiceService, private renderer: Renderer2, private scroller: ViewportScroller, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -54,7 +54,7 @@ export class AskChemistComponent implements OnInit {
         state: form.value.state,
         city: form.value.city,
         zip: form.value.zip,
-        input_1 : form.value.input_11,
+        input_1: form.value.input_11,
         input_2: form.value.textarea
       };
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
@@ -62,12 +62,18 @@ export class AskChemistComponent implements OnInit {
         form.reset();
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
+        setTimeout(() => {
+          this.resSignupMsg = '';
+        }, 3000);
       }
       )
     }
     else {
       this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please Fill the Fields Below!';    
+      this.resSignupMsg = 'Please Fill the Fields Below!';
+      setTimeout(() => {
+        this.resSignupMsg = '';
+        }, 2000);
     }
   }
   ngAfterViewInit() { }
