@@ -11,7 +11,6 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 })
 export class FooterComponent implements OnInit {
   newsletter_email: any;
-  @Output() responseArray = new EventEmitter<any>();
   invalidUserEmail: string = '';
   invalidEmail: boolean = false;
   windowScrolled!: boolean;
@@ -51,12 +50,10 @@ export class FooterComponent implements OnInit {
       let resSignupMsg = 'Please Enter Email !'
       let resSignupMsgCheck = 'danger';
       let object = {
-        resSignupMsg : resSignupMsg,
-        resSignupMsgCheck : resSignupMsgCheck
+        resSignupMsg: resSignupMsg,
+        resSignupMsgCheck: resSignupMsgCheck
       }
-
-      this.responseArray.emit(object);
-
+      this._ApiService.subscribedmsg.next(Object.assign({}, object));
     }
     else {
       let endpoint = 'newsletter'
@@ -66,14 +63,15 @@ export class FooterComponent implements OnInit {
         let resSignupMsgCheck = 'success';
         this.newsletter_email = undefined;
         let object = {
-          resSignupMsg : resSignupMsg,
-          resSignupMsgCheck : resSignupMsgCheck
+          resSignupMsg: resSignupMsg,
+          resSignupMsgCheck: resSignupMsgCheck
         }
-
-        this.responseArray.emit(object);
+        this._ApiService.subscribedmsg.next(Object.assign({}, object));
+        console.log(this._ApiService.subscribedmsg);
       })
-      
+
     }
+    this.scrollToTop();
   }
   routeOnSamePage(slug: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;

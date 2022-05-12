@@ -9,7 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class HomeComponent implements OnInit {
 
   remembertoken: any;
-  responseSubscribe: any = {}
+
 
   constructor(private scroller: ViewportScroller, private route: ActivatedRoute, private router: Router) { }
 
@@ -41,22 +41,7 @@ export class HomeComponent implements OnInit {
     this.scroller.scrollToAnchor("newsletter");
   }
 
-  scrollup(event: any) {
-    console.log(event);
-    this.responseSubscribe = event;
-    this.scroller.scrollToAnchor('subscribeMsg');
-  }
 
-  closeButton() {
-    // this.renderer.setStyle(this.closer.nativeElement, 'display', 'none');
-    let resSignupMsg = '';
-    let resSignupMsgCheck = ''
-    let object = {
-      resSignupMsg: resSignupMsg,
-      resSignupMsgCheck: resSignupMsgCheck
-    }
 
-    this.responseSubscribe = object;
 
-  }
 }
