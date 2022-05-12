@@ -39,7 +39,7 @@ export class SubcatgorycomponentComponent implements OnInit {
   rangeValues: number[] = [0, 100];
   resetvalues: number[] = [0, 100];
   shimmerLoad: boolean = true;
-  subslug : any;
+  subslug: any;
   subCatgoryProduct: any = [];
   @ViewChild('warning') warning: any;
   constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService, private router: Router) {
@@ -99,9 +99,9 @@ export class SubcatgorycomponentComponent implements OnInit {
         resp.products = obj_Array;
       })
     }
-    else if(this.value1.length == 0){
-      console.log(this.subCatgoryProduct[0].products);
-      
+    else if (this.value1.length == 0) {
+      // console.log(this.subCatgoryProduct[0].products);
+
       // this.subCatgoryProduct[0].products = this.subCatgoryProduct;
     }
 
@@ -111,7 +111,7 @@ export class SubcatgorycomponentComponent implements OnInit {
   displayProducts: any = [];
   productList: any = [];
   async getListingData(slug: any) {
-    await this._ApiService.getDetailByCategory(slug).then((res:any) => {
+    await this._ApiService.getDetailByCategory(slug).then((res: any) => {
       if (res.code == 200) {
         this.productResponse = res.data.subcategory;
         for (let data = 0; data < this.productResponse.length; data++) {
@@ -225,7 +225,7 @@ export class SubcatgorycomponentComponent implements OnInit {
     console.log(this.productList, this.subCatgoryProduct);
     this.subCatgoryProduct[0].products = this.displayProducts;
     this.getPrice();
-    console.log(this.displayProducts , this.subCatgoryProduct);
+    console.log(this.displayProducts, this.subCatgoryProduct);
     // this.productCheck = false;]
     // this.selectedRatings = false
   }
@@ -237,7 +237,7 @@ export class SubcatgorycomponentComponent implements OnInit {
     }
     else if (this.value1.length == 0) {
       this.suggestions = false;
-      this.subCatgoryProduct = this.displayProducts;
+      this.subCatgoryProduct[0].products = this.displayProducts;
     }
 
     console.log(this.displayProducts);
