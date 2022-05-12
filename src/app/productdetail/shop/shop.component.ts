@@ -68,7 +68,7 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  getProductDetail(sendslug: any) {
+  getProductDetail(sendslug: any) {    
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
@@ -76,7 +76,7 @@ export class ShopComponent implements OnInit {
         this.stock=res.data.product.stock;
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
-        this.ItemCount = this.minimum_qyt;
+        this.ItemCount = this.minimum_qyt == null ? 1 : this.minimum_qyt;
       }
     })
   }
