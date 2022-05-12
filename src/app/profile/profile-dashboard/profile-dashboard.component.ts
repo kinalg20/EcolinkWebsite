@@ -267,7 +267,6 @@ export class ProfileDashboardComponent implements OnInit {
         let formData1 = new FormData();
         let data = Object.assign({}, form.value);
         this.header = localStorage.getItem('ecolink_user_credential');
-        let user_id = JSON.parse(this.header).user_id;
         formData1.append('profile_image', this.file);
         formData1.append('name', data.firstname + ' ' + data.lastname);
         formData1.append('email', data.email);
@@ -278,7 +277,6 @@ export class ProfileDashboardComponent implements OnInit {
         formData1.append('state', data.state);
         formData1.append('city', data.city);
         formData1.append('pincode', data.pincode);
-        formData1.append('user_id', user_id);
         // console.log(formData1.get('profile_image'));
         // this.userObj = {
         //   name: data.firstname + ' ' + data.lastname,
@@ -314,24 +312,35 @@ export class ProfileDashboardComponent implements OnInit {
     }
     else {
       if (form.valid) {
+        let formData1 = new FormData();
         let data = Object.assign({}, form.value);
         this.userObj1 = {
           email: data.email,
           password: data.password,
           password_confirmation: data.password
         };
-        this.userObj = {
-          name: data.firstname + ' ' + data.lastname,
-          email: data.email,
-          mobile: data.phonenumber,
-          address: data.address,
-          country: data.country,
-          state: data.state,
-          city: data.city,
-          pincode: data.pincode
-        };
+        // this.userObj = {
+        //   name: data.firstname + ' ' + data.lastname,
+        //   email: data.email,
+        //   mobile: data.phonenumber,
+        //   address: data.address,
+        //   country: data.country,
+        //   state: data.state,
+        //   city: data.city,
+        //   pincode: data.pincode
+        // };
+        formData1.append('profile_image', this.file);
+        formData1.append('name', data.firstname + ' ' + data.lastname);
+        formData1.append('email', data.email);
+        formData1.append('mobile', data.phonenumber);
+        // formData1.append('password', data.password);
+        formData1.append('address', data.address);
+        formData1.append('country', data.country);
+        formData1.append('state', data.state);
+        formData1.append('city', data.city);
+        formData1.append('pincode', data.pincode);
         console.log(this.userObj);
-        this.__apiservice.forgotPassword(this.userObj1).subscribe((res: any) => {
+        this.__apiservice.forgotPassword(formData1).subscribe((res: any) => {
           console.log(res);
           form.reset();
         })

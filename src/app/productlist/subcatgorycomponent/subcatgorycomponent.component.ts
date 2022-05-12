@@ -1,23 +1,23 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiServiceService } from '../Services/api-service.service';
-import { CookiesService } from '../Services/cookies.service';
+import { ApiServiceService } from '../../Services/api-service.service';
+import { CookiesService } from '../../Services/cookies.service';
 interface popularity {
   name: string,
   slug: string
 }
 
 @Component({
-  selector: 'app-productlist',
-  templateUrl: './productlist.component.html',
-  styleUrls: ['./productlist.component.scss']
+  selector: 'app-subcatgorycomponent',
+  templateUrl: './subcatgorycomponent.component.html',
+  styleUrls: ['./subcatgorycomponent.component.scss']
 })
-export class ProductlistComponent implements OnInit {
+export class SubcatgorycomponentComponent implements OnInit {
   suggestions: boolean = true;
   showFiterModel: boolean = false;
   previousdata: any;
-  productCheck:boolean=false;
+  productCheck: boolean = false;
   ItemCount: any = 1;
   CartObj: any = {};
   view_card: boolean = true;
@@ -32,14 +32,16 @@ export class ProductlistComponent implements OnInit {
   ProductListData: any = [];
   ProductbackupData: any = []
   cart_obj: any = [];
+  catgory: any;
   price_from: any;
   price_to: any;
   selectedLevel: any = 'default';
-  rangeValues: number[] = [0,100];
+  rangeValues: number[] = [0, 100];
   resetvalues: number[] = [0, 100];
-  shimmerLoad : boolean = true;
+  shimmerLoad: boolean = true;
+  subCatgoryProduct: any = [];
   @ViewChild('warning') warning: any;
-  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService , private router :Router) {
+  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService, private router: Router) {
     this.popularity = [
       { name: "Price low to high", slug: "lowtohigh" },
       { name: "Price high to low", slug: "hightolow" },
@@ -49,19 +51,10 @@ export class ProductlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.catgory = localStorage.getItem('category');
+    let subslug = JSON.parse(this.catgory);
+    this.getListingData(subslug);
     this.slug = this.route.snapshot.params;
-    // if(this.slug.subslug.subsubslug){
-    //   this.getListingData(this.slug.subslug.subsubslug);
-    // }
-    if (this.slug.sublink) {
-      console.log(this.slug.sublink);
-      this.getListingData(this.slug.sublink);
-    }
-    else {
-      this.getListingData(this.slug.slug);
-      console.log(this.slug.slug); 
-    }
-    localStorage.setItem("category", JSON.stringify(this.slug.slug));
   }
   responsiveOptions = [
     {
@@ -81,21 +74,6 @@ export class ProductlistComponent implements OnInit {
     }
   ];
 
-  showlist(string: string) {
-    if (string == 'list') {
-      this.view_list = true;
-      this.view_card = false;
-    }
-    if (string == "card") {
-      this.view_list = false;
-      this.view_card = true;
-    }
-    
-    console.log("view_list", this.view_list);
-    console.log("view_card", this.view_card);
-    
-  }
-
   selected(event: any) {
     console.log(event.target.value);
     this.selectedLevel = event.target.value;
@@ -104,39 +82,49 @@ export class ProductlistComponent implements OnInit {
   getselecteddata(selectedValue: any) {
     let obj_Array: any = [];
     this.value1 = selectedValue;
+    console.log(this.value1);
     this.suggestions = false;
     if (this.value1.length > 0) {
-      obj_Array.push(
-        this.ProductListData[0].data.products.filter((search: any) => {
-          return search.name.toLowerCase().indexOf(selectedValue.toLowerCase()) > -1
+      this.subCatgoryProduct.map((response: any) => {
+        response.products.filter((search: any) => {
+          if (search.name.toLowerCase().includes(selectedValue.toLowerCase())) {
+            obj_Array.push(search)
+          }
         })
-      )
+      })
+      console.log(obj_Array);
+      this.subCatgoryProduct.map((resp: any) => {
+        resp.products = obj_Array;
+      })
     }
-    this.ProductListData[0].data.products = obj_Array[0];
+    else if(this.value1.length == 0){
+      
+    }
+
   }
 
   productResponse: any = {};
   displayProducts: any = [];
   productList: any = [];
-  getListingData(slug: any) {
-    this._ApiService.getDetailByCategory(slug)
-    .then(res => {
+  async getListingData(slug: any) {
+    await this._ApiService.getDetailByCategory(slug).then(res => {
       if (res.code == 200) {
-        this.productResponse = res.data;
-        this.productList = this.productResponse.products;
-        this.displayProducts = this.productList;
-        console.log(this.productList,'checkforproduct')
-        console.log("this.productResponse", this.displayProducts)
+        this.productResponse = res.data.subcategory;
         this.ProductListData.push(res);
+        for (let data = 0; data < this.productResponse.length; data++) {
+          if (this.slug.sublink == this.productResponse[data].slug) {
+            this.productList = this.productResponse[data];
+            this.subCatgoryProduct.push(this.productResponse[data]);
+          }
+        }
         this.getPrice();
+        console.log("this.productList", this.productList);
         this.shimmerLoad = false;
       }
     })
-    .catch((error)=>{
-      if(error.error.code==400){
-        this.warning.show('Danger');
-      }
-    })
+      .catch((error) => {
+        this.warning.show("Danger")
+      })
   }
 
   async AddProductToCart(Item: any) {
@@ -166,7 +154,7 @@ export class ProductlistComponent implements OnInit {
     }
     else {
       console.log(Item);
-      this._ApiService.addItemToCart(Item.id ,this.ItemCount, "add" )
+      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add")
       // this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
       //   console.log(res);
       // })
@@ -179,7 +167,7 @@ export class ProductlistComponent implements OnInit {
   }
 
   addWishList(product: any) {
-    if(localStorage.getItem('ecolink_user_credential')!=null){
+    if (localStorage.getItem('ecolink_user_credential') != null) {
       console.log(product.id);
       this._ApiService.addItemToWishlist(product.id).subscribe(res => {
         console.log(res);
@@ -187,19 +175,20 @@ export class ProductlistComponent implements OnInit {
       this.router.navigate(['/shop/wishlist'])
     }
 
-    else{
+    else {
       this.router.navigate(['/profile/auth'])
     }
   }
 
   getDataForFilter() {
+    console.log(this.productList);
     this.productCheck = false;
     let obj_Array: any[] = [];
     let filterValue = {
-      category: Array.from(this.selectedCategory,Number),
+      category: Array.from(this.selectedCategory, Number),
       price_from: this.rangeValues[0],
       price_to: this.rangeValues[1],
-      rating: Array.from(this.selectedRatings,Number),
+      rating: Array.from(this.selectedRatings, Number),
       sortby: this.selectedLevel
     }
     console.log(filterValue);
@@ -208,33 +197,36 @@ export class ProductlistComponent implements OnInit {
       Object.keys(res.data).map(function (key) {
         obj_Array.push(res.data[key]);
       });
-      this.ProductListData[0].data.products = obj_Array;
+      this.subCatgoryProduct[0].products = obj_Array;
+      console.log(this.subCatgoryProduct);
       this.getPrice();
     },
-    (error:HttpErrorResponse)=> {
-      if(error.error.code==400) {
-        this.productCheck=true;
+      (error: HttpErrorResponse) => {
+        if (error.error.code == 400) {
+          this.productCheck = true;
+        }
       }
-    }
     );
+
+    console.log(this.productList);
   }
 
   getPrice() {
-    this.ProductListData.filter((res: any) => {
-      this.price_from = Math.min(...res.data.products.map((item: any) => item.regular_price));
-      this.price_to = Math.max(...res.data.products.map((item: any) => item.regular_price));
+    this.subCatgoryProduct.filter((res: any) => {
+      this.price_from = Math.min(...res.products.map((item: any) => item.regular_price));
+      this.price_to = Math.max(...res.products.map((item: any) => item.regular_price));
       this.maximum = (this.price_to * 35) / 100 + this.price_to;
       this.rangeValues = [this.price_from, this.price_to]
-      console.log(this.maximum,this.rangeValues[1]);
+      console.log(this.maximum, this.rangeValues[1]);
     })
   }
 
   ClearAll() {
-    this.ProductListData[0].data.products = this.displayProducts;
-    console.log(this.displayProducts);
-    this.getPrice();
-    this.productCheck=false;
-    this.selectedRatings=false
+    console.log(this.productList, this.subCatgoryProduct);
+    this.subCatgoryProduct = this.productList;
+    // this.getPrice();
+    // this.productCheck = false;
+    // this.selectedRatings = false
   }
 
   getkeypressdata() {
@@ -242,9 +234,13 @@ export class ProductlistComponent implements OnInit {
     if (this.value1.length > 0) {
       this.suggestions = true;
     }
-    if (this.value1.length == 0) {
-      this.ProductListData[0].data.products = this.displayProducts;
+    else if (this.value1.length == 0) {
+      this.suggestions = false;
+      // this.subCatgoryProduct = this.productList;
     }
-  }
-}
 
+    console.log(this.subCatgoryProduct);
+
+  }
+
+}

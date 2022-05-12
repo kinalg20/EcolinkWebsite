@@ -37,9 +37,9 @@ export class ApiServiceService {
     return this.http.get(this._baseurl + 'getCategories');
   }
 
-  getDetailByCategory(slug: any): Observable<any> {
+  getDetailByCategory(slug: any): Promise<any> {
     let url = 'getCategory';
-    return this.http.post<any>(this._baseurl + url, { slug: slug });
+    return this.http.post<any>(this._baseurl + url, { slug: slug }).toPromise();
   }
   getProductDetail(slug: any): Observable<any> {
     let url = 'getProduct';
@@ -367,6 +367,8 @@ export class ApiServiceService {
     const httpHeaders = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     })
+    let user_id = JSON.parse(this.header).user_id;
+    data.append("user_id",user_id);
     // data.profile_image = "https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png";
     console.log(data);
     return this.http.post(this._baseurl + 'editUserInfo', data, { headers: httpHeaders })
