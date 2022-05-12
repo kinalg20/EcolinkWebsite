@@ -11,6 +11,8 @@ export class ApiServiceService {
   public _baseurl = environment.api_baseurl;
   header: any;
   token: any;
+  subscribedmsg = new BehaviorSubject<any>([]);
+  readonly msg$ = this.subscribedmsg.asObservable();
   cookiesCheckoutData = new BehaviorSubject<any>([]);
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
