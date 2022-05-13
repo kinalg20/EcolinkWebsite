@@ -96,14 +96,14 @@ export class ProfileDashboardComponent implements OnInit {
       setTimeout(() => {
         this.orderData = res.data;
         this.order = res.data;
-        console.log(this.orderData);
+        console.log(this.orderData, "orderhistory");
         res.data.map((resp: any) => {
           resp.items.map((response: any) => {
             product_search = response.product;
           })
           this.searchProductArray.push(product_search);
         })
-      }, 1000);
+      }, 2000);
     })
 
   }
