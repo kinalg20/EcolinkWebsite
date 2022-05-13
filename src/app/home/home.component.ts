@@ -41,7 +41,4 @@ export class HomeComponent implements OnInit {
     this.scroller.scrollToAnchor("newsletter");
   }
 
-
-
-
 }
