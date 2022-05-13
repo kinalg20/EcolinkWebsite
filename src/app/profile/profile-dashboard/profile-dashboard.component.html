@@ -1,7 +1,6 @@
 <div class="dashboard-section" *ngIf="showdesc == 'Dashboard'">
     <h2>Dashboard</h2>
     <div class="profile-card">
-        <!-- True Shimmer -->
         <ng-container *ngIf="shimmerLoad">
             <div class="row">
                 <div class="col-6 mt-3">
@@ -12,19 +11,19 @@
                 </div>
             </div>
         </ng-container>
-        <!-- False Shimmer -->
         <ng-container *ngIf="!shimmerLoad">
             <div class="row" *ngFor="let item of userDetail">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="card profile-section">
                         <div class="profile-image">
-                            <img [src]="item.profile_image" *ngIf="item.profile_image" alt="">
+                            <img [src]="item.profile_image != 'https://brandtalks.in/ecolink/storage/profile_image'? item.profile_image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'" alt="">
                         </div>
                         <div class="profile-desc">
                             <div class="profile-detail my-3">
                                 <h4>{{item.name}}</h4>
                                 <p class="m-0 p-0">{{item.email}}</p>
                             </div>
+
                             <div class="edit-profile-button my-2">
                                 <button (click)="changeTab()">Edit Profile</button>
                             </div>
