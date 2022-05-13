@@ -100,6 +100,8 @@ export class SignupSigninComponent implements OnInit {
 
   signUp(form: NgForm) {
     if (form.valid) {
+      this.resSignupMsgCheck = 'warning';
+      this.resSignupMsg = 'Wait for a while....'
       let data = Object.assign({}, form.value);
       let formData = new FormData();
       formData.append('profile_image', this.file);
@@ -116,7 +118,6 @@ export class SignupSigninComponent implements OnInit {
 
 
       this.taxCalculate = data.radio2
-
       this.__apiservice.post(formData).subscribe(
         (res) => {
           console.log(res);

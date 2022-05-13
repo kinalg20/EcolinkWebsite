@@ -22,6 +22,10 @@
                         {{ resSignupMsg }}
                         <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
+                    <div *ngIf="resSignupMsgCheck=='warning'" class="alert alert-warning" role="alert" id="loginAlert"
+                        #test>
+                        {{ resSignupMsg }}
+                    </div>
                 </ng-container>
                 <div class="row">
                     <div class="col-lg-6 col-md-12">
