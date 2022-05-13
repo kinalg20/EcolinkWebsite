@@ -19,9 +19,7 @@
             </div>
             <nav class="responsive-nav">
                 <div class="container-fluid">
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                        style="float: right; margin: 20px; box-shadow: none;" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" style="float: right; margin: 20px; box-shadow: none;" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span (click)="openNavbar()" *ngIf="!openNav"><i style="font-size:24px"
                                 class="fa">&#xf0c9;</i></span>
                         <span (click)="openNavbar()" *ngIf="openNav"><i style="font-size:24px "
@@ -43,7 +41,10 @@
                 </div>
             </nav>
             <div class="profile-sidebar-desc">
+                <app-addresses [showdesc]="togglebutton"></app-addresses>
+                <!-- <app-adress-modal [showdesc]="togglebutton"></app-adress-modal> -->
                 <app-profile-dashboard [showdesc]="togglebutton" (itemEvent)="event($event)"></app-profile-dashboard>
+                <app-edit-profile [showdesc]="togglebutton"></app-edit-profile>
             </div>
         </div>
     </div>

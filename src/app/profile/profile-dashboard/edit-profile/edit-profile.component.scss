@@ -1,0 +1,33 @@
+.Edit-Profile-section {
+    padding: 20px 40px;
+    .edituserdetail {
+        width: fit-content;
+    }
+    .form-control {
+        margin: 12px 0;
+    }
+    .btn {
+        background: var(--primary);
+        border: var(--primary);
+        color: #fff;
+    }
+    .add-user {
+        text-align: "right";
+    }
+    .btn:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0.25rem rgba(77, 207, 77, 0.25);
+    }
+}
+
+@media (max-width: 992px) {
+    .Edit-Profile-section {
+        .row {
+            width: 100%;
+            margin: 0;
+        }
+        .add-user {
+            text-align: center;
+        }
+    }
+}

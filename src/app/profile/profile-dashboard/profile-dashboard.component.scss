@@ -97,28 +97,6 @@
     }
 }
 
-.Edit-Profile-section {
-    padding: 20px 40px;
-    .edituserdetail {
-        width: fit-content;
-    }
-    .form-control {
-        margin: 12px 0;
-    }
-    .btn {
-        background: var(--primary);
-        border: var(--primary);
-        color: #fff;
-    }
-    .add-user {
-        text-align: "right";
-    }
-    .btn:focus {
-        outline: 0;
-        box-shadow: 0 0 0 0.25rem rgba(77, 207, 77, 0.25);
-    }
-}
-
 .Order-History-section {
     padding: 20px 40px;
     .order-history-header {
@@ -275,66 +253,6 @@
                         text-align: justify;
                     }
                 }
-            }
-        }
-    }
-}
-
-.Addresses-section {
-    padding: 20px 40px;
-    .address-body {
-        display: grid;
-        grid-template-columns: 49% 49%;
-        grid-gap: 15px;
-        .address-card {
-            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-            border: 1px solid #d7d1d1;
-            border-radius: 10px;
-            .address-text {
-                padding: 10px;
-                p {
-                    margin: 0;
-                }
-                .address {
-                    display: flex;
-                }
-                .sub-address {
-                    display: flex;
-                }
-                .crud-btn {
-                    padding: 15px 0;
-                    display: flex;
-                    width: 100%;
-                    justify-content: space-evenly;
-                    p {
-                        color: rgb(43, 43, 209);
-                        cursor: pointer;
-                        &:hover {
-                            text-decoration: underline;
-                        }
-                    }
-                }
-            }
-        }
-    }
-    .addAddress {
-        cursor: pointer;
-        border: 1px solid #d7d1d1;
-        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-        border-radius: 5px;
-        background: whitesmoke;
-        margin: 10px 0;
-        .addAddressCol {
-            padding: 10px;
-            justify-content: center;
-            display: flex;
-            align-items: center;
-            i {
-                margin: 0 5px;
-                border: 1px solid #d7d1d1;
-                border-radius: 100%;
-                background: whitesmoke;
-                padding: 3px;
             }
         }
     }
@@ -563,15 +481,6 @@
                     }
                 }
             }
-        }
-    }
-    .Edit-Profile-section {
-        .row {
-            width: 100%;
-            margin: 0;
-        }
-        .add-user {
-            text-align: center;
         }
     }
     .Addresses-section {
