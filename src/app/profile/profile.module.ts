@@ -15,6 +15,9 @@ import { GoogleLoginProvider } from 'angularx-social-login';
 import { BrowserModule } from '@angular/platform-browser';
 import { SearchPipePipe } from '../custom-pipe/search-pipe.pipe';
 import { PipemoduleModule } from '../pipemodule/pipemodule.module';
+import { EditProfileComponent } from './profile-dashboard/edit-profile/edit-profile.component';
+import { OrderHistoryComponent } from './profile-dashboard/order-history/order-history.component';
+import { AddressesComponent } from './profile-dashboard/addresses/addresses.component';
 
 
 @NgModule({
@@ -22,7 +25,10 @@ import { PipemoduleModule } from '../pipemodule/pipemodule.module';
     ProfileComponent,
     SignupSigninComponent,
     ProfileDashboardComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    EditProfileComponent,
+    OrderHistoryComponent,
+    AddressesComponent
   ],
   imports: [
     CommonModule,

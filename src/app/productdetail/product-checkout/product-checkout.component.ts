@@ -72,8 +72,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
       this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
         console.log(resp);
-        // console.log("resp.output", resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
-        // this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
   }
@@ -199,8 +197,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     let Extra_Charges: any;
     if (this.selectedShippingMethod == 'fedex') {
       Extra_Charges = this.shippingCharge + this.CheckoutProduct[0].payable;
-      // console.log(Extra_Charges);
-
     }
 
     else {

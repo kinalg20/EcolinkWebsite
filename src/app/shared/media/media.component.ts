@@ -45,11 +45,9 @@ export class MediaComponent implements OnInit {
   routeOnSamePage(slug: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
-    this.router.navigate(['/' + slug]);
+    this.router.navigate([slug]);
   }
   getInputValue() {
-    // window.scroll(1200, 1200)
-    // this.getAllBlog = [];
     if(this.searchValue) {
       this.backupBlog.data.map((res: any) => {
         if (res.title.includes(this.searchValue)) {

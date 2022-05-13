@@ -28,7 +28,6 @@ export class ProfileDashboardComponent implements OnInit {
   orderHistoryDesc: any = [];
   searchProductArray: any = [];
   passwrodCheck: boolean = false
-  // userObj1: any = []
   show: boolean = true;
   resEditProfileMsg: string = '';
   resEditProfileMsgCheck: string = '';
@@ -44,11 +43,11 @@ export class ProfileDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.getFunction();
-
     this.getAllUserAddress()
     this.getOrderhistory();
     // this.getReturnProduct();
   }
+  // <<--Get User deatils Function-->>
   getFunction() {
     this.userDetail = []
     this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
@@ -59,11 +58,12 @@ export class ProfileDashboardComponent implements OnInit {
           res.firstname = res.name.split(" ")[0]
           res.lastname = res.name.split(" ")[1]
           console.log("res", res);
-        }, 1000);
+        }, 500);
       })
       console.log(this.userDetail);
     })
   }
+  // <--Get User Address Function-->
   getAllUserAddress() {
     this.__apiservice.getUserAddress().subscribe((res: any) => {
       this.allUserAddresses = [];
@@ -76,10 +76,12 @@ export class ProfileDashboardComponent implements OnInit {
       }, 1000);
     })
   }
+  // <--for password input box true false-->
   changePassword() {
     this.passwrodCheck = !this.passwrodCheck;
     console.log()
   }
+  // <-- User Email Validation Start -->
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email.target.value) == false) {
@@ -91,7 +93,6 @@ export class ProfileDashboardComponent implements OnInit {
   }
   validateEmail(event: any) {
     const value = event.target.value;
-
     if (
       value &&
       !/^[0-9]*$/.test(value) &&
@@ -104,6 +105,8 @@ export class ProfileDashboardComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
+  // <-- User Email Validation End -->
+  // <-- for mobile validation Start-->
   inputMobile(event: any) {
     if (
       event.key.length === 1 &&
@@ -114,7 +117,6 @@ export class ProfileDashboardComponent implements OnInit {
   }
   validateMobile(event: any) {
     const value = event.target.value;
-
     if (
       value &&
       /^[0-9]+$/.test(value) &&
@@ -122,11 +124,12 @@ export class ProfileDashboardComponent implements OnInit {
     ) {
       this.invalidMobile = true;
     }
-
     else {
       this.invalidMobile = false;
     }
   }
+  // <-- for mobile validation End-->
+  // <User Address Modal>
   addUserAddress(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
@@ -181,7 +184,7 @@ export class ProfileDashboardComponent implements OnInit {
         this.resAddmsg = ''
       }, 2000);
     }
-
+    console.log()
   }
   resetValue(form: NgForm) {
     this.resSignupMsg = '';

@@ -22,37 +22,37 @@ export class HomeBannerComponent implements OnInit {
   constructor(private _ApiService: ApiServiceService , private scroller : ViewportScroller) { }
   action_array = [
     {
-      imgurl: "https://t4.ftcdn.net/jpg/02/27/41/31/360_F_227413125_c5CgAhRF9FVpEYKzckx8le5cSMpYx9YP.jpg",
+      imgurl: "assets/askchemist.jpg",
       heading: "Ask The Chemist",
       content: "Need a technical question answered?",
       route: "contact/ask-the-chemist"
     },
     {
-      imgurl: "https://wallpaperaccess.com/full/2847970.jpg",
+      imgurl: "assets/2847970.jpeg",
       heading: "Pricing",
       content: "Bulk pricing is available for 12, 24 or more drums",
       route: "productlist"
     },
     {
-      imgurl: "https://ecolink.com/wp-content/uploads/2020/05/Dollarphotoclub_58451099-1-750x321.jpg",
+      imgurl: "/assets/Ecolink.jpg",
       heading: "Ecolink",
       content: "Providing Lean(er) chemical solutions for next gen",
       route: "info"
     },
     {
-      imgurl: "https://blog.ipleaders.in/wp-content/uploads/2017/08/BV-Acharya-104.jpg",
+      imgurl: "/assets/abouus.jpg",
       heading: "About Us",
       content: "Supplying degreasers internationally for over 30 years",
       route: "about-us"
     },
     {
-      imgurl: "https://static.fibre2fashion.com/articleresources/images/87/8623/chemical-big_Big.jpg",
+      imgurl: "/assets/manufacturing.jpg",
       heading: "Ecolink Manufacturing",
       content: "Ecolink’s successful work in the manufacturing sector",
       route: "manufacture"
     },
     {
-      imgurl: "http://www.safemax.co.id/wp-content/uploads/2016/02/banner-services.jpg",
+      imgurl: "/assets/ourservices.jpg",
       heading: "Our Services",
       content: "Services and Marketing",
       route: "productlist"
