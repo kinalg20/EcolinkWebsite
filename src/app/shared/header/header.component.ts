@@ -200,14 +200,12 @@ export class HeaderComponent implements OnInit {
   }
   closeButton() {
     // this.renderer.setStyle(this.closer.nativeElement, 'display', 'none');
-    let resSignupMsg = '';
-    let resSignupMsgCheck = ''
     let object = {
-      resSignupMsg: resSignupMsg,
-      resSignupMsgCheck: resSignupMsgCheck
+      resSignupMsg: '',
+      resSignupMsgCheck: '',
     }
 
-    this.responseSubscribe = object;
+    this.__apiservice.subscribedmsg.next(Object.assign({}, object));
 
   }
   scrollup(event: any) {

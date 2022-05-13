@@ -288,6 +288,9 @@
     width: 50%;
     align-content: center;
     margin: 10px auto;
+    span {
+        cursor: pointer;
+    }
 
     p {
         margin-bottom: 0;
