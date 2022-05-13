@@ -16,7 +16,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="card profile-section">
                         <div class="profile-image">
-                            <img [src]="item.profile_image ? item.profile_image : 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png'" alt="">
+                            <img [src]="item.profile_image" *ngIf="item.profile_image" alt="">
                         </div>
                         <div class="profile-desc">
                             <div class="profile-detail my-3">
