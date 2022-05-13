@@ -53,6 +53,7 @@
         </ng-container>
     </div>
 </div>
+
 <div class="Edit-Profile-section" *ngIf="showdesc == 'Edit Profile'">
     <h2>Edit Profile</h2>
     <ng-container *ngFor="let item of userDetail">
@@ -170,6 +171,7 @@
         </form>
     </ng-container>
 </div>
+
 <div class="Order-History-section" *ngIf="showdesc == 'Order History'">
     <h2>Order History</h2>
     <div class="order-history-header">
@@ -322,6 +324,7 @@
     </div>
 </div> -->
 </div>
+
 <div class="Addresses-section" *ngIf="showdesc == 'Addresses'">
     <div class="adderess-head">
         <h2>Shipping Addresses</h2>
@@ -372,6 +375,7 @@
         </div>
     </ng-container>
 </div>
+
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content" *ngFor="let item of profileAddress">
