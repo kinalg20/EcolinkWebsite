@@ -16,10 +16,7 @@ interface popularity {
 export class ProductlistComponent implements OnInit {
   suggestions: boolean = true;
   showFiterModel: boolean = false;
-  previousdata: any;
-  productCheck:boolean=false;
-  ItemCount: any = 1;
-  CartObj: any = {};
+  productCheck: boolean = false;
   view_card: boolean = true;
   view_list: boolean = false;
   value1: string = '';
@@ -30,16 +27,15 @@ export class ProductlistComponent implements OnInit {
   selectedCategory: any = [];
   selectedRatings: any = [];
   ProductListData: any = [];
-  ProductbackupData: any = []
-  cart_obj: any = [];
+  ProductbackupData: any = [];
   price_from: any;
   price_to: any;
   selectedLevel: any = 'default';
-  rangeValues: number[] = [0,100];
+  rangeValues: number[] = [0, 100];
   resetvalues: number[] = [0, 100];
-  shimmerLoad : boolean = true;
+  shimmerLoad: boolean = true;
   @ViewChild('warning') warning: any;
-  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService , private router :Router) {
+  constructor(private route: ActivatedRoute, private _ApiService: ApiServiceService, private Cookies: CookiesService, private router: Router) {
     this.popularity = [
       { name: "Price low to high", slug: "lowtohigh" },
       { name: "Price high to low", slug: "hightolow" },
@@ -50,16 +46,13 @@ export class ProductlistComponent implements OnInit {
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
-    // if(this.slug.subslug.subsubslug){
-    //   this.getListingData(this.slug.subslug.subsubslug);
-    // }
     if (this.slug.sublink) {
       console.log(this.slug.sublink);
       this.getListingData(this.slug.sublink);
     }
     else {
       this.getListingData(this.slug.slug);
-      console.log(this.slug.slug); 
+      console.log(this.slug.slug);
     }
     localStorage.setItem("category", JSON.stringify(this.slug.slug));
   }
@@ -90,14 +83,9 @@ export class ProductlistComponent implements OnInit {
       this.view_list = false;
       this.view_card = true;
     }
-    
-    console.log("view_list", this.view_list);
-    console.log("view_card", this.view_card);
-    
   }
 
   selected(event: any) {
-    console.log(event.target.value);
     this.selectedLevel = event.target.value;
   }
 
@@ -120,56 +108,52 @@ export class ProductlistComponent implements OnInit {
   productList: any = [];
   getListingData(slug: any) {
     this._ApiService.getDetailByCategory(slug)
-    .then(res => {
-      if (res.code == 200) {
-        this.productResponse = res.data;
-        this.productList = this.productResponse.products;
-        this.displayProducts = this.productList;
-        console.log(this.productList,'checkforproduct')
-        console.log("this.productResponse", this.displayProducts)
-        this.ProductListData.push(res);
-        this.getPrice();
-        this.shimmerLoad = false;
-      }
-    })
-    .catch((error)=>{
-      if(error.error.code==400){
-        this.warning.show('Danger');
-      }
-    })
+      .then((res: any) => {
+        if (res.code == 200) {
+          this.productResponse = res.data;
+          this.productList = this.productResponse.products;
+          this.displayProducts = this.productList;
+          this.ProductListData.push(res);
+          this.getPrice();
+          this.shimmerLoad = false;
+        }
+      })
+      .catch((error) => {
+        if (error.error.code == 400) {
+          this.warning.show('Danger');
+        }
+      })
   }
 
   async AddProductToCart(Item: any) {
+    let previousdata: any;
+
     if (localStorage.getItem('ecolink_user_credential') == null) {
-      this.cart_obj = [];
-      this.previousdata = this.Cookies.GetCartData();
+      let cart_obj : any = [];
+      previousdata = this.Cookies.GetCartData();
       let recently_added_object = {
         "CartProductId": Item.id,
-        "ProductQuantity": this.ItemCount,
+        "ProductQuantity": 1,
         "ProductCategory": this.slug.slug
       }
-      this.cart_obj.push(recently_added_object);
-      if (this.previousdata != 'empty') {
-        this.previousdata.map((res: any) => {
-          if (res.CartProductId != this.cart_obj[0].CartProductId) {
-            this.cart_obj.push(res);
+      cart_obj.push(recently_added_object);
+      if (previousdata != 'empty') {
+        previousdata.map((res: any) => {
+          if (res.CartProductId != cart_obj[0].CartProductId) {
+            cart_obj.push(res);
           }
           else {
-            // res.ProductQuantity = res.ProductQuantity + this.cart_obj.ProductQuantity;
-            this.cart_obj[0].ProductQuantity = this.cart_obj[0].ProductQuantity + res.ProductQuantity;
-            console.log(this.cart_obj);
+            cart_obj[0].ProductQuantity = cart_obj[0].ProductQuantity + res.ProductQuantity;
+            console.log(cart_obj);
           }
         })
       }
-      this.Cookies.SaveCartData(this.cart_obj);
-      console.log(this.cart_obj);
+      this.Cookies.SaveCartData(cart_obj);
+      console.log(cart_obj);
     }
     else {
       console.log(Item);
-      this._ApiService.addItemToCart(Item.id ,this.ItemCount, "add" )
-      // this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
-      //   console.log(res);
-      // })
+      this._ApiService.addItemToCart(Item.id, 1, "add");
     }
   }
 
@@ -179,7 +163,7 @@ export class ProductlistComponent implements OnInit {
   }
 
   addWishList(product: any) {
-    if(localStorage.getItem('ecolink_user_credential')!=null){
+    if (localStorage.getItem('ecolink_user_credential') != null) {
       console.log(product.id);
       this._ApiService.addItemToWishlist(product.id).subscribe(res => {
         console.log(res);
@@ -187,7 +171,7 @@ export class ProductlistComponent implements OnInit {
       this.router.navigate(['/shop/wishlist'])
     }
 
-    else{
+    else {
       this.router.navigate(['/profile/auth'])
     }
   }
@@ -196,26 +180,24 @@ export class ProductlistComponent implements OnInit {
     this.productCheck = false;
     let obj_Array: any[] = [];
     let filterValue = {
-      category: Array.from(this.selectedCategory,Number),
+      category: Array.from(this.selectedCategory, Number),
       price_from: this.rangeValues[0],
       price_to: this.rangeValues[1],
-      rating: Array.from(this.selectedRatings,Number),
+      rating: Array.from(this.selectedRatings, Number),
       sortby: this.selectedLevel
     }
-    console.log(filterValue);
-    this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
-      console.log("response", res);
+    this._ApiService.filterProduct(filterValue).subscribe((res: any) => { 
       Object.keys(res.data).map(function (key) {
         obj_Array.push(res.data[key]);
       });
       this.ProductListData[0].data.products = obj_Array;
       this.getPrice();
     },
-    (error:HttpErrorResponse)=> {
-      if(error.error.code==400) {
-        this.productCheck=true;
+      (error: HttpErrorResponse) => {
+        if (error.error.code == 400) {
+          this.productCheck = true;
+        }
       }
-    }
     );
   }
 
@@ -225,7 +207,7 @@ export class ProductlistComponent implements OnInit {
       this.price_to = Math.max(...res.data.products.map((item: any) => item.regular_price));
       this.maximum = (this.price_to * 35) / 100 + this.price_to;
       this.rangeValues = [this.price_from, this.price_to]
-      console.log(this.maximum,this.rangeValues[1]);
+      console.log(this.maximum, this.rangeValues[1]);
     })
   }
 
@@ -233,8 +215,8 @@ export class ProductlistComponent implements OnInit {
     this.ProductListData[0].data.products = this.displayProducts;
     console.log(this.displayProducts);
     this.getPrice();
-    this.productCheck=false;
-    this.selectedRatings=false
+    this.productCheck = false;
+    this.selectedRatings = false
   }
 
   getkeypressdata() {

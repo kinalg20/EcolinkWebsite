@@ -366,11 +366,15 @@ export class ApiServiceService {
   editUserProfileInfo(data: any): Observable<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
     const httpHeaders = new HttpHeaders({
       'Authorization': `Bearer ${this.token}`
     })
+
+    console.log(user_id);
+
+    data.append("user_id" , user_id)
     // data.profile_image = "https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png";
-    console.log(data);
     return this.http.post(this._baseurl + 'editUserInfo', data, { headers: httpHeaders })
   }
 
