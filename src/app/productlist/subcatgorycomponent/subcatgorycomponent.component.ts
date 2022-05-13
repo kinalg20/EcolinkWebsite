@@ -17,9 +17,6 @@ export class SubcatgorycomponentComponent implements OnInit {
   suggestions: boolean = true;
   showFiterModel: boolean = false;
   previousdata: any;
-  productCheck: boolean = false;
-  ItemCount: any = 1;
-  CartObj: any = {};
   view_card: boolean = true;
   view_list: boolean = false;
   value1: string = '';
@@ -76,11 +73,13 @@ export class SubcatgorycomponentComponent implements OnInit {
     }
   ];
 
+  //selected product in dropdown
   selected(event: any) {
     console.log(event.target.value);
     this.selectedLevel = event.target.value;
   }
 
+  //selected from search bar
   getselecteddata(selectedValue: any) {
     let obj_Array: any = [];
     this.value1 = selectedValue;
@@ -100,13 +99,13 @@ export class SubcatgorycomponentComponent implements OnInit {
       })
     }
     else if (this.value1.length == 0) {
-      // console.log(this.subCatgoryProduct[0].products);
-
-      // this.subCatgoryProduct[0].products = this.subCatgoryProduct;
+      this.subCatgoryProduct[0].products = this.displayProducts;
     }
 
   }
 
+
+  //get data by slug from api 
   productResponse: any = {};
   displayProducts: any = [];
   productList: any = [];
@@ -117,7 +116,7 @@ export class SubcatgorycomponentComponent implements OnInit {
         for (let data = 0; data < this.productResponse.length; data++) {
           if (this.slug.sublink == this.productResponse[data].slug) {
             this.subCatgoryProduct.push(this.productResponse[data]);
-            this.productList = this.productResponse[0];
+            this.productList = this.productResponse[data];
             this.displayProducts = this.productList.products;
           }
         }
@@ -131,13 +130,14 @@ export class SubcatgorycomponentComponent implements OnInit {
       })
   }
 
+  //Add products to cart
   async AddProductToCart(Item: any) {
     if (localStorage.getItem('ecolink_user_credential') == null) {
       this.cart_obj = [];
       this.previousdata = this.Cookies.GetCartData();
       let recently_added_object = {
         "CartProductId": Item.id,
-        "ProductQuantity": this.ItemCount,
+        "ProductQuantity": 1,
         "ProductCategory": this.slug.slug
       }
       this.cart_obj.push(recently_added_object);
@@ -158,18 +158,18 @@ export class SubcatgorycomponentComponent implements OnInit {
     }
     else {
       console.log(Item);
-      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add")
-      // this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
-      //   console.log(res);
-      // })
+      this._ApiService.addItemToCart(Item.id, 1, "add");
     }
   }
 
+  // toggle filter model for mobile screen
   getFilterModel() {
     this.showFiterModel = true;
     this.showFiterModel = !this.showFiterModel;
   }
 
+
+  //add data to wishlist
   addWishList(product: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       console.log(product.id);
@@ -184,9 +184,9 @@ export class SubcatgorycomponentComponent implements OnInit {
     }
   }
 
+  //get data from filter api
   getDataForFilter() {
     console.log(this.productList);
-    // this.productCheck = false;
     let obj_Array: any[] = [];
     let filterValue = {
       category: Array.from(this.selectedCategory, Number),
@@ -204,13 +204,14 @@ export class SubcatgorycomponentComponent implements OnInit {
     },
       (error: HttpErrorResponse) => {
         if (error.error.code == 400) {
-          this.productCheck = true;
+          this.subCatgoryProduct[0].products = [];
         }
       }
     );
 
   }
 
+  //get range for filter
   getPrice() {
     this.subCatgoryProduct.filter((res: any) => {
       this.price_from = Math.min(...res.products.map((item: any) => item.regular_price));
@@ -221,15 +222,15 @@ export class SubcatgorycomponentComponent implements OnInit {
     })
   }
 
+  // clear filter
   ClearAll() {
     console.log(this.productList, this.subCatgoryProduct);
     this.subCatgoryProduct[0].products = this.displayProducts;
     this.getPrice();
     console.log(this.displayProducts, this.subCatgoryProduct);
-    // this.productCheck = false;]
-    // this.selectedRatings = false
   }
 
+  // get suggestion on key press
   getkeypressdata() {
     console.log(this.value1);
     if (this.value1.length > 0) {
@@ -239,9 +240,12 @@ export class SubcatgorycomponentComponent implements OnInit {
       this.suggestions = false;
       this.subCatgoryProduct[0].products = this.displayProducts;
     }
-
     console.log(this.displayProducts);
 
+  }
+
+  getImageurl(image:any){
+    return `https://brandtalks.in/ecolink/storage/products/`+ image;
   }
 
 }

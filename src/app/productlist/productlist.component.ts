@@ -74,6 +74,7 @@ export class ProductlistComponent implements OnInit {
     }
   ];
 
+  //show list on grid and list view
   showlist(string: string) {
     if (string == 'list') {
       this.view_list = true;
@@ -85,10 +86,12 @@ export class ProductlistComponent implements OnInit {
     }
   }
 
+  //selected dropdown value for fiter
   selected(event: any) {
     this.selectedLevel = event.target.value;
   }
 
+  //fetch data on search
   getselecteddata(selectedValue: any) {
     let obj_Array: any = [];
     this.value1 = selectedValue;
@@ -103,6 +106,9 @@ export class ProductlistComponent implements OnInit {
     this.ProductListData[0].data.products = obj_Array[0];
   }
 
+
+
+  // fetch data by selected slug
   productResponse: any = {};
   displayProducts: any = [];
   productList: any = [];
@@ -116,6 +122,8 @@ export class ProductlistComponent implements OnInit {
           this.ProductListData.push(res);
           this.getPrice();
           this.shimmerLoad = false;
+          console.log(this.productResponse);
+          
         }
       })
       .catch((error) => {
@@ -125,6 +133,7 @@ export class ProductlistComponent implements OnInit {
       })
   }
 
+  // add product to cart
   async AddProductToCart(Item: any) {
     let previousdata: any;
 
@@ -157,11 +166,13 @@ export class ProductlistComponent implements OnInit {
     }
   }
 
+  // toggle filter model
   getFilterModel() {
     this.showFiterModel = true;
     this.showFiterModel = !this.showFiterModel;
   }
 
+  // add data to wishlist
   addWishList(product: any) {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       console.log(product.id);
@@ -176,6 +187,7 @@ export class ProductlistComponent implements OnInit {
     }
   }
 
+  // get data using filter api
   getDataForFilter() {
     this.productCheck = false;
     let obj_Array: any[] = [];
@@ -201,6 +213,8 @@ export class ProductlistComponent implements OnInit {
     );
   }
 
+
+  //get price for range filter
   getPrice() {
     this.ProductListData.filter((res: any) => {
       this.price_from = Math.min(...res.data.products.map((item: any) => item.regular_price));
@@ -211,20 +225,22 @@ export class ProductlistComponent implements OnInit {
     })
   }
 
+  //clear filter
   ClearAll() {
     this.ProductListData[0].data.products = this.displayProducts;
     console.log(this.displayProducts);
     this.getPrice();
     this.productCheck = false;
-    this.selectedRatings = false
+    this.selectedRatings = false;
   }
 
+  //get data on key press
   getkeypressdata() {
     console.log(this.value1);
     if (this.value1.length > 0) {
       this.suggestions = true;
     }
-    if (this.value1.length == 0) {
+    else if (this.value1.length == 0) {
       this.ProductListData[0].data.products = this.displayProducts;
     }
   }

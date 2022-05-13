@@ -106,16 +106,6 @@
                         <p (click)="ClearAll()" style="cursor: pointer;"><a>Clear All</a></p>
                     </div>
                     <div class="filter-body">
-                        <!-- <section class="categories" *ngIf="listdata.data.subcategory.length>0">
-                            <h4>Catgories</h4>
-                            <ul *ngFor="let subcategory of listdata.data.subcategory">
-                                <div class="p-field-checkbox">
-                                    <p-checkbox name="group1" value="{{subcategory.id}}" [(ngModel)]="selectedCategory"
-                                        inputId="cc" #checkbox></p-checkbox>
-                                    <label for="cc" class="mx-2">{{subcategory.name}}</label>
-                                </div>
-                            </ul>
-                        </section> -->
                         <section class="price-section">
                             <div class="price-heading">
                                 <h4>Price</h4>
@@ -138,31 +128,6 @@
                                 </ng-container>
                             </div>
                         </section>
-                        <!-- <section class="rating">
-                                <div class="rating-heading">
-                                    <h4>Rating</h4>
-                                    <div class="p-field-checkbox mb-2">
-                                        <p-checkbox name="group2" value=4 [(ngModel)]="selectedRatings" inputId="4star">
-                                        </p-checkbox>
-                                        <label for="4star" class="mx-2">4 & above</label>
-                                    </div>
-                                    <div class="p-field-checkbox mb-2">
-                                        <p-checkbox name="group2" value=3 [(ngModel)]="selectedRatings" inputId="3star">
-                                        </p-checkbox>
-                                        <label for="3star" class="mx-2">3 & above</label>
-                                    </div>
-                                    <div class="p-field-checkbox mb-2">
-                                        <p-checkbox name="group2" value=2 [(ngModel)]="selectedRatings" inputId="2star">
-                                        </p-checkbox>
-                                        <label for="2star" class="mx-2">2 & above</label>
-                                    </div>
-                                    <div class="p-field-checkbox mb-2">
-                                        <p-checkbox name="group2" value=1 [(ngModel)]="selectedRatings" inputId="1star">
-                                        </p-checkbox>
-                                        <label for="1star" class="mx-2">1 & above</label>
-                                    </div>
-                                </div>
-                            </section> -->
                         <div class="apply-button">
                             <button pButton pRipple type="button" (click)="getDataForFilter()" label="Apply Filter"
                                 class="p-button  filter-button"></button>
@@ -179,7 +144,7 @@
                                     <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
                                         <div class="card" style="cursor: pointer;">
                                             <div class="card-image">
-                                                <img [src]="product.image" alt="">
+                                                <img [src]="getImageurl(product.image)" alt="">
                                                 <span (click)="addWishList(product)"><i style="color: white;"
                                                         class="pi pi-heart" aria-hidden="true"
                                                         title="Wishlist"></i></span>
@@ -232,7 +197,6 @@
                             </div>
                         </ng-container>
                     </div>
-                    <!-- </ng-container> -->
                 </div>
             </div>
         </div>

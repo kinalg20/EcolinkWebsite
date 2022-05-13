@@ -8,6 +8,7 @@
                 <div class="card">
                     <div class="dropdown-address">
                         <h3>Billing Details</h3>
+                        <!-- user address drop down -->
                         <div *ngIf="showDropdowm">
                             <div class="dropdown">
                                 <button class="btn border dropdown-toggle" type="button" id="dropdownMenuButton1"
@@ -31,10 +32,12 @@
                             </div>
                         </div>
                     </div>
+                    <!-- user billing form -->
                     <app-billing-form [CheckoutProduct]=CheckoutProduct [formShimmer]="formShimmer"
                         (FormFillUp)="fillformevent($event)" (OrderInfo)="getshippingInfo($event)"></app-billing-form>
                 </div>
             </div>
+            <!-- shimmar effect true-->
             <div class="your_order" *ngIf="checkoutShimmer">
                 <div class="card">
                     <h3>Your Order</h3>
@@ -52,6 +55,7 @@
                     </div>
                 </div>
             </div>
+            <!-- shimmar effect false-->
             <div class="your-order" *ngIf="!checkoutShimmer">
                 <div class="card">
                     <h3>Your Order</h3>
