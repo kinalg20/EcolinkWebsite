@@ -1,6 +1,7 @@
 <div class="dashboard-section" *ngIf="showdesc == 'Dashboard'">
     <h2>Dashboard</h2>
     <div class="profile-card">
+        <!-- True Shimmer -->
         <ng-container *ngIf="shimmerLoad">
             <div class="row">
                 <div class="col-6 mt-3">
@@ -11,6 +12,7 @@
                 </div>
             </div>
         </ng-container>
+        <!-- False Shimmer -->
         <ng-container *ngIf="!shimmerLoad">
             <div class="row" *ngFor="let item of userDetail">
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
@@ -23,7 +25,6 @@
                                 <h4>{{item.name}}</h4>
                                 <p class="m-0 p-0">{{item.email}}</p>
                             </div>
-
                             <div class="edit-profile-button my-2">
                                 <button (click)="changeTab()">Edit Profile</button>
                             </div>

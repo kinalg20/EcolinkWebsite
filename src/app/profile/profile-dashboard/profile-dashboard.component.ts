@@ -17,9 +17,7 @@ export class ProfileDashboardComponent implements OnInit {
   @Output() itemEvent = new EventEmitter<any>();
   searchItem: string = '';
   shimmerLoad: boolean = true;
-  tabCheck: boolean = true
   profileAddress: any = [];
-  addORedit: boolean = false;
   userObj: any;
   userDetail: any = [];
   invalidUserEmail: string = '';
@@ -29,9 +27,8 @@ export class ProfileDashboardComponent implements OnInit {
   orderData: any = [];
   orderHistoryDesc: any = [];
   searchProductArray: any = [];
-  storeObj: any;
   passwrodCheck: boolean = false
-  userObj1: any = []
+  // userObj1: any = []
   show: boolean = true;
   resEditProfileMsg: string = '';
   resEditProfileMsgCheck: string = '';
@@ -50,7 +47,7 @@ export class ProfileDashboardComponent implements OnInit {
 
     this.getAllUserAddress()
     this.getOrderhistory();
-    this.getReturnProduct();
+    // this.getReturnProduct();
   }
   getFunction() {
     this.userDetail = []
@@ -165,8 +162,8 @@ export class ProfileDashboardComponent implements OnInit {
           this.__apiservice.editUserAddress(this.userObj).subscribe((res: any) => {
             console.log(res);
             this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-              this.router.onSameUrlNavigation = 'reload';
-              this.router.navigate(['/' + 'profile']);
+            this.router.onSameUrlNavigation = 'reload';
+            this.router.navigate(['/' + 'profile']);
           },
             () => {
               form.reset();
@@ -181,7 +178,7 @@ export class ProfileDashboardComponent implements OnInit {
       this.resAddmsg = 'Please Fill the Fields Below!';
       this.resAddmsgCheck = 'danger';
       setTimeout(() => {
-        this.resAddmsg=''
+        this.resAddmsg = ''
       }, 2000);
     }
 
@@ -238,27 +235,28 @@ export class ProfileDashboardComponent implements OnInit {
     })
 
   }
-  storeReturnProduct(i: any) {
-    console.log(i)
-    this.storeObj = {
-      order_id: i.order_id,
-      order_item_id: i.id,
-      product_id: i.product_id,
-      quantity: i.quantity,
-      reason: "Accidentally Placed Order",
-      description: "test"
-    }
-    this.__apiservice.storeReturnOrder(this.storeObj).subscribe(res => {
-      console.log(res)
-    })
-  }
-  getReturnProduct() {
-    this.__apiservice.getReturnOrder().subscribe(res => {
-      setTimeout(() => {
-        console.log("returndata", res)
-      }, 1000);
-    })
-  }
+  // storeReturnProduct(i: any) {
+  //   let storeObj: any;
+  //   console.log(i)
+  //   storeObj = {
+  //     order_id: i.order_id,
+  //     order_item_id: i.id,
+  //     product_id: i.product_id,
+  //     quantity: i.quantity,
+  //     reason: "Accidentally Placed Order",
+  //     description: "test"
+  //   }
+  //   this.__apiservice.storeReturnOrder(storeObj).subscribe(res => {
+  //     console.log(res)
+  //   })
+  // }
+  // getReturnProduct() {
+  //   this.__apiservice.getReturnOrder().subscribe(res => {
+  //     setTimeout(() => {
+  //       console.log("returndata", res)
+  //     }, 1000);
+  //   })
+  // }
 
   header: any;
   editUserProfile(form: NgForm) {
@@ -271,32 +269,17 @@ export class ProfileDashboardComponent implements OnInit {
         formData1.append('name', data.firstname + ' ' + data.lastname);
         formData1.append('email', data.email);
         formData1.append('mobile', data.phonenumber);
-        // formData1.append('password', data.password);
         formData1.append('address', data.address);
         formData1.append('country', data.country);
         formData1.append('state', data.state);
         formData1.append('city', data.city);
         formData1.append('pincode', data.pincode);
-        // console.log(formData1.get('profile_image'));
-        // this.userObj = {
-        //   name: data.firstname + ' ' + data.lastname,
-        //   email: data.email,
-        //   mobile: data.phonenumber,
-        //   address: data.address,
-        //   country: data.country,
-        //   state: data.state,
-        //   city: data.city,
-        //   pincode: data.pincode,
-        //   user_id : user_id
-        // };
-        // console.log(this.userObj);
-
         this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
           console.log(res);
           this.resEditProfileMsgCheck = 'success';
           this.resEditProfileMsg = 'Profile Edited Successfully!';
           setTimeout(() => {
-          this.resEditProfileMsg = '';
+            this.resEditProfileMsg = '';
           }, 3000);
           this.getFunction()
           form.reset();
@@ -312,28 +295,18 @@ export class ProfileDashboardComponent implements OnInit {
     }
     else {
       if (form.valid) {
+        let userObj1: any = []
         let formData1 = new FormData();
         let data = Object.assign({}, form.value);
-        this.userObj1 = {
+        userObj1 = {
           email: data.email,
           password: data.password,
           password_confirmation: data.password
         };
-        // this.userObj = {
-        //   name: data.firstname + ' ' + data.lastname,
-        //   email: data.email,
-        //   mobile: data.phonenumber,
-        //   address: data.address,
-        //   country: data.country,
-        //   state: data.state,
-        //   city: data.city,
-        //   pincode: data.pincode
-        // };
         formData1.append('profile_image', this.file);
         formData1.append('name', data.firstname + ' ' + data.lastname);
         formData1.append('email', data.email);
         formData1.append('mobile', data.phonenumber);
-        // formData1.append('password', data.password);
         formData1.append('address', data.address);
         formData1.append('country', data.country);
         formData1.append('state', data.state);
@@ -347,7 +320,6 @@ export class ProfileDashboardComponent implements OnInit {
         this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
           console.log(res);
           this.getFunction();
-          // form.reset();
         })
       }
       else {
@@ -413,19 +385,6 @@ export class ProfileDashboardComponent implements OnInit {
 
       })
     })
-
-    // this.orderData = [];
-    // this.orderData.data.map((res:any)=>{
-    //   res.data.map((resp: any) => {
-    //     resp.items.map((response: any) => {
-    //       if(response.product.name === this.searchItem){
-    //         product_search = resp.product;
-    //       }
-    //       console.log(product_search);
-    //     })
-    //     // this.orderData.push(product_search);
-    //   })
-    // })
   }
 
 
