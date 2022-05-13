@@ -10,15 +10,14 @@ import { CookiesService } from 'src/app/Services/cookies.service';
 })
 export class ShopComponent implements OnInit {
   ItemCount: any;
-  stock:any
+  stock: any
   slug: any;
-  minimum_qyt:any=1
-  cart_obj: any = []
+  minimum_qyt: any = 1;
   previousdata: any;
-  test_slug:any;
+  test_slug: any;
   recommended_products: any = [];
   detailSlug: any;
-  shimmerLoad:boolean= true;
+  shimmerLoad: boolean = true;
 
   responsiveOptions = [
     {
@@ -38,13 +37,14 @@ export class ShopComponent implements OnInit {
     }
   ];
   productDetail: any = [];
-  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router:Router) { }
+  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router: Router) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
     if (this.slug.subsublug) {
       this.detailSlug = this.slug.slug + '/' + this.slug.subslug + '/' + this.slug.subsublug;
     }
+
     else if (this.slug.subslug) {
       this.detailSlug = this.slug.slug + '/' + this.slug.subslug;
     }
@@ -54,7 +54,6 @@ export class ShopComponent implements OnInit {
     }
 
     this.getProductDetail(this.detailSlug);
-    
 
   }
 
@@ -68,12 +67,13 @@ export class ShopComponent implements OnInit {
     }
   }
 
-  getProductDetail(sendslug: any) {    
+  //get product detail
+  getProductDetail(sendslug: any) {
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
-        this.minimum_qyt=res.data.product.minimum_qty;
-        this.stock=res.data.product.stock;
+        this.minimum_qyt = res.data.product.minimum_qty;
+        this.stock = res.data.product.stock;
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
         this.ItemCount = this.minimum_qyt == null ? 1 : this.minimum_qyt;
@@ -81,56 +81,56 @@ export class ShopComponent implements OnInit {
     })
   }
 
+
+  //add product to cart
   AddProductToCart(Item: any) {
     if (localStorage.getItem('ecolink_user_credential') == null) {
-      this.cart_obj = [];
+      let cart_obj: any = [];
       this.previousdata = this.Cookies.GetCartData();
       let recently_added_object = {
         "CartProductId": Item.id,
         "ProductQuantity": this.ItemCount,
         "ProductCategory": this.slug.slug
       }
-      this.cart_obj.push(recently_added_object);
+      cart_obj.push(recently_added_object);
       if (this.previousdata != 'empty') {
         this.previousdata.map((res: any) => {
-          if (res.CartProductId != this.cart_obj[0].CartProductId) {
-            this.cart_obj.push(res);
+          if (res.CartProductId != cart_obj[0].CartProductId) {
+            cart_obj.push(res);
           }
           else {
-            this.cart_obj[0].ProductQuantity = this.cart_obj[0].ProductQuantity + res.ProductQuantity;
-            console.log(this.cart_obj);
+            cart_obj[0].ProductQuantity = cart_obj[0].ProductQuantity + res.ProductQuantity;
+            console.log(cart_obj);
           }
         })
       }
-      this.Cookies.SaveCartData(this.cart_obj);
-      console.log(this.cart_obj);
+      this.Cookies.SaveCartData(cart_obj);
+      console.log(cart_obj);
     }
 
     else {
-      // this._ApiService.addItemToCart(Item.id, this.ItemCount, "add").subscribe((res: any) => {
-      //   console.log(res);
-      // })
-      this._ApiService.addItemToCart(Item.id ,this.ItemCount, "add" );
+      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add");
     }
   }
 
+  // add item to wishlist
   addWishList(product: any) {
-    if(localStorage.getItem('ecolink_user_credential')!=null){
+    if (localStorage.getItem('ecolink_user_credential') != null) {
       console.log("product_id", product.id);
-    this._ApiService.addItemToWishlist(product.id).subscribe(res => {
-      console.log(res);
-    })
+      this._ApiService.addItemToWishlist(product.id).subscribe(res => {
+        console.log(res);
+      })
       this.router.navigate(['/shop/wishlist'])
     }
 
-    else{
+    else {
       this.router.navigate(['/profile/auth'])
     }
-    
+
   }
 
-  
-  routeOnSamePage(slug:any) {
+
+  routeOnSamePage(slug: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/shop/' + this.slug.category + '/' + slug]);
