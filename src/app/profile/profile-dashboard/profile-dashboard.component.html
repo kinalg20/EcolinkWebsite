@@ -34,7 +34,7 @@
                     <div class="card address-section">
                         <div class="customer_name my-3">
                             <h4>Add Address</h4>
-                            <i data-bs-toggle="modal" data-bs-target="#exampleModal" class="pi pi-plus">
+                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal" class="pi pi-plus">
                             </i>
                         </div>
                         <div class="default-Address">
@@ -211,13 +211,13 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1">
     <div class="modal-dialog modal-md">
-        <div class="modal-content">
+        <div class="modal-content" *ngFor="let item of profileAddress">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">item.heading</h4>
+                <h4 class="modal-title" id="exampleModalLabel">{{item.heading}}</h4>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body container">
-                <app-adress-modal></app-adress-modal>
+                <app-adress-modal [profileaddress]="profileAddress"></app-adress-modal>
             </div>
         </div>
     </div>
