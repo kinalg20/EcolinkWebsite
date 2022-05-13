@@ -19,38 +19,42 @@ export class ProductWishlistComponent implements OnInit {
   }
 
   addProductToCart(prod: any) {
-    // this._ApiService.addItemToCart(prod.product_id, 1, "add").subscribe((res: any) => {
-    //   console.log(res);
-    // })
     this._ApiService.addItemToCart(prod.product_id, 1, "add")
 
   }
 
-  getWishlistItems() {
-    this.wishlistShimmer= true;
+  async getWishlistItems() {
+    this.wishlistShimmer = true;
     this.product = [];
-    this._ApiService.getWishListItem().subscribe(res => 
-      {
-      if (res.code == 200) {
-        console.log(res);
-        this.product.push(res.data);
-        this.wishlistShimmer = false;
-      }
-    },
-    (error: HttpErrorResponse) => {
-      if (error.error.code == 400) {
-        console.log("400");
-        this.product = [];
-        this.wishlistShimmer = false;
-      }
-      console.log(error.error.code);
-    })
+    await this._ApiService.getWishListItem()
+      .then(res => {
+        if (res.code == 200) {
+          console.log(res);
+          this.product.push(res.data);
+          this.wishlistShimmer = false;
+        }
+      })
+      .catch((error: any) => {
+        if (error.error.code == 400) {
+          console.log("400");
+          this.product = [];
+          this.wishlistShimmer = false;
+        }
+      })
   }
 
-  deleteWishlistItems(product_id: any) {
-    this._ApiService.deleteWishlistItems(product_id).subscribe((res: any) => {
-      console.log(res);
-    })
-    this.getWishlistItems();
+  async deleteWishlistItems(product_id: any) {
+    await this._ApiService.deleteWishlistItems(product_id)
+      .then(res => {
+        if (res.code == 200) {
+          this.getWishlistItems();
+        }
+      })
+
+      .catch(error => {
+        if (error.error.code == 400) {
+          this.getWishlistItems();
+        }
+      })
   }
 }

@@ -130,7 +130,7 @@ export class ApiServiceService {
 
   }
 
-  getWishListItem() {
+  getWishListItem() : Promise<any> {
     let url = 'getWishlistItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -143,10 +143,10 @@ export class ApiServiceService {
     let body = {
       user_id: user_id
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise();
   }
 
-  deleteWishlistItems(product_id: any) {
+  deleteWishlistItems(product_id: any): Promise<any> {
     let url = 'deleteWishlistItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -160,7 +160,7 @@ export class ApiServiceService {
       user_id: user_id,
       product_id: product_id
     }
-    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+    return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise();
   }
 
 

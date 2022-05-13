@@ -37,6 +37,7 @@ export class BillingFormComponent implements OnInit {
       this.FormFillUp.emit(true);
     }
   }
+
   signUp(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
@@ -63,7 +64,7 @@ export class BillingFormComponent implements OnInit {
               this.FormFillUp.emit(false);
               this.OrderInfo.emit(this.userObj)
               window.scroll(0, 0)
-              this.resSignupMsg = res.message;
+              this.resSignupMsg = "Verification mail has been sent to your Email Id !";
               this.resSignupMsgCheck = 'success'
               localStorage.setItem(
                 'ecolink_user_credential',
@@ -131,6 +132,7 @@ export class BillingFormComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
+
   SaveCookiesDataInCart() {
     this.CheckoutProduct.map((res: any) => {
       console.log(res.carts);
@@ -155,6 +157,7 @@ export class BillingFormComponent implements OnInit {
     })
     this.FormFillUp.emit(false);
   }
+
   inputMobile(event: any) {
     if (
       event.key.length === 1 &&
@@ -163,6 +166,7 @@ export class BillingFormComponent implements OnInit {
       event.preventDefault();
     }
   }
+
   validateMobile(event: any) {
     const value = event.target.value;
 
