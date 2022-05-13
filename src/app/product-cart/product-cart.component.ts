@@ -20,9 +20,7 @@ export class ProductCartComponent implements OnInit {
   constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig) { }
   ngOnInit(): void {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
-    setTimeout(() => {
-      this.getCartData();
-    }, 300);
+    this.getCartData();
   }
 
   Count(string: any, id: any) {
@@ -117,7 +115,6 @@ export class ProductCartComponent implements OnInit {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       this.CartShimmer = true;
       this.Count(action, rowIndex);
-      // setTimeout(() => {
       let saveDataInCookies: any = [];
       let cookiesObject: any = {}
       this.CardShow.map((res: any) => {
@@ -130,14 +127,17 @@ export class ProductCartComponent implements OnInit {
       console.log(saveDataInCookies);
       this._cookies.SaveCartData(saveDataInCookies);
       this.getCartData();
-      // }, 1000);
       this.subtotal();
     }
     else {
       this.CartShimmer = true;
       if (action == 'delete' && product_quantity > 1) {
-        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
+        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action)
+        .then((res) => {
           return res;
+        })
+        .catch(error=>{
+          return error.error.code;
         })
 
         if (this.ItemCart.code == 200) {
@@ -158,7 +158,7 @@ export class ProductCartComponent implements OnInit {
         }
       }
 
-      else{
+      else {
         this.getCartData();
         this.subtotal();
       }
@@ -170,12 +170,12 @@ export class ProductCartComponent implements OnInit {
     if (this.UserLogin != null) {
       this.CartShimmer = true;
       this._ApiService.deleteItemFromCart(product.product.id)
-      .then((res)=>{
-        this.getCartData();
-      })
-      .catch((error)=>{
-        this.getCartData();
-      })
+        .then((res) => {
+          this.getCartData();
+        })
+        .catch((error) => {
+          this.getCartData();
+        })
     }
 
     else {
@@ -194,7 +194,6 @@ export class ProductCartComponent implements OnInit {
   StoreCookiesData() {
     this._ApiService.cookiesCheckoutData.next(this.CardShow);
     localStorage.setItem("payable", JSON.stringify(this.SubTotal));
-    // localStorage.setItem("payable", JSON.stringify(this.SubTotal));
   }
 
 }

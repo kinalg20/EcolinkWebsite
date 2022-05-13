@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
+import { CommonservicesService } from 'src/app/Services/commonservices.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 
 @Component({
@@ -37,7 +38,7 @@ export class ShopComponent implements OnInit {
     }
   ];
   productDetail: any = [];
-  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router: Router) { }
+  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router: Router , private commonService : CommonservicesService) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
@@ -84,49 +85,12 @@ export class ShopComponent implements OnInit {
 
   //add product to cart
   AddProductToCart(Item: any) {
-    if (localStorage.getItem('ecolink_user_credential') == null) {
-      let cart_obj: any = [];
-      this.previousdata = this.Cookies.GetCartData();
-      let recently_added_object = {
-        "CartProductId": Item.id,
-        "ProductQuantity": this.ItemCount,
-        "ProductCategory": this.slug.slug
-      }
-      cart_obj.push(recently_added_object);
-      if (this.previousdata != 'empty') {
-        this.previousdata.map((res: any) => {
-          if (res.CartProductId != cart_obj[0].CartProductId) {
-            cart_obj.push(res);
-          }
-          else {
-            cart_obj[0].ProductQuantity = cart_obj[0].ProductQuantity + res.ProductQuantity;
-            console.log(cart_obj);
-          }
-        })
-      }
-      this.Cookies.SaveCartData(cart_obj);
-      console.log(cart_obj);
-    }
-
-    else {
-      this._ApiService.addItemToCart(Item.id, this.ItemCount, "add");
-    }
+    this.commonService.AddProductToCart(Item , this.slug , this.ItemCount);
   }
 
   // add item to wishlist
   addWishList(product: any) {
-    if (localStorage.getItem('ecolink_user_credential') != null) {
-      console.log("product_id", product.id);
-      this._ApiService.addItemToWishlist(product.id).subscribe(res => {
-        console.log(res);
-      })
-      this.router.navigate(['/shop/wishlist'])
-    }
-
-    else {
-      this.router.navigate(['/profile/auth'])
-    }
-
+    this.commonService.addWishList(product);
   }
 
 

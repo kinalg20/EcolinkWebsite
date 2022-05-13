@@ -63,7 +63,7 @@ export class BillingFormComponent implements OnInit {
               this.FormFillUp.emit(false);
               this.OrderInfo.emit(this.userObj)
               window.scroll(0, 0)
-              this.resSignupMsg = res.message;
+              this.resSignupMsg = "Verification mail has been sent to your Email Id !";
               this.resSignupMsgCheck = 'success'
               localStorage.setItem(
                 'ecolink_user_credential',
