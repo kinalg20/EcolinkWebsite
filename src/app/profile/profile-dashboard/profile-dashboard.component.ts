@@ -15,6 +15,7 @@ import { timeout } from 'rxjs/operators';
 export class ProfileDashboardComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   @Output() itemEvent = new EventEmitter<any>();
+  file: any = null;
   searchItem: string = '';
   shimmerLoad: boolean = true;
   profileAddress: any = [];
@@ -106,6 +107,7 @@ export class ProfileDashboardComponent implements OnInit {
     }
   }
   // <-- User Email Validation End -->
+
   // <-- for mobile validation Start-->
   inputMobile(event: any) {
     if (
@@ -129,6 +131,7 @@ export class ProfileDashboardComponent implements OnInit {
     }
   }
   // <-- for mobile validation End-->
+
   // <User Address Modal>
   addUserAddress(form: NgForm) {
     if (form.valid) {
@@ -186,9 +189,7 @@ export class ProfileDashboardComponent implements OnInit {
     }
     console.log()
   }
-  resetValue(form: NgForm) {
-    this.resSignupMsg = '';
-  }
+  //<-- User Address -->
   getUserDetail(item: any) {
     if (item == 'add') {
       this.profileAddress = [];
@@ -202,6 +203,7 @@ export class ProfileDashboardComponent implements OnInit {
       this.profileAddress.push(item);
     }
   }
+  // <-- Delete User Address --> 
   deleteUserAddress(item_id: any) {
     console.log(item_id);
     this.__apiservice.deleteUserAddress(item_id).subscribe((res: any) => {
@@ -210,7 +212,6 @@ export class ProfileDashboardComponent implements OnInit {
         this.resSignupMsgCheck = 'success';
         this.getAllUserAddress();
       }
-      // window.location.reload();
     },
       (error: HttpErrorResponse) => {
         if (error.error.code == 400) {
@@ -221,6 +222,8 @@ export class ProfileDashboardComponent implements OnInit {
       }
     )
   }
+  // ***************************************Order History****************************************
+  // <-- Get Order History -->
   getOrderhistory() {
     let product_search: any;
     this.__apiservice.getOrderData().subscribe((res: any) => {
@@ -238,36 +241,60 @@ export class ProfileDashboardComponent implements OnInit {
     })
 
   }
-  // storeReturnProduct(i: any) {
-  //   let storeObj: any;
-  //   console.log(i)
-  //   storeObj = {
-  //     order_id: i.order_id,
-  //     order_item_id: i.id,
-  //     product_id: i.product_id,
-  //     quantity: i.quantity,
-  //     reason: "Accidentally Placed Order",
-  //     description: "test"
-  //   }
-  //   this.__apiservice.storeReturnOrder(storeObj).subscribe(res => {
-  //     console.log(res)
-  //   })
-  // }
-  // getReturnProduct() {
-  //   this.__apiservice.getReturnOrder().subscribe(res => {
-  //     setTimeout(() => {
-  //       console.log("returndata", res)
-  //     }, 1000);
-  //   })
-  // }
+  // <-- Order History Details for Particular Product -->
+  showDeatils(i: any) {
+    this.orderHistoryDesc = [];
+    this.orderHistoryDesc.push(i)
+    console.log(this.orderHistoryDesc)
+    this.show = !this.show;
+  }
+  // <-- Get Search Data from search bar on order history
+  getselecteddata(value: any) {
+    console.log(value);
+    this.searchItem = value;
+    this.suggestions = false;
+  }
+  // Order history search bar Suggestions 
+  getSuggestions() {
+    if (this.searchItem.length > 0) {
+      this.suggestions = true;
+    }
+    else {
+      this.suggestions = false;
+      this.orderData = this.order;
+    }
+  }
+  // <-- Fetch Order History Data from search Bar -->
+  FetchSearchedData() {
+    let product_search: any;
+    this.orderData = []
+    this.order.map((res: any) => {
+      res.items.filter((resp: any) => {
+        product_search = '';
+        if (resp.product.name.includes(this.searchItem)) {
+          product_search = res;
+        }
 
-  header: any;
+        if (product_search) {
+          console.log(product_search);
+          this.orderData.push(product_search);
+        }
+
+        console.log(this.orderData);
+
+      })
+    })
+  }
+  // *************************************End**************************************************
+
+  // <-- Edit User Profile-->
   editUserProfile(form: NgForm) {
+    let header: any;
     if (!(this.passwrodCheck)) {
       if (form.valid) {
         let formData1 = new FormData();
         let data = Object.assign({}, form.value);
-        this.header = localStorage.getItem('ecolink_user_credential');
+        header = localStorage.getItem('ecolink_user_credential');
         formData1.append('profile_image', this.file);
         formData1.append('name', data.firstname + ' ' + data.lastname);
         formData1.append('email', data.email);
@@ -330,86 +357,39 @@ export class ProfileDashboardComponent implements OnInit {
       }
     }
   }
-  // ngAfterViewInit() { }
+  // <-- Back to top on edit profile page -->
+  goToTop() {
+    window.scrollTo(0, 0);
+    this.scroller.scrollToAnchor("backToTop");
+  }
+  // <-- Close toaster --> 
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
   }
-  goToTop() {
-    window.scrollTo(0, 0);
-    this.scroller.scrollToAnchor("backToTop");
-    // console.log(this.userDetail)
-  }
+  // <-- Switch Tab On Edit Profile -->
   changeTab() {
     this.itemEvent.emit('Edit Profile')
   }
-  showDeatils(i: any) {
-    this.orderHistoryDesc = [];
-    this.orderHistoryDesc.push(i)
-    console.log(this.orderHistoryDesc)
-    this.show = !this.show;
-  }
-
-  getselecteddata(value: any) {
-    console.log(value);
-    this.searchItem = value;
-    this.suggestions = false;
-  }
-
-  getSuggestions() {
-
-    if (this.searchItem.length > 0) {
-      this.suggestions = true;
-    }
-
-    else {
-      this.suggestions = false;
-      this.orderData = this.order;
-    }
-
-  }
-
-  FetchSearchedData() {
-    let product_search: any;
-    this.orderData = []
-    this.order.map((res: any) => {
-      res.items.filter((resp: any) => {
-        product_search = '';
-        if (resp.product.name.includes(this.searchItem)) {
-          product_search = res;
-        }
-
-        if (product_search) {
-          console.log(product_search);
-          this.orderData.push(product_search);
-        }
-
-        console.log(this.orderData);
-
-      })
-    })
-  }
-
-
-  file: any = null;
-  fileUrl: any;
-  max_error_front_img: string = '';
+  // <-- User Profile Image -->
   GetFileChange(event: any) {
+    let max_error_front_img: string = '';
+    let fileUrl: any;
     if (event.target.files && event.target.files[0]) {
       if (event.target.files[0].size < 2000000) {
         const reader = new FileReader();
-        reader.onload = (e: any) => this.fileUrl = e.target.result;
+        reader.onload = (e: any) => fileUrl = e.target.result;
         reader.readAsDataURL(event.target.files[0]);
         this.file = event.target.files[0];
-        this.max_error_front_img = "";
+        max_error_front_img = "";
       } else {
-        this.max_error_front_img = "Max file upload size to 2MB";
-        this.fileUrl = 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png';
+        max_error_front_img = "Max file upload size to 2MB";
+        fileUrl = 'https://breakthrough.org/wp-content/uploads/2018/10/default-placeholder-image.png';
         this.file = null;
       }
     }
   }
-
+// <-- Cancel Order -->
   orderCancel(id: any) {
     console.log(id.order_id);
     this.__apiservice.CancelOrderApi(id.order_id)
@@ -424,4 +404,30 @@ export class ProfileDashboardComponent implements OnInit {
         console.log(error.error.code);
       })
   }
+  
+  // <-- Return Order -->
+
+  // storeReturnProduct(i: any) {
+  //   let storeObj: any;
+  //   console.log(i)
+  //   storeObj = {
+  //     order_id: i.order_id,
+  //     order_item_id: i.id,
+  //     product_id: i.product_id,
+  //     quantity: i.quantity,
+  //     reason: "Accidentally Placed Order",
+  //     description: "test"
+  //   }
+  //   this.__apiservice.storeReturnOrder(storeObj).subscribe(res => {
+  //     console.log(res)
+  //   })
+  // }
+  // getReturnProduct() {
+  //   this.__apiservice.getReturnOrder().subscribe(res => {
+  //     setTimeout(() => {
+  //       console.log("returndata", res)
+  //     }, 1000);
+  //   })
+  // }
+
 }
