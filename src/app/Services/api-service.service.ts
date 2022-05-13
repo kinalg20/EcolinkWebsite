@@ -22,9 +22,6 @@ export class ApiServiceService {
   getBlog(url: string): Observable<any> {
     return this.http.post(this._baseurl + 'getblog', { slug: url });
   }
-  // registerClient(registerUser:any):Observable<any> {
-  //   return this.http.post(this._baseurl+'register',{registerUser});
-  // }
   post(data: any): Observable<any> {
     return this.http.post(this._baseurl + 'register', data);
   }
@@ -32,7 +29,6 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + url, { email: email });
   }
   login(url: any): Observable<any> {
-    // const body=JSON.stringify(url);
     return this.http.post(this._baseurl + 'login', url);
   }
   getAllCategories(): Observable<any> {
@@ -181,12 +177,6 @@ export class ApiServiceService {
 
   globalSearchData(searchItem: any) {
     let url = "globalSearch"
-    // this.header = localStorage.getItem('ecolink_user_credential');
-    // this.token = JSON.parse(this.header).access_token;
-    // const httpHeaders = new HttpHeaders({
-    //   'content-type': 'application/json',
-    //   'Authorization': `Bearer ${this.token}`
-    // })
     let name = {
       name: searchItem
     }
@@ -248,13 +238,6 @@ export class ApiServiceService {
 
   filterProduct(dataforfilter: any) {
     let url = 'filterProduct';
-    // this.header = localStorage.getItem('ecolink_user_credential');
-    // this.token = JSON.parse(this.header).access_token;
-    // let user_id = JSON.parse(this.header).user_id;
-    // const httpHeaders = new HttpHeaders({
-    //   'content-type': 'application/json',
-    //   'Authorization': `Bearer ${this.token}`
-    // })
     return this.http.post(this._baseurl + url, {
       category: dataforfilter.category,
       price_from: dataforfilter.price_from,
