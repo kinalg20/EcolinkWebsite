@@ -18,3 +18,4 @@ export class CallToActionComponent implements OnInit {
     return `https://brandtalks.in/ecolinkfrontend/${path}`;
   }
 }
+ 
