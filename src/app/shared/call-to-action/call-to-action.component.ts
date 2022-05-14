@@ -12,6 +12,9 @@ export class CallToActionComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  ngAfterViewInit() {
+
+  getImageUrl(path: string): string {
+    console.log("path");
+    return `https://brandtalks.in/ecolinkfrontend/${path}`;
   }
 }

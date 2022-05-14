@@ -86,9 +86,6 @@ export class HomeBannerComponent implements OnInit {
     this.searchItem = data.name;
   }
 
-  getImageUrl(path: string): string {
-    console.log("path");
-    return `https://brandtalks.in/ecolinkfrontend${path}`;
-  }
+
 
 }
