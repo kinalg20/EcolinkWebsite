@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  api_baseurl: "https://brandtalks.in/ecolink/api/"
+  api_baseurl: "https://brandtalks.in/ecolink/api/",
+  assetsurl : 'https://brandtalks.in/ecolinkfrontend'
 };
 
 /*
