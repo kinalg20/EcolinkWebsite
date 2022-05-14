@@ -16,7 +16,8 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="card profile-section">
                         <div class="profile-image">
-                            <img [src]="item.profile_image != 'https://brandtalks.in/ecolink/storage/profile_image'? item.profile_image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'" alt="">
+                            <img [src]="item.profile_image != 'https://brandtalks.in/ecolink/storage/profile_image'? item.profile_image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'"
+                                alt="">
                         </div>
                         <div class="profile-desc">
                             <div class="profile-detail my-3">
@@ -34,7 +35,8 @@
                     <div class="card address-section">
                         <div class="customer_name my-3">
                             <h4>Add Address</h4>
-                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal123" class="pi pi-plus">
+                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal123"
+                                class="pi pi-plus">
                             </i>
                         </div>
                         <div class="default-Address">
@@ -57,8 +59,10 @@
     <h2>Order History</h2>
     <div class="order-history-header">
         <div class="search-ordered-item">
-            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem" (input)="getSuggestions()" />
-            <button pButton pRipple type="button" label="Search" class="p-button-success" (click)="FetchSearchedData()"></button>
+            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem"
+                (input)="getSuggestions()" />
+            <button pButton pRipple type="button" label="Search" class="p-button-success"
+                (click)="FetchSearchedData()"></button>
         </div>
         <div class="card history_product_search" *ngIf="suggestions">
             <ul *ngFor="let i of searchProductArray | searchPipe : searchItem">
@@ -97,7 +101,9 @@
                                 <div class="d-flex justify-content-between">
                                     <button type="button" (click)="showDeatils(data)" class="more-btn">Show
                                         More</button>
-                                    <button type="button" class="cancel-btn" *ngIf="data.payment_via=='cod' && data.order_status == 'pending'" (click)="orderCancel(i)">Cancel
+                                    <button type="button" class="cancel-btn"
+                                        *ngIf="data.payment_via=='cod' && data.order_status == 'pending'"
+                                        (click)="orderCancel(i)">Cancel
                                         Order</button>
                                 </div>
                             </div>
