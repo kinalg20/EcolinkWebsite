@@ -42,9 +42,10 @@
             </nav>
             <div class="profile-sidebar-desc">
                 <app-addresses [showdesc]="togglebutton"></app-addresses>
-                <!-- <app-adress-modal [showdesc]="togglebutton"></app-adress-modal> -->
+                <app-adress-modal [showdesc]="togglebutton"></app-adress-modal>
                 <app-profile-dashboard [showdesc]="togglebutton" (itemEvent)="event($event)"></app-profile-dashboard>
                 <app-edit-profile [showdesc]="togglebutton"></app-edit-profile>
+                <app-order-history [showdesc]="togglebutton"> </app-order-history>
             </div>
         </div>
     </div>

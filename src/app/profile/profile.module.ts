@@ -18,7 +18,7 @@ import { PipemoduleModule } from '../pipemodule/pipemodule.module';
 import { AddressesComponent } from './profile-dashboard/addresses/addresses.component';
 import { AdressModalComponent } from './profile-dashboard/adress-modal/adress-modal.component';
 import { EditProfileComponent } from './profile-dashboard/edit-profile/edit-profile.component';
-
+import { OrderHistoryComponent } from './profile-dashboard/order-history/order-history.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,8 @@ import { EditProfileComponent } from './profile-dashboard/edit-profile/edit-prof
     ForgotPasswordComponent,
     AddressesComponent,
     AdressModalComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    OrderHistoryComponent
   ],
   imports: [
     CommonModule,
