@@ -75,9 +75,13 @@ export class ProfileDashboardComponent implements OnInit {
 
   //<-- User Address -->
   getUserDetail(item: any) {
+    console.log(item);
     if (item == 'add') {
-      this.profileAddress = [];
-      this.profileAddress.push({ heading: "Add Address" })
+      this.profileAddress=[];
+    this.profileAddress.push({
+          heading: "Add Address",
+    });
+     
     }
     else {
       this.profileAddress = [];
