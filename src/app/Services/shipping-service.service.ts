@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { async, BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 @Injectable({
   providedIn: 'root'
@@ -38,19 +38,17 @@ export class ShippingServiceService {
   fedextoken: string = ''
   requestedPackage: any = [];
   fedexshippingApi(access_token: any, product_details: any) {
-    let product: any = {};
-    product_details.map((res: any) => {
-      res.carts.map((resp: any) => {
-        product = {};
-        product = {
-          "groupPackageCount": resp.quantity,
-          "weight": {
-            "units": 'LB',
-            "value": resp.product.weight ? resp.product.weight : 1
-          }
-        }
-        this.requestedPackage.push(product);
+    let product: number = 0;
+    console.log(product_details);
+
+    product_details.map(async (res: any) => {
+      await res.carts.map((resp: any) => {
+        console.log(resp.quantity);
+        product = product + (resp.product.weight * resp.quantity);
       })
+
+      console.log(product);
+
     })
 
     this.fedextoken = access_token;
@@ -65,49 +63,29 @@ export class ShippingServiceService {
       "requestedShipment": {
         "shipper": {
           "address": {
-            "postalCode": 8099,
-            "countryCode": "CH"
+            "postalCode": 30030,
+            "countryCode": "US"
           }
         },
         "recipient": {
           "address": {
-            "postalCode": 2116,
-            "countryCode": "AU"
+            "postalCode": 30085,
+            "countryCode": "US"
           }
         },
-        "shipDateStamp": "2020-07-03",
         "pickupType": "DROPOFF_AT_FEDEX_LOCATION",
-        "serviceType": "INTERNATIONAL_PRIORITY",
         "rateRequestType": [
-          "LIST",
-          "ACCOUNT"
+          "ACCOUNT",
+          "LIST"
         ],
-        "customsClearanceDetail": {
-          "commodities": [
-            {
-              "description": "Camera",
-              "quantity": 1,
-              "quantityUnits": "PCS",
-              "weight": {
-                "units": "KG",
-                "value": 11
-              },
-              "customsValue": {
-                "amount": 100,
-                "currency": "SFR"
-              }
+        "requestedPackageLineItems": [
+          {
+            weight: {
+              "units": "LB",
+              "value": product
             }
-          ]
-        },
-        // "requestedPackageLineItems": [
-        //   {
-        //     "groupPackageCount": 3,
-        //     "weight": {
-        //       "units": 'LB',
-        //       "value": 2
-        //     }
-        //   }
-        // ]
+          }
+        ]
       }
     }
 

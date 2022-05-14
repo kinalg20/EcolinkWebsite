@@ -35,10 +35,11 @@ export class CommonservicesService {
       }
       this.Cookies.SaveCartData(cart_obj);
       console.log(cart_obj);
+      this._ApiService.itemCountSession.next(ItemCount);
     }
     else {
       console.log(Item);
-      this._ApiService.addItemToCart(Item.id, ItemCount, "add");
+      await this._ApiService.addItemToCart(Item.id, ItemCount, "add");
     }
   }
   addWishList(product: any) {
