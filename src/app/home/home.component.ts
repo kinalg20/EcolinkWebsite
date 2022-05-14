@@ -23,11 +23,11 @@ export class HomeComponent implements OnInit {
         let token = JSON.parse(this.remembertoken).user.remember_token;
         if (token != null) {
           this.router.navigateByUrl('/');
-          localStorage.removeItem('email_token');
+          // localStorage.removeItem('email_token');
         }
         else if (slug.token == this.remembertoken) {
           this.router.navigateByUrl('/');
-          localStorage.removeItem('email_token');
+          // localStorage.removeItem('email_token');
         }
         else {
           this.router.navigateByUrl('shared/error-404');

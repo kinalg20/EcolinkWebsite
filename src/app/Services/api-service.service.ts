@@ -14,6 +14,7 @@ export class ApiServiceService {
   subscribedmsg = new BehaviorSubject<any>({});
   readonly msg$ = this.subscribedmsg.asObservable();
   cookiesCheckoutData = new BehaviorSubject<any>([]);
+  itemCountSession = new BehaviorSubject<any>({});
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
   getAllBlogs(): Observable<any> {
