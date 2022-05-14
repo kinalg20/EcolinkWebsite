@@ -12,7 +12,6 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="suggestion-list" *ngIf="value1!='' && suggestions">
                     <div class="card">
                         <ul *ngFor="let prod of this.ProductListData[0].data.products | searchPipe:value1">
@@ -151,7 +150,7 @@
                                             </div>
                                             <div class="card-body">
                                                 <div class="card-title">
-                                                    <h6>{{product.name}}</h6>
+                                                    <h6>{{product.name.slice(0,45)}}</h6>
                                                 </div>
                                                 <div class="card-price-section">
                                                     <div class="card-price">
