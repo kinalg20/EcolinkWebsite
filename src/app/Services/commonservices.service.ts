@@ -40,7 +40,6 @@ export class CommonservicesService {
     else {
       console.log(Item);
       await this._ApiService.addItemToCart(Item.id, ItemCount, "add");
-      this._ApiService.itemCountSession.next(ItemCount);
     }
   }
   addWishList(product: any) {

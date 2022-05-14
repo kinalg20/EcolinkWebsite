@@ -101,6 +101,7 @@ export class ShopComponent implements OnInit {
   AddProductToCart(Item: any) {
     console.log(this.ItemCount);
     this.commonService.AddProductToCart(Item, this.slug, this.ItemCount);
+    this._ApiService.itemCountSession.next(this.ItemCount);
   }
 
   // add item to wishlist
