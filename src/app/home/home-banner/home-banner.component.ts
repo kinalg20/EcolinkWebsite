@@ -57,10 +57,6 @@ export class HomeBannerComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-
-    // setTimeout(() => {
-    //   console.log(this.getCategory.data);
-    // }, 500);
   }
 
   subscribe(value: any) {
