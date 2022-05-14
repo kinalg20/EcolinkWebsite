@@ -1,7 +1,6 @@
 import { ViewportScroller } from '@angular/common';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
-import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-home-banner',
   templateUrl: './home-banner.component.html',
@@ -17,7 +16,6 @@ export class HomeBannerComponent implements OnInit {
   suggestionList: any = []
   showMsg: boolean = false;
   msg: any = '';
-  assetsurl: any;
   constructor(private _ApiService: ApiServiceService, private scroller: ViewportScroller) { }
   action_array = [
     {
@@ -59,7 +57,6 @@ export class HomeBannerComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-    this.assetsurl = environment.assetsurl;
 
     // setTimeout(() => {
     //   console.log(this.getCategory.data);
