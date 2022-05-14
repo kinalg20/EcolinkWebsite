@@ -1,6 +1,7 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { EMPTY } from 'rxjs';
 import { ApiServiceService } from '../Services/api-service.service';
 import { CommonservicesService } from '../Services/commonservices.service';
 import { CookiesService } from '../Services/cookies.service';
@@ -48,14 +49,13 @@ export class ProductlistComponent implements OnInit {
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
     if (this.slug.sublink) {
-      console.log(this.slug.sublink);
       this.getListingData(this.slug.sublink);
     }
     else {
       this.getListingData(this.slug.slug);
-      console.log(this.slug.slug);
     }
     localStorage.setItem("category", JSON.stringify(this.slug.slug));
+    this._ApiService.itemCountSession.next("empty");
   }
   responsiveOptions = [
     {

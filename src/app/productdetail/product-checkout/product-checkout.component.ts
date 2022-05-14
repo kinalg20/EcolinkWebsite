@@ -51,11 +51,11 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
 
   }
 
-  ngOnInit(): void {
+  async ngOnInit() {
     if (localStorage.getItem('ecolink_user_credential') == null) {
       this.discountCheck = false;
     }
-    this.checkoutProduct();
+    await this.checkoutProduct();
     this.getTaxExempt()
     this.getPaypalProductDetail();
     this.initConfig();
@@ -71,7 +71,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
     this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
       this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
-        console.log(resp);
+        console.log(resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+        this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
       })
     })
   }

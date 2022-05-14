@@ -38,7 +38,7 @@ export class ShopComponent implements OnInit {
     }
   ];
   productDetail: any = [];
-  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router: Router , private commonService : CommonservicesService) { }
+  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router: Router, private commonService: CommonservicesService) { }
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
@@ -53,7 +53,6 @@ export class ShopComponent implements OnInit {
     else {
       this.detailSlug = this.slug.slug
     }
-
     this.getProductDetail(this.detailSlug);
 
   }
@@ -70,6 +69,7 @@ export class ShopComponent implements OnInit {
 
   //get product detail
   getProductDetail(sendslug: any) {
+    let value: any;
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
       if (res.code == 200) {
         this.productDetail.push(res);
@@ -78,6 +78,20 @@ export class ShopComponent implements OnInit {
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
         this.ItemCount = this.minimum_qyt == null ? 1 : this.minimum_qyt;
+        this._ApiService.itemCountSession.subscribe(resp => {
+          if (typeof (resp) == 'object') {
+            this._ApiService.itemCountSession.next(this.ItemCount);
+          } 
+
+          else if(typeof (resp) == 'string' && resp == 'empty'){
+            this._ApiService.itemCountSession.next(this.minimum_qyt);
+          }
+           
+          else {
+            console.log(typeof (resp) );
+            this.ItemCount = resp;
+          }
+        })
       }
     })
   }
@@ -85,7 +99,9 @@ export class ShopComponent implements OnInit {
 
   //add product to cart
   AddProductToCart(Item: any) {
-    this.commonService.AddProductToCart(Item , this.slug , this.ItemCount);
+    console.log(this.ItemCount);
+    this.commonService.AddProductToCart(Item, this.slug, this.ItemCount);
+    this._ApiService.itemCountSession.next(this.ItemCount);
   }
 
   // add item to wishlist
