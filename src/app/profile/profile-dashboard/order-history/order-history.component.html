@@ -2,8 +2,10 @@
     <h2>Order History</h2>
     <div class="order-history-header">
         <div class="search-ordered-item">
-            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem" (input)="getSuggestions()" />
-            <button pButton pRipple type="button" label="Search" class="p-button-success" (click)="FetchSearchedData()"></button>
+            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem"
+                (input)="getSuggestions()" />
+            <button pButton pRipple type="button" label="Search" class="p-button-success"
+                (click)="FetchSearchedData()"></button>
         </div>
         <div class="card history_product_search" *ngIf="suggestions">
             <ul *ngFor="let i of searchProductArray | searchPipe : searchItem">
@@ -40,9 +42,12 @@
 
                                 </div>
                                 <div class="d-flex justify-content-between">
-                                    <button type="button" (click)="showDeatils(data)" class="more-btn">Show
+                                    <button type="button" (click)="showDetails(data , i.product.id)"
+                                        class="more-btn">Show
                                         More</button>
-                                    <button type="button" class="cancel-btn" *ngIf="data.payment_via=='cod' && data.order_status == 'pending'" (click)="orderCancel(i)">Cancel
+                                    <button type="button" class="cancel-btn"
+                                        *ngIf="data.payment_via=='cod' && data.order_status == 'pending'"
+                                        (click)="orderCancel(i)">Cancel
                                         Order</button>
                                 </div>
                             </div>
@@ -64,7 +69,7 @@
             <ng-container *ngFor="let data of orderHistoryDesc">
                 <div class="card">
                     <div class="details" *ngFor="let i of data.items">
-                        <div class="card-body">
+                        <div class="card-body" *ngIf="this.order_product_id == i.product.id">
                             <div class="product-image">
                                 <img [src]="i.product.image" class="media-object" />
                             </div>
@@ -82,11 +87,11 @@
                                 </div>
                                 <!-- <button type="button" class="return-btn" (click)="storeReturnProduct(i)">Return</button> -->
                                 <!-- <div class="date">
-                            <p> order by {{data.billing_name}}</p>
-                        </div> -->
+                                    <p> order by {{data.billing_name}}</p>
+                                 </div> -->
                             </div>
                         </div>
-                        <span class="pro-desc" [innerHtml]="i.product.description"></span>
+                        <span class="pro-desc" [innerHtml]="i.product.description" *ngIf="this.order_product_id == i.product.id"></span>
                     </div>
                 </div>
             </ng-container>

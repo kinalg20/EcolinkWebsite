@@ -31,25 +31,28 @@ export class OrderHistoryComponent implements OnInit {
     console.log("Order History");
     let product_search: any;
     await this.__apiservice.getOrderData()
-    .then((res: any) => {
-      this.orderData = res.data;
-      this.order = res.data;
-      console.log(this.orderData, "orderhistory");
-      res.data.map((resp: any) => {
-        resp.items.map((response: any) => {
-          product_search = response.product;
+      .then((res: any) => {
+        this.orderData = res.data;
+        this.order = res.data;
+        console.log(this.orderData, "orderhistory");
+        res.data.map((resp: any) => {
+          resp.items.map((response: any) => {
+            product_search = response.product;
+          })
+          this.searchProductArray.push(product_search);
         })
-        this.searchProductArray.push(product_search);
       })
-    })
 
-    .catch(error=>{
-      console.log(error);
-    })
+      .catch(error => {
+        console.log(error);
+      })
 
   }
   // <-- Order History Details for Particular Product -->
-  showDeatils(i: any) {
+  order_product_id: any;
+  showDetails(i: any, id: any) {
+    console.log(i, id);
+    this.order_product_id = id;
     this.orderHistoryDesc = [];
     this.orderHistoryDesc.push(i)
     console.log(this.orderHistoryDesc)
@@ -98,9 +101,9 @@ export class OrderHistoryComponent implements OnInit {
     console.log(id.order_id);
     await this.__apiservice.CancelOrderApi(id.order_id).then(res => {
       console.log(res);
-          console.log("res.code" , res.code);
-          this.getOrderhistory();
-      })
+      console.log("res.code", res.code);
+      this.getOrderhistory();
+    })
       .catch((error) => {
         console.log(error.status);
         this.getOrderhistory();

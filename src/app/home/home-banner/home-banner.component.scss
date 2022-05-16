@@ -1,6 +1,7 @@
-.model-section{
+.model-section {
     position: relative;
-    .model-searchlist{
+
+    .model-searchlist {
         background: rgba(0, 0, 0, 0.9);
         position: absolute;
         top: 0;
@@ -9,26 +10,31 @@
         display: flex;
         width: 100%;
         height: 100%;
-        .model{
+
+        .model {
             width: 800px;
             height: 300px;
             overflow: auto;
             background: white;
             border-radius: 5px;
             padding: 0 20px;
-            .suggestions{
+
+            .suggestions {
                 border-bottom: 1px solid #2333;
-                h4{
+
+                h4 {
                     margin: 0;
                     padding: 0;
-                padding: 5px;
+                    padding: 5px;
 
                     cursor: pointer;
-                    a{
+
+                    a {
                         text-decoration: none;
                     }
                 }
-                h4:hover{
+
+                h4:hover {
                     background-color: var(--primary);
                     color: #ffff;
                 }
@@ -53,8 +59,10 @@
 
             .innerhead {
                 padding: 18px 25px;
+
                 .image {
                     width: 25%;
+
                     img {
                         width: 100%;
                     }
@@ -136,6 +144,7 @@
             .section1 {
                 padding: 25px 5px;
                 align-self: center;
+
                 .web-logo {
                     margin: 0 auto;
                     width: 65%;
@@ -443,9 +452,11 @@
         .container {
             .categories-text {
                 grid-template-columns: 100%;
+
                 .product-category {
                     .categories {
                         grid-template-columns: 100%;
+
                         .category-card {
                             .category-image {
                                 width: 40%;
@@ -456,10 +467,12 @@
             }
         }
     }
+
     .marketing {
         .container {
             .complete-section {
                 grid-template-columns: 100%;
+
                 .section1 {
                     .web-logo {
                         width: 35%;
@@ -468,6 +481,7 @@
             }
         }
     }
+
     // .home-banner {
     //     .container {
     //         .background-image {
@@ -480,17 +494,39 @@
     //     }
     // }
 }
+
 @media (max-width: 768px) {
+    .container{
+        max-width: 725px;
+    }
     .home-banner {
         .container {
             .background-image {
                 .headings {
                     width: 100%;
+
                     h1 {
                         font-size: 2rem;
                     }
                 }
+
+                .bottom-line p {
+                    font-size: 16px;
+                }
             }
         }
     }
+}
+
+@media (max-width: 425px) {
+    .home-banner {
+        .container {
+            .background-image {
+
+                .bottom-line p {
+                    font-size: 14px;
+                }
+            }
+        }
+    } 
 }

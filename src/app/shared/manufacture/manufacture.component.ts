@@ -14,12 +14,12 @@ export class ManufactureComponent implements OnInit {
 
   manufacture_array:any=[
     {
-      imgurl:"https://www.cheme.washington.edu/sites/cheme/files/about/imgs/test-tubes.jpg",
+      imgurl:"assets/test_tubes.jpg",
       heading:"Ecolink Manufacturing",
       content:"ECOLINK AT WORK FOR MANUFACTURING"
     },
     {
-      imgurl:"https://www.novartis.com/sites/novartis_com/files/styles/banner_image_1920/public/2021-07/continuous-manufacturing-hero-image.jpg?h=0a3615b4&itok=BbyrXuGQ",
+      imgurl:"assets/manufacture_factries.jpg",
       heading:"Manufacturing Case Studies",
       content:"Ecolink is especially proud of our work with the global mining sector"
     }

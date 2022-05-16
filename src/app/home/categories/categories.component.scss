@@ -135,6 +135,9 @@
     }
 }
 @media (max-width: 768px) {
+    .container{
+        max-width: 725px;
+    }
     .shop-categories {
         .container {
             .categories-text {

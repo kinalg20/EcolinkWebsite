@@ -88,7 +88,6 @@ export class ShopComponent implements OnInit {
           }
            
           else {
-            console.log(typeof (resp) );
             this.ItemCount = resp;
           }
         })

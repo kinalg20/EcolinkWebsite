@@ -307,10 +307,10 @@
             <p (click)="ClearAll()" (click)="showFiterModel=false" style="cursor: pointer;"><a>Clear All</a></p>
         </div>
         <hr>
-        <div class="filter-body">
-            <section class="categories" *ngIf="ProductListData.subcategory">
+        <div class="filter-body" *ngFor="let listdata of ProductListData">
+            <section class="categories" *ngIf="listdata.data.subcategory.length>0">
                 <h4>Catgories</h4>
-                <ul *ngFor="let subcategory of ProductListData.subcategory">
+                <ul *ngFor="let subcategory of listdata.data.subcategory">
                     <div class="p-field-checkbox">
                         <p-checkbox name="group1" value="{{subcategory.name}}" [(ngModel)]="selectedCategory"
                             inputId="cc"></p-checkbox>
@@ -318,6 +318,7 @@
                     </div>
                 </ul>
             </section>
+            
             <section class="price-section">
                 <div class="price-heading">
                     <h4>Price</h4>

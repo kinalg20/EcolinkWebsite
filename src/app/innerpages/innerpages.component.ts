@@ -63,12 +63,12 @@ export class InnerpagesComponent implements OnInit {
   }
   chemist_array: any = [
     {
-      imgurl: "https://chem.washington.edu/sites/chem/files/styles/front_slideshow_alternate/public/images/student-looking-through-microscope-1105x665.jpg?itok=XjWShO_w",
+      imgurl: "assets/Philosophy.jpg",
       heading: "Philosophy and Methodology",
       content: "We always seek multi-use over single use chemical solutions "
     },
     {
-      imgurl: "https://www.imperial.ac.uk/ImageCropToolT4/imageTool/uploaded-images/141024_imp_chem_026--tojpeg_1455114655644_x2.jpg",
+      imgurl: "assets/test_tubes.jpg",
       heading: "Manufacturing Case Studies",
       content: "Ecolink is especially proud of our work with the global mining sector"
     }
