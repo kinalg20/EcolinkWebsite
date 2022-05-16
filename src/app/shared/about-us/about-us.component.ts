@@ -14,27 +14,27 @@ export class AboutUsComponent implements OnInit,AfterViewInit {
   constructor() { }
   action_array=[
     {
-      imgurl:"https://ecolink.com/wp-content/uploads/2022/02/What-Chemical-Is-Used-for-Millipore-845x321.jpg",
+      imgurl:"assets/ChemicalImage.jpg",
       heading:"Who is Ecolink",
       content:"Providing chemical solutions for the next generation."
     },
     {
-      imgurl:"https://wallpaperaccess.com/full/2847970.jpg",
+      imgurl:"assets/Rate.jpeg",
       heading:"We work with whom",
       content:"How much we sell our impact"
     },
     {
-      imgurl:"https://ecolink.com/wp-content/uploads/2020/05/Dollarphotoclub_58451099-1-750x321.jpg",
+      imgurl:"assets/DollarProduct.jpg",
       heading:"Scholarship",
       content:"Chemical Solution for next generation"
     },
     {
-      imgurl:"https://blog.ipleaders.in/wp-content/uploads/2017/08/BV-Acharya-104.jpg",
+      imgurl:"assets/TeamWork.jpg",
       heading:"\"Behind the Brand\"",
       content:"chemicals where we start."
     },
     {
-      imgurl:"https://static.fibre2fashion.com/articleresources/images/87/8623/chemical-big_Big.jpg",
+      imgurl:"assets/Circuit.jpeg",
       heading:"Cherities we support",
       content:"Women in chemicals"
     }
