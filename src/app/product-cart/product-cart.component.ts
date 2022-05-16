@@ -82,16 +82,16 @@ export class ProductCartComponent implements OnInit {
       await this._ApiService.getItemFromCart()
         .then(
           (res) => {
-            if (res.code == 200) {
+            console.log(res);
               this.CardShow = res.data;
               this.subtotal();
               console.log(this.CardShow);
               this.CartShimmer = false;
               this.length = this.CardShow.length;
-            }
           })
         .catch(
           (error) => {
+            console.log(error)
             if (error.error.code == 400) {
               this.CardShow = [];
               this.CartShimmer = false;
