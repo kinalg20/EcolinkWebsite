@@ -82,7 +82,10 @@
             <div class="col-6">
                 <div>
                     <label for="pincode">Pincode</label>
-                    <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode" [(ngModel)]="item.zip" required />
+                    <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode" maxlength="6" (input)="validateZip($event)" (keydown)="inputZip($event)" [(ngModel)]="item.zip" required />
+                    <h6 class="text-danger" *ngIf="invalidZip">
+                        {{ invalidZip ? "Invalid Zip" : "" }}
+                    </h6>
                 </div>
             </div>
         </div>

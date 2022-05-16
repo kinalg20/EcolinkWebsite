@@ -19,6 +19,7 @@ export class AdressModalComponent implements OnInit {
   invalidEmail: boolean = false;
   invalidUserEmail: string = '';
   invalidMobile = false;
+  invalidZip = false;
 
   constructor(private __apiservice: ApiServiceService, private router: Router, private renderer: Renderer2,) { }
 
@@ -120,6 +121,27 @@ export class AdressModalComponent implements OnInit {
 
     else {
       this.invalidEmail = false;
+    }
+  }
+  inputZip(event: any) {
+    if (
+      event.key.length === 1 &&
+      !/^[0-9]$/.test(event.key)
+    ) {
+      event.preventDefault();
+    }
+  }
+  validateZip(event: any) {
+    const value = event.target.value;
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 6
+    ) {
+      this.invalidZip = true;
+    }
+    else {
+      this.invalidZip = false;
     }
   }
   inputMobile(event: any) {
