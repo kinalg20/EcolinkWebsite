@@ -61,3 +61,24 @@
         }
     }
 }
+
+@media (max-width: 992px) {
+    .Addresses-section {
+        .address-body {
+            display: block;
+            .address-card {
+                .address-text {
+                    .address {
+                        margin: 5px 0;
+                    }
+                    .sub-address {
+                        margin: 5px 0;
+                    }
+                    .crud-btn {
+                        justify-content: space-evenly;
+                    }
+                }
+            }
+        }
+    }
+}

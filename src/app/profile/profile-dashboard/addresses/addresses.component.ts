@@ -50,7 +50,7 @@ export class AddressesComponent implements OnInit {
     },
       (error: HttpErrorResponse) => {
         if (error.error.code == 400) {
-          this.allUserAddresses = []
+          // this.allUserAddresses = []
           this.getAllUserAddress();
         }
         console.log(error.error.code);
