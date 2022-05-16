@@ -58,7 +58,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.getPaypalProductDetail();
     this.initConfig();
     if (localStorage.getItem('ecolink_user_credential') != null) {
-      this.__apiservice.getUserAddress().subscribe((res: any) => {
+      await this.__apiservice.getUserAddress().
+      then((res: any) => {
         res.data.map((response: any) => {
           this.getAllUserAddresses.push(response);
           if (this.getAllUserAddresses.length > 0) {

@@ -187,7 +187,7 @@ export class ApiServiceService {
   }
 
 
-  getUserAddress(): Observable<any> {
+  getUserAddress(): Promise<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     let user_id = JSON.parse(this.header).user_id;
@@ -198,7 +198,7 @@ export class ApiServiceService {
     let body = {
       user_id: user_id
     }
-    return this.http.post(this._baseurl + 'getUserAddresses', body, { headers: httpHeaders })
+    return this.http.post(this._baseurl + 'getUserAddresses', body, { headers: httpHeaders }).toPromise();
   }
 
   addUserAddresses(data: any): Observable<any> {
@@ -227,7 +227,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'userInfo', body, { headers: httpHeaders })
   }
 
-  deleteUserAddress(item_id: any): Observable<any> {
+  deleteUserAddress(item_id: any): Promise<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     const httpHeaders = new HttpHeaders({
@@ -235,7 +235,7 @@ export class ApiServiceService {
       'Authorization': `Bearer ${this.token}`
     })
     console.log(item_id);
-    return this.http.post(this._baseurl + 'deleteUserAddresses', { address_id: item_id }, { headers: httpHeaders })
+    return this.http.post(this._baseurl + 'deleteUserAddresses', { address_id: item_id }, { headers: httpHeaders }).toPromise()
   }
 
   filterProduct(dataforfilter: any) {

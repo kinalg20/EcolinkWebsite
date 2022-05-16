@@ -14,48 +14,56 @@ export class AddressesComponent implements OnInit {
   resSignupMsg: string = '';
   resSignupMsgCheck: string = ' ';
   profileAddress: any = [];
-  adressModal: boolean= false;
+  adressModal: boolean = false;
 
   constructor(private __apiservice: ApiServiceService, private renderer: Renderer2) { }
 
   ngOnInit(): void {
     this.getAllUserAddress();
-    this.__apiservice.profiledashboard.subscribe((res:any)=> {
+    this.__apiservice.profiledashboard.subscribe((res: any) => {
       this.getAllUserAddress();
     })
     console.log(this.showdesc)
   }
   // <--Get User Address Function-->
-  getAllUserAddress() {
-    this.__apiservice.getUserAddress().subscribe((res: any) => {
-      this.allUserAddresses = [];
-      console.log(res);
-      res.data.map((response: any) => {
-        this.allUserAddresses.push(response);
+  async getAllUserAddress() {
+    await this.__apiservice.getUserAddress().then(
+      (res: any) => {
+        this.allUserAddresses = [];
+        console.log(res);
+        res.data.map((response: any) => {
+          this.allUserAddresses.push(response);
+        })
+        setTimeout(() => {
+          console.log(this.allUserAddresses);
+        }, 1000);
       })
-      setTimeout(() => {
-        console.log(this.allUserAddresses);
-      }, 1000);
-    })
+      .catch(error => {
+        console.log(error);
+        this.allUserAddresses = [];
+      })
+
   }
   // <-- Delete User Address --> 
-  deleteUserAddress(item_id: any) {
+  async deleteUserAddress(item_id: any) {
     console.log(item_id);
-    this.__apiservice.deleteUserAddress(item_id).subscribe((res: any) => {
-      if (res.code == 200) {
-        this.resSignupMsg = 'Your Address Deleted Successfully!';
-        this.resSignupMsgCheck = 'success';
-        this.getAllUserAddress();
-      }
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.code == 400) {
-          // this.allUserAddresses = []
+    await this.__apiservice.deleteUserAddress(item_id)
+      .then((res: any) => {
+        if (res.code == 200) {
+          this.resSignupMsg = 'Your Address Deleted Successfully!';
+          this.resSignupMsgCheck = 'success';
+          setTimeout(() => {
+            this.resSignupMsg = '';
+          this.resSignupMsgCheck = '';
+          }, 1000);
           this.getAllUserAddress();
         }
-        console.log(error.error.code);
-      }
-    )
+      })
+      .catch((error) => {
+        if (error.status == 400) {
+          this.getAllUserAddress();
+        }
+      })
   }
   // <-- Close toaster --> 
   close() {
@@ -76,6 +84,6 @@ export class AddressesComponent implements OnInit {
       this.profileAddress.push(item);
     }
   }
-  
-  
+
+
 }
