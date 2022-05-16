@@ -18,12 +18,6 @@ export class CategoriesComponent implements OnInit {
   constructor(public __apiService: ApiServiceService , private store: Store) { }
 
   ngOnInit(): void {
-    // this.__apiService.getAllCategories().subscribe(res => {
-    //   this.getCategory = res;
-    // })
-    // setTimeout(() => {
-    //   console.log(this.getCategory)
-    // }, 1000);
 
     this.getAllCategories();
     this.categories$.subscribe(res => {

@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { PrimeNGConfig } from 'primeng/api';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
@@ -17,7 +18,7 @@ export class ProductCartComponent implements OnInit {
   UserLogin: any;
   CartShimmer: boolean = true;
 
-  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig) { }
+  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig,private route:Router) { }
   ngOnInit(): void {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
     this.getCartData();
@@ -95,6 +96,11 @@ export class ProductCartComponent implements OnInit {
               this.CardShow = [];
               this.CartShimmer = false;
               this.length = 0;
+            }
+            else if(error.status==401){
+              // localStorage.clear();
+              localStorage.removeItem('ecolink_user_credential');
+              this.route.navigateByUrl('profile/auth');
             }
           }
         )
