@@ -31,25 +31,25 @@ export class HomeBannerComponent implements OnInit {
       route: "productlist"
     },
     {
-      imgurl: "/assets/Ecolink.jpg",
+      imgurl: "assets/Ecolink.jpg",
       heading: "Ecolink",
       content: "Providing Lean(er) chemical solutions for next gen",
       route: "info"
     },
     {
-      imgurl: "/assets/abouus.jpg",
+      imgurl: "assets/abouus.jpg",
       heading: "About Us",
       content: "Supplying degreasers internationally for over 30 years",
       route: "about-us"
     },
     {
-      imgurl: "/assets/manufacturing.jpg",
+      imgurl: "assets/manufacturing.jpg",
       heading: "Ecolink Manufacturing",
       content: "Ecolink’s successful work in the manufacturing sector",
       route: "manufacture"
     },
     {
-      imgurl: "/assets/ourservices.jpg",
+      imgurl: "assets/ourservices.jpg",
       heading: "Our Services",
       content: "Services and Marketing",
       route: "productlist"
