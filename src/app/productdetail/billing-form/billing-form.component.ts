@@ -97,7 +97,9 @@ export class BillingFormComponent implements OnInit {
           });
       }
       else {
-        this.addUserAddress(form);
+        console.log("Select Address");
+        // this.OrderInfo.emit(this.CheckoutProduct);
+        // this.addUserAddress(form);
       }
     }
     else {
@@ -203,7 +205,7 @@ export class BillingFormComponent implements OnInit {
           console.log(res);
           if (res.code == 200) {
             this.FormFillUp.emit(false);
-            this.OrderInfo.emit(this.userObj)
+            this.OrderInfo.emit(this.userObj);
             this.resSignupMsgCheck = 'success';
             this.resSignupMsg = res.message;
             window.scroll(0, 0)

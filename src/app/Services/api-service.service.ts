@@ -269,7 +269,7 @@ export class ApiServiceService {
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     })
-    orderObj.user_id = user_id
+    orderObj.user_id = user_id;    
     return this.http.post(this._baseurl + 'storeOrder', orderObj, { headers: httpHeaders })
   }
 
