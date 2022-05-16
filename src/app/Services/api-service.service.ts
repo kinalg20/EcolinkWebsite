@@ -273,7 +273,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'storeOrder', orderObj, { headers: httpHeaders })
   }
 
-  getOrderData() {
+  getOrderData():Promise<any>{
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     let user_id = JSON.parse(this.header).user_id;
@@ -284,7 +284,7 @@ export class ApiServiceService {
     let body = {
       user_id: user_id
     }
-    return this.http.post(this._baseurl + 'getOrder', body, { headers: httpHeaders })
+    return this.http.post(this._baseurl + 'getOrder', body, { headers: httpHeaders }).toPromise();
   }
 
   CancelOrderApi(id: any): Promise<any> {

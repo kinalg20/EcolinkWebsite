@@ -27,20 +27,24 @@ export class OrderHistoryComponent implements OnInit {
     this.getOrderhistory();
   }
   // <-- Get Order History -->
-  getOrderhistory() {
+  async getOrderhistory() {
+    console.log("Order History");
     let product_search: any;
-    this.__apiservice.getOrderData().subscribe((res: any) => {
-      setTimeout(() => {
-        this.orderData = res.data;
-        this.order = res.data;
-        console.log(this.orderData, "orderhistory");
-        res.data.map((resp: any) => {
-          resp.items.map((response: any) => {
-            product_search = response.product;
-          })
-          this.searchProductArray.push(product_search);
+    await this.__apiservice.getOrderData()
+    .then((res: any) => {
+      this.orderData = res.data;
+      this.order = res.data;
+      console.log(this.orderData, "orderhistory");
+      res.data.map((resp: any) => {
+        resp.items.map((response: any) => {
+          product_search = response.product;
         })
-      }, 2000);
+        this.searchProductArray.push(product_search);
+      })
+    })
+
+    .catch(error=>{
+      console.log(error);
     })
 
   }
@@ -51,7 +55,7 @@ export class OrderHistoryComponent implements OnInit {
     console.log(this.orderHistoryDesc)
     this.show = !this.show;
   }
-  // <-- Get Search Data from search bar on order history
+  // Get Search Data from search bar on order history
   getselecteddata(value: any) {
     console.log(value);
     this.searchItem = value;
@@ -67,7 +71,7 @@ export class OrderHistoryComponent implements OnInit {
       this.orderData = this.order;
     }
   }
-  // <-- Fetch Order History Data from search Bar -->
+  // Fetch Order History Data from search Bar
   FetchSearchedData() {
     let product_search: any;
     this.orderData = []
@@ -88,22 +92,25 @@ export class OrderHistoryComponent implements OnInit {
       })
     })
   }
-  // <-- Cancel Order -->
-  orderCancel(id: any) {
-    console.log(id.order_id);
-    this.__apiservice.CancelOrderApi(id.order_id)
-      .then((res) => {
-        if (res.code == 200) {
-          this.getOrderhistory();
-        }
-        console.log(res);
 
+  // Cancel Order
+  async orderCancel(id: any) {
+    console.log(id.order_id);
+    await this.__apiservice.CancelOrderApi(id.order_id).then(res => {
+      console.log(res);
+          console.log("res.code" , res.code);
+          this.getOrderhistory();
       })
       .catch((error) => {
-        console.log(error.error.code);
+        console.log(error.status);
+        this.getOrderhistory();
       })
   }
-  // <-- Return Order -->
+
+
+
+
+  // Return Order 
 
   // storeReturnProduct(i: any) {
   //   let storeObj: any;
