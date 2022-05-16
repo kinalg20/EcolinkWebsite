@@ -14,7 +14,6 @@ export class CallToActionComponent implements OnInit {
   }
 
   getImageUrl(path: string): string {
-    console.log("path");
     return `https://brandtalks.in/ecolinkfrontend/${path}`;
   }
 }

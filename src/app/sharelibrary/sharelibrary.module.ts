@@ -14,6 +14,7 @@ import { DialogModule } from 'primeng/dialog';
 import { NgxShimmerLoadingModule } from 'ngx-shimmer-loading';
 import { PipemoduleModule } from '../pipemodule/pipemodule.module';
 
+
 const exportsharedata: any = [
   CarouselModule,
   InputTextModule,

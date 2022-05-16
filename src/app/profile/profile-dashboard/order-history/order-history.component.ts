@@ -15,90 +15,95 @@ export class OrderHistoryComponent implements OnInit {
   searchItem: string = '';
   suggestions: boolean = false;
   @Input() showdesc: any;
+  displayModal: boolean = false;
+
+  showModalDialog() {
+    this.displayModal = true;
+  }
 
   constructor(private __apiservice: ApiServiceService,) { }
 
   ngOnInit(): void {
     this.getOrderhistory();
   }
-// <-- Get Order History -->
-getOrderhistory() {
-  let product_search: any;
-  this.__apiservice.getOrderData().subscribe((res: any) => {
-    setTimeout(() => {
-      this.orderData = res.data;
-      this.order = res.data;
-      console.log(this.orderData, "orderhistory");
-      res.data.map((resp: any) => {
-        resp.items.map((response: any) => {
-          product_search = response.product;
+  // <-- Get Order History -->
+  getOrderhistory() {
+    let product_search: any;
+    this.__apiservice.getOrderData().subscribe((res: any) => {
+      setTimeout(() => {
+        this.orderData = res.data;
+        this.order = res.data;
+        console.log(this.orderData, "orderhistory");
+        res.data.map((resp: any) => {
+          resp.items.map((response: any) => {
+            product_search = response.product;
+          })
+          this.searchProductArray.push(product_search);
         })
-        this.searchProductArray.push(product_search);
-      })
-    }, 2000);
-  })
+      }, 2000);
+    })
 
-}
-// <-- Order History Details for Particular Product -->
-showDeatils(i: any) {
-  this.orderHistoryDesc = [];
-  this.orderHistoryDesc.push(i)
-  console.log(this.orderHistoryDesc)
-  this.show = !this.show;
-}
-// <-- Get Search Data from search bar on order history
-getselecteddata(value: any) {
-  console.log(value);
-  this.searchItem = value;
-  this.suggestions = false;
-}
-// Order history search bar Suggestions 
-getSuggestions() {
-  if (this.searchItem.length > 0) {
-    this.suggestions = true;
   }
-  else {
+  // <-- Order History Details for Particular Product -->
+  showDeatils(i: any) {
+    this.orderHistoryDesc = [];
+    this.orderHistoryDesc.push(i)
+    console.log(this.orderHistoryDesc)
+    this.show = !this.show;
+  }
+  // <-- Get Search Data from search bar on order history
+  getselecteddata(value: any) {
+    console.log(value);
+    this.searchItem = value;
     this.suggestions = false;
-    this.orderData = this.order;
   }
-}
-// <-- Fetch Order History Data from search Bar -->
-FetchSearchedData() {
-  let product_search: any;
-  this.orderData = []
-  this.order.map((res: any) => {
-    res.items.filter((resp: any) => {
-      product_search = '';
-      if (resp.product.name.includes(this.searchItem)) {
-        product_search = res;
-      }
+  // Order history search bar Suggestions 
+  getSuggestions() {
+    if (this.searchItem.length > 0) {
+      this.suggestions = true;
+    }
+    else {
+      this.suggestions = false;
+      this.orderData = this.order;
+    }
+  }
+  // <-- Fetch Order History Data from search Bar -->
+  FetchSearchedData() {
+    let product_search: any;
+    this.orderData = []
+    this.order.map((res: any) => {
+      res.items.filter((resp: any) => {
+        product_search = '';
+        if (resp.product.name.includes(this.searchItem)) {
+          product_search = res;
+        }
 
-      if (product_search) {
-        console.log(product_search);
-        this.orderData.push(product_search);
-      }
+        if (product_search) {
+          console.log(product_search);
+          this.orderData.push(product_search);
+        }
 
-      console.log(this.orderData);
+        console.log(this.orderData);
 
+      })
     })
-  })
-}
-// <-- Cancel Order -->
-orderCancel(id: any) {
-  console.log(id.order_id);
-  this.__apiservice.CancelOrderApi(id.order_id)
-    .then((res) => {
-      if (res.code == 200) {
-        this.getOrderhistory();
-      }
-      console.log(res);
+  }
+  // <-- Cancel Order -->
+  orderCancel(id: any) {
+    console.log(id.order_id);
+    this.__apiservice.CancelOrderApi(id.order_id)
+      .then((res) => {
+        if (res.code == 200) {
+          this.getOrderhistory();
+        }
+        console.log(res);
 
-    })
-    .catch((error) => {
-      console.log(error.error.code);
-    })
-}
- // <-- Return Order -->
+      })
+      .catch((error) => {
+        console.log(error.error.code);
+      })
+  }
+  // <-- Return Order -->
 
   // storeReturnProduct(i: any) {
   //   let storeObj: any;
