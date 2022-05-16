@@ -5,7 +5,7 @@
             <div class="container">
                 <div class="both-part" routerLink="/{{action.route}}">
                     <div class="first-part" #height>
-                        <img src="{{action.imgurl}}" alt="">
+                        <img [src]="getImageUrl(action.imgurl)" alt="">
                     </div>
                     <div class="second-part">
                         <h3>{{action.heading}}</h3>

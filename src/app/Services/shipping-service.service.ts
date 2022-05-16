@@ -63,17 +63,19 @@ export class ShippingServiceService {
       "requestedShipment": {
         "shipper": {
           "address": {
-            "postalCode": 30030,
+            "postalCode": 30084,
             "countryCode": "US"
           }
         },
         "recipient": {
           "address": {
-            "postalCode": 30085,
-            "countryCode": "US"
+            "postalCode": 30030,
+            "countryCode": "US",
+            "residential": true
           }
         },
         "pickupType": "DROPOFF_AT_FEDEX_LOCATION",
+        "serviceType": "GROUND_HOME_DELIVERY",
         "rateRequestType": [
           "ACCOUNT",
           "LIST"

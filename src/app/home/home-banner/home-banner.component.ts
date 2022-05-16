@@ -57,10 +57,6 @@ export class HomeBannerComponent implements OnInit {
   ]
 
   ngOnInit(): void {
-
-    // setTimeout(() => {
-    //   console.log(this.getCategory.data);
-    // }, 500);
   }
 
   subscribe(value: any) {
@@ -83,9 +79,6 @@ export class HomeBannerComponent implements OnInit {
     this.searchItem = data.name;
   }
 
-  getImageUrl(path: string): string {
-    console.log("path");
-    return `https://brandtalks.in/ecolinkfrontend${path}`;
-  }
+
 
 }
