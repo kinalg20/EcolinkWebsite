@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -10,7 +11,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class ProductWishlistComponent implements OnInit {
   product: any = [];
   wishlistShimmer: boolean = true;
-  constructor(private _ApiService: ApiServiceService) { }
+  constructor(private _ApiService: ApiServiceService,private route:Router) { }
 
   ngOnInit(): void {
     setTimeout(() => {
@@ -18,9 +19,9 @@ export class ProductWishlistComponent implements OnInit {
     }, 500);
   }
 
-  addProductToCart(prod: any) {
-    this._ApiService.addItemToCart(prod.product_id, 1, "add")
-
+  async addProductToCart(prod: any) {
+    await this._ApiService.addItemToCart(prod.product_id, 1, "add");
+    this.route.navigateByUrl('/cart')
   }
 
   async getWishlistItems() {

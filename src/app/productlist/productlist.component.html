@@ -224,8 +224,7 @@
                                                         <button (click)=AddProductToCart(product) pButton pRipple
                                                             type="button" label="Add to Cart"
                                                             class="p-button-raised p-button-success"
-                                                            style="height:38px; background-color: #55b15c;"
-                                                            routerLink="/cart"></button>
+                                                            style="height:38px; background-color: #55b15c;"></button>
                                                         <p routerLink="/shop/{{this.slug.slug}}/{{product.slug}}">
                                                             Show Details
                                                         </p>
@@ -313,7 +312,7 @@
                 <h4>Catgories</h4>
                 <ul *ngFor="let subcategory of ProductListData.subcategory">
                     <div class="p-field-checkbox">
-                        <p-checkbox name="group1" value="{{subcategory.name}}" [(ngModel)]=" selectedCategory"
+                        <p-checkbox name="group1" value="{{subcategory.name}}" [(ngModel)]="selectedCategory"
                             inputId="cc"></p-checkbox>
                         <label for="cc" class="mx-2">{{subcategory.name}}</label>
                     </div>
