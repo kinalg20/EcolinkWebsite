@@ -179,8 +179,6 @@
             .card {
                 .checkout-product-heading {
                     .shimmer-loading {
-
-                        // height: 100px;
                         .ngx-shimmer {
                             height: 40px !important;
                         }
@@ -196,7 +194,6 @@
         background: var(--primary);
         border: 1px solid var(--primary);
         font-size: 18px;
-        // font-weight: 600;
     }
 
     .p-button.p-button-success:enabled:focus,

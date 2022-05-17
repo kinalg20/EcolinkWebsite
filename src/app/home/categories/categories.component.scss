@@ -9,9 +9,6 @@
             display: grid;
             grid-template-columns: 75% 25%;
             background: whitesmoke;
-            // .card-div {
-            //     background: whitesmoke;
-            //     padding: 20px;
 
             .product-category {
                 background: whitesmoke;
@@ -19,7 +16,6 @@
                 position: relative;
                 border-top-left-radius: 10px;
                 border-bottom-left-radius: 10px;
-                // border: 1px solid #d7d1d1;
                 padding: 20px;
 
                 .heading-section {
@@ -74,7 +70,6 @@
                     }
                 }
             }
-            // }
 
             .shop-text {
                 padding: 10px;
@@ -108,16 +103,6 @@
                     height: 200px;
                 }
                 grid-template-columns: 100%;
-                .product-category {
-                    .categories {
-                        // grid-template-columns: 100%;
-                        // .category-card {
-                        //     .category-image {
-                        //         width: 40%;
-                        //     }
-                        // }
-                    }
-                }
             }
         }
     }

@@ -25,7 +25,7 @@ export class CategoriesComponent implements OnInit {
       console.log(res);
     });
   }
-
+  //Get all product category
   getAllCategories() {
     this.categoriesData = this.categoriesLoaded$.subscribe(res => {
       if (!res) {

@@ -27,22 +27,7 @@
                 font-size: 33px;
             }
         }
-        // .product-rating {
-        //     max-width: 100px;
-        //     display: flex;
-        //     justify-content: space-between;
-        //     h3 {
-        //         margin: 0;
-        //         font-size: 35px;
-        //     }
-        //     h4{
-        //         font-size: 35px;
-        //         text-decoration:underline
-        //     }
-        // }
         .product-rate {
-            // display: flex;
-            // justify-content: space-between;
             align-items: center;
             margin: 10px 0;
             h3 {
@@ -351,8 +336,6 @@
 
 @media (max-width: 600px) {
     .product-detail-section {
-        // grid-template-columns: 35% 60%;
-        // padding: 15px;
         .product-detail {
             .product-name {
                 h3 {

@@ -65,6 +65,7 @@
                             <li>Total</li>
                         </ul>
                     </div>
+                    <!-- product detail on checkout page -->
                     <ng-container *ngFor="let cart of CheckoutProduct">
                         <div class="checkout-products">
                             <ul *ngFor="let data of cart.carts">
@@ -147,6 +148,7 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Paypal buttons -->
                     <div class="paypal-integration" *ngIf="showPaypal">
                         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                     </div>
