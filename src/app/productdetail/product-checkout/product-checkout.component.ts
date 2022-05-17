@@ -54,6 +54,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.discountCheck = false;
     }
     await this.checkoutProduct();
+    console.log('jp', this.CheckoutProduct);
+    this.CheckoutProduct.map((res:any)=> {
+      if(res.carts.length==0) {
+        this.route.navigateByUrl('cart');
+      }
+    })
     this.getTaxExempt()
     this.getPaypalProductDetail();
     this.initConfig();
@@ -322,28 +328,33 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     let data_obj: any = [];
     let completedFormat: any = {};
     cookiesObj = this._cookies.GetCartData();
-    cookiesObj.map((res: any) => {
-      this.__apiservice.getProductById(res.CartProductId).subscribe((resp: any) => {
-        let data: any = {};
-        let products: any = {};
-        data.quantity = res.ProductQuantity;
-        data.product_id = resp.data.id;
-        products.id = res.CartProductId;
-        products.name = resp.data.name;
-        products.sale_price = resp.data.sale_price;
-        products.image = resp.data.image;
-        products.alt = resp.data.alt;
-        data.product = products;
-        data_obj.push(data);
-        completedFormat.carts = data_obj;
+    if(cookiesObj.length>0){
+      cookiesObj.map((res: any) => {
+        this.__apiservice.getProductById(res.CartProductId).subscribe((resp: any) => {
+          let data: any = {};
+          let products: any = {};
+          data.quantity = res.ProductQuantity;
+          data.product_id = resp.data.id;
+          products.id = res.CartProductId;
+          products.name = resp.data.name;
+          products.sale_price = resp.data.sale_price;
+          products.image = resp.data.image;
+          products.alt = resp.data.alt;
+          data.product = products;
+          data_obj.push(data);
+          completedFormat.carts = data_obj;
+        })
+        this.cookiesCheckout.data = completedFormat;
       })
-      this.cookiesCheckout.data = completedFormat;
-    })
-    setTimeout(() => {
-      this.refractorData();
-      this.formShimmer = false;
-      this.checkoutShimmer = false
-    }, 1000);
+      setTimeout(() => {
+        this.refractorData();
+        this.formShimmer = false;
+        this.checkoutShimmer = false
+      }, 1000);
+    }
+    else{
+      this.route.navigateByUrl('cart');
+    }
   }
 
   refractorData() {
