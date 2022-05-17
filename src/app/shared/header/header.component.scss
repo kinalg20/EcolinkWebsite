@@ -71,6 +71,7 @@
                     padding: 0;
                     margin: 0;
                     width: 100%;
+                    align-items: center;
 
                     .nav-item {
                         a {
@@ -582,7 +583,7 @@
         max-width: 1000px;
 
         .responsive-navbar {
-            width: 70%;
+            width: fit-content;
         }
     }
 }
