@@ -16,7 +16,9 @@
 
 .nav-link-section {
     background: var(--primary);
-    .container {
+    .header-container {
+        margin-left: 50px;
+        margin-right: 60px;
         padding-top: 10px;
         padding-bottom: 10px;
         display: flex;

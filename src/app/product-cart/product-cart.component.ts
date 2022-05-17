@@ -17,24 +17,36 @@ export class ProductCartComponent implements OnInit {
   SubTotal: number = 0;
   UserLogin: any;
   CartShimmer: boolean = true;
+  disableIncreaseButton: boolean = false;
+  disableDecreaseButton: boolean = false;
 
-  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig,private route:Router) { }
+  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig, private route: Router) { }
   ngOnInit(): void {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
     this.getCartData();
   }
 
   Count(string: any, id: any) {
-    if (string == "add" && this.CardShow[id].quantity < 10) {
-      this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
-      this.subtotal();
+    if (string == "add") {
+      if (this.CardShow[id].quantity <= 24) {
+        this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
+        this.subtotal();
+      }
+      // else {
+      //   this.disableIncreaseButton = true;
+      // }
     }
-    if (string == "delete" && this.CardShow[id].quantity > 1) {
-      this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
-      this.subtotal();
+    if (string == "delete") {
+      if (this.CardShow[id].quantity == 2) {
+        this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
+        this.subtotal();
+      }
+      // else {
+      //   this.disableDecreaseButton = true;
+      // }
     }
   }
-
+  // if (product_quantity <= 24) {
   async getCartData() {
     let cookiesdata: any = [];
     let data_obj: any = [];
@@ -83,11 +95,11 @@ export class ProductCartComponent implements OnInit {
         .then(
           (res) => {
             console.log(res);
-              this.CardShow = res.data;
-              this.subtotal();
-              console.log(this.CardShow);
-              this.CartShimmer = false;
-              this.length = this.CardShow.length;
+            this.CardShow = res.data;
+            this.subtotal();
+            console.log(this.CardShow);
+            this.CartShimmer = false;
+            this.length = this.CardShow.length;
           })
         .catch(
           (error) => {
@@ -97,8 +109,7 @@ export class ProductCartComponent implements OnInit {
               this.CartShimmer = false;
               this.length = 0;
             }
-            else if(error.status==401){
-              // localStorage.clear();
+            else if (error.status == 401) {
               localStorage.removeItem('ecolink_user_credential');
               this.route.navigateByUrl('profile/auth');
             }
@@ -137,37 +148,53 @@ export class ProductCartComponent implements OnInit {
     }
     else {
       this.CartShimmer = true;
-      if (action == 'delete' && product_quantity > 1) {
-        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action)
-        .then((res) => {
-          return res;
-        })
-        .catch(error=>{
-          return error.error.code;
-        })
+      if (action == 'delete') {
+        // if (product_quantity > 2) {
+          this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action)
+            .then((res) => {
+              return res;
+            })
+            .catch(error => {
+              return error.error.code;
+            })
 
-        if (this.ItemCart.code == 200) {
-          this.getCartData();
-          this.subtotal();
-        }
+          if (this.ItemCart.code == 200) {
+            this.getCartData();
+            this.subtotal();
+          }
+        // }
+
+        // else {
+        //   this.disableDecreaseButton = true;
+        // }
 
       }
 
       else if (action == 'add') {
-        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
-          return res;
-        })
+        // if (product_quantity <= 24) {
+          this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
+            return res;
+          })
 
-        if (this.ItemCart.code == 200) {
-          this.getCartData();
-          this.subtotal();
-        }
+          if (this.ItemCart.code == 200) {
+            this.getCartData();
+            this.subtotal();
+          }
+        // }
+
+        // else{
+        //   this.disableIncreaseButton = true;
+        // }
       }
 
       else {
         this.getCartData();
         this.subtotal();
       }
+      // else {
+      //   this.disableIncreaseButton = true;
+      //   this.getCartData();
+      // }
     }
   }
 

@@ -59,10 +59,10 @@ export class ShopComponent implements OnInit {
 
 
   Count(string: any) {
-    if (string == "increase" && this.ItemCount < this.stock) {
+    if (string == "increase" ) {
       this.ItemCount = this.ItemCount + 1;
     }
-    if (string == "decrease" && this.ItemCount > this.minimum_qyt) {
+    if (string == "decrease") {
       this.ItemCount = this.ItemCount - 1;
     }
   }
