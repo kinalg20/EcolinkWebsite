@@ -2,24 +2,20 @@
     display: grid;
     grid-template-columns: 40% 58%;
     grid-gap: 14px;
-
     .detail-section {
         box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
         border: 1px solid #d7d1d1;
         border-radius: 10px;
         padding: 20px;
-
         .contact-heading {
             p {
                 margin-bottom: 0;
             }
-
             .country-buttons {
                 .button-row {
                     .button-col {
                         padding-top: 5px;
                         padding-bottom: 5px;
-
                         button {
                             background: #55b15c;
                             color: white;
@@ -29,7 +25,6 @@
                             padding: 5px;
                             width: 100%;
                         }
-
                         button:hover {
                             background: whitesmoke;
                             color: black;
@@ -55,13 +50,17 @@
     }
     .contact-form-heading {
         text-align: center;
-
         h2 {
             margin-bottom: 30px;
         }
     }
-
     form {
+        .row {
+            .alert-danger {
+                padding: 7px;
+                font-size: 13px;
+            }
+        }
         .proceed {
             .proceed-button {
                 button {
@@ -78,6 +77,7 @@
         }
     }
 }
+
 @media (max-width:992px) {
     .contact-us-section {
         display: block;
@@ -85,13 +85,24 @@
             margin-bottom: 30px;
         }
         .contact-us-form {
-
             .row {
                 .lname {
                     margin-top: 1rem !important;
                 }
-    
             }
+        }
+    }
+}
+
+@media (max-width:425px) {
+    form {
+        .alert-success {
+            font-size: 13px;
+            padding: 7px;
+        }
+        .alert-danger {
+            font-size: 13px;
+            padding: 7px;
         }
     }
 }

@@ -75,9 +75,9 @@ export class AskChemistComponent implements OnInit {
         this.chemistForm.reset();
         this.resSignupMsg = 'Contact Details Added Successfully!';
         this.resSignupMsgCheck = 'success';
-        // setTimeout(() => {
-        //   this.resSignupMsg = '';
-        // }, 3000);
+        setTimeout(() => {
+          this.resSignupMsg = '';
+        }, 3000);
       }
       )
     }

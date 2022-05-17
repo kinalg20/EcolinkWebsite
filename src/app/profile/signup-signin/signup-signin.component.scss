@@ -191,4 +191,16 @@
             width: 100%;
         }
     }
+    .signup-form {
+        form {
+            .alert-success {
+                font-size: 13px;
+                padding: 7px;
+            }
+            .alert-danger {
+                font-size: 13px;
+                padding: 7px;
+            }
+        }
+    }
 }
