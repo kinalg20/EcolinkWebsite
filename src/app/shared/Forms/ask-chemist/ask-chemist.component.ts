@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import { FormGroup, NgForm, FormControl } from '@angular/forms';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -39,32 +39,45 @@ export class AskChemistComponent implements OnInit {
       content: "Ecolink is especially proud of our work with the global mining sector"
     }
   ]
-
-  saveAskChemistDetail(form: NgForm) {
-    if (form.valid) {
-      console.log(form.value);
+  chemistForm = new FormGroup({
+    input_11: new FormControl (''),
+    textarea: new FormControl(''),
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    address: new FormControl(''),
+    country: new FormControl(''),
+    state: new FormControl(''),
+    city: new FormControl(''),
+    zip: new FormControl(''),
+  });
+  saveAskChemistDetail() {
+    if (this.chemistForm.valid) {
+      let data = this.chemistForm.value
+      console.log(data);
       this.userObj = {
-        first_name: form.value.firstname,
-        last_name: form.value.lastname,
-        email: form.value.email,
+        first_name: data.firstname,
+        last_name: data.lastname,
+        email: data.email,
         type: "askchemist",
-        phone: form.value.phone,
-        address_1: form.value.address,
-        country: form.value.country,
-        state: form.value.state,
-        city: form.value.city,
-        zip: form.value.zip,
-        input_1: form.value.input_11,
-        input_2: form.value.textarea
+        phone: data.phone,
+        address_1: data.address,
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        zip: data.zip,
+        input_1: data.input_11,
+        input_2: data.textarea
       };
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
-        form.reset();
-        this.resSignupMsg = 'Form Submitted Successfully!';
+        this.chemistForm.reset();
+        this.resSignupMsg = 'Contact Details Added Successfully!';
         this.resSignupMsgCheck = 'success';
-        setTimeout(() => {
-          this.resSignupMsg = '';
-        }, 3000);
+        // setTimeout(() => {
+        //   this.resSignupMsg = '';
+        // }, 3000);
       }
       )
     }

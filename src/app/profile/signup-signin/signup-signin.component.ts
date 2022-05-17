@@ -1,12 +1,11 @@
 import { Component, Renderer2, ViewChild, ElementRef, OnInit} from '@angular/core';
 import { ViewportScroller } from "@angular/common";
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { SocialAuthService } from "angularx-social-login";
 import { GoogleLoginProvider } from "angularx-social-login";
 import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-signup-signin',
@@ -93,9 +92,8 @@ export class SignupSigninComponent implements OnInit {
     }
   }
 
-
   profileForm = new FormGroup({
-    firstname: new FormControl(''),
+    firstname: new FormControl (''),
     lastname: new FormControl(''),
     email: new FormControl(''),
     phonenumber: new FormControl(''),
@@ -114,58 +112,59 @@ export class SignupSigninComponent implements OnInit {
     if (this.profileForm.valid) {
       this.resSignupMsgCheck = 'warning';
       this.resSignupMsg = 'Wait for a while....'
+
       let data = this.profileForm.value;
       console.log(data);
-      // let formData = new FormData();
-      // formData.append('profile_image', this.file);
-      // formData.append('name', data.firstname + ' ' + data.lastname);
-      // formData.append('email', data.email);
-      // formData.append('mobile', data.phonenumber);
-      // formData.append('password', data.password);
-      // formData.append('address', data.address);
-      // formData.append('country', data.country);
-      // formData.append('state', data.state);
-      // formData.append('city', data.city);
-      // formData.append('pincode', data.pincode);
-      // formData.append('tax_exempt', data.radio2);
-      // this.taxCalculate = data.radio2
-      // this.__apiservice.post(formData).subscribe(
-      //   (res) => {
-      //     console.log(res);
-      //     if (res.code == 200) {
-      //       if (res.data.user.remember_token) {
-      //         this.resSignupMsgCheck = 'success';
-      //         this.resSignupMsg = 'Verification mail has been sent to your Email Id !'
-      //       }
-      //       localStorage.setItem(
-      //         'ecolink_user_credential',
-      //         JSON.stringify(res.data)
-      //       );
-      //       form.reset();
-      //     }
+      let formData = new FormData();
+      formData.append('profile_image', this.file);
+      formData.append('name', data.firstname + ' ' + data.lastname);
+      formData.append('email', data.email);
+      formData.append('mobile', data.phonenumber);
+      formData.append('password', data.password);
+      formData.append('address', data.address);
+      formData.append('country', data.country);
+      formData.append('state', data.state);
+      formData.append('city', data.city);
+      formData.append('pincode', data.pincode);
+      formData.append('tax_exempt', data.radio2);
+      this.taxCalculate = data.radio2
+      this.__apiservice.post(formData).subscribe(
+        (res) => {
+          console.log(res);
+          if (res.code == 200) {
+            if (res.data.user.remember_token) {
+              this.resSignupMsgCheck = 'success';
+              this.resSignupMsg = 'Verification mail has been sent to your Email Id !'
+            }
+            localStorage.setItem(
+              'ecolink_user_credential',
+              JSON.stringify(res.data)
+            );
+            this.profileForm.reset();
+          }
 
-      //     else {
-      //       this.resSignupMsg = res.message;
-      //       localStorage.removeItem('ecolink_user_credential');
-      //     }
-      //   },
-      //   (error: HttpErrorResponse) => {
-      //     if (error.error.code == 400) {
-      //       if (error.error.message.email) {
-      //         this.resSignupMsg = error.error.message.email;
-      //       }
-      //       if (error.error.message.password) {
-      //         this.resSignupMsg = error.error.message.password;
-      //       }
-      //       if (error.error.message.mobile) {
-      //         this.resSignupMsg = error.error.message.mobile;
-      //       }
-      //       this.resSignupMsgCheck = 'danger';
-      //     }
-      //     // this.resSignupMsg = 'Username Password Incorrect!';
-      //     // console.log(error.error.code);
-      //     // form.reset();
-      //   });
+          else {
+            this.resSignupMsg = res.message;
+            localStorage.removeItem('ecolink_user_credential');
+          }
+        },
+        (error: HttpErrorResponse) => {
+          if (error.error.code == 400) {
+            if (error.error.message.email) {
+              this.resSignupMsg = error.error.message.email;
+            }
+            if (error.error.message.password) {
+              this.resSignupMsg = error.error.message.password;
+            }
+            if (error.error.message.mobile) {
+              this.resSignupMsg = error.error.message.mobile;
+            }
+            this.resSignupMsgCheck = 'danger';
+          }
+          // this.resSignupMsg = 'Username Password Incorrect!';
+          // console.log(error.error.code);
+          // form.reset();
+        });
     }
     else {
       this.resSignupMsg = "Please Fill The Value!"

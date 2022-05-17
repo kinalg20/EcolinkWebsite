@@ -10,7 +10,7 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { CallToActionComponent } from './call-to-action/call-to-action.component';
 import { MediaBannerComponent } from './media-banner/media-banner.component';
 import { TrendingPostComponent } from './trending-post/trending-post.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsRequestComponent } from './Forms/products-request/products-request.component';
 import { ReturnProductListingComponent } from './return-product-listing/return-product-listing.component';
 import { GoogleMapComponent } from './Forms/google-map/google-map.component';
@@ -61,6 +61,7 @@ const exportdata: any = [
     SharedRoutingModule,
     SharelibraryModule,
     FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     ...exportdata

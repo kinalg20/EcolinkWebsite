@@ -20,19 +20,21 @@
     .billing-detail {
         .card {
             padding: 20px 30px;
-
             h3 {
                 padding: 20px 0;
             }
-
             label {
                 font-weight: 400;
             }
-
+            .row {
+                .alert {
+                    padding: 7px;
+                    font-size: 13px;
+                }
+            }
             .checkbox {
                 display: flex;
                 align-items: center;
-
                 label {
                     margin-left: 5px;
                 }
@@ -81,7 +83,6 @@
             }
         }
     }
-
     .your-order {
         .card {
             padding: 20px 30px;
@@ -91,6 +92,7 @@
         text-align: left;
     }
 }
+
 @media (max-width: 992px) {
     .Fname {
         .fname {
@@ -103,6 +105,7 @@
         }
     }
 }
+
 @media (max-width: 768px) {
     .checkout-body {
         grid-template-columns: 100%;
@@ -111,6 +114,18 @@
         }
     }
 }
+
+@media (max-width:425px) {
+    .card {
+        .alert-success {
+            font-size: 13px;
+        }
+        .alert-danger {
+            font-size: 13px;
+        }
+    }
+}
+
 ::ng-deep {
     @media (max-width: 500px) {
         .wp-image-3097 {
