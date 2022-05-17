@@ -1,3 +1,4 @@
+<!-- Top Header Content Line  -->
 <section class="top-head-section">
     <div class="container">
         <div class="top-head-line">
@@ -6,6 +7,7 @@
         </div>
     </div>
 </section>
+<!-- Desktop View Header Links and Logo -->
 <section class="nav-link-section">
     <div class="header-container navbar navbar-expand-lg">
         <div class="logo" routerLink='/'>
@@ -64,6 +66,7 @@
         </div>
     </div>
 </section>
+<!-- Location Section and Cart & Dynamic Search Icon -->
 <section class="location-head">
     <div class="container">
         <div class="location-section" (click)="goToLocation()" style="cursor: pointer;">
@@ -87,6 +90,7 @@
         </div>
     </div>
 </section>
+<!-- Subscribed Mail Message -->
 <div class="container">
     <ng-container *ngIf="responseSubscribe.resSignupMsg">
         <div *ngIf="responseSubscribe.resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
@@ -150,6 +154,7 @@
         </div>
     </div>
 </div>
+<!-- Mobile View Header Links -->
 <div class="open-menu" *ngIf="openMenu">
     <ul *ngFor="let item of homePageData" class="responsive-menu">
         <li class="parent-menu">

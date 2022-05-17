@@ -1,5 +1,4 @@
-import { AfterViewInit, Component, OnInit, Output, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { IPayPalConfig, ICreateOrderRequest } from 'ngx-paypal';
@@ -14,7 +13,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   selectedPaymentMethod: any;
-  userObj: any;
   discountCheck: boolean = true;
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
@@ -42,8 +40,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   public payPalConfig?: IPayPalConfig;
   shippingDataObj: any = {};
   billingUserDetail: any = {};
-  fedexshippingboolean : boolean = true;
-  saiashippingboolean : boolean = true;
+  fedexshippingboolean: boolean = true;
+  saiashippingboolean: boolean = true;
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
@@ -56,6 +54,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.discountCheck = false;
     }
     await this.checkoutProduct();
+    console.log('jp', this.CheckoutProduct);
+    this.CheckoutProduct.map((res: any) => {
+      if (res.carts.length == 0) {
+        this.route.navigateByUrl('cart');
+      }
+    })
     this.getTaxExempt()
     this.getPaypalProductDetail();
     this.initConfig();
@@ -77,12 +81,11 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
           this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
         })
       })
-
-      if(this.shippingCharge){
-        this.fedexshippingboolean = false;
-      }
+    if (this.shippingCharge) {
+      this.fedexshippingboolean = false;
     }
-
+  }
+  // get tax value 
   getTaxExempt() {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
@@ -102,15 +105,15 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       }, 1000);
     }
   }
+  //route on profile page
   routeToProfile() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/profile']);
   }
+  //get radio button value for addresses
   getRadioButtonValue(value: any) {
-    // this.showDropdowm=!this.showDropdowm;
     if (localStorage.getItem('ecolink_user_credential') != null) {
-      // this.disableOrderButton = false;
       console.log(this.getAllUserAddresses);
       this.CheckoutProduct[0].user = this.getAllUserAddresses[value];
       this.shippingDataObj = this.getAllUserAddresses[value];
@@ -118,7 +121,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
 
     }
   }
-
+  //get product for billing
   async checkoutProduct() {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       await this.__apiservice.getCheckoutProducts()
@@ -166,6 +169,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   product_width: number = 0;
   product_height: number = 0;
   product_length: number = 0;
+  // get shipping charges for product
   getProduct() {
     this.CheckoutProduct.map((res: any) => {
       res.carts.map((resp: any) => {
@@ -180,6 +184,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
 
   saiaValues: any = {};
   saiaAmount: number = 0;
+  // get product shipping info on checkout page
   getShippingInfo() {
     this.saiashippingboolean = false;
     this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem)
@@ -206,7 +211,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         }
       )
   }
-
+  //get total amount of product including taxes and shipping charges
   getOrderInfo() {
     console.log(this.billingUserDetail);
     let Extra_Charges: any;
@@ -252,6 +257,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       console.log(res);
     });
   }
+  // dynamic paypal binding and integration
   private initConfig(): void {
     this.payPalConfig = {
       currency: 'USD',
@@ -310,6 +316,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       }
     };
   }
+  // enable and disable payment tabs
   checkPaymentTab() {
     if (this.selectedPaymentMethod == 'cod') {
       this.paymentCheck = false;
@@ -326,35 +333,40 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
   }
   cookiesCheckout: any = {}
+  //get cookies data on cart
   getsubjectBehaviour() {
     let cookiesObj: any = [];
     let data_obj: any = [];
     let completedFormat: any = {};
     cookiesObj = this._cookies.GetCartData();
-    cookiesObj.map((res: any) => {
-      this.__apiservice.getProductById(res.CartProductId).subscribe((resp: any) => {
-        let data: any = {};
-        let products: any = {};
-        data.quantity = res.ProductQuantity;
-        data.product_id = resp.data.id;
-        products.id = res.CartProductId;
-        products.name = resp.data.name;
-        products.sale_price = resp.data.sale_price;
-        products.image = resp.data.image;
-        products.alt = resp.data.alt;
-        data.product = products;
-        data_obj.push(data);
-        completedFormat.carts = data_obj;
+    if (cookiesObj.length > 0) {
+      cookiesObj.map((res: any) => {
+        this.__apiservice.getProductById(res.CartProductId).subscribe((resp: any) => {
+          let data: any = {};
+          let products: any = {};
+          data.quantity = res.ProductQuantity;
+          data.product_id = resp.data.id;
+          products.id = res.CartProductId;
+          products.name = resp.data.name;
+          products.sale_price = resp.data.sale_price;
+          products.image = resp.data.image;
+          products.alt = resp.data.alt;
+          data.product = products;
+          data_obj.push(data);
+          completedFormat.carts = data_obj;
+        })
+        this.cookiesCheckout.data = completedFormat;
       })
-      this.cookiesCheckout.data = completedFormat;
-    })
-    setTimeout(() => {
-      this.refractorData();
-      this.formShimmer = false;
-      this.checkoutShimmer = false
-    }, 1000);
+      setTimeout(() => {
+        this.refractorData();
+        this.formShimmer = false;
+        this.checkoutShimmer = false
+      }, 1000);
+    }
+    else {
+      this.route.navigateByUrl('cart');
+    }
   }
-
   refractorData() {
     let user: any = {}
     user = {
@@ -371,6 +383,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
   }
+  //collect product information to send paypal
   payment: any;
   getPaypalProductDetail() {
     setTimeout(() => {
@@ -384,6 +397,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       })
     }, 1000);
   }
+  // get coupon discount on product
   couponButton() {
     this.discountCheck = false;
     this.couponCheck = true;
@@ -397,11 +411,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   fillformevent(event: any) {
     this.disableOrderButton = event;
   }
-
   getShippingMethod() {
     console.log(this.selectedShippingMethod);
   }
-
   getshippingInfo(event: any) {
     console.log(event);
     this.shippingDataObj = event;

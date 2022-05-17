@@ -28,11 +28,9 @@
         }
 
         .product_view {
-            // display: none;
             border: 1px solid #dedede;
             border-radius: 5px;
             text-align: center;
-            // display: flex;
         }
 
         .grid-list-view {
@@ -117,16 +115,6 @@
 
         .absolute {
             display: none;
-            // position: fixed;
-            // bottom: 80px;
-            // z-index: 100;
-            // right: 32px;
-            // border-radius: 100%;
-            // background: var(--primary);
-            // color: #fff;
-            // padding: 15px;
-            // padding-bottom: 4px;
-            // box-shadow: 4px 4px 9px 1px rgb(0 0 0 / 15%);
             position: fixed;
             bottom: 80px;
             right: 40px;
@@ -243,7 +231,6 @@
 
     .product-listing {
 
-        // display: none;
         .card {
             display: grid;
             grid-template-columns: 30% auto 30%;
@@ -500,7 +487,6 @@
                         border: 1px solid rgb(179 177 177);
                         padding: 6px 6px;
                         border-radius: 5px;
-                        // width: 45%;
                         text-align: center;
                         font-weight: 600;
                         cursor: pointer;
@@ -824,7 +810,6 @@
 
             .grid-list-view {
 
-                // display: block;
                 .sort-by-search {
                     display: block;
                     width: auto;

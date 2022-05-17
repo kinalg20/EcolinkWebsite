@@ -1,7 +1,5 @@
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { EMPTY } from 'rxjs';
 import { ApiServiceService } from '../Services/api-service.service';
 import { CommonservicesService } from '../Services/commonservices.service';
 import { CookiesService } from '../Services/cookies.service';
@@ -29,7 +27,6 @@ export class ProductlistComponent implements OnInit {
   selectedCategory: any = [];
   selectedRatings: any = [];
   ProductListData: any = [];
-  ProductbackupData: any = [];
   price_from: any;
   price_to: any;
   selectedLevel: any = 'default';

@@ -51,8 +51,8 @@
         </div>
         <!-- Falseshimmer -->
     </div>
+    <!-- page head section -->
     <div class="listing-section" *ngIf="!shimmerLoad">
-        <!-- <ng-container> -->
         <div class="card-page">
             <div class="list-header">
                 <div class="list-heading" *ngFor="let data of subCatgoryProduct">
@@ -63,12 +63,6 @@
                 </div>
                 <div class="grid-list-view">
                     <ul class="nav nav-pills product_view" id="pills-tab" role="tablist">
-                        <!-- <li class="nav-item">
-                                <a class="nav-link active" data-toggle="pill" role="tab" aria-selected="true" (click)="showlist('card')"><i class="fa fa-th" aria-hidden="true"></i></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="pill" role="tab" aria-selected="false" (click)="showlist('list')"><i class="fa fa-list" aria-hidden="true"></i></a>
-                            </li> -->
                     </ul>
                     <div class="sort-by-search">
                         <div class="dropdown">
@@ -201,6 +195,7 @@
         </div>
     </div>
 </div>
+<!-- filter section for desktop screen -->
 <div class="filter_model" *ngIf="showFiterModel">
     <div class="filter">
         <div class="filter-heading">

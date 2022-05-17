@@ -6,7 +6,6 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { PipemoduleModule } from '../pipemodule/pipemodule.module';
-import { SearchPipePipe } from '../custom-pipe/search-pipe.pipe';
 import { SubcatgorycomponentComponent } from './subcatgorycomponent/subcatgorycomponent.component';
 
 @NgModule({

@@ -5,7 +5,6 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { FetchedHeaderState } from '../../store/state/header.state';
 import { HeaderMenuAction } from '../../store/actions/header.action';
-import { ProductCartComponent } from 'src/app/product-cart/product-cart.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { CookiesService } from 'src/app/Services/cookies.service';
 import { ViewportScroller } from '@angular/common';
@@ -37,7 +36,7 @@ export class HeaderComponent implements OnInit {
   @Select(FetchedHeaderState.getFetchedHeader) headerMenu$!: Observable<any>;
   @Select(FetchedHeaderState.getFetchedHeaderLoad) headerMenuDataLoaded$!: Observable<boolean>;
 
-  constructor(private scroller: ViewportScroller,private _cookies: CookiesService, private route: Router, private __apiservice: ApiServiceService, private store: Store, private router: Router) { }
+  constructor(private scroller: ViewportScroller, private _cookies: CookiesService, private route: Router, private __apiservice: ApiServiceService, private store: Store, private router: Router) { }
   routes: any = [
     {
       "id": "1",
@@ -76,7 +75,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
     this.getAllHeaderMenu();
     this.headerMenu$.subscribe(res => {
-      this.homePageData=[];
+      this.homePageData = [];
       if (res.data) {
         res.data.pages.map((response: any) => {
           this.homePageData.push(response);
@@ -94,11 +93,9 @@ export class HeaderComponent implements OnInit {
       this.responseSubscribe=res;
     })
   }
+  //Get product count from cart 
   cartCountFunction() {
     if (localStorage.getItem('ecolink_user_credential') != null) {
-      // this.__apiservice.getItemFromCart().subscribe((res: any) => {
-      //   this.length = res.data.length;
-      // })
       this.__apiservice.getItemFromCart()
         .then((res) => {
           this.length = res.data.length;
@@ -110,14 +107,15 @@ export class HeaderComponent implements OnInit {
     }
     else {
       let cookiesdata = this._cookies.GetCartData();
-      if(cookiesdata != 'empty'){
+      if (cookiesdata != 'empty') {
         this.length = cookiesdata.length;
       }
-      else{
-        this.length = 0 ;
+      else {
+        this.length = 0;
       }
     }
   }
+  //Go to profile page if user signed in
   profile() {
     if (localStorage.getItem("ecolink_user_credential") === null) {
       this.route.navigateByUrl('/profile/auth');
@@ -126,26 +124,25 @@ export class HeaderComponent implements OnInit {
       this.route.navigateByUrl('/profile');
     }
   }
+  //open dropdown in mobile screen
   openmenu() {
     this.openMenu = !this.openMenu;
   }
-
   openDropDown() {
-    console.log('category')
     this.openSubmenu = !this.openSubmenu
   }
   opensubDropDown() {
     console.log('subcategory')
     this.opensubSubmenu = !this.opensubSubmenu
   }
-
+  //Suggestion when user search dynamically
   getSuggestion(data: any) {
     this.showGlobalSearchSuggestion = false;
     this.slug = data.category.slug;
     this.subslug = data.slug;
     this.searchItem = data.name;
   }
-
+  //Global search function
   globalSearch() {
     console.log(this.searchItem);
     if (this.searchItem.length > 0) {
@@ -182,7 +179,7 @@ export class HeaderComponent implements OnInit {
       this.userName = name.user.name.split(" ")[0];
     }
   }
-
+  //Route on Same page for header link in mobile view
   routeOnSamePage(slug: any, sublink?: any, subsublink?: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
@@ -197,17 +194,19 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/' + slug]);
     }
   }
+  //go to map, when click on location icon
   goToLocation() {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/' + 'contact']);
   }
+  //for not repeating api calling
   ngOnDestroy(): void {
     this.isAlive = false;
     this.headerMenuData.unsubscribe();
   }
+  //close subscribe mail popup 
   closeButton() {
-    // this.renderer.setStyle(this.closer.nativeElement, 'display', 'none');
     let object = {
       resSignupMsg: '',
       resSignupMsgCheck: '',
@@ -216,6 +215,7 @@ export class HeaderComponent implements OnInit {
     this.__apiservice.subscribedmsg.next(Object.assign({}, object));
 
   }
+  //scroll down to up function
   scrollup(event: any) {
     console.log(event);
     this.responseSubscribe = event;
