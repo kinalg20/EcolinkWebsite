@@ -56,7 +56,7 @@
                                 <td class="prod-price">{{prod.product.sale_price | currency:'USD'}}</td>
                                 <td class="prod-cart">
                                     <div class="price-row">
-                                        <button routerLink="/cart" (click)="addProductToCart(prod)">Add to Cart</button>
+                                        <button (click)="addProductToCart(prod)">Add to Cart</button>
                                         <span class="delete_item" (click)="deleteWishlistItems(prod.product.id)"><i class="pi pi-times"></i></span>
                                     </div>
                                 </td>

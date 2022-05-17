@@ -284,6 +284,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
           this.getOrderInfo();
           this.route.navigateByUrl('/thanks');
         }
+        else {
+          this.route.navigateByUrl('failed');
+        }
         console.log('onClientAuthorization - you should probably inform your server about completed transaction at this point', data);
       },
       onCancel: (data, actions) => {
@@ -301,11 +304,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   checkPaymentTab() {
     if (this.selectedPaymentMethod == 'cod') {
       this.paymentCheck = false;
+      this.showPaypal=false;
       console.log(this.paymentCheck);
     }
     else if (this.selectedPaymentMethod == "paypal") {
       this.paymentCheck = true;
-      this.showPaypal = !this.showPaypal;
+      this.showPaypal = true;
       console.log(this.paymentCheck);
     }
     else if (this.selectedPaymentMethod == "check-payment") {

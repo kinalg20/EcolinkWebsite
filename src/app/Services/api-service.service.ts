@@ -238,7 +238,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'deleteUserAddresses', { address_id: item_id }, { headers: httpHeaders }).toPromise()
   }
 
-  filterProduct(dataforfilter: any) {
+  filterProduct(dataforfilter: any):Promise<any> {
     let url = 'filterProduct';
     return this.http.post(this._baseurl + url, {
       category: dataforfilter.category,
@@ -246,7 +246,7 @@ export class ApiServiceService {
       price_to: dataforfilter.price_to,
       rating: dataforfilter.rating,
       sortby: dataforfilter.sortby
-    })
+    }).toPromise();
   }
 
   editUserAddress(item: any): Observable<any> {

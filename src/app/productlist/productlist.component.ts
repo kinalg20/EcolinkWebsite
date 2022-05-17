@@ -135,9 +135,10 @@ export class ProductlistComponent implements OnInit {
   }
 
   // add product to cart
-  AddProductToCart(Item: any) {
+  async AddProductToCart(Item: any) {
     let ItemCount = 1;
-    this.commonService.AddProductToCart(Item, this.slug, ItemCount);
+    await this.commonService.AddProductToCart(Item, this.slug, ItemCount);
+    this.router.navigateByUrl('/cart')
   }
 
   // toggle filter model
@@ -162,15 +163,15 @@ export class ProductlistComponent implements OnInit {
       rating: Array.from(this.selectedRatings, Number),
       sortby: this.selectedLevel
     }
-    this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
+    this._ApiService.filterProduct(filterValue).then((res: any) => {
       Object.keys(res.data).map(function (key) {
         obj_Array.push(res.data[key]);
       });
       this.ProductListData[0].data.products = obj_Array;
       this.getPrice();
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.code == 400) {
+    })
+    .catch(error => {
+        if (error.status==400) {
           this.productCheck = true;
         }
       }
@@ -195,7 +196,7 @@ export class ProductlistComponent implements OnInit {
     console.log(this.displayProducts);
     this.getPrice();
     this.productCheck = false;
-    this.selectedRatings = false;
+    this.selectedCategory = [];
   }
 
   //get data on key press

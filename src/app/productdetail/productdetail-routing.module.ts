@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { OrderFailComponent } from '../shared/order-fail/order-fail.component';
 import { ThankYouComponent } from '../shared/thank-you/thank-you.component';
 import { MainDetailComponent } from './main-detail/main-detail.component';
 import { ProductCheckoutComponent } from './product-checkout/product-checkout.component';
@@ -32,6 +33,7 @@ const routes: Routes = [
     ]
   },
   { path: 'thanks', component: ThankYouComponent },
+  { path: 'failed', component: OrderFailComponent }
 ];
 
 @NgModule({

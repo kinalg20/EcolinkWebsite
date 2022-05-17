@@ -195,15 +195,15 @@ export class SubcatgorycomponentComponent implements OnInit {
       rating: Array.from(this.selectedRatings, Number),
       sortby: this.selectedLevel
     }
-    this._ApiService.filterProduct(filterValue).subscribe((res: any) => {
+    this._ApiService.filterProduct(filterValue).then((res: any) => {
       console.log("response", res);
       Object.keys(res.data).map(function (key) {
         obj_Array.push(res.data[key]);
       });
       this.subCatgoryProduct[0].products = obj_Array;
-    },
-      (error: HttpErrorResponse) => {
-        if (error.error.code == 400) {
+    })
+     .catch(error => {
+        if (error.status == 400) {
           this.subCatgoryProduct[0].products = [];
         }
       }
