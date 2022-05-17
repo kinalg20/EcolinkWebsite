@@ -84,7 +84,7 @@
                 </div>
                 <div class="col-lg-6 col-12">
                     <label for="Phone">Phone*</label>
-                    <input type="text" class="form-control my-2" placeholder="phone" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" formControlName="phone" ngModel required>
+                    <input type="text" class="form-control my-2" placeholder="Phone" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" formControlName="phone" ngModel required>
                     <h6 class="text-danger" *ngIf="invalidMobile">
                         {{ invalidMobile ? "Invalid Mobile" : "" }}
                     </h6>
