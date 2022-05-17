@@ -36,11 +36,6 @@
 				border-radius: 0.25rem;
 			}
 
-			.form-control1:focus {
-				border: 1px solid #e22123;
-				box-shadow: none;
-			}
-
 			.signup-head {
 				display: flex;
 				margin-bottom: 30px;
@@ -68,6 +63,14 @@
 
 			input {
 				margin: 10px 0;
+
+				&:focus{
+					border: 1px solid #e22123;
+				}
+				&:focus-visible{
+					border: 1px solid #e22123;
+					outline: none;
+				}
 			}
 
 			button {

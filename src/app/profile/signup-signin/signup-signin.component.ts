@@ -95,19 +95,19 @@ export class SignupSigninComponent implements OnInit {
 
 
   profileForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    phonenumber: new FormControl(''),
+    firstname: new FormControl(' '),
+    lastname: new FormControl(' '),
+    email: new FormControl(' '),
+    phonenumber: new FormControl(' '),
     password: new FormControl(''),
     confirmpassword: new FormControl(''),
-    address: new FormControl(''),
-    country: new FormControl(''),
-    state: new FormControl(''),
-    city: new FormControl(''),
-    pincode: new FormControl(''),
-    radio2: new FormControl(''),
-    image: new FormControl(''),
+    address: new FormControl(' '),
+    country: new FormControl(' '),
+    state: new FormControl(' '),
+    city: new FormControl(' '),
+    pincode: new FormControl(' '),
+    radio2: new FormControl(' '),
+    image: new FormControl(' '),
   });
 
   signUp() {
