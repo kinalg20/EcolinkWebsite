@@ -368,9 +368,9 @@
 
 @media (max-width: 1200px) {
     .nav-link-section .header-container {
-        max-width: 90%;
+        // max-width: 90%;
         .responsive-navbar {
-            width: 80%;
+            width: 75%;
         }
 
         .menus {
@@ -421,12 +421,12 @@
         height: 24px;
     }
 
-    .nav-link-section {
-        .header-container {
-            max-width: 900px;
-            // width: 70%;
-        }
-    }
+    // .nav-link-section {
+    //     .header-container {
+    //         max-width: 900px;
+    //         // width: 70%;
+    //     }
+    // }
 
     .top-head-section {
         background: whitesmoke;
