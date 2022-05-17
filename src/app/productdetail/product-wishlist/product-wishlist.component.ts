@@ -1,4 +1,3 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
@@ -18,12 +17,12 @@ export class ProductWishlistComponent implements OnInit {
       this.getWishlistItems();
     }, 500);
   }
-
+  //add product to cart
   async addProductToCart(prod: any) {
     await this._ApiService.addItemToCart(prod.product_id, 1, "add");
     this.route.navigateByUrl('/cart')
   }
-
+  //get all wishlist product
   async getWishlistItems() {
     this.wishlistShimmer = true;
     this.product = [];
@@ -43,7 +42,7 @@ export class ProductWishlistComponent implements OnInit {
         }
       })
   }
-
+  //delete product from wishlist
   async deleteWishlistItems(product_id: any) {
     await this._ApiService.deleteWishlistItems(product_id)
       .then(res => {

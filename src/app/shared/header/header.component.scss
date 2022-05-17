@@ -3,8 +3,6 @@
     text-align: center;
     .container {
         .top-head-line {
-            // display: flex;
-            // justify-content: space-between;
             p {
                 font-size: 13px;
                 color: #37793a;
@@ -131,56 +129,7 @@
                     }
                 }
             }
-            // li {
-            //   position: relative;
-            // .header-dropdown {
-            //   position: absolute;
-            //   z-index: 999;
-            //   display: none;
-            //   background: #ffffff;
-            //   min-height: 100px;
-            //   width: 250px;
-            //   padding: 20px;
-            //   a {
-            //     color: #000000;
-            //   }
-            //   .test:hover {
-            //     .sub-header-dropdown {
-            //       display: block;
-            //       position: absolute;
-            //       background: #fff;
-            //       left: 0;
-            //       .subsublink {
-            //         position: absolute;
-            //         width: 200px;
-            //         left: -210px;
-            //         padding: 10px;
-            //         top: -77px;
-            //         background: #ffff;
-            //         li {
-            //           padding: 10px;
-            //         }
-            //       }
-            //       .test1 {
-            //         display: block;
-            //       }
-            //     }
-            //   }
-            //   .test {
-            //     .test1 {
-            //       display: none;
-            //     }
-            //   }
-            // }
         }
-        // li:hover .header-dropdown {
-        //   display: block;
-        // }
-        // a {
-        //   text-decoration: none;
-        //   color: white;
-        // }
-        // }
     }
 }
 
@@ -424,12 +373,6 @@
             .fa-shopping-cart {
                 font-size: 20px;
             }
-            // .location-section {
-            //     // display: none;
-            // }
-            // .chat-section {
-            //     // width: auto;
-            // }
         }
     }
 }

@@ -57,7 +57,7 @@ export class ShopComponent implements OnInit {
 
   }
 
-
+  //increase and decrease product quantity on detail page
   Count(string: any) {
     if (string == "increase" && this.ItemCount < this.stock) {
       this.ItemCount = this.ItemCount + 1;
@@ -108,7 +108,7 @@ export class ShopComponent implements OnInit {
     this.commonService.addWishList(product);
   }
 
-
+  // route on same page where we are
   routeOnSamePage(slug: any) {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
