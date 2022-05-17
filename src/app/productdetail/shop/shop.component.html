@@ -29,7 +29,8 @@
                         <h3>{{detail.data.product.name}} - {{detail.data.product.variant}}</h3>
                     </div>
                     <div class="product-rate">
-                        <ng-container *ngIf="detail.data.regular_price > detail.data.sale_price; then thenBlock else elseBlock">
+                        <ng-container
+                            *ngIf="detail.data.regular_price > detail.data.sale_price; then thenBlock else elseBlock">
                         </ng-container>
                         <ng-template #thenBlock>
                             <h4 class="product-price mb-1" style="text-decoration-line: line-through; font-size: 14px;">
@@ -48,7 +49,8 @@
                         </ng-container>
                     </div>
                     <div class="product-desc">
-                        <div [innerHtml]="this._ApiService.getSantizedData(detail.data.product.short_desc)" *ngIf="detail.data.product.short_desc"></div>
+                        <div [innerHtml]="this._ApiService.getSantizedData(detail.data.product.short_desc)"
+                            *ngIf="detail.data.product.short_desc"></div>
                     </div>
                     <div class="product-info">
                         <ul>
@@ -58,7 +60,8 @@
                         </ul>
                     </div>
                     <div class="dropdown" *ngIf="detail.data.variants.length>0">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-toggle="dropdown" aria-expanded="false">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-toggle="dropdown" aria-expanded="false">
                             {{detail.data.product.variant}}
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -71,12 +74,15 @@
                     <div class="cart">
                         <div class="add-to-cart">
                             <div class="counter">
-                                <button (click)="Count('decrease')">-</button>
+                                <button (click)="Count('decrease')"
+                                    [disabled]="ItemCount== detail.data.product.minimum_qty">-</button>
                                 <p>{{ItemCount}}</p>
-                                <button (click)="Count('increase')">+</button>
+                                <button (click)="Count('increase')" [disabled]="ItemCount>=25">+</button>
                             </div>
                             <div class="addtocartbutton">
-                                <button (click)=AddProductToCart(detail.data.product) pButton pRipple type="button" label="Add to Cart" routerLink="/cart" class="p-button-raised p-button-success" style="height:38px;"></button>
+                                <button (click)=AddProductToCart(detail.data.product) pButton pRipple type="button"
+                                    label="Add to Cart" routerLink="/cart" class="p-button-raised p-button-success"
+                                    style="height:38px;"></button>
                             </div>
                         </div>
                         <div class="wishlist">
@@ -91,7 +97,8 @@
             <ng-container *ngFor="let detail of productDetail">
                 <p-tabView>
                     <p-tabPanel header="Description" *ngIf="detail.data.product.description.length>0">
-                        <div class="desc" [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
+                        <div class="desc"
+                            [innerHtml]="this._ApiService.getSantizedData(detail.data.product.description)"></div>
                     </p-tabPanel>
                     <p-tabPanel header="Additional Information">
                         <ul>

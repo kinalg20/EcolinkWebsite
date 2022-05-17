@@ -74,7 +74,6 @@ export class HeaderComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    
     this.getAllHeaderMenu();
     this.headerMenu$.subscribe(res => {
       this.homePageData=[];
@@ -88,9 +87,9 @@ export class HeaderComponent implements OnInit {
       console.log("this.homePageData", this.homePageData);
     }, 1000);
     this.cartCountFunction();
-    this.getSUbscribemsg();
+    this.getSubscribeMsg();
   }
-  getSUbscribemsg() {
+  getSubscribeMsg() {
     this.__apiservice.subscribedmsg.subscribe((res:any)=> {
       this.responseSubscribe=res;
     })
@@ -167,12 +166,21 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  userName:string='';
+  userDetail:any;
   getAllHeaderMenu() {
     this.headerMenuData = this.headerMenuDataLoaded$.subscribe(res => {
       if (!res) {
         this.store.dispatch(new HeaderMenuAction());
       }
     })
+
+    this.userDetail =  localStorage.getItem('ecolink_user_credential');
+    if(this.userDetail ){
+      let name = JSON.parse(this.userDetail);
+      console.log(name.user.name);
+      this.userName = name.user.name.split(" ")[0];
+    }
   }
 
   routeOnSamePage(slug: any, sublink?: any, subsublink?: any) {
