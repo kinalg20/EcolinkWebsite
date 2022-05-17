@@ -2,8 +2,7 @@
 <ng-container *ngIf="!checkString">
     <div class="container authentication">
         <div class="signup-form">
-            <!-- <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)"> -->
-            <form [formGroup]="profileForm" (ngSubmit)="signUp()">
+            <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
                 <ng-container>
                     <div class="signup-head">
                         <span id="auth-head">
@@ -32,19 +31,15 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="first-name">First Name*</label>
-                            <input type="text" id="firstname" autocomplete="off" formControlName="firstname"
-                                maxlength='50'
-                                [ngClass]="profileForm.value.firstname.length > 0 ? 'form-control ': 'form-control1'"
-                                placeholder="Enter Your Name" required />
+                            <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname"
+                                maxlength='50' ngModel required />
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="last-name">Last Name*</label>
-                            <input type="text" id="lastname" autocomplete="off" maxlength='50'
-                                formControlName="lastname"
-                                [ngClass]="profileForm.value.lastname.length > 0 ? 'form-control ': 'form-control1'"
-                                required />
+                            <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
+                                name="lastname" ngModel required />
                         </div>
                     </div>
                 </div>
@@ -52,10 +47,8 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="email">Email*</label>
-                            <input class="form-control" type="email" id="email" autocomplete="off"
-                                formControlName="email" (input)="validateEmail($event)"
-                                [ngClass]="profileForm.value.email.length > 0 ? 'form-control ': 'form-control1'"
-                                required />
+                            <input class="form-control" type="email" id="email" autocomplete="off" name="email"
+                                (input)="validateEmail($event)" ngModel required />
                             <h6 class="text-danger" *ngIf="invalidEmail">
                                 {{ invalidEmail ? "Invalid Email" : "" }}
                             </h6>
@@ -65,10 +58,8 @@
                         <div>
                             <label for="phone-number">Phone Number*</label>
                             <input class="form-control" type="text" id="phonenumber" autocomplete="off"
-                                formControlName="phonenumber" maxlength="10" (input)="validateMobile($event)"
-                                (keydown)="inputMobile($event)"
-                                [ngClass]="profileForm.value.phonenumber.length > 0 ? 'form-control ': 'form-control1'"
-                                required />
+                                name="phonenumber" maxlength="10" (input)="validateMobile($event)"
+                                (keydown)="inputMobile($event)" ngModel required />
                             <h6 class="text-danger" *ngIf="invalidMobile">
                                 {{ invalidMobile ? "Invalid Mobile" : "" }}
                             </h6>
@@ -80,20 +71,18 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="password">Password*</label>
-                            <input class="form-control" type="password" id="password" autocomplete="off"
-                                formControlName="password"
-                                [ngClass]="profileForm.value.password.length > 0 ? 'form-control ': 'form-control1'"
-                                required />
+                            <input class="form-control" type="password" id="password" autocomplete="off" name="password"
+                                [(ngModel)]="password" required />
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="confirm-password">Confirm Password*</label>
-                            <input [ngClass]="profileForm.value.confirmpassword.length > 0 ? 'form-control ': 'form-control1'" type="password" id="confirmpassword" autocomplete="off"
-                                formControlName="confirmpassword" required />
-                            <p class="mt-2 text-danger" *ngIf="profileForm.value.confirmPassword">
+                            <input class="form-control" type="password" id="confirmpassword" autocomplete="off"
+                                [(ngModel)]="confirmPassword" name="confirmpassword" required />
+                            <p class="mt-2 text-danger" *ngIf="confirmPassword">
                                 {{
-                                    profileForm.value.password === profileForm.value.confirmPassword ? "" : "Password Not Match"
+                                password === confirmPassword ? "" : "Password Not Match"
                                 }}
                             </p>
                         </div>
@@ -103,8 +92,8 @@
                     <div class="col-12">
                         <div>
                             <label for="address">Address*</label>
-                            <input class="form-control" type="text" id="address" autocomplete="off"
-                                formControlName="address" [ngClass]="profileForm.value.address.length > 0 ? 'form-control ': 'form-control1'"  required />
+                            <input class="form-control" type="text" id="address" autocomplete="off" name="address"
+                                ngModel required />
                         </div>
                     </div>
                 </div>
@@ -112,15 +101,15 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="country">Country*</label>
-                            <input class="form-control" type="text" id="country" autocomplete="off"
-                                formControlName="country" [ngClass]="profileForm.value.country.length > 0 ? 'form-control ': 'form-control1'"  required />
+                            <input class="form-control" type="text" id="country" autocomplete="off" name="country"
+                                ngModel required />
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="state">State*</label>
-                            <input class="form-control" type="text" id="state" autocomplete="off"
-                                formControlName="state" [ngClass]="profileForm.value.state.length > 0 ? 'form-control ': 'form-control1'" required />
+                            <input class="form-control" type="text" id="state" autocomplete="off" name="state" ngModel
+                                required />
                         </div>
                     </div>
                 </div>
@@ -128,15 +117,15 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="city">City*</label>
-                            <input class="form-control" type="text" id="city" autocomplete="off" formControlName="city"  [ngClass]="profileForm.value.city.length > 0 ? 'form-control ': 'form-control1'" 
-                                required  />
+                            <input class="form-control" type="text" id="city" autocomplete="off" name="city" ngModel
+                                required />
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="pincode">Pincode*</label>
-                            <input class="form-control" type="text" id="pincode" autocomplete="off"
-                                formControlName="pincode" [ngClass]="profileForm.value.pincode.length > 0 ? 'form-control ': 'form-control1'"  required />
+                            <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
+                                ngModel required />
                         </div>
                     </div>
                 </div>
@@ -144,18 +133,18 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="photo">Profile photo</label>
-                            <input class="form-control" type="file" id="image" autocomplete="off"
-                                formControlName="image" [ngClass]="profileForm.value.image.length > 0 ? 'form-control ': 'form-control1'" (change)="GetFileChange($event)" />
+                            <input class="form-control" type="file" id="image" autocomplete="off" name="image" ngModel
+                                (change)="GetFileChange($event)" />
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="taxes">Tax Exemption*</label><br>
-                            <div class="row" style="margin-top: 10px;" >
-                                <div class="col-6"><input type="radio" id="radio1" name="radio2" value="1"  required />
-                                    Yes</div>
-                                <div class="col-6"><input type="radio" id="radio2" name="radio2" value="0" required />
-                                    No</div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-6"><input type="radio" id="radio1" name="radio2" value="1" ngModel required
+                                         /> Yes</div>
+                                <div class="col-6"><input type="radio" id="radio2" name="radio2" value="0" ngModel required
+                                         /> No</div>
                             </div>
                         </div>
                     </div>
@@ -204,7 +193,7 @@
                         <div>
                             <label for="EmailorPhone">Email*</label>
                             <input class="form-control" type="text" id="emailphone" autocomplete="off" name="emailphone"
-                                (input)="validateEmail($event)" required />
+                                (input)="validateEmail($event)" ngModel required />
                             <h6 class="text-danger" *ngIf="invalidEmail || invalidMobile">
                                 {{
                                 invalidEmail
@@ -222,7 +211,7 @@
                         <div>
                             <label for="password">Password*</label>
                             <input class="form-control" type="password" id="password" autocomplete="off" name="password"
-                                required>
+                                ngModel required>
                             <label for="forgot-password" style="width: 100%;text-align: right;"><a
                                     routerLink="/profile/reset-password">Forgot Password</a></label>
                         </div>
