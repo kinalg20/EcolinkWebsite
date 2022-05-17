@@ -44,7 +44,7 @@
         }
 
         .responsive-navbar {
-            width: 63%;
+            width: 70%;
 
             .navbar-toggler {
                 span {
@@ -69,6 +69,7 @@
                     padding: 0;
                     margin: 0;
                     width: 100%;
+                    align-items: center;
 
                     .nav-item {
                         a {
@@ -367,9 +368,9 @@
 
 @media (max-width: 1200px) {
     .nav-link-section .header-container {
-        max-width: 90%;
+        // max-width: 90%;
         .responsive-navbar {
-            width: 80%;
+            width: 75%;
         }
 
         .menus {
@@ -420,12 +421,12 @@
         height: 24px;
     }
 
-    .nav-link-section {
-        .header-container {
-            max-width: 900px;
-            // width: 70%;
-        }
-    }
+    // .nav-link-section {
+    //     .header-container {
+    //         max-width: 900px;
+    //         // width: 70%;
+    //     }
+    // }
 
     .top-head-section {
         background: whitesmoke;
@@ -522,7 +523,7 @@
         max-width: 1000px;
 
         .responsive-navbar {
-            width: 70%;
+            width: fit-content;
         }
     }
 }
