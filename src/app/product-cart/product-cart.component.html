@@ -56,9 +56,9 @@
                                 <td>{{product.product.sale_price| currency:'USD'}}</td>
                                 <td>
                                     <div class="quantity">
-                                        <button (click)="UpdateCart('delete' , product.product_id , product.quantity ,rowIndex )">-</button>
+                                        <button (click)="UpdateCart('delete' , product.product_id , product.quantity ,rowIndex )" [disabled]="product.quantity <= 1">-</button>
                                         <p>{{product.quantity}}</p>
-                                        <button (click)="UpdateCart('add' ,  product.product_id , product.quantity , rowIndex)">+</button>
+                                        <button  (click)="UpdateCart('add' ,  product.product_id , product.quantity , rowIndex)" [disabled]="product.quantity >= 25">+</button>
                                     </div>
                                 </td>
                                 <td>

@@ -40,6 +40,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   public payPalConfig?: IPayPalConfig;
   shippingDataObj: any = {};
   billingUserDetail: any = {};
+  fedexshippingboolean: boolean = true;
+  saiashippingboolean: boolean = true;
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
@@ -53,8 +55,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
     await this.checkoutProduct();
     console.log('jp', this.CheckoutProduct);
-    this.CheckoutProduct.map((res:any)=> {
-      if(res.carts.length==0) {
+    this.CheckoutProduct.map((res: any) => {
+      if (res.carts.length == 0) {
         this.route.navigateByUrl('cart');
       }
     })
@@ -63,23 +65,27 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.initConfig();
     if (localStorage.getItem('ecolink_user_credential') != null) {
       await this.__apiservice.getUserAddress().
-      then((res: any) => {
-        res.data.map((response: any) => {
-          this.getAllUserAddresses.push(response);
-          if (this.getAllUserAddresses.length > 0) {
-            this.showDropdowm = true;
-          }
-        })
-      });
+        then((res: any) => {
+          res.data.map((response: any) => {
+            this.getAllUserAddresses.push(response);
+            if (this.getAllUserAddresses.length > 0) {
+              this.showDropdowm = true;
+            }
+          })
+        });
     }
-    this._ShippingApi.fedextokengeneration().subscribe((res: any) => {
-      this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
-        console.log(resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
-        this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
+    await this._ShippingApi.fedextokengeneration()
+      .then((res: any) => {
+        this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
+          console.log(resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+          this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
+        })
       })
-    })
+    if (this.shippingCharge) {
+      this.fedexshippingboolean = false;
+    }
   }
-  //get tax exemption value
+  // get tax value 
   getTaxExempt() {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       this.__apiservice.getUserProfileDetail().subscribe((res: any) => {
@@ -180,6 +186,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   saiaAmount: number = 0;
   // get product shipping info on checkout page
   getShippingInfo() {
+    this.saiashippingboolean = false;
     this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem)
       .subscribe(
         (res: any) => {
@@ -236,7 +243,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       shipping_email: this.shippingDataObj.email,
       shipping_mobile: this.shippingDataObj.mobile,
       shipping_address: this.shippingDataObj.address,
-      shipping_landmark: this.shippingDataObj.landmark ? this.shippingDataObj.landmark:this.shippingDataObj.city,
+      shipping_landmark: this.shippingDataObj.landmark ? this.shippingDataObj.landmark : this.shippingDataObj.city,
       shipping_country: this.shippingDataObj.country,
       shipping_state: this.shippingDataObj.state,
       shipping_city: this.shippingDataObj.city,
@@ -313,7 +320,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   checkPaymentTab() {
     if (this.selectedPaymentMethod == 'cod') {
       this.paymentCheck = false;
-      this.showPaypal=false;
+      this.showPaypal = false;
       console.log(this.paymentCheck);
     }
     else if (this.selectedPaymentMethod == "paypal") {
@@ -332,7 +339,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     let data_obj: any = [];
     let completedFormat: any = {};
     cookiesObj = this._cookies.GetCartData();
-    if(cookiesObj.length>0){
+    if (cookiesObj.length > 0) {
       cookiesObj.map((res: any) => {
         this.__apiservice.getProductById(res.CartProductId).subscribe((resp: any) => {
           let data: any = {};
@@ -356,7 +363,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         this.checkoutShimmer = false
       }, 1000);
     }
-    else{
+    else {
       this.route.navigateByUrl('cart');
     }
   }

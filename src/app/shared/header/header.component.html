@@ -9,13 +9,14 @@
 </section>
 <!-- Desktop View Header Links and Logo -->
 <section class="nav-link-section">
-    <div class="container navbar navbar-expand-lg">
+    <div class="header-container navbar navbar-expand-lg">
         <div class="logo" routerLink='/'>
             <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-33.png" alt="">
             <h1>ECOLINK</h1>
         </div>
         <div class="responsive-navbar">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span (click)="openmenu()" *ngIf="!openMenu"><i style="font-size:24px" class="fa">&#xf0c9;</i></span>
                 <span (click)="openmenu()" *ngIf="openMenu"><i style="font-size:24px " class="fa">&#xf00d;</i></span>
             </button>
@@ -33,7 +34,8 @@
                                         <div class="subsublink">
                                             <ng-container *ngFor="let subsublink of sublink.subpage">
                                                 <li class="test1">
-                                                    <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">
+                                                    <a
+                                                        (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">
                                                         <div>{{subsublink.title| uppercase}}
                                                         </div>
                                                     </a>
@@ -45,9 +47,18 @@
                             </ul>
                         </li>
                     </ng-container>
-                    <li class="nav-item">
+                    <li class="nav-item" *ngIf="userName">
                         <a (click)="profile()" style="cursor: pointer; color: #fff;">
-                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span style="font-size:16px;"><b>{{userName | titlecase}}</b> <i class="fa fa-user mx-2"
+                                    aria-hidden="true"></i></span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item" *ngIf="!userName">
+                        <a (click)="profile()"
+                            style="cursor: pointer; color: #fff; display: flex;  align-items: center; ">
+                            <i class="pi pi-download" style="transform: rotate(270deg); font-size: 16px;"></i> <span
+                                style="font-size:16px;"> <b class="mx-2">Login / SignUp</b></span>
                         </a>
                     </li>
                 </ul>
@@ -70,7 +81,8 @@
             <a style="cursor: pointer;" (click)="goToLocation()">Speak with our team to find the right product for
                 you!</a>
         </div>
-        <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal" data-target="#exampleModalCenter">
+        <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal"
+            data-target="#exampleModalCenter">
             <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
         </button>
         <div class="cart-icon">
@@ -81,21 +93,26 @@
 <!-- Subscribed Mail Message -->
 <div class="container">
     <ng-container *ngIf="responseSubscribe.resSignupMsg">
-        <div *ngIf="responseSubscribe.resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert1" #close>
+        <div *ngIf="responseSubscribe.resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert"
+            id="loginAlert1" #close>
             {{ responseSubscribe.resSignupMsg }}
             <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
         </div>
-        <div *ngIf="responseSubscribe.resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert1" #close>
+        <div *ngIf="responseSubscribe.resSignupMsgCheck=='success'" class="alert alert-success" role="alert"
+            id="loginAlert1" #close>
+            <!-- {{ responseSubscribe.resSignupMsg }} -->
             <p>Thank you for subscribing ! </p>
             <span class="icon-class"><i class="fa fa-close" (click)="closeButton()"></i></span>
         </div>
-        <div *ngIf="responseSubscribe.resSignupMsgCheck=='warning'" class="alert alert-warning" role="alert" id="loginAlert1" #close>
+        <div *ngIf="responseSubscribe.resSignupMsgCheck=='warning'" class="alert alert-warning" role="alert"
+            id="loginAlert1" #close>
             {{ responseSubscribe.resSignupMsg }}
         </div>
     </ng-container>
 </div>
-<!-- Dynamic Search Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -108,7 +125,9 @@
                 <div class="container">
                     <form class="global-search">
                         <div class="input-group mx-auto">
-                            <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..." (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem" name="search">
+                            <input type="text" class="form-control border border-right-0  py-2" placeholder="Search..."
+                                (input)="globalSearch()" (keydown)="globalSearch()" [(ngModel)]="searchItem"
+                                name="search">
                             <span class="input-group-append" autocomplete="off">
                                 <button class="btn btn-success" type="button" style="height: 42px;"
                                     routerLink="/shop/{{slug}}/{{subslug}}" (click)="globalSearch()"
@@ -147,7 +166,8 @@
                 <ng-container *ngIf="openSubmenu">
                     <ul class="sub-link-responsive" *ngIf="item.subpage">
                         <li class="sub-link" *ngFor="let sublink of item.subpage" (click)="opensubDropDown()">
-                            <a *ngIf="sublink.subpage.length==0" (click)="routeOnSamePage(item.slug , sublink.slug)">{{sublink.title| uppercase}}</a>
+                            <a *ngIf="sublink.subpage.length==0"
+                                (click)="routeOnSamePage(item.slug , sublink.slug)">{{sublink.title| uppercase}}</a>
                             <a *ngIf="sublink.subpage.length!=0">{{sublink.title| uppercase}}
                                 <i *ngIf="sublink.subpage.length>0" style="margin: 0 5px;" class="fa fa-caret-down"></i>
                             </a>
@@ -156,7 +176,8 @@
                                     <ul *ngIf="sublink.subpage.length>0" class="sub-sub-link">
                                         <ng-container *ngFor="let subsublink of sublink.subpage">
                                             <li class="sub-sub-link-title">
-                                                <a (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
+                                                <a
+                                                    (click)="routeOnSamePage(item.slug , sublink.slug , subsublink.slug)">{{subsublink.title|
                                                     uppercase}}</a>
                                             </li>
                                         </ng-container>
@@ -169,9 +190,17 @@
             </div>
         </li>
     </ul>
-    <li class="user-icon">
-        <a (click)="profile()">
-            <i class="fa fa-user" aria-hidden="true"></i>
+    <li class="user-icon" *ngIf="userName">
+        <a (click)="profile()" style="cursor: pointer; color: #37793a;">
+            <span style="font-size:16px;"><b>{{userName | titlecase}}</b> <i class="fa fa-user mx-2"
+                    aria-hidden="true"></i></span>
+        </a>
+    </li>
+
+    <li class="nav-item" *ngIf="!userName">
+        <a (click)="profile()" style="cursor: pointer; color: #37793a; display: flex;  align-items: center; ">
+            <i class="pi pi-download" style="transform: rotate(270deg); font-size: 16px;"></i> <span
+                style="font-size:16px;"> <b class="mx-2">Login / SignUp</b></span>
         </a>
     </li>
 </div>

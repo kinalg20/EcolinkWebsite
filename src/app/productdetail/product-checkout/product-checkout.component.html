@@ -1,9 +1,9 @@
 <div class="container">
-    <div class="checkout-section">
+    <div class="checkout-section" >
         <div class="checkout-heading">
             <h1>Checkout </h1>
         </div>
-        <div class="checkout-body">
+        <div class="checkout-body" >
             <div class="billing-detail">
                 <div class="card">
                     <div class="dropdown-address">
@@ -95,14 +95,12 @@
                                         <div class="Shipping_key">
                                             <div class="d-flex " style="align-items: center;">
                                                 <input type="radio" id="saia" name="shipping"
-                                                    [(ngModel)]="selectedShippingMethod" value="saia" class="saia"
-                                                    >
+                                                    [(ngModel)]="selectedShippingMethod" value="saia" class="saia">
                                                 <label for="saia" class=" mx-2">Saia</label>
                                             </div>
                                             <div class="d-flex mx-3" style="align-items: center;">
                                                 <input type="radio" id="fedex" name="shipping" value="fedex"
-                                                    class="fedex mx-2" [(ngModel)]="selectedShippingMethod"
-                                                    >
+                                                    class="fedex mx-2" [(ngModel)]="selectedShippingMethod">
                                                 <label for="fedex">Fedex</label>
                                             </div>
                                         </div>
@@ -123,7 +121,8 @@
                         <div class="checkout-products-total">
                             <ul>
                                 <li class="subtotal-list-element"><b>Total : </b></li>
-                                <li><b>${{(rate ? rate : 0) -- cart.payable -- (selectedShippingMethod == 'fedex' ? shippingCharge : saiaAmount) - couponDiscount | number
+                                <li><b>${{(rate ? rate : 0) -- cart.payable -- (selectedShippingMethod == 'fedex' ?
+                                        shippingCharge : saiaAmount) - couponDiscount | number
                                         : '1.2-2'}}</b></li>
                             </ul>
                         </div>
@@ -154,14 +153,31 @@
                         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                     </div>
                     <div class="warning-message">
-                        <span *ngIf="disableOrderButton" class="text-danger" style="font-size:12px;">*Please Fill the Billing Details*</span>
+                        <span *ngIf="disableOrderButton" class="text-danger" style="font-size:12px;">*Please Fill the
+                            Billing Details*</span>
                     </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
                                 (click)="getOrderInfo()" class="p-button-raised p-button-success"
                                 style="height:45px; width: 100%;"
-                                [disabled]="paymentCheck || disableOrderButton"></button>
+                                [disabled]="paymentCheck || disableOrderButton || fedexshippingboolean && saiashippingboolean"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="empty-cart" *ngIf="CheckoutProduct.length==0">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body cart">
+                        <div class="col-sm-12 empty-cart-cls text-center"> <img
+                                src="https://i.imgur.com/dCdflKN.png" width="130" height="130"
+                                class="img-fluid mb-4 mr-3">
+                            <h3><strong>Your Cart is Empty</strong></h3>
+                            <h4>Add something to make me happy :)</h4> <a routerLink="/shop"
+                                class="btn btn-success cart-btn-transform m-3" data-abc="true">continue
+                                shopping</a>
                         </div>
                     </div>
                 </div>

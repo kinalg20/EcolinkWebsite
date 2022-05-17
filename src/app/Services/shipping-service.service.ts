@@ -20,7 +20,7 @@ export class ShippingServiceService {
   params: any;
   fedextokenurl: string = 'https://apis-sandbox.fedex.com/oauth/token'
 
-  fedextokengeneration(): Observable<any> {
+  fedextokengeneration(): Promise<any> {
     this.options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
@@ -31,7 +31,7 @@ export class ShippingServiceService {
       .set("grant_type", "client_credentials")
       .set("scope", "scope")
 
-    return this.http.post(`${this.fedextokenurl}`, this.params, { headers: this.options })
+    return this.http.post(`${this.fedextokenurl}`, this.params, { headers: this.options }).toPromise();
   }
 
   fedexshippingurl = 'https://apis-sandbox.fedex.com/rate/v1/rates/quotes'
@@ -131,7 +131,8 @@ export class ShippingServiceService {
   </soap:Envelope>`
 
     const headers = new HttpHeaders({
-      'Content-Type': 'text/xml; charset=utf-8'
+      'Content-Type': 'text/xml; charset=utf-8',
+      'Accept':'application/xml'
     });
     return this.http.post(url, body, { headers: headers, responseType: 'text' });
   }

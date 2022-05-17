@@ -59,10 +59,10 @@ export class ShopComponent implements OnInit {
 
   //increase and decrease product quantity on detail page
   Count(string: any) {
-    if (string == "increase" && this.ItemCount < this.stock) {
+    if (string == "increase" ) {
       this.ItemCount = this.ItemCount + 1;
     }
-    if (string == "decrease" && this.ItemCount > this.minimum_qyt) {
+    if (string == "decrease") {
       this.ItemCount = this.ItemCount - 1;
     }
   }
@@ -91,6 +91,8 @@ export class ShopComponent implements OnInit {
             this.ItemCount = resp;
           }
         })
+        // console.log("res",res);
+        
       }
     })
   }

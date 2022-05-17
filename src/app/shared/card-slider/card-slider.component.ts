@@ -13,7 +13,6 @@ export class CardSliderComponent implements OnInit {
   constructor(private router: Router) { }
 
   ngOnInit(): void {
-    console.log(this.category);
     if (this.recommended_products.length > 0) {
       this.recommended_shimmer_load = false;
     }

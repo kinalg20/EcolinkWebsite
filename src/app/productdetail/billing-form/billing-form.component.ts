@@ -61,7 +61,7 @@ export class BillingFormComponent implements OnInit {
           (res) => {
             console.log(res);
             if (res.code == 200) {
-              this.FormFillUp.emit(false);
+              // this.FormFillUp.emit(false);
               this.OrderInfo.emit(this.userObj)
               window.scroll(0, 0)
               this.resSignupMsg = "Verification mail has been sent to your Email Id !";
@@ -71,7 +71,7 @@ export class BillingFormComponent implements OnInit {
                 JSON.stringify(res.data));
               this.route.navigateByUrl('/shop/checkout');
               this.SaveCookiesDataInCart();
-              window.location.reload();
+              // window.location.reload();
             }
             else {
               localStorage.removeItem('ecolink_user_credential');
