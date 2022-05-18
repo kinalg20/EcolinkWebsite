@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -32,45 +32,59 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() { }
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
-    this.resSignupMsg='';
+    this.resSignupMsg = '';
   }
   goToTop() {
     this.scroller.scrollToAnchor("backToTop");
   }
-  saveSupportFormDetail(form: NgForm) {
-    if (form.valid) {
-      console.log(form.value);
+  supportForm = new FormGroup({
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    streetaddress: new FormControl(''),
+    country: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    pincode: new FormControl('', Validators.required),
+    textarea: new FormControl('', Validators.required),
+  }, { updateOn: 'blur' }
+  );
+  saveSupportFormDetail() {
+    if (this.supportForm.valid) {
+      let data = this.supportForm.value
       this.userObj = {
-        first_name: form.value.firstname,
-        last_name: form.value.lastname,
-        email: form.value.email,
+        first_name: data.firstname,
+        last_name: data.lastname,
+        email: data.email,
         type: "technical",
-        phone: form.value.phone,
-        address_1: form.value.address,
-        country: form.value.country,
-        state: form.value.state,
-        city: form.value.city,
-        zip: form.value.pincode,
-        input_1: form.value.textarea,
+        phone: data.phone,
+        address_1: data.address,
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        zip: data.pincode,
+        input_1: data.textarea,
       };
       this._apiService.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
-        form.reset();
+        this.supportForm.reset();
         this.checkBoxChcek = false
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {
           this.resSignupMsg = '';
-          }, 3000);
+        }, 3000);
       }
       )
     }
     else {
-      this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please Fill the Fields Below!';
-      setTimeout(() => {
-        this.resSignupMsg = '';
-        }, 2000);
+      // this.resSignupMsgCheck = 'danger';
+      // this.resSignupMsg = 'Please Fill the Fields Below!';
+      // setTimeout(() => {
+      //   this.resSignupMsg = '';
+      // }, 2000);
     }
   }
 
