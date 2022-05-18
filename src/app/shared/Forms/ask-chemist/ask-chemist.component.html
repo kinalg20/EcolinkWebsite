@@ -126,7 +126,7 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="Postcode">Pincode*</label>
-                                <input type="text" (input)="validatePincode($event)" (keydown)="inputPincode($event)" class="form-control my-2" placeholder="Postcode / ZIP" formControlName="zip" ngModel required>
+                                <input type="text" maxlength="7" (input)="validatePincode($event)" (keydown)="inputPincode($event)" class="form-control my-2" placeholder="Postcode / ZIP" formControlName="zip" ngModel required>
                                 <h6 class="text-danger" *ngIf="invalidPincode">
                                     {{ invalidPincode ? "Invalid Pincode" : "" }}
                                 </h6>

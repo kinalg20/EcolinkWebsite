@@ -109,7 +109,7 @@
                     <div class="row mb-3">
                         <div class="col-lg-6 col-12">
                             <label for="user-name">Pincode*</label>
-                            <input type="text" [class.is-valid]="localForm.submitted && supportForm.get('pincode')?.valid" [class.is-invalid]="localForm.submitted && supportForm.get('pincode')?.invalid" class="form-control mt-2" id="first-name" formControlName="pincode" required>
+                            <input type="text" maxlength="7" [class.is-valid]="localForm.submitted && supportForm.get('pincode')?.valid" [class.is-invalid]="localForm.submitted && supportForm.get('pincode')?.invalid" class="form-control mt-2" id="first-name" formControlName="pincode" required>
                             <div class="invalid-feedback">
                                 Pincode is required
                             </div>
