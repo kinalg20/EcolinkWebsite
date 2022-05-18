@@ -23,8 +23,10 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
   resSignupMsgCheck: string = ' ';
   invalidMobile = false;
   invalidEmail: boolean = false;
-  invalidPincode:boolean=false
-  checkBoxChcek: boolean = false
+  invalidPincode:boolean=false;
+  checkBoxChcek: boolean = false;
+  submitted = false;
+
   constructor(private _apiService: ApiServiceService, private renderer: Renderer2, private scroller: ViewportScroller, private router: Router) { }
 
   ngOnInit(): void {
@@ -52,6 +54,7 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
   }, { updateOn: 'blur' }
   );
   saveSupportFormDetail() {
+    this.submitted = true;
     if (this.supportForm.valid) {
       let data = this.supportForm.value
       this.userObj = {
@@ -71,6 +74,7 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
         console.log(res);
         this.supportForm.reset();
         this.checkBoxChcek = false
+        this.submitted = false;
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {
@@ -80,6 +84,7 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
       )
     }
     else {
+      this.supportForm.clearValidators();
       // this.resSignupMsgCheck = 'danger';
       // this.resSignupMsg = 'Please Fill the Fields Below!';
       // setTimeout(() => {
