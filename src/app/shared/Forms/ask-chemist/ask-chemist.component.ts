@@ -52,7 +52,8 @@ export class AskChemistComponent implements OnInit {
     state: new FormControl(''),
     city: new FormControl(''),
     zip: new FormControl(''),
-  });
+  }, {updateOn: 'blur'}
+  );
   saveAskChemistDetail() {
     if (this.chemistForm.valid) {
       let data = this.chemistForm.value
