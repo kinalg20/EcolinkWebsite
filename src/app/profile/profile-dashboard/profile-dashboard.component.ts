@@ -1,12 +1,9 @@
 import {
-  Component, Input, OnInit, Renderer2, AfterViewInit, ViewChild, ElementRef, Output, EventEmitter
+  Component, Input, OnInit, Renderer2, ViewChild, ElementRef, Output, EventEmitter
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
-import { HttpErrorResponse } from '@angular/common/http';
-import { timeout } from 'rxjs/operators';
 @Component({
   selector: 'app-profile-dashboard',
   templateUrl: './profile-dashboard.component.html',
