@@ -27,16 +27,20 @@
             </div>
         </div>
         <div class="map-section">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d423976.63487513247!2d-84.151759!3d33.88147699999994!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc425a8157699cf5!2sEcolink+Inc!5e0!3m2!1sen!2sus!4v1402985217757" width="100%" height="300"
-                frameborder="0" style="border:0"></iframe>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d423976.63487513247!2d-84.151759!3d33.88147699999994!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xc425a8157699cf5!2sEcolink+Inc!5e0!3m2!1sen!2sus!4v1402985217757"
+                width="100%" height="300" frameborder="0" style="border:0"></iframe>
         </div>
     </div>
     <div class="sample-policy-section">
         <div class="policy-content">
             <p>For additional information or to request a product sample, please use this form.</p>
 
-            <p><strong>Sample Policy</strong> : <br>Established companies and military users are welcome to request samples of Ecolink products at no charge. For international samples, we request only that you pay the freight costs by providing your shipper’s
-                account number (FedEx, UPS, etc.) In order to determine the most effective products for your needs, please describe your application using this short form.</p>
+            <p><strong>Sample Policy</strong> : <br>Established companies and military users are welcome to request
+                samples of Ecolink products at no charge. For international samples, we request only that you pay the
+                freight costs by providing your shipper’s
+                account number (FedEx, UPS, etc.) In order to determine the most effective products for your needs,
+                please describe your application using this short form.</p>
         </div>
     </div>
     <div class="contact-us-form" id="backToTop">
@@ -44,13 +48,14 @@
             <h2>Contact Us</h2>
         </div>
         <!-- <form #contactdetail="ngForm" (ngSubmit)="saveContactUsDetail(contactdetail)" id="backToTop"> -->
-        <form [formGroup]="contactForm" (ngSubmit)="saveContactUsDetail()">
+        <form [formGroup]="contactForm" (ngSubmit)="saveContactUsDetail()" #contactform="ngForm">
             <ng-container *ngIf="resSignupMsg">
                 <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
                     {{ resSignupMsg }}
                     <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                 </div>
-                <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert" #test>
+                <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
+                    #test>
                     {{ resSignupMsg }}
                     <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                 </div>
@@ -58,15 +63,20 @@
             <div class="row mb-3">
                 <div class="col-lg-6 col-md-12">
                     <label for="first-name">First Name*</label>
-                    <input type="text" class="form-control my-2" placeholder="First name" id="first-name" formControlName="firstname" ngModel required>
-                    <div *ngIf="contactForm.controls['firstname'].invalid && (contactForm.controls['firstname'].dirty || contactForm.controls['firstname'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="First name" id="first-name"
+                        formControlName="firstname"
+                        [class.is-valid]="contactform.submitted && contactForm.get('firstname')?.valid"
+                        [class.is-invalid]="contactform.submitted && contactForm.get('firstname')?.invalid" required>
+                    <div class="invalid-feedback">
                         First Name is required
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-12 ">
                     <label for="last-name" class="lname">Last Name*</label>
-                    <input type="text" class="form-control my-2" placeholder="Last name" formControlName="lastname" ngModel required>
-                    <div *ngIf="contactForm.controls['lastname'].invalid && (contactForm.controls['lastname'].dirty || contactForm.controls['lastname'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Last name" formControlName="lastname"
+                    [class.is-valid]="contactform.submitted && contactForm.get('lastname')?.valid"
+                    [class.is-invalid]="contactform.submitted && contactForm.get('lastname')?.invalid"  required>
+                    <div class="invalid-feedback">
                         Last Name is required
                     </div>
                 </div>
@@ -74,21 +84,26 @@
             <div class="row mb-3">
                 <div class="col-lg-6 col-12">
                     <label for="Email Address">Email Address*</label>
-                    <input type="email" class="form-control my-2" placeholder="Email" id="Email-Address" (input)="validateEmail($event)" formControlName="email" ngModel required>
+                    <input type="email" class="form-control my-2" placeholder="Email" id="Email-Address"
+                        (input)="validateEmail($event)" formControlName="email"  [class.is-valid]="contactform.submitted && contactForm.get('email')?.valid"
+                        [class.is-invalid]="contactform.submitted && contactForm.get('email')?.invalid"  required>
                     <h6 class="text-danger" *ngIf="invalidEmail">
                         {{ invalidEmail ? "Invalid Email" : "" }}
                     </h6>
-                    <div *ngIf="contactForm.controls['email'].invalid && (contactForm.controls['email'].dirty || contactForm.controls['email'].touched)" class="alert alert-danger">
+                    <div class="invalid-feedback">
                         Email is required
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
                     <label for="Phone">Phone*</label>
-                    <input type="text" class="form-control my-2" placeholder="Phone" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" formControlName="phone" ngModel required>
+                    <input type="text" class="form-control my-2" placeholder="Phone" maxlength="10"
+                        (input)="validateMobile($event)" (keydown)="inputMobile($event)" formControlName="phone"  [class.is-valid]="contactform.submitted && contactForm.get('email')?.valid"
+                        [class.is-invalid]="contactform.submitted && contactForm.get('email')?.invalid" 
+                        required>
                     <h6 class="text-danger" *ngIf="invalidMobile">
                         {{ invalidMobile ? "Invalid Mobile" : "" }}
                     </h6>
-                    <div *ngIf="contactForm.controls['phone'].invalid && (contactForm.controls['phone'].dirty || contactForm.controls['phone'].touched)" class="alert alert-danger">
+                    <div class="invalid-feedback">
                         Phone Number is required
                     </div>
                 </div>
@@ -96,8 +111,10 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <label for="street-address">Street Address*</label>
-                    <input type="text" class="form-control my-2" placeholder="Street Address" formControlName="address" ngModel required>
-                    <div *ngIf="contactForm.controls['address'].invalid && (contactForm.controls['address'].dirty || contactForm.controls['address'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Street Address" formControlName="address"
+                    [class.is-valid]="contactform.submitted && contactForm.get('address')?.valid"
+                    [class.is-invalid]="contactform.submitted && contactForm.get('address')?.invalid"  required>
+                    <div class="invalid-feedback">
                         Address is required
                     </div>
                 </div>
@@ -105,15 +122,19 @@
             <div class="row mb-3">
                 <div class="col-lg-6 col-12">
                     <label for="Town-city">City*</label>
-                    <input type="text" class="form-control my-2" placeholder="Town / City" formControlName="city" ngModel required>
-                    <div *ngIf="contactForm.controls['city'].invalid && (contactForm.controls['city'].dirty || contactForm.controls['city'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Town / City" formControlName="city"
+                    [class.is-valid]="contactform.submitted && contactForm.get('city')?.valid"
+                    [class.is-invalid]="contactform.submitted && contactForm.get('city')?.invalid"  required>
+                    <div class="invalid-feedback">
                         City is required
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
                     <label for="state">State*</label>
-                    <input type="text" class="form-control my-2" placeholder="State" formControlName="state" ngModel required>
-                    <div *ngIf="contactForm.controls['state'].invalid && (contactForm.controls['state'].dirty || contactForm.controls['state'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="State" formControlName="state"  [class.is-valid]="contactform.submitted && contactForm.get('state')?.valid"
+                    [class.is-invalid]="contactform.submitted && contactForm.get('state')?.invalid" 
+                        required>
+                    <div class="invalid-feedback">
                         State is required
                     </div>
                 </div>
@@ -121,8 +142,10 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <label for="State-County">Country*</label>
-                    <input type="text" class="form-control my-2" placeholder="Country" formControlName="country" ngModel required>
-                    <div *ngIf="contactForm.controls['country'].invalid && (contactForm.controls['country'].dirty || contactForm.controls['country'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Country" formControlName="country"  [class.is-valid]="contactform.submitted && contactForm.get('country')?.valid"
+                    [class.is-invalid]="contactform.submitted && contactForm.get('country')?.invalid" 
+                        required>
+                    <div class="invalid-feedback">
                         Country is required
                     </div>
                 </div>
@@ -130,8 +153,10 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <label for="Postcode">Postcode*</label>
-                    <input type="text" class="form-control my-2" placeholder="Postcode / ZIP" formControlName="zip" ngModel required>
-                    <div *ngIf="contactForm.controls['zip'].invalid && (contactForm.controls['zip'].dirty || contactForm.controls['zip'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Postcode / ZIP" formControlName="zip"
+                    [class.is-valid]="contactform.submitted && contactForm.get('zip')?.valid"
+                    [class.is-invalid]="contactform.submitted && contactForm.get('zip')?.invalid"  required>
+                    <div class="invalid-feedback">
                         Pincode is required
                     </div>
                 </div>
@@ -140,38 +165,46 @@
                 <div class="col-12">
                     <label for="query1">What item do you wish to clean & what is the surface material ?*
                     </label>
-                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query1" formControlName="query1" ngModel required>
-                    <div *ngIf="contactForm.controls['query1'].invalid && (contactForm.controls['query1'].dirty || contactForm.controls['query1'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query1"
+                        formControlName="query1"  [class.is-valid]="contactform.submitted && contactForm.get('query1')?.valid"
+                        [class.is-invalid]="contactform.submitted && contactForm.get('query1')?.invalid"  required>
+                    <div class="invalid-feedback">
                         Field is required
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-12">
-                    <label for="query1">What kind of soil, grease or coating do you wish to remove ?*
+                    <label for="query2">What kind of soil, grease or coating do you wish to remove ?*
                     </label>
-                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query2" formControlName="query2" ngModel required>
-                    <div *ngIf="contactForm.controls['query2'].invalid && (contactForm.controls['query2'].dirty || contactForm.controls['query2'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query2"
+                        formControlName="query2"  [class.is-valid]="contactform.submitted && contactForm.get('query2')?.valid"
+                        [class.is-invalid]="contactform.submitted && contactForm.get('query2')?.invalid"  required>
+                    <div class="invalid-feedback">
                         Field is required
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-12">
-                    <label for="query1">How do you currently clean this item ?*
+                    <label for="query3">How do you currently clean this item ?*
                     </label>
-                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query3" formControlName="query3" ngModel required>
-                    <div *ngIf="contactForm.controls['query3'].invalid && (contactForm.controls['query3'].dirty || contactForm.controls['query3'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query3"
+                        formControlName="query3"  [class.is-valid]="contactform.submitted && contactForm.get('query3')?.valid"
+                        [class.is-invalid]="contactform.submitted && contactForm.get('query3')?.invalid"  required>
+                    <div class="invalid-feedback">
                         Field is required
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-12">
-                    <label for="query1">What chemicals or products do you currently use and in what amounts ?*
+                    <label for="query4">What chemicals or products do you currently use and in what amounts ?*
                     </label>
-                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query4" formControlName="query4" ngModel required>
-                    <div *ngIf="contactForm.controls['query4'].invalid && (contactForm.controls['query4'].dirty || contactForm.controls['query4'].touched)" class="alert alert-danger">
+                    <input type="text" class="form-control my-2" placeholder="Type here ...." id="query4"
+                        formControlName="query4"  [class.is-valid]="contactform.submitted && contactForm.get('query4')?.valid"
+                        [class.is-invalid]="contactform.submitted && contactForm.get('query4')?.invalid"  required>
+                    <div class="invalid-feedback">
                         Field is required
                     </div>
                 </div>

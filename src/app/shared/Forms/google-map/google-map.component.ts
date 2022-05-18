@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -41,21 +41,21 @@ export class GoogleMapComponent implements OnInit {
     city: "NewYork"
   };
   mapsURL = `https://maps.google.com/maps?q=${this.positionMap.street}%20${this.positionMap.num}%20%${this.positionMap.city}&t=&z=20&ie=UTF8&iwloc=&output=embed`;
-  
+
   contactForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    address: new FormControl(''),
-    country: new FormControl(''),
-    state: new FormControl(''),
-    city: new FormControl(''),
-    zip: new FormControl(''),
-    query1: new FormControl(''),
-    query2: new FormControl(''),
-    query3: new FormControl(''),
-    query4: new FormControl(''),
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    zip: new FormControl('', Validators.required),
+    query1: new FormControl('', Validators.required),
+    query2: new FormControl('', Validators.required),
+    query3: new FormControl('', Validators.required),
+    query4: new FormControl('', Validators.required),
   });
   saveContactUsDetail() {
     if (this.contactForm.valid) {
@@ -75,7 +75,7 @@ export class GoogleMapComponent implements OnInit {
         input_2: data.query2,
         input_3: data.query3,
         input_4: data.query4,
-      };
+      }, {updateOn: 'blur'};
       console.log(this.userObj);
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
@@ -84,7 +84,7 @@ export class GoogleMapComponent implements OnInit {
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {
           this.resSignupMsg = '';
-          }, 3000);
+        }, 3000);
       }
       )
     }
@@ -93,7 +93,7 @@ export class GoogleMapComponent implements OnInit {
       this.resSignupMsg = 'Please Fill the Fields Below!';
       setTimeout(() => {
         this.resSignupMsg = '';
-        }, 2000);
+      }, 2000);
     }
   }
 
