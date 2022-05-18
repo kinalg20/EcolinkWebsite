@@ -38,18 +38,26 @@ export class ShippingServiceService {
   fedextoken: string = ''
   requestedPackage: any = [];
   fedexshippingApi(access_token: any, product_details: any) {
-    let product: number = 0;
+    // let product: number = 0;
     console.log(product_details);
-
+    let product: any;
     product_details.map(async (res: any) => {
       await res.carts.map((resp: any) => {
-        console.log(resp.quantity);
-        product = product + (resp.product.weight * resp.quantity);
+        console.log(resp);
+        product = 
+        {
+          "groupPackageCount": resp.quantity,
+          "weight": {
+            "units": "LB",
+            "value": resp.product.weight
+          }
+        },
+
+        this.requestedPackage.push(product);
       })
-
-      console.log(product);
-
     })
+
+    console.log(this.requestedPackage);
 
     this.fedextoken = access_token;
     const httpHeaders = new HttpHeaders({
@@ -76,18 +84,19 @@ export class ShippingServiceService {
         },
         "pickupType": "DROPOFF_AT_FEDEX_LOCATION",
         "serviceType": "GROUND_HOME_DELIVERY",
+        "shipmentSpecialServices": {
+          "specialServiceTypes": [
+            "HOME_DELIVERY_PREMIUM"
+          ],
+          "homeDeliveryPremiumDetail": {
+            "homedeliveryPremiumType": "APPOINTMENT"
+          }
+        },
         "rateRequestType": [
           "ACCOUNT",
           "LIST"
         ],
-        "requestedPackageLineItems": [
-          {
-            weight: {
-              "units": "LB",
-              "value": product
-            }
-          }
-        ]
+        "requestedPackageLineItems": this.requestedPackage
       }
     }
 
@@ -132,7 +141,7 @@ export class ShippingServiceService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'text/xml; charset=utf-8',
-      'Accept':'application/xml'
+      'Accept': 'application/xml'
     });
     return this.http.post(url, body, { headers: headers, responseType: 'text' });
   }
