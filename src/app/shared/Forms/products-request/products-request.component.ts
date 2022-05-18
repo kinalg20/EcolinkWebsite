@@ -20,6 +20,7 @@ export class ProductsRequestComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   slug: any;
   data: any = []
+  invalidPincode = false;
   userObj: any;
   invalidUserEmail: string = '';
   resSignupMsg: string = '';
@@ -111,9 +112,7 @@ export class ProductsRequestComponent implements OnInit {
     this.resSignupMsg = '';
   }
   goToTop() {
-    if (this.sampleForm.valid) {
       this.scroller.scrollToAnchor("backToTop");
-    }
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -137,6 +136,29 @@ export class ProductsRequestComponent implements OnInit {
 
     else {
       this.invalidEmail = false;
+    }
+  }
+  inputPincode(event: any) {
+    if (
+      event.key.length === 1 &&
+      !/^[0-9]$/.test(event.key)
+    ) {
+      event.preventDefault();
+    }
+  }
+  validatePincode(event: any) {
+    const value = event.target.value;
+
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 6
+    ) {
+      this.invalidPincode = true;
+    }
+
+    else {
+      this.invalidPincode = false;
     }
   }
   inputMobile(event: any) {

@@ -46,7 +46,6 @@ export class BulkPricingComponent implements OnInit {
   saveBulkFormDetail() {
     if (this.pricingForm.valid) {
       let data = this.pricingForm.value
-      console.log(data);
       this.userObj = {
         first_name: data.firstname,
         last_name: data.lastname,

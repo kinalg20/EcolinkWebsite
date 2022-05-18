@@ -153,9 +153,12 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <label for="Postcode">Postcode*</label>
-                    <input type="text" class="form-control my-2" placeholder="Postcode / ZIP" formControlName="zip"
+                    <input type="text" (input)="validatePincode($event)" (keydown)="inputPincode($event)" class="form-control my-2" placeholder="Postcode / ZIP" formControlName="zip"
                     [class.is-valid]="contactform.submitted && contactForm.get('zip')?.valid"
                     [class.is-invalid]="contactform.submitted && contactForm.get('zip')?.invalid"  required>
+                    <h6 class="text-danger" *ngIf="invalidPincode">
+                        {{ invalidPincode ? "Invalid Pincode" : "" }}
+                    </h6>
                     <div class="invalid-feedback">
                         Pincode is required
                     </div>
