@@ -91,6 +91,9 @@ export class HeaderComponent implements OnInit {
   getSubscribeMsg() {
     this.__apiservice.subscribedmsg.subscribe((res:any)=> {
       this.responseSubscribe=res;
+      setTimeout(() => {
+        this.responseSubscribe={};
+      }, 6000);
     })
   }
   //Get product count from cart 
