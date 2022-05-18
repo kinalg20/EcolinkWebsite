@@ -75,7 +75,7 @@ export class AskChemistComponent implements OnInit {
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         this.chemistForm.reset();
-        this.resSignupMsg = 'Contact Details Added Successfully!';
+        this.resSignupMsg = 'Chemist Form Added Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {
           this.resSignupMsg = '';
