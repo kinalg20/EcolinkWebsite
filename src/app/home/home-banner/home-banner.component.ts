@@ -19,7 +19,7 @@ export class HomeBannerComponent implements OnInit {
   constructor(private _ApiService: ApiServiceService, private scroller: ViewportScroller) { }
   action_array = [
     {
-      imgurl: "assets/askchemist.jpg",
+      imgurl: "assets/askchemist.jpeg",
       heading: "Ask The Chemist",
       content: "Need a technical question answered?",
       route: "contact/ask-the-chemist"
@@ -49,7 +49,7 @@ export class HomeBannerComponent implements OnInit {
       route: "manufacture"
     },
     {
-      imgurl: "assets/ourservices.jpg",
+      imgurl: "assets/services.jpeg",
       heading: "Our Services",
       content: "Services and Marketing",
       route: "productlist"
