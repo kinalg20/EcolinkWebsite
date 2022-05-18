@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -27,19 +27,20 @@ export class BulkPricingComponent implements OnInit {
   ngOnInit(): void {
   }
   pricingForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    input_11: new FormControl(''),
-    address: new FormControl(''),
-    address2: new FormControl(''),
-    country: new FormControl(''),
-    state: new FormControl(''),
-    city: new FormControl(''),
-    pincode: new FormControl(''),
-    help: new FormControl(''),
-  });
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    input_11: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    address2: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    pincode: new FormControl('', Validators.required),
+    help: new FormControl('', Validators.required),
+  }, {updateOn: 'blur'}
+  );
   saveBulkFormDetail() {
     if (this.pricingForm.valid) {
       let data = this.pricingForm.value
@@ -70,11 +71,11 @@ export class BulkPricingComponent implements OnInit {
       )
     }
     else {
-      this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please Fill the Fields Below!';
-      setTimeout(() => {
-        this.resSignupMsg = '';
-        }, 2000);
+      // this.resSignupMsgCheck = 'danger';
+      // this.resSignupMsg = 'Please Fill the Fields Below!';
+      // setTimeout(() => {
+      //   this.resSignupMsg = '';
+      //   }, 2000);
     }
   }
   ngAfterViewInit() { }
