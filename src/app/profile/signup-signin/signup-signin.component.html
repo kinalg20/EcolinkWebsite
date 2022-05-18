@@ -159,7 +159,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="pincode">Pincode*</label>
-                            <input class="form-control" type="text" id="pincode" autocomplete="off"
+                            <input class="form-control" maxlength="7" type="text" id="pincode" autocomplete="off"
                                 formControlName="pincode" (input)="validatePincode($event)" (keydown)="inputPincode($event)"
                                 [class.is-valid]="signup.submitted && profileForm.get('pincode')?.valid"
                                 [class.is-invalid]="signup.submitted && profileForm.get('pincode')?.invalid" required />
