@@ -2,7 +2,8 @@
 <ng-container *ngIf="!checkString">
     <div class="container authentication">
         <div class="signup-form">
-            <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)">
+            <!-- <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)"> -->
+            <form [formGroup]="profileForm" (ngSubmit)="signUp()">
                 <ng-container>
                     <div class="signup-head">
                         <span id="auth-head">
@@ -12,18 +13,15 @@
                     </div>
                 </ng-container>
                 <ng-container *ngIf="resSignupMsg">
-                    <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
-                        #test>
+                    <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
                         {{ resSignupMsg }}
                         <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
-                    <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert"
-                        #test>
+                    <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert" #test>
                         {{ resSignupMsg }}
                         <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                     </div>
-                    <div *ngIf="resSignupMsgCheck=='warning'" class="alert alert-warning" role="alert" id="loginAlert"
-                        #test>
+                    <div *ngIf="resSignupMsgCheck=='warning'" class="alert alert-warning" role="alert" id="loginAlert" #test>
                         {{ resSignupMsg }}
                     </div>
                 </ng-container>
@@ -31,15 +29,19 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="first-name">First Name*</label>
-                            <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname"
-                                maxlength='50' ngModel required />
+                            <input type="text" class="form-control" id="firstname" autocomplete="off" formControlName="firstname" maxlength='50' required />
+                            <div *ngIf="profileForm.controls['firstname'].invalid && (profileForm.controls['firstname'].dirty || profileForm.controls['firstname'].touched)" class="alert alert-danger">
+                                First Name is required
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="last-name">Last Name*</label>
-                            <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50'
-                                name="lastname" ngModel required />
+                            <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50' formControlName="lastname" required />
+                            <div *ngIf="profileForm.controls['lastname'].invalid && (profileForm.controls['lastname'].dirty || profileForm.controls['lastname'].touched)" class="alert alert-danger">
+                                Last Name is required
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -47,23 +49,25 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="email">Email*</label>
-                            <input class="form-control" type="email" id="email" autocomplete="off" name="email"
-                                (input)="validateEmail($event)" ngModel required />
+                            <input class="form-control" type="email" id="email" autocomplete="off" formControlName="email" (input)="validateEmail($event)" required />
                             <h6 class="text-danger" *ngIf="invalidEmail">
                                 {{ invalidEmail ? "Invalid Email" : "" }}
                             </h6>
+                            <div *ngIf="profileForm.controls['email'].invalid && (profileForm.controls['email'].dirty || profileForm.controls['email'].touched)" class="alert alert-danger">
+                                Email is required
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="phone-number">Phone Number*</label>
-                            <input class="form-control" type="text" id="phonenumber" autocomplete="off"
-                                name="phonenumber" maxlength="10" (input)="validateMobile($event)"
-                                (keydown)="inputMobile($event)" ngModel required />
+                            <input class="form-control" type="text" id="phonenumber" autocomplete="off" formControlName="phonenumber" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" required />
                             <h6 class="text-danger" *ngIf="invalidMobile">
                                 {{ invalidMobile ? "Invalid Mobile" : "" }}
                             </h6>
-
+                            <div *ngIf="profileForm.controls['phonenumber'].invalid && (profileForm.controls['phonenumber'].dirty || profileForm.controls['phonenumber'].touched)" class="alert alert-danger">
+                                Phone Number is required
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -71,19 +75,18 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="password">Password*</label>
-                            <input class="form-control" type="password" id="password" autocomplete="off" name="password"
-                                [(ngModel)]="password" required />
+                            <input class="form-control" type="password" id="password" autocomplete="off" [(ngModel)]="password" formControlName="password" required />
+                            <div *ngIf="profileForm.controls['password'].invalid && (profileForm.controls['password'].dirty || profileForm.controls['password'].touched)" class="alert alert-danger">
+                                Password is required
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="confirm-password">Confirm Password*</label>
-                            <input class="form-control" type="password" id="confirmpassword" autocomplete="off"
-                                [(ngModel)]="confirmPassword" name="confirmpassword" required />
+                            <input class="form-control" type="password" id="confirmpassword" [(ngModel)]="confirmPassword" autocomplete="off" formControlName="confirmpassword" required />
                             <p class="mt-2 text-danger" *ngIf="confirmPassword">
-                                {{
-                                password === confirmPassword ? "" : "Password Not Match"
-                                }}
+                                {{ password === confirmPassword ? "" : "Password Not Match" }}
                             </p>
                         </div>
                     </div>
@@ -92,8 +95,10 @@
                     <div class="col-12">
                         <div>
                             <label for="address">Address*</label>
-                            <input class="form-control" type="text" id="address" autocomplete="off" name="address"
-                                ngModel required />
+                            <input class="form-control" type="text" id="address" autocomplete="off" formControlName="address" required />
+                            <div *ngIf="profileForm.controls['address'].invalid && (profileForm.controls['address'].dirty || profileForm.controls['address'].touched)" class="alert alert-danger">
+                                Address is required
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -101,15 +106,19 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="country">Country*</label>
-                            <input class="form-control" type="text" id="country" autocomplete="off" name="country"
-                                ngModel required />
+                            <input class="form-control" type="text" id="country" autocomplete="off" formControlName="country" required />
+                            <div *ngIf="profileForm.controls['country'].invalid && (profileForm.controls['country'].dirty || profileForm.controls['country'].touched)" class="alert alert-danger">
+                                Country is required
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="state">State*</label>
-                            <input class="form-control" type="text" id="state" autocomplete="off" name="state" ngModel
-                                required />
+                            <input class="form-control" type="text" id="state" autocomplete="off" formControlName="state" required />
+                            <div *ngIf="profileForm.controls['state'].invalid && (profileForm.controls['state'].dirty || profileForm.controls['state'].touched)" class="alert alert-danger">
+                                State is required
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -117,15 +126,19 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="city">City*</label>
-                            <input class="form-control" type="text" id="city" autocomplete="off" name="city" ngModel
-                                required />
+                            <input class="form-control" type="text" id="city" autocomplete="off" formControlName="city" required />
+                            <div *ngIf="profileForm.controls['city'].invalid && (profileForm.controls['city'].dirty || profileForm.controls['city'].touched)" class="alert alert-danger">
+                                City is required
+                            </div>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="pincode">Pincode*</label>
-                            <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode"
-                                ngModel required />
+                            <input class="form-control" type="text" id="pincode" autocomplete="off" formControlName="pincode" required />
+                            <div *ngIf="profileForm.controls['pincode'].invalid && (profileForm.controls['pincode'].dirty || profileForm.controls['pincode'].touched)" class="alert alert-danger">
+                                Pincode is required
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -133,18 +146,17 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="photo">Profile photo</label>
-                            <input class="form-control" type="file" id="image" autocomplete="off" name="image" ngModel
-                                (change)="GetFileChange($event)" />
+                            <input class="form-control" type="file" id="image" autocomplete="off" formControlName="image" (change)="GetFileChange($event)" />
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="taxes">Tax Exemption*</label><br>
                             <div class="row" style="margin-top: 10px;">
-                                <div class="col-6"><input type="radio" id="radio1" name="radio2" value="1" ngModel required
-                                         /> Yes</div>
-                                <div class="col-6"><input type="radio" id="radio2" name="radio2" value="0" ngModel required
-                                         /> No</div>
+                                <div class="col-6"><input type="radio" id="radio1" formControlName="radio2" value="1" required /> Yes
+                                </div>
+                                <div class="col-6"><input type="radio" id="radio2" formControlName="radio2" value="0" required /> No
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -181,8 +193,7 @@
                         </div>
                     </ng-container> -->
                     <ng-container *ngIf="resSignupMsg">
-                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
-                            #test>
+                        <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
                             {{ resSignupMsg }}
                             <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                         </div>
@@ -192,16 +203,9 @@
                     <div class="col-12">
                         <div>
                             <label for="EmailorPhone">Email*</label>
-                            <input class="form-control" type="text" id="emailphone" autocomplete="off" name="emailphone"
-                                (input)="validateEmail($event)" ngModel required />
+                            <input class="form-control" type="text" id="emailphone" autocomplete="off" name="emailphone" (input)="validateEmail($event)" ngModel required />
                             <h6 class="text-danger" *ngIf="invalidEmail || invalidMobile">
-                                {{
-                                invalidEmail
-                                ? "Invalid Email"
-                                : invalidMobile
-                                ? "Invalid Mobile"
-                                : ""
-                                }}
+                                {{ invalidEmail ? "Invalid Email" : invalidMobile ? "Invalid Mobile" : "" }}
                             </h6>
                         </div>
                     </div>
@@ -210,8 +214,7 @@
                     <div class="col-12">
                         <div>
                             <label for="password">Password*</label>
-                            <input class="form-control" type="password" id="password" autocomplete="off" name="password"
-                                ngModel required>
+                            <input class="form-control" type="password" id="password" autocomplete="off" name="password" ngModel required>
                             <label for="forgot-password" style="width: 100%;text-align: right;"><a
                                     routerLink="/profile/reset-password">Forgot Password</a></label>
                         </div>
@@ -224,8 +227,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 text-center">
-                        <p>If you don't have account <a (click)="SignIn()" class="primary"
-                                style="cursor: pointer;">Create Account</a></p>
+                        <p>If you don't have account <a (click)="SignIn()" class="primary" style="cursor: pointer;">Create Account</a></p>
                     </div>
                 </div>
                 <div class="row">

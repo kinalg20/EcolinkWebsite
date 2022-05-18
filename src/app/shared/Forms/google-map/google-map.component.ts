@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -41,31 +41,46 @@ export class GoogleMapComponent implements OnInit {
     city: "NewYork"
   };
   mapsURL = `https://maps.google.com/maps?q=${this.positionMap.street}%20${this.positionMap.num}%20%${this.positionMap.city}&t=&z=20&ie=UTF8&iwloc=&output=embed`;
-
-  saveContactUsDetail(form: NgForm) {
-    if (form.valid) {
-      console.log(form.value);
+  
+  contactForm = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    address: new FormControl(''),
+    country: new FormControl(''),
+    state: new FormControl(''),
+    city: new FormControl(''),
+    zip: new FormControl(''),
+    query1: new FormControl(''),
+    query2: new FormControl(''),
+    query3: new FormControl(''),
+    query4: new FormControl(''),
+  });
+  saveContactUsDetail() {
+    if (this.contactForm.valid) {
+      let data = this.contactForm.value
       this.userObj = {
-        first_name: form.value.firstname,
-        last_name: form.value.lastname,
-        email: form.value.email,
+        first_name: data.firstname,
+        last_name: data.lastname,
+        email: data.email,
         type: "contact",
-        phone: form.value.phone,
-        address_1: form.value.address,
-        country: form.value.country,
-        state: form.value.state,
-        city: form.value.city,
-        zip: form.value.zip,
-        input_1: form.value.query1,
-        input_2: form.value.query2,
-        input_3: form.value.query3,
-        input_4: form.value.query4,
+        phone: data.phone,
+        address_1: data.address,
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        zip: data.zip,
+        input_1: data.query1,
+        input_2: data.query2,
+        input_3: data.query3,
+        input_4: data.query4,
       };
       console.log(this.userObj);
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
-        form.reset();
-        this.resSignupMsg = 'Form Submitted Successfully!';
+        this.contactForm.reset();
+        this.resSignupMsg = 'Contact Details Added Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {
           this.resSignupMsg = '';

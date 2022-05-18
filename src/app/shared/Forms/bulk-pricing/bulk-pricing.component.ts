@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -26,27 +26,41 @@ export class BulkPricingComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  saveBulkFormDetail(form: NgForm) {
-    if (form.valid) {
-      console.log(form.value);
+  pricingForm = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    input_11: new FormControl(''),
+    address: new FormControl(''),
+    address2: new FormControl(''),
+    country: new FormControl(''),
+    state: new FormControl(''),
+    city: new FormControl(''),
+    pincode: new FormControl(''),
+    help: new FormControl(''),
+  });
+  saveBulkFormDetail() {
+    if (this.pricingForm.valid) {
+      let data = this.pricingForm.value
+      console.log(data);
       this.userObj = {
-        first_name: form.value.firstname,
-        last_name: form.value.lastname,
-        email: form.value.email,
+        first_name: data.firstname,
+        last_name: data.lastname,
+        email: data.email,
         type: "bulkpricing",
-        phone: form.value.phone,
-        address_1: form.value.address,
-        country: form.value.country,
-        state: form.value.state,
-        city: form.value.city,
-        zip: form.value.pincode,
-        input_1: form.value.input_11,
-        input_2: form.value.help
+        phone: data.phone,
+        address_1: data.address,
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        zip: data.pincode,
+        input_1: data.input_11,
+        input_2: data.help
       };
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
-        form.reset();
+        this.pricingForm.reset();
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {

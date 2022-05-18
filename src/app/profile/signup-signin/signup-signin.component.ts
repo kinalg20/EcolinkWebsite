@@ -1,12 +1,6 @@
-import {
-  Component,
-  Renderer2,
-  AfterViewInit,
-  ViewChild,
-  ElementRef, OnInit
-} from '@angular/core';
+import { Component, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { SocialAuthService } from "angularx-social-login";
@@ -33,7 +27,7 @@ export class SignupSigninComponent implements OnInit {
   resSignupMsgCheck: string = ' ';
   resMsg: string = '';
   errMsg = [];
-  constructor(private router: Router, private renderer: Renderer2, private scroller: ViewportScroller, private __apiservice: ApiServiceService, private authService: SocialAuthService, private route :ActivatedRoute) { }
+  constructor(private router: Router, private renderer: Renderer2, private scroller: ViewportScroller, private __apiservice: ApiServiceService, private authService: SocialAuthService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
@@ -98,11 +92,29 @@ export class SignupSigninComponent implements OnInit {
     }
   }
 
-  signUp(form: NgForm) {
-    if (form.valid) {
+  profileForm = new FormGroup({
+    firstname: new FormControl(''),
+    lastname: new FormControl(''),
+    email: new FormControl(''),
+    phonenumber: new FormControl(''),
+    password: new FormControl(''),
+    confirmpassword: new FormControl(''),
+    address: new FormControl(''),
+    country: new FormControl(''),
+    state: new FormControl(''),
+    city: new FormControl(''),
+    pincode: new FormControl(''),
+    radio2: new FormControl(''),
+    image: new FormControl(''),
+  });
+
+  signUp() {
+    if (this.profileForm.valid) {
       this.resSignupMsgCheck = 'warning';
       this.resSignupMsg = 'Wait for a while....'
-      let data = Object.assign({}, form.value);
+
+      let data = this.profileForm.value;
+      console.log(data);
       let formData = new FormData();
       formData.append('profile_image', this.file);
       formData.append('name', data.firstname + ' ' + data.lastname);
@@ -115,8 +127,6 @@ export class SignupSigninComponent implements OnInit {
       formData.append('city', data.city);
       formData.append('pincode', data.pincode);
       formData.append('tax_exempt', data.radio2);
-
-
       this.taxCalculate = data.radio2
       this.__apiservice.post(formData).subscribe(
         (res) => {
@@ -130,7 +140,7 @@ export class SignupSigninComponent implements OnInit {
               'ecolink_user_credential',
               JSON.stringify(res.data)
             );
-            form.reset();
+            this.profileForm.reset();
           }
 
           else {
@@ -176,14 +186,14 @@ export class SignupSigninComponent implements OnInit {
           console.log(res.error);
           if (res.code === 200) {
             // if (res.data.user_id == 1) {
-              // window.location.href = 'https://brandtalks.in/ecolink/login';
+            // window.location.href = 'https://brandtalks.in/ecolink/login';
             // }
             // else {
-              localStorage.setItem(
-                'ecolink_user_credential',
-                JSON.stringify(res.data)
-              );
-              this.router.navigateByUrl('/');
+            localStorage.setItem(
+              'ecolink_user_credential',
+              JSON.stringify(res.data)
+            );
+            this.router.navigateByUrl('/');
             // }
           }
           else {
