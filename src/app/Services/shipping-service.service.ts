@@ -42,23 +42,22 @@ export class ShippingServiceService {
     console.log(product_details);
     let product: any;
     product_details.map(async (res: any) => {
+      this.requestedPackage=[];
       await res.carts.map((resp: any) => {
         console.log(resp);
-        product = 
-        {
+        product = {
           "groupPackageCount": resp.quantity,
           "weight": {
             "units": "LB",
             "value": resp.product.weight
           }
-        },
-
+        }
         this.requestedPackage.push(product);
       })
     })
 
     console.log(this.requestedPackage);
-
+    
     this.fedextoken = access_token;
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/json',
