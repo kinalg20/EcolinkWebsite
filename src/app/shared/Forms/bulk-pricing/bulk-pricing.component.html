@@ -137,7 +137,10 @@
                     <div class="row mb-3">
                         <div class="col-lg-6 col-12">
                             <label for="user-name">Pincode*</label>
-                            <input type="text" [class.is-valid]="localForm.submitted && pricingForm.get('pincode')?.valid" [class.is-invalid]="localForm.submitted && pricingForm.get('pincode')?.invalid" class="form-control mt-2" id="first-name" formControlName="pincode" required>
+                            <input type="text" (input)="validatePincode($event)" (keydown)="inputPincode($event)" [class.is-valid]="localForm.submitted && pricingForm.get('pincode')?.valid" [class.is-invalid]="localForm.submitted && pricingForm.get('pincode')?.invalid" class="form-control mt-2" id="first-name" formControlName="pincode" required>
+                            <h6 class="text-danger" *ngIf="invalidPincode">
+                                {{ invalidPincode ? "Invalid Pincode" : "" }}
+                            </h6>
                             <div class="invalid-feedback">
                                 Pincode is required
                             </div>

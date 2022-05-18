@@ -81,7 +81,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
           this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
         })
       })
-    if (this.shippingCharge) {
+    if (this.shippingCharge > 0) {
       this.fedexshippingboolean = false;
     }
   }
@@ -186,7 +186,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   saiaAmount: number = 0;
   // get product shipping info on checkout page
   getShippingInfo() {
-    this.saiashippingboolean = false;
     this._ShippingApi.rateDetailThroughSaia(this.checkoutProductItem)
       .subscribe(
         (res: any) => {
@@ -202,6 +201,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
             this.saiaValues[firstEmployee.childNodes[i].nodeName] = x.childNodes[0].nodeValue
           }
           console.log(this.saiaValues);
+          this.saiashippingboolean = false;
           this.saiaAmount = Number(this.saiaValues.Amount);
         },
         (error: HttpErrorResponse) => {
