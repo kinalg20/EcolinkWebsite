@@ -105,8 +105,8 @@ export class SignupSigninComponent implements OnInit {
     city: new FormControl('', Validators.required),
     pincode: new FormControl('', Validators.required),
     radio2: new FormControl('', Validators.required),
-    image: new FormControl('', Validators.required),
-  }, {updateOn: 'blur'}
+    image: new FormControl(''),
+  }, {updateOn: 'submit'}
   );
 
   signUp() {
