@@ -127,9 +127,6 @@ export class ShippingServiceService {
         <Details>
           <DetailItem>
             <Weight>${checkoutProductList.weight != undefined ? checkoutProductList.weight : 0}</Weight>
-            <Height>${checkoutProductList.height != undefined ? checkoutProductList.height : 0}</Height>
-            <Length>${checkoutProductList.length != undefined ? checkoutProductList.length : 0}</Length>
-            <Width>${checkoutProductList.width != undefined ? checkoutProductList.width : 0}</Width>
             <Class>50</Class>
           </DetailItem>
         </Details>
