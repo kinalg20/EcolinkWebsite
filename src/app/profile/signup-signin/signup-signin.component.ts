@@ -105,13 +105,12 @@ export class SignupSigninComponent implements OnInit {
     city: new FormControl('', Validators.required),
     pincode: new FormControl('', Validators.required),
     radio2: new FormControl('', Validators.required),
-    image: new FormControl(''),
-  }, {updateOn: 'submit'}
+    image: new FormControl('')
+  }, {updateOn: 'blur'}
   );
 
   signUp() {
     if (this.profileForm.valid) {
-      console.log (this.profileForm, "gun")
       this.resSignupMsgCheck = 'warning';
       this.resSignupMsg = 'Wait for a while....'
 
