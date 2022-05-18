@@ -18,6 +18,7 @@ import { ApiServiceService } from 'src/app/Services/api-service.service';
 export class AskChemistComponent implements OnInit {
   @ViewChild('test') test: ElementRef | any;
   userObj: any;
+  invalidPincode = false;
   invalidUserEmail: string = '';
   resSignupMsg: string = '';
   resSignupMsgCheck: string = ' ';
@@ -120,6 +121,29 @@ export class AskChemistComponent implements OnInit {
 
     else {
       this.invalidEmail = false;
+    }
+  }
+  inputPincode(event: any) {
+    if (
+      event.key.length === 1 &&
+      !/^[0-9]$/.test(event.key)
+    ) {
+      event.preventDefault();
+    }
+  }
+  validatePincode(event: any) {
+    const value = event.target.value;
+
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 6
+    ) {
+      this.invalidPincode = true;
+    }
+
+    else {
+      this.invalidPincode = false;
     }
   }
   inputMobile(event: any) {
