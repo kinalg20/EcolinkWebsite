@@ -38,19 +38,26 @@ export class ShippingServiceService {
   fedextoken: string = ''
   requestedPackage: any = [];
   fedexshippingApi(access_token: any, product_details: any) {
-    let product: number = 0;
+    // let product: number = 0;
     console.log(product_details);
-
+    let product: any;
     product_details.map(async (res: any) => {
+      this.requestedPackage=[];
       await res.carts.map((resp: any) => {
-        console.log(resp.quantity);
-        product = product + (resp.product.weight * resp.quantity);
+        console.log(resp);
+        product = {
+          "groupPackageCount": resp.quantity,
+          "weight": {
+            "units": "LB",
+            "value": resp.product.weight
+          }
+        }
+        this.requestedPackage.push(product);
       })
-
-      console.log(product);
-
     })
 
+    console.log(this.requestedPackage);
+    
     this.fedextoken = access_token;
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/json',
@@ -76,18 +83,19 @@ export class ShippingServiceService {
         },
         "pickupType": "DROPOFF_AT_FEDEX_LOCATION",
         "serviceType": "GROUND_HOME_DELIVERY",
+        "shipmentSpecialServices": {
+          "specialServiceTypes": [
+            "HOME_DELIVERY_PREMIUM"
+          ],
+          "homeDeliveryPremiumDetail": {
+            "homedeliveryPremiumType": "APPOINTMENT"
+          }
+        },
         "rateRequestType": [
           "ACCOUNT",
           "LIST"
         ],
-        "requestedPackageLineItems": [
-          {
-            weight: {
-              "units": "LB",
-              "value": product
-            }
-          }
-        ]
+        "requestedPackageLineItems": this.requestedPackage
       }
     }
 
@@ -119,9 +127,6 @@ export class ShippingServiceService {
         <Details>
           <DetailItem>
             <Weight>${checkoutProductList.weight != undefined ? checkoutProductList.weight : 0}</Weight>
-            <Height>${checkoutProductList.height != undefined ? checkoutProductList.height : 0}</Height>
-            <Length>${checkoutProductList.length != undefined ? checkoutProductList.length : 0}</Length>
-            <Width>${checkoutProductList.width != undefined ? checkoutProductList.width : 0}</Width>
             <Class>50</Class>
           </DetailItem>
         </Details>
@@ -132,7 +137,7 @@ export class ShippingServiceService {
 
     const headers = new HttpHeaders({
       'Content-Type': 'text/xml; charset=utf-8',
-      'Accept':'application/xml'
+      'Accept': 'application/xml'
     });
     return this.http.post(url, body, { headers: headers, responseType: 'text' });
   }

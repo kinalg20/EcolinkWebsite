@@ -203,7 +203,7 @@
                     <div class="col-12">
                         <div>
                             <label for="EmailorPhone">Email*</label>
-                            <input class="form-control" type="text" id="emailphone" autocomplete="off" name="emailphone" (input)="validateEmail($event)" required />
+                            <input class="form-control" type="text" id="emailphone" autocomplete="off" name="emailphone" (input)="validateEmail($event)" ngModel required />
                             <h6 class="text-danger" *ngIf="invalidEmail || invalidMobile">
                                 {{ invalidEmail ? "Invalid Email" : invalidMobile ? "Invalid Mobile" : "" }}
                             </h6>
@@ -214,7 +214,7 @@
                     <div class="col-12">
                         <div>
                             <label for="password">Password*</label>
-                            <input class="form-control" type="password" id="password" autocomplete="off" name="password" required>
+                            <input class="form-control" type="password" id="password" autocomplete="off" name="password" ngModel required>
                             <label for="forgot-password" style="width: 100%;text-align: right;"><a
                                     routerLink="/profile/reset-password">Forgot Password</a></label>
                         </div>
