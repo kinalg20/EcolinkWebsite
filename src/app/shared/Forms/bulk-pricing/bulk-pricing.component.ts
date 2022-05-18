@@ -33,7 +33,7 @@ export class BulkPricingComponent implements OnInit {
     phone: new FormControl('', Validators.required),
     input_11: new FormControl('', Validators.required),
     address: new FormControl('', Validators.required),
-    address2: new FormControl('', Validators.required),
+    address2: new FormControl(''),
     country: new FormControl('', Validators.required),
     state: new FormControl('', Validators.required),
     city: new FormControl('', Validators.required),

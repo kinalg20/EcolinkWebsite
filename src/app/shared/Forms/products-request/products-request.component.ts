@@ -4,10 +4,10 @@ import {
   AfterViewInit,
   ViewChild,
   ElementRef, OnInit
-} from '@angular/core'; 
+} from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
@@ -44,44 +44,65 @@ export class ProductsRequestComponent implements OnInit {
       })
     }
   }
-
-  saveProductRequestDetail(form: NgForm) {
-    if (form.valid) {
-      console.log(form.value);
+  sampleForm = new FormGroup({
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    streetaddress: new FormControl(''),
+    country: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    pincode: new FormControl('', Validators.required),
+    input1: new FormControl('', Validators.required),
+    input2: new FormControl('', Validators.required),
+    input3: new FormControl('', Validators.required),
+    input4: new FormControl('', Validators.required),
+    change: new FormControl(''),
+    city1: new FormControl(''),
+    city2: new FormControl(''),
+    input_13: new FormControl(''),
+  }, { updateOn: 'blur' }
+  );
+  saveProductRequestDetail() {
+    if (this.sampleForm.valid) {
+      let data = this.sampleForm.value
+      console.log(data);
       this.userObj = {
-        first_name: form.value.firstname,
-        last_name: form.value.lastname,
-        email: form.value.email,
+        first_name: data.firstname,
+        last_name: data.lastname,
+        email: data.email,
         type: "requestproduct",
-        phone: form.value.phone,
-        address_1: form.value.address,
-        country: form.value.country,
-        state: form.value.state,
-        city: form.value.city,
-        zip: form.value.pincode,
-        input_1: form.value.input1,
-        input_2: form.value.input2,
-        input_3: form.value.input3,
-        input_4: form.value.input4
+        phone: data.phone,
+        address_1: data.address,
+        country: data.country,
+        state: data.state,
+        city: data.city,
+        zip: data.pincode,
+        input_1: data.input1,
+        input_2: data.input2,
+        input_3: data.input3,
+        input_4: data.input4
       };
       this._apiService.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
-        form.reset();
+        this.sampleForm.reset();
         this.checkBoxChcek = false
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {
           this.resSignupMsg = '';
-          }, 3000);
+        }, 3000);
       }
       )
     }
     else {
-      this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please Fill the Fields Below!';
-      setTimeout(() => {
-        this.resSignupMsg = '';
-        }, 2000);
+      // this.resSignupMsgCheck = 'danger';
+      // this.resSignupMsg = 'Please Fill the Fields Below!';
+      // setTimeout(() => {
+      //   this.resSignupMsg = '';
+      // }, 2000);
     }
   }
   ngAfterViewInit() { }
@@ -90,7 +111,9 @@ export class ProductsRequestComponent implements OnInit {
     this.resSignupMsg = '';
   }
   goToTop() {
-    this.scroller.scrollToAnchor("backToTop");
+    if (this.sampleForm.valid) {
+      this.scroller.scrollToAnchor("backToTop");
+    }
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
