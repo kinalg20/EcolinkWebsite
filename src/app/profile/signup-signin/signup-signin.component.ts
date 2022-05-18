@@ -1,6 +1,6 @@
 import { Component, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
-import { NgForm, FormGroup, FormControl } from '@angular/forms';
+import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { SocialAuthService } from "angularx-social-login";
@@ -93,23 +93,25 @@ export class SignupSigninComponent implements OnInit {
   }
 
   profileForm = new FormGroup({
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    phonenumber: new FormControl(''),
-    password: new FormControl(''),
-    confirmpassword: new FormControl(''),
-    address: new FormControl(''),
-    country: new FormControl(''),
-    state: new FormControl(''),
-    city: new FormControl(''),
-    pincode: new FormControl(''),
-    radio2: new FormControl(''),
-    image: new FormControl(''),
-  });
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('' , Validators.required),
+    email: new FormControl('', Validators.required),
+    phonenumber: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    confirmpassword: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    pincode: new FormControl('', Validators.required),
+    radio2: new FormControl('', Validators.required),
+    image: new FormControl('', Validators.required),
+  }, {updateOn: 'blur'}
+  );
 
   signUp() {
     if (this.profileForm.valid) {
+      console.log (this.profileForm, "gun")
       this.resSignupMsgCheck = 'warning';
       this.resSignupMsg = 'Wait for a while....'
 
@@ -161,15 +163,12 @@ export class SignupSigninComponent implements OnInit {
             }
             this.resSignupMsgCheck = 'danger';
           }
-          // this.resSignupMsg = 'Username Password Incorrect!';
-          // console.log(error.error.code);
-          // form.reset();
         });
     }
-    else {
-      this.resSignupMsg = "Please Fill The Value!"
-      this.resSignupMsgCheck = "danger"
-    }
+    // else {
+    //   this.resSignupMsg = "Please Fill The Value!"
+    //   this.resSignupMsgCheck = "danger"
+    // }
   }
 
   signinWithEmail(form: NgForm) {
