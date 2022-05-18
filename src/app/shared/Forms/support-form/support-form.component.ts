@@ -23,6 +23,7 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
   resSignupMsgCheck: string = ' ';
   invalidMobile = false;
   invalidEmail: boolean = false;
+  invalidPincode:boolean=false
   checkBoxChcek: boolean = false
   constructor(private _apiService: ApiServiceService, private renderer: Renderer2, private scroller: ViewportScroller, private router: Router) { }
 
@@ -103,6 +104,29 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
       !/^[0-9]$/.test(event.key)
     ) {
       event.preventDefault();
+    }
+  }
+  inputPincode(event: any) {
+    if (
+      event.key.length === 1 &&
+      !/^[0-9]$/.test(event.key)
+    ) {
+      event.preventDefault();
+    }
+  }
+  validatePincode(event: any) {
+    const value = event.target.value;
+
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 6
+    ) {
+      this.invalidPincode = true;
+    }
+
+    else {
+      this.invalidPincode = false;
     }
   }
   validateMobile(event: any) {

@@ -15,8 +15,7 @@ export class GSAProductComponent implements OnInit {
   categoriesData: any;
   @Select(FetchedCategoriesState.getFetchedCategory) categories$!: Observable<any>;
   @Select(FetchedCategoriesState.getFetchedCategoryLoad) categoriesLoaded$!: Observable<boolean>;
-  store: any;
-  constructor(public __apiService: ApiServiceService) { }
+  constructor(public __apiService: ApiServiceService , private store : Store)  { }
 
   ngOnInit(): void {
     this.getAllCategories();

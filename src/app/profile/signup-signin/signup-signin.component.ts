@@ -21,6 +21,7 @@ export class SignupSigninComponent implements OnInit {
   password: string = '';
   confirmPassword: string = '';
   invalidMobile = false;
+  invalidPincode = false;
   invalidEmail: boolean = false;
   invalidUserEmail: string = '';
   checkString: boolean = true;
@@ -75,7 +76,29 @@ export class SignupSigninComponent implements OnInit {
       event.preventDefault();
     }
   }
+  inputPincode(event: any) {
+    if (
+      event.key.length === 1 &&
+      !/^[0-9]$/.test(event.key)
+    ) {
+      event.preventDefault();
+    }
+  }
+  validatePincode(event: any) {
+    const value = event.target.value;
 
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 6
+    ) {
+      this.invalidPincode = true;
+    }
+
+    else {
+      this.invalidPincode = false;
+    }
+  }
   validateMobile(event: any) {
     const value = event.target.value;
 

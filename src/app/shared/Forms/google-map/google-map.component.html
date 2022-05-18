@@ -130,7 +130,10 @@
             <div class="row mb-3">
                 <div class="col-12">
                     <label for="Postcode">Postcode*</label>
-                    <input type="text" class="form-control my-2" placeholder="Postcode / ZIP" formControlName="zip" ngModel required>
+                    <input type="text" class="form-control my-2" (input)="validatePincode($event)" (keydown)="inputPincode($event)" placeholder="Postcode / ZIP" formControlName="zip" ngModel required>
+                    <h6 class="text-danger" *ngIf="invalidPincode">
+                        {{ invalidPincode ? "Invalid Pincode" : "" }}
+                    </h6>
                     <div *ngIf="contactForm.controls['zip'].invalid && (contactForm.controls['zip'].dirty || contactForm.controls['zip'].touched)" class="alert alert-danger">
                         Pincode is required
                     </div>

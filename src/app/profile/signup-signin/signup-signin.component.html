@@ -135,7 +135,10 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="pincode">Pincode*</label>
-                            <input class="form-control" type="text" id="pincode" autocomplete="off" formControlName="pincode" required />
+                            <input class="form-control" (input)="validatePincode($event)" (keydown)="inputPincode($event)" type="text" id="pincode" autocomplete="off" formControlName="pincode" required />
+                            <h6 class="text-danger" *ngIf="invalidPincode">
+                                {{ invalidPincode ? "Invalid Pincode" : "" }}
+                            </h6>
                             <div *ngIf="profileForm.controls['pincode'].invalid && (profileForm.controls['pincode'].dirty || profileForm.controls['pincode'].touched)" class="alert alert-danger">
                                 Pincode is required
                             </div>
