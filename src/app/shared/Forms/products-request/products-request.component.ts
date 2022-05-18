@@ -111,9 +111,7 @@ export class ProductsRequestComponent implements OnInit {
     this.resSignupMsg = '';
   }
   goToTop() {
-    if (this.sampleForm.valid) {
       this.scroller.scrollToAnchor("backToTop");
-    }
   }
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
