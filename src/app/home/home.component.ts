@@ -15,7 +15,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     let slug = this.route.snapshot.params;
-    console.log(slug.token);
     if (slug.token) {
       localStorage.setItem('email_token', slug.token);
       if (localStorage.getItem('ecolink_user_credential') != null) {
