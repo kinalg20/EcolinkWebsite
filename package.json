@@ -38,6 +38,7 @@
     "http-server": "^14.1.0",
     "jquery": "^3.6.0",
     "js2xmlparser": "^4.0.2",
+    "ng-connection-service": "^1.0.4",
     "ngx-cookie-service": "^13.2.0",
     "ngx-paypal": "^9.0.0",
     "ngx-shimmer-loading": "^0.0.5",

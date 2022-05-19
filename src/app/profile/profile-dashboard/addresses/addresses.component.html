@@ -11,6 +11,7 @@
     </ng-container>
     <ng-container *ngIf="allUserAddresses.length>0">
         <div class="address-body">
+            <!-- address card -->
             <div class="address-card" *ngFor="let item of allUserAddresses">
                 <div class="address-text">
                     <h4>{{item.name}}</h4>
@@ -39,6 +40,7 @@
             </div>
         </div>
     </ng-container>
+    <!-- add address button -->
     <ng-container *ngIf="!(allUserAddresses.length>0)">
         <div class="row addAddress" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="getUserDetail('add')">
             <div class="col-12 addAddressCol">
@@ -49,7 +51,7 @@
     </ng-container>
 </div>
 
-
+<!-- add address modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content" *ngFor="let item of profileAddress">

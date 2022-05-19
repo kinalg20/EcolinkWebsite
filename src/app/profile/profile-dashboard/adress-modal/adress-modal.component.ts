@@ -21,24 +21,10 @@ export class AdressModalComponent implements OnInit {
   invalidMobile = false;
   invalidZip = false;
 
-  constructor(private __apiservice: ApiServiceService, private router: Router, private renderer: Renderer2,) { }
+  constructor(private __apiservice: ApiServiceService, private renderer: Renderer2,) { }
 
   ngOnInit(): void {
   }
-   //<-- User Address -->
-  //  getUserDetail(item: any) {
-  //   if (item == 'add') {
-  //     this.profileaddress = [];
-  //     this.profileaddress.push({ heading: "Add Address" })
-  //   }
-  //   else {
-  //     this.profileaddress = [];
-  //     item.heading = "Edit Address";
-  //     item.firstname = item.name.split(" ")[0];
-  //     item.lastname = item.name.split(" ")[1];
-  //     this.profileaddress.push(item);
-  //   }
-  // }
   // <User Address Modal>
   addUserAddress(form: NgForm) {
     if (form.valid) {
@@ -123,6 +109,7 @@ export class AdressModalComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
+  // validate pincode 
   inputZip(event: any) {
     if (
       event.key.length === 1 &&
@@ -144,6 +131,7 @@ export class AdressModalComponent implements OnInit {
       this.invalidZip = false;
     }
   }
+  // validate mobile number
   inputMobile(event: any) {
     if (
       event.key.length === 1 &&

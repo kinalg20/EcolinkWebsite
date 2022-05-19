@@ -1,5 +1,4 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { error } from '@angular/compiler/src/util';
 import { Component, EventEmitter, Input, OnInit, Output, Renderer2 } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -24,20 +23,20 @@ export class BillingFormComponent implements OnInit {
   password: string = '';
   confirm_password: string = ''
   UserLogin: any;
-  constructor(private __apiservice: ApiServiceService, private renderer: Renderer2, private route: Router, private _cookies: CookiesService) { }
+  constructor(private __apiservice: ApiServiceService, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
     console.log(this.formShimmer);
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
-    if(this.UserLogin){
+    if (this.UserLogin) {
       this.FormFillUp.emit(false);
     }
 
-    else{
+    else {
       this.FormFillUp.emit(true);
     }
   }
-
+  // signup when user come to checkout without login
   signUp(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
@@ -61,7 +60,6 @@ export class BillingFormComponent implements OnInit {
           (res) => {
             console.log(res);
             if (res.code == 200) {
-              // this.FormFillUp.emit(false);
               this.OrderInfo.emit(this.userObj)
               window.scroll(0, 0)
               this.resSignupMsg = "Verification mail has been sent to your Email Id !";
@@ -71,7 +69,6 @@ export class BillingFormComponent implements OnInit {
                 JSON.stringify(res.data));
               this.route.navigateByUrl('/shop/checkout');
               this.SaveCookiesDataInCart();
-              // window.location.reload();
             }
             else {
               localStorage.removeItem('ecolink_user_credential');
@@ -98,8 +95,6 @@ export class BillingFormComponent implements OnInit {
       }
       else {
         console.log("Select Address");
-        // this.OrderInfo.emit(this.CheckoutProduct);
-        // this.addUserAddress(form);
       }
     }
     else {
@@ -108,7 +103,7 @@ export class BillingFormComponent implements OnInit {
       window.scroll(0, 0);
     }
   }
-
+  //validate user email
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email.target.value) == false) {
@@ -134,7 +129,7 @@ export class BillingFormComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
-
+  //store cookies data in cart on checkout page
   SaveCookiesDataInCart() {
     this.CheckoutProduct.map((res: any) => {
       console.log(res.carts);
@@ -148,18 +143,13 @@ export class BillingFormComponent implements OnInit {
 
           .catch((error: any) => {
             console.log(error);
-            
-          })
-        // this.__apiservice.addItemToCart(resp.product_id, resp.quantity, "add").subscribe(res =>
-        //   console.log(res));
-        // if (res.code == 200) {
-        // }
 
+          })
       })
     })
     this.FormFillUp.emit(false);
   }
-
+  //validate user mobile number 
   inputMobile(event: any) {
     if (
       event.key.length === 1 &&
@@ -168,7 +158,6 @@ export class BillingFormComponent implements OnInit {
       event.preventDefault();
     }
   }
-
   validateMobile(event: any) {
     const value = event.target.value;
 
@@ -184,7 +173,7 @@ export class BillingFormComponent implements OnInit {
       this.invalidMobile = false;
     }
   }
-
+  //add user address for shipping
   addUserAddress(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
@@ -242,7 +231,7 @@ export class BillingFormComponent implements OnInit {
     }
 
   }
-
+  //close pop up
   close() {
     this.resSignupMsg = '';
   }

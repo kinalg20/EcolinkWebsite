@@ -2,7 +2,7 @@ import { Component, HostListener } from '@angular/core';
 import { GeolocationService } from '@ng-web-apis/geolocation';
 import { Loader, LoaderOptions } from 'google-maps';
 import { ApiServiceService } from './Services/api-service.service';
-
+import { ConnectionService } from 'ng-connection-service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +16,18 @@ export class AppComponent {
   isShow: boolean = true;
   topPosToStartShowing = 100;
   GoogleMapAPIKey: string = 'AIzaSyDG8Z4FQOFQ9ddX0INeSaY11MLRTyr-0Xw'
-  constructor(private geolocation: GeolocationService , private _apiService : ApiServiceService) { }
+  constructor(private geolocation: GeolocationService, private _apiService: ApiServiceService, private connectionService: ConnectionService) {
+    this.connectionService.monitor().subscribe(isConnected => {
+      this.isConnected = isConnected;
+      if (this.isConnected) {
+        this.status = "ONLINE";
+      }
+      else {
+        this.status = "OFFLINE";
+      }
+    })
+  }
+
   // @HostListener('window:beforeinstallprompt', ['$event'])
   // onbeforeinstallprompt(e: any) {
   //   console.log(e);
@@ -68,7 +79,7 @@ export class AppComponent {
     const loader = new Loader(this.GoogleMapAPIKey, options);
 
     const google = await loader.load();
-    
+
     if (navigator.geolocation) {
       let geocoder = new google.maps.Geocoder();
       let latlng = new google.maps.LatLng(lat, lng);
@@ -105,4 +116,6 @@ export class AppComponent {
   //       this.deferredPrompt = null;
   //     });
   // }
+  status = 'ONLINE';
+  isConnected = true;
 }

@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
   Renderer2,
-  AfterViewInit,
   ViewChild,
   ElementRef, OnInit
 } from '@angular/core';
@@ -36,6 +35,7 @@ export class ForgotPasswordComponent implements OnInit {
       this.userCheck = true;
     }
   }
+  //user forgot password section 
   ForgotPassword(form: NgForm) {
     if (this.userCheck) {
       if (form.valid) {
@@ -58,10 +58,6 @@ export class ForgotPasswordComponent implements OnInit {
                 this.resSignupMsgCheck = "danger"
                 form.reset();
               }
-              // else {
-              //   this.resetMsg = 'Password Reset Successfully!'
-              //   this.resSignupMsgCheck = "success"
-              // }
             }
           )
       }
@@ -102,6 +98,7 @@ export class ForgotPasswordComponent implements OnInit {
       }
     }
   }
+  //validate user email 
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email.target.value) == false) {
@@ -126,10 +123,12 @@ export class ForgotPasswordComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
+  //close pop up
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
   }
+  //showing pop up till forgot password mail sent
   update() {
     if(!this.userCheck){
       this.resSignupMsg = 'Please Wait For a While...';
