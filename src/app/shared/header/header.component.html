@@ -11,8 +11,23 @@
         <div class="logo" routerLink='/'>
             <img src="https://ecolink.com/wp-content/uploads/2017/09/New_Ecolink_Logo-33.png" alt="">
             <h1>ECOLINK</h1>
+            <!-- Responsive header -->
+            <div class="location-section" (click)="goToLocation()" style="cursor: pointer;">
+                <div class="location">
+                    <i class="fa fa-map-marker" aria-hidden="true"></i>
+                </div>
+                <div class="address">
+                    <a>Decatur 30030</a>
+                </div>
+            </div>
         </div>
         <div class="responsive-navbar">
+            <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal" data-target="#exampleModalCenter">
+                <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
+            </button>
+            <div class="cart-icon">
+                <i class="fa fa-shopping-cart text-white" routerLink="/cart"></i><span *ngIf="length>0">{{length}}</span>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span (click)="openmenu()" *ngIf="!openMenu"><i style="font-size:24px" class="fa">&#xf0c9;</i></span>
                 <span (click)="openmenu()" *ngIf="openMenu"><i style="font-size:24px " class="fa">&#xf00d;</i></span>
