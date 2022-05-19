@@ -16,9 +16,11 @@
                 <div class="location">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </div>
-                <div class="address">
-                    <a>Decatur 30030</a>
-                </div>
+                <ng-container *ngIf="customerLocation!=''">
+                    <div class="address">
+                        <a>{{customerLocation}}</a>
+                    </div>
+                </ng-container>
             </div>
         </div>
         <div class="responsive-navbar">
