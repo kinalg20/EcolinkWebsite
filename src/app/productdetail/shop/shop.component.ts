@@ -91,7 +91,7 @@ export class ShopComponent implements OnInit {
             this.ItemCount = resp;
           }
         })
-        // console.log("res",res);
+        console.log(res, "gfgfdkmgdf");
         
       }
     })

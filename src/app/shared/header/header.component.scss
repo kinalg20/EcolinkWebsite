@@ -36,8 +36,17 @@
                 font-weight: 800;
                 margin-left: 20px;
             }
+            .location-section {
+                display: none;
+            }
         }
         .responsive-navbar {
+            button {
+                display: none;
+            }
+            .cart-icon {
+                display: none;
+            }
             width: 63%;
             .navbar-toggler {
                 span {
@@ -256,7 +265,6 @@
 .modal {
     overflow-y: hidden;
     .modal-dialog {
-        margin: 10rem auto;
         .modal-content {
             .modal-header {
                 align-items: baseline;
@@ -419,22 +427,51 @@
 
 @media (max-width: 768px) {
     .location-head {
+        display: none;
         .container {
             max-width: 765px;
             .fa-shopping-cart {
                 font-size: 20px;
             }
-            // .location-section {
-            //     // display: none;
-            // }
-            // .chat-section {
-            //     // width: auto;
-            // }
+        }
+    }
+    .nav-link-section {
+        .container {
+            .responsive-navbar {
+                justify-content: space-between;
+                width: 20%;
+                display: flex;
+                button {
+                    display: block;
+                }
+                .cart-icon {
+                    display: block;
+                    font-size: 20px;
+                }
+            }
+            .logo {
+                h1 {
+                    display: none;
+                }
+                .location-section {
+                    color: #fff;
+                    display: flex;
+                    margin: 0 20px;
+                    .location {
+                        margin-right: 10px;
+                    }
+                }
+            }
         }
     }
 }
 
 @media (max-width:500px) {
+    .nav-link-section .container {
+        .responsive-navbar {
+            width: 30%;
+        }
+    }
     .location-head {
         .container {
             .location-section {
@@ -445,12 +482,6 @@
 }
 
 @media (max-width: 671px) {
-    .nav-link-section .container {
-        max-width: 1000px;
-        .responsive-navbar {
-            width: 55%;
-        }
-    }
     .location-head {
         .container {
             .chat-section {
@@ -479,15 +510,6 @@
                     font-size: 11px;
                 }
             }
-        }
-    }
-}
-
-@media (max-width: 419px) {
-    .nav-link-section .container {
-        max-width: 1000px;
-        .responsive-navbar {
-            width: 40%;
         }
     }
 }

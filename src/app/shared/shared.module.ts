@@ -35,7 +35,8 @@ const exportdata: any = [
   SupportFormComponent,
   TrendingPostComponent,
   BulkPricingComponent, 
-  GSAProductComponent
+  GSAProductComponent,
+  PageNotFoundComponent
 ]
 
 @NgModule({

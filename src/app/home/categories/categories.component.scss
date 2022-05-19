@@ -1,6 +1,5 @@
 .shop-categories {
     margin: 30px 0;
-
     .container {
         .categories-text {
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -9,7 +8,6 @@
             display: grid;
             grid-template-columns: 75% 25%;
             background: whitesmoke;
-
             .product-category {
                 background: whitesmoke;
                 height: 100%;
@@ -17,24 +15,20 @@
                 border-top-left-radius: 10px;
                 border-bottom-left-radius: 10px;
                 padding: 20px;
-
                 .heading-section {
                     text-align: center;
                     background: var(--primary);
-
                     h3 {
                         margin: 0;
                         padding: 5px 0;
                         color: white;
                     }
                 }
-
                 .categories {
                     margin-top: 20px;
                     display: grid;
                     grid-template-columns: 49% 49%;
                     grid-gap: 15px;
-
                     .category-card {
                         background: white;
                         border: 1px solid lightgray;
@@ -70,7 +64,6 @@
                     }
                 }
             }
-
             .shop-text {
                 padding: 10px;
                 display: grid;
@@ -84,7 +77,6 @@
                     display: grid;
                     align-items: center;
                 }
-
                 p {
                     margin: 0;
                     text-align: center;
@@ -98,6 +90,13 @@
     .shop-categories {
         .container {
             .categories-text {
+                .product-category {
+                    .categories {
+                        .category-card {
+                            grid-template-columns: 40% 60%;
+                        }
+                    }
+                }
                 .shop-text {
                     display: block;
                     height: 200px;
@@ -119,8 +118,9 @@
         }
     }
 }
+
 @media (max-width: 768px) {
-    .container{
+    .container {
         max-width: 725px;
     }
     .shop-categories {
@@ -172,6 +172,7 @@
         }
     }
 }
+
 @media (max-width: 425px) {
     .shop-categories {
         .container {
