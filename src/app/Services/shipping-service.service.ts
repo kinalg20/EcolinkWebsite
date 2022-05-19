@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { async, BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
 @Injectable({
   providedIn: 'root'
@@ -37,9 +37,7 @@ export class ShippingServiceService {
   fedexshippingurl = 'https://apis-sandbox.fedex.com/rate/v1/rates/quotes'
   fedextoken: string = ''
   requestedPackage: any = [];
-  fedexshippingApi(access_token: any, product_details: any) {
-    // let product: number = 0;
-    console.log(product_details);
+  fedexshippingApi(access_token: any, product_details: any , shippingDataObj:any) {
     let product: any;
     product_details.map(async (res: any) => {
       this.requestedPackage=[];
