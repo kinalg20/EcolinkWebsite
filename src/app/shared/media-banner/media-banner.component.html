@@ -1,43 +1,47 @@
-<ng-container *ngFor="let action of blogArray ; index as index">
+<ng-container *ngFor="let action of helperArray ; index as index">
     <div *ngIf="!(index==0)">
         <div *ngIf="index%2==0; then thenBlock else elseBlock"></div>
         <ng-template #thenBlock>
-            <section class="media-banner">
-                <div class="container">
-                    <div class="img-text" routerLink="/info/{{action.slug}}">
-                        <div class="img-part" #height>
-                            <img src="{{action.image}}" alt="{{action.alt}}">
-                        </div>
-                        <div class="text-part">
-                            <h3>{{action.title}}</h3>
-                            <p>{{action.short_desc.slice(0,150)}}</p>
-                            <p class="action-button">Read Article <i class="fa fa-arrow-right"></i></p>
+            <!-- <ng-container *ngFor=" let i of elements"> -->
+                <section class="media-banner">
+                    <div class="container">
+                        <div class="img-text" routerLink="/info/{{action.slug}}">
+                            <div class="img-part" #height>
+                                <img src="{{action.image}}" alt="{{action.alt}}">
+                            </div>
+                            <div class="text-part">
+                                <h3>{{action.title}}</h3>
+                                <p>{{action.short_desc?.slice(0,150)}}</p>
+                                <p class="action-button">Read Article <i class="fa fa-arrow-right"></i></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            <!-- </ng-container> -->
         </ng-template>
         <ng-template #elseBlock>
-            <section class="re-media-banner">
-                <div class="container">
-                    <div class="re-img-text" routerLink="/info/{{action.slug}}">
-                        <div class="re-text-part">
-                            <h3>{{action.title}}</h3>
-                            <p>{{action.short_desc.slice(0,150)}}</p>
-                            <p class="action-button">Read Article <i class="fa fa-arrow-right"></i></p>
-                        </div>
-                        <div class="re-img-part">
-                            <img src="{{action.image}}" alt="{{action.alt}}">
+            <!-- <ng-container *ngFor=" let i of elements"> -->
+                <section class="re-media-banner">
+                    <div class="container">
+                        <div class="re-img-text" routerLink="/info/{{action.slug}}">
+                            <div class="re-text-part">
+                                <h3>{{action.title}}</h3>
+                                <p>{{action.short_desc?.slice(0,150)}}</p>
+                                <p class="action-button">Read Article <i class="fa fa-arrow-right"></i></p>
+                            </div>
+                            <div class="re-img-part">
+                                <img src="{{action.image}}" alt="{{action.alt}}">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            <!-- </ng-container> -->
         </ng-template>
     </div>
 </ng-container>
-<div class="container">
+<!-- <div class="container">
     <div class="load-more">
         <p (click)="loadAllBlog()" *ngIf="moreCheck">Show More...</p>
         <p (click)="loadAllBlog()" *ngIf="lessCheck">Show Less...</p>
     </div>
-</div>
+</div> -->
