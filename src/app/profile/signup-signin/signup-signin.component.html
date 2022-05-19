@@ -2,16 +2,16 @@
 <ng-container *ngIf="!checkString">
     <div class="container authentication">
         <div class="signup-form">
-            <!-- <form #signUpForm="ngForm" (ngSubmit)="signUp(signUpForm)"> -->
+            <!-- user sign up form -->
             <form [formGroup]="profileForm" (ngSubmit)="signUp()" #signup="ngForm">
                 <ng-container>
                     <div class="signup-head">
                         <span id="auth-head">
                             <h2>Sign Up</h2>
                         </span>
-                        <!-- <span class="icon-class"><i routerLink="/" class="fa fa-close"></i></span> -->
                     </div>
                 </ng-container>
+                <!-- pop ups -->
                 <ng-container *ngIf="resSignupMsg">
                     <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
                         #test>
@@ -112,9 +112,9 @@
                                 [class.is-valid]="signup.submitted && profileForm.get('confirmpassword')?.valid"
                                 [class.is-invalid]="signup.submitted && profileForm.get('confirmpassword')?.invalid"
                                 required />
-                            <!-- <p class="mt-2 text-danger" *ngIf="confirmPassword">
+                            <p class="mt-2 text-danger" *ngIf="confirmPassword">
                                 {{ password === confirmPassword ? "" : "Password Not Match" }}
-                            </p> -->
+                            </p>
                             <div class="invalid-feedback">
                                 Password not matched
                             </div>
@@ -234,19 +234,14 @@
 <ng-container *ngIf="checkString">
     <div class="container authenticated">
         <div class="signin-form">
+            <!-- user sign in form -->
             <form #signUpForm="ngForm" (submit)="signinWithEmail(signUpForm)">
                 <ng-container>
                     <div class="signin-head">
                         <span id="auth-head">
                             <h2>Sign In</h2>
                         </span>
-                        <!-- <span class="fw-icon-class"><i routerLink="/" class="fa fa-close"></i></span> -->
                     </div>
-                    <!-- <ng-container *ngIf="resMsg">
-                        <div class="alert alert-danger" role="alert" id="loginAlert">
-                            {{ resMsg }}
-                        </div>
-                    </ng-container> -->
                     <ng-container *ngIf="resSignupMsg">
                         <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert"
                             #test>

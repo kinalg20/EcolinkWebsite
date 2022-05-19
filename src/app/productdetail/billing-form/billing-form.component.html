@@ -1,3 +1,4 @@
+<!-- shimmar effect on -->
 <ng-container *ngIf="formShimmer">
     <form>
         <div class="mt-3" class="form-shimmer">
@@ -26,12 +27,9 @@
         </div>
     </form>
 </ng-container>
-
-
-
-
+<!-- shimmar effect off -->
 <ng-container *ngIf="!formShimmer">
-
+    <!-- user detail form -->
     <form #signupform="ngForm" (ngSubmit)="signUp(signupform)" *ngFor="let data of CheckoutProduct">
         <ng-container *ngIf="resSignupMsg.length>0">
             <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" style="justify-content: space-between;

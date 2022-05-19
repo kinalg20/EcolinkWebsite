@@ -71,18 +71,13 @@
                 .search-bar {
                     width: 15%;
                     padding: 0 3%;
-                    // margin-left: 25%;
 
                     span {
                         background: #37793a;
                         border: 1px solid #37793a;
                         justify-content: center;
                         width: 150px;
-                        // border-top-left-radius: 20px;
                         border-radius: 20px;
-                        // border-bottom-left-radius: 20px;
-                        // border-top-right-radius: 0;
-                        // border-bottom-right-radius: 0;
 
                         a {
                             text-decoration: none;
@@ -481,18 +476,6 @@
             }
         }
     }
-
-    // .home-banner {
-    //     .container {
-    //         .background-image {
-    //             .innerhead {
-    //                 .search-bar {
-    //                 //   display: none;
-    //                 }
-    //             }
-    //         }
-    //     }
-    // }
 }
 
 @media (max-width: 768px) {

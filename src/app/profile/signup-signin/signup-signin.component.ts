@@ -1,10 +1,8 @@
 import { Component, Renderer2, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
-import { SocialAuthService } from "angularx-social-login";
-import { GoogleLoginProvider } from "angularx-social-login";
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
@@ -28,15 +26,15 @@ export class SignupSigninComponent implements OnInit {
   resSignupMsgCheck: string = ' ';
   resMsg: string = '';
   errMsg = [];
-  constructor(private router: Router, private renderer: Renderer2, private scroller: ViewportScroller, private __apiservice: ApiServiceService, private authService: SocialAuthService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private renderer: Renderer2, private scroller: ViewportScroller, private __apiservice: ApiServiceService) { }
 
   ngOnInit(): void {
   }
-
+  // showing sign in modal
   SignIn() {
     this.checkString = !this.checkString;
   }
-
+  //validate user email
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (re.test(email.target.value) == false) {
@@ -46,12 +44,6 @@ export class SignupSigninComponent implements OnInit {
     this.invalidUserEmail = '';
     return true;
   }
-
-  goToTop() {
-    window.scrollTo(0, 0);
-    this.scroller.scrollToAnchor("backToTop");
-  }
-
   validateEmail(event: any) {
     const value = event.target.value;
 
@@ -67,7 +59,12 @@ export class SignupSigninComponent implements OnInit {
       this.invalidEmail = false;
     }
   }
-
+  //go to top when pop up opens
+  goToTop() {
+    window.scrollTo(0, 0);
+    this.scroller.scrollToAnchor("backToTop");
+  }
+  //validate user mobile number
   inputMobile(event: any) {
     if (
       event.key.length === 1 &&
@@ -76,6 +73,22 @@ export class SignupSigninComponent implements OnInit {
       event.preventDefault();
     }
   }
+  validateMobile(event: any) {
+    const value = event.target.value;
+
+    if (
+      value &&
+      /^[0-9]+$/.test(value) &&
+      value.length < 10
+    ) {
+      this.invalidMobile = true;
+    }
+
+    else {
+      this.invalidMobile = false;
+    }
+  }
+  //validate user pincode 
   inputPincode(event: any) {
     if (
       event.key.length === 1 &&
@@ -99,25 +112,10 @@ export class SignupSigninComponent implements OnInit {
       this.invalidPincode = false;
     }
   }
-  validateMobile(event: any) {
-    const value = event.target.value;
-
-    if (
-      value &&
-      /^[0-9]+$/.test(value) &&
-      value.length < 10
-    ) {
-      this.invalidMobile = true;
-    }
-
-    else {
-      this.invalidMobile = false;
-    }
-  }
-
+  //get user form details
   profileForm = new FormGroup({
     firstname: new FormControl('', Validators.required),
-    lastname: new FormControl('' , Validators.required),
+    lastname: new FormControl('', Validators.required),
     email: new FormControl('', Validators.required),
     phonenumber: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
@@ -129,9 +127,9 @@ export class SignupSigninComponent implements OnInit {
     pincode: new FormControl('', Validators.required),
     radio2: new FormControl('', Validators.required),
     image: new FormControl('')
-  }, {updateOn: 'blur'}
+  }, { updateOn: 'blur' }
   );
-
+  //user sign up 
   signUp() {
     if (this.profileForm.valid) {
       this.resSignupMsgCheck = 'warning';
@@ -192,7 +190,7 @@ export class SignupSigninComponent implements OnInit {
     //   this.resSignupMsgCheck = "danger"
     // }
   }
-
+  //user sign in 
   signinWithEmail(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
@@ -240,12 +238,12 @@ export class SignupSigninComponent implements OnInit {
       this.resSignupMsgCheck = "danger"
     }
   }
-
+  //close pop up
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
     this.resSignupMsg = '';
   }
-
+  //get profile image and validate
   file: any = null;
   fileUrl: any;
   max_error_front_img: string = '';

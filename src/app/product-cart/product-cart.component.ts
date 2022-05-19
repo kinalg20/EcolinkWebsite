@@ -1,7 +1,5 @@
-import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PrimeNGConfig } from 'primeng/api';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 
@@ -20,33 +18,27 @@ export class ProductCartComponent implements OnInit {
   disableIncreaseButton: boolean = false;
   disableDecreaseButton: boolean = false;
 
-  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private primengConfig: PrimeNGConfig, private route: Router) { }
+  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private route: Router) { }
   ngOnInit(): void {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
     this.getCartData();
   }
-
+  //increase and decrease product quantity
   Count(string: any, id: any) {
     if (string == "add") {
       if (this.CardShow[id].quantity <= 24) {
         this.CardShow[id].quantity = this.CardShow[id].quantity + 1;
         this.subtotal();
       }
-      // else {
-      //   this.disableIncreaseButton = true;
-      // }
     }
     if (string == "delete") {
       if (this.CardShow[id].quantity == 2) {
         this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
         this.subtotal();
       }
-      // else {
-      //   this.disableDecreaseButton = true;
-      // }
     }
   }
-  // if (product_quantity <= 24) {
+  //get products which added in cart
   async getCartData() {
     let cookiesdata: any = [];
     let data_obj: any = [];
@@ -117,16 +109,14 @@ export class ProductCartComponent implements OnInit {
         )
     }
   }
-
-
+  //get total amount of all product
   subtotal() {
     this.SubTotal = 0;
     this.CardShow.map((res: any) => {
       this.SubTotal = this.SubTotal + res.product.sale_price * res.quantity;
     })
   }
-
-
+  //update cart item in cookies and backend
   ItemCart: any;
   async UpdateCart(action: any, product_id: any, product_quantity: any, rowIndex: any) {
     if (localStorage.getItem('ecolink_user_credential') === null) {
@@ -149,7 +139,6 @@ export class ProductCartComponent implements OnInit {
     else {
       this.CartShimmer = true;
       if (action == 'delete') {
-        // if (product_quantity > 2) {
           this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action)
             .then((res) => {
               return res;
@@ -162,16 +151,9 @@ export class ProductCartComponent implements OnInit {
             this.getCartData();
             this.subtotal();
           }
-        // }
-
-        // else {
-        //   this.disableDecreaseButton = true;
-        // }
-
       }
 
       else if (action == 'add') {
-        // if (product_quantity <= 24) {
           this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
             return res;
           })
@@ -180,24 +162,15 @@ export class ProductCartComponent implements OnInit {
             this.getCartData();
             this.subtotal();
           }
-        // }
-
-        // else{
-        //   this.disableIncreaseButton = true;
-        // }
       }
 
       else {
         this.getCartData();
         this.subtotal();
       }
-      // else {
-      //   this.disableIncreaseButton = true;
-      //   this.getCartData();
-      // }
     }
   }
-
+  //delete cart item from cookies and backend
   cookies_data: any = [];
   deleteItemFromCart(product: any) {
     if (this.UserLogin != null) {
@@ -223,7 +196,7 @@ export class ProductCartComponent implements OnInit {
       })
     }
   }
-
+  //store data in cookies
   StoreCookiesData() {
     this._ApiService.cookiesCheckoutData.next(this.CardShow);
     localStorage.setItem("payable", JSON.stringify(this.SubTotal));

@@ -1,3 +1,4 @@
+<!-- form when modal opens -->
 <form #signUpForm="ngForm" (ngSubmit)="addUserAddress(signUpForm)">
     <ng-container *ngIf="resAddmsg">
         <div *ngIf="resAddmsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>

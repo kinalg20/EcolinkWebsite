@@ -1,6 +1,7 @@
 <div class="dashboard-section" *ngIf="showdesc == 'Dashboard'">
     <h2>Dashboard</h2>
     <div class="profile-card">
+        <!-- shimmar effect on -->
         <ng-container *ngIf="shimmerLoad">
             <div class="row">
                 <div class="col-6 mt-3">
@@ -11,8 +12,10 @@
                 </div>
             </div>
         </ng-container>
+        <!-- shimmar effect off -->
         <ng-container *ngIf="!shimmerLoad">
             <div class="row" *ngFor="let item of userDetail">
+                <!-- user detail on dashboard -->
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="card profile-section">
                         <div class="profile-image">
@@ -55,6 +58,7 @@
         </ng-container>
     </div>
 </div>
+<!-- add, edit address modal -->
 <div class="modal fade" id="exampleModal123" tabindex="-1">
     <div class="modal-dialog modal-md">
         <div class="modal-content" *ngFor="let item of profileAddress">
