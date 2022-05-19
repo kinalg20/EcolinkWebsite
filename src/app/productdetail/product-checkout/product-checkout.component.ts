@@ -16,7 +16,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   discountCheck: boolean = true;
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
-  rate: any;
+  rate: number = 0;
   openAddressDropdown: boolean = false;
   selectedShippingMethod: string = 'fedex';
   couponDiscount: any = 0;
@@ -31,7 +31,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   showPaypal: boolean = false;
   paypalProductDetails: any = {};
   paypal: any = []
-  taxCheck: boolean = false;
+  taxCheck: boolean = true;
   paymentCheck: boolean = true;
   shippingCharge: number = 0;
   tax_exempt_user: number = 0
@@ -76,7 +76,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
     await this._ShippingApi.fedextokengeneration()
       .then((res: any) => {
-        this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct).subscribe((resp: any) => {
+        this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct , this.shippingDataObj).subscribe((resp: any) => {
           console.log(resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
           this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
         })
@@ -118,7 +118,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.CheckoutProduct[0].user = this.getAllUserAddresses[value];
       this.shippingDataObj = this.getAllUserAddresses[value];
       console.log(this.shippingDataObj, this.getAllUserAddresses[value]);
-
+      this.getProduct();
     }
   }
   //get product for billing
@@ -171,6 +171,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   product_length: number = 0;
   // get shipping charges for product
   getProduct() {
+    this.checkoutProductItem = [];
     this.CheckoutProduct.map((res: any) => {
       res.carts.map((resp: any) => {
         this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight);
@@ -179,6 +180,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         this.checkoutProductItem.length = this.product_length += (resp.quantity * resp.product.lenght);
       })
     })
+    this.checkoutProductItem.country = this.shippingDataObj.country;
+    this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip;
     this.getShippingInfo();
   }
 
