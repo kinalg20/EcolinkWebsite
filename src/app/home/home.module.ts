@@ -15,9 +15,9 @@ import { CategoriesComponent } from './categories/categories.component';
 
 
 
-const exportdata:any =[
- CategoriesComponent,
- BlogComponent
+const exportdata: any = [
+  CategoriesComponent,
+  BlogComponent
 ]
 
 @NgModule({
@@ -38,7 +38,7 @@ const exportdata:any =[
     FormsModule
   ],
 
-  exports:[
+  exports: [
     ...exportdata
   ]
 })

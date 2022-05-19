@@ -54,12 +54,6 @@ export class InnerpagesComponent implements OnInit {
         this.innershimmerLoad = false;
       })
     }
-    // else{
-    //   this._apiService.getPageBySlug(this.slug).subscribe((res:any)=>{
-    //     this.data = res.data;
-    //     console.log(res);
-    //   })
-    // }
   }
   chemist_array: any = [
     {

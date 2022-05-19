@@ -32,6 +32,7 @@ export class HeaderComponent implements OnInit {
   subslug: any;
   suggestionList: any = [];
   showGlobalSearchSuggestion: any = false;
+  customerLocation: string = '';
 
   @Select(FetchedHeaderState.getFetchedHeader) headerMenu$!: Observable<any>;
   @Select(FetchedHeaderState.getFetchedHeaderLoad) headerMenuDataLoaded$!: Observable<boolean>;
@@ -72,7 +73,8 @@ export class HeaderComponent implements OnInit {
     },
   ];
 
-  ngOnInit(): void {
+  addressArray: any = []
+  ngOnInit() {
     this.getAllHeaderMenu();
     this.headerMenu$.subscribe(res => {
       this.homePageData = [];
@@ -87,10 +89,17 @@ export class HeaderComponent implements OnInit {
     }, 1000);
     this.cartCountFunction();
     this.getSubscribeMsg();
+    this.__apiservice.UserLocation.subscribe(res => {
+      if (res) {
+        let pincode = res[7] ? res[7].long_name : 30030;
+        let Location = res[3] ? res[3].long_name : 'Decatur';
+        this.customerLocation = Location + "," + pincode;
+      }
+    });
   }
   getSubscribeMsg() {
-    this.__apiservice.subscribedmsg.subscribe((res:any)=> {
-      this.responseSubscribe=res;
+    this.__apiservice.subscribedmsg.subscribe((res: any) => {
+      this.responseSubscribe = res;
     })
   }
   //Get product count from cart 
@@ -163,8 +172,8 @@ export class HeaderComponent implements OnInit {
     }
   }
 
-  userName:string='';
-  userDetail:any;
+  userName: string = '';
+  userDetail: any;
   getAllHeaderMenu() {
     this.headerMenuData = this.headerMenuDataLoaded$.subscribe(res => {
       if (!res) {
@@ -172,8 +181,8 @@ export class HeaderComponent implements OnInit {
       }
     })
 
-    this.userDetail =  localStorage.getItem('ecolink_user_credential');
-    if(this.userDetail ){
+    this.userDetail = localStorage.getItem('ecolink_user_credential');
+    if (this.userDetail) {
       let name = JSON.parse(this.userDetail);
       console.log(name.user.name);
       this.userName = name.user.name.split(" ")[0];

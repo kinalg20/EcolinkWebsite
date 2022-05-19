@@ -17,9 +17,7 @@ import { FetchedHeaderState } from './store/state/header.state';
 import { FetchedCategoriesState } from './store/state/category.state'
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { SearchPipePipe } from './custom-pipe/search-pipe.pipe';
 import { CommonModule } from "@angular/common";
-import { TitlePipe } from './custom-pipe/title.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +42,7 @@ import { TitlePipe } from './custom-pipe/title.pipe';
       registrationStrategy: 'registerWhenStable:30000'
     })
   ],
-  providers: [ApiServiceService, AuthGuard ],
+  providers: [ApiServiceService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

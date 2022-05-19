@@ -21,6 +21,7 @@
     <!-- Falseshimmer -->
     <div class="container" *ngIf="!innershimmerLoad">
         <h5>{{data.title}}</h5>
+        <!-- top page links -->
         <div class="list-heading">
             <span><a>Home</a></span>
             <span><a *ngIf="this.slug.slug">/{{this.slug.slug | titlecase}}</a></span>
@@ -34,7 +35,7 @@
                 <app-call-to-action [data]=chemist_array></app-call-to-action>
             </section>
             <div class="col-8">
-
+                <!-- bind inner pages forms -->
                 <div class="page-desc">
                     <section *ngIf="data.slug=='ask-the-chemist'">
                         <app-ask-chemist></app-ask-chemist>
@@ -57,6 +58,7 @@
                     </section>
                 </div>
             </div>
+            <!-- side bar call to action buttons -->
             <div class="col-4">
                 <div class="inner_sidebar extralight-border">
                     <nav class="widget widget_nav_menu widget_nav_hide_child">

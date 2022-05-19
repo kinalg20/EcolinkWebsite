@@ -22,6 +22,7 @@ import { SupportFormComponent } from './Forms/support-form/support-form.componen
 import { BulkPricingComponent } from './Forms/bulk-pricing/bulk-pricing.component';
 import { GSAProductComponent } from './gsa-product/gsa-product.component';
 import { PipemoduleModule } from '../pipemodule/pipemodule.module';
+import { GeolocationService } from '@ng-web-apis/geolocation';
 
 const exportdata: any = [
   HeaderComponent,
@@ -66,6 +67,9 @@ const exportdata: any = [
   ],
   exports: [
     ...exportdata
+  ],
+  providers:[
+    GeolocationService
   ]
 })
 export class SharedModule { }

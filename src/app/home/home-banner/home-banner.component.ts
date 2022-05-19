@@ -58,20 +58,11 @@ export class HomeBannerComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  //go to footer for subscribe mail
   subscribe(value: any) {
-    // this.scroller.scrollToAnchor("targetRed");
-    // let endpoint = 'newsletter'
     this.newItemEvent.emit(value);
-    // console.log(this.newsletter_email);
-    // this._ApiService.newLatter(endpoint, this.newsletter_email).subscribe(res => {
-    //   if (res.code == 200) {
-    //     console.log(res);
-    //     this.showMsg=true;
-    //     this.newsletter_email=''
-    //   }
-    // })
   }
+  //get product data for suggestion
   getSuggestion(data: any) {
     this.showGlobalSearchSuggestion = false;
     this.slug = data.category.slug;
