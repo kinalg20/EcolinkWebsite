@@ -31,8 +31,8 @@
                 }
             }
             .inner_sidebar {
-                margin-left: 50px;
-                position: sticky;
+                // margin-left: 50px;
+                // position: sticky;
                 top: 80px;
                 .widget {
                     margin-bottom: 100px;
@@ -40,7 +40,11 @@
                         list-style: none;
                         padding: 0;
                         li {
-                            padding: 10px 0;
+                            // padding: 10px 0;
+                            color: #3f661c;
+                        }
+                        li:hover {
+                            color: #0a6fbd;
                         }
                     }
                 }
@@ -114,6 +118,7 @@
         }
     }
 }
+
 @media (max-width: 992px) {
     .inner-pages {
         .container {
@@ -156,6 +161,7 @@
         }
     }
 }
+
 @media (max-width: 768px) {
     .inner-pages {
         .container {
@@ -169,30 +175,31 @@
         }
     }
 }
+
 ::ng-deep {
-        .inner-pages {
-            .list-heading {
-                .shimmer-loading .ngx-shimmer {
-                    height: 50px !important;
-                } 
-            }
-            .page-desc {
-                .shimmer-loading .ngx-shimmer {
-                    height: 500px !important;
-                } 
-            }
-            .inner_sidebar {
-                .shimmer-loading .ngx-shimmer {
-                    height: 500px !important;
-                } 
+    .inner-pages {
+        .list-heading {
+            .shimmer-loading .ngx-shimmer {
+                height: 50px !important;
             }
         }
+        .page-desc {
+            .shimmer-loading .ngx-shimmer {
+                height: 500px !important;
+            }
+        }
+        .inner_sidebar {
+            .shimmer-loading .ngx-shimmer {
+                height: 500px !important;
+            }
+        }
+    }
     .post-entry {
         width: -webkit-fill-available !important;
     }
     .big-preview {
         img {
-        width: -webkit-fill-available !important;
+            width: -webkit-fill-available !important;
         }
     }
     .template-page {

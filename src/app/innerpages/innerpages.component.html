@@ -34,7 +34,7 @@
                 <app-call-to-action [data]=chemist_array></app-call-to-action>
             </section>
             <div class="col-8">
-                
+
                 <div class="page-desc">
                     <section *ngIf="data.slug=='ask-the-chemist'">
                         <app-ask-chemist></app-ask-chemist>
@@ -61,8 +61,7 @@
                 <div class="inner_sidebar extralight-border">
                     <nav class="widget widget_nav_menu widget_nav_hide_child">
                         <ul class="nested_nav" *ngFor="let link of data.links">
-                            <li class="page_item page-item-17541" style="cursor: pointer;"
-                                routerLink="{{link.related_page.slug}}">{{link.related_page.title}}</li>
+                            <li class="page_item page-item-17541" style="cursor: pointer;" routerLink="{{link.related_page.slug}}">{{link.related_page.title}}</li>
                         </ul>
                     </nav>
                     <section id="text-5" class="widget clearfix widget_text">
