@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { InnerpagesRoutingModule } from './innerpages-routing.module';
 import { InnerpagesComponent } from './innerpages.component';
 import { SharedModule } from '../shared/shared.module';
@@ -22,4 +21,5 @@ import { SharelibraryModule } from '../sharelibrary/sharelibrary.module';
     
   ]
 })
-export class InnerpagesModule { }
+export class InnerpagesModule {
+ }
