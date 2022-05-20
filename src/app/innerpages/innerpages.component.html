@@ -63,17 +63,20 @@
                 <div class="inner_sidebar extralight-border">
                     <nav class="widget widget_nav_menu widget_nav_hide_child">
                         <ul class="nested_nav" *ngFor="let link of data.links">
-                            <li class="page_item page-item-17541" style="cursor: pointer;" routerLink="/{{link.related_page.slug}}">{{link.related_page.title | uppercase}}</li>
+                            <ng-container *ngIf="link.related_page.title!='prodpage'">
+                                <li class="page_item page-item-17541" style="cursor: pointer;" routerLink="/{{link.related_page.slug}}">{{link.related_page.title | uppercase}}
+                                </li>
+                            </ng-container>
                         </ul>
                     </nav>
                     <section id="text-5" class="widget clearfix widget_text">
                         <div class="textwidget">
                             <p><a class="shopButton2020" routerLink="shop">SHOP</a><br>
-                                <a class="requestButton2020" (click)="routeOnSamePage('contact/request')">REQUEST A
+                                <a class="requestButton2020" (click)="routeOnSamePage('contact/request ')">REQUEST A
                                     SAMPLE</a><br>
-                                <a class="pdsButton2020" (click)="routeOnSamePage('contact/support')">REQUEST PDS /
+                                <a class="pdsButton2020" (click)="routeOnSamePage('contact/support ')">REQUEST PDS /
                                     TDS</a><br>
-                                <a class="contactButton2020" (click)="routeOnSamePage('contact')">CONTACT US</a>
+                                <a class="contactButton2020" (click)="routeOnSamePage('contact ')">CONTACT US</a>
                             </p>
                         </div>
                         <span class="seperator extralight-border"></span>

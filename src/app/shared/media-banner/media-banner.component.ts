@@ -17,7 +17,7 @@ export class MediaBannerComponent implements OnInit {
   @HostListener("window:scroll", [])
   onScroll() {
     if (this.bottomReached()) {
-      this.count=0
+      this.count=1
       this.data_input.map((res:any,index:any)=> {
         if(this.count<3){
           this.helperArray.push(res);
@@ -31,7 +31,7 @@ export class MediaBannerComponent implements OnInit {
     }
   }
   bottomReached(): boolean {
-    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight -300;
   }
   ngOnInit(): void {
     setTimeout(() => {

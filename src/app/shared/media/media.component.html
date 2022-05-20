@@ -8,7 +8,7 @@
             </span>
             <div *ngIf="showSuggestedList" class="ListSuggested">
                 <ul *ngFor="let value of backupBlog.data | title:searchValue">
-                    <li (click)="getInputSelectedValue(value.title)" style="list-style:none;text-align: left;">>  {{value.title}}</li>
+                    <li (click)="getInputSelectedValue(value.title)" style="list-style:none;text-align: left;">> {{value.title}}</li>
                     <!-- <hr style="margin: 0;"> -->
                 </ul>
             </div>
@@ -37,7 +37,7 @@
     <section class="media-banner">
         <div class="container">
             <div class="media-calltoaction">
-                <ng-container *ngFor="let item of backupBlog.data; index as index">
+                <ng-container *ngFor="let item of backupBlog.data ; index as index">
                     <div *ngIf="index==0">
                         <div class="media" routerLink="/info/{{item.slug}}">
                             <div class="spotlight-banner">
@@ -64,8 +64,7 @@
     </section>
     <!-- <app-trending-post></app-trending-post> -->
     <div class="container trending-section">
-        <hr>
-        Latest Posts
+        <hr> Latest Posts
         <hr>
     </div>
     <app-media-banner [data_input]="getAllBlog"></app-media-banner>

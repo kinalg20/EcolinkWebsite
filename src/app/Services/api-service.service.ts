@@ -19,8 +19,8 @@ export class ApiServiceService {
   profiledashboard = new BehaviorSubject<boolean>(false);
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
-  getAllBlogs(): Observable<any> {
-    return this.http.get(this._baseurl + 'getallblogs');
+  getAllBlogs(): Promise<any> {
+    return this.http.get(this._baseurl + 'getallblogs').toPromise();
   }
   getBlog(url: string): Observable<any> {
     return this.http.post(this._baseurl + 'getblog', { slug: url });
