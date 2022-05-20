@@ -79,16 +79,17 @@
                                 <li>${{cart.payable | number : '1.2-2'}}</li>
                             </ul>
 
-                            <ul *ngIf="taxCheck">
-                                <li class="subtotal-list-element">Taxes : </li>
-                                <ng-container *ngIf="rate>0">
-                                    <li>${{rate}}</li>
-                                </ng-container>
-                                <ng-container *ngIf="rate==0">
-                                    <span ><i class="pi pi-spin pi-spinner"
-                                        style="font-size: 1rem"></i></span>
-                                </ng-container>
-                            </ul>
+                            <ng-container *ngIf="user_credential">
+                                <ul *ngIf="taxCheck">
+                                    <li class="subtotal-list-element">Taxes : </li>
+                                    <ng-container *ngIf="rate>0">
+                                        <li>${{rate}}</li>
+                                    </ng-container>
+                                    <ng-container *ngIf="rate==0">
+                                        <span><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></span>
+                                    </ng-container>
+                                </ul>
+                            </ng-container>
 
                             <ul>
                                 <li>
@@ -102,25 +103,28 @@
                                             <div class="d-flex " style="align-items: center;">
                                                 <input type="radio" id="saia" name="shipping"
                                                     [(ngModel)]="selectedShippingMethod" value="saia" class="saia">
-                                                <label for="saia" class=" mx-2">Saia</label>
+                                                <label for="saia" class=" mx-2">SAIA</label>
                                             </div>
                                             <div class="d-flex mx-3" style="align-items: center;">
                                                 <input type="radio" id="fedex" name="shipping" value="fedex"
                                                     class="fedex mx-2" [(ngModel)]="selectedShippingMethod">
-                                                <label for="fedex">Fedex</label>
+                                                <label for="fedex">FedEx</label>
                                             </div>
                                         </div>
                                     </li>
-                                    <ng-container *ngIf="selectedShippingMethod=='fedex' && shippingCharge>0">
-                                        <li >${{shippingCharge}}</li>
-                                    </ng-container>
                                     <ng-container *ngIf="selectedShippingMethod=='fedex'">
-                                        <li *ngIf="shippingCharge==0">
-                                            <span ><i class="pi pi-spin pi-spinner"
-                                                style="font-size: 1rem"></i></span>
+                                        <li *ngIf="shippingCharge>0 && this.user_credential!=null">${{shippingCharge}}
                                         </li>
+                                        <li *ngIf="shippingCharge==0 && this.user_credential!=null">
+                                            <span><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></span>
+                                        </li>
+                                        <li *ngIf="this.user_credential==null" style="color:red; cursor: pointer;" routerLink="/profile/auth">Please Login</li>
                                     </ng-container>
-                                    <li *ngIf="selectedShippingMethod=='saia'">${{saiaValues.Amount}}</li>
+
+                                    <ng-container *ngIf="selectedShippingMethod=='saia'">
+                                        <li *ngIf="saiaValues && this.user_credential!=null">${{saiaValues.Amount}}</li>
+                                        <li *ngIf="this.user_credential==null" style="color:red; cursor: pointer;" routerLink="/profile/auth">Please Login</li>
+                                    </ng-container>
                                 </ul>
                             </div>
                             <ul *ngIf="discountCheck">

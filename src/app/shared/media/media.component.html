@@ -15,6 +15,24 @@
         </div>
     </div>
 </section>
+<!-- <ng-container  *ngIf="backupBlog.data">
+    <div class="row">
+        <ng-container *ngFor="let data of [].constructor(1)">
+            <div class="mt-3">
+                <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+            </div>
+        </ng-container>
+    </div>
+</ng-container>
+<ng-container  *ngIf="!backupBlog.data">
+    <div class="row">
+        <ng-container *ngFor="let data of [].constructor(1)">
+            <div class="mt-3">
+                <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+            </div>
+        </ng-container>
+    </div>
+</ng-container> -->
 <div *ngIf="backupBlog.data">
     <section class="media-banner">
         <div class="container">
@@ -44,7 +62,7 @@
             </div>
         </div>
     </section>
-    <app-trending-post></app-trending-post>
+    <!-- <app-trending-post></app-trending-post> -->
     <div class="container trending-section">
         <hr>
         Latest Posts
