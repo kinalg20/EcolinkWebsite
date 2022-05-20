@@ -42,6 +42,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   billingUserDetail: any = {};
   fedexshippingboolean: boolean = true;
   saiashippingboolean: boolean = true;
+  user_credential:any;
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
@@ -50,17 +51,17 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void { }
 
   async ngOnInit() {
+    this.user_credential=localStorage.getItem('ecolink_user_credential');
     if (localStorage.getItem('ecolink_user_credential') == null) {
       this.discountCheck = false;
     }
     await this.checkoutProduct();
-    console.log('jp', this.CheckoutProduct);
+    console.log(this.CheckoutProduct);
     this.CheckoutProduct.map((res: any) => {
       if (res.carts.length == 0) {
         this.route.navigateByUrl('cart');
       }
     })
-    this.getTaxExempt()
     this.getPaypalProductDetail();
     this.initConfig();
     if (localStorage.getItem('ecolink_user_credential') != null) {
@@ -76,7 +77,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
     await this._ShippingApi.fedextokengeneration()
       .then((res: any) => {
-        this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct , this.shippingDataObj).subscribe((resp: any) => {
+        this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct, this.shippingDataObj).subscribe((resp: any) => {
           console.log(resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
           this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
         })
@@ -122,6 +123,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
   }
   //get product for billing
+  dataFromLocation: any;
   async checkoutProduct() {
     if (localStorage.getItem('ecolink_user_credential') != null) {
       await this.__apiservice.getCheckoutProducts()
@@ -148,10 +150,15 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
 
       setTimeout(() => {
         console.log(this.shippingDataObj);
+        this.getTaxExempt();
         this.getProduct();
       }, 1000);
     }
     else {
+      if (localStorage.getItem('Address')) {
+        this.dataFromLocation = localStorage.getItem('Address')
+        this.dataFromLocation = JSON.parse(this.dataFromLocation)
+      }
       this.getsubjectBehaviour();
     }
     this.CheckoutProduct.map((response: any) => {
@@ -371,21 +378,24 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
   }
   refractorData() {
-    let user: any = {}
+    let user: any = {};
     user = {
       name: "",
       email: "",
-      address: "",
-      city: "",
-      state: "",
-      country: "",
-      pincode: "",
+      address: this.dataFromLocation ? this.dataFromLocation[4].long_name : "",
+      city: this.dataFromLocation ? this.dataFromLocation[3].long_name : "",
+      state: this.dataFromLocation ? this.dataFromLocation[5].long_name : "",
+      country: this.dataFromLocation ? this.dataFromLocation[6].long_name : "",
+      pincode: this.dataFromLocation ? this.dataFromLocation[7].long_name : "",
       mobile: ""
     }
     this.cookiesCheckout.data.user = user;
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
+    // this.getTaxExempt();
+    // this.getProduct();
   }
+
   //collect product information to send paypal
   payment: any;
   getPaypalProductDetail() {

@@ -56,7 +56,7 @@ export class AppComponent {
     // this.geolocation$.subscribe(position => {
     //   console.log(position);
     // });
-    // localStorage.removeItem('currentAddress')
+    // localStorage.removeItem('Address');
     this.getCurrentLocation();
   }
 
@@ -91,6 +91,7 @@ export class AppComponent {
             console.log("Adddres:", result);
             console.log("Adddres:", result.formatted_address);
             this._apiService.UserLocation.next(result.address_components)
+            localStorage.setItem("Address", JSON.stringify(result.address_components));
           } else {
             alert("No address available!");
           }

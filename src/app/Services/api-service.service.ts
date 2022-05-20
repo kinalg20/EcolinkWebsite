@@ -98,7 +98,7 @@ export class ApiServiceService {
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders }).toPromise()
   }
 
-  getCheckoutProducts():Promise<any>{
+  getCheckoutProducts(): Promise<any> {
     let url = 'checkout';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -132,7 +132,7 @@ export class ApiServiceService {
 
   }
 
-  getWishListItem() : Promise<any> {
+  getWishListItem(): Promise<any> {
     let url = 'getWishlistItems';
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
@@ -239,7 +239,7 @@ export class ApiServiceService {
     return this.http.post(this._baseurl + 'deleteUserAddresses', { address_id: item_id }, { headers: httpHeaders }).toPromise()
   }
 
-  filterProduct(dataforfilter: any):Promise<any> {
+  filterProduct(dataforfilter: any): Promise<any> {
     let url = 'filterProduct';
     return this.http.post(this._baseurl + url, {
       category: dataforfilter.category,
@@ -270,11 +270,11 @@ export class ApiServiceService {
       'content-type': 'application/json',
       'Authorization': `Bearer ${this.token}`
     })
-    orderObj.user_id = user_id;    
+    orderObj.user_id = user_id;
     return this.http.post(this._baseurl + 'storeOrder', orderObj, { headers: httpHeaders })
   }
 
-  getOrderData():Promise<any>{
+  getOrderData(): Promise<any> {
     this.header = localStorage.getItem('ecolink_user_credential');
     this.token = JSON.parse(this.header).access_token;
     let user_id = JSON.parse(this.header).user_id;
@@ -302,7 +302,7 @@ export class ApiServiceService {
       user_id: user_id
     }
 
-    return this.http.post(this._baseurl + 'cancelOrder', body , {headers : httpHeaders}).toPromise();
+    return this.http.post(this._baseurl + 'cancelOrder', body, { headers: httpHeaders }).toPromise();
   }
   storeReturnOrder(storeObj: any) {
     this.header = localStorage.getItem('ecolink_user_credential');
@@ -359,7 +359,7 @@ export class ApiServiceService {
 
     console.log(user_id);
 
-    data.append("user_id" , user_id)
+    data.append("user_id", user_id)
     // data.profile_image = "https://chirpybazaar.com/wp-content/uploads/2019/05/dummy-man-570x570.png";
     return this.http.post(this._baseurl + 'editUserInfo', data, { headers: httpHeaders })
   }
@@ -381,6 +381,18 @@ export class ApiServiceService {
     }
     return this.http.post(this._baseurl + 'getTaxByZip', body)
   }
+
+  // customerLocation: any;
+  // getUserLocation() {
+  //   this.UserLocation.subscribe(res => {
+  //     if (res) {
+  //       let pincode = res[6] ? res[6].long_name : 30030;
+  //       let Location = res[3] ? res[3].long_name : 'Decatur';
+  //       this.customerLocation = Location + "" + "," + " " + pincode;
+  //     }
+  //   });
+  //   return this.customerLocation;
+  // }
 
 }
 

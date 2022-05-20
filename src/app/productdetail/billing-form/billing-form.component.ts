@@ -23,6 +23,7 @@ export class BillingFormComponent implements OnInit {
   password: string = '';
   confirm_password: string = ''
   UserLogin: any;
+  dataFromLocation:any;
   constructor(private __apiservice: ApiServiceService, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
@@ -34,6 +35,9 @@ export class BillingFormComponent implements OnInit {
 
     else {
       this.FormFillUp.emit(true);
+      // console.log(this.dataFromLocation[3]);
+      // this.updateBillingForm(this.dataFromLocation)
+      
     }
   }
   // signup when user come to checkout without login
@@ -158,6 +162,7 @@ export class BillingFormComponent implements OnInit {
       event.preventDefault();
     }
   }
+
   validateMobile(event: any) {
     const value = event.target.value;
 
@@ -174,63 +179,63 @@ export class BillingFormComponent implements OnInit {
     }
   }
   //add user address for shipping
-  addUserAddress(form: NgForm) {
-    if (form.valid) {
-      let data = Object.assign({}, form.value);
-      this.userObj = {
-        name: data.name,
-        email: data.email,
-        mobile: data.mobile,
-        landmark: data.landmark,
-        address: data.streetaddress,
-        country: data.countryname,
-        state: data.state,
-        city: data.city,
-        zip: data.pincode
-      };
-      console.log(this.userObj);
-      this.__apiservice.addUserAddresses(this.userObj).subscribe(
-        (res) => {
-          console.log(res);
-          if (res.code == 200) {
-            this.FormFillUp.emit(false);
-            this.OrderInfo.emit(this.userObj);
-            this.resSignupMsgCheck = 'success';
-            this.resSignupMsg = res.message;
-            window.scroll(0, 0)
-            this.route.routeReuseStrategy.shouldReuseRoute = () => false;
-            this.route.navigate(['/shop/checkout']);
-          }
-        },
+  // addUserAddress(form: NgForm) {
+  //   if (form.valid) {
+  //     let data = Object.assign({}, form.value);
+  //     this.userObj = {
+  //       name: data.name,
+  //       email: data.email,
+  //       mobile: data.mobile,
+  //       landmark: data.landmark,
+  //       address: data.streetaddress,
+  //       country: data.countryname,
+  //       state: data.state,
+  //       city: data.city,
+  //       zip: data.pincode
+  //     };
+  //     console.log(this.userObj);
+  //     this.__apiservice.addUserAddresses(this.userObj).subscribe(
+  //       (res) => {
+  //         console.log(res);
+  //         if (res.code == 200) {
+  //           this.FormFillUp.emit(false);
+  //           this.OrderInfo.emit(this.userObj);
+  //           this.resSignupMsgCheck = 'success';
+  //           this.resSignupMsg = res.message;
+  //           window.scroll(0, 0)
+  //           this.route.routeReuseStrategy.shouldReuseRoute = () => false;
+  //           this.route.navigate(['/shop/checkout']);
+  //         }
+  //       },
 
-        (error: HttpErrorResponse) => {
-          window.scroll(0, 0)
-          if (error.error.code == 400) {
-            if (error.error.message.email) {
-              this.resSignupMsg = error.error.message.email;
-            }
-            if (error.error.message.password) {
-              this.resSignupMsg = error.error.message.password;
-            }
-            if (error.error.message.mobile) {
-              this.resSignupMsg = error.error.message.mobile;
-            }
-            if (error.error.message.landmark) {
-              this.resSignupMsg = error.error.message.landmark;
-            }
-            this.resSignupMsgCheck = 'danger';
-          }
-        });
-      () => {
-        form.reset();
-      }
-    }
-    else {
-      this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please Fill the Fields Below!';
-    }
+  //       (error: HttpErrorResponse) => {
+  //         window.scroll(0, 0)
+  //         if (error.error.code == 400) {
+  //           if (error.error.message.email) {
+  //             this.resSignupMsg = error.error.message.email;
+  //           }
+  //           if (error.error.message.password) {
+  //             this.resSignupMsg = error.error.message.password;
+  //           }
+  //           if (error.error.message.mobile) {
+  //             this.resSignupMsg = error.error.message.mobile;
+  //           }
+  //           if (error.error.message.landmark) {
+  //             this.resSignupMsg = error.error.message.landmark;
+  //           }
+  //           this.resSignupMsgCheck = 'danger';
+  //         }
+  //       });
+  //     () => {
+  //       form.reset();
+  //     }
+  //   }
+  //   else {
+  //     this.resSignupMsgCheck = 'danger';
+  //     this.resSignupMsg = 'Please Fill the Fields Below!';
+  //   }
 
-  }
+  // }
   //close pop up
   close() {
     this.resSignupMsg = '';
