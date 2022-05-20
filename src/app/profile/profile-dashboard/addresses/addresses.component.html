@@ -12,7 +12,7 @@
     <ng-container *ngIf="allUserAddresses.length>0">
         <div class="address-body">
             <!-- address card -->
-            <div class="address-card" *ngFor="let item of allUserAddresses">
+            <div class="address-card" *ngFor="let item of allUserAddresses; index as index">
                 <div class="address-text">
                     <h4>{{item.name}}</h4>
                     <div class="address">
@@ -26,9 +26,9 @@
                         <p>, {{item.country}}</p>
                     </div>
                     <p>{{item.mobile}}</p>
-                    <div class="crud-btn">
+                    <div class="crud-btn" *ngIf="index!=0">
                         <p (click)="getUserDetail(item)" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</p>
-                        <p (click)="deleteUserAddress(item.id)">Delete</p>
+                        <!-- <p (click)="deleteUserAddress(item.id)">Delete</p> -->
                     </div>
                 </div>
             </div>

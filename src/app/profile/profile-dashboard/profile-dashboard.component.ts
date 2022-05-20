@@ -96,12 +96,12 @@ export class ProfileDashboardComponent implements OnInit {
     this.resSignupMsg = '';
   }
   // <-- Switch Tab On Edit Profile -->
-  changeTab() {
-    this.itemEvent.emit('Edit Profile')
+  changeTab(name:any) {
+    if(name=='address'){
+      this.itemEvent.emit('Addresses')
+    }
+    else{
+      this.itemEvent.emit('Edit Profile')
+    }
   }
-
-
-  
- 
-
 }

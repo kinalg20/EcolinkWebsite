@@ -49,7 +49,6 @@ export class EditProfileComponent implements OnInit {
   // <-- Edit User Profile-->
   editUserProfile(form: NgForm) {
     let header: any;
-    if (!(this.passwrodCheck)) {
       if (form.valid) {
         let formData1 = new FormData();
         let data = Object.assign({}, form.value);
@@ -63,6 +62,9 @@ export class EditProfileComponent implements OnInit {
         formData1.append('state', data.state);
         formData1.append('city', data.city);
         formData1.append('pincode', data.pincode);
+        if(data.password) {
+          formData1.append('password', data.password);
+        }
         this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
           console.log(res);
           this.resEditProfileMsgCheck = 'success';
@@ -73,6 +75,7 @@ export class EditProfileComponent implements OnInit {
           }, 3000);
           this.getFunction()
           form.reset();
+          this.passwrodCheck=false
         })
       }
       else {
@@ -82,41 +85,7 @@ export class EditProfileComponent implements OnInit {
           this.resEditProfileMsg = '';
         }, 2000);
       }
-    }
-    else {
-      if (form.valid) {
-        let userObj1: any = []
-        let formData1 = new FormData();
-        let data = Object.assign({}, form.value);
-        userObj1 = {
-          email: data.email,
-          password: data.password,
-          password_confirmation: data.password
-        };
-        formData1.append('profile_image', this.file);
-        formData1.append('name', data.firstname + ' ' + data.lastname);
-        formData1.append('email', data.email);
-        formData1.append('mobile', data.phonenumber);
-        formData1.append('address', data.address);
-        formData1.append('country', data.country);
-        formData1.append('state', data.state);
-        formData1.append('city', data.city);
-        formData1.append('pincode', data.pincode);
-        console.log(this.userObj);
-        this.__apiservice.forgotPassword(formData1).subscribe((res: any) => {
-          console.log(res);
-          form.reset();
-        })
-        this.__apiservice.editUserProfileInfo(this.userObj).subscribe((res: any) => {
-          console.log(res);
-          this.getFunction();
-        })
-      }
-      else {
-        this.resSignupMsg = 'Please fill the value';
-      }
-    }
-    window.location.reload
+    // window.location.reload
   }
   // <-- Close toaster --> 
   close() {
