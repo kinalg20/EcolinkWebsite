@@ -113,17 +113,24 @@
                                         </div>
                                     </li>
                                     <ng-container *ngIf="selectedShippingMethod=='fedex'">
-                                        <li *ngIf="shippingCharge>0 && this.user_credential!=null">${{shippingCharge}}
-                                        </li>
-                                        <li *ngIf="shippingCharge==0 && this.user_credential!=null">
-                                            <span><i class="pi pi-spin pi-spinner" style="font-size: 1rem"></i></span>
-                                        </li>
-                                        <li *ngIf="this.user_credential==null" style="color:red; cursor: pointer;" routerLink="/profile/auth">Please Login</li>
+                                        <ng-container *ngIf="this.user_credential">
+                                            <li *ngIf="shippingCharge>0">${{shippingCharge}}
+                                            </li>
+                                            <li *ngIf="shippingCharge==0">
+                                                <span><i class="pi pi-spin pi-spinner"
+                                                        style="font-size: 1rem"></i></span>
+                                            </li>
+                                        </ng-container>
+                                        <ng-container *ngIf="!this.user_credential">
+                                            <li style="color:red; cursor: pointer;" routerLink="/profile/auth">Please
+                                                Login</li>
+                                        </ng-container>
                                     </ng-container>
 
                                     <ng-container *ngIf="selectedShippingMethod=='saia'">
                                         <li *ngIf="saiaValues && this.user_credential!=null">${{saiaValues.Amount}}</li>
-                                        <li *ngIf="this.user_credential==null" style="color:red; cursor: pointer;" routerLink="/profile/auth">Please Login</li>
+                                        <li *ngIf="this.user_credential==null" style="color:red; cursor: pointer;"
+                                            routerLink="/profile/auth">Please Login</li>
                                     </ng-container>
                                 </ul>
                             </div>
@@ -145,6 +152,14 @@
                             </ul>
                         </div>
                     </ng-container>
+                    <div class="warning-message" *ngIf="paymentMethod">
+                        <span *ngIf="disableOrderButton" class="text-danger" style="font-size:12px;">*Please Fill the
+                            Billing Details*</span>
+                        <!-- <span *ngIf="verifiedUser" class="text-danger" style="font-size:12px;">*Please Verify email sent
+                            to your mail Id {{verifiedUser}}*</span> -->
+                        <!-- <span *ngIf="user_credential==null && this.verifiedUser" class="text-danger" style="font-size:12px;">*Please Sign In*</span> -->
+                    </div>
+
                     <div class="bank-detail">
                         <div class="card mx-1">
                             <h6>Direct bank transfer</h6>
@@ -166,35 +181,17 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Paypal buttons -->
                     <div class="paypal-integration" *ngIf="showPaypal">
                         <ngx-paypal [config]="payPalConfig"></ngx-paypal>
-                    </div>
-                    <div class="warning-message">
-                        <span *ngIf="disableOrderButton" class="text-danger" style="font-size:12px;">*Please Fill the
-                            Billing Details*</span>
                     </div>
                     <div class="place-order my-2 mx-1">
                         <div class="proceed-button">
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
                                 (click)="getOrderInfo()" class="p-button-raised p-button-success"
                                 style="height:45px; width: 100%;"
-                                [disabled]="paymentCheck || disableOrderButton || fedexshippingboolean && saiashippingboolean"></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="empty-cart" *ngIf="CheckoutProduct.length==0">
-            <div class="row">
-                <div class="card">
-                    <div class="card-body cart">
-                        <div class="col-sm-12 empty-cart-cls text-center"> <img src="https://i.imgur.com/dCdflKN.png"
-                                width="130" height="130" class="img-fluid mb-4 mr-3">
-                            <h3><strong>Your Cart is Empty</strong></h3>
-                            <h4>Add something to make me happy :)</h4> <a routerLink="/shop"
-                                class="btn btn-success cart-btn-transform m-3" data-abc="true">continue
-                                shopping</a>
+                                [disabled]="paymentCheck || disableOrderButton || fedexshippingboolean && saiashippingboolean || !verifiedUser"></button>
                         </div>
                     </div>
                 </div>
@@ -202,3 +199,8 @@
         </div>
     </div>
 </div>
+
+
+
+
+<!-- paymentCheck || disableOrderButton || fedexshippingboolean && saiashippingboolean &&  -->

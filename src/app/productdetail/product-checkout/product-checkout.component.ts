@@ -42,7 +42,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   billingUserDetail: any = {};
   fedexshippingboolean: boolean = true;
   saiashippingboolean: boolean = true;
-  user_credential:any;
+  user_credential: any;
+  verifiedUser: boolean = true;
+  paymentMethod: boolean = false;
   constructor(private __apiservice: ApiServiceService,
     private route: Router,
     private _cookies: CookiesService,
@@ -51,7 +53,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void { }
 
   async ngOnInit() {
-    this.user_credential=localStorage.getItem('ecolink_user_credential');
+    this.user_credential = localStorage.getItem('ecolink_user_credential');
     if (localStorage.getItem('ecolink_user_credential') == null) {
       this.discountCheck = false;
     }
@@ -328,6 +330,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   }
   // enable and disable payment tabs
   checkPaymentTab() {
+    this.paymentMethod = true;
     if (this.selectedPaymentMethod == 'cod') {
       this.paymentCheck = false;
       this.showPaypal = false;
@@ -338,8 +341,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.showPaypal = true;
       console.log(this.paymentCheck);
     }
-    else if (this.selectedPaymentMethod == "check-payment") {
-      this.paymentCheck = false;
+
+    let verification = JSON.parse(this.user_credential);
+    if (verification.user?.email_verified) {
+      this.verifiedUser = false;
+      console.log(this.verifiedUser);
+      
     }
   }
   cookiesCheckout: any = {}

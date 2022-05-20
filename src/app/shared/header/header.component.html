@@ -82,15 +82,10 @@
 </section>
 <section class="location-head">
     <div class="container">
-        <div class="location-section" (click)="goToLocation()" style="cursor: pointer;">
+        <div class="location-section">
             <div class="location">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
             </div>
-            <!-- <ng-container *ngIf="customerLocation==''">
-                    <div class="address">
-                        <a>Decatur, 30030</a>
-                    </div>
-                </ng-container> -->
             <ng-container *ngIf="customerLocation!=''">
                 <div class="address">
                     <a>{{customerLocation}}</a>
