@@ -22,7 +22,6 @@ export class InnerpagesComponent implements OnInit {
         this.data = res.data;
         console.log("inner-page route", res);
         this.innershimmerLoad = false;
-
       })
     }
     if (this.slug.subsubsublink) {

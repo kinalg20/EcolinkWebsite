@@ -45,26 +45,26 @@ export class AddressesComponent implements OnInit {
 
   }
   // <-- Delete User Address --> 
-  async deleteUserAddress(item_id: any) {
-    console.log(item_id);
-    await this.__apiservice.deleteUserAddress(item_id)
-      .then((res: any) => {
-        if (res.code == 200) {
-          this.resSignupMsg = 'Your Address Deleted Successfully!';
-          this.resSignupMsgCheck = 'success';
-          setTimeout(() => {
-            this.resSignupMsg = '';
-          this.resSignupMsgCheck = '';
-          }, 1000);
-          this.getAllUserAddress();
-        }
-      })
-      .catch((error) => {
-        if (error.status == 400) {
-          this.getAllUserAddress();
-        }
-      })
-  }
+  // async deleteUserAddress(item_id: any) {
+  //   console.log(item_id);
+  //   await this.__apiservice.deleteUserAddress(item_id)
+  //     .then((res: any) => {
+  //       if (res.code == 200) {
+  //         this.resSignupMsg = 'Your Address Deleted Successfully!';
+  //         this.resSignupMsgCheck = 'success';
+  //         setTimeout(() => {
+  //           this.resSignupMsg = '';
+  //         this.resSignupMsgCheck = '';
+  //         }, 1000);
+  //         this.getAllUserAddress();
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       if (error.status == 400) {
+  //         this.getAllUserAddress();
+  //       }
+  //     })
+  // }
   // <-- Close toaster --> 
   close() {
     this.renderer.setStyle(this.test.nativeElement, 'display', 'none');
