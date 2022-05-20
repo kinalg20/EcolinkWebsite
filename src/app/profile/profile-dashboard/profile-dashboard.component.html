@@ -19,8 +19,7 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <div class="card profile-section">
                         <div class="profile-image">
-                            <img [src]="item.profile_image != 'https://brandtalks.in/ecolink/storage/profile_image'? item.profile_image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'"
-                                alt="">
+                            <img [src]="item.profile_image != 'https://brandtalks.in/ecolink/storage/profile_image'? item.profile_image : 'https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg'" alt="">
                         </div>
                         <div class="profile-desc">
                             <div class="profile-detail my-3">
@@ -29,7 +28,7 @@
                             </div>
 
                             <div class="edit-profile-button my-2">
-                                <button (click)="changeTab()">Edit Profile</button>
+                                <button (click)="changeTab('profile')">Edit Profile</button>
                             </div>
                         </div>
                     </div>
@@ -38,8 +37,7 @@
                     <div class="card address-section">
                         <div class="customer_name my-3">
                             <h4>Add Address</h4>
-                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal123"
-                                class="pi pi-plus">
+                            <i (click)="getUserDetail('add')" data-bs-toggle="modal" data-bs-target="#exampleModal123" class="pi pi-plus">
                             </i>
                         </div>
                         <div class="default-Address">
@@ -50,7 +48,7 @@
                         <span class="address-label">Email Address</span>
                         <span>{{item.email}}</span>
                         <div class="edit-Address-button my-2">
-                            <button (click)="changeTab()">Edit Address</button>
+                            <button (click)="changeTab('address')">Edit Address</button>
                         </div>
                     </div>
                 </div>
@@ -72,6 +70,3 @@
         </div>
     </div>
 </div>
-
-
-

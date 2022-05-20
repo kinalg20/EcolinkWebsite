@@ -84,11 +84,8 @@ export class HeaderComponent implements OnInit {
         });
       }
     });
-    setTimeout(() => {
-      console.log("this.homePageData", this.homePageData);
-    }, 1000);
-    this.cartCountFunction();
-    this.getSubscribeMsg();
+
+  
     this.__apiservice.UserLocation.subscribe(res => {
       if (res) {
         let pincode = res[7] ? res[7].long_name : 30030;
@@ -96,6 +93,9 @@ export class HeaderComponent implements OnInit {
         this.customerLocation = Location + "," + pincode;
       }
     });
+
+    this.cartCountFunction();
+    this.getSubscribeMsg();
   }
   getSubscribeMsg() {
     this.__apiservice.subscribedmsg.subscribe((res: any) => {

@@ -1,3 +1,9 @@
+<!-- <ng-container *ngIf="homePageData.length>0"> -->
+<div class="spinner"  *ngIf="homePageData.length==0">
+    <div class="spinner-border" role="status">
+        <span class="sr-only" id="loading"></span>
+    </div>
+</div>
 <section class="top-head-section">
     <div class="container">
         <div class="top-head-line">
@@ -16,19 +22,24 @@
                 <div class="location">
                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                 </div>
-                <div class="address">
-                    <a>Decatur 30030</a>
-                </div>
+                <ng-container *ngIf="customerLocation!=''">
+                    <div class="address">
+                        <a>{{customerLocation}}</a>
+                    </div>
+                </ng-container>
             </div>
         </div>
         <div class="responsive-navbar">
-            <button type="button" style=" background: transparent; border: none; font-size: 16px;" data-toggle="modal" data-target="#exampleModalCenter">
+            <button class="search" type="button" style=" background: transparent; border: none; font-size: 16px;"
+                data-toggle="modal" data-target="#exampleModalCenter">
                 <i class="fa fa-search text-white" aria-hidden="true" style="cursor: pointer;"></i>
             </button>
             <div class="cart-icon">
-                <i class="fa fa-shopping-cart text-white" routerLink="/cart"></i><span *ngIf="length>0">{{length}}</span>
+                <i class="fa fa-shopping-cart text-white" routerLink="/cart"></i><span
+                    *ngIf="length>0">{{length}}</span>
             </div>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span (click)="openmenu()" *ngIf="!openMenu"><i style="font-size:24px" class="fa">&#xf0c9;</i></span>
                 <span (click)="openmenu()" *ngIf="openMenu"><i style="font-size:24px " class="fa">&#xf00d;</i></span>
             </button>
@@ -76,10 +87,10 @@
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
             </div>
             <!-- <ng-container *ngIf="customerLocation==''">
-                <div class="address">
-                    <a>Decatur, 30030</a>
-                </div>
-            </ng-container> -->
+                    <div class="address">
+                        <a>Decatur, 30030</a>
+                    </div>
+                </ng-container> -->
             <ng-container *ngIf="customerLocation!=''">
                 <div class="address">
                     <a>{{customerLocation}}</a>
@@ -204,3 +215,4 @@
         </a>
     </li>
 </div>
+<!-- </ng-container> -->

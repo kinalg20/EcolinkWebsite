@@ -9,6 +9,7 @@
         grid-template-columns: 49% 49%;
         grid-gap: 15px;
         .address-card {
+            margin: 0 0 20px 0;
             box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
             border: 1px solid #d7d1d1;
             border-radius: 10px;
@@ -29,10 +30,16 @@
                     width: 100%;
                     justify-content: space-evenly;
                     p {
-                        color: rgb(43, 43, 209);
+                        color: #ffffff;
                         cursor: pointer;
+                        background: #2875b8;
+                        padding: 5px 30px;
+                        cursor: pointer;
+                        border-radius: 5px;
                         &:hover {
-                            text-decoration: underline;
+                            background: #fff;
+                            color: #000;
+                            border: 1px solid #2875b8;
                         }
                     }
                 }
