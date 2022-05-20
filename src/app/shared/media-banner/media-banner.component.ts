@@ -31,7 +31,7 @@ export class MediaBannerComponent implements OnInit {
     }
   }
   bottomReached(): boolean {
-    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight;
+    return (window.innerHeight + window.scrollY) >= document.body.offsetHeight -300;
   }
   ngOnInit(): void {
     setTimeout(() => {
