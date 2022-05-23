@@ -32,7 +32,7 @@ export class ProductCartComponent implements OnInit {
       }
     }
     if (string == "delete") {
-      if (this.CardShow[id].quantity == 2) {
+      if (this.CardShow[id].quantity >= 2) {
         this.CardShow[id].quantity = this.CardShow[id].quantity - 1;
         this.subtotal();
       }
