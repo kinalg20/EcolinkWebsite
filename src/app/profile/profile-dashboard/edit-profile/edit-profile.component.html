@@ -1,5 +1,5 @@
 <div class="Edit-Profile-section" *ngIf="showdesc == 'Edit Profile'">
-    <h2>Edit Profile</h2>
+    <h2>{{heading}}</h2>
     <!-- edit profile form -->
     <ng-container *ngFor="let item of userDetail">
         <form #editProfileFrom="ngForm" (ngSubmit)="editUserProfile(editProfileFrom)" id="backToTop">

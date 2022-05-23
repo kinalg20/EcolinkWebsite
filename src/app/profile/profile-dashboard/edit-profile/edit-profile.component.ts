@@ -21,14 +21,16 @@ export class EditProfileComponent implements OnInit {
   invalidMobile = false;
   invalidEmail: boolean = false;
   invalidUserEmail: string = '';
-
+  heading: any
   @Input() showdesc: any;
 
   constructor(private __apiservice: ApiServiceService, private renderer: Renderer2, private scroller: ViewportScroller,) { }
 
   ngOnInit(): void {
     this.getFunction();
-
+    this.__apiservice.UserAddress.subscribe((res: any) => {
+      this.heading = res
+    })
   }
   // <<--Get User deatils Function-->>
   getFunction() {
@@ -49,42 +51,42 @@ export class EditProfileComponent implements OnInit {
   // <-- Edit User Profile-->
   editUserProfile(form: NgForm) {
     let header: any;
-      if (form.valid) {
-        let formData1 = new FormData();
-        let data = Object.assign({}, form.value);
-        header = localStorage.getItem('ecolink_user_credential');
-        formData1.append('profile_image', this.file);
-        formData1.append('name', data.firstname + ' ' + data.lastname);
-        formData1.append('email', data.email);
-        formData1.append('mobile', data.phonenumber);
-        formData1.append('address', data.address);
-        formData1.append('country', data.country);
-        formData1.append('state', data.state);
-        formData1.append('city', data.city);
-        formData1.append('pincode', data.pincode);
-        if(data.password) {
-          formData1.append('password', data.password);
-        }
-        this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
-          console.log(res);
-          this.resEditProfileMsgCheck = 'success';
-          this.resEditProfileMsg = 'Profile Edited Successfully!';
-          this.__apiservice.profiledashboard.next(true);
-          setTimeout(() => {
-            this.resEditProfileMsg = '';
-          }, 3000);
-          this.getFunction()
-          form.reset();
-          this.passwrodCheck=false
-        })
+    if (form.valid) {
+      let formData1 = new FormData();
+      let data = Object.assign({}, form.value);
+      header = localStorage.getItem('ecolink_user_credential');
+      formData1.append('profile_image', this.file);
+      formData1.append('name', data.firstname + ' ' + data.lastname);
+      formData1.append('email', data.email);
+      formData1.append('mobile', data.phonenumber);
+      formData1.append('address', data.address);
+      formData1.append('country', data.country);
+      formData1.append('state', data.state);
+      formData1.append('city', data.city);
+      formData1.append('pincode', data.pincode);
+      if (data.password) {
+        formData1.append('password', data.password);
       }
-      else {
-        this.resEditProfileMsgCheck = 'danger';
-        this.resEditProfileMsg = 'Please Fill the Fields Below!';
+      this.__apiservice.editUserProfileInfo(formData1).subscribe((res: any) => {
+        console.log(res);
+        this.resEditProfileMsgCheck = 'success';
+        this.resEditProfileMsg = 'Profile Edited Successfully!';
+        this.__apiservice.profiledashboard.next(true);
         setTimeout(() => {
           this.resEditProfileMsg = '';
-        }, 2000);
-      }
+        }, 3000);
+        this.getFunction()
+        form.reset();
+        this.passwrodCheck = false
+      })
+    }
+    else {
+      this.resEditProfileMsgCheck = 'danger';
+      this.resEditProfileMsg = 'Please Fill the Fields Below!';
+      setTimeout(() => {
+        this.resEditProfileMsg = '';
+      }, 2000);
+    }
     // window.location.reload
   }
   // <-- Close toaster --> 

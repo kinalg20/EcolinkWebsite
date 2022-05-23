@@ -15,6 +15,7 @@ export class ProfileDashboardComponent implements OnInit {
   file: any = null;
   shimmerLoad: boolean = true;
   profileAddress: any = [];
+  address: any = [];
   userObj: any;
   userDetail: any = [];
   invalidMobile = false;
@@ -28,8 +29,8 @@ export class ProfileDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getFunction();
     // this.getReturnProduct();
-    this.__apiservice.profiledashboard.subscribe((res:any) => {
-      if(res) {
+    this.__apiservice.profiledashboard.subscribe((res: any) => {
+      if (res) {
         this.getFunction();
         this.__apiservice.profiledashboard.next(false);
       }
@@ -39,18 +40,18 @@ export class ProfileDashboardComponent implements OnInit {
   getFunction() {
     this.userDetail = []
     this.__apiservice.getUserProfileDetail().
-    subscribe((res: any) => {
-      this.userDetail.push(res.data);
-      this.shimmerLoad = false;
-      this.userDetail.map((res: any) => {
-        setTimeout(() => {
-          res.firstname = res.name.split(" ")[0]
-          res.lastname = res.name.split(" ")[1]
-          console.log("res", res);
-        }, 500);
+      subscribe((res: any) => {
+        this.userDetail.push(res.data);
+        this.shimmerLoad = false;
+        this.userDetail.map((res: any) => {
+          setTimeout(() => {
+            res.firstname = res.name.split(" ")[0]
+            res.lastname = res.name.split(" ")[1]
+            console.log("res", res);
+          }, 500);
+        })
+        console.log(this.userDetail);
       })
-      console.log(this.userDetail);
-    })
   }
 
 
@@ -65,11 +66,11 @@ export class ProfileDashboardComponent implements OnInit {
   getUserDetail(item: any) {
     console.log(item);
     if (item == 'add') {
-      this.profileAddress=[];
-    this.profileAddress.push({
-          heading: "Add Address",
-    });
-     
+      this.profileAddress = [];
+      this.profileAddress.push({
+        heading: "Add Address",
+      });
+
     }
     else {
       this.profileAddress = [];
@@ -79,9 +80,9 @@ export class ProfileDashboardComponent implements OnInit {
       this.profileAddress.push(item);
     }
   }
- 
+
   // ***************************************Order History****************************************
-  
+
   // *************************************End**************************************************
 
 
@@ -96,12 +97,8 @@ export class ProfileDashboardComponent implements OnInit {
     this.resSignupMsg = '';
   }
   // <-- Switch Tab On Edit Profile -->
-  changeTab(name:any) {
-    if(name=='address'){
-      this.itemEvent.emit('Addresses')
-    }
-    else{
-      this.itemEvent.emit('Edit Profile')
-    }
+  changeTab(name: any) {
+    this.__apiservice.UserAddress.next(name)
+    this.itemEvent.emit('Edit Profile')
   }
 }

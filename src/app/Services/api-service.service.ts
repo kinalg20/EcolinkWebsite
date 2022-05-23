@@ -16,6 +16,7 @@ export class ApiServiceService {
   cookiesCheckoutData = new BehaviorSubject<any>([]);
   itemCountSession = new BehaviorSubject<any>({});
   UserLocation = new BehaviorSubject<any>([]);
+  UserAddress = new BehaviorSubject<any>({});
   profiledashboard = new BehaviorSubject<boolean>(false);
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
