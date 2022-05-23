@@ -58,7 +58,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.discountCheck = false;
     }
     await this.checkoutProduct();
-    console.log(this.CheckoutProduct);
     this.CheckoutProduct.map((res: any) => {
       if (res.carts.length == 0) {
         this.route.navigateByUrl('cart');
@@ -76,16 +75,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
             }
           })
         });
-    }
-    await this._ShippingApi.fedextokengeneration()
-      .then((res: any) => {
-        this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct, this.shippingDataObj).subscribe((resp: any) => {
-          console.log(resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
-          this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
-        })
-      })
-    if (this.shippingCharge > 0) {
-      this.fedexshippingboolean = false;
+        this.FedexShippingObj();
     }
   }
   // get tax value 
@@ -174,25 +164,54 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     })
   }
 
+
+  async FedexShippingObj() {
+    await this._ShippingApi.fedextokengeneration()
+      .then((res: any) => {
+        this._ShippingApi.fedexshippingApi(res.access_token, this.CheckoutProduct, this.shippingDataObj).subscribe((resp: any) => {
+          console.log(resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge);
+          this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
+        })
+      })
+    if (this.shippingCharge > 0) {
+      this.fedexshippingboolean = false;
+    }
+  }
+
   product_weight: number = 0;
   product_width: number = 0;
   product_height: number = 0;
   product_length: number = 0;
+
   // get shipping charges for product
   getProduct() {
     this.checkoutProductItem = [];
+    console.log("this.CheckoutProduct", this.CheckoutProduct);
+
     this.CheckoutProduct.map((res: any) => {
-      res.carts.map((resp: any) => {
-        this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight);
-        this.checkoutProductItem.width = this.product_width += (resp.quantity * resp.product.width);
-        this.checkoutProductItem.height = this.product_height += (resp.quantity * resp.product.height);
-        this.checkoutProductItem.length = this.product_length += (resp.quantity * resp.product.lenght);
-      })
+      if(res){
+        res.carts.map((resp: any) => {
+          this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight);
+          this.checkoutProductItem.width = this.product_width += (resp.quantity * resp.product.width);
+          this.checkoutProductItem.height = this.product_height += (resp.quantity * resp.product.height);
+          this.checkoutProductItem.length = this.product_length += (resp.quantity * resp.product.lenght);
+        })
+      }
     })
-    this.checkoutProductItem.country = this.shippingDataObj.country;
-    this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip;
+    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name ;
+    this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip ? this.shippingDataObj.zip : this.dataFromLocation[7].long_name;
     this.getShippingInfo();
   }
+
+
+  // address: this.dataFromLocation ? this.dataFromLocation[4].long_name : "",
+  //     city: this.dataFromLocation ? this.dataFromLocation[3].long_name : "",
+  //     state: this.dataFromLocation ? this.dataFromLocation[5].long_name : "",
+  //     country: this.dataFromLocation ? this.dataFromLocation[6].long_name : "",
+  //     pincode: this.dataFromLocation ? this.dataFromLocation[7].long_name : "",
+
+
+
 
   saiaValues: any = {};
   saiaAmount: number = 0;
@@ -346,7 +365,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     if (verification.user?.email_verified) {
       this.verifiedUser = false;
       console.log(this.verifiedUser);
-      
+
     }
   }
   cookiesCheckout: any = {}
@@ -359,6 +378,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     if (cookiesObj.length > 0) {
       cookiesObj.map((res: any) => {
         this.__apiservice.getProductById(res.CartProductId).subscribe((resp: any) => {
+          console.log("resp", resp);
           let data: any = {};
           let products: any = {};
           data.quantity = res.ProductQuantity;
@@ -366,6 +386,10 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
           products.id = res.CartProductId;
           products.name = resp.data.name;
           products.sale_price = resp.data.sale_price;
+          products.width = resp.data.width;
+          products.height = resp.data.height;
+          products.lenght = resp.data.lenght;
+          products.weight = resp.data.weight;
           products.image = resp.data.image;
           products.alt = resp.data.alt;
           data.product = products;
@@ -400,7 +424,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
     // this.getTaxExempt();
-    // this.getProduct();
+    this.getProduct();
+    this.FedexShippingObj();
   }
 
   //collect product information to send paypal
