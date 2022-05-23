@@ -13,14 +13,15 @@ export class MediaComponent implements OnInit {
   firstBlock: any = [];
   searchValue: string = '';
   showSuggestedList: boolean = false;
+  innershimmerLoad: boolean = true;
   constructor(private __apiservice: ApiServiceService, private router: Router) { }
 
   async ngOnInit() {
     await this.__apiservice.getAllBlogs().then(res => {
       this.getAllBlog = res.data;
     })
-
     await this.getfirstblog();
+    
   }
 
   responsiveOptions = [

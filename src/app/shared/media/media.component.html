@@ -1,4 +1,5 @@
 <app-header></app-header>
+
 <section class="media-section">
     <div class="container">
         <div class="head-section">
@@ -33,6 +34,16 @@
         </ng-container>
     </div>
 </ng-container> -->
+<section class="media-banner" *ngIf="!backupBlog.data">
+    <div class="container">
+        <div class="media-calltoaction">
+            <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+            <div class="calltoaction">
+                <ngx-shimmer-loading [shape]="'square'" width="'100%'"></ngx-shimmer-loading>
+            </div>
+        </div>
+    </div>
+</section>
 <div *ngIf="backupBlog.data">
     <section class="media-banner">
         <div class="container">
