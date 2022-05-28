@@ -25,6 +25,7 @@ export class SignupSigninComponent implements OnInit {
   checkString: boolean = true;
   resSignupMsgCheck: string = ' ';
   resMsg: string = '';
+  invalidZip = false;
   errMsg = [];
   constructor(private router: Router, private renderer: Renderer2, private scroller: ViewportScroller, private __apiservice: ApiServiceService) { }
 
@@ -34,6 +35,28 @@ export class SignupSigninComponent implements OnInit {
   SignIn() {
     this.checkString = !this.checkString;
   }
+    // validate pincode 
+    inputZip(event: any) {
+      if (
+        event.key.length === 1 &&
+        !/^[0-9]$/.test(event.key)
+      ) {
+        event.preventDefault();
+      }
+    }
+    validateZip(event: any) {
+      const value = event.target.value;
+      if (
+        value &&
+        /^[0-9]+$/.test(value) &&
+        value.length < 6
+      ) {
+        this.invalidZip = true;
+      }
+      else {
+        this.invalidZip = false;
+      }
+    }
   //validate user email
   validateUserEmail(email: any) {
     const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
