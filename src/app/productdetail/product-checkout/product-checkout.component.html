@@ -153,10 +153,10 @@
                         </div>
                     </ng-container>
                     <div class="warning-message" *ngIf="paymentMethod">
-                        <span *ngIf="disableOrderButton" class="text-danger" style="font-size:12px;">*Please Fill the
-                            Billing Details*</span>
-                        <!-- <span *ngIf="verifiedUser" class="text-danger" style="font-size:12px;">*Please Verify email sent
-                            to your mail Id {{verifiedUser}}*</span> -->
+                        <span *ngIf="verifiedUser" class="text-danger" style="font-size:12px;">*Please Verify email sent
+                            to your mail Id *</span>
+                            <span *ngIf="disableOrderButton" class="text-danger" style="font-size:12px;">*Please Fill the
+                                Billing Details*</span>
                         <!-- <span *ngIf="user_credential==null && this.verifiedUser" class="text-danger" style="font-size:12px;">*Please Sign In*</span> -->
                     </div>
 
@@ -191,7 +191,7 @@
                             <button pButton pRipple type="button" label="Place Order" routerLink="/thanks"
                                 (click)="getOrderInfo()" class="p-button-raised p-button-success"
                                 style="height:45px; width: 100%;"
-                                [disabled]="paymentCheck || disableOrderButton || fedexshippingboolean && saiashippingboolean || !verifiedUser"></button>
+                                [disabled]="paymentCheck || disableOrderButton || fedexshippingboolean && saiashippingboolean || verifiedUser"></button>
                         </div>
                     </div>
                 </div>

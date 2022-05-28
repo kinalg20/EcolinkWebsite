@@ -23,7 +23,7 @@ export class BillingFormComponent implements OnInit {
   password: string = '';
   confirm_password: string = ''
   UserLogin: any;
-  dataFromLocation:any;
+  dataFromLocation: any;
   constructor(private __apiservice: ApiServiceService, private route: Router, private _cookies: CookiesService) { }
 
   ngOnInit(): void {
@@ -37,13 +37,15 @@ export class BillingFormComponent implements OnInit {
       this.FormFillUp.emit(true);
       // console.log(this.dataFromLocation[3]);
       // this.updateBillingForm(this.dataFromLocation)
-      
+
     }
   }
   // signup when user come to checkout without login
   signUp(form: NgForm) {
     if (form.valid) {
       let data = Object.assign({}, form.value);
+      this.resSignupMsg = "Wait for a While";
+      this.resSignupMsgCheck = 'warning'
       console.log(data.radio2);
       this.userObj = {
         name: data.name,

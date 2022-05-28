@@ -21,7 +21,7 @@
 
     <ng-container *ngIf="!shimmerLoad">
         <div class="product-detail-section">
-             <!-- product detail card  -->
+            <!-- product detail card  -->
             <ng-container *ngFor="let detail of productDetail">
                 <div class="product-image">
                     <img [src]="detail.data.product.image" alt="">
@@ -83,8 +83,12 @@
                             </div>
                             <div class="addtocartbutton">
                                 <button (click)=AddProductToCart(detail.data.product) pButton pRipple type="button"
-                                    label="Add to Cart" routerLink="/cart" class="p-button-raised p-button-success"
-                                    style="height:38px;"></button>
+                                    [label]="CartButton" routerLink="/cart" class="p-button-raised p-button-success"
+                                    style="width:max-content; height: fit-content;"
+                                    *ngIf="!DisabledCartButton"></button>
+                                <button pButton pRipple type="button" [label]="CartButton" routerLink="/cart"
+                                    *ngIf="DisabledCartButton" class="p-button-raised p-button-success"
+                                    style="width:max-content; height: fit-content;"></button>
                             </div>
                         </div>
                         <div class="wishlist">
