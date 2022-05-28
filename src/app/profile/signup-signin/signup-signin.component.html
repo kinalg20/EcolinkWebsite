@@ -53,7 +53,7 @@
                             <label for="email">Email*</label>
                             <input class="form-control" type="email" id="email" autocomplete="off" formControlName="email" (input)="validateEmail($event)" [class.is-valid]="signup.submitted && profileForm.get('email')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('email')?.invalid"
                                 required />
-                            <h6 class="invalid-feedback">
+                            <h6 class="text-danger" *ngIf="invalidEmail">
                                 {{ invalidEmail ? "Invalid Email" : "" }}
                             </h6>
                             <div class="invalid-feedback">
@@ -66,7 +66,7 @@
                             <label for="phone-number">Phone Number*</label>
                             <input class="form-control" type="text" id="phonenumber" autocomplete="off" formControlName="phonenumber" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" [class.is-valid]="signup.submitted && profileForm.get('phonenumber')?.valid"
                                 [class.is-invalid]="signup.submitted && profileForm.get('phonenumber')?.invalid" required />
-                            <h6 class="invalid-feedback">
+                            <h6 class="text-danger" *ngIf="invalidMobile">
                                 {{ invalidMobile ? "Invalid Mobile" : "" }}
                             </h6>
                             <div class="invalid-feedback">
@@ -89,14 +89,11 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="confirm-password">Confirm Password*</label>
-                            <input class="form-control" type="password" id="confirmpassword" autocomplete="off" formControlName="confirmpassword" [class.is-valid]="signup.submitted && profileForm.get('confirmpassword')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('confirmpassword')?.invalid"
+                            <input class="form-control" type="password" id="confirmpassword" [(ngModel)]="confirmPassword" autocomplete="off" formControlName="confirmpassword" [class.is-valid]="signup.submitted && profileForm.get('confirmpassword')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('confirmpassword')?.invalid"
                                 required />
                             <p class="mt-2 text-danger" *ngIf="confirmPassword">
                                 {{ password === confirmPassword ? "" : "Password Not Match" }}
                             </p>
-                            <div class="invalid-feedback">
-                                Password not matched
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,8 +143,11 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="pincode">Pincode*</label>
-                            <input class="form-control" type="text" id="pincode" autocomplete="off" formControlName="pincode" [class.is-valid]="signup.submitted && profileForm.get('pincode')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('pincode')?.invalid" required
-                            />
+                            <input class="form-control" type="text" id="pincode" autocomplete="off" formControlName="pincode" maxlength="6" (input)="validateZip($event)" (keydown)="inputZip($event)" [class.is-valid]="signup.submitted && profileForm.get('pincode')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('pincode')?.invalid"
+                                required />
+                            <h6 class="text-danger" *ngIf="invalidZip">
+                                {{ invalidZip ? "Invalid Zip" : "" }}
+                            </h6>
                             <div class="invalid-feedback">
                                 Pincode is required
                             </div>
