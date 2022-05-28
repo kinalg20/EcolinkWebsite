@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ViewportScroller } from "@angular/common";
 import { Router } from "@angular/router";
-import { FormGroup, NgForm, FormControl } from '@angular/forms';
+import { FormGroup, NgForm, FormControl, Validators } from '@angular/forms';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 
 @Component({
@@ -41,17 +41,17 @@ export class AskChemistComponent implements OnInit {
     }
   ]
   chemistForm = new FormGroup({
-    input_11: new FormControl (''),
-    textarea: new FormControl(''),
-    firstname: new FormControl(''),
-    lastname: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
-    address: new FormControl(''),
-    country: new FormControl(''),
-    state: new FormControl(''),
-    city: new FormControl(''),
-    zip: new FormControl(''),
+    input_11: new FormControl ('', Validators.required),
+    textarea: new FormControl('', Validators.required),
+    firstname: new FormControl('', Validators.required),
+    lastname: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
+    phone: new FormControl('', Validators.required),
+    address: new FormControl('', Validators.required),
+    country: new FormControl('', Validators.required),
+    state: new FormControl('', Validators.required),
+    city: new FormControl('', Validators.required),
+    zip: new FormControl('', Validators.required),
   }, {updateOn: 'blur'}
   );
   saveAskChemistDetail() {
@@ -75,6 +75,11 @@ export class AskChemistComponent implements OnInit {
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         this.chemistForm.reset();
+        // Remove validators after form submission
+        Object.keys(this.chemistForm.controls).forEach(key => {
+          this.chemistForm.controls[key].setErrors(null)
+        });
+
         this.resSignupMsg = 'Chemist Form Added Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {
@@ -83,13 +88,13 @@ export class AskChemistComponent implements OnInit {
       }
       )
     }
-    else {
-      this.resSignupMsgCheck = 'danger';
-      this.resSignupMsg = 'Please Fill the Fields Below!';
-      setTimeout(() => {
-        this.resSignupMsg = '';
-        }, 2000);
-    }
+    // else {
+    //   this.resSignupMsgCheck = 'danger';
+    //   this.resSignupMsg = 'Please Fill the Fields Below!';
+    //   setTimeout(() => {
+    //     this.resSignupMsg = '';
+    //     }, 2000);
+    // }
   }
   ngAfterViewInit() { }
   close() {

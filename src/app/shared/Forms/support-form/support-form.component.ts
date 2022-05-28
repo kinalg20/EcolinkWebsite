@@ -73,6 +73,10 @@ export class SupportFormComponent implements OnInit, AfterViewInit {
       this._apiService.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         this.supportForm.reset();
+        // Remove validators after form submission
+        Object.keys(this.supportForm.controls).forEach(key => {
+          this.supportForm.controls[key].setErrors(null)
+        });
         this.checkBoxChcek = false
         this.submitted = false;
         this.resSignupMsg = 'Form Submitted Successfully!';

@@ -29,8 +29,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="first-name">First Name*</label>
-                            <input type="text" class="form-control" id="firstname" autocomplete="off" formControlName="firstname" [class.is-valid]="signup.submitted && profileForm.get('firstname')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('firstname')?.invalid "
-                                maxlength='50' required />
+                            <input type="text" class="form-control" id="firstname" autocomplete="off" formControlName="firstname" [class.is-invalid]="signup.submitted && profileForm.get('firstname')?.invalid " maxlength='50' required />
                             <div class="invalid-feedback">
                                 First Name is required
                             </div>
@@ -39,8 +38,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="last-name">Last Name*</label>
-                            <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50' formControlName="lastname" [class.is-valid]="signup.submitted && profileForm.get('lastname')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('lastname')?.invalid"
-                                required />
+                            <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50' formControlName="lastname" [class.is-invalid]="signup.submitted && profileForm.get('lastname')?.invalid" required />
                             <div class="invalid-feedback">
                                 Last name is required
                             </div>
@@ -51,8 +49,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="email">Email*</label>
-                            <input class="form-control" type="email" id="email" autocomplete="off" formControlName="email" (input)="validateEmail($event)" [class.is-valid]="signup.submitted && profileForm.get('email')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('email')?.invalid"
-                                required />
+                            <input class="form-control" type="email" id="email" autocomplete="off" formControlName="email" (input)="validateEmail($event)" [class.is-invalid]="signup.submitted && profileForm.get('email')?.invalid" required />
                             <h6 class="text-danger" *ngIf="invalidEmail">
                                 {{ invalidEmail ? "Invalid Email" : "" }}
                             </h6>
@@ -64,8 +61,8 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="phone-number">Phone Number*</label>
-                            <input class="form-control" type="text" id="phonenumber" autocomplete="off" formControlName="phonenumber" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" [class.is-valid]="signup.submitted && profileForm.get('phonenumber')?.valid"
-                                [class.is-invalid]="signup.submitted && profileForm.get('phonenumber')?.invalid" required />
+                            <input class="form-control" type="text" id="phonenumber" autocomplete="off" formControlName="phonenumber" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" [class.is-invalid]="signup.submitted && profileForm.get('phonenumber')?.invalid"
+                                required />
                             <h6 class="text-danger" *ngIf="invalidMobile">
                                 {{ invalidMobile ? "Invalid Mobile" : "" }}
                             </h6>
@@ -79,8 +76,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="password">Password*</label>
-                            <input class="form-control" type="password" id="password" autocomplete="off" formControlName="password" [class.is-valid]="signup.submitted && profileForm.get('password')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('password')?.invalid"
-                                required />
+                            <input class="form-control" type="password" id="password" autocomplete="off" formControlName="password" [(ngModel)]="password" [class.is-invalid]="signup.submitted && profileForm.get('password')?.invalid" required />
                             <div class="invalid-feedback">
                                 Password is required
                             </div>
@@ -89,11 +85,10 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="confirm-password">Confirm Password*</label>
-                            <input class="form-control" type="password" id="confirmpassword" [(ngModel)]="confirmPassword" autocomplete="off" formControlName="confirmpassword" [class.is-valid]="signup.submitted && profileForm.get('confirmpassword')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('confirmpassword')?.invalid"
-                                required />
-                            <p class="mt-2 text-danger" *ngIf="confirmPassword">
-                                {{ password === confirmPassword ? "" : "Password Not Match" }}
-                            </p>
+                            <input class="form-control" type="password" id="confirmpassword" [(ngModel)]="confirmPassword" autocomplete="off" formControlName="confirmpassword" [class.is-invalid]="signup.submitted && profileForm.get('confirmpassword')?.invalid" required />
+                            <h6 class="text-danger" *ngIf="confirmPassword">
+                                {{ password === "" && confirmPassword != "" ? "Enter password" : "" }} {{ password != "" && password != confirmPassword ? "Password Not Match" : "" }}
+                            </h6>
                         </div>
                     </div>
                 </div>
@@ -101,8 +96,7 @@
                     <div class="col-12">
                         <div>
                             <label for="address">Address*</label>
-                            <input class="form-control" type="text" id="address" autocomplete="off" formControlName="address" [class.is-valid]="signup.submitted && profileForm.get('address')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('address')?.invalid" required
-                            />
+                            <input class="form-control" type="text" id="address" autocomplete="off" formControlName="address" [class.is-invalid]="signup.submitted && profileForm.get('address')?.invalid" required />
                             <div class="invalid-feedback">
                                 Address is required
                             </div>
@@ -113,8 +107,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="country">Country*</label>
-                            <input class="form-control" type="text" id="country" autocomplete="off" formControlName="country" [class.is-valid]="signup.submitted && profileForm.get('country')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('country')?.invalid" required
-                            />
+                            <input class="form-control" type="text" id="country" autocomplete="off" formControlName="country" [class.is-invalid]="signup.submitted && profileForm.get('country')?.invalid" required />
                             <div class="invalid-feedback">
                                 Country is required
                             </div>
@@ -123,7 +116,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="state">State*</label>
-                            <input class="form-control" type="text" id="state" autocomplete="off" formControlName="state" [class.is-valid]="signup.submitted && profileForm.get('state')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('state')?.invalid" required />
+                            <input class="form-control" type="text" id="state" autocomplete="off" formControlName="state" [class.is-invalid]="signup.submitted && profileForm.get('state')?.invalid" required />
                             <div class="invalid-feedback">
                                 State is required
                             </div>
@@ -134,7 +127,7 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="city">City*</label>
-                            <input class="form-control" type="text" id="city" autocomplete="off" formControlName="city" [class.is-valid]="signup.submitted && profileForm.get('city')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('city')?.invalid" required />
+                            <input class="form-control" type="text" id="city" autocomplete="off" formControlName="city" [class.is-invalid]="signup.submitted && profileForm.get('city')?.invalid" required />
                             <div class="invalid-feedback">
                                 City is required
                             </div>
@@ -143,8 +136,8 @@
                     <div class="col-lg-6 col-md-12">
                         <div>
                             <label for="pincode">Pincode*</label>
-                            <input class="form-control" type="text" id="pincode" autocomplete="off" formControlName="pincode" maxlength="6" (input)="validateZip($event)" (keydown)="inputZip($event)" [class.is-valid]="signup.submitted && profileForm.get('pincode')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('pincode')?.invalid"
-                                required />
+                            <input class="form-control" type="text" id="pincode" autocomplete="off" formControlName="pincode" maxlength="6" (input)="validateZip($event)" (keydown)="inputZip($event)" [class.is-invalid]="signup.submitted && profileForm.get('pincode')?.invalid" required
+                            />
                             <h6 class="text-danger" *ngIf="invalidZip">
                                 {{ invalidZip ? "Invalid Zip" : "" }}
                             </h6>
@@ -165,22 +158,21 @@
                         <div>
                             <label for="taxes">Tax Exemption*</label><br>
                             <div class="row" style="margin-top: 10px;">
-                                <div class="col-6"><input type="radio" id="radio1" formControlName="radio2" value="1" [class.is-valid]="signup.submitted && profileForm.get('radio2')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('radio2')?.invalid" required
-                                    /> Yes
+                                <div class="col-6"><input type="radio" id="radio1" formControlName="radio2" value="1" [class.is-invalid]="signup.submitted && profileForm.get('radio2')?.invalid" required /> Yes
                                     <div class="invalid-feedback">
                                         Please select atleast one option
                                     </div>
                                 </div>
                                 <div class="col-6">
-                                    <input type="radio" id="radio2" formControlName="radio2" value="0" [class.is-valid]="signup.submitted && profileForm.get('radio2')?.valid" [class.is-invalid]="signup.submitted && profileForm.get('radio2')?.invalid" required />                                    No
+                                    <input type="radio" id="radio2" formControlName="radio2" value="0" [class.is-invalid]="signup.submitted && profileForm.get('radio2')?.invalid" required /> No
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-12">
-                        <button class="form-control" (click)="goToTop()">Sign Up</button>
+                    <div class="col-12 text-center">
+                        <button class="btn btn-success submit-btn " [disabled]="!profileForm.dirty || !profileForm.valid" (click)="goToTop()">Sign Up</button>
                     </div>
                 </div>
                 <div class="row">

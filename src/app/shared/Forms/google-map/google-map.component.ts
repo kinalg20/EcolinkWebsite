@@ -81,6 +81,10 @@ export class GoogleMapComponent implements OnInit {
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         this.contactForm.reset();
+        // Remove validators after form submission
+        Object.keys(this.contactForm.controls).forEach(key => {
+          this.contactForm.controls[key].setErrors(null)
+        });
         this.resSignupMsg = 'Contact Details Added Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {

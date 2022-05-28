@@ -44,6 +44,7 @@ export class BulkPricingComponent implements OnInit {
   }, {updateOn: 'blur'}
   );
   saveBulkFormDetail() {
+    console.log(this.pricingForm.value, "gdfgdgd")
     if (this.pricingForm.valid) {
       let data = this.pricingForm.value
       this.userObj = {
@@ -63,6 +64,10 @@ export class BulkPricingComponent implements OnInit {
       this.__apiservice.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         this.pricingForm.reset();
+        // Remove validators after form submission
+        Object.keys(this.pricingForm.controls).forEach(key => {
+          this.pricingForm.controls[key].setErrors(null)
+        });
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';
         setTimeout(() => {

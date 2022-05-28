@@ -185,7 +185,12 @@ export class SignupSigninComponent implements OnInit {
               'ecolink_user_credential',
               JSON.stringify(res.data)
             );
+            //Reset the form affter submition
             this.profileForm.reset();
+            // Remove validators after form submission
+            Object.keys(this.profileForm.controls).forEach(key => {
+              this.profileForm.controls[key].setErrors(null)
+            });
           }
 
           else {

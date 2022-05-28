@@ -27,7 +27,7 @@
                             <div class="col-12">
                                 <label for="first-name">What item do you wish to clean & what is the surface
                                     material ?*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('input1')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('input1')?.invalid" class="form-control mt-2" id="first-name" formControlName="input1" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('input1')?.invalid" class="form-control mt-2" id="first-name" formControlName="input1" required>
                                 <div class="invalid-feedback">
                                     Field is required
                                 </div>
@@ -35,7 +35,7 @@
                             <div class="col-12">
                                 <label for="last-name">What kind of soil, grease or coating do you wish to remove
                                     ?*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('input2')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('input2')?.invalid" class="form-control mt-2" formControlName="input2" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('input2')?.invalid" class="form-control mt-2" formControlName="input2" required>
                                 <div class="invalid-feedback">
                                     Field is required
                                 </div>
@@ -44,7 +44,7 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="street-address">How do you currently clean this item ?*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('input3')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('input3')?.invalid" class="form-control mt-2" formControlName="input3" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('input3')?.invalid" class="form-control mt-2" formControlName="input3" required>
                                 <div class="invalid-feedback">
                                     Field is required
                                 </div>
@@ -54,7 +54,7 @@
                             <div class="col-12">
                                 <label for="Town-city">What chemicals or products do you currently use and in what
                                     amounts ?*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('input4')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('input4')?.invalid" class="form-control mt-2" formControlName="input4" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('input4')?.invalid" class="form-control mt-2" formControlName="input4" required>
                                 <div class="invalid-feedback">
                                     Field is required
                                 </div>
@@ -120,14 +120,14 @@
                         <div class="row mb-3">
                             <div class="col-lg-6 col-12">
                                 <label for="first-name">First Name*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('firstname')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('firstname')?.invalid" class="form-control mt-2" id="first-name" formControlName="firstname" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('firstname')?.invalid" class="form-control mt-2" id="first-name" formControlName="firstname" required>
                                 <div class="invalid-feedback">
                                     First Name is required
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <label for="last-name">Last Name*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('lastname')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('lastname')?.invalid" class="form-control mt-2" formControlName="lastname" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('lastname')?.invalid" class="form-control mt-2" formControlName="lastname" required>
                                 <div class="invalid-feedback">
                                     Last Name is required
                                 </div>
@@ -136,8 +136,7 @@
                         <div class="row mb-3">
                             <div class="col-6">
                                 <label for="user-name">Email*</label>
-                                <input type="email" [class.is-valid]="localForm.submitted && sampleForm.get('email')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('email')?.invalid" class="form-control mt-2" id="first-name" (input)="validateEmail($event)" formControlName="email"
-                                    required>
+                                <input type="email" [class.is-invalid]="localForm.submitted && sampleForm.get('email')?.invalid" class="form-control mt-2" id="first-name" (input)="validateEmail($event)" formControlName="email" required>
                                 <h6 class="text-danger" *ngIf="invalidEmail">
                                     {{ invalidEmail ? "Invalid Email" : "" }}
                                 </h6>
@@ -147,8 +146,7 @@
                             </div>
                             <div class="col-6">
                                 <label for="street-address">Phone*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('phone')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('phone')?.invalid" (input)="validateMobile($event)" maxlength="10" (keydown)="inputMobile($event)" class="form-control mt-2"
-                                    formControlName="phone" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('phone')?.invalid" (input)="validateMobile($event)" maxlength="10" (keydown)="inputMobile($event)" class="form-control mt-2" formControlName="phone" required>
                                 <h6 class="text-danger" *ngIf="invalidMobile">
                                     {{ invalidMobile ? "Invalid Mobile" : "" }}
                                 </h6>
@@ -160,7 +158,7 @@
                         <div class="row mb-3">
                             <div class="col-12">
                                 <label for="street-address">Address*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('address')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('address')?.invalid" class="form-control mt-2" formControlName="address" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('address')?.invalid" class="form-control mt-2" formControlName="address" required>
                                 <div class="invalid-feedback">
                                     Address is required
                                 </div>
@@ -175,14 +173,14 @@
                         <div class="row mb-3">
                             <div class="col-lg-6 col-12">
                                 <label for="user-name">City*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('city')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('city')?.invalid" class="form-control mt-2" id="first-name" formControlName="city" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('city')?.invalid" class="form-control mt-2" id="first-name" formControlName="city" required>
                                 <div class="invalid-feedback">
                                     City is required
                                 </div>
                             </div>
                             <div class="col-lg-6 col-12">
                                 <label for="last-name">State*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('state')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('state')?.invalid" class="form-control mt-2" formControlName="state" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('state')?.invalid" class="form-control mt-2" formControlName="state" required>
                                 <div class="invalid-feedback">
                                     State is required
                                 </div>
@@ -191,7 +189,7 @@
                         <div class="row mb-3">
                             <div class="col-lg-6 col-12">
                                 <label for="user-name">Postcode*</label>
-                                <input type="text" (input)="validatePincode($event)" (keydown)="inputPincode($event)" [class.is-valid]="localForm.submitted && sampleForm.get('pincode')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('pincode')?.invalid" class="form-control mt-2" maxlength="7" id="first-name" formControlName="pincode" required>
+                                <input type="text" (input)="validatePincode($event)" (keydown)="inputPincode($event)" [class.is-invalid]="localForm.submitted && sampleForm.get('pincode')?.invalid" class="form-control mt-2" maxlength="6" id="first-name" formControlName="pincode" required>
                                 <h6 class="text-danger" *ngIf="invalidPincode">
                                     {{ invalidPincode ? "Invalid Pincode" : "" }}
                                 </h6>
@@ -201,14 +199,14 @@
                             </div>
                             <div class="col-lg-6 col-12">
                                 <label for="last-name">Country*</label>
-                                <input type="text" [class.is-valid]="localForm.submitted && sampleForm.get('country')?.valid" [class.is-invalid]="localForm.submitted && sampleForm.get('country')?.invalid" class="form-control mt-2" formControlName="country" required>
+                                <input type="text" [class.is-invalid]="localForm.submitted && sampleForm.get('country')?.invalid" class="form-control mt-2" formControlName="country" required>
                                 <div class="invalid-feedback">
                                     Country is required
                                 </div>
                             </div>
                         </div>
 
-                        <button role="button" class="btn-sm submit-btn" (click)="goToTop()">Submit</button>
+                        <button class="btn btn-success submit-btn" [disabled]="!sampleForm.dirty || !sampleForm.valid" (click)="goToTop()">Submit</button>
                     </form>
                 </section>
             </div>

@@ -89,6 +89,10 @@ export class ProductsRequestComponent implements OnInit {
       this._apiService.submitFormDetail(this.userObj).subscribe((res: any) => {
         console.log(res);
         this.sampleForm.reset();
+        // Remove validators after form submission
+        Object.keys(this.sampleForm.controls).forEach(key => {
+          this.sampleForm.controls[key].setErrors(null)
+        });
         this.checkBoxChcek = false
         this.resSignupMsg = 'Form Submitted Successfully!';
         this.resSignupMsgCheck = 'success';

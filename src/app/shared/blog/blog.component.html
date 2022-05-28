@@ -20,6 +20,7 @@
                     <div class="blog-image">
                         <img src="{{items.data.image}}" alt="">
                     </div>
+                    <!-- <h2>{{items.data.title}}</h2> -->
                     <div class="blog-text">
                         <div [innerHTML]="this.__apiService.getSantizedData(items.data.description)"></div>
                     </div>
