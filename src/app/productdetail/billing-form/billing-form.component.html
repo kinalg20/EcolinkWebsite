@@ -41,6 +41,10 @@
                 {{ resSignupMsg }}
                 <span class="icon-class"><i class="fa fa-close" (click)="close()" style="cursor: pointer;"></i></span>
             </div>
+            <div *ngIf="resSignupMsgCheck=='warning'" class="alert alert-warning" role="alert">
+                {{ resSignupMsg }}
+                <span class="icon-class"><i class="fa fa-close" (click)="close()" style="cursor: pointer;"></i></span>
+            </div>
         </ng-container>
         <div class="row mb-3">
             <div class="col-12">

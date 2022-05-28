@@ -60,7 +60,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     await this.checkoutProduct();
     this.CheckoutProduct.map((res: any) => {
       if (res.carts.length == 0) {
-        this.route.navigateByUrl('cart');
+        this.route.navigateByUrl('/cart');
       }
     })
     this.getPaypalProductDetail();
@@ -75,7 +75,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
             }
           })
         });
-        this.FedexShippingObj();
+      this.FedexShippingObj();
     }
   }
   // get tax value 
@@ -173,6 +173,10 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
           this.shippingCharge = resp.output.rateReplyDetails[0].ratedShipmentDetails[0].totalNetCharge;
         })
       })
+
+      .catch((error:any)=>{
+        this.shippingCharge = 0;
+      })
     if (this.shippingCharge > 0) {
       this.fedexshippingboolean = false;
     }
@@ -189,26 +193,16 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     console.log("this.CheckoutProduct", this.CheckoutProduct);
 
     this.CheckoutProduct.map((res: any) => {
-      if(res){
+      console.log("res", res.carts);
         res.carts.map((resp: any) => {
-          this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight);
-          this.checkoutProductItem.width = this.product_width += (resp.quantity * resp.product.width);
-          this.checkoutProductItem.height = this.product_height += (resp.quantity * resp.product.height);
-          this.checkoutProductItem.length = this.product_length += (resp.quantity * resp.product.lenght);
+          console.log(resp);
+          this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight ? resp.product.weight : 1);
         })
-      }
     })
     this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name ;
     this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip ? this.shippingDataObj.zip : this.dataFromLocation[7].long_name;
     this.getShippingInfo();
   }
-
-
-  // address: this.dataFromLocation ? this.dataFromLocation[4].long_name : "",
-  //     city: this.dataFromLocation ? this.dataFromLocation[3].long_name : "",
-  //     state: this.dataFromLocation ? this.dataFromLocation[5].long_name : "",
-  //     country: this.dataFromLocation ? this.dataFromLocation[6].long_name : "",
-  //     pincode: this.dataFromLocation ? this.dataFromLocation[7].long_name : "",
 
 
 
@@ -362,10 +356,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
 
     let verification = JSON.parse(this.user_credential);
-    if (verification.user?.email_verified) {
+    if (verification.user?.email_verified == 0) {
       this.verifiedUser = false;
       console.log(this.verifiedUser);
-
     }
   }
   cookiesCheckout: any = {}
@@ -401,31 +394,35 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       setTimeout(() => {
         this.refractorData();
         this.formShimmer = false;
-        this.checkoutShimmer = false
+        this.checkoutShimmer = false;
       }, 1000);
     }
     else {
-      this.route.navigateByUrl('cart');
+      this.route.navigateByUrl('/cart');
     }
   }
   refractorData() {
+    console.log(this.dataFromLocation);
     let user: any = {};
     user = {
       name: "",
       email: "",
-      address: this.dataFromLocation ? this.dataFromLocation[4].long_name : "",
-      city: this.dataFromLocation ? this.dataFromLocation[3].long_name : "",
-      state: this.dataFromLocation ? this.dataFromLocation[5].long_name : "",
-      country: this.dataFromLocation ? this.dataFromLocation[6].long_name : "",
-      pincode: this.dataFromLocation ? this.dataFromLocation[7].long_name : "",
+      address: this.dataFromLocation ? this.dataFromLocation[4]?.long_name : "",
+      city: this.dataFromLocation ? this.dataFromLocation[3]?.long_name : "",
+      state: this.dataFromLocation ? this.dataFromLocation[5]?.long_name : "",
+      country: this.dataFromLocation ? this.dataFromLocation[6]?.long_name : "",
+      pincode: this.dataFromLocation ? this.dataFromLocation[7]?.long_name : "",
       mobile: ""
     }
+
+    console.log(user);
+
     this.cookiesCheckout.data.user = user;
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     this.CheckoutProduct.push(this.cookiesCheckout.data);
     // this.getTaxExempt();
-    this.getProduct();
     this.FedexShippingObj();
+    this.getProduct();
   }
 
   //collect product information to send paypal

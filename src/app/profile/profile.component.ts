@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
 
 
   ngOnInit(): void {
+  this.__apiservice.UserAddress.next("Edit Profile")
   }
   event(event:any) {
     this.togglebutton=event;

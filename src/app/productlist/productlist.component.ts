@@ -53,6 +53,8 @@ export class ProductlistComponent implements OnInit {
     }
     localStorage.setItem("category", JSON.stringify(this.slug.slug));
     this._ApiService.itemCountSession.next("empty");
+    localStorage.removeItem("ItemExist");
+
   }
   responsiveOptions = [
     {
@@ -130,7 +132,7 @@ export class ProductlistComponent implements OnInit {
         }
       })
   }
-
+  
   // add product to cart
   async AddProductToCart(Item: any) {
     let ItemCount = 1;
@@ -167,12 +169,12 @@ export class ProductlistComponent implements OnInit {
       this.ProductListData[0].data.products = obj_Array;
       this.getPrice();
     })
-    .catch(error => {
-        if (error.status==400) {
+      .catch(error => {
+        if (error.status == 400) {
           this.productCheck = true;
         }
       }
-    );
+      );
   }
 
 

@@ -139,29 +139,29 @@ export class ProductCartComponent implements OnInit {
     else {
       this.CartShimmer = true;
       if (action == 'delete') {
-          this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action)
-            .then((res) => {
-              return res;
-            })
-            .catch(error => {
-              return error.error.code;
-            })
+        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action)
+          .then((res) => {
+            return res;
+          })
+          .catch(error => {
+            return error.error.code;
+          })
 
-          if (this.ItemCart.code == 200) {
-            this.getCartData();
-            this.subtotal();
-          }
+        if (this.ItemCart.code == 200) {
+          this.getCartData();
+          this.subtotal();
+        }
       }
 
       else if (action == 'add') {
-          this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
-            return res;
-          })
+        this.ItemCart = await this._ApiService.addItemToCart(product_id, 1, action).then((res) => {
+          return res;
+        })
 
-          if (this.ItemCart.code == 200) {
-            this.getCartData();
-            this.subtotal();
-          }
+        if (this.ItemCart.code == 200) {
+          this.getCartData();
+          this.subtotal();
+        }
       }
 
       else {
@@ -170,15 +170,17 @@ export class ProductCartComponent implements OnInit {
       }
     }
   }
+  
   //delete cart item from cookies and backend
   cookies_data: any = [];
+  local_data: any = [];
   deleteItemFromCart(product: any) {
+    let CartData: any;
     if (this.UserLogin != null) {
       this.CartShimmer = true;
-      this._ApiService.deleteItemFromCart(product.product.id)
-        .then((res) => {
-          this.getCartData();
-        })
+      this._ApiService.deleteItemFromCart(product.product.id).then((res) => {
+        this.getCartData();
+      })
         .catch((error) => {
           this.getCartData();
         })
@@ -195,6 +197,21 @@ export class ProductCartComponent implements OnInit {
         }
       })
     }
+
+    CartData = localStorage.getItem("ItemExist");
+    this.local_data = JSON.parse(CartData);
+    if(this.local_data){
+      this.local_data.map((response: any, index: any) => {
+        console.log(index);
+        if (response.ItemId == product.product.id) {
+          this.local_data.splice(index, 1);
+        }
+      })
+    }
+    console.log(this.local_data);
+    localStorage.setItem("ItemExist" , JSON.stringify(this.local_data));
+
+
   }
   //store data in cookies
   StoreCookiesData() {

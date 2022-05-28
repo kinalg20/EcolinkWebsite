@@ -88,7 +88,7 @@ export class HeaderComponent implements OnInit {
   
     this.__apiservice.UserLocation.subscribe(res => {
       if (res) {
-        let pincode = res[6] ? res[6].long_name : 30030;
+        let pincode = res[5] ? res[5].long_name : "US";
         let Location = res[3] ? res[3].long_name : 'Decatur';
         this.customerLocation = Location + "" + "," + " "+ pincode;
       }

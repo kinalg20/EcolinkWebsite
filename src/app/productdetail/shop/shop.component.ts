@@ -19,6 +19,8 @@ export class ShopComponent implements OnInit {
   recommended_products: any = [];
   detailSlug: any;
   shimmerLoad: boolean = true;
+  CartButton: string = "Add to Cart";
+  DisabledCartButton: boolean = false;
 
   responsiveOptions = [
     {
@@ -59,7 +61,9 @@ export class ShopComponent implements OnInit {
 
   //increase and decrease product quantity on detail page
   Count(string: any) {
-    if (string == "increase" ) {
+    // this.CartButton = "Add to Cart";
+    // this.DisabledCartButton = false;
+    if (string == "increase") {
       this.ItemCount = this.ItemCount + 1;
     }
     if (string == "decrease") {
@@ -68,9 +72,10 @@ export class ShopComponent implements OnInit {
   }
 
   //get product detail
+  ItemStorage: any;
   getProductDetail(sendslug: any) {
-    let value: any;
     this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
+      console.log(res.data.product);
       if (res.code == 200) {
         this.productDetail.push(res);
         this.minimum_qyt = res.data.product.minimum_qty;
@@ -81,28 +86,68 @@ export class ShopComponent implements OnInit {
         this._ApiService.itemCountSession.subscribe(resp => {
           if (typeof (resp) == 'object') {
             this._ApiService.itemCountSession.next(this.ItemCount);
-          } 
+          }
 
-          else if(typeof (resp) == 'string' && resp == 'empty'){
+          else if (typeof (resp) == 'string' && resp == 'empty') {
             this._ApiService.itemCountSession.next(this.minimum_qyt);
           }
-           
+
           else {
             this.ItemCount = resp;
           }
         })
-        console.log(res, "gfgfdkmgdf");
-        
+
+        this.ItemStorage = localStorage.getItem("ItemExist");
+        if (this.ItemStorage) {
+          let ItemData = JSON.parse(this.ItemStorage);
+          console.log(ItemData);
+          ItemData.map((resp: any) => {
+            if (resp.ItemId == res.data.product.id) {
+              this.CartButton = "Go to Cart"
+              this.DisabledCartButton = true;
+            }
+          })
+        }
+
+        // this._ApiService.CartItems.subscribe(resp => {
+        //   resp.map((response: any) => {
+        //     console.log(res.data.product.id, response.ItemId);
+        //     if (resp.length > 0) {
+        //       if (res.data.product.id == response.ItemId) {
+        //         this.CartButton = "Added Item to Cart"
+        //       }
+        //     }
+        //   })
+        // })
+
+        setTimeout(() => {
+          console.log(this.CartButton);
+        }, 2000);
+
       }
     })
   }
 
 
   //add product to cart
+  CartItem: any = [];
   AddProductToCart(Item: any) {
     console.log(this.ItemCount);
     this.commonService.AddProductToCart(Item, this.slug, this.ItemCount);
     this._ApiService.itemCountSession.next(this.ItemCount);
+    this._ApiService.CartItems.subscribe(res => {
+      res.map((resp:any)=>{
+        if(resp.ItemId != Item.id){
+          this.CartItem.push(resp);
+        }
+      })
+    })
+    this.CartItem.push({
+      ItemCount: this.ItemCount,
+      ItemId: Item.id
+    })
+    this._ApiService.CartItems.next(this.CartItem);
+    localStorage.setItem("ItemExist", JSON.stringify(this.CartItem));
   }
 
   // add item to wishlist
