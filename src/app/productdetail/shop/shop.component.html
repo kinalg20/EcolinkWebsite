@@ -77,7 +77,7 @@
                         <div class="add-to-cart">
                             <div class="counter">
                                 <button (click)="Count('decrease')"
-                                    [disabled]="ItemCount== detail.data.product.minimum_qty">-</button>
+                                    [disabled]="ItemCount== detail.data.product.minimum_qty || ItemCount==1">-</button>
                                 <p>{{ItemCount}}</p>
                                 <button (click)="Count('increase')" [disabled]="ItemCount>=25">+</button>
                             </div>

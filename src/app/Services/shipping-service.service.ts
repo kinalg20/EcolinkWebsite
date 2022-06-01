@@ -37,10 +37,10 @@ export class ShippingServiceService {
   fedexshippingurl = 'https://apis-sandbox.fedex.com/rate/v1/rates/quotes'
   fedextoken: string = ''
   requestedPackage: any = [];
-  fedexshippingApi(access_token: any, product_details: any , shippingDataObj:any) {
+  fedexshippingApi(access_token: any, product_details: any, shippingDataObj: any) {
     let product: any;
     product_details.map(async (res: any) => {
-      this.requestedPackage=[];
+      this.requestedPackage = [];
       await res.carts.map((resp: any) => {
         console.log(resp);
         product = {
@@ -55,7 +55,7 @@ export class ShippingServiceService {
     })
 
     console.log(this.requestedPackage);
-    
+
     this.fedextoken = access_token;
     const httpHeaders = new HttpHeaders({
       'content-type': 'application/json',

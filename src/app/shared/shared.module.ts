@@ -56,11 +56,7 @@ const exportdata: any = [
     PageNotFoundComponent,
     AskChemistComponent,
     SupportFormComponent,
-<<<<<<< HEAD
-     ],
-=======
   ],
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
   imports: [
     CommonModule,
     PipemoduleModule,
@@ -70,12 +66,8 @@ const exportdata: any = [
     ReactiveFormsModule
   ],
   exports: [
-<<<<<<< HEAD
-    ...exportdata
-=======
     ...exportdata,
     PageNotFoundComponent,
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
   ],
   providers:[
     GeolocationService

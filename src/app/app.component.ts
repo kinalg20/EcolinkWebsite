@@ -27,36 +27,7 @@ export class AppComponent {
       }
     })
   }
-
-  // @HostListener('window:beforeinstallprompt', ['$event'])
-  // onbeforeinstallprompt(e: any) {
-  //   console.log(e);
-  //   // Prevent Chrome 67 and earlier from automatically showing the prompt
-  //   e.preventDefault();
-  //   // Stash the event so it can be triggered later.
-  //   this.deferredPrompt = e;
-  //   this.showButton = true;
-  // }
-  // @HostListener('window:scroll')
-  // checkScroll() {
-  //   const scrollPosition =
-  //     window.pageYOffset ||
-  //     document.documentElement.scrollTop ||
-  //     document.body.scrollTop ||
-  //     0;
-
-  //   if (scrollPosition >= this.topPosToStartShowing) {
-  //     this.isShow = true;
-  //   } else {
-  //     this.isShow = false;
-  //   }
-  // }
   ngOnInit() {
-    // this.cookiesService.DeleteServiceWorker();
-    // this.geolocation$.subscribe(position => {
-    //   console.log(position);
-    // });
-    // localStorage.removeItem('Address');
     this.getCurrentLocation();
   }
 
@@ -70,6 +41,7 @@ export class AppComponent {
     }
     else {
       alert("Geolocation is not supported by this browser.");
+
     }
   }
 
@@ -94,6 +66,12 @@ export class AppComponent {
             localStorage.setItem("Address", JSON.stringify(result.address_components));
           } else {
             alert("No address available!");
+          }
+        }
+
+        else {
+          if(localStorage.getItem("Address")){
+            localStorage.removeItem("Address");
           }
         }
       });

@@ -10,7 +10,7 @@ import { CookiesService } from 'src/app/Services/cookies.service';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  ItemCount: any;
+  ItemCount: number = 1;
   stock: any
   slug: any;
   minimum_qyt: any = 1;

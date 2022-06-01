@@ -25,6 +25,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   CheckoutProduct: any = [];
   carts: any = [];
   pincode: any
+
   formShimmer: boolean = true;
   paypalItems: any = {}
   orderObj: any;
@@ -174,11 +175,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         })
       })
 
-<<<<<<< HEAD
       .catch((error: any) => {
-=======
-      .catch((error:any)=>{
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
         this.shippingCharge = 0;
       })
     if (this.shippingCharge > 0) {
@@ -193,9 +190,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
 
   // get shipping charges for product
   getProduct() {
+    console.log("Function Called");
     this.checkoutProductItem = [];
-<<<<<<< HEAD
-    console.log("this.CheckoutProduct", this.CheckoutProduct[0]);
+    console.log("this.CheckoutProduct", this.dataFromLocation ? this.dataFromLocation : "Not Available");
     this.CheckoutProduct.map((res: any) => {
       console.log("res", res);
       res.carts.map((resp: any) => {
@@ -203,20 +200,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight ? resp.product.weight : 1);
       })
     })
-    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name;
-=======
-    console.log("this.CheckoutProduct", this.CheckoutProduct);
-
-    this.CheckoutProduct.map((res: any) => {
-      console.log("res", res.carts);
-        res.carts.map((resp: any) => {
-          console.log(resp);
-          this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight ? resp.product.weight : 1);
-        })
-    })
-    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name ;
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
-    this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip ? this.shippingDataObj.zip : this.dataFromLocation[7].long_name;
+    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation? this.dataFromLocation[6].long_name : "";
+    this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip ? this.shippingDataObj.zip : this.dataFromLocation? this.dataFromLocation[7].long_name : "";
     this.getShippingInfo();
   }
 
@@ -372,6 +357,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }
 
     let verification = JSON.parse(this.user_credential);
+    console.log(verification.user);
     if (verification.user?.email_verified == 0) {
       this.verifiedUser = false;
       console.log(this.verifiedUser);
@@ -406,11 +392,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
           completedFormat.carts = data_obj;
         })
         this.cookiesCheckout.data = completedFormat;
-<<<<<<< HEAD
         console.log(this.cookiesCheckout);
 
-=======
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
       })
       setTimeout(() => {
         this.refractorData();
@@ -422,18 +405,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.route.navigateByUrl('/cart');
     }
   }
-<<<<<<< HEAD
   async refractorData() {
     console.log(this.cookiesCheckout);
-=======
-  refractorData() {
-    console.log(this.dataFromLocation);
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
     let user: any = {};
     user = {
       name: "",
       email: "",
-<<<<<<< HEAD
       address: this.dataFromLocation ? this.dataFromLocation[4].long_name ? this.dataFromLocation[4].long_name : "" : "",
       city: this.dataFromLocation ? this.dataFromLocation[3].long_name ? this.dataFromLocation[3].long_name : "" : "",
       state: this.dataFromLocation ? this.dataFromLocation[5].long_name ? this.dataFromLocation[5].long_name : "" : "",
@@ -446,27 +423,14 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
     console.log(this.cookiesCheckout, "this.cookiesCheckout");
     let product_data = [];
-    await product_data.push(this.cookiesCheckout.data);
+    product_data.push(this.cookiesCheckout.data);
     console.log(product_data, "product_data");
     this.CheckoutProduct = product_data;
-=======
-      address: this.dataFromLocation ? this.dataFromLocation[4]?.long_name : "",
-      city: this.dataFromLocation ? this.dataFromLocation[3]?.long_name : "",
-      state: this.dataFromLocation ? this.dataFromLocation[5]?.long_name : "",
-      country: this.dataFromLocation ? this.dataFromLocation[6]?.long_name : "",
-      pincode: this.dataFromLocation ? this.dataFromLocation[7]?.long_name : "",
-      mobile: ""
-    }
-
-    console.log(user);
-
-    this.cookiesCheckout.data.user = user;
-    this.cookiesCheckout.data.payable = localStorage.getItem('payable');
-    this.CheckoutProduct.push(this.cookiesCheckout.data);
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
     // this.getTaxExempt();
-    this.FedexShippingObj();
-    this.getProduct();
+    setTimeout(() => {
+      this.FedexShippingObj();
+      this.getProduct();
+    }, 2000);
   }
 
   //collect product information to send paypal
