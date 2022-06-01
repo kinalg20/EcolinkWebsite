@@ -25,7 +25,6 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   CheckoutProduct: any = [];
   carts: any = [];
   pincode: any
-
   formShimmer: boolean = true;
   paypalItems: any = {}
   orderObj: any;
@@ -448,13 +447,15 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }, 1000);
   }
   // get coupon discount on product
+  coupon_code:string='';
   couponButton() {
     this.discountCheck = false;
     this.couponCheck = true;
     this.CheckoutProduct.map((res: any) => {
       console.log(res);
-      res.carts.map((response: any) => {
-        this.couponDiscount += response.product.coupon_discount
+      res.coupons.map((response: any) => {
+        this.coupon_code=response.code;
+        this.couponDiscount = this.couponDiscount + res.payable * response.discount / 100;
       })
     })
   }

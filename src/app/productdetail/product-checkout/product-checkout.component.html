@@ -135,12 +135,16 @@
                                 </ul>
                             </div>
                             <ul *ngIf="discountCheck">
-                                <li class="subtotal-list-element"></li>
-                                <li><button (click)="couponButton()">Apply Coupon</button></li>
+                                <li class="subtotal-list-element"><input type="text" class="form-control" style="padding: 0.25rem 0.5rem;"></li>
+                                <li><button (click)="couponButton()" style="padding: 0.25rem 0.5rem;">Apply Coupon</button></li>
+                            </ul>
+                            <ul *ngIf="couponCheck">
+                                <li class="subtotal-list-element">Coupon Code : </li>
+                                <li style="color: #55b15c;"><mark>{{coupon_code}}</mark></li>
                             </ul>
                             <ul *ngIf="couponCheck">
                                 <li class="subtotal-list-element">Coupon Discount : </li>
-                                <li style="color: #55b15c;">${{couponDiscount}}</li>
+                                <li style="color: #55b15c;">${{couponDiscount | number:'2.1-2'}}</li>
                             </ul>
                         </div>
                         <div class="checkout-products-total">
