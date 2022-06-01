@@ -1,0 +1,118 @@
+<div class="Edit-Profile-section" *ngIf="showdesc == 'Edit Profile'">
+    <h2>{{heading}}</h2>
+    <!-- edit profile form -->
+    <ng-container *ngFor="let item of userDetail">
+        <form #editProfileFrom="ngForm" (ngSubmit)="editUserProfile(editProfileFrom)" id="backToTop">
+            <ng-container *ngIf="resEditProfileMsg">
+                <div *ngIf="resEditProfileMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
+                    {{ resEditProfileMsg }}
+                    <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+                </div>
+                <div *ngIf="resEditProfileMsgCheck=='success'" class="alert alert-success" role="alert" id="loginAlert" #test>
+                    {{ resEditProfileMsg }}
+                    <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
+                </div>
+            </ng-container>
+            <input type="text" name="id" [(ngModel)]="item.id" style="display: none;">
+            <div class="row">
+                <div class="col-lg-6 col-sm-12 fname">
+                    <div>
+                        <label for="first-name">First Name</label>
+                        <input class="form-control" type="text" id="firstname" autocomplete="off" name="firstname" maxlength='50' [(ngModel)]="item.firstname" required />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12 lname">
+                    <div>
+                        <label for="last-name">Last Name</label>
+                        <input class="form-control" type="text" id="lastname" autocomplete="off" maxlength='50' name="lastname" [(ngModel)]="item.lastname" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div>
+                        <label for="email">Email</label>
+                        <input class="form-control" type="email" id="email" autocomplete="off" name="email" (input)="validateEmail($event)" [(ngModel)]="item.email" required />
+                        <h6 class="text-danger" *ngIf="invalidEmail">
+                            {{ invalidEmail ? "Invalid Email" : "" }}
+                        </h6>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div>
+                        <label for="phone-number">Phone Number</label>
+                        <input class="form-control" type="text" id="phonenumber" autocomplete="off" name="phonenumber" maxlength="10" (input)="validateMobile($event)" (keydown)="inputMobile($event)" [(ngModel)]="item.mobile" required />
+                        <h6 class="text-danger" *ngIf="invalidMobile">
+                            {{ invalidMobile ? "Invalid Mobile" : "" }}
+                        </h6>
+
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div>
+                        <label for="address">Address</label>
+                        <input class="form-control" type="text" id="address" autocomplete="off" name="address" [(ngModel)]="item.address" required />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div>
+                        <label for="country">Country</label>
+                        <input class="form-control" type="text" id="country" autocomplete="off" name="country" [(ngModel)]="item.country" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div>
+                        <label for="state">State</label>
+                        <input class="form-control" type="text" id="state" autocomplete="off" name="state" [(ngModel)]="item.state" required />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12">
+                    <div>
+                        <label for="city">City</label>
+                        <input class="form-control" type="text" id="city" autocomplete="off" name="city" [(ngModel)]="item.city" required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <div>
+                        <label for="pincode">Pincode</label>
+                        <input class="form-control" type="text" id="pincode" autocomplete="off" name="pincode" [(ngModel)]="item.pincode" required />
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-12" *ngIf="passwrodCheck">
+                    <div>
+                        <label for="address">Password</label>
+                        <input class="form-control" type="password" id="password" autocomplete="off" name="password" ngModel required />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div>
+                        <label for="image">Profile Image</label>
+                        <input class="form-control" type="file" id="image" autocomplete="off" name="profile_image" (change)="GetFileChange($event)" ngModel />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-sm-12">
+                    <input class="form-check-input" style="margin-right:5px;" (click)="changePassword()" ngModel name="checkbox" type="checkbox" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Do you want to change password ?
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 add-user ">
+                    <button class="edituserdetail btn btn-success my-3 form-control" (click)="goToTop()">Save
+                        Details</button>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+</div>

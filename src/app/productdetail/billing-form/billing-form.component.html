@@ -1,0 +1,161 @@
+<!-- shimmar effect on -->
+<ng-container *ngIf="formShimmer">
+    <form>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+        <div class="mt-3" class="form-shimmer">
+            <ngx-shimmer-loading width="'100%'"></ngx-shimmer-loading>
+        </div>
+    </form>
+</ng-container>
+<!-- shimmar effect off -->
+<ng-container *ngIf="!formShimmer">
+    <!-- user detail form -->
+    <form #signupform="ngForm" (ngSubmit)="signUp(signupform)" *ngFor="let data of CheckoutProduct">
+        <ng-container *ngIf="resSignupMsg.length>0">
+            <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" style="justify-content: space-between;
+                display: flex;">
+                {{ resSignupMsg }}
+                <span class="icon-class"><i class="fa fa-close" (click)="close()" style="cursor: pointer;"></i></span>
+            </div>
+            <div *ngIf="resSignupMsgCheck=='success'" class="alert alert-success" role="alert">
+                {{ resSignupMsg }}
+                <span class="icon-class"><i class="fa fa-close" (click)="close()" style="cursor: pointer;"></i></span>
+            </div>
+            <div *ngIf="resSignupMsgCheck=='warning'" class="alert alert-warning" role="alert">
+                {{ resSignupMsg }}
+                <span class="icon-class"><i class="fa fa-close" (click)="close()" style="cursor: pointer;"></i></span>
+            </div>
+        </ng-container>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="name">Name</label>
+                <input type="text" class="form-control mt-2" placeholder="name" id="name" name="name"
+                    [(ngModel)]="data.user.name" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-lg-6 col-12">
+                <label for="Email Address">Email Address</label>
+                <input type="text" class="form-control mt-2" placeholder="Email Address" id="Email-Address" name="email"
+                    [(ngModel)]="data.user.email" required (input)="validateEmail($event)">
+                <h6 class="text-danger" *ngIf="invalidEmail">
+                    {{ invalidEmail ? "Invalid Email" : "" }}
+                </h6>
+            </div>
+            <div class="col-lg-6 col-12">
+                <label for="Phone">Phone</label>
+                <input type="text" maxlength="10" class="form-control mt-2" placeholder="phone" name="mobile"
+                    [(ngModel)]="data.user.mobile" required (input)="validateMobile($event)"
+                    (keydown)="inputMobile($event)">
+                <h6 class="text-danger" *ngIf="invalidMobile">
+                    {{ invalidMobile ? "Invalid Mobile" : "" }}
+                </h6>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="countryname">Country / Region *</label>
+                <input type="text" class="form-control mt-2" placeholder="Country / Region" id="country"
+                    name="countryname" [(ngModel)]="data.user.country" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="streetaddress">Street Address</label>
+                <input type="text" class="form-control mt-2" placeholder="Street Address" name="streetaddress"
+                    [(ngModel)]="data.user.address" required>
+            </div>
+        </div>
+        <div class="row mb-3" *ngIf="UserLogin != null">
+            <div class="col-12">
+                <label for="landmark">LandMark</label>
+                <input type="text" class="form-control mt-2" placeholder="Land Mark" name="landmark"
+                    [(ngModel)]="data.user.landmark ? data.user.landmark : data.user.address" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="Town-city">Town / City</label>
+                <input type="text" class="form-control mt-2" placeholder="Town / City" name="city"
+                    [(ngModel)]="data.user.city" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="state">State</label>
+                <input type="text" class="form-control mt-2" placeholder="State / County" name="state"
+                    [(ngModel)]="data.user.state" required>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <label for="Postcode">Postcode</label>
+                <input type="text" class="form-control mt-2" placeholder="Postcode / ZIP" name="pincode"
+                    [(ngModel)]="data.user.pincode ? data.user.pincode : data.user.zip" required>
+            </div>
+        </div>
+        <div class="row mb-3" *ngIf="UserLogin == null">
+            <div class="col-lg-6 col-12">
+                <label for="Password">Password</label>
+                <input type="password" class="form-control mt-2" placeholder="Password" id="password" name="password"
+                    [(ngModel)]="password" required>
+            </div>
+            <div class="col-lg-6 col-12">
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" class="form-control mt-2" placeholder="Confirm Password" id="confirm_password"
+                    name="confirm_password" [(ngModel)]="confirm_password" required>
+            </div>
+        </div>
+        <div class="col-lg-12 col-md-12 mb-3" *ngIf="UserLogin == null">
+            <div>
+                <label for="taxes">Tax Exemption</label><br>
+                <div class="row" style="margin-top: 10px;">
+                    <div class="col-6"><input type="radio" id="radio1" name="radio2" value="1" ngModel /> Yes</div>
+                    <div class="col-6"><input type="radio" id="radio2" name="radio2" value="0" ngModel /> No</div>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="checkbox form-group">
+                    <input type="checkbox" required>
+                    <label class="checkbox-label" for="">Ship to a different address?</label>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-12">
+                <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Order notes (optional)</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="proceed">
+            <div class="proceed-button">
+                <button pButton pRipple label="Save Details" *ngIf="!UserLogin" class="p-button-raised p-button-success"
+                    style="height:40px; width: 100%;" ></button>
+                </div>
+            </div>
+        </form>
+</ng-container>

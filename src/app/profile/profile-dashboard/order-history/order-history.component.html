@@ -1,0 +1,157 @@
+<div class="Order-History-section" *ngIf="showdesc == 'Order History'">
+    <h2>Order History</h2>
+    <div class="order-history-header">
+        <div class="search-ordered-item">
+            <input type="text" pInputText placeholder="Search Ordered Item...." [(ngModel)]="searchItem"
+                (input)="getSuggestions()" />
+            <button pButton pRipple type="button" label="Search" class="p-button-success"
+                (click)="FetchSearchedData()"></button>
+        </div>
+        <div class="card history_product_search" *ngIf="suggestions">
+            <ul *ngFor="let i of searchProductArray | searchPipe : searchItem">
+                <li (click)="getselecteddata(i.name)">{{i.name}}</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- list-card -->
+    <div class="history-list-card">
+        <div class="row" *ngIf="show">
+            <ng-container *ngFor="let data of orderData">
+                <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6" *ngFor="let i of data.items">
+                    <div class="card">
+                        <div class="history-image">
+                            <img [src]="i.product.image" class="media-object" />
+                        </div>
+                        <div class="history-desc">
+                            <div class="product-details">
+                                <h6 class="head">{{i.product.name.slice(0,30) + '...'}}</h6>
+                                <!-- <p class="desc"> {{i.product.meta_description}}</p> -->
+                                <div class="history-data">
+                                    <p class="qty">Qty: {{i.quantity}}</p>
+                                    <span class="price">${{data.total_amount}}</span>
+                                </div>
+                                <div class="history-data">
+                                    <h6 class="status text-danger" *ngIf="data.order_status == 'cancelled'">
+                                        {{data.order_status}}</h6>
+                                    <h6 class="status text-warning" *ngIf="data.order_status == 'pending'">
+                                        {{data.order_status}}</h6>
+                                    <h6 class="status text-success" *ngIf="data.order_status == 'complete'">
+                                        {{data.order_status}}</h6>
+                                    <h6 class="status">{{data.created_at | date:"dd/MM/yyyy"}}</h6>
+
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <button type="button" (click)="showDetails(data , i.product.id)"
+                                        class="more-btn">Show
+                                        More</button>
+                                    <button type="button" class="cancel-btn"
+                                        *ngIf="data.payment_via=='cod' && data.order_status == 'pending'"
+                                        (click)="orderCancel(i)">Cancel
+                                        Order</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <!-- detail-card -->
+    <div class="history-details-card" *ngIf="!show">
+        <div type="" class="back" (click)="show=!show">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                <path
+                    d="M256 0C114.6 0 0 114.6 0 256c0 141.4 114.6 256 256 256s256-114.6 256-256C512 114.6 397.4 0 256 0zM384 288H205.3l49.38 49.38c12.5 12.5 12.5 32.75 0 45.25s-32.75 12.5-45.25 0L105.4 278.6C97.4 270.7 96 260.9 96 256c0-4.883 1.391-14.66 9.398-22.65l103.1-103.1c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25L205.3 224H384c17.69 0 32 14.33 32 32S401.7 288 384 288z" />
+            </svg>
+        </div>
+        <div class="history-item-card">
+            <ng-container *ngFor="let data of orderHistoryDesc">
+                <div class="card">
+                    <div class="details" *ngFor="let i of data.items">
+                        <div class="card-body" *ngIf="this.order_product_id == i.product.id">
+                            <div class="product-image">
+                                <img [src]="i.product.image" class="media-object" />
+                            </div>
+                            <div class="description">
+                                <div class="product-details">
+                                    <h5 class="head">{{i.product.name}}</h5>
+                                    <!-- <span class="pro-desc" [innerHtml]="i.product.description"></span> -->
+                                    <span> <strong>Address: </strong> {{data.shipping_address}}, {{data.shipping_city}},
+                                        {{data.shipping_state}}, {{data.shipping_country}}</span>
+                                    <p class="desc"> {{i.product.meta_description}}</p>
+                                    <p class="qty"> <strong>Qty: </strong> {{i.quantity}}</p>
+                                    <span class="price"> <strong>Total amount:</strong> ${{data.total_amount}}</span>
+                                    <h6> <strong>Ordered on</strong> {{i.created_at | date:'EEEE, MMMM d, y' }}</h6>
+                                    <!-- <h5 class="status">{{data.order_status}}</h5> -->
+                                </div>
+                                <!-- <button type="button" class="return-btn" (click)="storeReturnProduct(i)">Return</button> -->
+                                <!-- <div class="date">
+                                    <p> order by {{data.billing_name}}</p>
+                                 </div> -->
+                            </div>
+                        </div>
+                        <span class="pro-desc" [innerHtml]="i.product.description" *ngIf="this.order_product_id == i.product.id"></span>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <!-- <div class="return-product-list" *ngIf="showdesc == 'Return Order'">
+    order-listing
+    <div class="row">
+        <ng-container *ngFor="let data of orderData.data">
+            <div class="col-xl-4 col-md-6 col-sm-6 col-lg-6">
+                <div class="card" *ngFor="let i of data.items">
+                    <div class="product-return-image">
+                        <img [src]="i.product.image" class="media-object" />
+                    </div>
+                    <div class="return-desc">
+                        <div class="product-details">
+                            <h5 class="head">{{i.product.name}}</h5>
+                            <p class="desc"> {{i.product.meta_description}}</p>
+                            <p class="qty">{{i.quantity}}</p>
+                            <span class="price">${{data.total_amount}}</span>
+                            <h6 class="status">{{data.order_status}}</h6>
+                        </div>
+                    </div>
+                    <button type="button" class="return-btn">Return</button>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <div class="ordered-item-card">
+        <div class="bootdey">
+            <div class="panel panel-default panel-order">
+                <div class="panel-body">
+                    <ng-container *ngFor="let data of orderData.data">
+                        <div class="card" *ngFor="let i of data.items">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4 col-sm-4">
+                                    <div class="product-image">
+                                        <img [src]="i.product.image" class="media-object" />
+                                    </div>
+                                </div>
+                                <div class="col-lg-9 col-md-8 col-sm-8">
+                                    <div class="product-details">
+                                        <h5 class="head">{{i.product.name}}</h5>
+                                        <p class="desc"> {{i.product.meta_description}}</p>
+                                        <p class="qty">{{i.quantity}}</p>
+                                        <span class="price">${{data.total_amount}}</span>
+                                        <h6 class="status">{{data.order_status}}</h6>
+                                    </div>
+                                    <button type="button" class="return-btn"
+                                        (click)="getReturnProduct()">Return</button>
+                                    <div class="date">
+                                        <p> order by {{data.billing_name}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+</div>
