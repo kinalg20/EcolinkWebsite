@@ -24,8 +24,11 @@ export class SignupSigninComponent implements OnInit {
   invalidUserEmail: string = '';
   checkString: boolean = true;
   resSignupMsgCheck: string = ' ';
+<<<<<<< HEAD
   resSignInMsgCheck: string = ' ';
   resSignInMsg: string = ' ';
+=======
+>>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
   resMsg: string = '';
   invalidZip = false;
   errMsg = [];
@@ -252,8 +255,13 @@ export class SignupSigninComponent implements OnInit {
           }
         },
         (error: HttpErrorResponse) => {
+<<<<<<< HEAD
           this.resSignInMsgCheck = 'danger';
           this.resSignInMsg = 'Incorrect Username Password!';
+=======
+          this.resSignupMsgCheck = 'danger';
+          this.resSignupMsg = 'Incorrect Username Password!';
+>>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
           console.log(error.error.code);
           form.reset();
         }
