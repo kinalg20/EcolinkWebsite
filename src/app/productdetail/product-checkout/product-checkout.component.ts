@@ -174,7 +174,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
         })
       })
 
-      .catch((error:any)=>{
+      .catch((error: any) => {
         this.shippingCharge = 0;
       })
     if (this.shippingCharge > 0) {
@@ -194,12 +194,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
 
     this.CheckoutProduct.map((res: any) => {
       console.log("res", res.carts);
-        res.carts.map((resp: any) => {
-          console.log(resp);
-          this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight ? resp.product.weight : 1);
-        })
+      res.carts.map((resp: any) => {
+        console.log(resp);
+        this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight ? resp.product.weight : 1);
+      })
     })
-    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name ;
+    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name;
     this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip ? this.shippingDataObj.zip : this.dataFromLocation[7].long_name;
     this.getShippingInfo();
   }
@@ -440,13 +440,15 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
     }, 1000);
   }
   // get coupon discount on product
+  coupon_code:string='';
   couponButton() {
     this.discountCheck = false;
     this.couponCheck = true;
     this.CheckoutProduct.map((res: any) => {
       console.log(res);
-      res.carts.map((response: any) => {
-        this.couponDiscount += response.product.coupon_discount
+      res.coupons.map((response: any) => {
+        this.coupon_code=response.code;
+        this.couponDiscount = this.couponDiscount + res.payable * response.discount / 100;
       })
     })
   }
