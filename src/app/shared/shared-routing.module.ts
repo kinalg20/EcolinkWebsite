@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'inner-pages/contact/request', component: ProductsRequestComponent },
   { path: 'thanks', component: ThankYouComponent },
   { path: 'failure', component: OrderFailComponent },
-  { path: 'error-404', component: PageNotFoundComponent },
+  { path: '404', component: PageNotFoundComponent },
   { path: 'inner-pages/contact/ask-the-chemist', component: AskChemistComponent },
   { path: 'shops', component: GSAProductComponent }
 ];
