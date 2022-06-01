@@ -172,7 +172,11 @@
                 </div>
                 <div class="row">
                     <div class="col-12 text-center">
+<<<<<<< HEAD
+                        <button class="btn btn-success submit-btn" [disabled]="!profileForm.dirty || !profileForm.valid" (click)="goToTop()">Sign Up</button>
+=======
                         <button class="btn btn-success submit-btn " [disabled]="!profileForm.dirty || !profileForm.valid" (click)="goToTop()">Sign Up</button>
+>>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
                     </div>
                 </div>
                 <div class="row">
@@ -196,9 +200,15 @@
                             <h2>Sign In</h2>
                         </span>
                     </div>
+<<<<<<< HEAD
+                    <ng-container *ngIf="resSignInMsg">
+                        <div *ngIf="resSignInMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
+                            {{ resSignInMsg }}
+=======
                     <ng-container *ngIf="resSignupMsg">
                         <div *ngIf="resSignupMsgCheck=='danger'" class="alert alert-danger" role="alert" id="loginAlert" #test>
                             {{ resSignupMsg }}
+>>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
                             <span class="icon-class"><i class="fa fa-close" (click)="close()"></i></span>
                         </div>
                     </ng-container>
@@ -225,8 +235,13 @@
                     </div>
                 </div>
                 <div class="row">
+<<<<<<< HEAD
+                    <div class="col-12 text-center">
+                        <button class="btn btn-success signin-btn" [disabled]="!signUpForm.dirty || !signUpForm.valid" type="submit">Sign In</button>
+=======
                     <div class="col-12">
                         <button class="form-control signin-btn" type="submit">Sign In</button>
+>>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
                     </div>
                 </div>
                 <div class="row">

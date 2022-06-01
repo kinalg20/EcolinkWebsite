@@ -25,6 +25,7 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   CheckoutProduct: any = [];
   carts: any = [];
   pincode: any
+  
   formShimmer: boolean = true;
   paypalItems: any = {}
   orderObj: any;
@@ -190,17 +191,16 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   // get shipping charges for product
   getProduct() {
     this.checkoutProductItem = [];
-    console.log("this.CheckoutProduct", this.CheckoutProduct);
-
+    console.log("this.CheckoutProduct", this.CheckoutProduct[0]);
     this.CheckoutProduct.map((res: any) => {
-      console.log("res", res.carts);
+      console.log("res", res);
       res.carts.map((resp: any) => {
         console.log(resp);
         this.checkoutProductItem.weight = this.product_weight += (resp.quantity * resp.product.weight ? resp.product.weight : 1);
       })
     })
-    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name;
-    this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip ? this.shippingDataObj.zip : this.dataFromLocation[7].long_name;
+    this.checkoutProductItem.country = this.shippingDataObj.country ? this.shippingDataObj.country : this.dataFromLocation[6].long_name ? this.dataFromLocation[6].long_name : "";
+    this.checkoutProductItem.pincode = this.shippingDataObj.pincode ? this.shippingDataObj.pincode : this.shippingDataObj.zip ? this.shippingDataObj.zip : this.dataFromLocation[7].long_name ? this.dataFromLocation[7].long_name:"";
     this.getShippingInfo();
   }
 
@@ -390,6 +390,8 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
           completedFormat.carts = data_obj;
         })
         this.cookiesCheckout.data = completedFormat;
+        console.log(this.cookiesCheckout);
+
       })
       setTimeout(() => {
         this.refractorData();
@@ -401,25 +403,27 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
       this.route.navigateByUrl('/cart');
     }
   }
-  refractorData() {
-    console.log(this.dataFromLocation);
+  async refractorData() {
+    console.log(this.cookiesCheckout);
     let user: any = {};
     user = {
       name: "",
       email: "",
-      address: this.dataFromLocation ? this.dataFromLocation[4]?.long_name : "",
-      city: this.dataFromLocation ? this.dataFromLocation[3]?.long_name : "",
-      state: this.dataFromLocation ? this.dataFromLocation[5]?.long_name : "",
-      country: this.dataFromLocation ? this.dataFromLocation[6]?.long_name : "",
-      pincode: this.dataFromLocation ? this.dataFromLocation[7]?.long_name : "",
+      address: this.dataFromLocation ? this.dataFromLocation[4].long_name ? this.dataFromLocation[4].long_name : "" : "",
+      city: this.dataFromLocation ? this.dataFromLocation[3].long_name ? this.dataFromLocation[3].long_name : "" : "",
+      state: this.dataFromLocation ? this.dataFromLocation[5].long_name ? this.dataFromLocation[5].long_name : "" : "",
+      country: this.dataFromLocation ? this.dataFromLocation[6].long_name ? this.dataFromLocation[6].long_name : "" : "",
+      pincode: this.dataFromLocation ? this.dataFromLocation[7].long_name ? this.dataFromLocation[7].long_name : "" : "",
       mobile: ""
     }
-
     console.log(user);
-
     this.cookiesCheckout.data.user = user;
     this.cookiesCheckout.data.payable = localStorage.getItem('payable');
-    this.CheckoutProduct.push(this.cookiesCheckout.data);
+    console.log(this.cookiesCheckout, "this.cookiesCheckout");
+    let product_data = [];
+    product_data.push(this.cookiesCheckout.data);
+    console.log(product_data, "product_data");
+    this.CheckoutProduct = product_data;
     // this.getTaxExempt();
     this.FedexShippingObj();
     this.getProduct();
