@@ -135,8 +135,8 @@
                                 </ul>
                             </div>
                             <ul *ngIf="discountCheck">
-                                <li class="subtotal-list-element"></li>
-                                <li><button (click)="couponButton()">Apply Coupon</button></li>
+                                <li class="subtotal-list-element"><input type="text" class="form-control" style="padding: 0.25rem 0.5rem;"></li>
+                                <li><button (click)="couponButton()" style="padding: 0.25rem 0.5rem;">Apply Coupon</button></li>
                             </ul>
                             <ul *ngIf="couponCheck">
                                 <li class="subtotal-list-element">Coupon Code : </li>

@@ -27,19 +27,11 @@ export class HomeComponent implements OnInit {
           this.router.navigateByUrl('/');
         }
         else {
-<<<<<<< HEAD
-          this.router.navigateByUrl('/profile/auth');
-        }
-      }
-      else {
-        this.router.navigateByUrl('/profile/auth');
-=======
           this.router.navigateByUrl('shared/error-404');
         }
       }
       else {
         this.router.navigateByUrl('shared/error-404');
->>>>>>> e440f1b643078bda9e91b04cf33324b063921ae8
       }
     }
   }
