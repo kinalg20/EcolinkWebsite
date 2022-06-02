@@ -134,10 +134,6 @@
                                     </ng-container>
                                 </ul>
                             </div>
-                            <ul *ngIf="discountCheck">
-                                <li class="subtotal-list-element"><input type="text" class="form-control" style="padding: 0.25rem 0.5rem;"></li>
-                                <li><button (click)="couponButton()" style="padding: 0.25rem 0.5rem;">Apply Coupon</button></li>
-                            </ul>
                             <ul *ngIf="couponCheck">
                                 <li class="subtotal-list-element">Coupon Code : </li>
                                 <li style="color: #55b15c;"><mark>{{coupon_code}}</mark></li>
@@ -146,6 +142,23 @@
                                 <li class="subtotal-list-element">Coupon Discount : </li>
                                 <li style="color: #55b15c;">${{couponDiscount | number:'2.1-2'}}</li>
                             </ul>
+                            <ul *ngIf="discountCheck">
+                                <li class="subtotal-list-element"><input type="text" maxlength="0" [(ngModel)]="couponValue" class="form-control" style="padding: 0.25rem 0.5rem;"></li>
+                                <li><button (click)="couponButton()" style="padding: 0.25rem 0.5rem;">Apply Coupon</button></li>
+                            </ul>
+                            <ul *ngIf="errormsg">
+                                <li class="subtotal-list-element"><h6 class="text-danger">{{errormsg}}</h6></li>
+                            </ul>
+                            <ng-container *ngFor="let item of CheckoutProduct">
+                                <ng-container *ngFor="let discounts of item.coupons">
+                                    <ul *ngIf="discountCheck" style="justify-content:normal;cursor: pointer;" (click)="getDiscountvalue()">
+                                        <p-radioButton name="discount" value="{{discounts.code}}" [(ngModel)]="couponCode"
+                                    inputId="discountmethod">
+                                </p-radioButton>
+                                        <li class="subtotal-list-element" style="margin-left: 3px;">{{discounts.code}} </li>
+                                    </ul>
+                                </ng-container>
+                            </ng-container>
                         </div>
                         <div class="checkout-products-total">
                             <ul>

@@ -16,6 +16,9 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   discountCheck: boolean = true;
   disableOrderButton: boolean = true;
   couponCheck: boolean = false;
+  errormsg:string='';
+  couponValue:string='';
+  couponCode:any;
   rate: number = 0;
   openAddressDropdown: boolean = false;
   selectedShippingMethod: string = 'fedex';
@@ -449,15 +452,21 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   // get coupon discount on product
   coupon_code:string='';
   couponButton() {
-    this.discountCheck = false;
-    this.couponCheck = true;
-    this.CheckoutProduct.map((res: any) => {
-      console.log(res);
-      res.coupons.map((response: any) => {
-        this.coupon_code=response.code;
-        this.couponDiscount = this.couponDiscount + res.payable * response.discount / 100;
+    this.errormsg='*select coupon first'
+    if(this.couponValue) {
+      this.discountCheck = false;
+      this.couponCheck = true;
+      this.coupon_code=this.couponValue;
+      this.CheckoutProduct.map((res: any) => {
+        console.log(res);
+        res.coupons.map((response: any) => {
+          if(this.coupon_code==response.code) {
+            this.couponDiscount = this.couponDiscount + res.payable * response.discount / 100;
+          }
+        })
       })
-    })
+      this.errormsg='';
+    }
   }
   fillformevent(event: any) {
     this.disableOrderButton = event;
@@ -468,5 +477,12 @@ export class ProductCheckoutComponent implements OnInit, AfterViewInit {
   getshippingInfo(event: any) {
     console.log(event);
     this.shippingDataObj = event;
+  }
+  
+  
+  getDiscountvalue() {
+    this.couponValue=this.couponCode;
+    console.log(this.couponCode);
+    console.log(this.couponValue);
   }
 }
