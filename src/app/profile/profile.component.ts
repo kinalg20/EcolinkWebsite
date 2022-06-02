@@ -30,6 +30,7 @@ export class ProfileComponent implements OnInit {
     this.__apiservice.getUserLogoutProfile().subscribe((res:any)=> {
       console.log(res);
       localStorage.removeItem("ecolink_user_credential");
+      localStorage.removeItem('email_token');
       this.route.navigateByUrl('/profile/auth');
     })
   }

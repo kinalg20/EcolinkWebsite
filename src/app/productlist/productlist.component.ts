@@ -44,6 +44,9 @@ export class ProductlistComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem("ItemCountSession")) {
+      localStorage.removeItem("ItemCountSession");
+    }
     this.slug = this.route.snapshot.params;
     if (this.slug.sublink) {
       this.getListingData(this.slug.sublink);
@@ -54,7 +57,6 @@ export class ProductlistComponent implements OnInit {
     localStorage.setItem("category", JSON.stringify(this.slug.slug));
     this._ApiService.itemCountSession.next("empty");
     localStorage.removeItem("ItemExist");
-
   }
   responsiveOptions = [
     {
@@ -132,7 +134,7 @@ export class ProductlistComponent implements OnInit {
         }
       })
   }
-  
+
   // add product to cart
   async AddProductToCart(Item: any) {
     let ItemCount = 1;

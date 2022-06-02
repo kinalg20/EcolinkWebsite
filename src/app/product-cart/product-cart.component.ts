@@ -46,7 +46,7 @@ export class ProductCartComponent implements OnInit {
     if (localStorage.getItem('ecolink_user_credential') === null) {
       cookiesdata = this._cookies.GetCartData();
       if (cookiesdata != 'empty') {
-        console.log(cookiesdata.length);
+        console.log(cookiesdata);
         this.length = cookiesdata.length;
         cookiesdata.map((res: any) => {
           this._ApiService.getProductById(res.CartProductId).subscribe((resp: any) => {
@@ -208,7 +208,7 @@ export class ProductCartComponent implements OnInit {
         }
       })
     }
-    console.log(this.local_data);
+    // console.log(this.local_data);
     localStorage.setItem("ItemExist" , JSON.stringify(this.local_data));
 
 

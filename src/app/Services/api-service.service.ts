@@ -44,9 +44,9 @@ export class ApiServiceService {
     let url = 'getCategory';
     return this.http.post<any>(this._baseurl + url, { slug: slug }).toPromise();
   }
-  getProductDetail(slug: any): Observable<any> {
+  getProductDetail(slug: any): Promise<any> {
     let url = 'getProduct';
-    return this.http.post<any>(this._baseurl + url, { slug: slug });
+    return this.http.post<any>(this._baseurl + url, { slug: slug }).toPromise();
   }
 
   addItemToCart(product_id: any, quantity: any, action: any): Promise<any> {

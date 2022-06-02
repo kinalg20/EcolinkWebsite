@@ -10,7 +10,7 @@ import { CookiesService } from 'src/app/Services/cookies.service';
   styleUrls: ['./shop.component.scss']
 })
 export class ShopComponent implements OnInit {
-  ItemCount: number = 1;
+  ItemCount: any = 1;
   stock: any
   slug: any;
   minimum_qyt: any = 1;
@@ -73,8 +73,9 @@ export class ShopComponent implements OnInit {
 
   //get product detail
   ItemStorage: any;
-  getProductDetail(sendslug: any) {
-    this._ApiService.getProductDetail(sendslug).subscribe((res: any) => {
+  ItemCountStorage: any;
+  async getProductDetail(sendslug: any) {
+    await this._ApiService.getProductDetail(sendslug).then((res: any) => {
       console.log(res.data.product);
       if (res.code == 200) {
         this.productDetail.push(res);
@@ -83,19 +84,29 @@ export class ShopComponent implements OnInit {
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
         this.ItemCount = this.minimum_qyt == null ? 1 : this.minimum_qyt;
-        this._ApiService.itemCountSession.subscribe(resp => {
-          if (typeof (resp) == 'object') {
-            this._ApiService.itemCountSession.next(this.ItemCount);
-          }
+        if (localStorage.getItem("ItemCountSession")) {
+          this.ItemCountStorage = localStorage.getItem("ItemCountSession");
+          let CountStorage = JSON.parse(this.ItemCountStorage);
+          this.ItemCount = CountStorage;
+          console.log("Copied");
 
-          else if (typeof (resp) == 'string' && resp == 'empty') {
-            this._ApiService.itemCountSession.next(this.minimum_qyt);
-          }
+        }
 
-          else {
-            this.ItemCount = resp;
-          }
-        })
+        // this._ApiService.itemCountSession.subscribe(resp => {
+        //   console.log(typeof resp);
+
+        //   if (typeof (resp) == 'object') {
+        //     this._ApiService.itemCountSession.next(this.ItemCount);
+        //   }
+
+        //   else if (typeof (resp) == 'string' && resp == 'empty') {
+        //     this._ApiService.itemCountSession.next(this.minimum_qyt);
+        //   }
+
+        //   else if (typeof resp == 'number') {
+        //     this.ItemCount = resp;
+        //   }
+        // })
 
         this.ItemStorage = localStorage.getItem("ItemExist");
         if (this.ItemStorage) {
@@ -109,21 +120,6 @@ export class ShopComponent implements OnInit {
           })
         }
 
-        // this._ApiService.CartItems.subscribe(resp => {
-        //   resp.map((response: any) => {
-        //     console.log(res.data.product.id, response.ItemId);
-        //     if (resp.length > 0) {
-        //       if (res.data.product.id == response.ItemId) {
-        //         this.CartButton = "Added Item to Cart"
-        //       }
-        //     }
-        //   })
-        // })
-
-        setTimeout(() => {
-          console.log(this.CartButton);
-        }, 2000);
-
       }
     })
   }
@@ -135,9 +131,10 @@ export class ShopComponent implements OnInit {
     console.log(this.ItemCount);
     this.commonService.AddProductToCart(Item, this.slug, this.ItemCount);
     this._ApiService.itemCountSession.next(this.ItemCount);
+    localStorage.setItem("ItemCountSession", JSON.parse(this.ItemCount));
     this._ApiService.CartItems.subscribe(res => {
-      res.map((resp:any)=>{
-        if(resp.ItemId != Item.id){
+      res.map((resp: any) => {
+        if (resp.ItemId != Item.id) {
           this.CartItem.push(resp);
         }
       })
