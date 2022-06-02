@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Select , Store} from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
+import { getCartDataAction } from '../store/actions/Cart.action';
+import { FetchedCartDataState } from '../store/state/Cart.state';
+
 
 @Component({
   selector: 'app-product-cart',
@@ -17,11 +22,18 @@ export class ProductCartComponent implements OnInit {
   CartShimmer: boolean = true;
   disableIncreaseButton: boolean = false;
   disableDecreaseButton: boolean = false;
+  cartData:any;
 
-  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private route: Router) { }
-  ngOnInit(): void {
+  @Select(FetchedCartDataState.getFetchedCartData) cartData$!: Observable<any>;
+  @Select(FetchedCartDataState.getFetchedCartDataLoaded) cartDataLoaded$!: Observable<boolean>;
+  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private route: Router , private store : Store) { }
+  async ngOnInit() {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
     this.getCartData();
+    await this.getCartDataFromState();
+    this.cartData$.subscribe((data:any)=>{
+      console.log(data);
+    })
   }
   //increase and decrease product quantity
   Count(string: any, id: any) {
@@ -218,5 +230,14 @@ export class ProductCartComponent implements OnInit {
     this._ApiService.cookiesCheckoutData.next(this.CardShow);
     localStorage.setItem("payable", JSON.stringify(this.SubTotal));
   }
+
+  getCartDataFromState(){
+    this.cartData = this.cartDataLoaded$.subscribe(res => {
+      if (!res) {
+        this.store.dispatch(new getCartDataAction());
+      }
+    })
+  }
+  
 
 }
