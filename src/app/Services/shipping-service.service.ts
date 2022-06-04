@@ -93,7 +93,15 @@ export class ShippingServiceService {
           "ACCOUNT",
           "LIST"
         ],
-        "requestedPackageLineItems": this.requestedPackage
+        "requestedPackageLineItems": [
+          {
+            "groupPackageCount": 2,
+            "weight": {
+              "units": "LB",
+              "value": 12
+            }
+          }
+        ]
       }
     }
 

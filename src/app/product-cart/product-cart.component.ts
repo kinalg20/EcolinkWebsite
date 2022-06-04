@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
-import { Select , Store} from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
 import { getCartDataAction } from '../store/actions/Cart.action';
-import { FetchedCartDataState } from '../store/state/Cart.state';
+import { AddCartDataState } from '../store/state/addItemCart.state';
+import { FetchedCartDataState } from '../store/state/cart.state';
 
 
 @Component({
@@ -22,18 +23,20 @@ export class ProductCartComponent implements OnInit {
   CartShimmer: boolean = true;
   disableIncreaseButton: boolean = false;
   disableDecreaseButton: boolean = false;
-  cartData:any;
+  cartData: any;
 
   @Select(FetchedCartDataState.getFetchedCartData) cartData$!: Observable<any>;
+  @Select(AddCartDataState.getCartAddedData) AddcartData$!: Observable<any>;
+  @Select(AddCartDataState.getCartAddedDataLoaded) AddcartDataLoaded$!: Observable<any>;
   @Select(FetchedCartDataState.getFetchedCartDataLoaded) cartDataLoaded$!: Observable<boolean>;
-  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private route: Router , private store : Store) { }
+  constructor(private _ApiService: ApiServiceService, private _cookies: CookiesService, private route: Router, private store: Store) { }
   async ngOnInit() {
     this.UserLogin = localStorage.getItem('ecolink_user_credential');
     this.getCartData();
-    await this.getCartDataFromState();
-    this.cartData$.subscribe((data:any)=>{
-      console.log(data);
-    })
+    // await this.getCartDataFromState();
+    // this.cartData$.subscribe((data: any) => {
+    //   console.log(data);
+    // })
   }
   //increase and decrease product quantity
   Count(string: any, id: any) {
@@ -95,30 +98,62 @@ export class ProductCartComponent implements OnInit {
       }
     }
     else {
-      await this._ApiService.getItemFromCart()
-        .then(
-          (res) => {
-            console.log(res);
-            this.CardShow = res.data;
-            this.subtotal();
-            console.log(this.CardShow);
-            this.CartShimmer = false;
-            this.length = this.CardShow.length;
-          })
-        .catch(
-          (error) => {
-            console.log(error)
-            if (error.error.code == 400) {
-              this.CardShow = [];
+      this._ApiService.GetCart.subscribe((res) => {
+        if (!res.data) {
+          this._ApiService.AddCart.subscribe(async (resp) => {
+            if (resp.data) {
+              console.log("F1");              
+              this.CardShow = resp.data;
               this.CartShimmer = false;
-              this.length = 0;
+              this.subtotal();
+              res = resp.data;
+              // this.getCartThroughApi();
+              // console.log(this.CardShow);
             }
-            else if (error.status == 401) {
-              localStorage.removeItem('ecolink_user_credential');
-              this.route.navigateByUrl('profile/auth');
+
+            else if(!resp.data){
+              console.log("F2");              
+              await this._ApiService.getItemFromCart().then(response=>{
+                console.log(response.data);                
+                if(response.data){
+                  res = response.data;
+                  resp = response.data;
+                  this.CardShow = response.data;
+                  this.CartShimmer = false;
+                }
+              })
             }
-          }
-        )
+          });
+        }
+
+        else if(res.data){
+          console.log("F3");              
+          this.CardShow = res.data;
+          this.CartShimmer = false;
+        }
+      });
+
+      // await this._ApiService.getItemFromCart()
+      //   .then(
+      //     (res) => {
+      //       this.CardShow = res.data;
+      //       this.subtotal();
+      //       this.CartShimmer = false;
+      //       this.length = this.CardShow.length;
+      //     })
+      //   .catch(
+      //     (error) => {
+      //       if (error.error.code == 400) {
+      //         this.CardShow = [];
+      //         this.CartShimmer = false;
+      //         this.length = 0;
+      //       }
+      //       else if (error.status == 401) {
+      //         localStorage.removeItem('ecolink_user_credential');
+      //         this.route.navigateByUrl('profile/auth');
+      //       }
+      //     }
+      //   )
     }
   }
   //get total amount of all product
@@ -182,7 +217,7 @@ export class ProductCartComponent implements OnInit {
       }
     }
   }
-  
+
   //delete cart item from cookies and backend
   cookies_data: any = [];
   local_data: any = [];
@@ -212,7 +247,7 @@ export class ProductCartComponent implements OnInit {
 
     CartData = localStorage.getItem("ItemExist");
     this.local_data = JSON.parse(CartData);
-    if(this.local_data){
+    if (this.local_data) {
       this.local_data.map((response: any, index: any) => {
         console.log(index);
         if (response.ItemId == product.product.id) {
@@ -221,7 +256,7 @@ export class ProductCartComponent implements OnInit {
       })
     }
     // console.log(this.local_data);
-    localStorage.setItem("ItemExist" , JSON.stringify(this.local_data));
+    localStorage.setItem("ItemExist", JSON.stringify(this.local_data));
 
 
   }
@@ -231,13 +266,34 @@ export class ProductCartComponent implements OnInit {
     localStorage.setItem("payable", JSON.stringify(this.SubTotal));
   }
 
-  getCartDataFromState(){
-    this.cartData = this.cartDataLoaded$.subscribe(res => {
-      if (!res) {
-        this.store.dispatch(new getCartDataAction());
-      }
-    })
+  // getCartDataFromState() {
+  //   this.cartData = this.cartDataLoaded$.subscribe(res => {
+  //     if (!res) {
+  //       this.store.dispatch(new getCartDataAction());
+  //     }
+  //   })
+  // }
+
+  async getCartThroughApi() {
+    console.log("Called");
+    await this._ApiService.getItemFromCart()
+      .then((response) => {
+        this._ApiService.GetCart.next(response.data);
+      })
+      .catch(
+        (error) => {
+          if (error.error.code == 400) {
+            this.CardShow = [];
+            this.CartShimmer = false;
+            this.length = 0;
+          }
+          else if (error.status == 401) {
+            localStorage.removeItem('ecolink_user_credential');
+            this.route.navigateByUrl('profile/auth');
+          }
+        }
+      )
   }
-  
+
 
 }

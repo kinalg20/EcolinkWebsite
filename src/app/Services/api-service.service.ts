@@ -3,6 +3,7 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { addCartDataAction } from '../store/actions/addItemCart.action';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,8 @@ export class ApiServiceService {
   UserLocation = new BehaviorSubject<any>([]);
   UserAddress = new BehaviorSubject<any>({});
   CartItems = new BehaviorSubject<any>([]);
+  AddCart = new BehaviorSubject<any>([]);
+  GetCart = new BehaviorSubject<any>([]);
   profiledashboard = new BehaviorSubject<boolean>(false);
   constructor(public http: HttpClient, private sanitizer: DomSanitizer) { }
 
@@ -410,6 +413,30 @@ export class ApiServiceService {
       user_id: user_id
     }
     return this.http.post<any>(this._baseurl + url, body, { headers: httpHeaders })
+  }
+
+  addItemToState(product_detail: any): Observable<any> {
+    let url = 'addCartItems';
+    // this.header = localStorage.getItem('ecolink_user_credential');
+    this.token = JSON.parse(this.header).access_token;
+    let user_id = JSON.parse(this.header).user_id;
+    const httpHeaders = new HttpHeaders({
+      'content-type': 'application/json',
+      'Authorization': `Bearer ${this.token}`
+    })
+
+    product_detail.product_detail.user_id=user_id
+    // let body =
+    // {
+    //   user_id: user_id,
+    //   product_id: product_detail.product_id,
+    //   quantity: product_detail.quantity,
+    //   action: product_detail.action
+    // }
+
+    // console.log(body);
+
+    return this.http.post<any>(this._baseurl + url, product_detail.product_detail, { headers: httpHeaders });
   }
 
 }

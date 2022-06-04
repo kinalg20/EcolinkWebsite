@@ -83,7 +83,7 @@
                             </div>
                             <div class="addtocartbutton">
                                 <button (click)=AddProductToCart(detail.data.product) pButton pRipple type="button"
-                                    [label]="CartButton" routerLink="/cart" class="p-button-raised p-button-success"
+                                    [label]="CartButton" class="p-button-raised p-button-success"
                                     style="width:max-content; height: fit-content;"
                                     *ngIf="!DisabledCartButton"></button>
                                 <button pButton pRipple type="button" [label]="CartButton" routerLink="/cart"

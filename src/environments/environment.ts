@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  api_baseurl: "https://brandtalks.in/ecolink/api/"
-  // api_baseurl: "http://localhost:8000/api/",
+  // api_baseurl: "https://brandtalks.in/ecolink/api/"
+  api_baseurl: "http://localhost:8000/api/",
   // assetsurl : 'https://brandtalks.in/ecolinkfrontend'
 };
 

@@ -40,9 +40,9 @@ export class CommonservicesService {
     else {
       console.log(Item);
       await this._ApiService.addItemToCart(Item.id, ItemCount, "add")
-      .then(res => {
-        console.log(res);
-      })
+        .then(res => {
+          console.log(res);
+        })
         .catch((error: any) => {
           if (error.status == 401) {
             localStorage.removeItem('ecolink_user_credential');

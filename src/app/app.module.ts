@@ -18,7 +18,7 @@ import { FetchedCategoriesState } from './store/state/category.state'
 import { environment } from 'src/environments/environment';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CommonModule } from "@angular/common";
-import { FetchedCartDataState } from './store/state/Cart.state';
+import { AddCartDataState } from './store/state/addItemCart.state';
 @NgModule({
   declarations: [
     AppComponent,
@@ -33,7 +33,7 @@ import { FetchedCartDataState } from './store/state/Cart.state';
     SharelibraryModule,
     CommonModule,
     ToastrModule.forRoot(),
-    NgxsModule.forRoot([FetchedHeaderState, FetchedCategoriesState , FetchedCartDataState], { developmentMode: !environment.production }),
+    NgxsModule.forRoot([FetchedHeaderState, FetchedCategoriesState  , AddCartDataState], { developmentMode: !environment.production }),
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', {

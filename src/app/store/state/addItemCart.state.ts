@@ -2,14 +2,14 @@ import { Injectable } from "@angular/core";
 import { Action, Selector, State, StateContext } from "@ngxs/store";
 import { ApiServiceService } from "src/app/Services/api-service.service"
 import { tap } from 'rxjs/operators'
-import { getCartDataAction } from "../actions/Cart.action";
+import { addCartDataAction } from "../actions/addItemCart.action";
 
-export class FetchCartStateModel {
+export class AddCartStateModel {
     cartData: any;
     cartDataLoaded!: boolean
 }
 
-@State<FetchCartStateModel>({
+@State<AddCartStateModel>({
     name: 'fetchCartData',
     defaults: {
         cartData: [],
@@ -18,23 +18,24 @@ export class FetchCartStateModel {
 })
 
 @Injectable()
-export class FetchedCartDataState {
+export class AddCartDataState {
     //selector has logic
     constructor(private _ApiData: ApiServiceService) { }
 
     @Selector()
-    static getFetchedCartData(state: FetchCartStateModel) {
+    static getCartAddedData(state: AddCartStateModel) {
         return state.cartData;
     }
 
     @Selector()
-    static getFetchedCartDataLoaded(state: FetchCartStateModel) {
+    static getCartAddedDataLoaded(state: AddCartStateModel) {
         return state.cartDataLoaded;
     }
 
-    @Action(getCartDataAction)
-    getfetchedcategories({ getState, setState }: StateContext<FetchCartStateModel>) {
-        return this._ApiData.getItemFromState().pipe(tap(res => {
+    @Action(addCartDataAction)
+    getResponseByCart({ getState, setState }: StateContext<AddCartStateModel>, product_detail: addCartDataAction) {
+        console.log(product_detail);
+        return this._ApiData.addItemToState(product_detail).pipe(tap(res => {
             const state = getState();
             setState({
                 ...state,

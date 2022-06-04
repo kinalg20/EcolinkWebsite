@@ -1,8 +1,13 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Select, Store } from '@ngxs/store';
+import { Observable } from 'rxjs';
 import { ApiServiceService } from 'src/app/Services/api-service.service';
 import { CommonservicesService } from 'src/app/Services/commonservices.service';
 import { CookiesService } from 'src/app/Services/cookies.service';
+import { addCartDataAction } from 'src/app/store/actions/addItemCart.action';
+import { AddCartDataState } from 'src/app/store/state/addItemCart.state';
 
 @Component({
   selector: 'app-shop',
@@ -21,6 +26,7 @@ export class ShopComponent implements OnInit {
   shimmerLoad: boolean = true;
   CartButton: string = "Add to Cart";
   DisabledCartButton: boolean = false;
+  AddCartCount: any;
 
   responsiveOptions = [
     {
@@ -40,7 +46,10 @@ export class ShopComponent implements OnInit {
     }
   ];
   productDetail: any = [];
-  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router: Router, private commonService: CommonservicesService) { }
+  header: any;
+  constructor(public _ApiService: ApiServiceService, private route: ActivatedRoute, private Cookies: CookiesService, private router: Router, private commonService: CommonservicesService, private store: Store) { }
+  @Select(AddCartDataState.getCartAddedData) cartAddedData$!: Observable<any>;
+  @Select(AddCartDataState.getCartAddedDataLoaded) cartAddedDataLoaded$!: Observable<boolean>;
 
   ngOnInit(): void {
     this.slug = this.route.snapshot.params;
@@ -55,6 +64,7 @@ export class ShopComponent implements OnInit {
     else {
       this.detailSlug = this.slug.slug
     }
+
     this.getProductDetail(this.detailSlug);
 
   }
@@ -84,13 +94,13 @@ export class ShopComponent implements OnInit {
         this.recommended_products = res.data.related_products;
         this.shimmerLoad = false;
         this.ItemCount = this.minimum_qyt == null ? 1 : this.minimum_qyt;
-        if (localStorage.getItem("ItemCountSession")) {
-          this.ItemCountStorage = localStorage.getItem("ItemCountSession");
-          let CountStorage = JSON.parse(this.ItemCountStorage);
-          this.ItemCount = CountStorage;
-          console.log("Copied");
+        // if (localStorage.getItem("ItemCountSession")) {
+        //   this.ItemCountStorage = localStorage.getItem("ItemCountSession");
+        //   let CountStorage = JSON.parse(this.ItemCountStorage);
+        //   this.ItemCount = CountStorage;
+        //   console.log("Copied");
 
-        }
+        // }
 
         // this._ApiService.itemCountSession.subscribe(resp => {
         //   console.log(typeof resp);
@@ -108,17 +118,17 @@ export class ShopComponent implements OnInit {
         //   }
         // })
 
-        this.ItemStorage = localStorage.getItem("ItemExist");
-        if (this.ItemStorage) {
-          let ItemData = JSON.parse(this.ItemStorage);
-          console.log(ItemData);
-          ItemData.map((resp: any) => {
-            if (resp.ItemId == res.data.product.id) {
-              this.CartButton = "Go to Cart"
-              this.DisabledCartButton = true;
-            }
-          })
-        }
+        // this.ItemStorage = localStorage.getItem("ItemExist");
+        // if (this.ItemStorage) {
+        //   let ItemData = JSON.parse(this.ItemStorage);
+        //   console.log(ItemData);
+        //   ItemData.map((resp: any) => {
+        //     if (resp.ItemId == res.data.product.id) {
+        //       this.CartButton = "Go to Cart"
+        //       this.DisabledCartButton = true;
+        //     }
+        //   })
+        // }
 
       }
     })
@@ -127,9 +137,9 @@ export class ShopComponent implements OnInit {
 
   //add product to cart
   CartItem: any = [];
-  AddProductToCart(Item: any) {
+  async AddProductToCart(Item: any) {
     console.log(this.ItemCount);
-    this.commonService.AddProductToCart(Item, this.slug, this.ItemCount);
+    await this.AddProductToSubject(Item, this.slug, this.ItemCount);
     this._ApiService.itemCountSession.next(this.ItemCount);
     localStorage.setItem("ItemCountSession", JSON.parse(this.ItemCount));
     this._ApiService.CartItems.subscribe(res => {
@@ -143,6 +153,7 @@ export class ShopComponent implements OnInit {
       ItemCount: this.ItemCount,
       ItemId: Item.id
     })
+    this.router.navigateByUrl('/cart');
     this._ApiService.CartItems.next(this.CartItem);
     localStorage.setItem("ItemExist", JSON.stringify(this.CartItem));
   }
@@ -157,6 +168,69 @@ export class ShopComponent implements OnInit {
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate(['/shop/' + this.slug.category + '/' + slug]);
+  }
+
+  async AddProductToState(Item: any) {
+    let product_detail = {
+      product_id: Item.id,
+      quantity: this.ItemCount,
+      action: "add",
+    }
+
+    console.log(product_detail);
+    this.AddCartCount = await this.cartAddedDataLoaded$.subscribe(res => {
+        this.store.dispatch(new addCartDataAction(product_detail));
+        this.cartAddedData$.subscribe(res=>{
+          console.log(res);
+        })
+    })
+    
+    setTimeout(() => {
+      this.router.navigateByUrl('/cart');
+    }, 1000);
+
+  }
+
+  async AddProductToSubject(Item: any, slug: any, ItemCount: any) {
+    let previousdata: any;
+
+    if (localStorage.getItem('ecolink_user_credential') == null) {
+      let cart_obj: any = [];
+      previousdata = this.Cookies.GetCartData();
+      let recently_added_object = {
+        "CartProductId": Item.id,
+        "ProductQuantity": ItemCount,
+        "ProductCategory": slug.slug
+      }
+      cart_obj.push(recently_added_object);
+      if (previousdata != 'empty') {
+        previousdata.map((res: any) => {
+          if (res.CartProductId != cart_obj[0].CartProductId) {
+            cart_obj.push(res);
+          }
+          else {
+            cart_obj[0].ProductQuantity = cart_obj[0].ProductQuantity + res.ProductQuantity;
+            console.log(cart_obj);
+          }
+        })
+      }
+      this.Cookies.SaveCartData(cart_obj);
+      console.log(cart_obj);
+      this._ApiService.itemCountSession.next(ItemCount);
+    }
+    else {
+      console.log(Item);
+      await this._ApiService.addItemToCart(Item.id, ItemCount, "add")
+        .then(res => {
+          this._ApiService.AddCart.next(res);
+        })
+        .catch((error: any) => {
+          if (error.status == 401) {
+            localStorage.removeItem('ecolink_user_credential');
+            this.router.navigateByUrl('profile/auth');
+          }
+        })
+    }
   }
 
 }
